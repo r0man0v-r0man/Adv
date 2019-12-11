@@ -20,11 +20,11 @@ namespace Adv.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(CancellationToken ct = default)
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var result = _superManager.GetFlats().GetAsync(2);
+                var result = await _superManager.GetFlats().GetAsync(2).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception ex)

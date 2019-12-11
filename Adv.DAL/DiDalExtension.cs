@@ -15,7 +15,7 @@ namespace Adv.DAL
         {            
             var connection = configuration.GetConnectionString("AdvConnection");
             services.AddDbContextPool<AdvContext>(options => options.UseSqlServer(connection));
-            services.AddTransient<IDataManager, DataManager>();
+            services.AddScoped<IDataManager, DataManager>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             return services;

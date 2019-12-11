@@ -24,9 +24,11 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddBll();
+            //services.AddControllers();
             services.AddDal(Configuration);
+
+            services.AddBll();
+            services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
