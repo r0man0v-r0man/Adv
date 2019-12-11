@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.WEB", "Adv.WEB\Adv.WEB.csproj", "{F9FC7DF0-7D72-4353-9290-1ABF0BB55FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adv.DOMAIN", "Adv.DOMAIN\Adv.DOMAIN.csproj", "{54C34F52-99EE-4ACE-A824-4F8794D4A5BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.DOMAIN", "Adv.DOMAIN\Adv.DOMAIN.csproj", "{54C34F52-99EE-4ACE-A824-4F8794D4A5BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adv.DAL", "Adv.DAL\Adv.DAL.csproj", "{86DFCAE6-AD50-4EE0-AB37-4FA9267806F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.DAL", "Adv.DAL\Adv.DAL.csproj", "{86DFCAE6-AD50-4EE0-AB37-4FA9267806F7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adv.BLL", "Adv.BLL\Adv.BLL.csproj", "{6B7AD250-3DB5-4EE9-B627-D74CB72199F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adv.BLL", "Adv.BLL\Adv.BLL.csproj", "{6B7AD250-3DB5-4EE9-B627-D74CB72199F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F9FC7DF0-7D72-4353-9290-1ABF0BB55FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9FC7DF0-7D72-4353-9290-1ABF0BB55FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9FC7DF0-7D72-4353-9290-1ABF0BB55FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9FC7DF0-7D72-4353-9290-1ABF0BB55FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54C34F52-99EE-4ACE-A824-4F8794D4A5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54C34F52-99EE-4ACE-A824-4F8794D4A5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54C34F52-99EE-4ACE-A824-4F8794D4A5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU

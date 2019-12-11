@@ -14,6 +14,7 @@ namespace Adv.DAL
         {
             services.AddDbContext<AdvContext>(
                 options => options.UseSqlServer(configuration.GetConnectionString("AdvConnection")));
+
             services.AddScoped<IRepository<Flat>, Repository<Flat>>();
 
             return services;
