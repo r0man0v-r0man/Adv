@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Adv.BLL;
 using Adv.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,6 +25,7 @@ namespace Adv.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddBll();
             services.AddDal(Configuration);
         }
 

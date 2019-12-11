@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces
 {
-    public interface IRepository<T> where T: class
+    public interface IRepository<T>: IDisposable where T: class 
     {
         Task<T> CreateAsync(T item);
         Task<T> GetByIdAsync(int Id);

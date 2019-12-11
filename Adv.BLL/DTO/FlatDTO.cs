@@ -1,11 +1,10 @@
-﻿using Adv.DOMAIN.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adv.DOMAIN.Entities
+namespace Adv.BLL.DTO
 {
-    public class Flat : AuditableEntity
+    public class FlatDTO
     {
         public int Id { get; set; }
         public string Description { get; set; }

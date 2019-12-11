@@ -15,7 +15,7 @@ namespace Adv.DAL.Interfaces.Implementations
         public Repository(AdvContext context)
         {
             _context = context;
-            dbSet = _context.Set<T>();
+            dbSet = _context?.Set<T>();
         }
         public async Task<T> CreateAsync(T item)
         {
@@ -23,6 +23,8 @@ namespace Adv.DAL.Interfaces.Implementations
             await _context.SaveChangesAsync().ConfigureAwait(false);
             return item;
         }
+
+        public void Dispose() => _context.Dispose();
 
         public Task<T> FindAsync(Expression<Func<T, bool>> predicate)
         {

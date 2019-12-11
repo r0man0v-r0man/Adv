@@ -12,8 +12,8 @@ namespace Adv.API.Controllers
     [ApiController]
     public class FlatController : ControllerBase
     {
-        private readonly ISuperManager _superManager;
-        public FlatController(ISuperManager superManager)
+        private readonly SuperManager _superManager;
+        public FlatController(SuperManager superManager)
         {
             _superManager = superManager;
         }
