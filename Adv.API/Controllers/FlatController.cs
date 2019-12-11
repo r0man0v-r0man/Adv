@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,8 +13,8 @@ namespace Adv.API.Controllers
     [ApiController]
     public class FlatController : ControllerBase
     {
-        private readonly SuperManager _superManager;
-        public FlatController(SuperManager superManager)
+        private readonly ISuperManager _superManager;
+        public FlatController(ISuperManager superManager)
         {
             _superManager = superManager;
         }
@@ -23,7 +24,8 @@ namespace Adv.API.Controllers
         {
             try
             {
-                return Ok(await _superManager.Flats.GetAllAsync(ct));
+                var result = _superManager.GetFlats().GetAsync(2);
+                return Ok(result);
             }
             catch (Exception ex)
             {

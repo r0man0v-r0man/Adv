@@ -1,5 +1,6 @@
 ﻿using Adv.BLL.DTO;
 using Adv.BLL.Interfaces;
+using Adv.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,10 +10,15 @@ namespace Adv.BLL.Services
 {
     public class FlatService : IFlatService
     {
-
-        public Task<FlatDTO> Get(int id)
+        private readonly IDataManager _dataManager;
+        public async Task<FlatDTO> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _dataManager.GetFlatRepository().GetByIdAsync(id).ConfigureAwait(false);
+            return new FlatDTO
+            {
+                Id = result.Id,
+                Description = result.Description
+            };
         }
     }
 }

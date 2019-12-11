@@ -8,6 +8,6 @@ namespace Adv.BLL.Interfaces
 {
     public interface IFlatService
     {
-        Task<FlatDTO> Get(int id);
+        Task<FlatDTO> GetAsync(int id);
     }
 }
