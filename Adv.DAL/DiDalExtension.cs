@@ -1,4 +1,5 @@
-﻿using Adv.DAL.Context;
+﻿
+using Adv.DAL.Context;
 using Adv.DAL.Entities;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
@@ -11,10 +12,10 @@ namespace Adv.DAL
     public static class DiDalExtension
     {
         public static IServiceCollection AddDal(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<AdvContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("AdvConnection")));
-
+        {            
+            var connection = configuration.GetConnectionString("AdvConnection");
+            services.AddDbContextPool<AdvContext>(options => options.UseSqlServer(connection));
+            
             services.AddScoped<IRepository<Flat>, Repository<Flat>>();
 
             return services;
