@@ -1,4 +1,5 @@
 ﻿using Adv.BLL.DTO;
+using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using System;
@@ -20,6 +21,10 @@ namespace Adv.BLL.Services
         public async Task<FlatDTO> GetAsync(int id, CancellationToken ct = default)
         {
             var result = await _dataManager.Flats.GetByIdAsync(id, ct).ConfigureAwait(false);
+            if (result is null)
+            {
+                throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
+            }
             return new FlatDTO
             {
                 Id = result.Id,
