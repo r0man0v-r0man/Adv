@@ -6,6 +6,6 @@ namespace Adv.BLL.Interfaces
 {
     public interface ISuperManager
     {
-        IFlatService GetFlats();
+        IFlatService Flats { get; }
     }
 }

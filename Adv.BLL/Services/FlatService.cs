@@ -11,9 +11,13 @@ namespace Adv.BLL.Services
     public class FlatService : IFlatService
     {
         private readonly IDataManager _dataManager;
+        public FlatService(IDataManager dataManager)
+        {
+            _dataManager = dataManager;
+        }
         public async Task<FlatDTO> GetAsync(int id)
         {
-            var result = await _dataManager.GetFlatRepository().GetByIdAsync(id).ConfigureAwait(false);
+            var result = await _dataManager.Flats.GetByIdAsync(id).ConfigureAwait(false);
             return new FlatDTO
             {
                 Id = result.Id,

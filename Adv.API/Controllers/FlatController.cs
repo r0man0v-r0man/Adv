@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.BLL;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,11 @@ namespace Adv.API.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get()
+        
         {
             try
             {
-                var result = await _superManager.GetFlats().GetAsync(2).ConfigureAwait(false);
+                var result = await _superManager.Flats.GetAsync(2).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception ex)

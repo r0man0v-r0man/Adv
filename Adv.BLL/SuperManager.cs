@@ -9,14 +9,8 @@ namespace Adv.BLL
     {
         public SuperManager(IFlatService flatService)
         {
-            flats = flatService;
+            Flats = flatService;
         }
-
-        private readonly IFlatService flats;
-
-        public IFlatService GetFlats()
-        {
-            return flats;
-        }
+        public IFlatService Flats { get; }
     }
 }
