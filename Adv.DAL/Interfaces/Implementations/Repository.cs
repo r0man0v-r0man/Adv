@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
@@ -31,16 +32,18 @@ namespace Adv.DAL.Interfaces.Implementations
             throw new NotImplementedException();
         }
 
-        public async IAsyncEnumerable<T> GetAllAsync()
+        public async IAsyncEnumerable<T> GetAllAsync(CancellationToken ct = default)
         {
-            await foreach (var T in dbSet.AsAsyncEnumerable().ConfigureAwait(false))
+            await foreach (var T in dbSet.AsNoTracking<T>().AsAsyncEnumerable().ConfigureAwait(false))
             {
                 yield return T;
             }
-
         }
 
-        public async Task<T> GetByIdAsync(int Id) => await dbSet.FindAsync(Id);
+        public async Task<T> GetByIdAsync(int Id, CancellationToken ct = default)
+        {
+            return await dbSet.FindAsync(Id).ConfigureAwait(false);
+        }
 
         public async Task RemoveAsync(T item)
         {

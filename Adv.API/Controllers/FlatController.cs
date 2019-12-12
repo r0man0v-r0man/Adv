@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Adv.BLL;
+﻿using Adv.API.Models;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Adv.API.Controllers
 {
@@ -21,18 +20,37 @@ namespace Adv.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
-        
+        public async IAsyncEnumerable<FlatViewModel> Get(CancellationToken ct = default)
+        {
+            var flats = _superManager.Flats.GetAsync(ct).ConfigureAwait(false);
+
+            await foreach (var flat in flats)
+            {
+                yield return new FlatViewModel
+                {
+                    Description = flat.Description,
+                    Id = flat.Id
+                };
+            }
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<FlatViewModel>> Get(int id, CancellationToken ct = default)
         {
             try
             {
-                var result = await _superManager.Flats.GetAsync(2).ConfigureAwait(false);
-                return Ok(result);
+                var result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
+                return Ok(new FlatViewModel
+                {
+                    Description = result.Description,
+                    Id = result.Id
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
     }
+
+    
 }
