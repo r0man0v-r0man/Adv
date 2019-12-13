@@ -12,7 +12,7 @@ namespace Adv.BLL
     {
         public static IServiceCollection AddBll(this IServiceCollection services)
         {
-            services.AddTransient<ISuperManager, SuperManager>();
+            services.AddScoped<ISuperManager, SuperManager>();
             services.AddTransient<IFlatService, FlatService>();
             return services;
         }
