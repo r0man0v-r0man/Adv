@@ -11,15 +11,16 @@ namespace Adv.DAL.Context.Extensions
     {
         public static void ApplyAuditableInformation(this ChangeTracker changeTracker)
         {
+            DateTime now = DateTime.Now;
             foreach (var entry in changeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.Created = DateTime.Now;
+                        entry.Entity.Created = now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModified = DateTime.Now;
+                        entry.Entity.LastModified = now;
                         break;
                 }
             }
