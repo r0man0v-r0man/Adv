@@ -12,8 +12,8 @@ namespace Adv.BLL
     {
         public static IServiceCollection AddBll(this IServiceCollection services)
         {
-            services.AddScoped<ISuperManager, SuperManager>();
-            services.AddScoped<IFlatService, FlatService>();
+            services.AddTransient<ISuperManager, SuperManager>();
+            services.AddTransient<IFlatService, FlatService>();
             return services;
         }
     }
