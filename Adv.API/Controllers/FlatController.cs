@@ -29,7 +29,8 @@ namespace Adv.API.Controllers
                 yield return new FlatViewModel
                 {
                     Description = flat.Description,
-                    Id = flat.Id
+                    Id = flat.Id,
+                    District = flat.District
                 };
             }
         }
@@ -42,7 +43,8 @@ namespace Adv.API.Controllers
                 return Ok(new FlatViewModel
                 {
                     Description = result.Description,
-                    Id = result.Id
+                    Id = result.Id,
+                    District = result.District
                 });
             }
             catch (Exception ex)

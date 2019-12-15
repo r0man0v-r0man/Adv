@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adv.DOMAIN.Enums
+namespace Adv.BLL.DTO.Enums
 {
-    public enum District
+    public class City : DAL.Entities.Enums.City
     {
     }
 }

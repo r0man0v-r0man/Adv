@@ -28,7 +28,8 @@ namespace Adv.BLL.Services
             return new FlatDTO
             {
                 Id = result.Id,
-                Description = result.Description
+                Description = result.Description,
+                District = result.DistrictName
             };
         }
 
@@ -40,7 +41,8 @@ namespace Adv.BLL.Services
                 yield return new FlatDTO
                 {
                     Id = flat.Id,
-                    Description = flat.Description
+                    Description = flat.Description,
+                    District = flat.DistrictName
                 };
             }
         }

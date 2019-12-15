@@ -17,6 +17,9 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.Created)
                 .IsRequired();
+            builder
+                .Property(prop => prop.DistrictName)
+                .HasConversion<int>();
         }
     }
 }
