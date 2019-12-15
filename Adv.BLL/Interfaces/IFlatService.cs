@@ -9,7 +9,7 @@ namespace Adv.BLL.Interfaces
 {
     public interface IFlatService
     {
-        Task<FlatDTO> GetAsync(int id, CancellationToken ct = default);
-        IAsyncEnumerable<FlatDTO> GetAsync(CancellationToken ct = default);
+        Task<FlatDTO> GetAsync(int id, CancellationToken ct);
+        IAsyncEnumerable<FlatDTO> GetAsync(CancellationToken ct);
     }
 }
