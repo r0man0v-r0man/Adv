@@ -1,6 +1,7 @@
 ﻿using Adv.API.Models.Enums;
 using Adv.API.Models.Files;
 using Adv.API.Models.Files.Link;
+using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,7 @@ namespace Adv.API.Controllers
                 catch (Exception ex)
                 {
                     return BadRequest(ex.Message);
+                    throw;
                 }
             }
 
