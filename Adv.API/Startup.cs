@@ -24,7 +24,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddApi();
             services.AddBll();
             services.AddDal(Configuration);
         }

@@ -33,7 +33,7 @@ namespace Adv.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DistrictName")
+                    b.Property<int>("District")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModified")

@@ -10,7 +10,7 @@ namespace Adv.DOMAIN.Entities
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public City.District DistrictName { get; set; }
+        public City.District District { get; set; }
 
     }
 

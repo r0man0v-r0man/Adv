@@ -2,6 +2,7 @@
 using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,37 +14,29 @@ namespace Adv.BLL.Services
     public class FlatService : IFlatService
     {
         private readonly IDataManager _dataManager;
-        public FlatService(IDataManager dataManager)
+        private readonly IMapper _mapper;
+        public FlatService(IDataManager dataManager, IMapper mapper)
         {
             _dataManager = dataManager;
+            _mapper = mapper;
         }
         
         public async Task<FlatDTO> GetAsync(int id, CancellationToken ct = default)
         {
-            var result = await _dataManager.Flats.GetByIdAsync(id, ct).ConfigureAwait(false);
-            if (result is null)
+            var flarDAL = await _dataManager.Flats.GetByIdAsync(id, ct).ConfigureAwait(false);
+            if (flarDAL is null)
             {
                 throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
             }
-            return new FlatDTO
-            {
-                Id = result.Id,
-                Description = result.Description,
-                District = result.DistrictName
-            };
+            return _mapper.Map<FlatDTO>(flarDAL);
         }
 
         public async IAsyncEnumerable<FlatDTO> GetAsync(CancellationToken ct = default)
         {
-            var flats = _dataManager.Flats.GetAllAsync(ct).ConfigureAwait(false);
-            await foreach (var flat in flats)
+            var flatsDAL = _dataManager.Flats.GetAllAsync(ct).ConfigureAwait(false);
+            await foreach (var flatDAL in flatsDAL)
             {
-                yield return new FlatDTO
-                {
-                    Id = flat.Id,
-                    Description = flat.Description,
-                    District = flat.DistrictName
-                };
+                yield return _mapper.Map<FlatDTO>(flatDAL);
             }
         }
     }

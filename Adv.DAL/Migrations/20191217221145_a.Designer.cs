@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Adv.DAL.Migrations
 {
     [DbContext(typeof(AdvContext))]
-    [Migration("20191215135552_first4")]
-    partial class first4
+    [Migration("20191217221145_a")]
+    partial class a
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,7 @@ namespace Adv.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DistrictName")
+                    b.Property<int>("District")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModified")
