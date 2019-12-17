@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Adv.BLL.Interfaces;
+﻿using Adv.BLL.Interfaces;
 using Adv.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
 
