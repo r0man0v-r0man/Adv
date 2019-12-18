@@ -9,6 +9,10 @@ namespace Adv.BLL.DTO
         public string Description { get; set; }
         public City.District District { get; set; }
 
+        /// <summary>
+        /// Mapping to DTO model
+        /// </summary>
+        /// <param name="dalFlat">Data Access Layer flat</param>
         public static implicit operator FlatDTO(Flat dalFlat) => new FlatDTO
         {
             Description = dalFlat.Description,

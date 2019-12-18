@@ -9,7 +9,10 @@ namespace Adv.API.Models
         public string Description { get; set; }
         public City.District District { get; set; }
 
-
+        /// <summary>
+        /// Mapping to ViewModel
+        /// </summary>
+        /// <param name="flat">DTO entity</param>
         public static implicit operator FlatViewModel(FlatDTO flat) => new FlatViewModel
         {
             Id = flat.Id,
