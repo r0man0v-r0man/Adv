@@ -1,6 +1,5 @@
 ﻿using Adv.API.Models;
 using Adv.BLL.Interfaces;
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,11 +14,9 @@ namespace Adv.API.Controllers
     public class FlatController : ControllerBase
     {
         private readonly ISuperManager _superManager;
-        private readonly IMapper _mapper;
-        public FlatController(ISuperManager superManager, IMapper mapper)
+        public FlatController(ISuperManager superManager)
         {
             _superManager = superManager;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -29,7 +26,7 @@ namespace Adv.API.Controllers
 
             await foreach (var flat in flatsDTO)
             {
-                yield return _mapper.Map<FlatViewModel>(flat);
+                yield return flat;
             }
         }
         [HttpGet("{id}")]
@@ -38,7 +35,7 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
-                return Ok(_mapper.Map<FlatViewModel>(result));
+                return Ok(result);
             }
             catch (Exception ex)
             {

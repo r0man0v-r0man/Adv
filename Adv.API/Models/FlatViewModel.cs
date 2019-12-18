@@ -1,9 +1,5 @@
 ﻿using Adv.API.Models.Enums;
-using Adv.DOMAIN.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Adv.BLL.DTO;
 
 namespace Adv.API.Models
 {
@@ -12,5 +8,13 @@ namespace Adv.API.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public City.District District { get; set; }
+
+
+        public static implicit operator FlatViewModel(FlatDTO flat) => new FlatViewModel
+        {
+            Id = flat.Id,
+            Description = flat.Description,
+            District = flat.District
+        };
     }
 }

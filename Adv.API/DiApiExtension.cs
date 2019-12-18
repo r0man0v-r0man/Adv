@@ -1,5 +1,4 @@
-﻿using Adv.API.Additional;
-using AutoMapper;
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,6 @@ namespace Adv.API
         public static IServiceCollection AddApi(this IServiceCollection services)
         {
             services.AddControllers();
-            services.AddAutoMapper(typeof(ViewModelMapProfile));
 
             return services;
         }

@@ -8,4 +8,5 @@ namespace Adv.DAL.Entities
     public class Flat : DOMAIN.Entities.Flat
     {
     }
+
 }
