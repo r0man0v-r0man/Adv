@@ -12,6 +12,9 @@ namespace Adv.DOMAIN.Entities
         public string Description { get; set; }
         public City.District District { get; set; }
 
+        public bool IsActive { get; set; }
+        public decimal Price { get; set; }
+        public string Image { get; set; }
     }
 
 }

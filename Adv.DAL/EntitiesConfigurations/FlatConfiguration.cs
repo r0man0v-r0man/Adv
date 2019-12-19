@@ -20,6 +20,15 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.District)
                 .HasConversion<int>();
+            builder
+                .Property(prop => prop.Price)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Image)
+                .IsRequired();
+            builder
+                .Property(prop => prop.IsActive)
+                .IsRequired();
         }
     }
 }
