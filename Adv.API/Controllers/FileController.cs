@@ -1,7 +1,5 @@
 ﻿using Adv.API.Models.Enums;
 using Adv.API.Models.Files;
-using Adv.API.Models.Files.Link;
-using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +20,7 @@ namespace Adv.API.Controllers
             _superManager = superManager;
         }
         [HttpPost]
-        public async Task<IActionResult> Post(IFormFile file, CancellationToken ct = default)
+        public async Task<ActionResult<FileModel>> Post(IFormFile file, CancellationToken ct = default)
         {
             if (!(file is null))
             {
@@ -32,10 +30,11 @@ namespace Adv.API.Controllers
                     return CreatedAtAction(nameof(Post),
                         new FileModel
                         {
-                            LinkProps = new Links { Download = result },
+                            LinkProps = result,
                             Name = Path.GetFileName(result),
                             Size = file.Length,
-                            Status = FileResponseStatus.Response.Success.ToString().ToLower()
+                            Status = FileResponseStatus.Response.Success.ToString().ToLower(),
+                            Uid = Path.GetFileNameWithoutExtension(result)
                         });
                 }
                 catch (Exception ex)
