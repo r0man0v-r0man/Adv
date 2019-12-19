@@ -3,7 +3,7 @@ using Adv.DAL.Entities;
 
 namespace Adv.BLL.DTO
 {
-    public class FlatDTO 
+    public class FlatDTO : Common.AuditableEntity
     {
         public int Id { get; set; }
         public string Description { get; set; }
@@ -24,6 +24,19 @@ namespace Adv.BLL.DTO
             IsActive = flat.IsActive,
             Price = flat.Price,
             Image = flat.Image
+        };
+        /// <summary>
+        /// Mapping to DAL model
+        /// </summary>
+        /// <param name="flat"></param>
+        public static implicit operator Flat(FlatDTO flat) => new Flat
+        {
+                Id = flat.Id,
+                Image = flat.Image,
+                IsActive = flat.IsActive,
+                Price = flat.Price,
+                Description = flat.Description,
+                District = flat.District
         };
     }
 }

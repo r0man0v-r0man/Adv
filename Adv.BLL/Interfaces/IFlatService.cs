@@ -11,5 +11,6 @@ namespace Adv.BLL.Interfaces
     {
         Task<FlatDTO> GetAsync(int id, CancellationToken ct);
         IAsyncEnumerable<FlatDTO> GetAsync(CancellationToken ct);
+        Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct = default);
     }
 }

@@ -39,9 +39,29 @@ namespace Adv.API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return BadRequest(ex.Message);
                 throw;
             }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<FlatViewModel>> Post(FlatViewModel flatModel, CancellationToken ct = default)
+        {
+            if (!(flatModel is null))
+            {
+                try
+                {
+                    FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                    throw;
+                }
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }
 

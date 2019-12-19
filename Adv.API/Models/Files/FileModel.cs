@@ -1,4 +1,5 @@
-﻿using Adv.API.Models.Files.Link;
+﻿using System;
+using Adv.API.Models.Files.Link;
 
 namespace Adv.API.Models.Files
 {
@@ -19,5 +20,10 @@ namespace Adv.API.Models.Files
             {
                 LinkProps = image
             };
+
+        public static implicit operator string(FileModel file)
+        {
+            return file.LinkProps.Download;
+        }
     }
 }

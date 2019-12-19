@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.DAL.Entities;
 
 namespace Adv.BLL.Services
 {
@@ -35,6 +36,11 @@ namespace Adv.BLL.Services
             {
                 yield return flat;
             }
+        }
+
+        public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct = default)
+        {
+            return await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);
         }
     }
 }

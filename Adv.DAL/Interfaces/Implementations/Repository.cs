@@ -18,10 +18,10 @@ namespace Adv.DAL.Interfaces.Implementations
             _context = context;
             dbSet = _context?.Set<T>();
         }
-        public async Task<T> CreateAsync(T item)
+        public async Task<T> CreateAsync(T item, CancellationToken ct = default)
         {
-            await dbSet.AddAsync(item);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            await dbSet.AddAsync(item, ct);
+            await _context.SaveChangesAsync(ct).ConfigureAwait(false);
             return item;
         }
 

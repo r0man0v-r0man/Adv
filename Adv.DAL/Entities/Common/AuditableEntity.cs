@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Adv.DAL.Entities.Common
 {
-    public class AuditableEntity : DOMAIN.Common.AuditableEntity
+    public abstract class AuditableEntity : DOMAIN.Common.AuditableEntity
     {
     }
 }
