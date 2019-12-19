@@ -1,6 +1,5 @@
 ﻿using Adv.API.Models.Enums;
 using Adv.API.Models.Files;
-using Adv.API.Models.Files.Link;
 using Adv.BLL.DTO;
 
 namespace Adv.API.Models

@@ -12,7 +12,10 @@ namespace Adv.API
         public static IServiceCollection AddApi(this IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
             return services;
         }
     }
