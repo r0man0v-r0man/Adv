@@ -13,8 +13,10 @@ namespace Adv.API.Models
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public FileModel File { get; set; }
+        
+        
         /// <summary>
-        /// Mapping to ViewModel
+        /// Mapping to FlatViewModel
         /// </summary>
         /// <param name="flat">DTO entity</param>
         public static implicit operator FlatViewModel(FlatDTO flat) => new FlatViewModel
@@ -26,7 +28,10 @@ namespace Adv.API.Models
             Price = flat.Price,
             File = flat.Image
         };
-
+        /// <summary>
+        /// Mapping to FlatDTo model
+        /// </summary>
+        /// <param name="flat"></param>
         public static implicit operator FlatDTO(FlatViewModel flat) =>
             new FlatDTO
             {
