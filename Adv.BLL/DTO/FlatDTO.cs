@@ -8,16 +8,22 @@ namespace Adv.BLL.DTO
         public int Id { get; set; }
         public string Description { get; set; }
         public City.District District { get; set; }
+        public bool IsActive { get; set; }
+        public decimal Price { get; set; }
+        public string Image { get; set; }
 
         /// <summary>
         /// Mapping to DTO model
         /// </summary>
-        /// <param name="dalFlat">Data Access Layer flat</param>
-        public static implicit operator FlatDTO(Flat dalFlat) => new FlatDTO
+        /// <param name="flat">Data Access Layer flat</param>
+        public static implicit operator FlatDTO(Flat flat) => new FlatDTO
         {
-            Description = dalFlat.Description,
-            District = dalFlat.District,
-            Id = dalFlat.Id
+            Description = flat.Description,
+            District = flat.District,
+            Id = flat.Id,
+            IsActive = flat.IsActive,
+            Price = flat.Price,
+            Image = flat.Image
         };
     }
 }

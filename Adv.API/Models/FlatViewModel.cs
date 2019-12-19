@@ -1,4 +1,6 @@
 ﻿using Adv.API.Models.Enums;
+using Adv.API.Models.Files;
+using Adv.API.Models.Files.Link;
 using Adv.BLL.DTO;
 
 namespace Adv.API.Models
@@ -8,7 +10,9 @@ namespace Adv.API.Models
         public int Id { get; set; }
         public string Description { get; set; }
         public City.District District { get; set; }
-
+        public bool IsActive { get; set; }
+        public decimal Price { get; set; }
+        public FileModel Image { get; set; }
         /// <summary>
         /// Mapping to ViewModel
         /// </summary>
@@ -17,7 +21,10 @@ namespace Adv.API.Models
         {
             Id = flat.Id,
             Description = flat.Description,
-            District = flat.District
+            District = flat.District,
+            IsActive = flat.IsActive,
+            Price = flat.Price,
+            Image = flat.Image
         };
     }
 }
