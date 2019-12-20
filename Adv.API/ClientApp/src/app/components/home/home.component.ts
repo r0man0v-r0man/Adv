@@ -10,10 +10,19 @@ import { FlatModel } from 'src/app/models/flatModel';
 export class HomeComponent implements OnInit {
   flats:FlatModel[]
   loading = true;
+  cardStyle;
   constructor(private flatService: FlatService) { }
 
   ngOnInit() {
+    this.setCardStyle();
     this.initHomePage();
+  }
+  setCardStyle(){
+    this.cardStyle = {
+      margin: 0,
+      background: '#ECECEC',
+      padding: '30px'
+    }
   }
   initHomePage(){
     this.flatService.getAll()

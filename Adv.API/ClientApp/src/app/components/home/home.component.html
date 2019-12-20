@@ -1,5 +1,5 @@
-<div class="flat-cards" nz-row [nzGutter]="8" style="background: #ECECEC;padding:30px;">
-    <div *ngFor="let flat of flats" nz-col [nzSpan]="8">
+<div class="flat-cards" nz-row [nzGutter]="0" [ngStyle]="cardStyle" >
+    <div *ngFor="let flat of flats" nz-col  [nzSpan]="8">
       <nz-card  
         [nzCover]="flatCoverTpl"
         [nzLoading]="loading"
