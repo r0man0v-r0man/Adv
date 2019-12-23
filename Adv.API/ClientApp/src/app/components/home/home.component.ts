@@ -15,13 +15,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.initHomePage();
   }
-  // setCardStyle(){
-  //   this.cardStyle = {
-  //     margin: 0,
-  //     background: '#ECECEC',
-  //     padding: '30px'
-  //   }
-  // }
+  onScroll(){
+    console.log('scrolled!!');
+  }
   initHomePage(){
     this.flatService.getAll()
       .subscribe(

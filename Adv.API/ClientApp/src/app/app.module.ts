@@ -16,6 +16,7 @@ import { FlatsComponent } from './components/flat/flats/flats.component';
 import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AddAdvertComponent } from './modal/add-advert/add-advert.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 registerLocaleData(ru);
 
@@ -36,7 +37,8 @@ registerLocaleData(ru);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    InfiniteScrollModule
   ],
   entryComponents: [
     AddAdvertComponent
