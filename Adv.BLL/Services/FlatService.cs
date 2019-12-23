@@ -38,6 +38,11 @@ namespace Adv.BLL.Services
             }
         }
 
+        public async IAsyncEnumerable<FlatDTO> GetAsync(int pageNumber, byte size, int skip, CancellationToken ct = default)
+        {
+            return await _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+        }
+
         public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct = default)
         {
             return await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);

@@ -19,6 +19,13 @@ namespace Adv.API.Controllers
             _superManager = superManager;
         }
 
+        [HttpGet("{pageNumber}")]
+        public async IAsyncEnumerable<FlatViewModel> Get(int pageNumber = 1, CancellationToken ct = default)
+        {
+            const byte SIZE = 20;
+            var skip = (SIZE * pageNumber) - SIZE;
+            var flats = _superManager.Flats.GetAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
+        }
         [HttpGet]
         public async IAsyncEnumerable<FlatViewModel> Get(CancellationToken ct = default)
         {

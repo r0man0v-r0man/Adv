@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading;
@@ -35,6 +36,14 @@ namespace Adv.DAL.Interfaces.Implementations
         public async IAsyncEnumerable<T> GetAllAsync(CancellationToken ct = default)
         {
             await foreach (var T in dbSet.AsNoTracking<T>().AsAsyncEnumerable().ConfigureAwait(false))
+            {
+                yield return T;
+            }
+        }
+
+        public async IAsyncEnumerable<T> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct = default)
+        {
+            await foreach (var T in dbSet.Skip(skip).Take(size).AsNoTracking<T>().AsAsyncEnumerable().ConfigureAwait(false))
             {
                 yield return T;
             }

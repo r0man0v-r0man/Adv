@@ -13,6 +13,7 @@ namespace Adv.DAL.Interfaces
         Task<T> GetByIdAsync(int Id, CancellationToken ct = default);
         Task<T> FindAsync(Expression<Func<T, bool>> predicate);
         IAsyncEnumerable<T> GetAllAsync(CancellationToken ct = default);
+        IAsyncEnumerable<T> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct = default);
         Task RemoveAsync(T item);
         Task<bool> UpdateAsync(T item);
     }
