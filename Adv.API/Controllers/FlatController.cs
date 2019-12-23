@@ -25,6 +25,10 @@ namespace Adv.API.Controllers
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
             var flats = _superManager.Flats.GetAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
+            await foreach (var flat in flats)
+            {
+                yield return flat;
+            }
         }
         [HttpGet]
         public async IAsyncEnumerable<FlatViewModel> Get(CancellationToken ct = default)
