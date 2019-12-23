@@ -8,8 +8,9 @@ import { FlatModel } from 'src/app/models/flatModel';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-  flats:FlatModel[]
+  flats:FlatModel[] = [];
   loading = true;
+  pageNumber: number = 1;
   constructor(private flatService: FlatService) { }
 
   ngOnInit() {
@@ -17,9 +18,24 @@ export class HomeComponent implements OnInit {
   }
   onScroll(){
     console.log('scrolled!!');
+    console.log(this.pageNumber);
+    this.flatService.getFlats(this.pageNumber)
+      .subscribe(response => {
+        if(response && response.length > 0){
+          for(var i = 0; i < response.length; i++){
+            this.flats.push(response[i]);
+          }
+        }
+      },
+      ()=>{}
+      ,
+      ()=>{
+        this.loading = false;
+        this.pageNumber++;
+      })
   }
   initHomePage(){
-    this.flatService.getAll()
+    this.flatService.getFlats(this.pageNumber)
       .subscribe(
           flats => {
           this.flats = flats
@@ -28,7 +44,9 @@ export class HomeComponent implements OnInit {
 
          },
          ()=>{
-          this.loading = false       
+          this.loading = false;
+        this.pageNumber++;
+
          }
       )
   }

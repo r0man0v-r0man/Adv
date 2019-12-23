@@ -28,6 +28,19 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public void Dispose() => _context.Dispose();
 
+        public ValueTask DisposeAsync()
+        {
+            try
+            {
+                Dispose();
+                return default;
+            }
+            catch (Exception exception)
+            {
+                return new ValueTask(Task.FromException(exception));
+            }
+        }
+
         public Task<T> FindAsync(Expression<Func<T, bool>> predicate)
         {
             throw new NotImplementedException();

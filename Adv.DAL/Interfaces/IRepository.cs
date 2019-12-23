@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces
 {
-    public interface IRepository<T>: IDisposable where T: class 
+    public interface IRepository<T>: IAsyncDisposable, IDisposable where T: class 
     {
         Task<T> CreateAsync(T item, CancellationToken ct = default);
         Task<T> GetByIdAsync(int Id, CancellationToken ct = default);

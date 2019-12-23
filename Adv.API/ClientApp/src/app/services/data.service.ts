@@ -5,6 +5,7 @@ import { throwError, Observable } from 'rxjs';
 import { AppError } from '../app-errors/app-error';
 import { NotFoundError } from '../app-errors/not-found-error';
 import { BadInput } from '../app-errors/bad-input';
+import { FlatModel } from '../models/flatModel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,13 @@ export class DataService {
   constructor(
     private url: string, 
     private httpService: HttpClient) { }
+  getFlats(pageNumber: number){
+    return this.httpService.get<FlatModel[]>(this.url + '/' + pageNumber)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
   getAll(){
     return this.httpService.get<any[]>(this.url)
       .pipe(

@@ -40,7 +40,11 @@ namespace Adv.BLL.Services
 
         public async IAsyncEnumerable<FlatDTO> GetAsync(int pageNumber, byte size, int skip, CancellationToken ct = default)
         {
-            return await _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+            var flats =  _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+            await foreach (var flat in flats)
+            {
+                yield return flat;
+            }
         }
 
         public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct = default)
