@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,18 +26,20 @@ namespace Adv.DAL.Interfaces.Implementations
             return item;
         }
 
-        public void Dispose() => _context.Dispose();
-
-        public ValueTask DisposeAsync()
+        public void Dispose()
         {
-            try
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                Dispose();
-                return default;
-            }
-            catch (Exception exception)
-            {
-                return new ValueTask(Task.FromException(exception));
+                if (_context != null)
+                {
+                    _context.Dispose();
+                }
             }
         }
 
@@ -46,23 +48,23 @@ namespace Adv.DAL.Interfaces.Implementations
             throw new NotImplementedException();
         }
 
-        public async IAsyncEnumerable<T> GetAllAsync(CancellationToken ct = default)
+        public async IAsyncEnumerable<T> GetAllAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
-            await foreach (var T in dbSet.AsNoTracking<T>().AsAsyncEnumerable().ConfigureAwait(false))
+            await foreach (var T in dbSet.AsNoTracking().AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
             {
                 yield return T;
             }
         }
 
-        public async IAsyncEnumerable<T> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct = default)
+        public async IAsyncEnumerable<T> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct = default)
         {
-            await foreach (var T in dbSet.AsNoTracking<T>().Skip(skip).Take(size).AsAsyncEnumerable().ConfigureAwait(false))
+            await foreach (var T in dbSet.AsNoTracking().Skip(skip).Take(size).AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
             {
                 yield return T;
             }
         }
 
-        public async Task<T> GetByIdAsync(int Id, CancellationToken ct = default)
+        public async Task<T> GetByIdAsync(int Id)
         {
             return await dbSet.FindAsync(Id).ConfigureAwait(false);
         }

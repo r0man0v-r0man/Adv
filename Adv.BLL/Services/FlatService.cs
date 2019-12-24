@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Entities;
+using System.Runtime.CompilerServices;
 
 namespace Adv.BLL.Services
 {
@@ -19,9 +20,9 @@ namespace Adv.BLL.Services
             _dataManager = dataManager;
         }
         
-        public async Task<FlatDTO> GetAsync(int id, CancellationToken ct = default)
+        public async Task<FlatDTO> GetAsync(int id)
         {
-            var flat = await _dataManager.Flats.GetByIdAsync(id, ct).ConfigureAwait(false);
+            var flat = await _dataManager.Flats.GetByIdAsync(id).ConfigureAwait(false);
             if (flat is null)
             {
                 throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
@@ -29,19 +30,19 @@ namespace Adv.BLL.Services
             return flat;
         }
 
-        public async IAsyncEnumerable<FlatDTO> GetAsync(CancellationToken ct = default)
+        public async IAsyncEnumerable<FlatDTO> GetAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
             var flats = _dataManager.Flats.GetAllAsync(ct).ConfigureAwait(false);
-            await foreach (var flat in flats)
+            await foreach (var flat in flats.WithCancellation(ct))
             {
                 yield return flat;
             }
         }
 
-        public async IAsyncEnumerable<FlatDTO> GetAsync(int pageNumber, byte size, int skip, CancellationToken ct = default)
+        public async IAsyncEnumerable<FlatDTO> GetAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct = default)
         {
             var flats =  _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
-            await foreach (var flat in flats)
+            await foreach (var flat in flats.WithCancellation(ct))
             {
                 yield return flat;
             }
