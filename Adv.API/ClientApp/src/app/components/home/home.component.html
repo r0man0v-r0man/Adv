@@ -8,7 +8,7 @@
     >
     <div style="background: #ECECEC;padding:30px;">
       <div  nz-row [nzGutter]="8" >
-        <div *ngFor="let flat of flats" nz-col  [nzSpan]="8" style="margin-bottom: 16px;" >
+        <div *ngFor="let flat of flats" nz-col [nzSpan]="8" style="margin-bottom: 16px;" >
           <nz-card  
             [nzCover]="flatCoverTpl"
             [nzLoading]="loading"

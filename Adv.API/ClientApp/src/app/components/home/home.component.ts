@@ -17,8 +17,6 @@ export class HomeComponent implements OnInit {
     this.initHomePage();
   }
   onScroll(){
-    console.log('scrolled!!');
-    console.log(this.pageNumber);
     this.flatService.getFlats(this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
@@ -30,7 +28,6 @@ export class HomeComponent implements OnInit {
       ()=>{}
       ,
       ()=>{
-        this.loading = false;
         this.pageNumber++;
       })
   }
@@ -45,8 +42,7 @@ export class HomeComponent implements OnInit {
          },
          ()=>{
           this.loading = false;
-        this.pageNumber++;
-
+          this.pageNumber++;
          }
       )
   }

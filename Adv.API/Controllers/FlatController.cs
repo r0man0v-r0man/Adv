@@ -31,16 +31,6 @@ namespace Adv.API.Controllers
                 yield return flat;
             }
         }
-        [HttpGet]
-        public async IAsyncEnumerable<FlatViewModel> Get([EnumeratorCancellation] CancellationToken ct = default)
-        {
-            var flatsDTO = _superManager.Flats.GetAsync(ct).ConfigureAwait(false);
-
-            await foreach (var flat in flatsDTO.WithCancellation(ct))
-            {
-                yield return flat;
-            }
-        }
         [HttpGet("{id}")]
         public async Task<ActionResult<FlatViewModel>> Get(int id)
         {
