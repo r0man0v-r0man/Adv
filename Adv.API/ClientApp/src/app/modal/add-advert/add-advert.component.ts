@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add-advert.component.less']
 })
 export class AddAdvertComponent implements OnInit {
+  selectedDistrict: number = 1;
+  listOfDistricts: Array<{ label: string; value: number}> = [];
   price = 200;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
@@ -27,15 +29,19 @@ export class AddAdvertComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.listOfDistricts.push({ label: 'Заводской', value: 1},{ label: 'Московский', value: 2});
   }
   initForm(){
     this.form = this.formBuilder.group({
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],
-      file: [this.file, [Validators.required]]
+      file: [this.file, [Validators.required]],
+      district: [this.selectedDistrict, [Validators.required]]
     });
   }
-
+  setDistrict(value){
+    console.log(value)
+  }
   onChange(info: { file: UploadFile }){
     if(info.file.status === 'done' && info.file.response) 
       this.form.controls['file'].setValue(info.file.response);

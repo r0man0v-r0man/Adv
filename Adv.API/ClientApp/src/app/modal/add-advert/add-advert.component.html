@@ -45,20 +45,24 @@ nz-form
     <div nz-col [nzSpan]="16">
         <nz-form-item >
             <nz-form-control 
-            nzHasFeedback 
-            nzErrorTip="Укажите цену!">
-                <nz-input-number
-                [(ngModel)]="price"
+            nzHasFeedback
+            nzErrorTip="Выберите район!">
+                <nz-select 
+                [(ngModel)]="selectedDistrict"
+                formControlName="district"
                 [nzSize]="'large'"
-                formControlName="price"
-                [nzPlaceHolder]="100"
-                [nzMin]="10"
-                [nzMax]="10000"
-                [nzStep]="10"
-                [nzFormatter]="formatterDollar"
-                [nzParser]="parserDollar"
-                [nzId]="price"
-                ></nz-input-number>
+                nzAllowClear
+                (ngModelChange)="setDistrict($event)"
+
+                nzPlaceHolder="Выберите район">
+                  <nz-option
+                    *ngFor="let district of listOfDistricts"
+                    [nzLabel]="district.label"
+                    [nzValue]="district.value"
+                    >
+                  </nz-option>
+                </nz-select>
+                
             </nz-form-control>
         </nz-form-item>
     </div>

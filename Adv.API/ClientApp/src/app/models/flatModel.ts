@@ -8,6 +8,7 @@ export class FlatModel{
     description: string;
     file: UploadFile
     id: number;
+    district: number;
 
     public constructor(init?: Partial<FlatModel>){
         Object.assign(this, init);
