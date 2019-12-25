@@ -6,6 +6,7 @@ import { UploadFile, NzMessageService } from 'ng-zorro-antd';
 import { UserWarning } from 'src/app/app-errors/userWarning';
 import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
+import { District } from 'src/app/models/distriscts';
 
 @Component({
   selector: 'app-add-advert',
@@ -35,8 +36,11 @@ export class AddAdvertComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.listOfDistricts.push({ label: 'Заводской', value: 1},{ label: 'Московский', value: 2});
+    this.setDistricts();
   }
+  /**
+   * Initialize form fields
+   */
   initForm(){
     this.form = this.formBuilder.group({
       price: [null, [Validators.required]],
@@ -45,13 +49,31 @@ export class AddAdvertComponent implements OnInit {
       district: [this.selectedDistrict, [Validators.required]]
     });
   }
-  setDistrict(value){
-    console.log(value)
+  /**
+   * Set list of districts for select menu
+   */
+  setDistricts(){
+    this.listOfDistricts.push(
+      { label: 'Заводской район', value: District.factory },
+      { label: 'Ленинский район', value: District.leninsky },
+      { label: 'Московский район', value: District.moscow },
+      { label: 'Октябрьский район', value: District.october },
+      { label: 'Партизанский район', value: District.partisan },
+      { label: 'Первомайский район', value: District.firstMay },
+      { label: 'Советский район', value: District.sovet },
+      { label: 'Центральный район', value: District.central },
+      { label: 'Фрунзенский район', value: District.frunzensky}
+      );
   }
   onChange(info: { file: UploadFile }){
     if(info.file.status === 'done' && info.file.response) 
     this.setFormControlValue('file', info.file.response);
   }
+  /**
+   * Check resolution of image
+   * @param file checked file
+   * @param resolution minimum dimension
+   */
   checkImageResolution(file: File, resolution: number) : Observable<boolean>{
     return new Observable(observer=>{
       let width: number, height: number;
@@ -70,6 +92,9 @@ export class AddAdvertComponent implements OnInit {
       }
     })
   }
+  /**
+   * Delete file
+   */
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
       console.info(file);
@@ -84,10 +109,17 @@ export class AddAdvertComponent implements OnInit {
       }
     })
   }
+  /**
+   * Set value to formControl
+   * @param formControlName name of form control 
+   * @param value value 
+   */
   setFormControlValue(formControlName: string, value: any){
     this.form.controls[formControlName].setValue(value);
-
   };
+  /**
+   * Check file size and file resolution
+   */
   beforeUpload = (file: File) : Observable<boolean> => {
     return new Observable(observer => {
       const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;

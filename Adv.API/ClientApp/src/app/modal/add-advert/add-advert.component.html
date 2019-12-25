@@ -52,8 +52,6 @@ nz-form
                 formControlName="district"
                 [nzSize]="'large'"
                 nzAllowClear
-                (ngModelChange)="setDistrict($event)"
-
                 nzPlaceHolder="Выберите район">
                   <nz-option
                     *ngFor="let district of listOfDistricts"
@@ -62,12 +60,10 @@ nz-form
                     >
                   </nz-option>
                 </nz-select>
-                
             </nz-form-control>
         </nz-form-item>
     </div>
 </div>
-
     <nz-form-item >
         <nz-form-control
         nzHasFeedback 
