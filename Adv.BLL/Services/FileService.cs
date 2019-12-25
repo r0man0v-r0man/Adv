@@ -73,6 +73,7 @@ namespace Adv.BLL.Services
             catch
             {
                 return false;
+                throw;
             }
         }
         /// <summary>

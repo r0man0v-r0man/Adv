@@ -46,5 +46,19 @@ namespace Adv.API.Controllers
 
             return StatusCode(StatusCodes.Status503ServiceUnavailable);
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            }
+
+            var result = await _superManager.Files
+                .CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+
+            return result ? Ok(result) : (IActionResult)BadRequest(result);
+
+        }
     }
 }
