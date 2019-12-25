@@ -42,6 +42,12 @@ export class DataService {
         catchError(this.handleError)
       )
   }
+  deleteFile(fileName: string){
+    return this.httpService.delete<boolean>(this.url + '/' + fileName)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
   private handleError(error: HttpErrorResponse){
     if(error.status === 400)
     return throwError(new BadInput(error.error));

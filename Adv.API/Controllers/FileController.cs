@@ -46,7 +46,7 @@ namespace Adv.API.Controllers
 
             return StatusCode(StatusCodes.Status503ServiceUnavailable);
         }
-        [HttpDelete]
+        [HttpDelete("{fileName}")]
         public async Task<IActionResult> Delete(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
