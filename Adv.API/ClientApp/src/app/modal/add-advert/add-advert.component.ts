@@ -14,6 +14,7 @@ import { District } from 'src/app/models/distriscts';
   styleUrls: ['./add-advert.component.less']
 })
 export class AddAdvertComponent implements OnInit {
+  deleteFileUrl: string = Constants.deleteFileUrl;
   minDimension = 1000;
   maxFileSize = 3;
   selectedDistrict: number = 1;
@@ -99,7 +100,7 @@ export class AddAdvertComponent implements OnInit {
     return new Observable(observer =>{
       console.info(file);
       if(file){
-        this.fileService.deleteFile(file.response.name).subscribe(response =>{
+        this.fileService.deleteFile(this.deleteFileUrl, file.response.name).subscribe(response =>{
           if(response) {
           observer.next(response);
           observer.complete();

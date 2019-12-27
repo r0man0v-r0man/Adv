@@ -19,7 +19,7 @@ namespace Adv.DAL
                 options.UseSqlServer(connection);
             });
             services.AddScoped<IDataManager, DataManager>();
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
 
             return services;
         }

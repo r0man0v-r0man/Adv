@@ -9,6 +9,6 @@ import { Constants } from '../constants';
 export class FlatService extends DataService {
   
   constructor(httpService: HttpClient) {
-    super(Constants.getAllFlats, httpService)
+    super(httpService)
    }
 }

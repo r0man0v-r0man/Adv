@@ -8,10 +8,10 @@ namespace Adv.DAL
 {
     public class DataManager : IDataManager
     {
-        public DataManager(IRepository<Flat> flatRepository)
+        public DataManager(IFlatRepository flatRepository)
         {
             this.Flats = flatRepository;
         }
-        public IRepository<Flat> Flats { get; }
+        public IFlatRepository Flats { get; }
     }
 }

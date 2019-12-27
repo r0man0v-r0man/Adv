@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent implements OnInit {
+  createFlatUrl: string = Constants.flat;
   constructor(
     private modalService: NzModalService, 
     private flatService: FlatService,
@@ -35,8 +36,8 @@ export class NavbarComponent implements OnInit {
             if(modalForm.valid){
               let newFlatAdvert = new FlatModel(modalForm.value)
               this.flatService
-                .create( 
-                  Constants.createFlatAdvertURL, 
+                .createFlat( 
+                  this.createFlatUrl, 
                   newFlatAdvert)
                 .subscribe(
                   response => this.goToDetails(response.id)

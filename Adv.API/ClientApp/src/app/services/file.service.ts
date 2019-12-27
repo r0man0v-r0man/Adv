@@ -9,7 +9,7 @@ import { DataService } from './data.service';
 export class FileService extends DataService{
 
   constructor(httpService: HttpClient) {
-    super(Constants.deleteFileUrl, httpService)
+    super(httpService)
    }
    
 }

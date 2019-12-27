@@ -25,18 +25,18 @@ namespace Adv.API.Controllers
         {
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
-            var flats = _superManager.Flats.GetAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
+            var flats = _superManager.Flats.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
             await foreach (var flat in flats.WithCancellation(ct))
             {
                 yield return flat;
             }
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<FlatViewModel>> Get(int id)
+        public async Task<ActionResult<FlatViewModel>> Get(int id, CancellationToken ct = default)
         {
             try
             {
-                var result = await _superManager.Flats.GetAsync(id).ConfigureAwait(false);
+                var result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception ex)

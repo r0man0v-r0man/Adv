@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatService } from 'src/app/services/flat.service';
 import { FlatModel } from 'src/app/models/flatModel';
+import { Constants } from 'src/app/constants';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { FlatModel } from 'src/app/models/flatModel';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
+  flatsUrl: string = Constants.getAllFlats;
   flats:FlatModel[] = [];
   loading = true;
   pageNumber: number = 1;
@@ -17,7 +19,7 @@ export class HomeComponent implements OnInit {
     this.initHomePage();
   }
   onScroll(){
-    this.flatService.getFlats(this.pageNumber)
+    this.flatService.getFlats(this.flatsUrl, this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
@@ -32,7 +34,7 @@ export class HomeComponent implements OnInit {
       })
   }
   initHomePage(){
-    this.flatService.getFlats(this.pageNumber)
+    this.flatService.getFlats(this.flatsUrl, this.pageNumber)
       .subscribe(
           flats => {
           this.flats = flats

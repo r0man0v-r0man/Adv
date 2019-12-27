@@ -19,27 +19,31 @@ namespace Adv.BLL.Services
         {
             _dataManager = dataManager;
         }
-        
-        public async Task<FlatDTO> GetAsync(int id)
+        /// <summary>
+        /// Return flat
+        /// </summary>
+        /// <param name="flatId">Flat Id</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<FlatDTO> GetAsync(int flatId, CancellationToken ct)
         {
-            var flat = await _dataManager.Flats.GetByIdAsync(id).ConfigureAwait(false);
+            var flat = await _dataManager.Flats.GetByIdAsync(flatId, ct).ConfigureAwait(false);
             if (flat is null)
             {
-                throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
+                throw new FlatNotFoundException($"Мы не нашли объявления с номером {flatId}");
             }
             return flat;
         }
 
-        public async IAsyncEnumerable<FlatDTO> GetAsync([EnumeratorCancellation] CancellationToken ct = default)
-        {
-            var flats = _dataManager.Flats.GetAllAsync(ct).ConfigureAwait(false);
-            await foreach (var flat in flats.WithCancellation(ct))
-            {
-                yield return flat;
-            }
-        }
-
-        public async IAsyncEnumerable<FlatDTO> GetAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct = default)
+        /// <summary>
+        /// Returns all flats from flatRepository
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="size"></param>
+        /// <param name="skip"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async IAsyncEnumerable<FlatDTO> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
         {
             var flats =  _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
             await foreach (var flat in flats.WithCancellation(ct))
@@ -48,9 +52,22 @@ namespace Adv.BLL.Services
             }
         }
 
-        public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct = default)
+        public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct)
         {
-            return await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);
+            if (newFlat is null)
+            {
+                throw new ArgumentNullException(nameof(newFlat));
+            }
+
+            var result = await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);
+            if (result is null)
+            {
+                throw new FlatBadCreateException($"Мы не смогли создать объявление {newFlat.Id}");
+            }
+            else
+            {
+                return result;
+            }
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Adv.DAL.Interfaces
 {
     public interface IDataManager
     {
-        IRepository<Flat> Flats { get; }
+        IFlatRepository Flats { get; }
     }
 }

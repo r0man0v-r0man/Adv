@@ -11,39 +11,48 @@ import { FlatModel } from '../models/flatModel';
   providedIn: 'root'
 })
 export class DataService {
-  headers = new HttpHeaders().set('content-type', 'application/json'); 
+  
+  headers = new HttpHeaders().set('content-type', 'application/json');
+
   constructor(
-    private url: string, 
     private httpService: HttpClient) { }
-  getFlats(pageNumber: number){
-    return this.httpService.get<FlatModel[]>(this.url + '/' + pageNumber)
+
+
+  /**
+   * Get flats
+   * @param url api url for fething flats
+   * @param pageNumber number for fetch flats
+   */
+  getFlats(url:string, pageNumber: number){
+    return this.httpService.get<FlatModel[]>(url + '/' + pageNumber)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
-  getAll(){
-    return this.httpService.get<any[]>(this.url)
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      )
-  }
-  create(url: string, resourse){
-    return this.httpService.post<any>(url, resourse, {headers: this.headers})
+  
+  getFlat(url: string, flatId: number){
+    return this.httpService.get<FlatModel>(url + '/' + flatId)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
-  delete(id){
-    return this.httpService.delete(this.url + '/' + id)
+  createFlat(url: string, newFlat: FlatModel){
+    return this.httpService.post<FlatModel>(url, newFlat, { headers: this.headers })
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+  delete(url: string, id: number){
+    return this.httpService.delete(url + '/' + id)
       .pipe(
         catchError(this.handleError)
       )
   }
-  deleteFile(fileName: string){
-    return this.httpService.delete<boolean>(this.url + '/' + fileName)
+  deleteFile(url: string, fileName: string){
+    return this.httpService.delete<boolean>(url + '/' + fileName)
       .pipe(
         catchError(this.handleError)
       )
