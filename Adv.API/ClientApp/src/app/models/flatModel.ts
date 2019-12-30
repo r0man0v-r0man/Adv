@@ -9,6 +9,12 @@ export class FlatModel{
     file: UploadFile
     id: number;
     district: number;
+    street: string;
+    numberOfHouse: number;
+    numberOfHouseCourpus: number;
+    numberOfSubHouse: number;
+    numberOfFlat: number;
+
 
     public constructor(init?: Partial<FlatModel>){
         Object.assign(this, init);

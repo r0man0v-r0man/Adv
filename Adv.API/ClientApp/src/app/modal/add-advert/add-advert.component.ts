@@ -15,21 +15,39 @@ import { District } from 'src/app/models/distriscts';
 })
 export class AddAdvertComponent implements OnInit {
   deleteFileUrl: string = Constants.deleteFileUrl;
+  uploadUrl = Constants.uploadFileUrl;
+
+  /** Minimum dimension/resolution for image */
   minDimension = 1000;
+  /** Max file size in mb */
   maxFileSize = 3;
+  /** Selected District, default district is: 1 */
   selectedDistrict: number = 1;
+  /** Array of districts */
   listOfDistricts: Array<{ label: string; value: number}> = [];
-  price = 200;
+  /** Flat's price, default is: 200 */
+  price: number = 200;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
+  /** Street, part of address */
+  street: string = '';
+  /** Number of House, part of address */
+  numberOfHouse: number;
+  /** Number of House Corpus, part of address */
+  numberOfHouseCourpus: number;
+  /** Number Of SubHouse, part of address */
+  numberOfSubHouse: number;
+  /** Number of flat, part of address */
+  numberOfFlat: number;
+
   form: FormGroup;
-  uploadUrl = Constants.uploadFileUrl;
-  fileList : UploadFile[]= [];
+  fileList : UploadFile[] = [];
   file: UploadFile;
   showUploadList = {
     showPreviewIcon: false,
     showRemoveIcon: true
   }
+
   constructor(
     private formBuilder: FormBuilder, 
     private messageService: NzMessageService,
@@ -47,7 +65,12 @@ export class AddAdvertComponent implements OnInit {
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],
       file: [this.file, [Validators.required]],
-      district: [this.selectedDistrict, [Validators.required]]
+      district: [this.selectedDistrict, [Validators.required]],
+      street: [this.street, [Validators.required]],
+      numberOfHouse: [null, [Validators.required]],
+      numberOfHouseCourpus: [this.numberOfHouseCourpus],
+      numberOfSubHouse: [ this.numberOfSubHouse, [Validators.required]],
+      numberOfFlat: [this.numberOfFlat, [Validators.required]]
     });
   }
   /**

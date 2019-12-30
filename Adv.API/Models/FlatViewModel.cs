@@ -13,8 +13,12 @@ namespace Adv.API.Models
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public FileModel File { get; set; }
-        
-        
+        public string Street { get; set; }
+        public int NumberOfHouse { get; set; }
+        public int NumberOfHouseCourpus { get; set; }
+        public int NumberOfSubHouse { get; set; }
+        public int NumberOfFlat { get; set; }
+
         /// <summary>
         /// Mapping to FlatViewModel
         /// </summary>
