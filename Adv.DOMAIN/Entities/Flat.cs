@@ -15,6 +15,10 @@ namespace Adv.DOMAIN.Entities
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
+        /// <summary>
+        /// Street + house + corpus + subHouse + flat(flatNumber)
+        /// </summary>
+        public string Address { get; set; }
     }
 
 }

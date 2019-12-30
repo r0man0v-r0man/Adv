@@ -2,6 +2,8 @@
 using Adv.API.Models.Files;
 using Adv.API.Models.Files.Link;
 using Adv.BLL.DTO;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace Adv.API.Models
 {
@@ -33,7 +35,7 @@ namespace Adv.API.Models
             File = flat.Image
         };
         /// <summary>
-        /// Mapping to FlatDTo model
+        /// Mapping to FlatDTO model
         /// </summary>
         /// <param name="flat"></param>
         public static implicit operator FlatDTO(FlatViewModel flat) =>
@@ -44,7 +46,15 @@ namespace Adv.API.Models
                 Price = flat.Price,
                 District = flat.District,
                 Description = flat.Description,
-                Id = flat.Id
+                Id = flat.Id,
+                Address = new Dictionary<string, string>
+                {
+                    ["street"] = flat.Street,
+                    ["house"] = flat.NumberOfHouse.ToString(new CultureInfo("ru-RU")),
+                    ["corpus"] = flat.NumberOfHouseCourpus.ToString(new CultureInfo("ru-RU")),
+                    ["subHouse"] = flat.NumberOfSubHouse.ToString(new CultureInfo("ru-RU")),
+                    ["flat"] = flat.NumberOfFlat.ToString(new CultureInfo("ru-RU"))
+                }
             };
     }
 }

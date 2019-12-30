@@ -1,5 +1,7 @@
 ﻿using Adv.BLL.DTO.Enums;
 using Adv.DAL.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Adv.BLL.DTO
 {
@@ -11,7 +13,7 @@ namespace Adv.BLL.DTO
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
-
+        public Dictionary<string, string> Address { get; set; }
         /// <summary>
         /// Mapping to DTO model
         /// </summary>
@@ -36,7 +38,12 @@ namespace Adv.BLL.DTO
                 IsActive = flat.IsActive,
                 Price = flat.Price,
                 Description = flat.Description,
-                District = flat.District
+                District = flat.District,
+                Address = flat.Address["street"] + "_" + 
+                          flat.Address["house"] + "_" + 
+                          flat.Address["corpus"] + "_" + 
+                          flat.Address["subHouse"] + "_" + 
+                          flat.Address["flat"]
         };
     }
 }
