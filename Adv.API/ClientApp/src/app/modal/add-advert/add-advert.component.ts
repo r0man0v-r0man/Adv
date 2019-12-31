@@ -7,6 +7,7 @@ import { UserWarning } from 'src/app/app-errors/userWarning';
 import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
 import { District } from 'src/app/models/distriscts';
+import ymaps from 'ymaps';
 
 @Component({
   selector: 'app-add-advert',
@@ -40,6 +41,7 @@ export class AddAdvertComponent implements OnInit {
   /** Number of flat, part of address */
   numberOfFlat: number;
 
+
   form: FormGroup;
   fileList : UploadFile[] = [];
   file: UploadFile;
@@ -56,6 +58,19 @@ export class AddAdvertComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.setDistricts();
+    this.yandexMapInitialize();
+  }
+  /** setup yandex map */
+  yandexMapInitialize(){
+    ymaps
+  .load()
+  .then(maps => {
+    const map = new maps.Map('yandex-map-container', {
+      center: [-8.369326, 115.166023],
+      zoom: 7
+    });
+  })
+  .catch(error => console.log('Failed to load Yandex Maps', error));
   }
   /**
    * Initialize form fields
