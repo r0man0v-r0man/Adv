@@ -2,6 +2,8 @@
 using Adv.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace Adv.BLL.DTO
 {
@@ -25,7 +27,11 @@ namespace Adv.BLL.DTO
             Id = flat.Id,
             IsActive = flat.IsActive,
             Price = flat.Price,
-            Image = flat.Image
+            Image = flat.Image,
+            Address = flat.Address
+                .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x=>x.Split('='))
+                .ToDictionary(split=>split[0], split=>split[1])
         };
         /// <summary>
         /// Mapping to DAL model
@@ -33,17 +39,13 @@ namespace Adv.BLL.DTO
         /// <param name="flat"></param>
         public static implicit operator Flat(FlatDTO flat) => new Flat
         {
-                Id = flat.Id,
-                Image = flat.Image,
-                IsActive = flat.IsActive,
-                Price = flat.Price,
-                Description = flat.Description,
-                District = flat.District,
-                Address = flat.Address["street"] + "_" + 
-                          flat.Address["house"] + "_" + 
-                          flat.Address["corpus"] + "_" + 
-                          flat.Address["subHouse"] + "_" + 
-                          flat.Address["flat"]
+            Id = flat.Id,
+            Image = flat.Image,
+            IsActive = flat.IsActive,
+            Price = flat.Price,
+            Description = flat.Description,
+            District = flat.District,
+            Address = string.Join(";", flat.Address.Select(x=>x.Key + "=" + x.Value))
         };
     }
 }

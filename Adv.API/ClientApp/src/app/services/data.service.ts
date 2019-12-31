@@ -26,7 +26,6 @@ export class DataService {
   getFlats(url:string, pageNumber: number){
     return this.httpService.get<FlatModel[]>(url + '/' + pageNumber)
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
@@ -34,14 +33,12 @@ export class DataService {
   getFlat(url: string, flatId: number){
     return this.httpService.get<FlatModel>(url + '/' + flatId)
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }
   createFlat(url: string, newFlat: FlatModel){
     return this.httpService.post<FlatModel>(url, newFlat, { headers: this.headers })
       .pipe(
-        retry(2),
         catchError(this.handleError)
       )
   }

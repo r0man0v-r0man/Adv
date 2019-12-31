@@ -2,6 +2,7 @@
 using Adv.API.Models.Files;
 using Adv.API.Models.Files.Link;
 using Adv.BLL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -32,7 +33,12 @@ namespace Adv.API.Models
             District = flat.District,
             IsActive = flat.IsActive,
             Price = flat.Price,
-            File = flat.Image
+            File = flat.Image,
+            Street = flat.Address["street"],
+            NumberOfHouse = Convert.ToInt32(flat.Address["house"], new CultureInfo("ru-RU")),
+            NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], new CultureInfo("ru-RU")),
+            NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], new CultureInfo("ru-RU")),
+            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], new CultureInfo("ru-RU"))
         };
         /// <summary>
         /// Mapping to FlatDTO model

@@ -44,7 +44,7 @@ namespace Adv.DAL.Interfaces.Implementations
         public async IAsyncEnumerable<Flat> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
         {
             await foreach (var flat in _context.Flats.AsNoTracking()
-                                                      .OrderBy(property => property.Created)
+                                                      .OrderByDescending(property => property.Created)
                                                       .Skip(skip)
                                                       .Take(size)
                                                       .AsAsyncEnumerable()

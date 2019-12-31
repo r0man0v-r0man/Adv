@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Adv.DOMAIN.Common
 {
-    public abstract class AuditableEntity
+    public abstract class AuditableEntity : IAuditableEntity
     {
         public DateTime Created { get; set; }
         public DateTime LastModified { get; set; }
