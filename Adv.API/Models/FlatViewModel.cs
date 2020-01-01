@@ -38,7 +38,8 @@ namespace Adv.API.Models
             NumberOfHouse = Convert.ToInt32(flat.Address["house"], new CultureInfo("ru-RU")),
             NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], new CultureInfo("ru-RU")),
             NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], new CultureInfo("ru-RU")),
-            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], new CultureInfo("ru-RU"))
+            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], new CultureInfo("ru-RU")),
+            Created = flat.Created
         };
         /// <summary>
         /// Mapping to FlatDTO model

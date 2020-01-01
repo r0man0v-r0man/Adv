@@ -26,7 +26,7 @@ namespace Adv.API.Controllers
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
             var flats = _superManager.Flats.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
-            await foreach (var flat in flats.WithCancellation(ct))
+            await foreach (FlatViewModel flat in flats.WithCancellation(ct))
             {
                 yield return flat;
             }
@@ -36,7 +36,7 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
+                FlatViewModel result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception ex)

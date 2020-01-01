@@ -23,6 +23,7 @@ export class FlatDetailComponent implements OnInit {
     this.getFlatIdFromRoute();
     this._flatService.getFlat(this.flatUrl, this.getFlatIdFromRoute())
       .subscribe(response => {
+        this.flat = response
         console.log(response);
     });
   }
