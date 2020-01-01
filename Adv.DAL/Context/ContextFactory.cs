@@ -10,9 +10,15 @@ namespace Adv.DAL.Context
 {
     public class ContextFactory : IDesignTimeDbContextFactory<AdvContext>
     {
+        public IConfiguration Configuration { get; set; }
+        public ContextFactory(IConfiguration Configuration)
+        {
+            this.Configuration = Configuration;
+        }
         public AdvContext CreateDbContext(string[] args)
         {
-            string connectionString = ReadAdvConnectionStringFromAppSettings();
+            string connectionString = Configuration["AdvConnection"];
+            
 
             var builder = new DbContextOptionsBuilder<AdvContext>();
             builder.UseSqlServer(connectionString);

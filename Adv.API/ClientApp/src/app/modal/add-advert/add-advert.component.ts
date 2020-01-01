@@ -58,7 +58,6 @@ export class AddAdvertComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.setDistricts();
-    this.yandexMapInitialize();
   }
   /** setup yandex map */
   yandexMapInitialize(){
