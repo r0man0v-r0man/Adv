@@ -12,7 +12,7 @@ import { Constants } from 'src/app/constants';
 
 export class FlatDetailComponent implements OnInit {
   flatUrl:string = Constants.flat;
-  flat: FlatModel;
+  flat: FlatModel = new FlatModel();
 
   constructor(
     private _flatService:FlatService,

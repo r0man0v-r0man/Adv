@@ -31,7 +31,8 @@ namespace Adv.BLL.DTO
             Address = flat.Address
                 .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x=>x.Split('='))
-                .ToDictionary(split=>split[0], split=>split[1])
+                .ToDictionary(split=>split[0], split=>split[1]),
+            Created = flat.Created
         };
         /// <summary>
         /// Mapping to DAL model
