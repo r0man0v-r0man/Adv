@@ -17,6 +17,7 @@ import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AddAdvertComponent } from './modal/add-advert/add-advert.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { AddressPipe } from './customPipes/address.pipe';
 
 registerLocaleData(ru);
 
@@ -28,7 +29,8 @@ registerLocaleData(ru);
     NavbarComponent,
     FlatsComponent,
     AddAdvertComponent,
-    FlatDetailComponent
+    FlatDetailComponent,
+    AddressPipe
   ],
   imports: [
     BrowserModule,

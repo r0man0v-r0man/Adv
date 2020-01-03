@@ -83,7 +83,7 @@ export class AddAdvertComponent implements OnInit {
       street: [this.street, [Validators.required]],
       numberOfHouse: [null, [Validators.required]],
       numberOfHouseCourpus: [this.numberOfHouseCourpus],
-      numberOfSubHouse: [ this.numberOfSubHouse, [Validators.required]],
+      numberOfSubHouse: [ this.numberOfSubHouse],
       numberOfFlat: [this.numberOfFlat, [Validators.required]]
     });
   }

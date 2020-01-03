@@ -12,11 +12,17 @@
           <nz-card  
             [nzCover]="flatCoverTpl"
             [nzLoading]="loading"
-            nzTitle="{{flat.price}}$">
-            <p>{{flat.description}}</p>
+            [nzExtra]="more"
+            nzTitle="{{flat.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
+            <p>{{flat | address }}</p>
           </nz-card>
           <ng-template #flatCoverTpl>
             <img src="{{ flat.file.linkProps.download }}">
+          </ng-template>
+          <ng-template #more>
+            <a 
+            [routerLink]="['/flat', flat.id]"
+            >Подробнее</a>
           </ng-template>
         </div>
       </div>

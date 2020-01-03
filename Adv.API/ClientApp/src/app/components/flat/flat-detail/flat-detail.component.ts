@@ -22,9 +22,9 @@ export class FlatDetailComponent implements OnInit {
   ngOnInit() {
     this.getFlatIdFromRoute();
     this._flatService.getFlat(this.flatUrl, this.getFlatIdFromRoute())
-      .subscribe(response => {
+      .subscribe(
+        response => {
         this.flat = response
-        console.log(response);
     });
   }
 
