@@ -21,7 +21,7 @@ namespace Adv.API.Controllers
         }
 
         [HttpGet("getAll/{pageNumber}")]
-        public async IAsyncEnumerable<FlatViewModel> GetAll(int pageNumber = 1, [EnumeratorCancellation] CancellationToken ct = default)
+        public async IAsyncEnumerable<FlatViewModel> GetAll(int pageNumber, [EnumeratorCancellation] CancellationToken ct = default)
         {
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
@@ -54,7 +54,7 @@ namespace Adv.API.Controllers
                 try
                 {
                     FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
-                    return result;
+                    return CreatedAtAction(nameof(Post), result);
                 }
                 catch (Exception ex)
                 {

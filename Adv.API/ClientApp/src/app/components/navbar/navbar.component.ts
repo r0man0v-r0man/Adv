@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
   goToDetails(id: number){
-    this.router.navigate(['/flat/', id]);
+    this.router.navigate(['flat', id]);
   }
   showAddAdvertModal(){
   const modal = this.modalService.create({
@@ -40,7 +40,9 @@ export class NavbarComponent implements OnInit {
                   this.createFlatUrl, 
                   newFlatAdvert)
                 .subscribe(
-                  response => this.goToDetails(response.id)
+                  response => {
+                    this.goToDetails(response.id);
+                  }
                 );
               modal.destroy();
             }

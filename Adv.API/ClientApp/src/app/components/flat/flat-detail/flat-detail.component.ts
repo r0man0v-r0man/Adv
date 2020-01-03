@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Constants } from 'src/app/constants';
 
 @Component({
@@ -15,22 +15,41 @@ export class FlatDetailComponent implements OnInit {
   flat: FlatModel = new FlatModel();
 
   constructor(
-    private _flatService:FlatService,
-    private _route: ActivatedRoute
-  ) { }
+    private flatService:FlatService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {  }
 
   ngOnInit() {
-    this.getFlatIdFromRoute();
-    this._flatService.getFlat(this.flatUrl, this.getFlatIdFromRoute())
-      .subscribe(
-        response => {
-        this.flat = response
+    this.routeReUseStrategy();
+    this.getFlat(this.getFlatIdFromRoute());
+  }
+
+  getFlat(id: number){
+    this.flatService.getFlat(this.flatUrl, id)
+    .subscribe(
+      response => {
+      this.flat = response
+  });
+  }
+
+  routeReUseStrategy(){
+    // override the route reuse strategy
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
+      }
     });
   }
 
+
   getFlatIdFromRoute() : number {
     let flatId: number;
-    this._route.params.subscribe(params =>{
+    this.route.params.subscribe(params =>{
       flatId = params['id'];
     })
     return flatId;
