@@ -8,10 +8,10 @@ import { Constants } from 'src/app/constants';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.less']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   flatsUrl: string = Constants.getAllFlats;
-  flats:FlatModel[] = [];
+  flats: FlatModel[] = [];
   loading = true;
   pageNumber: number;
   constructor(private flatService: FlatService) { }
@@ -19,11 +19,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.initHomePage();
   }
-  ngOnDestroy(): void {
-    this.flats = [];
-  }
+
   onScroll(){
-    if (this.flats.length !== 0){
+    if (this.pageNumber !== 1){
       this.flatService.getFlats(this.flatsUrl, this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){

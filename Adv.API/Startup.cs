@@ -25,7 +25,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApi();
+            services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
         }
@@ -47,6 +47,7 @@ namespace Adv.API
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
