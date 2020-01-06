@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,6 +13,12 @@ namespace Adv.API
     {
         public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .Build();
+            });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(config =>
                 {
@@ -31,6 +39,7 @@ namespace Adv.API
 
                     config.TokenValidationParameters = new TokenValidationParameters()
                     {
+                        ClockSkew = TimeSpan.FromMinutes(10),
                         ValidIssuer = configuration["TokenIssuer"],
                         ValidAudience = configuration["TokenAudience"],
                         IssuerSigningKey = key

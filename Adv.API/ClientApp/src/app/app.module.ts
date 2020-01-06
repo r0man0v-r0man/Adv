@@ -19,6 +19,7 @@ import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.c
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddressPipe } from './customPipes/address.pipe';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 registerLocaleData(ru);
 
@@ -32,7 +33,8 @@ registerLocaleData(ru);
     AddAdvertComponent,
     FlatDetailComponent,
     AddressPipe,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -29,10 +29,6 @@ namespace Adv.DAL
             })
                 .AddEntityFrameworkStores<AdvContext>()
                 .AddDefaultTokenProviders();
-            services.ConfigureApplicationCookie(config =>
-            {
-                config.Cookie.Name = "HalupaIdentityCookie";
-            });
             services.AddScoped<IDataManager, DataManager>();
             services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
 

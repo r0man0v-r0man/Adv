@@ -18,6 +18,18 @@ export class DataService {
   constructor(
     private httpService: HttpClient) { }
 
+  /**login user */
+  login(url: string, user: UserModel){
+    return this.httpService.post(url, user)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  /**logout user */
+  logOut(){
+
+  }
+
   /** register new user */
   registerUser(url: string, newUser: UserModel){
     return this.httpService.post<UserModel>(url, newUser, { headers: this.headers })
