@@ -21,7 +21,7 @@ namespace Adv.BLL.Services
         public FileService(IConfiguration configuration)
         {
             _config = configuration;
-            AzureConnectionString = _config["AzureStorageConnectionString"];
+            AzureConnectionString = _config.GetConnectionString("AzureStorageConnectionString");
             ContainerName = "files";
         }
         public async Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct = default)

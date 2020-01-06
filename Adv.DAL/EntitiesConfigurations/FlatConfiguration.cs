@@ -29,6 +29,9 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.IsActive)
                 .IsRequired();
+            builder
+                .Property(prop => prop.Address)
+                .IsRequired();
         }
     }
 }

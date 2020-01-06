@@ -34,7 +34,7 @@ namespace Adv.API.Controllers
             }
             return NotFound();
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(UserViewModel user)
         {
             var result = await superManager.Users.CreateAsync(user, user?.Password).ConfigureAwait(false);

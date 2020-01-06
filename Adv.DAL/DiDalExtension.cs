@@ -12,7 +12,7 @@ namespace Adv.DAL
     {
         public static IServiceCollection AddDal(this IServiceCollection services, IConfiguration configuration)
         {            
-            var connection = configuration["AdvConnection"];
+            var connection = configuration.GetConnectionString("AdvConnection");
             services.AddDbContextPool<AdvContext>(options =>
             {
                 options.UseSqlServer(connection);
