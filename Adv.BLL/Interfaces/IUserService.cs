@@ -9,7 +9,7 @@ namespace Adv.BLL.Interfaces
     {
         Task<IdentityResult> CreateAsync(IdentityUser user, string password);
         Task<IdentityUser> FindByNameAsync(string userName);
-        Task<SignInResult> PasswordSignInAsync(IdentityUser user, string password);
+        Task<SignInResult> PasswordSignInAsync(string userName, string password);
         Task SignOutAsync();
     }
 }

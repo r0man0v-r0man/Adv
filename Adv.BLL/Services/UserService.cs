@@ -33,9 +33,9 @@ namespace Adv.BLL.Services
             return result;
         }
 
-        public async Task<SignInResult> PasswordSignInAsync(IdentityUser user, string password)
+        public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
         {
-            var result = await signInManager.PasswordSignInAsync(user, password, false, false).ConfigureAwait(false);
+            var result = await signInManager.PasswordSignInAsync(userName, password, false, false).ConfigureAwait(false);
             return result;
         }
 

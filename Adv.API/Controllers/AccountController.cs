@@ -26,7 +26,7 @@ namespace Adv.API.Controllers
             if (existUser != null)
             {
                 // sign in
-                var signInResult = await superManager.Users.PasswordSignInAsync(user, user?.Password).ConfigureAwait(false);
+                var signInResult = await superManager.Users.PasswordSignInAsync(user?.UserName, user?.Password).ConfigureAwait(false);
                 if (signInResult.Succeeded)
                 {
                     return Ok(true);
@@ -42,7 +42,7 @@ namespace Adv.API.Controllers
             if (result.Succeeded)
             {
                 //sign in
-                var signInResult = await superManager.Users.PasswordSignInAsync(user, user?.Password).ConfigureAwait(false);
+                var signInResult = await superManager.Users.PasswordSignInAsync(user?.UserName, user?.Password).ConfigureAwait(false);
                 if (signInResult.Succeeded)
                 {
                     return Ok(true);
