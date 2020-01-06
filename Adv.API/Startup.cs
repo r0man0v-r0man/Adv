@@ -45,14 +45,20 @@ namespace Adv.API
                 app.UseSpaStaticFiles();
             }
 
+
             app.UseRouting();
 
+            //who are you?
             app.UseAuthentication();
+
+            //are you allowed?
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute();
             });
 
             app.UseSpa(spa =>

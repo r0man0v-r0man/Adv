@@ -21,7 +21,7 @@
     "@angular/router": "^8.2.14",
     "ng-zorro-antd": "^8.5.2",
     "ngx-infinite-scroll": "^8.0.1",
-    "rxjs": "~6.5.3",
+    "rxjs": "^6.5.4",
     "tslib": "^1.10.0",
     "ymaps": "^0.2.1",
     "zone.js": "~0.9.1"
@@ -41,7 +41,7 @@
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
-    "karma-jasmine-html-reporter": "^1.4.0",
+    "karma-jasmine-html-reporter": "^1.5.1",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",

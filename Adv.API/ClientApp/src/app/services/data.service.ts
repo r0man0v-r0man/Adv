@@ -6,6 +6,7 @@ import { AppError } from '../app-errors/app-error';
 import { NotFoundError } from '../app-errors/not-found-error';
 import { BadInput } from '../app-errors/bad-input';
 import { FlatModel } from '../models/flatModel';
+import { UserModel } from '../models/UserModel';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,13 @@ export class DataService {
   constructor(
     private httpService: HttpClient) { }
 
+  /** register new user */
+  registerUser(url: string, newUser: UserModel){
+    return this.httpService.post<UserModel>(url, newUser, { headers: this.headers })
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   /**
    * Get flats

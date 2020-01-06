@@ -1,11 +1,7 @@
-﻿
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,8 +11,8 @@ namespace Adv.API
     {
         public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddAuthentication("OAuth")
-                .AddJwtBearer("OAuth", config =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(config =>
                 {
                     var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
                     var key = new SymmetricSecurityKey(secretsBytes);

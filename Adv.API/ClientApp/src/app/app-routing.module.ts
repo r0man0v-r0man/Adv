@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FlatsComponent } from './components/flat/flats/flats.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'flat/:id',
     component: FlatDetailComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {  
     path: '**', 

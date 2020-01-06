@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlatService } from 'src/app/services/flat.service';
 import { FlatModel } from 'src/app/models/flatModel';
 import { Constants } from 'src/app/constants';

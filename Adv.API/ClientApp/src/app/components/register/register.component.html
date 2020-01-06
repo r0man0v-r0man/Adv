@@ -1,0 +1,41 @@
+<nz-layout>
+    <nz-content class="outer-content">
+        <nz-layout class="inner-layout">
+            <nz-content class="inner-content" nz-row [nzGutter]="24">
+                <form nz-form  [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm.value)">
+                    <nz-form-item style="text-align: center;">
+                        <h1 nz-title>Halupa.by</h1>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control>
+                          <input nz-input 
+                          formControlName="userName" 
+                          id="userName"
+                          placeHolder="Имя пользователя"  
+                          [nzSize]="'large'"/>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control>
+                          <input nz-input 
+                          formControlName="password" 
+                          id="password" 
+                          placeholder="Пароль"
+                          [nzSize]="'large'"/>
+                      </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                      <nz-form-control >
+                        <button nz-button 
+                        nzType="primary" 
+                        [nzSize]="'large'" 
+                        [disabled]="!registerForm.valid"
+                        style="width: 100%;">Регистрация</button>
+                      </nz-form-control>
+                    </nz-form-item>
+                  </form>
+                  <p>{{registerForm.value | json }}</p>
+            </nz-content>
+        </nz-layout>
+    </nz-content>
+</nz-layout>

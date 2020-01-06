@@ -1,19 +1,16 @@
-﻿
-using Adv.DAL.Context.Interfaces;
+﻿using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
-using Adv.DAL.Entities.Common;
 using Adv.DAL.EntitiesConfigurations;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Adv.DAL.Context
 {
-    public class AdvContext : DbContext, IAdvContext
+    // IdentityDbCOntext contains all the user tables
+    public class AdvContext : IdentityDbContext, IAdvContext
     {
         public DbSet<Flat> Flats { get; set; }
 
@@ -21,7 +18,7 @@ namespace Adv.DAL.Context
         {
             Database.EnsureCreated();
         }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new FlatConfiguration());

@@ -1,4 +1,7 @@
 export class Constants {
+
+  //user
+  static registerUser = 'https://localhost:44335/api/account'
   //flat
   static flat = 'https://localhost:44335/api/flat'; 
   static getAllFlats = 'https://localhost:44335/api/flat/getAll';

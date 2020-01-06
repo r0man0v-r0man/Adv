@@ -8,5 +8,6 @@ namespace Adv.BLL.Interfaces
     {
         IFlatService Flats { get; }
         IFileService Files { get; }
+        IUserService Users { get; }
     }
 }
