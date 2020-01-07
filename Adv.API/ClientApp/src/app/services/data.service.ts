@@ -28,13 +28,16 @@ export class DataService {
             localStorage.setItem('access_token', token);
             return true;
           }
+          else{
+            return false;
+          }
         }),
         catchError(this.handleError)
       )
   }
   /**logout user */
   logOut(){
-
+    localStorage.removeItem("access_token");
   }
 
   /** register new user */

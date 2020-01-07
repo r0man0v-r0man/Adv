@@ -5,6 +5,7 @@ import { FlatService } from 'src/app/services/flat.service';
 import { Constants } from 'src/app/constants';
 import { FlatModel } from 'src/app/models/flatModel';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
