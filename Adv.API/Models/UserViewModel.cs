@@ -9,6 +9,7 @@ namespace Adv.API.Models
 {
     public class UserViewModel
     {
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
@@ -19,7 +20,8 @@ namespace Adv.API.Models
         /// <param name="identityUser"></param>
         public static implicit operator UserViewModel(IdentityUser identityUser) => new UserViewModel
         {
-            UserName = identityUser.UserName
+            UserName = identityUser?.UserName,
+            Id = identityUser.Id
         };
         /// <summary>
         /// Mapping to IdentityUser
@@ -27,7 +29,7 @@ namespace Adv.API.Models
         /// <param name="userViewModel"></param>
         public static implicit operator IdentityUser(UserViewModel userViewModel) => new IdentityUser
         {
-            UserName = userViewModel.UserName,
+            UserName = userViewModel?.UserName,
             NormalizedUserName = userViewModel.UserName.ToUpper(new CultureInfo("ru-RU"))
         };
     }

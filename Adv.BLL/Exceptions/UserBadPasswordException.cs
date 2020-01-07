@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Adv.BLL.Exceptions
 {
-    class UserBadPasswordException
+    public class UserBadPasswordException
         : Exception
     {
         public UserBadPasswordException()

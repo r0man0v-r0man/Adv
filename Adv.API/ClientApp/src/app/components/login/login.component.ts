@@ -3,6 +3,7 @@ import { UserModel } from 'src/app/models/UserModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
     private authService: AuthService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private route: Router) { }
 
   ngOnInit() {
     this.initializeLoginForm();
@@ -31,6 +33,9 @@ export class LoginComponent implements OnInit {
     if(user){
       this.authService.login(this.loginUrl, user)
       .subscribe(response => { 
+        if(response){
+          this.route.navigate(['/']);
+        }
         console.log(response);
       })
     }

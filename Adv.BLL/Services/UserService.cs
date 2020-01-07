@@ -3,6 +3,7 @@ using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,11 @@ namespace Adv.BLL.Services
         {
             var result = await userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
             return result ? result : throw new UserBadPasswordException("Не верный пароль!");
+        }
+        public async Task<IEnumerable<Claim>> GetClaims(IdentityUser user)
+        {
+            var result = await userManager.GetClaimsAsync(user).ConfigureAwait(false);
+            return result;
         }
         public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
         {
