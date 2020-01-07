@@ -33,7 +33,11 @@ namespace Adv.BLL.Services
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
             return result ?? throw new UserNotFoundException($"Пользователя {userName} не существует!");
         }
-
+        public async Task<bool> CheckPasswordAsync(IdentityUser user, string password)
+        {
+            var result = await userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
+            return result ? result : throw new UserBadPasswordException("Не верный пароль!");
+        }
         public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
         {
             var result = await signInManager.PasswordSignInAsync(userName, password, false, false).ConfigureAwait(false);

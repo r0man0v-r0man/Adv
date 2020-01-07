@@ -33,8 +33,11 @@ namespace Adv.API.Controllers
         {
             try
             {
-                UserViewModel existUser = await superManager.Users.FindByNameAsync(user?.UserName).ConfigureAwait(false);
-                if (existUser != null)
+                //find user
+                var existUser = await superManager.Users.FindByNameAsync(user?.UserName).ConfigureAwait(false);
+                //check pair user - password
+                var checkUserPassword = await superManager.Users.CheckPasswordAsync(existUser, user?.Password).ConfigureAwait(false);
+                if (existUser != null && checkUserPassword == true)
                 {
                     //generates user claims
                     var claims = new List<Claim>
@@ -63,14 +66,9 @@ namespace Adv.API.Controllers
                 }
                 return NoContent();
             }
-            catch (UserNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-                throw;
-            }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status503ServiceUnavailable, ex.Message);
+                return BadRequest(ex.Message);
                 throw;
             }
 
