@@ -22,6 +22,13 @@ export class DataService {
   login(url: string, user: UserModel){
     return this.httpService.post(url, user)
       .pipe(
+        map((response:any)=>{
+          let token = response.access_token;
+          if(token){
+            localStorage.setItem('access_token', token);
+            return true;
+          }
+        }),
         catchError(this.handleError)
       )
   }
