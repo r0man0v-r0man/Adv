@@ -7,12 +7,17 @@
                         <h1 nz-title>Halupa.by</h1>
                     </nz-form-item>
                     <nz-form-item>
-                      <nz-form-control>
+                      <nz-form-control nzHasFeedback nzValidatingTip="Проверка..." [nzErrorTip]="userErrorTpl">
                           <input nz-input 
                           formControlName="userName" 
                           id="userName"
                           placeHolder="Имя пользователя"  
                           [nzSize]="'large'"/>
+                          <ng-template #userErrorTpl let-control>
+                            <ng-container *ngIf="control.hasError('duplicated')">
+                              Имя уже занято!
+                            </ng-container>
+                          </ng-template>
                       </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
@@ -34,7 +39,6 @@
                       </nz-form-control>
                     </nz-form-item>
                   </form>
-                  <p>{{registerForm.value | json }}</p>
             </nz-content>
         </nz-layout>
     </nz-content>

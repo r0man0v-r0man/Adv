@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,12 +72,18 @@ namespace Adv.API.Controllers
         {//add cliams to new user, like a role, date of birth, gender etc.
             var result = await superManager.Users.CreateAsync(user, user?.Password).ConfigureAwait(false);
 
-            if (result)
+            if (result.Succeeded)
             {
-                return Ok();
+                return Ok(true);
             }
 
-            return BadRequest();
+            return BadRequest(result.Errors.FirstOrDefault().Description);
+        }
+        [HttpGet("IsValidateUserName/{userName}")]
+        public async Task<ActionResult<bool>> IsValidateUserName(string userName)
+        {
+            var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
+            return result;
         }
         /// <summary>
         /// Generate JWT

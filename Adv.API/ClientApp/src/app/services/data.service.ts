@@ -7,6 +7,7 @@ import { NotFoundError } from '../app-errors/not-found-error';
 import { BadInput } from '../app-errors/bad-input';
 import { FlatModel } from '../models/flatModel';
 import { UserModel } from '../models/UserModel';
+import { Constants } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,13 @@ export class DataService {
         catchError(this.handleError)
       )
   }
-
+/**chech the duplicate username */
+IsUserNameExist(userName: string){
+  return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
+    .pipe(
+      catchError(this.handleError)
+    )
+}
   /**
    * Get flats
    * @param url api url for fething flats
