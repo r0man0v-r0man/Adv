@@ -22,11 +22,13 @@ namespace Adv.BLL.Services
             this.signInManager = signInManager;
         }
 
-        public async Task<IdentityResult> CreateAsync(IdentityUser user, string password)
+        public async Task<bool> CreateAsync(IdentityUser user, string password)
         {
             var result = await userManager.CreateAsync(user, password).ConfigureAwait(false);
-           
-            return result;
+            //add default claims
+            var claimResult = await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user?.UserName)).ConfigureAwait(false);
+            bool isSuccess = (result.Succeeded && claimResult.Succeeded);
+            return isSuccess ? isSuccess : throw new UserBadCreationException($"Не удалось создать пользователя {user?.UserName}");
         }
 
         public async Task<IdentityUser> FindByNameAsync(string userName)
@@ -42,11 +44,6 @@ namespace Adv.BLL.Services
         public async Task<IEnumerable<Claim>> GetClaims(IdentityUser user)
         {
             var result = await userManager.GetClaimsAsync(user).ConfigureAwait(false);
-            return result;
-        }
-        public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
-        {
-            var result = await signInManager.PasswordSignInAsync(userName, password, false, false).ConfigureAwait(false);
             return result;
         }
 

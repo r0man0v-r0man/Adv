@@ -71,14 +71,8 @@ namespace Adv.API.Controllers
         {//add cliams to new user, like a role, date of birth, gender etc.
             var result = await superManager.Users.CreateAsync(user, user?.Password).ConfigureAwait(false);
 
-            if (result.Succeeded)
+            if (result)
             {
-                //sign in
-                //var signInResult = await superManager.Users.PasswordSignInAsync(user?.UserName, user?.Password).ConfigureAwait(false);
-                //if (signInResult.Succeeded)
-                //{
-                //    return Ok(true);
-                //}
                 return Ok();
             }
 
