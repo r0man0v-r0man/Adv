@@ -1,4 +1,5 @@
-﻿using Adv.BLL.Interfaces;
+﻿using Adv.BLL.Exceptions;
+using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace Adv.BLL.Services
         public async Task<IdentityUser> FindByNameAsync(string userName)
         {
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
-            return result;
+            return result ?? throw new UserNotFoundException($"Пользователя {userName} не существует!");
         }
 
         public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
