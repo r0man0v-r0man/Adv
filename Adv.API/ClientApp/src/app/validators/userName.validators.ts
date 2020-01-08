@@ -18,8 +18,7 @@ export class UserNameValidators {
                     }
                     observer.complete();
                 })
-            }, 1000);
-            
+            }, 2000);
    })
 }
 }

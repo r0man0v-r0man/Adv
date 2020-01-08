@@ -50,20 +50,18 @@ namespace Adv.API.Controllers
                 }
                 return NoContent();
             }
-            catch (UserNotFoundException ex)
+            catch (Exception ex) 
             {
-                return BadRequest(ex.Message);
-                throw;
-            }
-            catch (UserBadPasswordException ex)
-            {
-                return BadRequest(ex.Message);
-                throw;
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-                throw;
+                if (ex is UserNotFoundException || ex is UserBadPasswordException)
+                {
+                    return BadRequest(ex.Message);
+                    throw;
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                    throw;
+                }
             }
 
         }

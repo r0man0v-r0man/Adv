@@ -39,11 +39,14 @@ export class RegisterComponent implements OnInit {
   }
   initializeRegisiterForm(){
     this.registerForm = this.formBuilder.group({
-      userName:[null, {
-        validators: [Validators.required],
-        asyncValidators: [UserNameValidators.duplicated(this.authService)],
-        updateOn: 'blur'
-   } ],
+      userName:
+        [null, 
+          {
+          validators: [Validators.required],
+          asyncValidators: [UserNameValidators.duplicated(this.authService)],
+          updateOn: 'blur'
+          } 
+        ],
       password:[null, [Validators.required]]
     })
   }
