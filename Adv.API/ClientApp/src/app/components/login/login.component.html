@@ -8,20 +8,24 @@
                     </nz-form-item>
                     <nz-form-item>
                       <nz-form-control>
+                        <nz-input-group nzPrefixIcon="user"  nzSize="large">
                           <input nz-input 
                           formControlName="userName" 
                           id="userName"
-                          placeHolder="Имя пользователя"  
-                          [nzSize]="'large'"/>
+                          placeHolder="Имя пользователя"/>
+                        </nz-input-group>
                       </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
                       <nz-form-control>
+                        <nz-input-group nzPrefixIcon="lock"  nzSize="large">
                           <input nz-input 
+                          type="password"
                           formControlName="password" 
                           id="password" 
                           placeholder="Пароль"
-                          [nzSize]="'large'"/>
+                          />
+                        </nz-input-group>
                       </nz-form-control>
                     </nz-form-item>
                     <nz-form-item>
