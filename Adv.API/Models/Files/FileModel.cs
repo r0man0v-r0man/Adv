@@ -23,7 +23,7 @@ namespace Adv.API.Models.Files
 
         public static implicit operator string(FileModel file)
         {
-            return file.LinkProps.Download;
+            return file?.LinkProps.Download;
         }
     }
 }

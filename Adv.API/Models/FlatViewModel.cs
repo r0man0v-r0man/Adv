@@ -34,10 +34,10 @@ namespace Adv.API.Models
             Price = flat.Price,
             File = flat.Image,
             Street = flat.Address["street"],
-            NumberOfHouse = Convert.ToInt32(flat.Address["house"], new CultureInfo("ru-RU")),
-            NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], new CultureInfo("ru-RU")),
-            NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], new CultureInfo("ru-RU")),
-            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], new CultureInfo("ru-RU")),
+            NumberOfHouse = Convert.ToInt32(flat.Address["house"], CultureInfo.GetCultureInfo(1049)),
+            NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], CultureInfo.GetCultureInfo(1049)),
+            NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], CultureInfo.GetCultureInfo(1049)),
+            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], CultureInfo.GetCultureInfo(1049)),
             Created = flat.Created
         };
         /// <summary>
@@ -47,7 +47,7 @@ namespace Adv.API.Models
         public static implicit operator FlatDTO(FlatViewModel flat) =>
             new FlatDTO
             {
-                Image = flat.File.LinkProps.Download,
+                Image = flat?.File.LinkProps.Download,
                 IsActive = flat.IsActive,
                 Price = flat.Price,
                 District = flat.District,
@@ -56,10 +56,10 @@ namespace Adv.API.Models
                 Address = new Dictionary<string, string>
                 {
                     ["street"] = flat.Street,
-                    ["house"] = flat.NumberOfHouse.ToString(new CultureInfo("ru-RU")),
-                    ["corpus"] = flat.NumberOfHouseCourpus.ToString(new CultureInfo("ru-RU")),
-                    ["subHouse"] = flat.NumberOfSubHouse.ToString(new CultureInfo("ru-RU")),
-                    ["flat"] = flat.NumberOfFlat.ToString(new CultureInfo("ru-RU"))
+                    ["house"] = flat.NumberOfHouse.ToString(CultureInfo.GetCultureInfo(1049)),
+                    ["corpus"] = flat.NumberOfHouseCourpus.ToString(CultureInfo.GetCultureInfo(1049)),
+                    ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
+                    ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
                 }
             };
     }

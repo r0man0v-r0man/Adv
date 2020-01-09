@@ -4,6 +4,7 @@ using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Adv.API.Controllers
                             LinkProps = result,
                             Name = Path.GetFileName(result),
                             Size = file.Length,
-                            Status = FileResponseStatus.Response.Success.ToString().ToLower(),
+                            Status = FileResponseStatus.Response.Success.ToString().ToLower(CultureInfo.GetCultureInfo(1049)),
                             Uid = Path.GetFileNameWithoutExtension(result)
                         });
                 }

@@ -22,7 +22,7 @@ namespace Adv.BLL.DTO
         /// <param name="flat">Data Access Layer flat</param>
         public static implicit operator FlatDTO(Flat flat) => new FlatDTO
         {
-            Description = flat.Description,
+            Description = flat?.Description,
             District = flat.District,
             Id = flat.Id,
             IsActive = flat.IsActive,

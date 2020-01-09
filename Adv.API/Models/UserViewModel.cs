@@ -30,7 +30,7 @@ namespace Adv.API.Models
         public static implicit operator IdentityUser(UserViewModel userViewModel) => new IdentityUser
         {
             UserName = userViewModel?.UserName,
-            NormalizedUserName = userViewModel.UserName.ToUpper(new CultureInfo("ru-RU"))
+            NormalizedUserName = userViewModel.UserName.ToUpper(CultureInfo.GetCultureInfo(1049))
         };
     }
 }
