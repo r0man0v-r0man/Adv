@@ -13,6 +13,12 @@ namespace Adv.BLL.Interfaces
         Task<IdentityUser> FindByNameAsync(string userName);
         Task<bool> CheckPasswordAsync(IdentityUser user, string password);
         Task<IEnumerable<Claim>> GetClaims(IdentityUser user);
+        /// <summary>
+        /// Generate JWT
+        /// </summary>
+        /// <param name="claims">User Claims</param>
+        /// <returns></returns>
+        string CreateToken(IEnumerable<Claim>);
         Task SignOutAsync();
         Task<bool> IsValidateUserNameAsync(string userName);
     }

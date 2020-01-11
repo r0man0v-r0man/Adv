@@ -2,16 +2,10 @@
 using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Adv.API.Controllers
@@ -44,7 +38,7 @@ namespace Adv.API.Controllers
                     //generates user claims
                     var claims = await superManager.Users.GetClaims(existUser).ConfigureAwait(false);
                     //create JWT
-                    var token = CreateToken(claims);
+                    var token = superManager.Users.CreateToken(claims);
 
                     return CreatedAtAction(nameof(Login), new { access_token = token });
                 }
@@ -82,29 +76,6 @@ namespace Adv.API.Controllers
         {
             var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
-        }
-        /// <summary>
-        /// Generate JWT
-        /// </summary>
-        /// <param name="userClaims">User Claims</param>
-        /// <returns></returns>
-        private string CreateToken(IEnumerable<Claim> userClaims)
-        {
-            var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
-            var key = new SymmetricSecurityKey(secretsBytes);
-            var algorithm = SecurityAlgorithms.HmacSha256;
-
-            var signingCredentials = new SigningCredentials(key, algorithm);
-
-            var token = new JwtSecurityToken(
-                configuration["TokenIssuer"],
-                configuration["TokenAudience"],
-                userClaims,
-                notBefore: DateTime.Now,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials);
-            var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
-            return tokenJson;
         }
         public async Task<IActionResult> LogOut()
         {

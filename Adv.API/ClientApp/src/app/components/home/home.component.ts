@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FlatService } from 'src/app/services/flat.service';
-import { FlatModel } from 'src/app/models/flatModel';
-import { Constants } from 'src/app/constants';
 
 @Component({
   selector: 'app-home',
@@ -10,44 +7,9 @@ import { Constants } from 'src/app/constants';
 })
 export class HomeComponent implements OnInit {
 
-  flatsUrl: string = Constants.getAllFlats;
-  flats: FlatModel[] = [];
-  loading = true;
-  pageNumber: number;
-  constructor(private flatService: FlatService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.initHomePage();
-  }
-
-  onScroll(){
-    if (this.pageNumber !== 1){
-      this.flatService.getFlats(this.flatsUrl, this.pageNumber)
-      .subscribe(response => {
-        if(response && response.length > 0){
-          for(var i = 0; i < response.length; i++){
-            this.flats.push(response[i]);
-          }
-        }
-      },
-      ()=>{},
-      ()=>{
-        this.pageNumber++;
-      });
-    }
-  }
-  initHomePage(){
-    this.pageNumber = 1;
-    this.flatService.getFlats(this.flatsUrl, this.pageNumber)
-      .subscribe(flats => {
-          this.flats = flats
-          this.loading = false;
-         },
-         ()=>{},
-         ()=>{
-           this.pageNumber++;
-         }
-      )
   }
 
 }

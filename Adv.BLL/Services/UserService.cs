@@ -1,8 +1,13 @@
 ﻿using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Adv.BLL.Services
@@ -11,13 +16,18 @@ namespace Adv.BLL.Services
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly IConfiguration configuration;
+
 
         public UserService(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            SignInManager<IdentityUser> signInManager,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.configuration = configuration;
+
         }
 
         public async Task<IdentityResult> CreateAsync(IdentityUser user, string password)
@@ -59,6 +69,24 @@ namespace Adv.BLL.Services
                 return false;
             }
             return true;
+        }
+        public string CreateToken(IEnumerable<Claim> claims)
+        {
+            var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
+            var key = new SymmetricSecurityKey(secretsBytes);
+            var algorithm = SecurityAlgorithms.HmacSha256;
+
+            var signingCredentials = new SigningCredentials(key, algorithm);
+
+            var token = new JwtSecurityToken(
+                configuration["TokenIssuer"],
+                configuration["TokenAudience"],
+                claims,
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials);
+            var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenJson;
         }
     }
 }

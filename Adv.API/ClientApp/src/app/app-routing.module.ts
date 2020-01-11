@@ -6,28 +6,45 @@ import { FlatsComponent } from './components/flat/flats/flats.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { AppComponent } from './app.component';
 
 
 const routes: Routes = [
   {  
     path: '', 
-    component: HomeComponent
-  },
-  {  
-    path: 'flat', 
-    component: FlatsComponent
+    component: HomeComponent,
+    children:[
+      {
+        path: '', component: FlatsComponent
+      }
+    ]
   },
   {
     path: 'flat/:id',
-    component: FlatDetailComponent
+    component: HomeComponent,
+    children:[
+      {
+        path: '', component: FlatDetailComponent
+      }
+    ]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: AppComponent,
+    children: [
+      {
+        path: '', component: RegisterComponent
+      }
+    ]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: AppComponent,
+    children:[
+      {
+        path: '', component: LoginComponent
+      }
+    ]
   },
   {  
     path: '**', 
