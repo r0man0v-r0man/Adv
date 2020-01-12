@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
   constructor(
     private modalService: NzModalService, 
     private flatService: FlatService,
-    private router: Router) { }
+    private router: Router, 
+    public authService: AuthService) { }
   ngOnInit() {
   }
   goToDetails(id: number){

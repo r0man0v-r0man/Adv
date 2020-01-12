@@ -35,7 +35,11 @@ namespace Adv.BLL.Services
             var result = await userManager.CreateAsync(user, password).ConfigureAwait(false);
             if (result.Succeeded)
             {
-                await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Name, user?.UserName)).ConfigureAwait(false);
+                await userManager.AddClaimsAsync(user, new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, user?.UserName),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Id)
+                }).ConfigureAwait(false);
             }
             return result;
         }

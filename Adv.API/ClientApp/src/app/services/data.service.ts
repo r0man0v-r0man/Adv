@@ -8,6 +8,7 @@ import { BadInput } from '../app-errors/bad-input';
 import { FlatModel } from '../models/flatModel';
 import { UserModel } from '../models/UserModel';
 import { Constants } from '../constants';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,23 @@ export class DataService {
   /**logout user */
   logOut(){
     localStorage.removeItem("access_token");
+  }
+  /** Is User Login */
+  isLogedIn(){
+    const jwtHelper = new JwtHelperService();
+    let token = localStorage.getItem('access_token');
+    
+    if(!token) return false;
+
+    const decodedToken = jwtHelper.decodeToken(token);
+    const expirationDate = jwtHelper.getTokenExpirationDate(token);
+    const isExpired = jwtHelper.isTokenExpired(token);
+
+    console.log("decodedToken", decodedToken);
+    console.log("expirationDate", expirationDate);
+    console.log("isExpired", isExpired);
+
+    return !isExpired;
   }
 
   /** register new user */

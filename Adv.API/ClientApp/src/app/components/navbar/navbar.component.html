@@ -6,9 +6,15 @@
         </a>
     </li>
     <li  style="float: right;">
-        <a  [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
+        <a *ngIf="!authService.isLogedIn()" [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
             <i nz-icon nzType="login" nzTheme="outline"></i>    
-            войти
+            Войти
+        </a>
+        <a *ngIf="authService.isLogedIn()"
+        (click)="authService.logOut()"
+        style="margin-right: 8px;">
+            <i nz-icon nzType="logout" nzTheme="outline"></i>    
+            Выйти
         </a>
         <button nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
             <i nz-icon nzType="plus-circle"></i>
