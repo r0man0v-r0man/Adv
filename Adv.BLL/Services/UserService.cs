@@ -37,7 +37,7 @@ namespace Adv.BLL.Services
             {
                 await userManager.AddClaimsAsync(user, new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user?.UserName),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user?.UserName),
                     new Claim(JwtRegisteredClaimNames.Sub, user.Id)
                 }).ConfigureAwait(false);
             }

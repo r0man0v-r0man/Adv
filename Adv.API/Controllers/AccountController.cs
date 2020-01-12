@@ -60,7 +60,7 @@ namespace Adv.API.Controllers
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserViewModel user)
-        {//add cliams to new user, like a role, date of birth, gender etc.
+        {
             var result = await superManager.Users.CreateAsync(user, user?.Password).ConfigureAwait(false);
 
             if (result.Succeeded)
