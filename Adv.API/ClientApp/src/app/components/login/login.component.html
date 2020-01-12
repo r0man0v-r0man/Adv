@@ -3,50 +3,53 @@
         <nz-layout class="inner-layout">
             <nz-content class="inner-content" nz-row [nzGutter]="24">
                 <form nz-form  [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)">
+                  <nz-spin [nzSpinning]="isLoading" >
                     <nz-form-item style="text-align: center;">
-                        <h1 nz-title>Halupa.by</h1>
-                    </nz-form-item>
-                    <nz-form-item>
-                      <nz-form-control>
-                        <nz-input-group nzPrefixIcon="user"  nzSize="large">
-                          <input nz-input 
-                          formControlName="userName" 
-                          id="userName"
-                          placeHolder="Имя пользователя"/>
-                        </nz-input-group>
-                      </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                      <nz-form-control>
-                        <nz-input-group nzPrefixIcon="lock"  nzSize="large">
-                          <input nz-input 
-                          type="password"
-                          formControlName="password" 
-                          id="password" 
-                          placeholder="Пароль"
-                          />
-                        </nz-input-group>
-                      </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                      <nz-form-control >
-                        <button nz-button 
-                        nzType="primary" 
-                        [nzSize]="'large'" 
-                        [disabled]="!loginForm.valid"
-                        style="width: 100%;">Войти</button>
-                      </nz-form-control>
-                    </nz-form-item>
-                    <nz-form-item>
-                      <nz-form-control>
-                        <hr/>
-                        <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
-                          <i nz-icon nzType="login" nzTheme="outline"></i>    
-                          Зарегистрироваться
-                      </a>
-                      </nz-form-control>
+                      <h1 nz-title>Halupa.by</h1>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group nzPrefixIcon="user"  nzSize="large">
+                        <input nz-input 
+                        formControlName="userName" 
+                        id="userName"
+                        placeHolder="Имя пользователя"/>
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <nz-input-group nzPrefixIcon="lock"  nzSize="large">
+                        <input nz-input 
+                        type="password"
+                        formControlName="password" 
+                        id="password" 
+                        placeholder="Пароль"
+                        />
+                      </nz-input-group>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control >
+                      <button nz-button 
+                      nzType="primary" 
+                      [nzSize]="'large'" 
+                      [disabled]="!loginForm.valid"
+                      style="width: 100%;">Войти</button>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control>
+                      <hr/>
+                      <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
+                        <i nz-icon nzType="login" nzTheme="outline"></i>    
+                        Зарегистрироваться
+                    </a>
+                    </nz-form-control>
 
-                    </nz-form-item>
+                  </nz-form-item>
+                  </nz-spin>
+                    
                   </form>
             </nz-content>
         </nz-layout>

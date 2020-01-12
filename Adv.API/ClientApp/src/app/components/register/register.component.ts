@@ -39,7 +39,9 @@ export class RegisterComponent implements OnInit {
           }
         },
         (error)=>{
-          this.isLoadingSwitch();
+          setTimeout(() => {
+            this.isLoadingSwitch();
+          }, 3000);
           throw new UserWarning(error.error);
         })
     }
