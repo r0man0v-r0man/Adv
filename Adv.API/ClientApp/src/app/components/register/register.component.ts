@@ -6,6 +6,7 @@ import { Constants } from 'src/app/constants';
 import { Router } from '@angular/router';
 import { UserNameValidators } from 'src/app/validators/userName.validators';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserWarning } from 'src/app/app-errors/userWarning';
 
 @Component({
   selector: 'app-register',
@@ -13,8 +14,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.less']
 })
 export class RegisterComponent implements OnInit {
+
   registerUrl: string = Constants.registerUser;
   registerForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,21 +31,26 @@ export class RegisterComponent implements OnInit {
 
   submitForm(registerUser: UserModel){
     if(registerUser){
+      this.isLoadingSwitch();
       this.registerService.registerUser(this.registerUrl, registerUser)
         .subscribe(response => {
           if(response){
             this.router.navigate(['/login']);
           }
-          console.log(response);
+        },
+        (error)=>{
+          this.isLoadingSwitch();
+          throw new UserWarning(error.error);
         })
     }
   }
+  
   initializeRegisiterForm(){
     this.registerForm = this.formBuilder.group({
       userName:
         [null, 
           {
-          validators: [Validators.required],
+          validators: [Validators.required, Validators.pattern('^(?=.*[a-zA-Z])[a-zA-Z0-9]+$')],
           asyncValidators: [UserNameValidators.duplicated(this.authService)],
           updateOn: 'blur'
           } 
@@ -50,4 +58,9 @@ export class RegisterComponent implements OnInit {
       password:[null, [Validators.required]]
     })
   }
+
+  isLoadingSwitch(){
+    this.isLoading = !this.isLoading;
+  }
+
 }

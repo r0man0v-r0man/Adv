@@ -57,7 +57,6 @@ namespace Adv.API.Controllers
                     throw;
                 }
             }
-
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserViewModel user)

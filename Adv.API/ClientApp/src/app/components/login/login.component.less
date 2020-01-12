@@ -1,6 +1,8 @@
 form {
     max-width: 300px;
     margin: 0 auto;
+    background: #fff;
+    padding: 25px;
   }
 .inner-content {
     padding: 0 24px;
@@ -8,8 +10,14 @@ form {
 }
 .outer-content {
   padding: 50px 50px;
+  max-height: 100%;
 }
 .inner-layout {
   padding: 24px 0;
-  background: #fff;
+}
+nz-layout{
+  height: 100%;
+  height: -moz-available;          /* WebKit-based browsers will ignore this. */
+  height: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  height: fill-available;
 }

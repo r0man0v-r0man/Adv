@@ -30,5 +30,13 @@ namespace Adv.BLL.Exceptions
                 Description = $"Минимальная длина пароля '{length}'."
             };
         }
+        public override IdentityError InvalidUserName(string userName)
+        {
+            return new IdentityError
+            {
+                Code = nameof(InvalidUserName),
+                Description = $"Ошибка в имени пользователя '{userName}', используйте символы латинского алфавита."
+            };
+        }
     }
 }

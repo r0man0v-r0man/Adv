@@ -43,18 +43,18 @@ export class DataService {
 
   /** register new user */
   registerUser(url: string, newUser: UserModel){
-    return this.httpService.post<UserModel>(url, newUser, { headers: this.headers })
+    return this.httpService.post<boolean>(url, newUser, { headers: this.headers })
       .pipe(
         catchError(this.handleError)
       )
   }
-/**chech the duplicate username */
-IsUserNameExist(userName: string){
-  return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
-    .pipe(
-      catchError(this.handleError)
-    )
-}
+  /**check the duplicate username */
+  IsUserNameExist(userName: string){
+    return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
   /**
    * Get flats
    * @param url api url for fething flats
