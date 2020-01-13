@@ -3,7 +3,7 @@ import { UserModel } from 'src/app/models/UserModel';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserWarning } from 'src/app/app-errors/userWarning';
 
 @Component({
@@ -19,7 +19,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private route: Router) { }
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
     this.initializeLoginForm();
@@ -38,7 +40,8 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginUrl, user)
       .subscribe(response => { 
         if(response){
-          this.route.navigate(['/']);
+          let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+          this.router.navigate([returnUrl || '/']);
         }
       },
       (error)=>{

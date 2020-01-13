@@ -9,6 +9,7 @@ import { FlatModel } from '../models/flatModel';
 import { UserModel } from '../models/UserModel';
 import { Constants } from '../constants';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class DataService {
   headers = new HttpHeaders().set('content-type', 'application/json');
 
   constructor(
-    private httpService: HttpClient) { }
+    private httpService: HttpClient,
+    private router: Router
+    ) { }
 
   /**login user */
   login(url: string, user: UserModel){

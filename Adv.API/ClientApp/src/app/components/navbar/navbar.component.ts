@@ -21,6 +21,10 @@ export class NavbarComponent implements OnInit {
     public authService: AuthService) { }
   ngOnInit() {
   }
+  logOut(){
+    this.authService.logOut();
+    this.router.navigate(['/login']);
+  }
   goToDetails(id: number){
     this.router.navigate(['flat', id]);
   }

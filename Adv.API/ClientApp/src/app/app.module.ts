@@ -20,6 +20,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddressPipe } from './customPipes/address.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 registerLocaleData(ru);
 
@@ -50,6 +51,7 @@ registerLocaleData(ru);
     AddAdvertComponent
   ],
   providers: [
+    AuthGuardService,
     { 
       provide: NZ_I18N, useValue: ru_RU 
     },

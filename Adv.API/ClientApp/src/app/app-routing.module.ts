@@ -7,6 +7,7 @@ import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.c
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AppComponent } from './app.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 const routes: Routes = [
@@ -26,6 +27,9 @@ const routes: Routes = [
       {
         path: '', component: FlatDetailComponent
       }
+    ],
+    canActivate:[
+      AuthGuardService
     ]
   },
   {

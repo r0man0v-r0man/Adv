@@ -11,11 +11,10 @@
             Войти
         </a>
         <a *ngIf="authService.isLogedIn()"
-        (click)="authService.logOut()"
+        (click)="logOut()"
         style="margin-right: 8px;">
             <i nz-icon nzType="logout" nzTheme="outline"></i>    
             Выйти
-            {{authService.currentUser.uniqueName}}
         </a>
         <button nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
             <i nz-icon nzType="plus-circle"></i>
