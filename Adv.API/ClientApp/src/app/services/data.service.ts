@@ -19,8 +19,7 @@ export class DataService {
   headers = new HttpHeaders().set('content-type', 'application/json');
 
   constructor(
-    private httpService: HttpClient,
-    private router: Router
+    private httpService: HttpClient
     ) { }
 
   /**login user */
