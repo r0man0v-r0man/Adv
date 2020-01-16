@@ -1,6 +1,7 @@
 ﻿using Adv.API.Models.Enums;
 using Adv.API.Models.Files;
 using Adv.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;

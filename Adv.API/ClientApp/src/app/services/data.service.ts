@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, retry } from 'rxjs/operators'
-import { throwError, Observable } from 'rxjs';
-import { AppError } from '../app-errors/app-error';
-import { NotFoundError } from '../app-errors/not-found-error';
-import { BadInput } from '../app-errors/bad-input';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators'
 import { FlatModel } from '../models/flatModel';
 import { UserModel } from '../models/UserModel';
 import { Constants } from '../constants';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +30,7 @@ export class DataService {
           else{
             return false;
           }
-        }),
-        catchError(this.handleError)
+        })
       )
   }
   /**logout user */
@@ -50,13 +44,7 @@ export class DataService {
     
     if(!token) return false;
 
-    const decodedToken = jwtHelper.decodeToken(token);
-    const expirationDate = jwtHelper.getTokenExpirationDate(token);
     const isExpired = jwtHelper.isTokenExpired(token);
-
-    console.log("decodedToken", decodedToken);
-    console.log("expirationDate", expirationDate);
-    console.log("isExpired", isExpired);
 
     return !isExpired;
   }
@@ -64,16 +52,10 @@ export class DataService {
   /** register new user */
   registerUser(url: string, newUser: UserModel){
     return this.httpService.post<boolean>(url, newUser, { headers: this.headers })
-      .pipe(
-        catchError(this.handleError)
-      )
   }
   /**check the duplicate username */
   IsUserNameExist(userName: string){
     return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
-      .pipe(
-        catchError(this.handleError)
-      )
   }
   /**
    * Get flats
@@ -82,42 +64,20 @@ export class DataService {
    */
   getFlats(url:string, pageNumber: number){
     return this.httpService.get<FlatModel[]>(url + '/' + pageNumber)
-      .pipe(
-        catchError(this.handleError)
-      )
   }
   
   getFlat(url: string, flatId: number){
-    return this.httpService.get<FlatModel>(url + '/' + flatId)
-      .pipe(
-        catchError(this.handleError)
-      )
+    const secureHeader = this.headers.append("Authorization", 'Bearer ' + localStorage.getItem('access_token'));
+    return this.httpService.get<FlatModel>(url + '/' + flatId, { headers :  secureHeader})
   }
   createFlat(url: string, newFlat: FlatModel){
     return this.httpService.post<FlatModel>(url, newFlat, { headers: this.headers })
-      .pipe(
-        catchError(this.handleError)
-      )
   }
   delete(url: string, id: number){
     return this.httpService.delete(url + '/' + id)
-      .pipe(
-        catchError(this.handleError)
-      )
   }
   deleteFile(url: string, fileName: string){
     return this.httpService.delete<boolean>(url + '/' + fileName)
-      .pipe(
-        catchError(this.handleError)
-      )
   }
-  private handleError(error: HttpErrorResponse){
-    if(error.status === 400)
-    return throwError(new BadInput(error.error));
-  
-    if(error.status === 404)
-    return throwError(new NotFoundError(error.error));
-    
-  return throwError(new AppError(error));
-  }
+
 }

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgZorroAntdModule, NZ_I18N, ru_RU } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
@@ -21,6 +21,8 @@ import { AddressPipe } from './customPipes/address.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
 
 registerLocaleData(ru);
 
@@ -35,7 +37,8 @@ registerLocaleData(ru);
     FlatDetailComponent,
     AddressPipe,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    AccessDeniedComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,11 @@ registerLocaleData(ru);
     },
     {
       provide: ErrorHandler, useClass: AppErrorHandler
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -48,6 +48,7 @@ namespace Adv.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<FlatViewModel>> Post(FlatViewModel flatModel, CancellationToken ct = default)
         {
             if (!(flatModel is null))
