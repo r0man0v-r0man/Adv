@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/models/UserModel';
-import { RegisterService } from 'src/app/services/register.service';
 import { Constants } from 'src/app/constants';
 import { Router } from '@angular/router';
 import { UserNameValidators } from 'src/app/validators/userName.validators';
@@ -21,7 +20,6 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService,
     private authService: AuthService,
     private router: Router) { }
 
@@ -32,7 +30,7 @@ export class RegisterComponent implements OnInit {
   submitForm(registerUser: UserModel){
     if(registerUser){
       this.isLoadingSwitch();
-      this.registerService.registerUser(this.registerUrl, registerUser)
+      this.authService.registerUser(this.registerUrl, registerUser)
         .subscribe(response => {
           if(response){
             this.router.navigate(['/login']);

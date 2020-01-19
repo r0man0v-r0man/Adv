@@ -22,6 +22,7 @@ namespace Adv.API.Controllers
             _superManager = superManager;
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<FileModel>> Post(IFormFile file, CancellationToken ct = default)
         {
             if (!(file is null))

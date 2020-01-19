@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Constants } from '../constants';
-import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FileService extends DataService{
+export class FileService {
 
-  constructor(httpService: HttpClient) {
-    super(httpService)
+  constructor(
+    private httpService: HttpClient) {
    }
    
+   deleteFile(url: string, fileName: string){
+    return this.httpService.delete<boolean>(url + '/' + fileName)
+  }
 }

@@ -6,11 +6,11 @@
         </a>
     </li>
     <li  style="float: right;">
-        <a *ngIf="!authService.isLogedIn()" [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
+        <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
             <i nz-icon nzType="login" nzTheme="outline"></i>    
             Войти
         </a>
-        <a *ngIf="authService.isLogedIn()"
+        <a *ngIf="isLogedIn"
         (click)="logOut()"
         style="margin-right: 8px;">
             <i nz-icon nzType="logout" nzTheme="outline"></i>    
