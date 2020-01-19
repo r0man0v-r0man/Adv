@@ -14,6 +14,7 @@ namespace Adv.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FileController : ControllerBase
     {
         private readonly ISuperManager _superManager;
@@ -22,7 +23,6 @@ namespace Adv.API.Controllers
             _superManager = superManager;
         }
         [HttpPost]
-        [Authorize]
         public async Task<ActionResult<FileModel>> Post(IFormFile file, CancellationToken ct = default)
         {
             if (!(file is null))
