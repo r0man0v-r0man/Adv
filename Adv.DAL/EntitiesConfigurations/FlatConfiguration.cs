@@ -18,13 +18,13 @@ namespace Adv.DAL.EntitiesConfigurations
                 .Property(prop => prop.Created)
                 .IsRequired();
             builder
-                .Property(prop => prop.District)
-                .HasConversion<int>();
+                .Property(prop => prop.City)
+                .IsRequired();
             builder
                 .Property(prop => prop.Price)
                 .IsRequired();
             builder
-                .Property(prop => prop.Image)
+                .Property(prop => prop.Images)
                 .IsRequired();
             builder
                 .Property(prop => prop.IsActive)

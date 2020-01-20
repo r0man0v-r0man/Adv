@@ -20,7 +20,10 @@ namespace Adv.API.Models.Files
             {
                 LinkProps = image
             };
-
+        /// <summary>
+        /// Mapping to string
+        /// </summary>
+        /// <param name="file"></param>
         public static implicit operator string(FileModel file)
         {
             return file?.LinkProps.Download;

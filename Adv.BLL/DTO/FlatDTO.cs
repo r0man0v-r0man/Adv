@@ -11,10 +11,10 @@ namespace Adv.BLL.DTO
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public City.District District { get; set; }
+        public string City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        public Dictionary<string, string> Images { get; set; }
         public Dictionary<string, string> Address { get; set; }
         /// <summary>
         /// Mapping to DTO model
@@ -23,11 +23,14 @@ namespace Adv.BLL.DTO
         public static implicit operator FlatDTO(Flat flat) => new FlatDTO
         {
             Description = flat?.Description,
-            District = flat.District,
+            City = flat.City,
             Id = flat.Id,
             IsActive = flat.IsActive,
             Price = flat.Price,
-            Image = flat.Image,
+            Images = flat.Images
+                .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(x=>x.Split('='))
+                .ToDictionary(split => split[0], split => split[1]),
             Address = flat.Address
                 .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
                 .Select(x=>x.Split('='))
@@ -41,11 +44,11 @@ namespace Adv.BLL.DTO
         public static implicit operator Flat(FlatDTO flat) => new Flat
         {
             Id = flat.Id,
-            Image = flat.Image,
+            Images = string.Join(";", flat.Images.Select(x=>x.Key + "=" + x.Value)),
             IsActive = flat.IsActive,
             Price = flat.Price,
             Description = flat.Description,
-            District = flat.District,
+            City = flat.City,
             Address = string.Join(";", flat.Address.Select(x=>x.Key + "=" + x.Value))
         };
     }
