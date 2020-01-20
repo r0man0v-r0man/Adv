@@ -6,9 +6,9 @@ export class FlatModel{
     isActive: boolean = true;
     price: number;
     description: string;
-    file: UploadFile
+    files: UploadFile[];
     id: number;
-    district: number;
+    city: string;
     street: string;
     numberOfHouse: number;
     numberOfHouseCourpus: number;

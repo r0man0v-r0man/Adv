@@ -36,10 +36,6 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['flat', id]);
   }
   showAddAdvertModal(){
-  if(!this.isLogedIn) {
-    this.router.navigate(['/login']);
-    return;
-  }
   const modal = this.modalService.create({
       nzTitle: 'Добавить объявление',
       nzContent: AddAdvertComponent,

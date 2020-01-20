@@ -40,11 +40,13 @@ export class AddAdvertComponent implements OnInit {
   numberOfSubHouse: number;
   /** Number of flat, part of address */
   numberOfFlat: number;
-
+  /** city */
+  city: string;
 
   form: FormGroup;
   fileList : UploadFile[] = [];
-  file: UploadFile;
+  /**file from success status from server */
+  files: UploadFile[] = [];
   showUploadList = {
     showPreviewIcon: false,
     showRemoveIcon: true
@@ -78,8 +80,8 @@ export class AddAdvertComponent implements OnInit {
     this.form = this.formBuilder.group({
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],
-      file: [this.file, [Validators.required]],
-      district: [this.selectedDistrict, [Validators.required]],
+      files: [this.fileList, [Validators.required]],
+      city: [this.city, [Validators.required]],
       street: [this.street, [Validators.required]],
       numberOfHouse: [null, [Validators.required]],
       numberOfHouseCourpus: [this.numberOfHouseCourpus],
@@ -103,9 +105,12 @@ export class AddAdvertComponent implements OnInit {
       { label: 'Фрунзенский район', value: District.frunzensky}
       );
   }
-  onChange(info: { file: UploadFile }){
-    if(info.file.status === 'done' && info.file.response) 
-    this.setFormControlValue('file', info.file.response);
+  onChange(info: { file : UploadFile} ){
+     if(info.file.status === 'done' && info.file.response) 
+
+     this.files.push(info.file.response);
+
+     this.setFormControlValue('files', this.files);
   }
   /**
    * Check resolution of image
@@ -137,11 +142,19 @@ export class AddAdvertComponent implements OnInit {
     return new Observable(observer =>{
       console.info(file);
       if(file){
-        this.fileService.deleteFile(this.deleteFileUrl, file.response.name).subscribe(response =>{
+        this.fileService.deleteFile(this.deleteFileUrl, file.response.name)
+        .subscribe(response =>{
           if(response) {
+            
+          let index = this.files.findIndex(x=>x.uid === file.response.uid);
+          
+          if(index > -1) {
+            this.files.splice(index, 1);
+          }
+          this.setFormControlValue('files', this.files);
+
           observer.next(response);
           observer.complete();
-          this.setFormControlValue('file', null);
           }
         });
       }

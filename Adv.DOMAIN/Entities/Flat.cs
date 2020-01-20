@@ -1,8 +1,4 @@
 ﻿using Adv.DOMAIN.Common;
-using Adv.DOMAIN.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Adv.DOMAIN.Entities
 {
@@ -10,11 +6,13 @@ namespace Adv.DOMAIN.Entities
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public City.District District { get; set; }
-
+        public string City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
-        public string Image { get; set; }
+        /// <summary>
+        /// key - uid/value - url, pairs of images
+        /// </summary>
+        public string Images { get; set; }
         /// <summary>
         /// Street + house + corpus + subHouse + flat(flatNumber)
         /// </summary>

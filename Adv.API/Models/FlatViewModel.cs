@@ -1,9 +1,9 @@
-﻿using Adv.API.Models.Enums;
-using Adv.API.Models.Files;
+﻿using Adv.API.Models.Files;
 using Adv.BLL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace Adv.API.Models
 {
@@ -11,10 +11,10 @@ namespace Adv.API.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public City.District District { get; set; }
+        public string City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
-        public FileModel File { get; set; }
+        public List<FileModel> Files { get; set; }
         public string Street { get; set; }
         public int NumberOfHouse { get; set; }
         public int NumberOfHouseCourpus { get; set; }
@@ -29,10 +29,16 @@ namespace Adv.API.Models
         {
             Id = flat.Id,
             Description = flat.Description,
-            District = flat.District,
+            City = flat.City,
             IsActive = flat.IsActive,
             Price = flat.Price,
-            File = flat.Image,
+            Files = flat.Images
+                .Select(kvp => new FileModel
+                {
+                    Uid = kvp.Key,
+                    LinkProps = kvp.Value
+                })
+                .ToList(),
             Street = flat.Address["street"],
             NumberOfHouse = Convert.ToInt32(flat.Address["house"], CultureInfo.GetCultureInfo(1049)),
             NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], CultureInfo.GetCultureInfo(1049)),
@@ -47,10 +53,10 @@ namespace Adv.API.Models
         public static implicit operator FlatDTO(FlatViewModel flat) =>
             new FlatDTO
             {
-                Image = flat?.File.LinkProps.Download,
+                Images = flat?.Files.ToDictionary(x => x.Uid, x => x.LinkProps.Download),
                 IsActive = flat.IsActive,
                 Price = flat.Price,
-                District = flat.District,
+                City = flat.City,
                 Description = flat.Description,
                 Id = flat.Id,
                 Address = new Dictionary<string, string>
