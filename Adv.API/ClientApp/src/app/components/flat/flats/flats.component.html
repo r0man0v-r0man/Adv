@@ -6,17 +6,20 @@
     (scrolled)="onScroll()"
     >
     <div style="background: #ECECEC;padding:30px;">
-      <div  nz-row [nzGutter]="8" >
-        <div *ngFor="let flat of flats" nz-col [nzSpan]="8" style="margin-bottom: 16px;" >
+      <div  nz-row [nzGutter]="6" >
+        <div *ngFor="let flat of flats" nz-col [nzSpan]="6" style="margin-bottom: 16px;" >
           <nz-card  
             [nzCover]="flatCoverTpl"
             [nzLoading]="loading"
             [nzExtra]="more"
             nzTitle="{{flat.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
-            <p>{{flat | address }}</p>
+            <p>{{ flat | address }}</p>
           </nz-card>
-          <ng-template #flatCoverTpl>
-            <img src="{{ flat.files[0].linkProps.download }}">
+          <ng-template #flatCoverTpl >
+            <div >
+              <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%;" >
+
+            </div>
           </ng-template>
           <ng-template #more>
             <a 
