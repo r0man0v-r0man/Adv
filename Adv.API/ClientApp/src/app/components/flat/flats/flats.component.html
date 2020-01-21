@@ -16,8 +16,8 @@
             <p>{{ flat | address }}</p>
           </nz-card>
           <ng-template #flatCoverTpl >
-            <div >
-              <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%;" >
+            <div style="height: 160px; overflow: hidden;">
+              <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
 
             </div>
           </ng-template>
