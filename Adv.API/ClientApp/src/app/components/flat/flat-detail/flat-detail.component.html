@@ -3,21 +3,33 @@
         <nz-layout class="inner-layout">
             <nz-content class="inner-content" nz-row [nzGutter]="24">
                 <div nz-col [nzSpan]="12">
-                    <div class="ant-card-cover" >
-                        <img src="{{ flat.file?.linkProps.download }}">
-                    </div>
+                    <nz-carousel [nzEffect]="'scrollx'"
+                    [nzDotPosition]="'top'"
+                     style="height: 350px;">
+                        <div nz-carousel-content *ngFor="let image of flat.files">
+                            <div >
+                                <img src="{{ image?.linkProps.download }}" style="height:350px;">
+                            </div>
+                        </div>
+
+                      </nz-carousel>
+                      <nz-button-group [nzSize]="'large'" style="width: 100%; line-height: 5rem;">
+                        <button nz-button nzType="link" (click)="pre()" style="width: 50%;">
+                            <i nz-icon nzType="left"></i>
+                        </button>
+                        <button nz-button nzType="link" (click)="next()" style="width: 50%;">
+                            <i nz-icon nzType="right"></i>
+                        </button>
+                      </nz-button-group>
                 </div>
                 <div nz-col [nzSpan]="12">
-                    <nz-descriptions nzTitle="{{flat | address : 'full'}}" nzLayout="vertical">
+                    <nz-descriptions nzTitle="{{ flat | address : 'full' }}" nzLayout="vertical">
                         <nz-descriptions-item nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Цена">{{ flat.price | currency : 'USD' }}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Район">{{ flat.district }}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Город">{{ flat.city }}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
                     </nz-descriptions>
                 </div>
-                
-
-                
             </nz-content>
         </nz-layout>
     </nz-content>

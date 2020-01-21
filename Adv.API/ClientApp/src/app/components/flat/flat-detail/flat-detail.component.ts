@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Constants } from 'src/app/constants';
+import { NzCarouselComponent } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-flat-detail',
@@ -14,6 +15,9 @@ export class FlatDetailComponent implements OnInit {
   flatUrl:string = Constants.flat;
   flat: FlatModel = new FlatModel();
 
+  @ViewChild(NzCarouselComponent, { static: false }) 
+  flatImageCarousel: NzCarouselComponent;
+
   constructor(
     private flatService:FlatService,
     private route: ActivatedRoute,
@@ -24,7 +28,12 @@ export class FlatDetailComponent implements OnInit {
     this.routeReUseStrategy();
     this.getFlat(this.getFlatIdFromRoute());
   }
-
+  pre(){
+    this.flatImageCarousel.pre();
+  }
+  next(){
+    this.flatImageCarousel.next();
+  }
   getFlat(id: number){
     this.flatService.getFlat(this.flatUrl, id)
     .subscribe(
@@ -32,7 +41,7 @@ export class FlatDetailComponent implements OnInit {
       this.flat = response
   });
   }
-
+  /** for open detail after modal close */
   routeReUseStrategy(){
     // override the route reuse strategy
     this.router.routeReuseStrategy.shouldReuseRoute = function () {

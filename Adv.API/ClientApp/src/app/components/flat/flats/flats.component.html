@@ -16,7 +16,7 @@
             <p>{{flat | address }}</p>
           </nz-card>
           <ng-template #flatCoverTpl>
-            <img src="{{ flat.file.linkProps.download }}">
+            <img src="{{ flat.files[0].linkProps.download }}">
           </ng-template>
           <ng-template #more>
             <a 
