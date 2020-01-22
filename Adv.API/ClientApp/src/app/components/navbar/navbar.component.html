@@ -16,9 +16,21 @@
             <i nz-icon nzType="logout" nzTheme="outline"></i>    
             Выйти
         </a>
-        <button nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
-            <i nz-icon nzType="plus-circle"></i>
-            Добавить объявление
-        </button>
+        <ng-container *ngIf="isLogedIn; then isLogedInButton else isNotLogedInButton"></ng-container>
+        <ng-template #isLogedInButton>
+            <button  nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
+                <i nz-icon nzType="plus-circle"></i>
+                Добавить объявление
+            </button>
+        </ng-template>
+        <ng-template #isNotLogedInButton>
+            <button *ngIf="!isLogedIn" nz-button 
+            nzType="primary" nzSize="large" nzShape="round" (click)="registerThenAddAdvert()">
+                <i nz-icon nzType="plus-circle"></i>
+                Добавить объявление
+            </button>
+        </ng-template>
+
+
     </li>
 </ul>

@@ -64,4 +64,7 @@ export class NavbarComponent implements OnInit {
       ]
     });
   }
+  registerThenAddAdvert(){
+    alert('Вы не зарегистрированы!');
+  }
 }
