@@ -18,15 +18,10 @@ namespace Adv.API.Controllers
     public class FlatController : ControllerBase
     {
         private readonly ISuperManager _superManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public FlatController(ISuperManager superManager, 
-            IHttpContextAccessor httpContextAccessor
-
-            )
+        public FlatController(ISuperManager superManager)
         {
             _superManager = superManager;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("getAll/{pageNumber}")]
@@ -63,6 +58,7 @@ namespace Adv.API.Controllers
             {
                 try
                 {
+                    var currentUser = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
                     return CreatedAtAction(nameof(Post), result);
                 }
