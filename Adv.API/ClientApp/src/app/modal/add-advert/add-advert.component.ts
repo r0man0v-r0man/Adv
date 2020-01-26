@@ -64,12 +64,8 @@ export class AddAdvertComponent implements OnInit {
     this.initForm();
     this.setDistricts();
   }
-  headers = (file: UploadFile) => {
-    const token = localStorage.getItem('access_token');
-    const XCMG = `Bearer ${token}`;
-    return {
-      Authorization: XCMG
-    }
+  headers = () => {
+    return this.authService.Token;
   };
   /** setup yandex map */
   yandexMapInitialize(){

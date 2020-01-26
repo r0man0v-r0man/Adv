@@ -59,11 +59,20 @@ export class AuthService {
     /**
      * get secure token
      */
-  get SecureToken(){
+  get SecureHeaders(){
     const token = localStorage.getItem('access_token');
     if(!token) return null;
 
     return this.headers.append("Authorization", 'Bearer ' + token);
+  }
+  /** get JWT token */
+  get Token(){
+    const token = localStorage.getItem('access_token');
+    if(!token) return null;
+    const XCMG = `Bearer ${token}`;
+    return {
+      Authorization: XCMG
+    }
   }
   /**
     * get current user

@@ -35,7 +35,7 @@ export class FlatService {
    * @param newFlat flatModel object
    */
   createFlat(url: string, newFlat: FlatModel){
-    return this.httpService.post<FlatModel>(url, newFlat, { headers: this.authService.SecureToken });
+    return this.httpService.post<FlatModel>(url, newFlat, { headers: this.authService.SecureHeaders });
   }
   delete(url: string, id: number){
     return this.httpService.delete(url + '/' + id)

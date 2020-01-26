@@ -6,8 +6,6 @@ import { Constants } from 'src/app/constants';
 import { FlatModel } from 'src/app/models/flatModel';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { throwError } from 'rxjs';
-import { UserWarning } from 'src/app/app-errors/userWarning';
 
 @Component({
   selector: 'app-navbar',
