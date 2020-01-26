@@ -64,7 +64,10 @@ export class NavbarComponent implements OnInit {
       ]
     });
   }
+  /**
+   * redirect to login page if user is not logedIn
+   */
   registerThenAddAdvert(){
-    alert('Вы не зарегистрированы!');
+    this.router.navigate(['/login']);
   }
 }

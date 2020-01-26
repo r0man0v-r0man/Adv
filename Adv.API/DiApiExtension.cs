@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,12 +20,17 @@ namespace Adv.API
                 .RequireAuthenticatedUser()
                 .Build();
             });
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(options => 
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
                 .AddJwtBearer(config =>
                 {
                     var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
                     var key = new SymmetricSecurityKey(secretsBytes);
-
+                    
                     config.Events = new JwtBearerEvents()
                     { 
                         OnMessageReceived = context =>
@@ -36,13 +42,14 @@ namespace Adv.API
                             return Task.CompletedTask;
                         }
                     };
-
+                    
                     config.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ClockSkew = TimeSpan.FromMinutes(10),
                         ValidIssuer = configuration["TokenIssuer"],
                         ValidAudience = configuration["TokenAudience"],
-                        IssuerSigningKey = key
+                        IssuerSigningKey = key,
+                        NameClaimType = JwtRegisteredClaimNames.UniqueName
                     };
                 });
             services.AddControllers();

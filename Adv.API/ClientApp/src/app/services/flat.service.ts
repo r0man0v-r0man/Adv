@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FlatModel } from '../models/flatModel';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlatService {
-  
-  headers = new HttpHeaders().set('content-type', 'application/json');
 
   constructor(
-    private httpService: HttpClient
+    private httpService: HttpClient,
+    private authService: AuthService
     ) { }
     
   /**
@@ -21,13 +21,21 @@ export class FlatService {
   getFlats(url:string, pageNumber: number){
     return this.httpService.get<FlatModel[]>(url + '/' + pageNumber)
   }
-  
+  /**
+   * get one flat
+   * @param url api url
+   * @param flatId flat id
+   */
   getFlat(url: string, flatId: number){
-    const secureHeader = this.headers.append("Authorization", 'Bearer ' + localStorage.getItem('access_token'));
-    return this.httpService.get<FlatModel>(url + '/' + flatId, { headers :  secureHeader})
+    return this.httpService.get<FlatModel>(url + '/' + flatId)
   }
+  /**
+   * Create new flat advert
+   * @param url 
+   * @param newFlat flatModel object
+   */
   createFlat(url: string, newFlat: FlatModel){
-    return this.httpService.post<FlatModel>(url, newFlat, { headers: this.headers })
+    return this.httpService.post<FlatModel>(url, newFlat, { headers: this.authService.SecureToken });
   }
   delete(url: string, id: number){
     return this.httpService.delete(url + '/' + id)

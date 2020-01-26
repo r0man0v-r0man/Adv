@@ -5,6 +5,7 @@ nz-form
 >
 <nz-upload
     nzAction="{{uploadUrl}}"
+    [nzHeaders]="headers"
     nzListType="picture-card"
     [nzBeforeUpload]="beforeUpload"
     [nzRemove]="onDelete"

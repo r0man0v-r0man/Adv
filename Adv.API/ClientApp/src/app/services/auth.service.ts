@@ -56,7 +56,15 @@ export class AuthService {
     IsUserNameExist(userName: string){
       return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
     }
+    /**
+     * get secure token
+     */
+  get SecureToken(){
+    const token = localStorage.getItem('access_token');
+    if(!token) return null;
 
+    return this.headers.append("Authorization", 'Bearer ' + token);
+  }
   /**
     * get current user
     */

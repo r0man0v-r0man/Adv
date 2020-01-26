@@ -14,6 +14,7 @@ namespace Adv.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FileController : ControllerBase
     {
         private readonly ISuperManager _superManager;

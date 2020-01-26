@@ -28,10 +28,10 @@ const routes: Routes = [
       {
         path: '', component: FlatDetailComponent
       }
-    ],
-    canActivate:[
-      AuthGuardService
     ]
+    // canActivate:[
+    //   AuthGuardService
+    // ]
   },
   {
     path: 'register',

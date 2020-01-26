@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,9 +18,15 @@ namespace Adv.API.Controllers
     public class FlatController : ControllerBase
     {
         private readonly ISuperManager _superManager;
-        public FlatController(ISuperManager superManager)
+        private readonly IHttpContextAccessor httpContextAccessor;
+
+        public FlatController(ISuperManager superManager, 
+            IHttpContextAccessor httpContextAccessor
+
+            )
         {
             _superManager = superManager;
+            this.httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("getAll/{pageNumber}")]
@@ -48,6 +56,7 @@ namespace Adv.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<FlatViewModel>> Post(FlatViewModel flatModel, CancellationToken ct = default)
         {
             if (!(flatModel is null))

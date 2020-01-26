@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
 import { District } from 'src/app/models/distriscts';
 import ymaps from 'ymaps';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-add-advert',
@@ -55,12 +56,21 @@ export class AddAdvertComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private messageService: NzMessageService,
-    private fileService: FileService) { }
+    private fileService: FileService,
+    private authService: AuthService
+    ) { }
 
   ngOnInit() {
     this.initForm();
     this.setDistricts();
   }
+  headers = (file: UploadFile) => {
+    const token = localStorage.getItem('access_token');
+    const XCMG = `Bearer ${token}`;
+    return {
+      Authorization: XCMG
+    }
+  };
   /** setup yandex map */
   yandexMapInitialize(){
     ymaps
@@ -73,6 +83,8 @@ export class AddAdvertComponent implements OnInit {
   })
   .catch(error => console.log('Failed to load Yandex Maps', error));
   }
+
+
   /**
    * Initialize form fields
    */

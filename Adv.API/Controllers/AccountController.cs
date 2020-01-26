@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Adv.API.Controllers
 {
+    /// <summary>
+    /// var usr = User.FindFirst(ClaimTypes.NameIdentifier).Value; * get current user id
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -75,12 +78,6 @@ namespace Adv.API.Controllers
         {
             var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
-        }
-        public async Task<IActionResult> LogOut()
-        {
-            // sign out
-            await superManager.Users.SignOutAsync().ConfigureAwait(false);
-            return Ok();
         }
     }
 }
