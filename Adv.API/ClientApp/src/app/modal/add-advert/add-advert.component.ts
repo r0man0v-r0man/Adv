@@ -6,9 +6,9 @@ import { UploadFile, NzMessageService } from 'ng-zorro-antd';
 import { UserWarning } from 'src/app/app-errors/userWarning';
 import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
-import { District } from 'src/app/models/distriscts';
 import ymaps from 'ymaps';
 import { AuthService } from 'src/app/services/auth.service';
+import { Cities } from 'src/app/models/cities';
 
 @Component({
   selector: 'app-add-advert',
@@ -23,10 +23,10 @@ export class AddAdvertComponent implements OnInit {
   minDimension = 1000;
   /** Max file size in mb */
   maxFileSize = 3;
-  /** Selected District, default district is: 1 */
-  selectedDistrict: number = 1;
+  /** Selected City, default district is: 0 */
+  selectedCity: number = 0;
   /** Array of districts */
-  listOfDistricts: Array<{ label: string; value: number}> = [];
+  listOfCities: Array<{ label: string; value: number}> = [];
   /** Flat's price, default is: 200 */
   price: number = 200;
   formatterDollar = (value: number) => `$ ${value}`;
@@ -62,7 +62,7 @@ export class AddAdvertComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.setDistricts();
+    this.setCities();
   }
   headers = () => {
     return this.authService.Token;
@@ -89,7 +89,7 @@ export class AddAdvertComponent implements OnInit {
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],
       files: [this.fileList, [Validators.required]],
-      city: [this.city, [Validators.required]],
+      city: [this.selectedCity, [Validators.required]],
       street: [this.street, [Validators.required]],
       numberOfHouse: [null, [Validators.required]],
       numberOfHouseCourpus: [this.numberOfHouseCourpus],
@@ -100,17 +100,9 @@ export class AddAdvertComponent implements OnInit {
   /**
    * Set list of districts for select menu
    */
-  setDistricts(){
-    this.listOfDistricts.push(
-      { label: 'Заводской район', value: District.factory },
-      { label: 'Ленинский район', value: District.leninsky },
-      { label: 'Московский район', value: District.moscow },
-      { label: 'Октябрьский район', value: District.october },
-      { label: 'Партизанский район', value: District.partisan },
-      { label: 'Первомайский район', value: District.firstMay },
-      { label: 'Советский район', value: District.sovet },
-      { label: 'Центральный район', value: District.central },
-      { label: 'Фрунзенский район', value: District.frunzensky}
+  setCities(){
+    this.listOfCities.push(
+      { label: 'Несвиж', value: Cities.nesvizh }
       );
   }
   onChange(info: { file : UploadFile} ){

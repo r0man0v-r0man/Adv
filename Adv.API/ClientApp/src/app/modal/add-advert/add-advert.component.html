@@ -25,27 +25,22 @@ nz-form
 <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="12">
         <nz-form-item >
-            <nz-form-control>
-                <nz-input-group [nzSuffix]="suffixTemplate" [nzSize]="'large'">
-                    <input 
-                    type="text" 
-                    nz-input 
-                    [(ngModel)]="city" 
-                    formControlName="city"
-                    placeholder="Город" />
-                  </nz-input-group>
-                  <ng-template #suffixTemplate
-                    ><i
-                      nz-icon
-                      nz-tooltip
-                      class="ant-input-clear-icon"
-                      nzTheme="fill"
-                      nzType="close-circle"
-                      *ngIf="city"
-                      (click)="city = null"
-                    ></i
-                  ></ng-template>       
-        </nz-form-control>
+            <nz-form-control 
+            nzHasFeedback
+            nzErrorTip="Выберите район!">
+                <nz-select 
+                [(ngModel)]="selectedCity"
+                formControlName="city"
+                [nzSize]="'large'"
+                nzPlaceHolder="Выберите город">
+                  <nz-option
+                    *ngFor="let city of listOfCities"
+                    [nzLabel]="city.label"
+                    [nzValue]="city.value"
+                    >
+                  </nz-option>
+                </nz-select>
+            </nz-form-control>
         </nz-form-item>
     </div>
     <div nz-col [nzSpan]="12">

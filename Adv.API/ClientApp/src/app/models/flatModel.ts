@@ -8,7 +8,7 @@ export class FlatModel{
     description: string;
     files: UploadFile[];
     id: number;
-    city: string;
+    city: number;
     street: string;
     numberOfHouse: number;
     numberOfHouseCourpus: number;

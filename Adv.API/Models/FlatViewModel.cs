@@ -1,4 +1,5 @@
-﻿using Adv.API.Models.Files;
+﻿using Adv.API.Models.Enums;
+using Adv.API.Models.Files;
 using Adv.BLL.DTO;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Adv.API.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string City { get; set; }
+        public Cities.CityName City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public List<FileModel> Files { get; set; }

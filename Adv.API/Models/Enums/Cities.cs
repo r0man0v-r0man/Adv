@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Adv.API.Models.Enums
 {
-    public class City : BLL.DTO.Enums.City
+    public class Cities : Adv.BLL.DTO.Enums.Cities
     {
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Adv.DOMAIN.Common;
-
+using Adv.DOMAIN.Enums;
 namespace Adv.DOMAIN.Entities
 {
     public abstract class Flat : AuditableEntity
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string City { get; set; }
+        public Cities.CityName City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         /// <summary>
