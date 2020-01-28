@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class reInit : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,7 @@ namespace Adv.DAL.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
+                    City = table.Column<int>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     Images = table.Column<string>(nullable: false),
