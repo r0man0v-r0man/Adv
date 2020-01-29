@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Adv.DAL.Context
 {
     // IdentityDbCOntext contains all the user tables
-    public class AdvContext : IdentityDbContext, IAdvContext
+    public class 
+
+        AdvContext : IdentityDbContext, IAdvContext
     {
         //
         public DbSet<Flat> Flats { get; set; }

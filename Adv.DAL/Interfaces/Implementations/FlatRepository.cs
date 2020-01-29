@@ -1,4 +1,5 @@
 ﻿using Adv.DAL.Context;
+using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
-    public class FlatRepository : IFlatRepository
+    public sealed class FlatRepository : IFlatRepository
     {
-        private readonly AdvContext _context;
-        public FlatRepository(AdvContext context)
+        private readonly IContextFactory contextFactory;
+        public FlatRepository(IContextFactory contextFactory)
         {
-            _context = context;
+            this.contextFactory = contextFactory;
         }
-
         public async Task<Flat> CreateAsync(Flat flat, CancellationToken ct)
         {
-            await _context.Flats.AddAsync(flat, ct).ConfigureAwait(false);
-            var result = await _context.SaveChangesAsync(ct).ConfigureAwait(false);
+            using var context = contextFactory.GetAdvContext();
+            await context.Flats.AddAsync(flat, ct).ConfigureAwait(false);
+            var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
             return result >= 0 ? flat : null;
         }
 
@@ -35,7 +36,8 @@ namespace Adv.DAL.Interfaces.Implementations
 
         private async IAsyncEnumerable<Flat> GetAllAsync([EnumeratorCancellation] CancellationToken ct = default)
         {
-            await foreach (var Flat in _context.Flats.AsNoTracking().AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
+            using var context = contextFactory.GetAdvContext();
+            await foreach (var Flat in context.Flats.AsNoTracking().AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
             {
                 yield return Flat;
             }
@@ -43,7 +45,9 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public async IAsyncEnumerable<Flat> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
         {
-            await foreach (var flat in _context.Flats.AsNoTracking()
+            using var context = contextFactory.GetAdvContext();
+
+            await foreach (var flat in context.Flats.AsNoTracking()
                                                       .OrderByDescending(property => property.Created)
                                                       .Skip(skip)
                                                       .Take(size)
@@ -57,7 +61,9 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public async Task<Flat> GetByIdAsync(int flatId, CancellationToken ct)
         {
-            return await _context.Flats.FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
+            using var context = contextFactory.GetAdvContext();
+
+            return await context.Flats.FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
         }
 
         public Task<bool> RemoveAsync(Flat flat)
@@ -72,18 +78,6 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_context != null)
-                {
-                    _context.Dispose();
-                }
-            }
         }
     }
 }

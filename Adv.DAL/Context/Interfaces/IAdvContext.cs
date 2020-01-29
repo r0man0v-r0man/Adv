@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Adv.DAL.Context.Interfaces
 {
-    public interface IAdvContext : IDisposable
+    public interface IAdvContext : IBaseContext
     {
         public DbSet<Flat> Flats { get; set; }
     }

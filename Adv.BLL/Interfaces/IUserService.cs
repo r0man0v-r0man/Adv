@@ -19,7 +19,6 @@ namespace Adv.BLL.Interfaces
         /// <param name="claims">User Claims</param>
         /// <returns></returns>
         string CreateToken(IEnumerable<Claim> claims);
-        Task SignOutAsync();
         Task<bool> IsValidateUserNameAsync(string userName);
     }
 }

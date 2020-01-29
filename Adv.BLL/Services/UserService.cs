@@ -60,10 +60,6 @@ namespace Adv.BLL.Services
             return result;
         }
 
-        public async Task SignOutAsync()
-        {
-            await signInManager.SignOutAsync().ConfigureAwait(false);
-        }
 
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
