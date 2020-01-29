@@ -1,4 +1,5 @@
 ﻿using Adv.DAL.Context;
+using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -17,6 +18,7 @@ namespace Adv.DAL
             {
                 options.UseSqlServer(connection);
             });
+            services.AddSingleton<IContextFactory, ContextFactory>();
             services.Configure<PasswordHasherOptions>(options =>
                 options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3
                 );

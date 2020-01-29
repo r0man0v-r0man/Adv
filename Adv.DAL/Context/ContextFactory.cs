@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Adv.DAL.Context.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -8,27 +9,19 @@ using System.Text;
 
 namespace Adv.DAL.Context
 {
-    public class ContextFactory : IDesignTimeDbContextFactory<AdvContext>
+    public class ContextFactory : IContextFactory
     {
-        public AdvContext CreateDbContext(string[] args)
+        public ContextFactory(IConfiguration configuration)
         {
-            string connectionString = ReadAdvConnectionStringFromAppSettings();
-            
-
-            var builder = new DbContextOptionsBuilder<AdvContext>();
-            builder.UseSqlServer(connectionString);
-            return new AdvContext(builder.Options);
+            Configuration = configuration;
         }
 
-        private string ReadAdvConnectionStringFromAppSettings()
-        {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+        public IConfiguration Configuration { get; }
 
-            string connectionString = configuration.GetConnectionString("AdvConnection");
-            return connectionString;
-        }
+        public IAdvContext GetAdvContext()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<AdvContext>();
+            return new AdvContext(optionsBuilder.Options);
+        } 
     }
 }
