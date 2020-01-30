@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Adv.DAL.Context
 {
-    public class ContextFactory : IContextFactory
+    public sealed class ContextFactory : IContextFactory
     {
         public ContextFactory(IConfiguration configuration)
         {
@@ -18,9 +18,15 @@ namespace Adv.DAL.Context
 
         public IConfiguration Configuration { get; }
 
+        public void Dispose()
+        {
+        }
+
         public IAdvContext GetAdvContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<AdvContext>();
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("AdvConnection"));
+
             return new AdvContext(optionsBuilder.Options);
         } 
     }

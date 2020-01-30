@@ -8,6 +8,6 @@ namespace Adv.DAL.Context.Interfaces
 {
     public interface IAdvContext : IBaseContext
     {
-        public DbSet<Flat> Flats { get; set; }
+        DbSet<Flat> Flats { get; set; }
     }
 }
