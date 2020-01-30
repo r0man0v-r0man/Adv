@@ -23,6 +23,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
+import { CityPipe } from './customPipes/city.pipe';
 
 registerLocaleData(ru);
 
@@ -36,6 +37,7 @@ registerLocaleData(ru);
     AddAdvertComponent,
     FlatDetailComponent,
     AddressPipe,
+    CityPipe,
     RegisterComponent,
     LoginComponent,
     AccessDeniedComponent

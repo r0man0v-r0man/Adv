@@ -26,7 +26,7 @@
                     <nz-descriptions nzTitle="{{ flat | address : 'full' }}" nzLayout="vertical">
                         <nz-descriptions-item nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Цена">{{ flat.price | currency : 'USD' }}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Город">{{ flat.city }}</nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
                         <nz-descriptions-item nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
                     </nz-descriptions>
                 </div>
