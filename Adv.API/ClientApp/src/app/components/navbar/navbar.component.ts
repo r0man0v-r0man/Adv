@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   goToDetails(id: number){
-    this.router.navigate(['flat', id]);
+    this.router.navigate(['flats', id]);
   }
   showAddAdvertModal(){
   const modal = this.modalService.create({

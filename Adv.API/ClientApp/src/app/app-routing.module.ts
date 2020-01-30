@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'flats',
-    component: FlatsComponent
+    component: FlatsComponent,
   },
   {
     path: 'flats/:id',
@@ -26,15 +26,33 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: AppComponent,
+    children:[
+      {
+        path: '',
+        component: LoginComponent
+      }
+    ]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: AppComponent,
+    children:[
+      {
+        path: '',
+        component: RegisterComponent
+      }
+    ]
   },
   {
     path: 'access-denied',
-    component: AccessDeniedComponent
+    component: AppComponent,
+    children:[
+      {
+        path:'',
+        component: AccessDeniedComponent
+      }
+    ]
   },
   {  
     path: '**', 

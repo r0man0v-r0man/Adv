@@ -1,31 +1,45 @@
-<div
-    class="search-results"
-    infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollThrottle]="50"
-    (scrolled)="onScroll()"
-    >
-    <div style="background: #ECECEC;padding:30px;">
-      <div  nz-row [nzGutter]="6" >
-        <div *ngFor="let flat of flats" nz-col [nzSpan]="6" style="margin-bottom: 16px;" >
-          <nz-card  
-            [nzCover]="flatCoverTpl"
-            [nzLoading]="loading"
-            [nzExtra]="more"
-            nzTitle="{{flat.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
-            <p>{{ flat | address }}</p>
-          </nz-card>
-          <ng-template #flatCoverTpl >
-            <div style="height: 160px; overflow: hidden;">
-              <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
+
+<nz-layout>
+  <app-navbar></app-navbar>
+  <nz-content class="outer-content">
+      
+      <nz-layout>
+
+          <nz-content>
+            <div
+            class="search-results"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()"
+            >
+            <div>
+              <div  nz-row [nzGutter]="6" >
+                <div *ngFor="let flat of flats" nz-col [nzSpan]="6" style="margin-bottom: 16px;" >
+                  <nz-card  
+                    [nzCover]="flatCoverTpl"
+                    [nzLoading]="loading"
+                    [nzExtra]="more"
+                    nzTitle="{{flat.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
+                    <p>{{ flat | address }}</p>
+                  </nz-card>
+                  <ng-template #flatCoverTpl >
+                    <div style="height: 160px; overflow: hidden;">
+                      <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
+                    </div>
+                  </ng-template>
+                  <ng-template #more>
+                    <a 
+                    [routerLink]="[flat.id]"
+                    >Подробнее</a>
+                  </ng-template>
+                </div>
+              </div>
             </div>
-          </ng-template>
-          <ng-template #more>
-            <a 
-            [routerLink]="[flat.id]"
-            >Подробнее</a>
-          </ng-template>
         </div>
-      </div>
-    </div>
-</div>
+          </nz-content>
+      </nz-layout>
+  </nz-content>
+  <nz-footer>Footer</nz-footer>
+
+</nz-layout>
