@@ -12,44 +12,25 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 
 
 const routes: Routes = [
-  {  
-    path: '', 
-    component: HomeComponent,
-    children:[
-      {
-        path: '', component: FlatsComponent
-      }
-    ]
+  {
+    path: '',
+    component: HomeComponent
   },
   {
-    path: 'flat/:id',
-    component: HomeComponent,
-    children:[
-      {
-        path: '', component: FlatDetailComponent
-      }
-    ]
-    // canActivate:[
-    //   AuthGuardService
-    // ]
+    path: 'flats',
+    component: FlatsComponent
   },
   {
-    path: 'register',
-    component: AppComponent,
-    children: [
-      {
-        path: '', component: RegisterComponent
-      }
-    ]
+    path: 'flats/:id',
+    component: FlatDetailComponent
   },
   {
     path: 'login',
-    component: AppComponent,
-    children:[
-      {
-        path: '', component: LoginComponent
-      }
-    ]
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   },
   {
     path: 'access-denied',

@@ -5,6 +5,11 @@
             halupa.by
         </a>
     </li>
+    <li nz-menu-item >
+        <a [routerLink]="[ '/flats' ]" routerLinkActive="active">
+            Квартиры
+        </a>
+    </li>
     <li  style="float: right;">
         <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
             <i nz-icon nzType="login" nzTheme="outline"></i>    
