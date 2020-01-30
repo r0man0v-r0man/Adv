@@ -1,6 +1,17 @@
 <nz-layout>
     <app-navbar></app-navbar>
-    <nz-content>
+    <nz-content class="outer-content">
+        <nz-layout class="inner-layout">
+            <nz-content class="inner-content" nz-row [nzGutter]="24">
+                <div style="text-align:center">
+                    <h1 nz-title >Halupa.by</h1>
+                    <span nz-text>
+                        <strong>Сайт по аренде жилья в Несвиже</strong>
+                    </span>
+                </div>
+                <nz-divider></nz-divider>
+            </nz-content>
+        </nz-layout>
     </nz-content>
-    <nz-footer>Footer</nz-footer>
+    <app-footer></app-footer>
 </nz-layout>

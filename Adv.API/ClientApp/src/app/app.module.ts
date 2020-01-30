@@ -24,6 +24,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
 import { CityPipe } from './customPipes/city.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 
 registerLocaleData(ru);
 
@@ -40,7 +41,8 @@ registerLocaleData(ru);
     CityPipe,
     RegisterComponent,
     LoginComponent,
-    AccessDeniedComponent
+    AccessDeniedComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
