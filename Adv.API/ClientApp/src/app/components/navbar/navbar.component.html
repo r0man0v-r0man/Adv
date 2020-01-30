@@ -6,12 +6,12 @@
         </a>
     </li>
     <li nz-menu-item >
-        <a [routerLink]="[ '/flats' ]" routerLinkActive="active">
+        <a [routerLink]="[ '/flats' ]" >
             Квартиры
         </a>
     </li>
     <li  style="float: right;">
-        <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" routerLinkActive="active" style="margin-right: 8px;">
+        <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" style="margin-right: 8px;">
             <i nz-icon nzType="login" nzTheme="outline"></i>    
             Войти
         </a>
