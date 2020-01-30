@@ -63,7 +63,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
 
-            return await context.Flats.FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
+            return await context.Flats.AsNoTracking().FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
         }
 
         public Task<bool> RemoveAsync(Flat flat)
