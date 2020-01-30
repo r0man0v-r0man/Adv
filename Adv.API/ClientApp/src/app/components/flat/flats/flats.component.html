@@ -18,12 +18,11 @@
           <ng-template #flatCoverTpl >
             <div style="height: 160px; overflow: hidden;">
               <img src="{{ flat.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
-
             </div>
           </ng-template>
           <ng-template #more>
             <a 
-            [routerLink]="['/flat', flat.id]"
+            [routerLink]="['flat', flat.id]"
             >Подробнее</a>
           </ng-template>
         </div>
