@@ -40,11 +40,15 @@
                   </nz-form-item>
                   <nz-form-item>
                     <nz-form-control>
-                      <hr/>
-                      <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
-                        <i nz-icon nzType="login" nzTheme="outline"></i>    
-                        Зарегистрироваться
-                    </a>
+                      <nz-divider [nzText]="text">
+                        <ng-template #text>
+                          <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
+                            <i nz-icon nzType="login" nzTheme="outline"></i>    
+                            Зарегистрироваться
+                          </a>
+                        </ng-template>
+                    </nz-divider>
+                      
                     </nz-form-control>
 
                   </nz-form-item>

@@ -6,11 +6,15 @@
                 <div style="text-align:center">
                     <embed src="assets/halupa.svg" id="halupa">
                     <h1 nz-title >Halupa.by</h1>
-                    <span nz-text>
-                        <strong>Сайт по аренде жилья в Несвиже</strong>
-                    </span>
+
+                    <nz-divider [nzText]="text">
+                        <ng-template #text>
+                            <span nz-text>
+                                <strong>Сайт по аренде жилья в Несвиже</strong>
+                            </span>
+                        </ng-template>
+                    </nz-divider>
                 </div>
-                <nz-divider></nz-divider>
             </nz-content>
         </nz-layout>
     </nz-content>
