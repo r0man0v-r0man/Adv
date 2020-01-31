@@ -15,17 +15,14 @@ namespace Adv.BLL.Services
     public class UserService : IUserService
     {
         private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
         private readonly IConfiguration configuration;
 
 
         public UserService(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
             IConfiguration configuration)
         {
             this.userManager = userManager;
-            this.signInManager = signInManager;
             this.configuration = configuration;
 
         }
