@@ -73,9 +73,8 @@ export class NavbarComponent implements OnInit {
    */
   openProfileDrawer(){
     const user = this.authService.currentUser;
-    console.log(user);
     const drawer = this.drawerService.create({
-      nzTitle: user.unique_name,
+      nzTitle: `${user.unique_name} - Кабинет пользователя`,
       nzContent: ProfileComponent,
       nzWidth: 640
     })
