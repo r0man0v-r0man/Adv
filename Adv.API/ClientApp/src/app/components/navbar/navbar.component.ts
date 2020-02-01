@@ -76,7 +76,8 @@ export class NavbarComponent implements OnInit {
     console.log(user);
     const drawer = this.drawerService.create({
       nzTitle: user.unique_name,
-      nzContent: ProfileComponent
+      nzContent: ProfileComponent,
+      nzWidth: 640
     })
   }
 }
