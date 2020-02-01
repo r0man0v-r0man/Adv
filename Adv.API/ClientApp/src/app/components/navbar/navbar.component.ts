@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzDrawerService } from 'ng-zorro-antd';
 import { AddAdvertComponent } from 'src/app/modal/add-advert/add-advert.component';
 import { FlatService } from 'src/app/services/flat.service';
 import { Constants } from 'src/app/constants';
 import { FlatModel } from 'src/app/models/flatModel';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
 
 @Component({
   selector: 'app-navbar',
@@ -19,17 +20,16 @@ export class NavbarComponent implements OnInit {
     private modalService: NzModalService, 
     private flatService: FlatService,
     private router: Router, 
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private drawerService: NzDrawerService
+    ) { }
   ngOnInit() {
     this.isUserLogenIn();
   }
   isUserLogenIn(){
     this.isLogedIn = this.authService.isLogedIn();
   }
-  logOut(){
-    this.authService.logOut();
-    this.router.navigate(['/login']);
-  }
+
   goToDetails(id: number){
     this.router.navigate(['flats', id]);
   }
@@ -67,5 +67,16 @@ export class NavbarComponent implements OnInit {
    */
   registerThenAddAdvert(){
     this.router.navigate(['/login']);
+  }
+  /**
+   * open profile drawer
+   */
+  openProfileDrawer(){
+    const user = this.authService.currentUser;
+    console.log(user);
+    const drawer = this.drawerService.create({
+      nzTitle: user.unique_name,
+      nzContent: ProfileComponent
+    })
   }
 }

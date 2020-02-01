@@ -25,6 +25,7 @@ import { AccessDeniedComponent } from './components/access-denied/access-denied.
 import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
 import { CityPipe } from './customPipes/city.pipe';
 import { FooterComponent } from './components/footer/footer.component';
+import { ProfileComponent } from './drawers/profile/profile.component';
 
 registerLocaleData(ru);
 
@@ -42,7 +43,8 @@ registerLocaleData(ru);
     RegisterComponent,
     LoginComponent,
     AccessDeniedComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ registerLocaleData(ru);
     InfiniteScrollModule
   ],
   entryComponents: [
-    AddAdvertComponent
+    AddAdvertComponent,
+    ProfileComponent
   ],
   providers: [
     AuthGuardService,

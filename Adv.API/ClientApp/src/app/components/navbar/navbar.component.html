@@ -16,10 +16,10 @@
             Войти
         </a>
         <a *ngIf="isLogedIn"
-        (click)="logOut()"
+        (click)="openProfileDrawer()"
         style="margin-right: 8px;">
-            <i nz-icon nzType="logout" nzTheme="outline"></i>    
-            Выйти
+            <i nz-icon nzType="user" nzTheme="outline"></i>    
+            Кабинет
         </a>
         <ng-container *ngIf="isLogedIn; then isLogedInButton else isNotLogedInButton"></ng-container>
         <ng-template #isLogedInButton>
