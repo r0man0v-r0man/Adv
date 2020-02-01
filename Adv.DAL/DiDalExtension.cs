@@ -1,5 +1,6 @@
 ﻿using Adv.DAL.Context;
 using Adv.DAL.Context.Interfaces;
+using Adv.DAL.Entities;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +23,7 @@ namespace Adv.DAL
             services.Configure<PasswordHasherOptions>(options =>
                 options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3
                 );
-            services.AddIdentity<IdentityUser, IdentityRole>(config =>
+            services.AddIdentity<AppUser, IdentityRole>(config =>
             {
                 config.Password.RequiredLength = 4;
                 config.Password.RequireDigit = false;
@@ -33,6 +34,7 @@ namespace Adv.DAL
                 .AddDefaultTokenProviders();
             services.AddTransient<IDataManager, DataManager>();
             services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
+            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
 
             return services;
         }

@@ -7,6 +7,8 @@ namespace Adv.DAL.Entities
 {
     public class Flat : DOMAIN.Entities.Flat
     {
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 
 }

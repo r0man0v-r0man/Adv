@@ -21,6 +21,7 @@ namespace Adv.API.Models
         public int NumberOfHouseCourpus { get; set; }
         public int NumberOfSubHouse { get; set; }
         public int NumberOfFlat { get; set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// Mapping to FlatViewModel
@@ -51,23 +52,23 @@ namespace Adv.API.Models
         /// Mapping to FlatDTO model
         /// </summary>
         /// <param name="flat"></param>
-        public static implicit operator FlatDTO(FlatViewModel flat) =>
-            new FlatDTO
+        public static implicit operator FlatDTO(FlatViewModel flat) => new FlatDTO
+        {
+            Images = flat?.Files.ToDictionary(x => x.Uid, x => x.LinkProps.Download),
+            IsActive = flat.IsActive,
+            Price = flat.Price,
+            City = flat.City,
+            Description = flat.Description,
+            Id = flat.Id,
+            Address = new Dictionary<string, string>
             {
-                Images = flat?.Files.ToDictionary(x => x.Uid, x => x.LinkProps.Download),
-                IsActive = flat.IsActive,
-                Price = flat.Price,
-                City = flat.City,
-                Description = flat.Description,
-                Id = flat.Id,
-                Address = new Dictionary<string, string>
-                {
-                    ["street"] = flat.Street,
-                    ["house"] = flat.NumberOfHouse.ToString(CultureInfo.GetCultureInfo(1049)),
-                    ["corpus"] = flat.NumberOfHouseCourpus.ToString(CultureInfo.GetCultureInfo(1049)),
-                    ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
-                    ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
-                }
-            };
+                ["street"] = flat.Street,
+                ["house"] = flat.NumberOfHouse.ToString(CultureInfo.GetCultureInfo(1049)),
+                ["corpus"] = flat.NumberOfHouseCourpus.ToString(CultureInfo.GetCultureInfo(1049)),
+                ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
+                ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
+            },
+
+        };
     }
 }

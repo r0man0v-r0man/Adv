@@ -6,8 +6,8 @@ namespace Adv.BLL.Interfaces
 {
     public interface ISuperManager
     {
-        IFlatService Flats { get; }
-        IFileService Files { get; }
-        IUserService Users { get; }
+        IFlatService Flats { get; set; }
+        IFileService Files { get; set; }
+        IUserService Users { get; set; }
     }
 }

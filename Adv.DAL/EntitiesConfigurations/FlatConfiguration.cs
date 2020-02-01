@@ -32,6 +32,10 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.Address)
                 .IsRequired();
+            builder
+                .HasOne(prop => prop.AppUser)
+                .WithMany(prop => prop.Flats)
+                .HasForeignKey(prop => prop.AppUserId);
         }
     }
 }

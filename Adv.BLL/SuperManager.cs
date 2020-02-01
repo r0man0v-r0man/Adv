@@ -7,9 +7,9 @@ namespace Adv.BLL
 {
     public class SuperManager : ISuperManager
     {
-        public IFlatService Flats { get; }
-        public IFileService Files { get; }
-        public IUserService Users { get; }
+        public IFlatService Flats { get; set; }
+        public IFileService Files { get; set; }
+        public IUserService Users { get; set; }
         public SuperManager(
             IFlatService flatService,
             IFileService fileService,

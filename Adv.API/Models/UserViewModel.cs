@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using Adv.BLL.DTO;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Adv.API.Models
 {
@@ -12,22 +10,22 @@ namespace Adv.API.Models
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-
-
+        public List<FlatViewModel> FlatsViewModels { get; set; }
         /// <summary>
         /// Mapping to UserViewModel
         /// </summary>
         /// <param name="identityUser"></param>
-        public static implicit operator UserViewModel(IdentityUser identityUser) => new UserViewModel
+        public static implicit operator UserViewModel(AppUserDTO appUserDTO) => new UserViewModel
         {
-            UserName = identityUser?.UserName,
-            Id = identityUser.Id
+            UserName = appUserDTO?.UserName,
+            Id = appUserDTO.Id,
+            FlatsViewModels = appUserDTO.flatDTOs.Select(s => new FlatViewModel()).ToList()
         };
         /// <summary>
-        /// Mapping to IdentityUser
+        /// Mapping to AppUserDTO
         /// </summary>
         /// <param name="userViewModel"></param>
-        public static implicit operator IdentityUser(UserViewModel userViewModel) => new IdentityUser
+        public static implicit operator AppUserDTO(UserViewModel userViewModel) => new AppUserDTO
         {
             UserName = userViewModel?.UserName,
             NormalizedUserName = userViewModel.UserName.ToUpper(CultureInfo.GetCultureInfo(1049))
