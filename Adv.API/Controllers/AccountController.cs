@@ -55,12 +55,17 @@ namespace Adv.API.Controllers
             var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
         }
-        [HttpGet("userInfo/{id}")]
+        [HttpGet("userInfo/{userId}")]
         [Authorize]
-        public async Task<ActionResult<UserViewModel>> GetUserInfo()
+        public async Task<ActionResult<UserViewModel>> GetUserInfo(string userId)
         {
             //get current user id
             var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (!string.Equals(currentUserId, userId))
+            {
+                return BadRequest();
+            }
+            //error convert flats
             UserViewModel result = await superManager.Users.GetUserInfo(currentUserId).ConfigureAwait(false);
             return Ok(result);
         }

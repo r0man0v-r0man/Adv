@@ -1,15 +1,15 @@
-<p class="title" style=" margin-bottom: 24px;">User Profile</p>
-<nz-descriptions [nzColumn]="2" nzTitle="Personal">
-  <nz-descriptions-item nzTitle="Full Name" [nzSpan]="1">Lily</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Account" [nzSpan]="1">AntDesign@example.com</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="City" [nzSpan]="1">HangZhou</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Country" [nzSpan]="1">China🇨🇳</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Birthday" [nzSpan]="1">February 2,1900</nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Website" [nzSpan]="1"> - </nz-descriptions-item>
-  <nz-descriptions-item nzTitle="Message" [nzSpan]="2">
-    Make things as simple as possible but no simpler.
-  </nz-descriptions-item>
-</nz-descriptions>
+<h4>Мои объявления:</h4>
+<ul
+      nz-list
+      [nzDataSource]="userFlats"
+      nzSize="small"
+      [nzRenderItem]="Item"
+    >
+      <ng-template #Item let-item>
+        <li nz-list-item [nzActions]="[opAction]" [nzContent]="item" nzNoFlex></li>
+        <ng-template #opAction><a>edit</a></ng-template>
+      </ng-template>
+    </ul>
 <nz-divider></nz-divider>
 <nz-descriptions [nzColumn]="2" nzTitle="Company">
   <nz-descriptions-item nzTitle="Position" [nzSpan]="1">Programmer</nz-descriptions-item>
