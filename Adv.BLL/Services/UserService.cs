@@ -30,60 +30,30 @@ namespace Adv.BLL.Services
             return result;
         }
 
-        //public async Task<IdentityResult> CreateAsync(IdentityUser user, string password)
-        //{
-
-        //    var result = await userManager.CreateAsync(user, password).ConfigureAwait(false);
-        //    if (result.Succeeded)
-        //    {
-        //        await userManager.AddClaimsAsync(user, new List<Claim>
-        //        {
-        //            new Claim(JwtRegisteredClaimNames.UniqueName, user?.UserName),
-        //            new Claim(JwtRegisteredClaimNames.Sub, user?.Id)
-        //        }).ConfigureAwait(false);
-        //    }
-        //    return result;
-        //}
-
-        //public async Task<IdentityUser> FindByNameAsync(string userName)
-        //{
-        //    var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
-        //    return result ?? throw new UserNotFoundException($"Пользователя {userName} не существует!");
-        //}
-        //public async Task<bool> CheckPasswordAsync(IdentityUser user, string password)
-        //{
-        //    var result = await userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
-        //    return result ? result : throw new UserBadPasswordException("Не верный пароль!");
-        //}
-        //public async Task<IEnumerable<Claim>> GetClaims(IdentityUser user)
-        //{
-        //    var result = await userManager.GetClaimsAsync(user).ConfigureAwait(false);
-        //    return result;
-        //}
-
-
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
             var result = await _dataManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
         }
-        //public string CreateToken(IEnumerable<Claim> claims)
-        //{
-        //    var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
-        //    var key = new SymmetricSecurityKey(secretsBytes);
-        //    var algorithm = SecurityAlgorithms.HmacSha256;
 
-        //    var signingCredentials = new SigningCredentials(key, algorithm);
+        public async Task<string> LoginAsync(AppUserDTO user, string password)
+        {
+            //find user
+            var existUser = await _dataManager.Users.FindByNameAsync(user?.UserName).ConfigureAwait(false);
+            //check pair user - password
+            var checkUserPassword = await _dataManager.Users.CheckPasswordAsync(existUser, password).ConfigureAwait(false);
+            if (existUser != null && checkUserPassword == true)
+            {
+                //generates user claims
+                var claims = await _dataManager.Users.GetClaims(existUser).ConfigureAwait(false);
+                //create JWT
+                var token = _dataManager.Users.CreateToken(claims);
 
-        //    var token = new JwtSecurityToken(
-        //        configuration["TokenIssuer"],
-        //        configuration["TokenAudience"],
-        //        claims,
-        //        notBefore: DateTime.Now,
-        //        expires: DateTime.Now.AddHours(1),
-        //        signingCredentials);
-        //    var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
-        //    return tokenJson;
-        //}
+                return token;
+            }
+            return null;
+
+        }
+
     }
 }

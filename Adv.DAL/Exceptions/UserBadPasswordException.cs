@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Adv.BLL.Exceptions
+namespace Adv.DAL.Exceptions
 {
     public class UserBadPasswordException
-        : Exception
+            : Exception
     {
         public UserBadPasswordException()
         {

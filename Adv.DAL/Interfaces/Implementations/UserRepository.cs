@@ -1,5 +1,8 @@
 ﻿using Adv.DAL.Entities;
+using Adv.DAL.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,10 +15,19 @@ namespace Adv.DAL.Interfaces.Implementations
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<AppUser> userManager;
-        public UserRepository(UserManager<AppUser> userManager)
+        private readonly IConfiguration configuration;
+        public UserRepository(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             this.userManager = userManager;
+            this.configuration = configuration;
         }
+
+        public async Task<bool> CheckPasswordAsync(AppUser user, string password)
+        {
+            var result = await userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
+            return result ? result : throw new UserBadPasswordException("Неверный пароль!");
+        }
+
         public async Task<IdentityResult> CreateAsync(AppUser user, string password)
         {
             var result = await userManager.CreateAsync(user, password).ConfigureAwait(false);
@@ -30,8 +42,39 @@ namespace Adv.DAL.Interfaces.Implementations
             return result;
         }
 
+        public string CreateToken(IEnumerable<Claim> claims)
+        {
+            var secretsBytes = Encoding.UTF8.GetBytes(configuration["TokenSecret"]);
+            var key = new SymmetricSecurityKey(secretsBytes);
+            var algorithm = SecurityAlgorithms.HmacSha256;
+
+            var signingCredentials = new SigningCredentials(key, algorithm);
+
+            var token = new JwtSecurityToken(
+                configuration["TokenIssuer"],
+                configuration["TokenAudience"],
+                claims,
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials);
+            var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
+            return tokenJson;
+        }
+
         public void Dispose()
         {
+        }
+
+        public async Task<AppUser> FindByNameAsync(string userName)
+        {
+            var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
+            return result;
+        }
+
+        public async Task<IEnumerable<Claim>> GetClaims(AppUser user)
+        {
+            var result = await userManager.GetClaimsAsync(user).ConfigureAwait(false);
+            return result;
         }
 
         public async Task<bool> IsValidateUserNameAsync(string userName)

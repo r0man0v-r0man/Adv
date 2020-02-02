@@ -17,6 +17,7 @@ namespace Adv.BLL.Interfaces
         /// <param name="password">Password</param>
         /// <returns></returns>
         Task<IdentityResult> CreateAsync(AppUserDTO user, string password);
+        Task<string> LoginAsync(AppUserDTO user, string password);
         //Task<IdentityUser> FindByNameAsync(string userName);
         //Task<bool> CheckPasswordAsync(IdentityUser user, string password);
         //Task<IEnumerable<Claim>> GetClaims(IdentityUser user);
