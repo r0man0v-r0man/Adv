@@ -10,7 +10,6 @@ import { FlatService } from 'src/app/services/flat.service';
 })
 export class FlatsComponent implements OnInit {
 
-  flatsUrl: string = Constants.getAllFlats;
   flats: FlatModel[] = [];
   loading = true;
   pageNumber: number;
@@ -22,7 +21,7 @@ export class FlatsComponent implements OnInit {
 
   onScroll(){
     if (this.pageNumber !== 1){
-      this.flatService.getFlats(this.flatsUrl, this.pageNumber)
+      this.flatService.getFlats(this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
@@ -38,7 +37,7 @@ export class FlatsComponent implements OnInit {
   }
   initHomePage(){
     this.pageNumber = 1;
-    this.flatService.getFlats(this.flatsUrl, this.pageNumber)
+    this.flatService.getFlats(this.pageNumber)
       .subscribe(flats => {
           this.flats = flats
           this.loading = false;

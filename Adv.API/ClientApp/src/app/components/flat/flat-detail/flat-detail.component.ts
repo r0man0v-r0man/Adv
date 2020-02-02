@@ -12,7 +12,6 @@ import { NzCarouselComponent } from 'ng-zorro-antd';
 })
 
 export class FlatDetailComponent implements OnInit {
-  flatUrl:string = Constants.flat;
   flat: FlatModel = new FlatModel();
 
   @ViewChild(NzCarouselComponent, { static: false }) 
@@ -35,7 +34,7 @@ export class FlatDetailComponent implements OnInit {
     this.flatImageCarousel.next();
   }
   getFlat(id: number){
-    this.flatService.getFlat(this.flatUrl, id)
+    this.flatService.getFlat(id)
     .subscribe(
       response => {
       this.flat = response

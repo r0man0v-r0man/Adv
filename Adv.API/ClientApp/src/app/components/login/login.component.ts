@@ -12,7 +12,6 @@ import { UserWarning } from 'src/app/app-errors/userWarning';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  loginUrl: string = Constants.login;
   loginForm: FormGroup;
   isLoading: boolean = false;
 
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
   signIn(user: UserModel){
     if(user){
       this.isLoadingSwitch();
-      this.authService.login(this.loginUrl, user)
+      this.authService.login(user)
       .subscribe(response => { 
         if(response){
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');

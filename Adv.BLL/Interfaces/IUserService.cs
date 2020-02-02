@@ -17,16 +17,19 @@ namespace Adv.BLL.Interfaces
         /// <param name="password">Password</param>
         /// <returns></returns>
         Task<IdentityResult> CreateAsync(AppUserDTO user, string password);
+        /// <summary>
+        /// Login user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         Task<string> LoginAsync(AppUserDTO user, string password);
-        //Task<IdentityUser> FindByNameAsync(string userName);
-        //Task<bool> CheckPasswordAsync(IdentityUser user, string password);
-        //Task<IEnumerable<Claim>> GetClaims(IdentityUser user);
-        ///// <summary>
-        ///// Generate JWT
-        ///// </summary>
-        ///// <param name="claims">User Claims</param>
-        ///// <returns></returns>
-        //string CreateToken(IEnumerable<Claim> claims);
         Task<bool> IsValidateUserNameAsync(string userName);
+        /// <summary>
+        /// Get user info
+        /// </summary>
+        /// <param name="currentUserId"></param>
+        /// <returns></returns>
+        Task<AppUserDTO> GetUserInfo(string currentUserId);
     }
 }

@@ -14,7 +14,6 @@ import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
   styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent implements OnInit {
-  createFlatUrl: string = Constants.flat;
   isLogedIn :boolean = false;
   constructor(
     private modalService: NzModalService, 
@@ -47,9 +46,7 @@ export class NavbarComponent implements OnInit {
             if(modalForm.valid){
               let newFlatAdvert = new FlatModel(modalForm.value)
               this.flatService
-                .createFlat( 
-                  this.createFlatUrl, 
-                  newFlatAdvert)
+                .createFlat(newFlatAdvert)
                 .subscribe(
                   response => {
                     this.goToDetails(response.id);

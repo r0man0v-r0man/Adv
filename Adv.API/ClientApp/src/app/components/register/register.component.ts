@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/models/UserModel';
-import { Constants } from 'src/app/constants';
 import { Router } from '@angular/router';
 import { UserNameValidators } from 'src/app/validators/userName.validators';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,7 +13,6 @@ import { UserWarning } from 'src/app/app-errors/userWarning';
 })
 export class RegisterComponent implements OnInit {
 
-  registerUrl: string = Constants.registerUser;
   registerForm: FormGroup;
   isLoading: boolean = false;
 
@@ -30,7 +28,7 @@ export class RegisterComponent implements OnInit {
   submitForm(registerUser: UserModel){
     if(registerUser){
       this.isLoadingSwitch();
-      this.authService.registerUser(this.registerUrl, registerUser)
+      this.authService.registerUser(registerUser)
         .subscribe(response => {
           if(response){
             this.router.navigate(['/login']);

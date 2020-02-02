@@ -30,6 +30,12 @@ namespace Adv.BLL.Services
             return result;
         }
 
+        public async Task<AppUserDTO> GetUserInfo(string currentUserId)
+        {
+            AppUserDTO currentUser = await _dataManager.Users.FindByIdAsync(currentUserId).ConfigureAwait(false);
+            return currentUser;
+        }
+
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
             var result = await _dataManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);

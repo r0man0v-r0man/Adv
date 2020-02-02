@@ -29,6 +29,13 @@ namespace Adv.DAL.Interfaces
         /// <returns></returns>
         Task<AppUser> FindByNameAsync(string userName);
         /// <summary>
+        /// Find User by Id
+        /// </summary>
+        /// <param name="currentUserId">User Id</param>
+        /// <returns></returns>
+        Task<AppUser> FindByIdAsync(string currentUserId);
+
+        /// <summary>
         /// Check pair user - password
         /// </summary>
         /// <param name="user"></param>

@@ -9,7 +9,9 @@ import { Constants } from '../constants';
   providedIn: 'root'
 })
 export class AuthService {
-
+  registerUrl: string = Constants.registerUser;
+  loginUrl: string = Constants.login;
+  isUserNameDublicatedUrl: string = Constants.IsUserNameDuplicated;
   headers = new HttpHeaders().set('content-type', 'application/json');
 
   constructor(
@@ -17,8 +19,8 @@ export class AuthService {
     ) { }
 
     /**login user */
-    login(url: string, user: UserModel){
-      return this.httpService.post(url, user)
+    login(user: UserModel){
+      return this.httpService.post(this.loginUrl, user)
         .pipe(
           map((response:any)=>{
             let token = response.access_token;
@@ -49,12 +51,12 @@ export class AuthService {
     }
   
     /** register new user */
-    registerUser(url: string, newUser: UserModel){
-      return this.httpService.post<boolean>(url, newUser, { headers: this.headers })
+    registerUser(newUser: UserModel){
+      return this.httpService.post<boolean>(this.registerUrl, newUser, { headers: this.headers })
     }
     /**check the duplicate username */
     IsUserNameExist(userName: string){
-      return this.httpService.get(Constants.IsUserNameDuplicated + '/' + userName)
+      return this.httpService.get(this.isUserNameDublicatedUrl + '/' + userName)
     }
     /**
      * get secure token

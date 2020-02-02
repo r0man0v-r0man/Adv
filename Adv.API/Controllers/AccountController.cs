@@ -1,9 +1,10 @@
 ﻿using Adv.API.Models;
 using Adv.BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Adv.API.Controllers
@@ -16,14 +17,11 @@ namespace Adv.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly ISuperManager superManager;
-        private readonly IConfiguration configuration;
 
         public AccountController(
-            ISuperManager superManager,
-            IConfiguration configuration)
+            ISuperManager superManager)
         {
             this.superManager = superManager;
-            this.configuration = configuration;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserViewModel user)
@@ -56,6 +54,15 @@ namespace Adv.API.Controllers
         {
             var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
+        }
+        [HttpGet("userInfo/{id}")]
+        [Authorize]
+        public async Task<ActionResult<UserViewModel>> GetUserInfo()
+        {
+            //get current user id
+            var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            UserViewModel result = await superManager.Users.GetUserInfo(currentUserId).ConfigureAwait(false);
+            return Ok(result);
         }
     }
 }

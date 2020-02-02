@@ -65,6 +65,12 @@ namespace Adv.DAL.Interfaces.Implementations
         {
         }
 
+        public async Task<AppUser> FindByIdAsync(string currentUserId)
+        {
+            var result = await userManager.FindByIdAsync(currentUserId).ConfigureAwait(false);
+            return result;
+        }
+
         public async Task<AppUser> FindByNameAsync(string userName)
         {
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);

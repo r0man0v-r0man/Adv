@@ -1,14 +1,16 @@
+import { environment } from 'src/environments/environment';
+
 export class Constants {
 
   //user
-  static registerUser = 'https://localhost:44335/api/account/register';
-  static login = 'https://localhost:44335/api/account/login';
-  static IsUserNameDuplicated = 'https://localhost:44335/api/account/IsValidateUserName'
+  static registerUser = environment.webApi + 'account/register';
+  static login = environment.webApi +  'account/login';
+  static IsUserNameDuplicated = environment.webApi + 'account/IsValidateUserName';
   //flat
-  static flat = 'https://localhost:44335/api/flat'; 
-  static getAllFlats = 'https://localhost:44335/api/flat/getAll';
+  static flat = environment.webApi +  'flat'; 
+  static getAllFlats = environment.webApi +  'flat/getAll';
   //file
-  static uploadFileUrl = 'https://localhost:44335/api/file';
-  static deleteFileUrl = 'https://localhost:44335/api/file';
+  static uploadFileUrl = environment.webApi + 'file';
+  static deleteFileUrl = environment.webApi +  'file';
 
 }
