@@ -15,6 +15,7 @@ export class FlatModel{
     numberOfSubHouse: number;
     numberOfFlat: number;
     created: any;
+    userId: string;
 
     public constructor(init?: Partial<FlatModel>){
         Object.assign(this, init);
