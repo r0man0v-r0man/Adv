@@ -17,13 +17,14 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'flats',
-    component: FlatsComponent,
-  },
-  {
     path: 'flats/:id',
     component: FlatDetailComponent
   },
+  {
+    path: 'flats',
+    component: FlatsComponent,
+  },
+
   {
     path: 'login',
     component: AppComponent,

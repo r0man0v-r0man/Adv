@@ -19,7 +19,7 @@ namespace Adv.API.Models
         {
             UserName = appUserDTO?.UserName,
             Id = appUserDTO.Id,
-            FlatsViewModels = appUserDTO.flatDTOs.Select(s => new FlatViewModel()).ToList()
+            FlatsViewModels = appUserDTO.flatDTOs.Select(dto => (FlatViewModel)dto).ToList()
         };
         /// <summary>
         /// Mapping to AppUserDTO

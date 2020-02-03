@@ -6,7 +6,7 @@
       [nzRenderItem]="Item"
     >
       <ng-template #Item let-item>
-        <li nz-list-item [nzActions]="[opAction]" [nzContent]="item" nzNoFlex></li>
+        <li nz-list-item [nzActions]="[opAction]" [nzContent]="item.street" nzNoFlex></li>
         <ng-template #opAction><a>edit</a></ng-template>
       </ng-template>
     </ul>

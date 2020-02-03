@@ -29,7 +29,10 @@ namespace Adv.BLL.DTO
             UserName = appUser?.UserName,
             Id = appUser.Id,
             flatDTOs = appUser.Flats
-                .Select(flat => new FlatDTO())
+                .Select(flat =>
+                {
+                    return (FlatDTO)flat;
+                })
                 .ToList()
         };
         /// <summary>
