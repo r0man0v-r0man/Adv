@@ -6,8 +6,21 @@
       [nzRenderItem]="Item"
     >
       <ng-template #Item let-item>
-        <li nz-list-item [nzActions]="[opAction]" [nzContent]="item.street" nzNoFlex></li>
-        <ng-template #opAction><a>edit</a></ng-template>
+        <li nz-list-item [nzActions]="[options]" [nzContent]="itemDetail" nzNoFlex></li>
+        <ng-template #options>    
+            <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+              <i nz-icon nzType="ellipsis"></i>
+          </a>
+          <nz-dropdown-menu #menu="nzDropdownMenu">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item (click)="onDelete(item)"><i nz-icon nzType="delete" nzTheme="outline"></i>Удалить</li>
+              <li nz-menu-item><i nz-icon nzType="edit" nzTheme="outline"></i>Редактировать</li>
+              <li nz-menu-item><i nz-icon nzType="eye-invisible" nzTheme="outline"></i>Снять</li>
+            </ul>
+          </nz-dropdown-menu>
+        </ng-template>
+        <ng-template #itemDetail>{{ item | address : 'full' }}</ng-template>
+
       </ng-template>
     </ul>
 <nz-divider></nz-divider>

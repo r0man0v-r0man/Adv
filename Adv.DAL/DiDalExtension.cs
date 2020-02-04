@@ -20,9 +20,11 @@ namespace Adv.DAL
                 options.UseSqlServer(connection);
             });
             services.AddSingleton<IContextFactory, ContextFactory>();
+
             services.Configure<PasswordHasherOptions>(options =>
-                options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3
-                );
+            {
+                options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV3;
+            });
             services.AddIdentity<AppUser, IdentityRole>(config =>
             {
                 config.Password.RequiredLength = 4;
@@ -32,6 +34,7 @@ namespace Adv.DAL
             })
                 .AddEntityFrameworkStores<AdvContext>()
                 .AddDefaultTokenProviders();
+
             services.AddTransient<IDataManager, DataManager>();
             services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));

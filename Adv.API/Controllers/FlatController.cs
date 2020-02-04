@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using System.Threading;
@@ -58,9 +57,17 @@ namespace Adv.API.Controllers
             {
                 try
                 {
-                    var currentUser = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
-                    return CreatedAtAction(nameof(Post), result);
+                    var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    if (currentUserId == flatModel.UserId)
+                    {
+                        FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
+                        return CreatedAtAction(nameof(Post), result);
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                    
                 }
                 catch (Exception ex)
                 {

@@ -36,7 +36,7 @@ namespace Adv.BLL.DTO
                 .Select(x => x.Split('='))
                 .ToDictionary(split => split[0], split => split[1]),
             Created = flat.Created,
-            UserId = flat.AppUser.Id
+            UserId = flat.AppUserId
         };
 
         /// <summary>

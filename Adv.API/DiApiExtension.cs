@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -57,6 +58,10 @@ namespace Adv.API
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+
             return services;
         }
     }

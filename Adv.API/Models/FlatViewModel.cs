@@ -69,7 +69,7 @@ namespace Adv.API.Models
                 ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
                 ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
             },
-
+            UserId = flat.UserId
         };
     }
 }

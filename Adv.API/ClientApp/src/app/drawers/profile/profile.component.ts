@@ -42,4 +42,7 @@ export class ProfileComponent implements OnInit {
         }
       })
   };
+  onDelete(item: FlatModel){
+    console.log(item.id);
+  }
 }
