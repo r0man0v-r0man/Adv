@@ -12,6 +12,7 @@ import { UserModel } from 'src/app/models/UserModel';
   styleUrls: ['./profile.component.less']
 })
 export class ProfileComponent implements OnInit {
+  loading : boolean = true;
   userFlats: FlatModel[] = [];
   userId: string;
   user: UserModel;
@@ -25,7 +26,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.userId = this.authService.currentUser.sub;
     this.getUserInfo();
-    console.log(this.user)
   }
 
   logOut(){
@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
         if(response){
           this.user = response;
           this.userFlats = this.user.flatsViewModels;
+          this.loading = false;
         }
       })
   };

@@ -4,9 +4,26 @@
       [nzDataSource]="userFlats"
       nzSize="small"
       [nzRenderItem]="Item"
+      [nzLoading]="loading"
+      [nzNoResult]="NoFlats"
     >
+    <ng-template #NoFlats>
+      <nz-empty 
+      [nzNotFoundContent]="contentTpl"
+    >
+      <ng-template #contentTpl>
+        <span> У вас нет объявлений </span>
+      </ng-template>
+    </nz-empty>
+    </ng-template>
+
       <ng-template #Item let-item>
-        <li nz-list-item [nzActions]="[options]" [nzContent]="itemDetail" nzNoFlex></li>
+        <li nz-list-item 
+        [nzActions]="[options]" 
+        [nzContent]="itemDetail" 
+        nzNoFlex>
+        </li>
+        <ng-template #itemDetail>{{ item | address : 'full' }}</ng-template>
         <ng-template #options>    
             <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
               <i nz-icon nzType="ellipsis"></i>
@@ -19,7 +36,6 @@
             </ul>
           </nz-dropdown-menu>
         </ng-template>
-        <ng-template #itemDetail>{{ item | address : 'full' }}</ng-template>
 
       </ng-template>
     </ul>
