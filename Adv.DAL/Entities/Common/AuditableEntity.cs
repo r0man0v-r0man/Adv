@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Adv.DAL.Entities.Common
 {
-    public abstract class AuditableEntity : DOMAIN.Common.AuditableEntity
+    public abstract class AuditableEntity : IAuditableEntity
     {
+        public DateTime Created { get; set; }
+        public DateTime LastModified { get; set; }
     }
 }

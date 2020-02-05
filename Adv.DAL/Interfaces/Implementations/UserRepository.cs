@@ -26,7 +26,7 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<bool> CheckPasswordAsync(AppUser user, string password)
         {
             var result = await userManager.CheckPasswordAsync(user, password).ConfigureAwait(false);
-            return result ? result : throw new UserBadPasswordException("Неверный логин или пароль!");
+            return result ? result : throw new UserBadPasswordException("Неверный пароль!");
         }
 
         public async Task<IdentityResult> CreateAsync(AppUser user, string password)
@@ -75,7 +75,7 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<AppUser> FindByNameAsync(string userName)
         {
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
-            return result;
+            return result ?? throw new UserNotFoundException($"Пользователя {userName} не существует!");
         }
 
         public async Task<IEnumerable<Claim>> GetClaims(AppUser user)

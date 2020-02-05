@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Adv.DAL.Entities.Enums
 {
-    public class Cities : Adv.DOMAIN.Enums.Cities
+    public class Cities
     {
+        public CityName City { get; set; }
+        public enum CityName
+        {
+            nesvizh
+        }
     }
 }

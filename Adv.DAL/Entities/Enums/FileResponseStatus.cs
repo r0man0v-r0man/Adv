@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace Adv.DAL.Entities.Enums
 {
-    public class FileResponseStatus : DOMAIN.Enums.FileResponseStatus
+    public class FileResponseStatus
     {
+        public Response Status { get; set; }
+        public enum Response
+        {
+            Success,
+            Failure
+        }
     }
 }

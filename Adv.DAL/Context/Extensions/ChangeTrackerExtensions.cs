@@ -1,5 +1,5 @@
 ﻿using System;
-using Adv.DOMAIN.Common;
+using Adv.DAL.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
