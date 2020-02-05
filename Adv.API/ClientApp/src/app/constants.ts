@@ -10,6 +10,8 @@ export class Constants {
   //flat
   static flat = environment.webApi +  'flat'; 
   static getAllFlats = environment.webApi +  'flat/getAll';
+  static deleteFlat = environment.webApi +  'flat';
+
   //file
   static uploadFileUrl = environment.webApi + 'file';
   static deleteFileUrl = environment.webApi +  'file';

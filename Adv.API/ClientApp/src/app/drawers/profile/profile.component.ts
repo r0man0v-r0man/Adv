@@ -5,6 +5,7 @@ import { NzDrawerRef } from 'ng-zorro-antd';
 import { FlatModel } from 'src/app/models/flatModel';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/UserModel';
+import { FlatService } from 'src/app/services/flat.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,7 +21,8 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private drawerRef: NzDrawerRef,
-    private userService: UserService
+    private userService: UserService,
+    private flatService: FlatService
   ) { }
 
   ngOnInit() {
@@ -44,6 +46,14 @@ export class ProfileComponent implements OnInit {
       })
   };
   onDelete(item: FlatModel){
+    this.flatService.delete(item.id).subscribe(response => { 
+      console.log(response);
+    })
+  }
+  onSwitchVisible(item: FlatModel){
+    console.log(item.id);
+  }
+  onEdit(item: FlatModel){
     console.log(item.id);
   }
 }

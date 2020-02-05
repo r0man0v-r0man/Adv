@@ -48,6 +48,12 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok(true);
+        }
 
         [HttpPost]
         [Authorize]

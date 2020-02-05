@@ -11,6 +11,7 @@ export class FlatService {
   createFlatUrl: string = Constants.flat;
   flatsUrl: string = Constants.getAllFlats;
   flatUrl:string = Constants.flat;
+  deleteFlatUrl: string = Constants.deleteFlat;
 
   constructor(
     private httpService: HttpClient,
@@ -39,8 +40,8 @@ export class FlatService {
   createFlat(newFlat: FlatModel){
     return this.httpService.post<FlatModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
   }
-  delete(url: string, id: number){
-    return this.httpService.delete(url + '/' + id)
+  delete(id: number){
+    return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
 
 }
