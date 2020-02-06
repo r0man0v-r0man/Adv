@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Adv.BLL.Exceptions
+namespace Adv.DAL.Exceptions
 {
-    public class FlatNotFoundException : Exception
+    public sealed class FlatNotFoundException : Exception
     {
         public FlatNotFoundException()
         {

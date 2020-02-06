@@ -11,14 +11,16 @@ namespace Adv.DAL
     {
         public DataManager(
             IFlatRepository flatRepository,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IFileRepository fileRepository
             )
         {
             this.Flats = flatRepository;
             this.Users = userRepository;
+            this.Files = fileRepository;
         }
-        public IFlatRepository Flats { get; set; }
-        public IUserRepository Users { get; set; }
-
+        public IFlatRepository Flats { get; }
+        public IUserRepository Users { get; }
+        public IFileRepository Files { get; }
     }
 }

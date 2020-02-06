@@ -12,5 +12,12 @@ namespace Adv.BLL.Interfaces
         Task<FlatDTO> GetAsync(int id, CancellationToken ct);
         IAsyncEnumerable<FlatDTO> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct);
         Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct);
+        /// <summary>
+        /// delete flat with images
+        /// </summary>
+        /// <param name="flatId"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<bool> DeleteAsync(int flatId, CancellationToken ct);
     }
 }

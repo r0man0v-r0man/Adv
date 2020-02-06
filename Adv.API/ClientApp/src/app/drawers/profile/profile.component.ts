@@ -46,9 +46,19 @@ export class ProfileComponent implements OnInit {
       })
   };
   onDelete(item: FlatModel){
-    this.flatService.delete(item.id).subscribe(response => { 
-      console.log(response);
-    })
+    this.loading = true;
+    this.flatService.delete(item.id)
+      .subscribe(response => { 
+        if(response) {
+        let index = this.userFlats.findIndex(x=>x.id === item.id);
+          
+        if(index > -1) {
+         this.userFlats.splice(index, 1);
+        }
+        this.loading = false;
+        console.log(response);
+      }
+    });
   }
   onSwitchVisible(item: FlatModel){
     console.log(item.id);

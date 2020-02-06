@@ -38,6 +38,7 @@ namespace Adv.DAL
             services.AddTransient<IDataManager, DataManager>();
             services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IFileRepository), typeof(FileRepository));
 
             return services;
         }

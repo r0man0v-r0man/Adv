@@ -50,9 +50,19 @@ namespace Adv.API.Controllers
         }
         [HttpDelete("{id}")]
         [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, CancellationToken ct = default)
         {
-            return Ok(true);
+            try
+            {
+                var result = await _superManager.Flats.DeleteAsync(id, ct).ConfigureAwait(false);
+                return result ? Ok(result) : (IActionResult)BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
+            }
+           
         }
 
         [HttpPost]

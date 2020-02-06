@@ -29,7 +29,7 @@ namespace Adv.API.Controllers
             {
                 try
                 {
-                    var result = await _superManager.Files.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
+                    var result = await _superManager.Files.UploadAsync(file, ct).ConfigureAwait(false);
                     return CreatedAtAction(nameof(Post),
                         new FileModel
                         {
@@ -58,7 +58,7 @@ namespace Adv.API.Controllers
             }
 
             var result = await _superManager.Files
-                .CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+                .DeleteAsync(fileName).ConfigureAwait(false);
 
             return result ? Ok(result) : (IActionResult)BadRequest(result);
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Adv.BLL.Exceptions
+namespace Adv.DAL.Exceptions
 {
-    public class FlatBadCreateException : Exception
+    public sealed class FlatBadCreateException : Exception
     {
         public FlatBadCreateException()
         {

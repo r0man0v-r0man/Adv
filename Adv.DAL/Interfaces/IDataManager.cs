@@ -8,7 +8,8 @@ namespace Adv.DAL.Interfaces
 {
     public interface IDataManager
     {
-        IFlatRepository Flats { get; set; }
-        IUserRepository Users { get; set; }
+        IFlatRepository Flats { get; }
+        IUserRepository Users { get; }
+        IFileRepository Files { get; }
     }
 }

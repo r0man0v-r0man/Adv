@@ -1,5 +1,6 @@
 ﻿using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
+using Adv.DAL.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             await context.Flats.AddAsync(flat, ct).ConfigureAwait(false);
             var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
-            return result >= 0 ? flat : null;
+            return result >= 0 ? flat : throw new FlatBadCreateException($"Мы не смогли создать объявление");
         }
 
 
@@ -60,13 +61,22 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<Flat> GetByIdAsync(int flatId, CancellationToken ct)
         {
             using var context = contextFactory.GetAdvContext();
-
-            return await context.Flats.Include(x=>x.AppUser).AsNoTracking().FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
+            var result = await context.Flats.Include(x => x.AppUser).AsNoTracking().FirstOrDefaultAsync(x => x.Id == flatId, ct).ConfigureAwait(false);
+            return result ?? throw new FlatNotFoundException($"Мы не нашли объявления с номером {flatId}");
         }
 
-        public Task<bool> RemoveAsync(Flat flat)
+        public async Task<bool> RemoveAsync(Flat flat, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            using var context = contextFactory.GetAdvContext();
+            var result = context.Flats.Remove(flat);
+            switch (result.State)
+            {
+                case EntityState.Deleted:
+                    await context.SaveChangesAsync(ct).ConfigureAwait(false);
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public Task<bool> UpdateAsync(Flat flat)

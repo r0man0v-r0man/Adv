@@ -1,5 +1,6 @@
 ﻿using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
+using Adv.DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
@@ -15,77 +16,29 @@ namespace Adv.BLL.Services
 {
     public class FileService : IFileService
     {
-        private readonly IConfiguration _config;
-        private string AzureConnectionString { get; }
-        private string ContainerName { get; }
-        public FileService(IConfiguration configuration)
+        private readonly IDataManager dataManager;
+        public FileService(IDataManager dataManager)
         {
-            _config = configuration;
-            AzureConnectionString = _config.GetConnectionString("AzureStorageConnectionString");
-            ContainerName = "files";
+            this.dataManager = dataManager;
         }
-        public async Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct = default)
+        public async Task<bool> DeleteAsync(string fileName)
         {
-            var container = GetBlobContainer(AzureConnectionString, ContainerName);
-            if (await container.ExistsAsync().ConfigureAwait(false))
-            {
-                var blockBlob = container.GetBlockBlobReference(SetUniqueName(file));
-
-                await blockBlob.UploadFromStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
-
-                return blockBlob.Uri.ToString();
-            }
-            else
-            {
-                throw new BadCloudUploadException($"Загрузить файл {file.FileName} не получилось! Попробуйте еще раз");
-            }
-        }
-        /// <summary>
-        /// Получаем облачный контейнер
-        /// </summary>
-        /// <param name="azureConnectionString">Строка подключения</param>
-        /// <param name="containerName">Имя контейнера</param>
-        /// <returns></returns>
-        private CloudBlobContainer GetBlobContainer(string azureConnectionString, string containerName)
-        {
-            var storageAccount = CloudStorageAccount.Parse(azureConnectionString);
-
-            var blobClient = storageAccount.CreateCloudBlobClient();
-
-            return blobClient.GetContainerReference(containerName);
+            var result = await dataManager.Files.CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+            return result;
         }
 
-        public async Task<bool> CloudDeleteFileAsync(string fileName)
+        public async Task DeleteAsync(Dictionary<string, string> flatsImages, CancellationToken ct)
         {
-            try
+            foreach (var image in flatsImages)
             {
-                var container = GetBlobContainer(AzureConnectionString, ContainerName);
-                if (await container.ExistsAsync().ConfigureAwait(false))
-                {
-                    var file = container.GetBlobReference(fileName);
-                    if (await file.ExistsAsync().ConfigureAwait(false))
-                    {
-                        await file.DeleteAsync().ConfigureAwait(false);
-                    }
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-                throw;
+                await dataManager.Files.CloudDeleteFileAsync(image.Value).ConfigureAwait(false);
             }
         }
-        /// <summary>
-        /// Установка уникального имени для файла
-        /// </summary>
-        /// <param name="file">Файл для переименования</param>
-        /// <returns></returns>
-        private string SetUniqueName(IFormFile file)
+
+        public async Task<string> UploadAsync(IFormFile file, CancellationToken ct)
         {
-            var uniqueName = Guid.NewGuid().ToString();
-            var fileExtension = Path.GetExtension(file.FileName);
-            return string.Concat(uniqueName, fileExtension);
+            var result = await dataManager.Files.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
+            return result;
         }
     }
 }

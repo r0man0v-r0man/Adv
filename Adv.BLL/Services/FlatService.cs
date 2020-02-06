@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Entities;
 using System.Runtime.CompilerServices;
+using System.IO;
+using System.Linq;
 
 namespace Adv.BLL.Services
 {
@@ -28,10 +30,6 @@ namespace Adv.BLL.Services
         public async Task<FlatDTO> GetAsync(int flatId, CancellationToken ct)
         {
             var flat = await _dataManager.Flats.GetByIdAsync(flatId, ct).ConfigureAwait(false);
-            if (flat is null)
-            {
-                throw new FlatNotFoundException($"Мы не нашли объявления с номером {flatId}");
-            }
             return flat;
         }
 
@@ -60,14 +58,23 @@ namespace Adv.BLL.Services
             }
 
             var result = await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);
-            if (result is null)
+            
+            return result;
+        }
+
+        public async Task<bool> DeleteAsync(int flatId, CancellationToken ct)
+        {
+            FlatDTO flat = await _dataManager.Flats.GetByIdAsync(flatId, ct).ConfigureAwait(false);
+            var tasks = new List<Task<bool>>();
+
+            foreach (var image in flat.Images)
             {
-                throw new FlatBadCreateException($"Мы не смогли создать объявление {newFlat.Id}");
+                tasks.Add(_dataManager.Files.CloudDeleteFileAsync(Path.GetFileName(image.Value)));
             }
-            else
-            {
-                return result;
-            }
+            tasks.Add(_dataManager.Flats.RemoveAsync(flat, ct));
+            var result = await Task.WhenAll(tasks).ConfigureAwait(false);
+
+            return result.All(x => x == true) ? true : false;
         }
     }
 }

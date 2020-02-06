@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Adv.BLL.Exceptions
+namespace Adv.DAL.Exceptions
 {
-    public class BadCloudUploadException : Exception
+    public sealed class BadCloudUploadException : Exception
     {
         public BadCloudUploadException()
         {
