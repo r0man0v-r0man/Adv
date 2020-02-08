@@ -11,40 +11,45 @@ import { FlatService } from 'src/app/services/flat.service';
 export class FlatsComponent implements OnInit {
 
   flats: FlatModel[] = [];
-  loading = true;
-  pageNumber: number;
+  list: FlatModel[] = [];
+  loadingMore = false;
+  initLoading = true; // bug
+  pageNumber: number = 1;
   constructor(private flatService: FlatService) { }
 
   ngOnInit() {
     this.initHomePage();
   }
 
-  onScroll(){
-    if (this.pageNumber !== 1){
+  onLoadMore(){
+    this.loadingMore = true;
+    this.initLoading = true;
+
       this.flatService.getFlats(this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
             this.flats.push(response[i]);
           }
+          this.list = [...this.flats];
+          this.loadingMore = false;
+          this.initLoading = false;
+
+          this.pageNumber++;
         }
-      },
-      ()=>{},
-      ()=>{
-        this.pageNumber++;
+        console.log(this.pageNumber);
+        console.log(this.list);
       });
-    }
+    
   }
   initHomePage(){
-    this.pageNumber = 1;
     this.flatService.getFlats(this.pageNumber)
       .subscribe(flats => {
           this.flats = flats
-          this.loading = false;
-         },
-         ()=>{},
-         ()=>{
-           this.pageNumber++;
+          this.list = flats
+          this.initLoading = false;
+          this.pageNumber++;
+
          }
       )
   }

@@ -1,12 +1,47 @@
-
 <nz-layout>
   <app-navbar></app-navbar>
-  <nz-content class="outer-content">
-      
-      <nz-layout>
+  <nz-content class="outer-content">   
+    <nz-layout>
+      <nz-content>
+        <nz-list 
+        [nzDataSource]="list" 
+        [nzRenderItem]="flat" 
+        [nzLoading]="initLoading"
+        [nzLoadMore]="loadMore"
+        [nzGrid]="{ gutter: 16, span: 6 }">
+          <ng-template #flat let-item>
+            <nz-list-item 
+            [nzContent]="nzContent">
+              <ng-template #nzContent>
+                <nz-card  
+                    [nzCover]="flatCoverTpl"
+                    [nzExtra]="more"
+                    nzTitle="{{item.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
+                    <p>{{ item | address }}</p>
+                  </nz-card>
+                  <ng-template #flatCoverTpl >
+                    <div style="height: 160px; overflow: hidden;">
+                      <img src="{{ item.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
+                    </div>
+                  </ng-template>
+                  <ng-template #more>
+                    <a 
+                    [routerLink]="[item.id]"
+                    >Подробнее</a>
+                  </ng-template>
+              </ng-template>
+            </nz-list-item>
+          </ng-template>
+          <ng-template #loadMore>
+            <div class="loadmore">
+              <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+            </div>
+          </ng-template>
+        </nz-list>
 
-          <nz-content>
-            <div
+
+
+            <!-- <div
             class="search-results"
             infiniteScroll
             [infiniteScrollDistance]="2"
@@ -36,7 +71,7 @@
                 </div>
               </div>
             </div>
-        </div>
+        </div> -->
           </nz-content>
       </nz-layout>
   </nz-content>
