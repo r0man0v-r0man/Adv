@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FooterService } from 'src/app/services/footer.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a/'
-  constructor() { }
+  constructor(
+    public footerService: FooterService
+  ) { }
 
   ngOnInit() {
   }

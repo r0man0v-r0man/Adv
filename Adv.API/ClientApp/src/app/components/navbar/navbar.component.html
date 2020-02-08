@@ -1,5 +1,5 @@
-<ul nz-menu nzMode="horizontal" >
-    <li nz-menu-item nzSelected>
+<ul *ngIf="navService.visible" nz-menu nzMode="horizontal" >
+    <li nz-menu-item >
         <a [routerLink]="[ '/' ]" routerLinkActive="active">
             <i nz-icon nzType="home" nzTheme="outline"></i>
             halupa.by
@@ -10,7 +10,7 @@
             Квартиры
         </a>
     </li>
-    <li  style="float: right;">
+    <li  nz-menu-item >
         <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" style="margin-right: 8px;">
             <i nz-icon nzType="login" nzTheme="outline"></i>    
             Войти
@@ -21,6 +21,8 @@
             <i nz-icon nzType="user" nzTheme="outline"></i>    
             Кабинет
         </a>
+    </li>
+    <li nz-menu-item nzSelected='false'>
         <ng-container *ngIf="isLogedIn; then isLogedInButton else isNotLogedInButton"></ng-container>
         <ng-template #isLogedInButton>
             <button  nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">

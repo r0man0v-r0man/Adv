@@ -4,6 +4,8 @@ import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Constants } from 'src/app/constants';
 import { NzCarouselComponent } from 'ng-zorro-antd';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { FooterService } from 'src/app/services/footer.service';
 
 @Component({
   selector: 'app-flat-detail',
@@ -20,10 +22,15 @@ export class FlatDetailComponent implements OnInit {
   constructor(
     private flatService:FlatService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private navService: NavbarService,
+    private footerService: FooterService
+
   ) {  }
 
   ngOnInit() {
+    this.navService.show();
+    this.footerService.show();
     this.routeReUseStrategy();
     this.getFlat(this.getFlatIdFromRoute());
   }

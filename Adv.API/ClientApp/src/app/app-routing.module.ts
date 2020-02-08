@@ -27,33 +27,33 @@ const routes: Routes = [
 
   {
     path: 'login',
-    component: AppComponent,
-    children:[
-      {
-        path: '',
-        component: LoginComponent
-      }
-    ]
+    component: LoginComponent,
+    // children:[
+    //   {
+    //     path: '',
+    //     component: LoginComponent
+    //   }
+    // ]
   },
   {
     path: 'register',
-    component: AppComponent,
-    children:[
-      {
-        path: '',
-        component: RegisterComponent
-      }
-    ]
+    component: RegisterComponent,
+    // children:[
+    //   {
+    //     path: '',
+    //     component: RegisterComponent
+    //   }
+    // ]
   },
   {
     path: 'access-denied',
-    component: AppComponent,
-    children:[
-      {
-        path:'',
-        component: AccessDeniedComponent
-      }
-    ]
+    component: AccessDeniedComponent,
+    // children:[
+    //   {
+    //     path:'',
+    //     component: AccessDeniedComponent
+    //   }
+    // ]
   },
   {  
     path: '**', 

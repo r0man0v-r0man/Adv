@@ -7,6 +7,7 @@ import { FlatModel } from 'src/app/models/flatModel';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
+import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +21,8 @@ export class NavbarComponent implements OnInit {
     private flatService: FlatService,
     private router: Router, 
     private authService: AuthService,
-    private drawerService: NzDrawerService
+    private drawerService: NzDrawerService,
+    public navService: NavbarService
     ) { }
   ngOnInit() {
     this.isUserLogenIn();

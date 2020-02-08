@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from 'src/app/models/UserModel';
 import { AuthService } from 'src/app/services/auth.service';
-import { Constants } from 'src/app/constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserWarning } from 'src/app/app-errors/userWarning';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { FooterService } from 'src/app/services/footer.service';
 
 @Component({
   selector: 'app-login',
@@ -19,10 +20,14 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private navService: NavbarService,
+    private footerService: FooterService
     ) { }
 
   ngOnInit() {
+    this.navService.hide();
+    this.footerService.hide();
     this.initializeLoginForm();
   }
 

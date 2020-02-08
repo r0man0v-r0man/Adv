@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { UserNameValidators } from 'src/app/validators/userName.validators';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserWarning } from 'src/app/app-errors/userWarning';
+import { NavbarService } from 'src/app/services/navbar.service';
+import { FooterService } from 'src/app/services/footer.service';
 
 @Component({
   selector: 'app-register',
@@ -19,9 +21,15 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private navService: NavbarService,
+    private footerService: FooterService
+
+    ) { }
 
   ngOnInit() {
+    this.navService.hide();
+    this.footerService.hide();
     this.initializeRegisiterForm();
   }
 
