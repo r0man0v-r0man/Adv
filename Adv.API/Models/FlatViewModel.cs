@@ -22,6 +22,13 @@ namespace Adv.API.Models
         public int NumberOfSubHouse { get; set; }
         public int NumberOfFlat { get; set; }
         public string UserId { get; set; }
+        public byte Rooms { get; set; }
+        public bool Furniture { get; set; }
+        public bool Refrigerator { get; set; }
+        public bool MicrowaveOven { get; set; }
+        public bool Internet { get; set; }
+        public bool WashingMachine { get; set; }
+        public Duration.RentTime Duration { get; set; }
 
         /// <summary>
         /// Mapping to FlatViewModel
@@ -47,7 +54,14 @@ namespace Adv.API.Models
             NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], CultureInfo.GetCultureInfo(1049)),
             NumberOfFlat = Convert.ToInt32(flat.Address["flat"], CultureInfo.GetCultureInfo(1049)),
             Created = flat.Created,
-            UserId = flat.UserId
+            UserId = flat.UserId,
+            Rooms = flat.Rooms,
+            Duration = flat.Duration,
+            Furniture = flat.Furniture,
+            Internet = flat.Internet,
+            MicrowaveOven = flat.MicrowaveOven,
+            Refrigerator = flat.Refrigerator,
+            WashingMachine = flat.WashingMachine
         };
         /// <summary>
         /// Mapping to FlatDTO model
@@ -69,7 +83,14 @@ namespace Adv.API.Models
                 ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
                 ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
             },
-            UserId = flat.UserId
+            UserId = flat.UserId,
+            Rooms = flat.Rooms,
+            Duration = flat.Duration,
+            Furniture = flat.Furniture,
+            Internet = flat.Internet,
+            MicrowaveOven = flat.MicrowaveOven,
+            Refrigerator = flat.Refrigerator,
+            WashingMachine = flat.WashingMachine
         };
     }
 }

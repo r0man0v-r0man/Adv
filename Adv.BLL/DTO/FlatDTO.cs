@@ -16,6 +16,13 @@ namespace Adv.BLL.DTO
         public Dictionary<string, string> Images { get; set; }
         public Dictionary<string, string> Address { get; set; }
         public string UserId { get; set; }
+        public byte Rooms { get; set; }
+        public bool Furniture { get; set; }
+        public bool Refrigerator { get; set; }
+        public bool MicrowaveOven { get; set; }
+        public bool Internet { get; set; }
+        public bool WashingMachine { get; set; }
+        public Duration.RentTime Duration { get; set; }
         /// <summary>
         /// Mapping to DTO model
         /// </summary>
