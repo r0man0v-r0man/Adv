@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
-    public class UserRepository : IUserRepository
+    public sealed class UserRepository : IUserRepository
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IConfiguration configuration;
