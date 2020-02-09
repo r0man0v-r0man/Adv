@@ -47,6 +47,7 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
 
             await foreach (var flat in context.Flats.Include(x=>x.AppUser).AsNoTracking()
+                                                      .Where(prop => prop.IsActive == true)
                                                       .OrderByDescending(property => property.Created)
                                                       .Skip(skip)
                                                       .Take(size)
