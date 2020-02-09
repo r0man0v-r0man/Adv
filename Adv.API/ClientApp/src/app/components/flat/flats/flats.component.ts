@@ -16,6 +16,8 @@ export class FlatsComponent implements OnInit {
   list: FlatModel[] = [];
   loadingMore = false;
   initLoading = true; // bug
+  /**Show or hide loadMore button */
+  isShowMoreButton: boolean = true;
   pageNumber: number = 1;
   constructor(
     private flatService: FlatService,
@@ -45,6 +47,11 @@ export class FlatsComponent implements OnInit {
           this.initLoading = false;
 
           this.pageNumber++;
+        }
+        if(response && response.length === 0){
+          this.isShowMoreButton = false;
+          this.loadingMore = true;
+          this.initLoading = false;
         }
         console.log(this.pageNumber);
         console.log(this.list);

@@ -63,4 +63,8 @@ export class ProfileComponent implements OnInit {
   onEdit(item: FlatModel){
     console.log(item.id);
   }
+  onMove(item: FlatModel){
+    this.router.navigate(['flats/', item.id]);
+    this.drawerRef.close();
+  }
 }

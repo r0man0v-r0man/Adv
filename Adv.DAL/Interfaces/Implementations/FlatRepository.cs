@@ -46,14 +46,12 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
 
-            await foreach (var flat in context.Flats.Include(x=>x.AppUser).AsNoTracking()
+            var flats = context.Flats.Include(x => x.AppUser).AsNoTracking()
                                                       .Where(prop => prop.IsActive == true)
                                                       .OrderByDescending(property => property.Created)
                                                       .Skip(skip)
-                                                      .Take(size)
-                                                      .AsAsyncEnumerable()
-                                                      .WithCancellation(ct)
-                                                      .ConfigureAwait(false))
+                                                      .Take(size);
+            await foreach (var flat in flats.AsAsyncEnumerable().ConfigureAwait(false))
             {
                 yield return flat;
             }

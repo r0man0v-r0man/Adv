@@ -23,7 +23,11 @@
         [nzContent]="itemDetail" 
         nzNoFlex>
         </li>
-        <ng-template #itemDetail>{{ item | address : 'full' }}</ng-template>
+        <ng-template #itemDetail>
+          <a (click)="onMove(item)">
+            {{ item | address : 'full' }}
+          </a>
+        </ng-template>
         <ng-template #options>    
             <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
               <i nz-icon nzType="ellipsis"></i>

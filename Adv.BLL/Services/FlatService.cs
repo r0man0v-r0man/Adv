@@ -44,6 +44,7 @@ namespace Adv.BLL.Services
         public async IAsyncEnumerable<FlatDTO> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
         {
             var flats =  _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+
             await foreach (var flat in flats.WithCancellation(ct))
             {
                 yield return flat;

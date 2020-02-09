@@ -11,10 +11,10 @@ namespace Adv.BLL
     {
         public static IServiceCollection AddBll(this IServiceCollection services)
         {
-            services.AddScoped<ISuperManager, SuperManager>();
-            services.AddScoped<IFlatService, FlatService>();
-            services.AddScoped<IFileService, FileService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<ISuperManager, SuperManager>();
+            services.AddTransient<IFlatService, FlatService>();
+            services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
 
