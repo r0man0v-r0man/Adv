@@ -20,15 +20,12 @@ export class NavbarComponent implements OnInit {
     private modalService: NzModalService, 
     private flatService: FlatService,
     private router: Router, 
-    private authService: AuthService,
+    public authService: AuthService,
     private drawerService: NzDrawerService,
     public navService: NavbarService
     ) { }
   ngOnInit() {
-    this.isUserLogenIn();
-  }
-  isUserLogenIn(){
-    this.isLogedIn = this.authService.isLogedIn();
+    
   }
 
   goToDetails(id: number){

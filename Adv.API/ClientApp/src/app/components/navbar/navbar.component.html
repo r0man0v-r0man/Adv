@@ -11,19 +11,7 @@
         </a>
     </li>
     <li  nz-menu-item >
-        <a *ngIf="!isLogedIn" [routerLink]="[ '/login' ]" style="margin-right: 8px;">
-            <i nz-icon nzType="login" nzTheme="outline"></i>    
-            Войти
-        </a>
-        <a *ngIf="isLogedIn"
-        (click)="openProfileDrawer()"
-        style="margin-right: 8px;">
-            <i nz-icon nzType="user" nzTheme="outline"></i>    
-            Кабинет
-        </a>
-    </li>
-    <li nz-menu-item nzSelected='false'>
-        <ng-container *ngIf="isLogedIn; then isLogedInButton else isNotLogedInButton"></ng-container>
+        <ng-container *ngIf="authService.isLogedIn(); then isLogedInButton else isNotLogedInButton"></ng-container>
         <ng-template #isLogedInButton>
             <button  nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
                 <i nz-icon nzType="plus-circle"></i>
@@ -31,13 +19,29 @@
             </button>
         </ng-template>
         <ng-template #isNotLogedInButton>
-            <button *ngIf="!isLogedIn" nz-button 
+            <button nz-button 
             nzType="primary" nzSize="large" nzShape="round" (click)="registerThenAddAdvert()">
                 <i nz-icon nzType="plus-circle"></i>
                 Добавить объявление
             </button>
         </ng-template>
+    </li>
+    <li nz-menu-item >
+    
 
-
+        <ng-container *ngIf="authService.isLogedIn(); then cabinet else enter"></ng-container>
+        <ng-template #enter>
+            <a [routerLink]="[ '/login' ]" style="margin-right: 8px;">
+                <i nz-icon nzType="login" nzTheme="outline"></i>    
+                Войти
+            </a>
+        </ng-template>
+        <ng-template #cabinet>
+            <a (click)="openProfileDrawer()"
+            style="margin-right: 8px;">
+                <i nz-icon nzType="user" nzTheme="outline"></i>    
+                Кабинет
+            </a>
+        </ng-template>
     </li>
 </ul>

@@ -60,9 +60,6 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  onSwitchVisible(item: FlatModel){
-    console.log(item.id);
-  }
   onEdit(item: FlatModel){
     console.log(item.id);
   }
