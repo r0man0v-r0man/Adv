@@ -41,14 +41,11 @@ namespace Adv.BLL.Services
         /// <param name="skip"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async IAsyncEnumerable<FlatDTO> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
+        public async Task<List<FlatDTO>> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct)
         {
-            var flats =  _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+            var flats = await _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
 
-            await foreach (var flat in flats.WithCancellation(ct))
-            {
-                yield return flat;
-            }
+            return flats.Select(flat => (FlatDTO) flat).ToList();
         }
 
         public async Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct)

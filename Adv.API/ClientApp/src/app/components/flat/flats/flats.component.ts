@@ -49,8 +49,9 @@ export class FlatsComponent implements OnInit {
           this.pageNumber++;
         }
         if(response && response.length === 0){
+
           this.isShowMoreButton = false;
-          this.loadingMore = true;
+          this.loadingMore = false;
           this.initLoading = false;
         }
         console.log(this.pageNumber);

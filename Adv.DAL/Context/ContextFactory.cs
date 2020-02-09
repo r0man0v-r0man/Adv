@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Adv.DAL.Context
 {
-    public sealed class ContextFactory : IContextFactory
+    public class ContextFactory : IContextFactory
     {
         public ContextFactory(IConfiguration configuration)
         {
@@ -17,10 +17,6 @@ namespace Adv.DAL.Context
         }
 
         public IConfiguration Configuration { get; }
-
-        public void Dispose()
-        {
-        }
 
         public IAdvContext GetAdvContext()
         {

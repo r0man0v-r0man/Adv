@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Adv.DAL.Context.Interfaces
 {
-    public interface IContextFactory : IDisposable
+    public interface IContextFactory 
     {
         IAdvContext GetAdvContext();
     }

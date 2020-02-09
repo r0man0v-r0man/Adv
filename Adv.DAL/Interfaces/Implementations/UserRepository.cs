@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
-    public sealed class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly UserManager<AppUser> userManager;
         private readonly IConfiguration configuration;
@@ -62,10 +62,6 @@ namespace Adv.DAL.Interfaces.Implementations
             return tokenJson;
         }
 
-        public void Dispose()
-        {
-            userManager.Dispose();
-        }
 
         public async Task<AppUser> FindByIdAsync(string currentUserId)
         {

@@ -10,9 +10,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Adv.DAL.Context
 {
     // IdentityDbCOntext contains all the AppUser tables
-    public class 
-
-        AdvContext : IdentityDbContext<AppUser>, IAdvContext
+    public class AdvContext : IdentityDbContext<AppUser>, IAdvContext
     {
         //
         public DbSet<Flat> Flats { get; set; }
@@ -34,5 +32,6 @@ namespace Adv.DAL.Context
             ChangeTracker.ApplyAuditableInformation();
             return await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
         }
+
     }
 }

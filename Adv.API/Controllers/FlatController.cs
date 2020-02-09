@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,15 +25,26 @@ namespace Adv.API.Controllers
         }
 
         [HttpGet("getAll/{pageNumber}")]
-        public async IAsyncEnumerable<FlatViewModel> GetAll(int pageNumber, [EnumeratorCancellation] CancellationToken ct = default)
+        public async Task<ActionResult<List<FlatViewModel>>> GetAll(int pageNumber, CancellationToken ct = default)
         {
+
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
-            var flats = _superManager.Flats.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
-            await foreach (FlatViewModel flat in flats.WithCancellation(ct))
+            try
             {
-                yield return flat;
+                var flats = await _superManager.Flats.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
+                return flats.Select(flatDto => (FlatViewModel)flatDto).ToList();
+
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+                throw;
+            }
+
+
+
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<FlatViewModel>> Get(int id, CancellationToken ct = default)
@@ -44,6 +56,7 @@ namespace Adv.API.Controllers
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
                 throw;
             }
@@ -59,10 +72,12 @@ namespace Adv.API.Controllers
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+
                 return BadRequest(ex.Message);
                 throw;
             }
-           
+
         }
 
         [HttpPost]
@@ -83,10 +98,12 @@ namespace Adv.API.Controllers
                     {
                         return BadRequest();
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
+
                     return BadRequest(ex.Message);
                     throw;
                 }
@@ -96,5 +113,5 @@ namespace Adv.API.Controllers
         }
     }
 
-    
+
 }

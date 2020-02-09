@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
-    public sealed class FlatRepository : IFlatRepository
+    public class FlatRepository : IFlatRepository
     {
         private readonly IContextFactory contextFactory;
         public FlatRepository(IContextFactory contextFactory)
@@ -33,28 +33,17 @@ namespace Adv.DAL.Interfaces.Implementations
             throw new NotImplementedException();
         }
 
-        private async IAsyncEnumerable<Flat> GetAllAsync([EnumeratorCancellation] CancellationToken ct = default)
-        {
-            using var context = contextFactory.GetAdvContext();
-            await foreach (var Flat in context.Flats.AsNoTracking().AsAsyncEnumerable().WithCancellation(ct).ConfigureAwait(false))
-            {
-                yield return Flat;
-            }
-        }
 
-        public async IAsyncEnumerable<Flat> GetAllAsync(int pageNumber, byte size, int skip, [EnumeratorCancellation] CancellationToken ct)
+        public async Task<IEnumerable<Flat>> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct)
         {
             using var context = contextFactory.GetAdvContext();
 
-            var flats = context.Flats.Include(x => x.AppUser).AsNoTracking()
+            var flats = await context.Flats.Include(x => x.AppUser).AsNoTracking()
                                                       .Where(prop => prop.IsActive == true)
                                                       .OrderByDescending(property => property.Created)
                                                       .Skip(skip)
-                                                      .Take(size);
-            await foreach (var flat in flats.AsAsyncEnumerable().ConfigureAwait(false))
-            {
-                yield return flat;
-            }
+                                                      .Take(size).ToListAsync().ConfigureAwait(false);
+            return flats;
         }
 
         public async Task<Flat> GetByIdAsync(int flatId, CancellationToken ct)
@@ -81,11 +70,6 @@ namespace Adv.DAL.Interfaces.Implementations
         public Task<bool> UpdateAsync(Flat flat)
         {
             throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            contextFactory.Dispose();
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Adv.DAL
             {
                 options.UseSqlServer(connection);
             });
-            services.AddSingleton<IContextFactory, ContextFactory>();
+            services.AddTransient<IContextFactory, ContextFactory>();
 
             services.Configure<PasswordHasherOptions>(options =>
             {

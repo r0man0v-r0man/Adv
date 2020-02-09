@@ -10,7 +10,7 @@ namespace Adv.BLL.Interfaces
     public interface IFlatService
     {
         Task<FlatDTO> GetAsync(int id, CancellationToken ct);
-        IAsyncEnumerable<FlatDTO> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct);
+        Task<List<FlatDTO>> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct);
         Task<FlatDTO> CreateAsync(FlatDTO newFlat, CancellationToken ct);
         /// <summary>
         /// delete flat with images

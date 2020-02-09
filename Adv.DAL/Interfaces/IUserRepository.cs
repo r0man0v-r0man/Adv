@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository 
     {
         /// <summary>
         /// Create user when register

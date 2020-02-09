@@ -59,7 +59,6 @@ namespace Adv.API
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
             return services;

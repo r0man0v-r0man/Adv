@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
-    public sealed class FileRepository : IFileRepository
+    public class FileRepository : IFileRepository
     {
         private readonly IConfiguration _config;
         private string AzureConnectionString { get; }
@@ -82,8 +82,5 @@ namespace Adv.DAL.Interfaces.Implementations
             return string.Concat(uniqueName, fileExtension);
         }
 
-        public void Dispose()
-        {
-        }
     }
 }
