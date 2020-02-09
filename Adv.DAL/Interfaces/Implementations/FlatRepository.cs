@@ -85,6 +85,7 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public void Dispose()
         {
+            contextFactory.Dispose();
         }
     }
 }

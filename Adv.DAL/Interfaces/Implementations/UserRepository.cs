@@ -64,6 +64,7 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public void Dispose()
         {
+            userManager.Dispose();
         }
 
         public async Task<AppUser> FindByIdAsync(string currentUserId)
