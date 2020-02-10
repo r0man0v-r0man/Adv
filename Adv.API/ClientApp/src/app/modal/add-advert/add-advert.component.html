@@ -22,12 +22,19 @@ nz-form
     <p class="ant-upload-text">Загрузите изображение</p>
 </nz-upload>
 <input nz-input type="hidden" formControlName="files">
+<nz-divider [nzText]="cityStreet">
+    <ng-template #cityStreet>
+        Город, улица
+    </ng-template>
+</nz-divider>
+  
 <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="12">
         <nz-form-item >
+            <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
             <nz-form-control 
             nzHasFeedback
-            nzErrorTip="Выберите район!">
+            nzErrorTip="Выберите город!">
                 <nz-select 
                 [(ngModel)]="selectedCity"
                 formControlName="city"
@@ -45,6 +52,7 @@ nz-form
     </div>
     <div nz-col [nzSpan]="12">
         <nz-form-item>
+            <nz-form-label nzRequired nzFor="street">Укажите улицу</nz-form-label>
             <nz-form-control>
                     <nz-input-group [nzSuffix]="suffixTemplate" [nzSize]="'large'">
                         <input 
@@ -52,7 +60,7 @@ nz-form
                         nz-input 
                         [(ngModel)]="street" 
                         formControlName="street"
-                        placeholder="Улица" />
+                        placeholder="Название" />
                       </nz-input-group>
                       <ng-template #suffixTemplate
                         ><i
@@ -69,9 +77,16 @@ nz-form
         </nz-form-item>
     </div>
 </div>
+<nz-divider [nzText]="house">
+    <ng-template #house>
+        Дом
+    </ng-template>
+</nz-divider>
+  
 <div nz-row [nzGutter]="24">
     <div nz-col [nzSpan]="6">
             <nz-form-item>
+                <nz-form-label nzRequired nzFor="numberOfHouse">Дом</nz-form-label>
                 <nz-form-control
                 nzHasFeedback
                 nzErrorTip="Укажите номер">
@@ -79,7 +94,7 @@ nz-form
                     [(ngModel)]="numberOfHouse"
                     [nzSize]="'large'"
                     formControlName="numberOfHouse"
-                    nzPlaceHolder="Дом"
+                    nzPlaceHolder="№"
                     [nzMin]="1"
                     [nzMax]="1000"
                     [nzStep]="1"
@@ -90,12 +105,13 @@ nz-form
     </div>
     <div nz-col [nzSpan]="6">
         <nz-form-item>
+            <nz-form-label nzFor="numberOfHouseCourpus">Корпус</nz-form-label>
             <nz-form-control>
                     <nz-input-number
                     [(ngModel)]="numberOfHouseCourpus"
                     [nzSize]="'large'"
                     formControlName="numberOfHouseCourpus"
-                    nzPlaceHolder="Корпус"
+                    nzPlaceHolder="№"
                     [nzMin]="1"
                     [nzMax]="1000"
                     [nzStep]="1"
@@ -106,6 +122,7 @@ nz-form
     </div>
     <div nz-col [nzSpan]="6">
         <nz-form-item>
+            <nz-form-label nzFor="numberOfSubHouse">Подъезд</nz-form-label>
             <nz-form-control
             nzHasFeedback
             nzErrorTip="Укажите номер">
@@ -113,7 +130,7 @@ nz-form
                     [(ngModel)]="numberOfSubHouse"
                     [nzSize]="'large'"
                     formControlName="numberOfSubHouse"
-                    nzPlaceHolder="Подъезд"
+                    nzPlaceHolder="№"
                     [nzMin]="1"
                     [nzMax]="1000"
                     [nzStep]="1"
@@ -124,6 +141,7 @@ nz-form
     </div>
     <div nz-col [nzSpan]="6">
         <nz-form-item>
+            <nz-form-label nzRequired nzFor="numberOfFlat">Квартира</nz-form-label>
             <nz-form-control
             nzHasFeedback
             nzErrorTip="Укажите номер">
@@ -131,7 +149,7 @@ nz-form
                     [(ngModel)]="numberOfFlat"
                     [nzSize]="'large'"
                     formControlName="numberOfFlat"
-                    nzPlaceHolder="Квартира"
+                    nzPlaceHolder="№"
                     [nzMin]="1"
                     [nzMax]="1000"
                     [nzStep]="1"
@@ -141,25 +159,39 @@ nz-form
         </nz-form-item>
     </div>
 </div>
-<nz-form-item>
-    <nz-form-control 
-    nzHasFeedback 
-    nzErrorTip="Укажите цену!">
-        <nz-input-number
-        [(ngModel)]="price"
-        [nzSize]="'large'"
-        formControlName="price"
-        [nzPlaceHolder]="100"
-        [nzMin]="10"
-        [nzMax]="10000"
-        [nzStep]="10"
-        [nzFormatter]="formatterDollar"
-        [nzParser]="parserDollar"
-        [nzId]="price"
-        ></nz-input-number>
-    </nz-form-control>
-</nz-form-item>
+<div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="18">
+        <nz-divider [nzText]="comfort">
+            <ng-template #comfort>
+                Удобства
+            </ng-template>
+        </nz-divider>
+    </div>
+    <div nz-col [nzSpan]="6" >
+        <nz-form-item>
+            <nz-form-label  nzRequired nzFor="price">Цена</nz-form-label>
+            <nz-form-control 
+            nzHasFeedback 
+            nzErrorTip="Укажите цену!">
+                <nz-input-number
+                [(ngModel)]="price"
+                [nzSize]="'large'"
+                formControlName="price"
+                [nzPlaceHolder]="100"
+                [nzMin]="10"
+                [nzMax]="10000"
+                [nzStep]="10"
+                [nzFormatter]="formatterDollar"
+                [nzParser]="parserDollar"
+                [nzId]="price"
+                ></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+</div>
+
     <nz-form-item >
+    <nz-form-label nzRequired nzFor="description">Описание</nz-form-label>
         <nz-form-control
         nzHasFeedback 
         [nzErrorTip]="descriptionErrorTpl">

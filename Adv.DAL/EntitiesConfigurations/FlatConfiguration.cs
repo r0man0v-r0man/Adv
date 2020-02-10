@@ -36,6 +36,30 @@ namespace Adv.DAL.EntitiesConfigurations
                 .HasOne(prop => prop.AppUser)
                 .WithMany(prop => prop.Flats)
                 .HasForeignKey(prop => prop.AppUserId);
+            builder
+                .Property(prop => prop.Rooms)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Furniture)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Refrigerator)
+                .IsRequired();
+            builder
+                .Property(prop => prop.MicrowaveOven)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Internet)
+                .IsRequired();
+            builder
+                .Property(prop => prop.WashingMachine)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Duration)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Floor)
+                .IsRequired();
         }
     }
 }

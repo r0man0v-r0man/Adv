@@ -1,5 +1,4 @@
-﻿using Adv.API.Models.Enums;
-using Adv.API.Models.Files;
+﻿using Adv.API.Models.Files;
 using Adv.BLL.DTO;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ namespace Adv.API.Models
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public Cities.CityName City { get; set; }
+        public int City { get; set; }
         public bool IsActive { get; set; }
         public decimal Price { get; set; }
         public List<FileModel> Files { get; set; }
@@ -28,7 +27,9 @@ namespace Adv.API.Models
         public bool MicrowaveOven { get; set; }
         public bool Internet { get; set; }
         public bool WashingMachine { get; set; }
-        public Duration.RentTime Duration { get; set; }
+        public byte Duration { get; set; }
+        public int Floor { get; set; }
+        public int? AllFloor { get; set; }
 
         /// <summary>
         /// Mapping to FlatViewModel
@@ -61,7 +62,9 @@ namespace Adv.API.Models
             Internet = flat.Internet,
             MicrowaveOven = flat.MicrowaveOven,
             Refrigerator = flat.Refrigerator,
-            WashingMachine = flat.WashingMachine
+            WashingMachine = flat.WashingMachine,
+            Floor = flat.Floor,
+            AllFloor = flat.AllFloor
         };
         /// <summary>
         /// Mapping to FlatDTO model
@@ -90,7 +93,9 @@ namespace Adv.API.Models
             Internet = flat.Internet,
             MicrowaveOven = flat.MicrowaveOven,
             Refrigerator = flat.Refrigerator,
-            WashingMachine = flat.WashingMachine
+            WashingMachine = flat.WashingMachine,
+            Floor = flat.Floor,
+            AllFloor = flat.AllFloor
         };
     }
 }

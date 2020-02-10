@@ -25,7 +25,7 @@ export class AddAdvertComponent implements OnInit {
   maxFileSize = 3;
   /** Selected City, default district is: 0 */
   selectedCity: number = 0;
-  /** Array of districts */
+  /** Array of cities */
   listOfCities: Array<{ label: string; value: number}> = [];
   /** Flat's price, default is: 200 */
   price: number = 200;
@@ -43,6 +43,24 @@ export class AddAdvertComponent implements OnInit {
   numberOfFlat: number;
   /** city */
   city: string;
+  /** count of rooms */
+  rooms: number;
+  /** duration long or short */
+  duration:number;
+  /** exist or not */
+  furniture: boolean;
+  /** exist or not */
+  refrigerator: boolean;
+  /** exist or not */
+  microwaveOven: boolean;
+  /** exist or not */
+  internet:boolean;
+  /** exist or not */
+  washingMachine:boolean;
+  /** flat floor */
+  floor: number;
+  /** Count all floor of house */
+  allFloor?: number; 
 
   form: FormGroup;
   fileList : UploadFile[] = [];

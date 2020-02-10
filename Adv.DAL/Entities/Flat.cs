@@ -18,9 +18,23 @@ namespace Adv.DAL.Entities
         /// Street + house + corpus + subHouse + flat(flatNumber)
         /// </summary>
         public string Address { get; set; }
-
         public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+        /// <summary>
+        /// Count of room
+        /// </summary>
+        public byte Rooms { get; set; }
+        public bool Furniture { get; set; }
+        public bool Refrigerator { get; set; }
+        public bool MicrowaveOven { get; set; }
+        public bool Internet { get; set; }
+        public bool WashingMachine { get; set; }
+        /// <summary>
+        /// Duration long -0, short -1
+        /// </summary>
+        public Duration.RentTime Duration { get; set; }
+        public int Floor { get; set; }
+        public int? AllFloor { get; set; }
     }
 
 }
