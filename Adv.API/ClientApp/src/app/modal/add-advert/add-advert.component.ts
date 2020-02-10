@@ -48,15 +48,15 @@ export class AddAdvertComponent implements OnInit {
   /** duration long or short */
   duration:number;
   /** exist or not */
-  furniture: boolean;
+  furniture: boolean = false;
   /** exist or not */
-  refrigerator: boolean;
+  refrigerator: boolean = false;
   /** exist or not */
-  microwaveOven: boolean;
+  microwaveOven: boolean = false;
   /** exist or not */
-  internet:boolean;
+  internet:boolean = false;
   /** exist or not */
-  washingMachine:boolean;
+  washingMachine:boolean = false;
   /** flat floor */
   floor: number;
   /** Count all floor of house */
@@ -112,7 +112,14 @@ export class AddAdvertComponent implements OnInit {
       numberOfHouse: [null, [Validators.required]],
       numberOfHouseCourpus: [this.numberOfHouseCourpus],
       numberOfSubHouse: [ this.numberOfSubHouse],
-      numberOfFlat: [this.numberOfFlat, [Validators.required]]
+      numberOfFlat: [this.numberOfFlat, [Validators.required]],
+      floor: [this.floor, [Validators.required]],
+      allFloor: [this.allFloor, [Validators.required]],
+      furniture: [this.furniture],
+      refrigerator: [this.refrigerator],
+      microwaveOven: [this.microwaveOven],
+      internet: [this.internet],
+      washingMachine: [this.washingMachine]
     });
   }
   /**

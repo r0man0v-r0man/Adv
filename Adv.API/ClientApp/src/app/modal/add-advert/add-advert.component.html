@@ -1,7 +1,7 @@
 <form 
 nz-form 
 [formGroup]="form" 
-[nzLayout]="'horizontal'"
+nzLayout="vertical"
 >
 <nz-upload
     nzAction="{{uploadUrl}}"
@@ -28,7 +28,7 @@ nz-form
     </ng-template>
 </nz-divider>
   
-<div nz-row [nzGutter]="24">
+<div nz-row [nzGutter]="16">
     <div nz-col [nzSpan]="12">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
@@ -82,15 +82,14 @@ nz-form
         Дом
     </ng-template>
 </nz-divider>
-  
-<div nz-row [nzGutter]="24">
+<div nz-row [nzGutter]="16" >
     <div nz-col [nzSpan]="6">
-            <nz-form-item>
+            <nz-form-item >
                 <nz-form-label nzRequired nzFor="numberOfHouse">Дом</nz-form-label>
                 <nz-form-control
                 nzHasFeedback
                 nzErrorTip="Укажите номер">
-                    <nz-input-number
+                    <nz-input-number style="width: 100%;"
                     [(ngModel)]="numberOfHouse"
                     [nzSize]="'large'"
                     formControlName="numberOfHouse"
@@ -107,7 +106,7 @@ nz-form
         <nz-form-item>
             <nz-form-label nzFor="numberOfHouseCourpus">Корпус</nz-form-label>
             <nz-form-control>
-                    <nz-input-number
+                    <nz-input-number style="width: 100%;"
                     [(ngModel)]="numberOfHouseCourpus"
                     [nzSize]="'large'"
                     formControlName="numberOfHouseCourpus"
@@ -126,7 +125,7 @@ nz-form
             <nz-form-control
             nzHasFeedback
             nzErrorTip="Укажите номер">
-                    <nz-input-number
+                    <nz-input-number style="width: 100%;"
                     [(ngModel)]="numberOfSubHouse"
                     [nzSize]="'large'"
                     formControlName="numberOfSubHouse"
@@ -145,7 +144,7 @@ nz-form
             <nz-form-control
             nzHasFeedback
             nzErrorTip="Укажите номер">
-                    <nz-input-number
+                    <nz-input-number style="width: 100%;"
                     [(ngModel)]="numberOfFlat"
                     [nzSize]="'large'"
                     formControlName="numberOfFlat"
@@ -159,21 +158,101 @@ nz-form
         </nz-form-item>
     </div>
 </div>
-<div nz-row [nzGutter]="24">
-    <div nz-col [nzSpan]="18">
-        <nz-divider [nzText]="comfort">
-            <ng-template #comfort>
-                Удобства
-            </ng-template>
-        </nz-divider>
+<div nz-row nzGutter="16">
+    <div nz-col nzSpan="6">
+        <nz-form-item >
+            <nz-form-label nzRequired nzFor="floor">Этаж</nz-form-label>
+            <nz-form-control 
+            nzHasFeedback
+            nzErrorTip="Укажите этаж">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="floor"
+                    [nzSize]="'large'"
+                    formControlName="floor"
+                    nzPlaceHolder="№"
+                    [nzMin]="1"
+                    [nzMax]="1000"
+                    [nzStep]="1"
+                    [nzId]="floor"
+                    ></nz-input-number>
+                </nz-form-control>
+        </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6" >
+    <div nz-col nzSpan="6">
+        <nz-form-item >
+            <nz-form-label nzRequired nzFor="allFloor">Этажей всего</nz-form-label>
+            <nz-form-control
+            nzHasFeedback
+            nzErrorTip="Сколько этажей в доме?">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="allFloor"
+                    [nzSize]="'large'"
+                    formControlName="allFloor"
+                    nzPlaceHolder="№"
+                    [nzMin]="1"
+                    [nzMax]="1000"
+                    [nzStep]="1"
+                    [nzId]="allFloor"
+                    ></nz-input-number>
+                </nz-form-control>
+        </nz-form-item>
+    </div>
+</div>
+<nz-divider [nzText]="comfort">
+    <ng-template #comfort>
+        Удобства
+    </ng-template>
+</nz-divider>
+<div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="6">
+        <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="furniture">Мебель</label>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="8">
+        <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="refrigerator">Холодильник</label>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="10">
+        <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="microwaveOven">Микроволновая печь</label>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="6">
+        <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="internet">Интернет</label>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="10">
+        <nz-form-item>
+            <nz-form-control>
+              <label nz-checkbox formControlName="washingMachine">Стиральная машина</label>
+            </nz-form-control>
+          </nz-form-item>
+    </div>
+</div>
+<nz-divider [nzText]="priceSector">
+    <ng-template #priceSector>
+        Стоимость
+    </ng-template>
+</nz-divider>
+<div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="12" >
         <nz-form-item>
             <nz-form-label  nzRequired nzFor="price">Цена</nz-form-label>
             <nz-form-control 
             nzHasFeedback 
             nzErrorTip="Укажите цену!">
-                <nz-input-number
+                <nz-input-number style="width: 100%;"
                 [(ngModel)]="price"
                 [nzSize]="'large'"
                 formControlName="price"
@@ -189,7 +268,6 @@ nz-form
         </nz-form-item>
     </div>
 </div>
-
     <nz-form-item >
     <nz-form-label nzRequired nzFor="description">Описание</nz-form-label>
         <nz-form-control
