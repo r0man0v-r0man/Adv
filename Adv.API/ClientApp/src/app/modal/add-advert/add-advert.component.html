@@ -197,6 +197,25 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
+    <div nz-col nzSpan="6">
+        <nz-form-item >
+            <nz-form-label nzRequired nzFor="rooms">Комнат</nz-form-label>
+            <nz-form-control
+            nzHasFeedback
+            nzErrorTip="Сколько этажей в доме?">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="rooms"
+                    [nzSize]="'large'"
+                    formControlName="rooms"
+                    nzPlaceHolder="Кол-во"
+                    [nzMin]="1"
+                    [nzMax]="100"
+                    [nzStep]="1"
+                    [nzId]="rooms"
+                    ></nz-input-number>
+                </nz-form-control>
+        </nz-form-item>
+    </div>
 </div>
 <nz-divider [nzText]="comfort">
     <ng-template #comfort>
@@ -246,6 +265,27 @@ nzLayout="vertical"
     </ng-template>
 </nz-divider>
 <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="12">
+        <nz-form-item >
+            <nz-form-label nzRequired nzFor="duration">Тип аренды</nz-form-label>
+            <nz-form-control 
+            nzHasFeedback
+            nzErrorTip="Укажите срок!">
+                <nz-select 
+                [(ngModel)]="selectedDuration"
+                formControlName="duration"
+                [nzSize]="'large'"
+                nzPlaceHolder="Выберите срок">
+                  <nz-option
+                    *ngFor="let duration of listOfDuration"
+                    [nzLabel]="duration.label"
+                    [nzValue]="duration.value"
+                    >
+                  </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
     <div nz-col [nzSpan]="12" >
         <nz-form-item>
             <nz-form-label  nzRequired nzFor="price">Цена</nz-form-label>

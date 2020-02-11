@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Constants } from 'src/app/constants';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';

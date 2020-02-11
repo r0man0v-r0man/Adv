@@ -26,6 +26,7 @@ import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
 import { CityPipe } from './customPipes/city.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './drawers/profile/profile.component';
+import { DurationPipe } from './customPipes/duration.pipe';
 
 registerLocaleData(ru);
 
@@ -40,6 +41,7 @@ registerLocaleData(ru);
     FlatDetailComponent,
     AddressPipe,
     CityPipe,
+    DurationPipe,
     RegisterComponent,
     LoginComponent,
     AccessDeniedComponent,

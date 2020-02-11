@@ -26,11 +26,11 @@
                       </nz-button-group>
                 </div>
                 <div nz-col [nzSpan]="12">
-                    <nz-descriptions nzTitle="{{ flat | address : 'full' }}" nzLayout="vertical">
-                        <nz-descriptions-item nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Цена">{{ flat.price | currency : 'USD' }}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
-                        <nz-descriptions-item nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
+                <nz-descriptions nzTitle="{{ flat | address : 'full' }} - {{ flat.price | currency : 'USD' }}" [nzColumn]="3">
+                        <nz-descriptions-item [nzSpan]="2" nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="3" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="3" nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
                     </nz-descriptions>
                 </div>
             </nz-content>

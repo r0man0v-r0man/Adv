@@ -9,6 +9,7 @@ import { FileService } from 'src/app/services/file.service';
 import ymaps from 'ymaps';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cities } from 'src/app/models/cities';
+import { Duration } from 'src/app/models/duration';
 
 @Component({
   selector: 'app-add-advert',
@@ -45,8 +46,9 @@ export class AddAdvertComponent implements OnInit {
   city: string;
   /** count of rooms */
   rooms: number;
-  /** duration long or short */
-  duration:number;
+  /** duration long */
+  selectedDuration: number = 0;
+  listOfDuration: Array<{ label: string; value: number}> = [];
   /** exist or not */
   furniture: boolean = false;
   /** exist or not */
@@ -81,6 +83,7 @@ export class AddAdvertComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.setCities();
+    this.setDurations();
   }
   headers = () => {
     return this.authService.Token;
@@ -119,7 +122,9 @@ export class AddAdvertComponent implements OnInit {
       refrigerator: [this.refrigerator],
       microwaveOven: [this.microwaveOven],
       internet: [this.internet],
-      washingMachine: [this.washingMachine]
+      washingMachine: [this.washingMachine],
+      rooms: [this.rooms, [Validators.required]],
+      duration: [this.selectedDuration, [Validators.required]]
     });
   }
   /**
@@ -128,6 +133,15 @@ export class AddAdvertComponent implements OnInit {
   setCities(){
     this.listOfCities.push(
       { label: 'Несвиж', value: Cities.nesvizh }
+      );
+  }
+    /**
+   * Set list of duration for select menu
+   */
+  setDurations(){
+    this.listOfDuration.push(
+      { label: 'Длительная', value: Duration.long },
+      { label: 'Часы/сутки', value: Duration.short }
       );
   }
   onChange(info: { file : UploadFile} ){
