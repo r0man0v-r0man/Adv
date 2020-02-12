@@ -26,11 +26,33 @@
                       </nz-button-group>
                 </div>
                 <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
-                <nz-descriptions nzTitle="{{ flat | address : 'full' }} - {{ flat.price | currency : 'USD' }}" [nzColumn]="3">
-                        <nz-descriptions-item [nzSpan]="2" nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
+                <nz-descriptions [nzTitle]="flatDetailTitle" [nzColumn]="3">
+                    <ng-template #flatDetailTitle>
+                        <nz-divider [nzText]="detailTitle">
+                            <ng-template #detailTitle>
+                                {{ flat | address : 'full' }}
+                                
+                            </ng-template>
+                        </nz-divider>
+                    </ng-template>
+                        <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="3" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="2" nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1" nzTitle="Цена">{{ flat.price | currency : 'USD' }}</nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="3" nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
+                    </nz-descriptions>
+                <nz-descriptions [nzTitle]="flatDetailComfortTitle" [nzColumn]="3" [nzColon]="false">
+                    <ng-template #flatDetailComfortTitle>
+                        <nz-divider [nzText]="detailComfortTitle">
+                            <ng-template #detailComfortTitle>
+                                Удобства
+                            </ng-template>
+                        </nz-divider>
+                    </ng-template>
+                        <nz-descriptions-item *ngIf="flat.furniture" [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><i nz-icon nzType="check" nzTheme="outline"></i> Мебель</nz-badge>
+                        </nz-descriptions-item>
                     </nz-descriptions>
                 </div>
             </nz-content>
