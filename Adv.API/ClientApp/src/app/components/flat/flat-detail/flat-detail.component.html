@@ -3,9 +3,9 @@
         
         <nz-layout class="inner-layout">
 
-            <nz-content class="inner-content" nz-row [nzGutter]="24">
+            <nz-content class="inner-content" nz-row [nzGutter]="24" nzType="flex" nzJustify="center">
 
-                <div nz-col [nzSpan]="12">
+                <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 22 }" [nzLg]="{ span : 16 }" [nzXl]="{ span : 12 }">
                     <nz-carousel [nzEffect]="'scrollx'"
                     [nzDotPosition]="'top'"
                      style="height: 350px;">
@@ -25,7 +25,7 @@
                         </button>
                       </nz-button-group>
                 </div>
-                <div nz-col [nzSpan]="12">
+                <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
                 <nz-descriptions nzTitle="{{ flat | address : 'full' }} - {{ flat.price | currency : 'USD' }}" [nzColumn]="3">
                         <nz-descriptions-item [nzSpan]="2" nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
