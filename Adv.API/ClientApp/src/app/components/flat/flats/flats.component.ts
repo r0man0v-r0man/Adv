@@ -12,12 +12,10 @@ import { FooterService } from 'src/app/services/footer.service';
 })
 export class FlatsComponent implements OnInit {
 
-  flats: FlatModel[] = [];
   list: FlatModel[] = [];
-  loadingMore = false;
-  initLoading = true; // bug
+  initLoading = false; // bug
   /**Show or hide loadMore button */
-  isShowMoreButton: boolean = true;
+  isShowMoreButton: boolean = false;
   pageNumber: number = 1;
   constructor(
     private flatService: FlatService,
@@ -33,42 +31,42 @@ export class FlatsComponent implements OnInit {
   }
 
   onLoadMore(){
-    this.loadingMore = true;
     this.initLoading = true;
 
       this.flatService.getFlats(this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
-            this.flats.push(response[i]);
+            this.list.push(response[i]);
           }
-          this.list = [...this.flats];
-          this.loadingMore = false;
-          this.initLoading = false;
-
           this.pageNumber++;
+        this.initLoading = false;
+
         }
         if(response && response.length === 0){
-
           this.isShowMoreButton = false;
-          this.loadingMore = false;
-          this.initLoading = false;
         }
+        this.initLoading = false;
+
+
+
         console.log(this.pageNumber);
         console.log(this.list);
       });
     
   }
   initHomePage(){
+    this.initLoading = true;
     this.flatService.getFlats(this.pageNumber)
       .subscribe(flats => {
-          this.flats = flats
+        if(flats && flats.length !== 0){
           this.list = flats
           this.initLoading = false;
           this.pageNumber++;
-
-         }
-      )
+        }},()=>{}, ()=>
+        {
+          this.isShowMoreButton = true;
+        })
   }
 
 }

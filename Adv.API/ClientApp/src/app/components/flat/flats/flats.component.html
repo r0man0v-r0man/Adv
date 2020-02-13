@@ -32,8 +32,8 @@
             </nz-list-item>
           </ng-template>
           <ng-template #loadMore >
-            <div class="loadmore" *ngIf="isShowMoreButton">
-              <button nz-button nzBlock nzSize="large"  *ngIf="!loadingMore" (click)="onLoadMore()">Загрузить еще</button>
+            <div class="loadmore" >
+              <button *ngIf="isShowMoreButton" nz-button nzBlock nzSize="large" (click)="onLoadMore()">Загрузить еще</button>
             </div>
           </ng-template>
         </nz-list>
