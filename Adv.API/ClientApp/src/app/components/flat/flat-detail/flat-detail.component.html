@@ -26,22 +26,33 @@
                       </nz-button-group>
                 </div>
                 <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
-                <nz-descriptions [nzTitle]="flatDetailTitle" [nzColumn]="3">
-                    <ng-template #flatDetailTitle>
-                        <nz-divider [nzText]="detailTitle">
-                            <ng-template #detailTitle>
-                                {{ flat | address : 'full' }}
-                                
-                            </ng-template>
-                        </nz-divider>
-                    </ng-template>
-                        <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="2" nzTitle="Дата размещения">{{ flat.created | date : 'fullDate' : '' : 'ru'}}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="1" nzTitle="Цена">{{ flat.price | currency : 'USD' }}</nz-descriptions-item>
-                        <nz-descriptions-item [nzSpan]="3" nzTitle="Описание">{{ flat.description }}</nz-descriptions-item>
-                    </nz-descriptions>
+                
+                    <nz-page-header>
+                        <nz-page-header-title>{{ flat | address : 'full' }}</nz-page-header-title>
+                        <nz-page-header-subtitle>{{ flat.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
+                        <nz-page-header-extra>
+                            <button nz-button nzSize="large" nzShape="round" nzType="primary"><i nz-icon nzType="contacts" nzTheme="outline"></i>Контакты</button>
+
+                        </nz-page-header-extra>
+                        <nz-page-header-content>
+                              <nz-descriptions [nzColumn]="3">
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этаж">{{ flat.floor }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>                      
+                              </nz-descriptions>
+                            
+                        </nz-page-header-content>
+                        <nz-page-header-footer>
+                            <nz-row nzType="flex" >
+                                <nz-statistic nzTitle="Цена" [nzValue]="flat.price" nzPrefix="$"></nz-statistic>
+
+                            </nz-row>
+                            
+                        </nz-page-header-footer>
+                      </nz-page-header>
+                
                 <nz-descriptions [nzTitle]="flatDetailComfortTitle" [nzColumn]="3" [nzColon]="false">
                     <ng-template #flatDetailComfortTitle>
                         <nz-divider [nzText]="detailComfortTitle">
@@ -50,10 +61,67 @@
                             </ng-template>
                         </nz-divider>
                     </ng-template>
-                        <nz-descriptions-item *ngIf="flat.furniture" [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><i nz-icon nzType="check" nzTheme="outline"></i> Мебель</nz-badge>
+                        <nz-descriptions-item [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.furniture; then existFurniture; else notExistFurniture"></ng-container>
+                            <ng-template #existFurniture>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </ng-template>
+                            <ng-template #notExistFurniture>
+                                <i nz-icon nzType="stop" nzTheme="outline"></i>
+                            </ng-template>
+                            Мебель</nz-badge>
+                        </nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.refrigerator; then existRefrigerator; else notExistRefrigerator"></ng-container>
+                            <ng-template #existRefrigerator>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </ng-template>
+                            <ng-template #notExistRefrigerator>
+                                <i nz-icon nzType="stop" nzTheme="outline"></i>
+                            </ng-template>
+                            Холодильник</nz-badge>
+                        </nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.microwaveOven; then existMicrowaveOven; else notExistMicrowaveOven"></ng-container>
+                            <ng-template #existMicrowaveOven>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </ng-template>
+                            <ng-template #notExistMicrowaveOven>
+                                <i nz-icon nzType="stop" nzTheme="outline"></i>
+                            </ng-template>
+                            Микроволновая печь</nz-badge>
+                        </nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.internet; then existInternet; else notExistInternet"></ng-container>
+                            <ng-template #existInternet>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </ng-template>
+                            <ng-template #notExistInternet>
+                                <i nz-icon nzType="stop" nzTheme="outline"></i>
+                            </ng-template>
+                            Интернет</nz-badge>
+                        </nz-descriptions-item>
+                        <nz-descriptions-item [nzSpan]="1">
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.washingMachine; then existWashingMachine; else notExistWashingMachine"></ng-container>
+                            <ng-template #existWashingMachine>
+                                <i nz-icon nzType="check" nzTheme="outline"></i>
+                            </ng-template>
+                            <ng-template #notExistWashingMachine>
+                                <i nz-icon nzType="stop" nzTheme="outline"></i>
+                            </ng-template>
+                            Стиральная машина</nz-badge>
                         </nz-descriptions-item>
                     </nz-descriptions>
+                <nz-descriptions [nzTitle]="description" [nzColumn]="3" nzColon="false">
+                    <ng-template #description>
+                        <nz-divider [nzText]="descriptionTitle">
+                            <ng-template #descriptionTitle>
+                                Описание
+                            </ng-template>
+                        </nz-divider>
+                    </ng-template>
+                    <nz-descriptions-item [nzSpan]="3">{{ flat.description }}</nz-descriptions-item>
+                </nz-descriptions>
                 </div>
             </nz-content>
         </nz-layout>
