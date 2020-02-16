@@ -10,6 +10,7 @@ import ymaps from 'ymaps';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cities } from 'src/app/models/cities';
 import { Duration } from 'src/app/models/duration';
+import { StreetsService } from 'src/app/services/streets.service';
 
 @Component({
   selector: 'app-add-advert',
@@ -72,18 +73,25 @@ export class AddAdvertComponent implements OnInit {
     showPreviewIcon: false,
     showRemoveIcon: true
   }
+  //streetList: { name: string, streets:Array<{name:string}> } ;
+  selectedStreet = null;
+  listOfStreet: Array<{ value: string; text: string }> = [];
+  nzFilterOption = () => true;
+
 
   constructor(
     private formBuilder: FormBuilder, 
     private messageService: NzMessageService,
     private fileService: FileService,
-    private authService: AuthService
+    private authService: AuthService,
+    private streetService: StreetsService
     ) { }
 
   ngOnInit() {
     this.initForm();
     this.setCities();
     this.setDurations();
+    this.setStreets();
   }
   headers = () => {
     return this.authService.Token;
@@ -111,7 +119,7 @@ export class AddAdvertComponent implements OnInit {
       description: [null, [DescriptionValidators.notOnlySpace]],
       files: [this.fileList, [Validators.required]],
       city: [this.selectedCity, [Validators.required]],
-      street: [this.street, [Validators.required]],
+      street: [this.selectedStreet, [Validators.required]],
       numberOfHouse: [null, [Validators.required]],
       numberOfHouseCourpus: [this.numberOfHouseCourpus],
       numberOfSubHouse: [ this.numberOfSubHouse],
@@ -126,6 +134,22 @@ export class AddAdvertComponent implements OnInit {
       rooms: [this.rooms, [Validators.required]],
       duration: [this.selectedDuration, [Validators.required]]
     });
+  }
+
+  setStreets(){
+    this.streetService.getStreets().subscribe(response => {
+      if(response){
+        const listOfOption: Array<{ value: string; text: string }> = [];
+        response.streets.forEach(street => {
+          listOfOption.push({
+            value: street.name,
+            text: street.name
+          });
+        });
+        this.listOfStreet = listOfOption;
+        console.log(this.listOfStreet);
+      }
+    })
   }
   /**
    * Set list of districts for select menu

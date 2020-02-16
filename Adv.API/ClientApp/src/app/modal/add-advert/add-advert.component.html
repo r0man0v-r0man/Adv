@@ -54,7 +54,17 @@ nzLayout="vertical"
         <nz-form-item>
             <nz-form-label nzRequired nzFor="street">Укажите улицу</nz-form-label>
             <nz-form-control>
-                    <nz-input-group [nzSuffix]="suffixTemplate" [nzSize]="'large'">
+                <nz-select
+                nzShowSearch 
+                [nzSize]="'large'"
+                formControlName="street"
+                nzPlaceHolder="Название"
+                [(ngModel)]="selectedStreet"
+                [nzShowArrow]="false"
+              >
+                <nz-option *ngFor="let o of listOfStreet" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
+              </nz-select>
+                    <!-- <nz-input-group [nzSuffix]="suffixTemplate" [nzSize]="'large'">
                         <input 
                         type="text" 
                         nz-input 
@@ -72,7 +82,7 @@ nzLayout="vertical"
                           *ngIf="street"
                           (click)="street = null"
                         ></i
-                      ></ng-template>       
+                      ></ng-template>        -->
             </nz-form-control>
         </nz-form-item>
     </div>
