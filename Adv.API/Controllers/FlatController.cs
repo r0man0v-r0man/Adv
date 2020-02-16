@@ -56,8 +56,8 @@ namespace Adv.API.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
                 return BadRequest(ex.Message);
+                Debug.WriteLine(ex.Message);
                 throw;
             }
         }

@@ -73,12 +73,14 @@ export class AddAdvertComponent implements OnInit {
     showPreviewIcon: false,
     showRemoveIcon: true
   }
-  //streetList: { name: string, streets:Array<{name:string}> } ;
+  /** streets */
   selectedStreet = null;
   listOfStreet: Array<{ value: string; text: string }> = [];
   nzFilterOption = () => true;
 
-
+  selectedPhoneNumberPrefix:string = '+375';
+  listOfPhoneNumberPrefix: Array<{ value: string; text: string }> = [];
+  phoneNumber: string;
   constructor(
     private formBuilder: FormBuilder, 
     private messageService: NzMessageService,
@@ -92,6 +94,7 @@ export class AddAdvertComponent implements OnInit {
     this.setCities();
     this.setDurations();
     this.setStreets();
+    this.setPhoneNumberPrefixes();
   }
   headers = () => {
     return this.authService.Token;
@@ -132,7 +135,9 @@ export class AddAdvertComponent implements OnInit {
       internet: [this.internet],
       washingMachine: [this.washingMachine],
       rooms: [this.rooms, [Validators.required]],
-      duration: [this.selectedDuration, [Validators.required]]
+      duration: [this.selectedDuration, [Validators.required]],
+      phoneNumberPrefix:[this.selectedPhoneNumberPrefix],
+      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9)]]
     });
   }
 
@@ -147,9 +152,13 @@ export class AddAdvertComponent implements OnInit {
           });
         });
         this.listOfStreet = listOfOption;
-        console.log(this.listOfStreet);
       }
-    })
+    });
+  }
+  setPhoneNumberPrefixes(){
+    this.listOfPhoneNumberPrefix.push(
+      { text: '+375', value: '+375' }
+    )
   }
   /**
    * Set list of districts for select menu

@@ -60,6 +60,9 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.Floor)
                 .IsRequired();
+            builder
+                .Property(prop => prop.Phone)
+                .IsRequired();
         }
     }
 }

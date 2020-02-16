@@ -18,7 +18,7 @@ export class AddressPipe implements PipeTransform{
             
         let result: string = '';
         /** transform to street */
-        let street: string = `ул.${flat.street}, `;
+        let street: string = `${flat.street}, `;
         /** transform to house */
         let house: string = `д.${flat.numberOfHouse}`;
         let houseCourpus: string = ' ';

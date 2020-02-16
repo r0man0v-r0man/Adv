@@ -30,6 +30,7 @@ namespace Adv.API.Models
         public byte Duration { get; set; }
         public int Floor { get; set; }
         public int? AllFloor { get; set; }
+        public string Phone { get; set; }
 
         /// <summary>
         /// Mapping to FlatViewModel

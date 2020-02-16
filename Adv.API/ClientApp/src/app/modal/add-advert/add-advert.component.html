@@ -64,25 +64,6 @@ nzLayout="vertical"
               >
                 <nz-option *ngFor="let o of listOfStreet" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
               </nz-select>
-                    <!-- <nz-input-group [nzSuffix]="suffixTemplate" [nzSize]="'large'">
-                        <input 
-                        type="text" 
-                        nz-input 
-                        [(ngModel)]="street" 
-                        formControlName="street"
-                        placeholder="Название" />
-                      </nz-input-group>
-                      <ng-template #suffixTemplate
-                        ><i
-                          nz-icon
-                          nz-tooltip
-                          class="ant-input-clear-icon"
-                          nzTheme="fill"
-                          nzType="close-circle"
-                          *ngIf="street"
-                          (click)="street = null"
-                        ></i
-                      ></ng-template>        -->
             </nz-form-control>
         </nz-form-item>
     </div>
@@ -318,6 +299,43 @@ nzLayout="vertical"
         </nz-form-item>
     </div>
 </div>
+<nz-divider [nzText]="contacts">
+    <ng-template #contacts>
+        Контакты
+    </ng-template>
+</nz-divider>
+<div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="12">
+        <nz-form-item >
+            <nz-form-label  nzRequired nzFor="phoneNumber">Телефон</nz-form-label>
+            <nz-form-control             
+            nzHasFeedback>
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" nzSize="large">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select 
+                  [(ngModel)]="selectedPhoneNumberPrefix"
+                  formControlName="phoneNumberPrefix" 
+                  nzSize="large" 
+                  >
+                    <nz-option
+                    *ngFor="let phoneNumberPrefix of listOfPhoneNumberPrefix"
+                    [nzLabel]="phoneNumberPrefix.text"
+                    [nzValue]="phoneNumberPrefix.value"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </ng-template>
+                <input nzSize="large"
+                [(ngModel)]="phoneNumber"
+                formControlName="phoneNumber" 
+                id="'phoneNumber'" 
+                placeholder="(__)___-__-__"
+                nz-input />
+              </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+</div>
     <nz-form-item >
     <nz-form-label nzRequired nzFor="description">Описание</nz-form-label>
         <nz-form-control
@@ -341,3 +359,4 @@ nzLayout="vertical"
     </nz-form-item>
 
 </form>
+<p>{{form.value | json}}</p>

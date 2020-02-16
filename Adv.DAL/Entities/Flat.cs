@@ -35,6 +35,8 @@ namespace Adv.DAL.Entities
         public Duration.RentTime Duration { get; set; }
         public int Floor { get; set; }
         public int? AllFloor { get; set; }
+        public string Phone { get; set; }
+
     }
 
 }
