@@ -24,9 +24,13 @@ export class FlatModel{
     washingMachine:boolean;
     floor: number;
     allFloor?: number; 
+    phoneNumberPrefix: string;
+    phoneNumber: string;
+    phone: string;
 
     public constructor(init?: Partial<FlatModel>){
         Object.assign(this, init);
+        this.phone = this.phoneNumberPrefix + this.phoneNumber;
     }
     
 }

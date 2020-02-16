@@ -56,7 +56,8 @@ namespace Adv.BLL.DTO
             WashingMachine = flat.WashingMachine,
             Duration = (byte) flat.Duration,
             Floor = flat.Floor,
-            AllFloor = flat.AllFloor
+            AllFloor = flat.AllFloor,
+            Phone = flat.Phone
         };
 
         /// <summary>
@@ -81,7 +82,8 @@ namespace Adv.BLL.DTO
             WashingMachine = flat.WashingMachine,
             Duration = (Duration.RentTime) flat.Duration,
             Floor = flat.Floor,
-            AllFloor = flat.AllFloor
+            AllFloor = flat.AllFloor,
+            Phone = flat.Phone
         };
     }
 }

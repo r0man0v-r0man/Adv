@@ -80,7 +80,7 @@ export class AddAdvertComponent implements OnInit {
 
   selectedPhoneNumberPrefix:string = '+375';
   listOfPhoneNumberPrefix: Array<{ value: string; text: string }> = [];
-  phoneNumber: string;
+  phoneNumber: number;
   constructor(
     private formBuilder: FormBuilder, 
     private messageService: NzMessageService,
@@ -137,7 +137,7 @@ export class AddAdvertComponent implements OnInit {
       rooms: [this.rooms, [Validators.required]],
       duration: [this.selectedDuration, [Validators.required]],
       phoneNumberPrefix:[this.selectedPhoneNumberPrefix],
-      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9)]]
+      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]]
     });
   }
 

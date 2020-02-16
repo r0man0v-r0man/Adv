@@ -30,6 +30,9 @@ namespace Adv.API.Models
         public byte Duration { get; set; }
         public int Floor { get; set; }
         public int? AllFloor { get; set; }
+        /// <summary>
+        /// prefix + phoneNumber
+        /// </summary>
         public string Phone { get; set; }
 
         /// <summary>
@@ -65,7 +68,8 @@ namespace Adv.API.Models
             Refrigerator = flat.Refrigerator,
             WashingMachine = flat.WashingMachine,
             Floor = flat.Floor,
-            AllFloor = flat.AllFloor
+            AllFloor = flat.AllFloor,
+            Phone = flat.Phone
         };
         /// <summary>
         /// Mapping to FlatDTO model
@@ -96,7 +100,8 @@ namespace Adv.API.Models
             Refrigerator = flat.Refrigerator,
             WashingMachine = flat.WashingMachine,
             Floor = flat.Floor,
-            AllFloor = flat.AllFloor
+            AllFloor = flat.AllFloor,
+            Phone = flat.Phone
         };
     }
 }
