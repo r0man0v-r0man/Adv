@@ -74,7 +74,7 @@ export class NavbarComponent implements OnInit {
     const drawer = this.drawerService.create({
       nzTitle: `${user.unique_name} - Кабинет пользователя`,
       nzContent: ProfileComponent,
-      nzWidth: 640, nzClosable: true
+      nzWidth: '50%', nzClosable: true
     })
   }
 }
