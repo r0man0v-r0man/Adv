@@ -27,6 +27,7 @@ import { CityPipe } from './customPipes/city.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './drawers/profile/profile.component';
 import { DurationPipe } from './customPipes/duration.pipe';
+import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
 
 registerLocaleData(ru);
 
@@ -46,7 +47,8 @@ registerLocaleData(ru);
     LoginComponent,
     AccessDeniedComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditAdvertComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ registerLocaleData(ru);
   ],
   entryComponents: [
     AddAdvertComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditAdvertComponent
   ],
   providers: [
     AuthGuardService,

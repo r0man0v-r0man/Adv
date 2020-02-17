@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { NzDrawerRef } from 'ng-zorro-antd';
+import { NzDrawerRef, NzModalService } from 'ng-zorro-antd';
 import { FlatModel } from 'src/app/models/flatModel';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/UserModel';
 import { FlatService } from 'src/app/services/flat.service';
+import { EditAdvertComponent } from 'src/app/modal/edit-advert/edit-advert.component';
 
 @Component({
   selector: 'app-profile',
@@ -22,6 +23,7 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private drawerRef: NzDrawerRef,
     private userService: UserService,
+    private modalService: NzModalService, 
     private flatService: FlatService
   ) { }
 
@@ -61,7 +63,9 @@ export class ProfileComponent implements OnInit {
     });
   }
   onEdit(item: FlatModel){
-    console.log(item.id);
+    const modal = this.modalService.create({
+      nzContent: EditAdvertComponent
+    });
   }
   onMove(item: FlatModel){
     this.router.navigate(['flats/', item.id]);
