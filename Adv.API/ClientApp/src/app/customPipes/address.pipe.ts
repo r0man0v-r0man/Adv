@@ -35,7 +35,7 @@ export class AddressPipe implements PipeTransform{
         else{
             let subHouse: string = ' ';
             if(flat.numberOfSubHouse !== 0){
-                subHouse = `подъезд ${flat.numberOfSubHouse} `;
+                subHouse = `под. ${flat.numberOfSubHouse} `;
             }
             result = street + house + subHouse + flatNumber;
         }
