@@ -1,10 +1,7 @@
 <nz-layout>
     <nz-content class="outer-content">
-        
         <nz-layout class="inner-layout">
-
             <nz-content class="inner-content" nz-row [nzGutter]="24" nzType="flex" nzJustify="center">
-
                 <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 22 }" [nzLg]="{ span : 16 }" [nzXl]="{ span : 12 }">
                     <nz-carousel [nzEffect]="'scrollx'"
                     [nzDotPosition]="'top'"
@@ -14,7 +11,6 @@
                                 <img src="{{ image?.linkProps.download }}" style="height:350px;">
                             </div>
                         </div>
-
                       </nz-carousel>
                       <nz-button-group [nzSize]="'large'" style="width: 100%; line-height: 5rem;">
                         <button nz-button nzType="link" (click)="pre()" style="width: 50%;">
@@ -26,30 +22,34 @@
                       </nz-button-group>
                 </div>
                 <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
-                
                     <nz-page-header>
                         <nz-page-header-title>{{ flat | address : 'full' }}</nz-page-header-title>
                         <nz-page-header-subtitle>{{ flat.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
-                        <nz-page-header-extra>
-                            <button nz-button nzSize="large" nzShape="round" nzType="primary"><i nz-icon nzType="contacts" nzTheme="outline"></i>Контакты</button>
-
-                        </nz-page-header-extra>
                         <nz-page-header-content>
                               <nz-descriptions [nzColumn]="3">
                                 <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
                                 <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
                                 <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
                                 <nz-descriptions-item [nzSpan]="1" nzTitle="Этаж">{{ flat.floor }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>                      
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>
                               </nz-descriptions>
-                            
                         </nz-page-header-content>
                         <nz-page-header-footer>
-                            <nz-row nzType="flex" >
-                                <nz-statistic nzTitle="Цена" [nzValue]="flat.price" nzPrefix="$"></nz-statistic>
-
+                            <nz-row nzJustify="start" >
+                                <div nz-col nzSpan="12">
+                                    <nz-statistic nzTitle="Цена" [nzValue]="flat.price" nzPrefix="$"></nz-statistic>
+                                </div>
+                                <div nz-col nzSpan="12" style=" height: 100%;">
+                                    
+                                    <nz-statistic *ngIf="isShowContacts" nzTitle="Телефон" [nzValue]="flat.phone"></nz-statistic>
+                                    <nz-statistic *ngIf="!isShowContacts"  [nzValueTemplate]="contactsButtonTpl"></nz-statistic>
+                                    <ng-template #contactsButtonTpl> 
+                                        <button nz-button nzSize="large" nzBlock="true" nzType="default" (click)="onShowContacts()" >
+                                        <i nz-icon nzType="contacts" nzTheme="outline"></i>Телефон
+                                        </button>
+                                    </ng-template>
+                                </div>
                             </nz-row>
-                            
                         </nz-page-header-footer>
                       </nz-page-header>
                 

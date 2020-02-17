@@ -14,7 +14,7 @@ import { FooterService } from 'src/app/services/footer.service';
 
 export class FlatDetailComponent implements OnInit {
   flat: FlatModel = new FlatModel();
-
+  isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent, { static: false }) 
   flatImageCarousel: NzCarouselComponent;
 
@@ -59,7 +59,9 @@ export class FlatDetailComponent implements OnInit {
       }
     });
   }
-
+  onShowContacts(){
+    this.isShowContacts = !this.isShowContacts;
+  }
 
   getFlatIdFromRoute() : number {
     let flatId: number;
