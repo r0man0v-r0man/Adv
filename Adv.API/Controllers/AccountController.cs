@@ -61,11 +61,11 @@ namespace Adv.API.Controllers
         {
             //get current user id
             var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (!string.Equals(currentUserId, userId))
+            if (currentUserId != userId)
             {
                 return BadRequest();
             }
-            //error convert flats
+
             UserViewModel result = await superManager.Users.GetUserInfo(currentUserId).ConfigureAwait(false);
             return Ok(result);
         }
