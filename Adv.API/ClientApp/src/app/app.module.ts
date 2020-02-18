@@ -3,7 +3,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, ru_RU } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, ru_RU, NzModalRef } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -57,8 +57,7 @@ registerLocaleData(ru);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
-    InfiniteScrollModule
+    BrowserAnimationsModule
   ],
   entryComponents: [
     AddAdvertComponent,

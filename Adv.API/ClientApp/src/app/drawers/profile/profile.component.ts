@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NzDrawerRef, NzModalService } from 'ng-zorro-antd';
@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
   userFlats: FlatModel[] = [];
   userId: string;
   user: UserModel;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -62,9 +63,11 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  onEdit(item: FlatModel){
-    const modal = this.modalService.create({
-      nzContent: EditAdvertComponent
+  onEdit(item: FlatModel, titleTpl: TemplateRef<{}>){
+    const editModal = this.modalService.create({
+      nzTitle: titleTpl,
+      nzContent: EditAdvertComponent,
+      nzClosable: false
     });
   }
   onMove(item: FlatModel){
