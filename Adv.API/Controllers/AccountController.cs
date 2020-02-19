@@ -16,19 +16,19 @@ namespace Adv.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly ISuperManager superManager;
+        private readonly IUserService userService;
 
         public AccountController(
-            ISuperManager superManager)
+            IUserService userService)
         {
-            this.superManager = superManager;
+            this.userService = userService;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserViewModel user)
         {
             try
             {
-                var loginUser = await superManager.Users.LoginAsync(user, user?.Password).ConfigureAwait(false);
+                var loginUser = await userService.LoginAsync(user, user?.Password).ConfigureAwait(false);
                 return CreatedAtAction(nameof(Login), new { access_token = loginUser });
             }
             catch (Exception ex)
@@ -40,7 +40,7 @@ namespace Adv.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserViewModel user)
         {
-            var result = await superManager.Users.CreateAsync(user, user?.Password).ConfigureAwait(false);
+            var result = await userService.CreateAsync(user, user?.Password).ConfigureAwait(false);
 
             if (result.Succeeded)
             {
@@ -52,7 +52,7 @@ namespace Adv.API.Controllers
         [HttpGet("IsValidateUserName/{userName}")]
         public async Task<ActionResult<bool>> IsValidateUserName(string userName)
         {
-            var result = await superManager.Users.IsValidateUserNameAsync(userName).ConfigureAwait(false);
+            var result = await userService.IsValidateUserNameAsync(userName).ConfigureAwait(false);
             return result;
         }
         [HttpGet("userInfo/{userId}")]
@@ -66,7 +66,7 @@ namespace Adv.API.Controllers
                 return BadRequest();
             }
 
-            UserViewModel result = await superManager.Users.GetUserInfo(currentUserId).ConfigureAwait(false);
+            UserViewModel result = await userService.GetUserInfo(currentUserId).ConfigureAwait(false);
             return Ok(result);
         }
     }

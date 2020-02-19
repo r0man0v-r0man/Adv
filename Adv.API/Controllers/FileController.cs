@@ -17,10 +17,10 @@ namespace Adv.API.Controllers
     [Authorize]
     public class FileController : ControllerBase
     {
-        private readonly ISuperManager _superManager;
-        public FileController(ISuperManager superManager)
+        private readonly IFileService fileService;
+        public FileController(IFileService fileService)
         {
-            _superManager = superManager;
+            this.fileService = fileService;
         }
         [HttpPost]
         public async Task<ActionResult<FileModel>> Post(IFormFile file, CancellationToken ct = default)
@@ -29,7 +29,7 @@ namespace Adv.API.Controllers
             {
                 try
                 {
-                    var result = await _superManager.Files.UploadAsync(file, ct).ConfigureAwait(false);
+                    var result = await fileService.UploadAsync(file, ct).ConfigureAwait(false);
                     return CreatedAtAction(nameof(Post),
                         new FileModel
                         {
@@ -57,7 +57,7 @@ namespace Adv.API.Controllers
                 return StatusCode(StatusCodes.Status503ServiceUnavailable);
             }
 
-            var result = await _superManager.Files
+            var result = await fileService
                 .DeleteAsync(fileName).ConfigureAwait(false);
 
             return result ? Ok(result) : (IActionResult)BadRequest(result);

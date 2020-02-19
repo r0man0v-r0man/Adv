@@ -1,1 +1,24 @@
-<p>edit-advert works!</p>
+<form nz-form [formGroup]="editForm" nzLayout="vertical" >
+    <nz-form-item>
+        <nz-form-label nzRequired nzFor="description">Описание</nz-form-label>
+        <nz-form-control
+        nzHasFeedback 
+        [nzErrorTip]="descriptionErrorTpl">
+                <textarea 
+                [nzSize]="'small'"
+                formControlName="description"
+                placeholder="Ваш комментарий"
+                [nzAutosize]="{ minRows: 4, maxRows: 6 }" 
+                nz-input></textarea>
+            <ng-template #descriptionErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    Добавьте комментарий!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('notOnlySpace')">
+                    Комментарий не должен быть пустым!
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+      </nz-form-item >
+</form>
+<p>{{ editForm.value | json}}</p>

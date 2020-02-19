@@ -17,11 +17,11 @@ namespace Adv.API.Controllers
     [ApiController]
     public class FlatController : ControllerBase
     {
-        private readonly ISuperManager _superManager;
+        private readonly IFlatService flatService;
 
-        public FlatController(ISuperManager superManager)
+        public FlatController(IFlatService flatService)
         {
-            _superManager = superManager;
+            this.flatService = flatService;
         }
 
         [HttpGet("getAll/{pageNumber}")]
@@ -32,7 +32,7 @@ namespace Adv.API.Controllers
             var skip = (SIZE * pageNumber) - SIZE;
             try
             {
-                var flats = await _superManager.Flats.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
+                var flats = await flatService.GetAllAsync(pageNumber, SIZE, skip, ct).ConfigureAwait(false);
                 return flats.Select(flatDto => (FlatViewModel)flatDto).ToList();
 
             }
@@ -51,7 +51,7 @@ namespace Adv.API.Controllers
         {
             try
             {
-                FlatViewModel result = await _superManager.Flats.GetAsync(id, ct).ConfigureAwait(false);
+                FlatViewModel result = await flatService.GetAsync(id, ct).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -67,7 +67,7 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _superManager.Flats.DeleteAsync(id, ct).ConfigureAwait(false);
+                var result = await flatService.DeleteAsync(id, ct).ConfigureAwait(false);
                 return result ? Ok(result) : (IActionResult)BadRequest(result);
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace Adv.API.Controllers
                     var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     if (currentUserId == flatModel.UserId)
                     {
-                        FlatViewModel result = await _superManager.Flats.CreateAsync(flatModel, ct).ConfigureAwait(false);
+                        FlatViewModel result = await flatService.CreateAsync(flatModel, ct).ConfigureAwait(false);
                         return CreatedAtAction(nameof(Post), result);
                     }
                     else

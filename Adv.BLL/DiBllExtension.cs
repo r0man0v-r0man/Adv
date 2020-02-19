@@ -11,7 +11,6 @@ namespace Adv.BLL
     {
         public static IServiceCollection AddBll(this IServiceCollection services)
         {
-            services.AddTransient<ISuperManager, SuperManager>();
             services.AddTransient<IFlatService, FlatService>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IUserService, UserService>();

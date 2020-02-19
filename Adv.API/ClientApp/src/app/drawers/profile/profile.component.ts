@@ -59,15 +59,24 @@ export class ProfileComponent implements OnInit {
          this.userFlats.splice(index, 1);
         }
         this.loading = false;
-        console.log(response);
       }
     });
   }
-  onEdit(item: FlatModel, titleTpl: TemplateRef<{}>){
+  onEdit(item: FlatModel){
     const editModal = this.modalService.create({
-      nzTitle: titleTpl,
+      nzTitle: 'Редактирование',
       nzContent: EditAdvertComponent,
-      nzClosable: false
+      nzComponentParams: {
+        flat: item
+      },
+      nzClosable: false,
+      nzFooter:[{
+        type: 'primary',
+        label: 'Сохранить изменения',
+        onClick: ()=>{
+          editModal.destroy();
+        }
+      }]
     });
   }
   onMove(item: FlatModel){

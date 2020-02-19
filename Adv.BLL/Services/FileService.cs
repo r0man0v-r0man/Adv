@@ -16,14 +16,14 @@ namespace Adv.BLL.Services
 {
     public class FileService : IFileService
     {
-        private readonly IDataManager dataManager;
-        public FileService(IDataManager dataManager)
+        private readonly IFileRepository fileRepository;
+        public FileService(IFileRepository fileRepository)
         {
-            this.dataManager = dataManager;
+            this.fileRepository = fileRepository;
         }
         public async Task<bool> DeleteAsync(string fileName)
         {
-            var result = await dataManager.Files.CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+            var result = await fileRepository.CloudDeleteFileAsync(fileName).ConfigureAwait(false);
             return result;
         }
 
@@ -31,13 +31,13 @@ namespace Adv.BLL.Services
         {
             foreach (var image in flatsImages)
             {
-                await dataManager.Files.CloudDeleteFileAsync(image.Value).ConfigureAwait(false);
+                await fileRepository.CloudDeleteFileAsync(image.Value).ConfigureAwait(false);
             }
         }
 
         public async Task<string> UploadAsync(IFormFile file, CancellationToken ct)
         {
-            var result = await dataManager.Files.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
+            var result = await fileRepository.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
             return result;
         }
     }

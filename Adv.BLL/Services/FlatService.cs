@@ -16,10 +16,12 @@ namespace Adv.BLL.Services
 {
     public class FlatService : IFlatService
     {
-        private readonly IDataManager _dataManager;
-        public FlatService(IDataManager dataManager)
+        private readonly IFlatRepository flatRepository;
+        private readonly IFileRepository fileRepository;
+        public FlatService(IFlatRepository flatRepository, IFileRepository fileRepository)
         {
-            _dataManager = dataManager;
+            this.flatRepository = flatRepository;
+            this.fileRepository = fileRepository;
         }
         /// <summary>
         /// Return flat
@@ -29,7 +31,7 @@ namespace Adv.BLL.Services
         /// <returns></returns>
         public async Task<FlatDTO> GetAsync(int flatId, CancellationToken ct)
         {
-            var flat = await _dataManager.Flats.GetByIdAsync(flatId, ct).ConfigureAwait(false);
+            var flat = await flatRepository.GetByIdAsync(flatId, ct).ConfigureAwait(false);
             return flat;
         }
 
@@ -43,7 +45,7 @@ namespace Adv.BLL.Services
         /// <returns></returns>
         public async Task<List<FlatDTO>> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct)
         {
-            var flats = await _dataManager.Flats.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
+            var flats = await flatRepository.GetAllAsync(pageNumber, size, skip, ct).ConfigureAwait(false);
 
             return flats.Select(flat => (FlatDTO) flat).ToList();
         }
@@ -55,21 +57,21 @@ namespace Adv.BLL.Services
                 throw new ArgumentNullException(nameof(newFlat));
             }
 
-            var result = await _dataManager.Flats.CreateAsync(newFlat, ct).ConfigureAwait(false);
+            var result = await flatRepository.CreateAsync(newFlat, ct).ConfigureAwait(false);
             
             return result;
         }
 
         public async Task<bool> DeleteAsync(int flatId, CancellationToken ct)
         {
-            FlatDTO flat = await _dataManager.Flats.GetByIdAsync(flatId, ct).ConfigureAwait(false);
+            FlatDTO flat = await flatRepository.GetByIdAsync(flatId, ct).ConfigureAwait(false);
             var tasks = new List<Task<bool>>();
 
             foreach (var image in flat.Images)
             {
-                tasks.Add(_dataManager.Files.CloudDeleteFileAsync(Path.GetFileName(image.Value)));
+                tasks.Add(fileRepository.CloudDeleteFileAsync(Path.GetFileName(image.Value)));
             }
-            tasks.Add(_dataManager.Flats.RemoveAsync(flat, ct));
+            tasks.Add(flatRepository.RemoveAsync(flat, ct));
             var result = await Task.WhenAll(tasks).ConfigureAwait(false);
 
             return result.All(x => x == true) ? true : false;
