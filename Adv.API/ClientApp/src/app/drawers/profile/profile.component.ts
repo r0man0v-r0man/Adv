@@ -74,6 +74,8 @@ export class ProfileComponent implements OnInit {
         type: 'primary',
         label: 'Сохранить изменения',
         onClick: ()=>{
+          const editForm = editModal.getContentComponent().editForm;
+          this.flatService.
           editModal.destroy();
         }
       }]

@@ -43,5 +43,8 @@ export class FlatService {
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
+  update(updateFlat:FlatModel){
+    return this.httpService.
+  }
 
 }
