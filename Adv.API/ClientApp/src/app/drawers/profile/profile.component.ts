@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/UserModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { EditAdvertComponent } from 'src/app/modal/edit-advert/edit-advert.component';
+import { FlatUpdateModel } from 'src/app/models/updateModels/flatUpdateModel';
 
 @Component({
   selector: 'app-profile',
@@ -63,6 +64,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   onEdit(item: FlatModel){
+    console.log(item.id);
     const editModal = this.modalService.create({
       nzTitle: 'Редактирование',
       nzContent: EditAdvertComponent,
@@ -75,8 +77,13 @@ export class ProfileComponent implements OnInit {
         label: 'Сохранить изменения',
         onClick: ()=>{
           const editForm = editModal.getContentComponent().editForm;
-          this.flatService.
-          editModal.destroy();
+          if(editForm.valid){
+            let updatedFlat = new FlatUpdateModel(editForm.value);
+            this.flatService.update(updatedFlat).subscribe(response => {
+              console.log(response);
+              editModal.destroy();
+            })
+          }
         }
       }]
     });

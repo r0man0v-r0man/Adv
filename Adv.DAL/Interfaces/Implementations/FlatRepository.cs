@@ -14,6 +14,7 @@ namespace Adv.DAL.Interfaces.Implementations
     public class FlatRepository : IFlatRepository
     {
         private readonly IContextFactory contextFactory;
+
         public FlatRepository(IContextFactory contextFactory)
         {
             this.contextFactory = contextFactory;
@@ -66,9 +67,12 @@ namespace Adv.DAL.Interfaces.Implementations
             }
         }
 
-        public Task<bool> UpdateAsync(Flat flat)
+        public async Task<bool> UpdateAsync(Flat flat, CancellationToken ct)
         {
-            throw new NotImplementedException();
+            using var context = contextFactory.GetAdvContext();
+            var old = await context.Flats.FindAsync(flat, ct).ConfigureAwait(false);
+            var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
+            return true;
         }
     }
 }

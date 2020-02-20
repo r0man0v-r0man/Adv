@@ -6,8 +6,8 @@
         [nzDataSource]="list" 
         [nzRenderItem]="flat" 
         [nzLoading]="initLoading"
-        [nzLoadMore]="loadMore"
-        [nzGrid]="{ gutter: 16, span: 6 }">
+        [nzLoadMore]="loadMore" 
+        [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 6, lg: 6, xl: 4 }">
           <ng-template #flat let-item>
             <nz-list-item 
             [nzContent]="nzContent">

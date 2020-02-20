@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FlatModel } from '../models/flatModel';
 import { AuthService } from './auth.service';
 import { Constants } from '../constants';
+import { FlatUpdateModel } from '../models/updateModels/flatUpdateModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class FlatService {
   flatsUrl: string = Constants.getAllFlats;
   flatUrl:string = Constants.flat;
   deleteFlatUrl: string = Constants.deleteFlat;
+  updateFlatUrl: string = Constants.updateFlat;
 
   constructor(
     private httpService: HttpClient,
@@ -43,8 +45,8 @@ export class FlatService {
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
-  update(updateFlat:FlatModel){
-    return this.httpService.
+  update(updateFlat:FlatUpdateModel){
+    return this.httpService.put<boolean>(this.updateFlatUrl, updateFlat, { headers: this.authService.SecureHeaders });
   }
 
 }

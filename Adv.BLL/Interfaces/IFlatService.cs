@@ -19,5 +19,6 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<bool> DeleteAsync(int flatId, CancellationToken ct);
+        Task<bool> UpdateAsync(FlatDTO updatedFlat, CancellationToken ct);
     }
 }

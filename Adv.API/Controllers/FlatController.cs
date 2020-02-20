@@ -79,7 +79,30 @@ namespace Adv.API.Controllers
             }
 
         }
+        [HttpPut]
+        [Authorize]
+        public async Task<IActionResult> Put(FlatViewModel flatViewModel, CancellationToken ct = default)
+        {
+            try
+            {
+                if (flatViewModel != null)
+                {
+                    var result = await flatService.UpdateAsync(flatViewModel, ct).ConfigureAwait(false);
+                    return Ok(result);
+                }
+                else
+                {
+                    throw new ArgumentNullException("Обновить данные не удалось, попробуйте еще раз");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
 
+                return BadRequest(ex.Message);
+                throw;
+            }
+        }
         [HttpPost]
         [Authorize]
         public async Task<ActionResult<FlatViewModel>> Post(FlatViewModel flatModel, CancellationToken ct = default)
