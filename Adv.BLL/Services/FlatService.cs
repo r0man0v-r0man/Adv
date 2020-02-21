@@ -65,12 +65,8 @@ namespace Adv.BLL.Services
         public async Task<bool> DeleteAsync(int flatId, CancellationToken ct)
         {
             FlatDTO flat = await flatRepository.GetByIdAsync(flatId, ct).ConfigureAwait(false);
-            var tasks = new List<Task<bool>>();
+            var tasks = flat.Images.Select(image => fileRepository.CloudDeleteFileAsync(Path.GetFileName(image.Value))).ToList();
 
-            foreach (var image in flat.Images)
-            {
-                tasks.Add(fileRepository.CloudDeleteFileAsync(Path.GetFileName(image.Value)));
-            }
             tasks.Add(flatRepository.RemoveAsync(flat, ct));
             var result = await Task.WhenAll(tasks).ConfigureAwait(false);
 
@@ -79,7 +75,7 @@ namespace Adv.BLL.Services
 
         public async Task<bool> UpdateAsync(FlatDTO updatedFlat, CancellationToken ct)
         {
-            FlatDTO result = await flatRepository.UpdateAsync(updatedFlat, ct).ConfigureAwait(false);
+            var result = await flatRepository.UpdateAsync(updatedFlat, ct).ConfigureAwait(false);
             return result;
         }
     }
