@@ -30,10 +30,8 @@ namespace Adv.API.Models.Flat
         public byte Duration { get; set; }
         public int Floor { get; set; }
         public int? AllFloor { get; set; }
-        /// <summary>
-        /// prefix + phoneNumber
-        /// </summary>
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PhoneNumberPrefix { get; set; }
 
         /// <summary>
         /// Mapping to FlatViewModel
@@ -69,7 +67,8 @@ namespace Adv.API.Models.Flat
             WashingMachine = flat.WashingMachine,
             Floor = flat.Floor,
             AllFloor = flat.AllFloor,
-            Phone = flat.Phone
+            PhoneNumber = flat.Phone.Remove(0, 4),
+            PhoneNumberPrefix = flat.Phone.Remove(4)
         };
         /// <summary>
         /// Mapping to FlatDTO model
@@ -101,7 +100,7 @@ namespace Adv.API.Models.Flat
             WashingMachine = flat.WashingMachine,
             Floor = flat.Floor,
             AllFloor = flat.AllFloor,
-            Phone = flat.Phone
+            Phone = flat.PhoneNumberPrefix + flat.PhoneNumber
         };
     }
 }

@@ -26,11 +26,9 @@ export class FlatModel{
     allFloor?: number; 
     phoneNumberPrefix: string;
     phoneNumber: string;
-    phone: string;
 
     public constructor(init?: Partial<FlatModel>){
         Object.assign(this, init);
-        this.phone = this.phoneNumberPrefix + this.phoneNumber;
     }
     
 }

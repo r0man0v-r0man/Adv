@@ -1,4 +1,52 @@
 <form nz-form [formGroup]="editForm" nzLayout="vertical" >
+    <div nz-col [nzSpan]="12">
+        <nz-form-item >
+            <nz-form-label  nzRequired nzFor="phoneNumber">Телефон</nz-form-label>
+            <nz-form-control             
+            nzHasFeedback>
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate" nzSize="large">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select 
+                  [(ngModel)]="selectedPhoneNumberPrefix"
+                  formControlName="phoneNumberPrefix" 
+                  nzSize="large" 
+                  >
+                    <nz-option
+                    *ngFor="let phoneNumberPrefix of listOfPhoneNumberPrefix"
+                    [nzLabel]="phoneNumberPrefix.text"
+                    [nzValue]="phoneNumberPrefix.value"
+                    >
+                    </nz-option>
+                  </nz-select>
+                </ng-template>
+                <input nzSize="large"
+                formControlName="phoneNumber" 
+                id="'phoneNumber'" 
+                placeholder="(29)1234567"
+                nz-input type="tel" maxlength="9"/>
+              </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12" >
+        <nz-form-item>
+            <nz-form-label nzRequired nzFor="price">Цена</nz-form-label>
+            <nz-form-control 
+            nzHasFeedback 
+            nzErrorTip="Укажите цену!">
+                <nz-input-number style="width: 100%;"
+                [nzSize]="'large'"
+                formControlName="price"
+                [nzPlaceHolder]="100"
+                [nzMin]="10"
+                [nzMax]="10000"
+                [nzStep]="10"
+                [nzFormatter]="formatterDollar"
+                [nzParser]="parserDollar"
+                ></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+    </div>
     <nz-form-item>
         <nz-form-label nzRequired nzFor="description">Описание</nz-form-label>
         <nz-form-control

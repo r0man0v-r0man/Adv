@@ -12,6 +12,9 @@ export class EditAdvertComponent implements OnInit {
 
   @Input() flat: FlatModel;
   editForm: FormGroup;
+
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -23,7 +26,10 @@ export class EditAdvertComponent implements OnInit {
   initEditForm(){
     this.editForm = this.formBuilder.group({
       description: [this.flat.description,  [DescriptionValidators.notOnlySpace]],
-      id: [this.flat.id]
+      id: [this.flat.id],
+      price: [this.flat.price, [Validators.required]],
+      phoneNumberPrefix:[this.flat.phoneNumberPrefix],
+      phoneNumber: [ this.flat.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]]
     })
   }
 

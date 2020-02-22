@@ -74,6 +74,7 @@ export class ProfileComponent implements OnInit {
       nzFooter:[{
         type: 'primary',
         label: 'Сохранить изменения',
+        disabled: ()=> !editModal.getContentComponent().editForm.valid,
         onClick: ()=>{
           const editForm = editModal.getContentComponent().editForm;
           if(editForm.valid){

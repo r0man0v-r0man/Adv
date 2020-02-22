@@ -41,7 +41,7 @@
                                 </div>
                                 <div nz-col nzSpan="12" style=" height: 100%;">
                                     
-                                    <nz-statistic *ngIf="isShowContacts" nzTitle="Телефон" [nzValue]="flat.phone"></nz-statistic>
+                                    <nz-statistic *ngIf="isShowContacts" nzTitle="Телефон" [nzValue]="flat.phoneNumberPrefix + flat.phoneNumber"></nz-statistic>
                                     <nz-statistic *ngIf="!isShowContacts"  [nzValueTemplate]="contactsButtonTpl"></nz-statistic>
                                     <ng-template #contactsButtonTpl> 
                                         <button nz-button nzSize="large" nzBlock="true" nzType="default" (click)="onShowContacts()" >
