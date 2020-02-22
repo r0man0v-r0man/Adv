@@ -74,6 +74,9 @@ namespace Adv.DAL.Interfaces.Implementations
             if (flat != null)
             {
                 flat.Description = updatedProperties?.Description;
+                flat.Price = updatedProperties.Price;
+                flat.Phone = updatedProperties.Phone;
+
                 var isUpdated = context.Flats.Update(flat);
                 switch (isUpdated.State)
                 {

@@ -18,14 +18,13 @@
                     nzTitle="{{item.price | currency : 'USD' : 'symbol' : '3.0-0'}}">
                     <p>{{ item | address }}</p>
                   </nz-card>
-                  <ng-template #flatCoverTpl >
+                  <ng-template #flatCoverTpl>
                     <div style="height: 160px; overflow: hidden;">
                       <img src="{{ item.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
                     </div>
                   </ng-template>
                   <ng-template #more>
-                    <a 
-                    [routerLink]="[item.id]"
+                    <a [routerLink]="[item.id]"
                     >Подробнее</a>
                   </ng-template>
               </ng-template>
