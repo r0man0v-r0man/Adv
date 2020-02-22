@@ -1,5 +1,5 @@
 <ul *ngIf="navService.visible" nz-menu nzMode="horizontal" >
-    <li nz-menu-item nzSelected="true">
+    <li nz-menu-item nzSelected="true" >
         <a [routerLink]="[ '/' ]" routerLinkActive="active">
             <i nz-icon nzType="home" nzTheme="outline"></i>
             halupa.by
@@ -10,7 +10,7 @@
             Квартиры
         </a>
     </li>
-    <li  nz-menu-item >
+    <li nz-menu-item >
         <ng-container *ngIf="authService.isLogedIn(); then isLogedInButton else isNotLogedInButton"></ng-container>
         <ng-template #isLogedInButton>
             <button  nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">

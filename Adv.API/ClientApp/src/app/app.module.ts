@@ -28,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProfileComponent } from './drawers/profile/profile.component';
 import { DurationPipe } from './customPipes/duration.pipe';
 import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
+import { SearchComponent } from './components/search/search.component';
 
 registerLocaleData(ru);
 
@@ -48,7 +49,8 @@ registerLocaleData(ru);
     AccessDeniedComponent,
     FooterComponent,
     ProfileComponent,
-    EditAdvertComponent
+    EditAdvertComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
