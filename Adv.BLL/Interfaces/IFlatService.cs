@@ -19,6 +19,13 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<bool> DeleteAsync(int flatId, CancellationToken ct);
-        Task<bool> UpdateAsync(FlatDTO updatedFlat, CancellationToken ct);
+        /// <summary>
+        /// update properties
+        /// </summary>
+        /// <param name="updatedFlat">new properties</param>
+        /// <param name="id">id of flat</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<bool> UpdateAsync(FlatUpdateDTO updatedProperties, int id, CancellationToken ct);
     }
 }

@@ -73,9 +73,9 @@ namespace Adv.BLL.Services
             return result.All(x => x == true) ? true : false;
         }
 
-        public async Task<bool> UpdateAsync(FlatDTO updatedFlat, CancellationToken ct)
+        public async Task<bool> UpdateAsync(FlatUpdateDTO updatedProperties, int id, CancellationToken ct)
         {
-            var result = await flatRepository.UpdateAsync(updatedFlat, ct).ConfigureAwait(false);
+            var result = await flatRepository.UpdateAsync(updatedProperties, id, ct).ConfigureAwait(false);
             return result;
         }
     }

@@ -22,7 +22,8 @@ export class EditAdvertComponent implements OnInit {
 
   initEditForm(){
     this.editForm = this.formBuilder.group({
-      description: [this.flat.description,  [DescriptionValidators.notOnlySpace]]
+      description: [this.flat.description,  [DescriptionValidators.notOnlySpace]],
+      id: [this.flat.id]
     })
   }
 

@@ -67,12 +67,24 @@ namespace Adv.DAL.Interfaces.Implementations
             }
         }
 
-        public async Task<bool> UpdateAsync(Flat flat, CancellationToken ct)
+        public async Task<bool> UpdateAsync(FlatUpdate updatedProperties, int id, CancellationToken ct)
         {
             using var context = contextFactory.GetAdvContext();
-            var old = await context.Flats.FindAsync(flat, ct).ConfigureAwait(false);
-            var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
-            return true;
+            var flat = await context.Flats.FindAsync(id).ConfigureAwait(false);
+            if (flat != null)
+            {
+                flat.Description = updatedProperties?.Description;
+                var isUpdated = context.Flats.Update(flat);
+                switch (isUpdated.State)
+                {
+                    case EntityState.Modified:
+                        await context.SaveChangesAsync(ct).ConfigureAwait(false);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+            throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
         }
     }
 }

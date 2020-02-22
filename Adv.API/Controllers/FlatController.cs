@@ -1,4 +1,4 @@
-﻿using Adv.API.Models;
+﻿using Adv.API.Models.Flat;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -81,13 +81,13 @@ namespace Adv.API.Controllers
         }
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> Put(FlatViewModel flatViewModel, CancellationToken ct = default)
+        public async Task<IActionResult> Put(FlatViewUpdateModel updateModel, CancellationToken ct = default)
         {
             try
             {
-                if (flatViewModel != null)
+                if (updateModel != null)
                 {
-                    var result = await flatService.UpdateAsync(flatViewModel, ct).ConfigureAwait(false);
+                    var result = await flatService.UpdateAsync(updateModel, updateModel.Id, ct).ConfigureAwait(false);
                     return Ok(result);
                 }
                 else

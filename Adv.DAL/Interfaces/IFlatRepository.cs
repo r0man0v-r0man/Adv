@@ -15,6 +15,6 @@ namespace Adv.DAL.Interfaces
         Task<Flat> FindAsync(Expression<Func<Flat, bool>> predicate);
         Task<IEnumerable<Flat>> GetAllAsync(int pageNumber, byte size, int skip, CancellationToken ct);
         Task<bool> RemoveAsync(Flat flat, CancellationToken ct);
-        Task<bool> UpdateAsync(Flat flat, CancellationToken ct);
+        Task<bool> UpdateAsync(FlatUpdate updatedProperties, int id, CancellationToken ct);
     }
 }

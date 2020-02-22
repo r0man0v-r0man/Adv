@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Adv.API.Models
+namespace Adv.API.Models.Flat
 {
     public class FlatViewModel : API.Models.Common.AuditableEntity
     {

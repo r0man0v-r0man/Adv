@@ -64,7 +64,6 @@ export class ProfileComponent implements OnInit {
     });
   }
   onEdit(item: FlatModel){
-    console.log(item.id);
     const editModal = this.modalService.create({
       nzTitle: 'Редактирование',
       nzContent: EditAdvertComponent,
@@ -79,9 +78,15 @@ export class ProfileComponent implements OnInit {
           const editForm = editModal.getContentComponent().editForm;
           if(editForm.valid){
             let updatedFlat = new FlatUpdateModel(editForm.value);
-            this.flatService.update(updatedFlat).subscribe(response => {
+            this.flatService.update(updatedFlat)
+              .subscribe(response => {
+                this.loading = true;
               console.log(response);
               editModal.destroy();
+            }, ()=>{
+              this.loading = false;
+            }, ()=>{
+                this.getUserInfo();
             })
           }
         }
