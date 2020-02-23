@@ -2,8 +2,8 @@
         <nz-tab nzTitle="Длительно">
             <ng-template nz-tab>
                 <form nz-form [formGroup]="longForm" nzLayout="vertical">
-                    <nz-row nzGutter="16">
-                        <div nz-col nzSpan="12">
+                    <nz-row nzGutter="16" nzAlign="bottom" nzType="flex">
+                        <div nz-col nzSpan="8">
                             <nz-form-item>
                                 <nz-form-label nzFor="city">Выберите город</nz-form-label>
                                 <nz-form-control 
@@ -23,28 +23,38 @@
                             </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzSpan]="12">
+                        <div nz-col [nzSpan]="8">
                             <nz-form-item >
-                                <nz-form-label nzFor="duration">Тип аренды</nz-form-label>
+                                <nz-form-label nzFor="rooms">Выберите квартиру</nz-form-label>
                                 <nz-form-control 
                                 nzErrorTip="Укажите срок!">
                                     <nz-select 
-                                    [(ngModel)]="selectedDuration"
-                                    formControlName="duration"
+                                    [(ngModel)]="selectedRoom"
+                                    formControlName="rooms"
                                     [nzSize]="'large'"
                                     nzPlaceHolder="Выберите срок">
                                       <nz-option
-                                        *ngFor="let duration of listOfDuration"
-                                        [nzLabel]="duration.label"
-                                        [nzValue]="duration.value"
+                                        *ngFor="let room of listOfRooms"
+                                        [nzLabel]="room.label"
+                                        [nzValue]="room.value"
                                         >
                                       </nz-option>
                                     </nz-select>
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
+                        <div nz-col  [nzSpan]="8" >
+                            <nz-form-item  >
+                                <nz-form-control>
+                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large">
+                                        <i nz-icon nzType="search"></i>Найти
+                                    </button>
+                                </nz-form-control>
+                              
+                            </nz-form-item>
+
+                        </div>
                     </nz-row>
-                    
                 </form>
             </ng-template>    
         </nz-tab>

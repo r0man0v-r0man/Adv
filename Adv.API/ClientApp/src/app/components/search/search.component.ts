@@ -15,16 +15,16 @@ export class SearchComponent implements OnInit {
     /** Array of cities */
     listOfCities: Array<{ label: string; value: number}> = [];
     longForm: FormGroup;
-     /** duration long */
-  selectedDuration: number = 0;
-  listOfDuration: Array<{ label: string; value: number}> = [];
+     /** rooms  */
+  selectedRoom: number = 1;
+  listOfRooms: Array<{ label: string; value: number}> = [];
   constructor(
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.initLongForm();
-    this.setDurations();
+    this.setRooms();
     this.setCities();
   }
 
@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit {
   initLongForm(){
     this.longForm = this.formBuilder.group({
       city: [this.selectedCity, [Validators.required]],
-      duration: [this.selectedDuration, [Validators.required]]
+      rooms: [this.selectedRoom, [Validators.required]]
     })
   }
     /**
@@ -44,12 +44,13 @@ export class SearchComponent implements OnInit {
       );
   }
       /**
-   * Set list of duration for select menu
+   * Set list of rooms for select menu
    */
-  setDurations(){
-    this.listOfDuration.push(
-      { label: 'Длительная', value: Duration.long },
-      { label: 'Часы/сутки', value: Duration.short }
+  setRooms(){
+    this.listOfRooms.push(
+      { label: 'Однокомнатная', value: 1 },
+      { label: 'Двухкомнатная', value: 2 },
+      { label: 'Трехкомнатная', value: 3 }
       );
   }
 }
