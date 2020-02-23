@@ -5,9 +5,8 @@
                     <nz-row nzGutter="16">
                         <div nz-col nzSpan="12">
                             <nz-form-item>
-                                <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
+                                <nz-form-label nzFor="city">Выберите город</nz-form-label>
                                 <nz-form-control 
-                                nzHasFeedback
                                 nzErrorTip="Выберите город!">
                                 <nz-select 
                                 [(ngModel)]="selectedCity"
@@ -24,22 +23,25 @@
                             </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col nzSpan="12">
-                            <nz-form-item>
-                                <nz-select 
-                                [(ngModel)]="selectedCity"
-                                formControlName="city"
-                                [nzSize]="'large'"
-                                nzPlaceHolder="Выберите город">
-                                  <nz-option
-                                    *ngFor="let city of listOfCities"
-                                    [nzLabel]="city.label"
-                                    [nzValue]="city.value"
-                                    >
-                                  </nz-option>
-                                </nz-select>
+                        <div nz-col [nzSpan]="12">
+                            <nz-form-item >
+                                <nz-form-label nzFor="duration">Тип аренды</nz-form-label>
+                                <nz-form-control 
+                                nzErrorTip="Укажите срок!">
+                                    <nz-select 
+                                    [(ngModel)]="selectedDuration"
+                                    formControlName="duration"
+                                    [nzSize]="'large'"
+                                    nzPlaceHolder="Выберите срок">
+                                      <nz-option
+                                        *ngFor="let duration of listOfDuration"
+                                        [nzLabel]="duration.label"
+                                        [nzValue]="duration.value"
+                                        >
+                                      </nz-option>
+                                    </nz-select>
+                                </nz-form-control>
                             </nz-form-item>
-                            
                         </div>
                     </nz-row>
                     

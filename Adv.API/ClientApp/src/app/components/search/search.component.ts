@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cities } from 'src/app/models/cities';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Duration } from 'src/app/models/duration';
 
 @Component({
   selector: 'app-search',
@@ -14,19 +15,24 @@ export class SearchComponent implements OnInit {
     /** Array of cities */
     listOfCities: Array<{ label: string; value: number}> = [];
     longForm: FormGroup;
+     /** duration long */
+  selectedDuration: number = 0;
+  listOfDuration: Array<{ label: string; value: number}> = [];
   constructor(
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.initLongForm();
+    this.setDurations();
     this.setCities();
   }
 
 
   initLongForm(){
     this.longForm = this.formBuilder.group({
-      city: [this.selectedCity, [Validators.required]]
+      city: [this.selectedCity, [Validators.required]],
+      duration: [this.selectedDuration, [Validators.required]]
     })
   }
     /**
@@ -35,6 +41,15 @@ export class SearchComponent implements OnInit {
   setCities(){
     this.listOfCities.push(
       { label: 'Несвиж', value: Cities.nesvizh }
+      );
+  }
+      /**
+   * Set list of duration for select menu
+   */
+  setDurations(){
+    this.listOfDuration.push(
+      { label: 'Длительная', value: Duration.long },
+      { label: 'Часы/сутки', value: Duration.short }
       );
   }
 }
