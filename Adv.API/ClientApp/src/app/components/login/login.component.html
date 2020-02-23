@@ -35,7 +35,7 @@
                       nzType="primary" 
                       [nzSize]="'large'" 
                       [disabled]="!loginForm.valid"
-                      style="width: 100%;">Войти</button>
+                       nzBlock="true">  <i nz-icon nzType="login" nzTheme="outline"></i>Войти</button>
                     </nz-form-control>
                   </nz-form-item>
                   <nz-form-item>
@@ -43,7 +43,6 @@
                       <nz-divider [nzText]="text">
                         <ng-template #text>
                           <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
-                            <i nz-icon nzType="login" nzTheme="outline"></i>    
                             Зарегистрироваться
                           </a>
                         </ng-template>

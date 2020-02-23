@@ -35,9 +35,9 @@ namespace Adv.DAL
                 .AddEntityFrameworkStores<AdvContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddTransient(typeof(IFlatRepository), typeof(FlatRepository));
-            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
-            services.AddTransient(typeof(IFileRepository), typeof(FileRepository));
+            services.AddScoped(typeof(IFlatRepository), typeof(FlatRepository));
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            services.AddScoped(typeof(IFileRepository), typeof(FileRepository));
 
             return services;
         }
