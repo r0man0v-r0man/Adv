@@ -1,1 +1,56 @@
-<p>search works!</p>
+    <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" nzSize="large">
+        <nz-tab nzTitle="Длительно">
+            <ng-template nz-tab>
+                <form nz-form [formGroup]="longForm" nzLayout="vertical">
+                    <nz-row nzGutter="16">
+                        <div nz-col nzSpan="12">
+                            <nz-form-item>
+                                <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
+                                <nz-form-control 
+                                nzHasFeedback
+                                nzErrorTip="Выберите город!">
+                                <nz-select 
+                                [(ngModel)]="selectedCity"
+                                formControlName="city"
+                                [nzSize]="'large'"
+                                nzPlaceHolder="Выберите город">
+                                  <nz-option
+                                    *ngFor="let city of listOfCities"
+                                    [nzLabel]="city.label"
+                                    [nzValue]="city.value"
+                                    >
+                                  </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col nzSpan="12">
+                            <nz-form-item>
+                                <nz-select 
+                                [(ngModel)]="selectedCity"
+                                formControlName="city"
+                                [nzSize]="'large'"
+                                nzPlaceHolder="Выберите город">
+                                  <nz-option
+                                    *ngFor="let city of listOfCities"
+                                    [nzLabel]="city.label"
+                                    [nzValue]="city.value"
+                                    >
+                                  </nz-option>
+                                </nz-select>
+                            </nz-form-item>
+                            
+                        </div>
+                    </nz-row>
+                    
+                </form>
+            </ng-template>    
+        </nz-tab>
+        <nz-tab nzTitle="Часы/сутки">
+            <ng-template nz-tab>
+                <form nz-form [formGroup]="short" nzLayout="vertical">
+                  
+                </form>
+            </ng-template>    
+        </nz-tab>
+    </nz-tabset>

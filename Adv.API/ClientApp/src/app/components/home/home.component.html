@@ -1,8 +1,8 @@
 <nz-layout>
     <nz-content class="outer-content">
         <nz-layout class="inner-layout">
-            <nz-content class="inner-content" nz-row [nzGutter]="24">
-                <div style="text-align:center">
+            <nz-content class="inner-content" nz-row [nzGutter]="24" nzType="flex" nzJustify="center">
+                <div nz-col nzSpan="24" style="text-align:center">
                     <embed src="assets/halupa.svg" id="halupa">
                     <h1 nz-title >Halupa.by</h1>
 
@@ -14,7 +14,9 @@
                         </ng-template>
                     </nz-divider>
                 </div>
-                <app-search></app-search>
+                <div nz-col nzSpan="16">
+                    <app-search style="text-align: center;"></app-search>
+                </div>
             </nz-content>
         </nz-layout>
     </nz-content>
