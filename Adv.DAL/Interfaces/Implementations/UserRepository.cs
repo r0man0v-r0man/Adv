@@ -94,14 +94,12 @@ namespace Adv.DAL.Interfaces.Implementations
 
         bool disposed = false;
 
-        // Public implementation of Dispose pattern callable by consumers.
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        // Protected implementation of Dispose pattern.
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)
@@ -110,8 +108,6 @@ namespace Adv.DAL.Interfaces.Implementations
             if (disposing)
             {
                 userManager.Dispose();
-                // Free any other managed objects here.
-                //
             }
 
             disposed = true;
