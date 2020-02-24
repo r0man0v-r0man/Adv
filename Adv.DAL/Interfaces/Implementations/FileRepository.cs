@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -82,5 +83,8 @@ namespace Adv.DAL.Interfaces.Implementations
             return string.Concat(uniqueName, fileExtension);
         }
 
+        public void Dispose()
+        {
+        }
     }
 }

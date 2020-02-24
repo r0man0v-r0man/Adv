@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces
 {
-    public interface IFileRepository 
+    public interface IFileRepository : IBaseRepository
     {
         Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct);
         Task<bool> CloudDeleteFileAsync(string fileName);

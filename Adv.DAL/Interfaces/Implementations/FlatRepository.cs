@@ -89,5 +89,30 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
         }
+
+        bool disposed = false;
+
+        // Public implementation of Dispose pattern callable by consumers.
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        // Protected implementation of Dispose pattern.
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                contextFactory?.Dispose();
+                // Free any other managed objects here.
+                //
+            }
+
+            disposed = true;
+        }
     }
 }

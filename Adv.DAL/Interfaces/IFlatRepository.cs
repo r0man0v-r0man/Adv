@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces
 {
-    public interface IFlatRepository 
+    public interface IFlatRepository : IBaseRepository
     {
         Task<Flat> CreateAsync(Flat flat, CancellationToken ct);
         Task<Flat> GetByIdAsync(int flatId, CancellationToken ct);
