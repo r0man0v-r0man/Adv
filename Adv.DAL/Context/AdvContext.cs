@@ -23,7 +23,7 @@ namespace Adv.DAL.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder?.ApplyConfiguration(new FlatConfiguration());
-            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

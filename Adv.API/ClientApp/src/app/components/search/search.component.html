@@ -1,9 +1,9 @@
     <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" nzSize="large">
         <nz-tab nzTitle="Длительно">
             <ng-template nz-tab>
-                <form nz-form [formGroup]="longForm" nzLayout="vertical">
+                <form nz-form [formGroup]="longForm" nzLayout="vertical" >
                     <nz-row nzGutter="16" nzAlign="bottom" nzType="flex">
-                        <div nz-col nzSpan="8">
+                        <div nz-col nzSpan="6">
                             <nz-form-item>
                                 <nz-form-label nzFor="city">Выберите город</nz-form-label>
                                 <nz-form-control 
@@ -23,7 +23,7 @@
                             </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzSpan]="8">
+                        <div nz-col [nzSpan]="6">
                             <nz-form-item >
                                 <nz-form-label nzFor="rooms">Выберите квартиру</nz-form-label>
                                 <nz-form-control 
@@ -43,16 +43,45 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col  [nzSpan]="8" >
+                        <div nz-col [nzSpan]="6">
+                            <nz-form-item >
+                                <nz-form-label nzFor="price">Стоимость</nz-form-label>
+                                <nz-form-control 
+                                nzErrorTip="Укажите стоимость!">
+                                <nz-input-group nzCompact nzSize="large" >
+                                    <nz-input-number
+                                    [nzMin]="100"
+                                    [nzMax]="10000"
+                                    [nzStep]="10" nzSize="large"
+                                    [nzFormatter]="formatterDollar"
+                                    [nzParser]="parserDollar" style="width: 45%;" nzPlaceHolder="От"
+                                  ></nz-input-number>
+                                    <input
+                                      type="text"
+                                      disabled
+                                      nz-input
+                                      placeholder="~"
+                                      style="width: 10%; border-left: 0px; border-right: 0px; pointer-events: none; background-color: rgb(255, 255, 255);"
+                                    />
+                                    <nz-input-number
+                                    [nzMin]="200"
+                                    [nzMax]="10000"
+                                    [nzStep]="10" nzSize="large"
+                                    [nzFormatter]="formatterDollar" nzPlaceHolder="До"
+                                    [nzParser]="parserDollar" style="width: 45%; border-left: 0px;"
+                                  ></nz-input-number>
+                                  </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col  [nzSpan]="6" >
                             <nz-form-item  >
                                 <nz-form-control>
                                     <button nzType="primary" nz-button  nzBlock="true" nzSize="large">
                                         <i nz-icon nzType="search"></i>Найти
                                     </button>
                                 </nz-form-control>
-                              
                             </nz-form-item>
-
                         </div>
                     </nz-row>
                 </form>
