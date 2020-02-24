@@ -1,9 +1,9 @@
     <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" nzSize="large">
         <nz-tab nzTitle="Длительно">
-            <ng-template nz-tab>
+            <ng-template nz-tab >
                 <form nz-form [formGroup]="longForm" nzLayout="vertical" >
                     <nz-row nzGutter="16" nzAlign="bottom" nzType="flex">
-                        <div nz-col nzSpan="6">
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }"> 
                             <nz-form-item>
                                 <nz-form-label nzFor="city">Выберите город</nz-form-label>
                                 <nz-form-control 
@@ -23,7 +23,7 @@
                             </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzSpan]="6">
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }">
                             <nz-form-item >
                                 <nz-form-label nzFor="rooms">Выберите квартиру</nz-form-label>
                                 <nz-form-control 
@@ -43,7 +43,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzSpan]="6">
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }">
                             <nz-form-item >
                                 <nz-form-label>Стоимость</nz-form-label>
                                 <nz-form-control 
@@ -74,10 +74,10 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col  [nzSpan]="6" >
+                        <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 6 }">
                             <nz-form-item  >
                                 <nz-form-control>
-                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large">
+                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large" [disabled]="!longForm.valid">
                                         <i nz-icon nzType="search"></i>Найти
                                     </button>
                                 </nz-form-control>
