@@ -45,11 +45,11 @@
                         </div>
                         <div nz-col [nzSpan]="6">
                             <nz-form-item >
-                                <nz-form-label nzFor="price">Стоимость</nz-form-label>
+                                <nz-form-label>Стоимость</nz-form-label>
                                 <nz-form-control 
-                                nzErrorTip="Укажите стоимость!">
-                                <nz-input-group nzCompact nzSize="large" >
-                                    <nz-input-number
+                                nzErrorTip="Укажите стоимость!" >
+                                <nz-input-group nzCompact nzSize="large">
+                                    <nz-input-number [(ngModel)]="priceMin" formControlName="priceMin"
                                     [nzMin]="100"
                                     [nzMax]="10000"
                                     [nzStep]="10" nzSize="large"
@@ -63,7 +63,7 @@
                                       placeholder="~"
                                       style="width: 10%; border-left: 0px; border-right: 0px; pointer-events: none; background-color: rgb(255, 255, 255);"
                                     />
-                                    <nz-input-number
+                                    <nz-input-number [(ngModel)]="priceMax" formControlName="priceMax"
                                     [nzMin]="200"
                                     [nzMax]="10000"
                                     [nzStep]="10" nzSize="large"

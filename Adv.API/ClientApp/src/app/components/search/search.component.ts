@@ -18,6 +18,10 @@ export class SearchComponent implements OnInit {
      /** rooms  */
   selectedRoom: number = 1;
   listOfRooms: Array<{ label: string; value: number}> = [];
+  priceMin: number = 100;
+  priceMax: number = 200;
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -32,7 +36,9 @@ export class SearchComponent implements OnInit {
   initLongForm(){
     this.longForm = this.formBuilder.group({
       city: [this.selectedCity, [Validators.required]],
-      rooms: [this.selectedRoom, [Validators.required]]
+      rooms: [this.selectedRoom, [Validators.required]],
+      priceMin: [this.priceMin, [Validators.required]],
+      priceMax: [this.priceMax, [Validators.required]]
     })
   }
     /**
