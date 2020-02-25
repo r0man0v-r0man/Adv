@@ -15,5 +15,6 @@ export class Constants {
   //file
   static uploadFileUrl = environment.webApi + 'file';
   static deleteFileUrl = environment.webApi +  'file';
-
+  //search
+  static searchFlat = environment.webApi + 'search'
 }
