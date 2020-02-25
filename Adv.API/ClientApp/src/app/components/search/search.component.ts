@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
     selectedCity: number = 0;
     /** Array of cities */
     listOfCities: Array<{ label: string; value: number}> = [];
-    longForm: FormGroup;
+    searchForm: FormGroup;
      /** rooms  */
   selectedRoom: number = 1;
   listOfRooms: Array<{ label: string; value: number}> = [];
@@ -22,6 +22,10 @@ export class SearchComponent implements OnInit {
   priceMax: number = 200;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
+
+  selectedRentType: number = 0;
+  listOfRentType: Array<{ label: string; value: number}> = [];
+
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -30,15 +34,17 @@ export class SearchComponent implements OnInit {
     this.initLongForm();
     this.setRooms();
     this.setCities();
+    this.setRentTypes();
   }
 
 
   initLongForm(){
-    this.longForm = this.formBuilder.group({
+    this.searchForm = this.formBuilder.group({
       city: [this.selectedCity, [Validators.required]],
       rooms: [this.selectedRoom, [Validators.required]],
       priceMin: [this.priceMin, [Validators.required]],
-      priceMax: [this.priceMax, [Validators.required]]
+      priceMax: [this.priceMax, [Validators.required]],
+      rentType: [this.selectedRentType, [Validators.required]]
     })
   }
     /**
@@ -47,6 +53,15 @@ export class SearchComponent implements OnInit {
   setCities(){
     this.listOfCities.push(
       { label: 'Несвиж', value: Cities.nesvizh }
+      );
+  }
+        /**
+   * Set list of rooms for select menu
+   */
+  setRentTypes(){
+    this.listOfRentType.push(
+      { label: 'Длительная', value: Duration.long },
+      { label: 'Часы/сутки', value: Duration.short }
       );
   }
       /**
@@ -58,5 +73,8 @@ export class SearchComponent implements OnInit {
       { label: 'Двухкомнатная', value: 2 },
       { label: 'Трехкомнатная', value: 3 }
       );
+  }
+  submitSearchForm(searchForm: any){
+    
   }
 }

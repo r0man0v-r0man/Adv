@@ -1,9 +1,6 @@
-    <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'" nzSize="large">
-        <nz-tab nzTitle="Длительно">
-            <ng-template nz-tab >
-                <form nz-form [formGroup]="longForm" nzLayout="vertical" >
+                <form nz-form [formGroup]="searchForm" nzLayout="vertical"  (ngSubmit)="submitSearchForm(searchForm.value)">
                     <nz-row nzGutter="16" nzAlign="bottom" nzType="flex">
-                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }"> 
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 6 }"> 
                             <nz-form-item>
                                 <nz-form-label nzFor="city">Выберите город</nz-form-label>
                                 <nz-form-control 
@@ -23,11 +20,11 @@
                             </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }">
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 6 }">
                             <nz-form-item >
                                 <nz-form-label nzFor="rooms">Выберите квартиру</nz-form-label>
                                 <nz-form-control 
-                                nzErrorTip="Укажите срок!">
+                                nzErrorTip="Выберите квартиру!">
                                     <nz-select 
                                     [(ngModel)]="selectedRoom"
                                     formControlName="rooms"
@@ -43,7 +40,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 8 }" [nzXl]="{ span : 6 }">
+                        <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 6 }">
                             <nz-form-item >
                                 <nz-form-label>Стоимость</nz-form-label>
                                 <nz-form-control 
@@ -74,10 +71,30 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 6 }">
+                        <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 6 }">
                             <nz-form-item  >
-                                <nz-form-control>
-                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large" [disabled]="!longForm.valid">
+                                <nz-form-label nzFor="rentType">Тип аренды</nz-form-label>
+                                <nz-form-control 
+                                nzErrorTip="Выберите тип аренды!">
+                                    <nz-select 
+                                    [(ngModel)]="selectedRentType"
+                                    formControlName="rentType"
+                                    [nzSize]="'large'"
+                                    nzPlaceHolder="Тип аренды">
+                                      <nz-option
+                                        *ngFor="let rentType of listOfRentType"
+                                        [nzLabel]="rentType.label"
+                                        [nzValue]="rentType.value"
+                                        >
+                                      </nz-option>
+                                    </nz-select>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div  nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">
+                            <nz-form-item   >
+                                <nz-form-control  >
+                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large" [disabled]="!searchForm.valid">
                                         <i nz-icon nzType="search"></i>Найти
                                     </button>
                                 </nz-form-control>
@@ -85,13 +102,3 @@
                         </div>
                     </nz-row>
                 </form>
-            </ng-template>    
-        </nz-tab>
-        <nz-tab nzTitle="Часы/сутки">
-            <ng-template nz-tab>
-                <form nz-form [formGroup]="short" nzLayout="vertical">
-                  
-                </form>
-            </ng-template>    
-        </nz-tab>
-    </nz-tabset>
