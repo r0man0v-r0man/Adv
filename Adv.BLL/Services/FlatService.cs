@@ -1,14 +1,10 @@
 ﻿using Adv.BLL.DTO;
-using Adv.BLL.Exceptions;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Adv.DAL.Entities;
-using System.Runtime.CompilerServices;
 using System.IO;
 using System.Linq;
 
@@ -77,6 +73,12 @@ namespace Adv.BLL.Services
         {
             var result = await flatRepository.UpdateAsync(updatedProperties, id, ct).ConfigureAwait(false);
             return result;
+        }
+
+        public async Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType)
+        {
+            var result = await flatRepository.FindByCriteriaAsync(city,rooms, priceMin, priceMax, rentType).ConfigureAwait(false);
+            return result.Select(flat => (FlatDTO) flat).ToList();
         }
     }
 }

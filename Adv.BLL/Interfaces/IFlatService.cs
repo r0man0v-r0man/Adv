@@ -27,5 +27,15 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<bool> UpdateAsync(FlatUpdateDTO updatedProperties, int id, CancellationToken ct);
+        /// <summary>
+        /// Find flats by criteria
+        /// </summary>
+        /// <param name="city">city</param>
+        /// <param name="rooms">the count of rooms</param>
+        /// <param name="priceMin">price from</param>
+        /// <param name="priceMax">price to</param>
+        /// <param name="rentType">long or short</param>
+        /// <returns></returns>
+        Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType);
     }
 }

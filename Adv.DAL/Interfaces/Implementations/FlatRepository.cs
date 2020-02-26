@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.DAL.Entities.Enums;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -89,6 +90,18 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
         }
+        public async Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType)
+        {
+            using var context = contextFactory.GetAdvContext();
+            var query = context.Flats
+                .AsNoTracking()
+                .Where(flat =>
+                    flat.City == (Cities.CityName) city &&
+                    flat.IsActive &&
+                    flat.Rooms == rooms &&
+                    flat.Duration == (Duration.RentTime) rentType &&
+                    (flat.Price >= priceMin && flat.Price <= priceMax));
+        }
 
         bool disposed = false;
 
@@ -110,5 +123,7 @@ namespace Adv.DAL.Interfaces.Implementations
 
             disposed = true;
         }
+
+
     }
 }

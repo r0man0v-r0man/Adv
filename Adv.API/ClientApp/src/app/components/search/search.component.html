@@ -1,4 +1,4 @@
-                <form nz-form [formGroup]="searchForm" nzLayout="vertical"  (ngSubmit)="submitSearchForm(searchForm.value)">
+                <form nz-form [formGroup]="searchForm" nzLayout="vertical"  (ngSubmit)="submitSearchForm()">
                     <nz-row nzGutter="16" nzAlign="bottom" nzType="flex">
                         <div nz-col [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 6 }"> 
                             <nz-form-item>
@@ -94,7 +94,7 @@
                         <div  nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">
                             <nz-form-item   >
                                 <nz-form-control  >
-                                    <button nzType="primary" nz-button  nzBlock="true" nzSize="large" [disabled]="!searchForm.valid">
+                                    <button  nzType="primary" nz-button  nzBlock="true" nzSize="large" [disabled]="!searchForm.valid">
                                         <i nz-icon nzType="search"></i>Найти
                                     </button>
                                 </nz-form-control>

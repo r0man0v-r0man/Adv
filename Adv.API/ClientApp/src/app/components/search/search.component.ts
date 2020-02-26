@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Cities } from 'src/app/models/cities';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Duration } from 'src/app/models/duration';
+import { SearchFlatService } from 'src/app/services/search-flat.service';
+import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 
 @Component({
   selector: 'app-search',
@@ -27,18 +29,19 @@ export class SearchComponent implements OnInit {
   listOfRentType: Array<{ label: string; value: number}> = [];
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private searchService: SearchFlatService
   ) { }
 
   ngOnInit() {
-    this.initLongForm();
+    this.initForm();
     this.setRooms();
     this.setCities();
     this.setRentTypes();
   }
 
 
-  initLongForm(){
+  initForm(){
     this.searchForm = this.formBuilder.group({
       city: [this.selectedCity, [Validators.required]],
       rooms: [this.selectedRoom, [Validators.required]],
@@ -74,7 +77,12 @@ export class SearchComponent implements OnInit {
       { label: 'Трехкомнатная', value: 3 }
       );
   }
-  submitSearchForm(searchForm: any){
+  submitSearchForm(){
+    let criteria = new SearchFlatCriteria(this.searchForm.value);
     
+    this.searchService.findFlats(criteria).subscribe(response => {
+      console.log(response);
+    })
+
   }
 }
