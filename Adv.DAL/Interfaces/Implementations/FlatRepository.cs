@@ -101,6 +101,7 @@ namespace Adv.DAL.Interfaces.Implementations
                     flat.Rooms == rooms &&
                     flat.Duration == (Duration.RentTime) rentType &&
                     (flat.Price >= priceMin && flat.Price <= priceMax));
+            return await query.ToListAsync();
         }
 
         bool disposed = false;
