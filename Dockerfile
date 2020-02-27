@@ -19,10 +19,10 @@ COPY ["Adv.API/Adv.API.csproj", "Adv.API/"]
 COPY ["Adv.DAL/Adv.DAL.csproj", "Adv.DAL/"]
 COPY ["Adv.BLL/Adv.BLL.csproj", "Adv.BLL/"]
 RUN dotnet restore "Adv.API/Adv.API.csproj"
+
 COPY . .
 WORKDIR "/src/Adv.API"
 RUN dotnet build "Adv.API.csproj" -c Release -o /app/build
-
 FROM build AS publish
 RUN dotnet publish "Adv.API.csproj" -c Release -o /app/publish
 
