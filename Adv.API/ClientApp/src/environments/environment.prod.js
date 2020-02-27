@@ -2,6 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
     production: true,
-    webApi: 'http://178.159.243.121:80/api/'
+    webApi: 'https://localhost:44335/api/'
 };
 //# sourceMappingURL=environment.prod.js.map
