@@ -21,10 +21,10 @@ COPY ["Adv.BLL/Adv.BLL.csproj", "Adv.BLL/"]
 RUN dotnet restore "Adv.API/Adv.API.csproj"
 COPY . .
 WORKDIR "/src/Adv.API"
-RUN dotnet build "Adv.API.csproj" -c Debug -o /app/build
+RUN dotnet build "Adv.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Adv.API.csproj" -c Debug -o /app/publish
+RUN dotnet publish "Adv.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
