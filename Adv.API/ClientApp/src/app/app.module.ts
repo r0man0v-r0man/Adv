@@ -16,7 +16,6 @@ import { FlatsComponent } from './components/flat/flats/flats.component';
 import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AddAdvertComponent } from './modal/add-advert/add-advert.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { AddressPipe } from './customPipes/address.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
