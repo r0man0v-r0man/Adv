@@ -26,15 +26,19 @@ WORKDIR /src
 COPY ["Adv.API/Adv.API.csproj", "Adv.API/"]
 COPY ["Adv.DAL/Adv.DAL.csproj", "Adv.DAL/"]
 COPY ["Adv.BLL/Adv.BLL.csproj", "Adv.BLL/"]
+RUN cd /src/adv.api/clientapp \ 
+&& npm install ng-zorro-antd --save
 RUN dotnet restore "Adv.API/Adv.API.csproj"
+
+
 
 COPY . .
 WORKDIR /src/Adv.API
-RUN dotnet build "Adv.API.csproj" -c Release -o /app
+RUN dotnet build "Adv.API.csproj" -c Release -o /app/build
 FROM build AS publish
-RUN dotnet publish "Adv.API.csproj" -c Release -o /app
+RUN dotnet publish "Adv.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
-WORKDIR /app
-COPY --from=publish /app .
+WORKDIR /app/publish
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Adv.API.dll"]
