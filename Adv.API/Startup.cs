@@ -36,6 +36,7 @@ namespace Adv.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHsts();
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
