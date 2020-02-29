@@ -17,7 +17,9 @@ COPY Adv.DAL/Adv.DAL.csproj ./Adv.DAL/
 COPY Adv.BLL/Adv.BLL.csproj ./Adv.BLL/
 COPY XMLConverter/XMLConverter.csproj ./XMLConverter/
 RUN dotnet restore
-
+COPY adv.api/clientapp/package.json ./adv.api/clientapp/
+RUN cd ./adv.api/clientapp \ 
+&& npm i
 COPY Adv.API/. ./Adv.API/
 COPY Adv.DAL/. ./Adv.DAL/
 COPY Adv.BLL/. ./Adv.BLL/
@@ -26,13 +28,6 @@ WORKDIR /source/Adv.API/
 RUN dotnet publish -c release -o /app 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-# Setup NodeJs
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y gnupg2 && \
-    wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get install -y build-essential nodejs
-# Copy everything else and build
 WORKDIR /app
 COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "Adv.API.dll"]
