@@ -1,44 +1,38 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 # Setup NodeJs
-RUN apt-get -qq update && \
-    apt-get -qq install -y wget && \
-    apt-get -qq install -y gnupg2 && \
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get install -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get -qq install -y build-essential nodejs && \
-    apt-get -qq install -y nginx
-# End setup
-WORKDIR /app
+    apt-get install -y build-essential nodejs
+# Copy everything else and build
+WORKDIR /source
 EXPOSE 19138
 EXPOSE 44335
+# Copy csproj and restore as distinct layers
+COPY Adv.sln .
+COPY Adv.API/Adv.API.csproj ./Adv.API/
+COPY Adv.DAL/Adv.DAL.csproj ./Adv.DAL/
+COPY Adv.BLL/Adv.BLL.csproj ./Adv.BLL/
+COPY XMLConverter/XMLConverter.csproj ./XMLConverter/
+RUN dotnet restore
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+COPY Adv.API/. ./Adv.API/
+COPY Adv.DAL/. ./Adv.DAL/
+COPY Adv.BLL/. ./Adv.BLL/
+COPY XMLConverter/. ./XMLConverter/
+WORKDIR /source/Adv.API/
+RUN dotnet publish -c release -o /app 
+# final stage/image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 # Setup NodeJs
-RUN apt-get -qq update && \
-    apt-get -qq install -y wget && \
-    apt-get -qq install -y gnupg2 && \
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get install -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get -qq install -y build-essential nodejs && \
-    apt-get -qq install -y nginx
-# End setup
-WORKDIR /src
-COPY ["Adv.API/Adv.API.csproj", "Adv.API/"]
-COPY ["Adv.DAL/Adv.DAL.csproj", "Adv.DAL/"]
-COPY ["Adv.BLL/Adv.BLL.csproj", "Adv.BLL/"]
-RUN cd /src/adv.api/clientapp \ 
-&& npm install ng-zorro-antd --save
-RUN dotnet restore "Adv.API/Adv.API.csproj"
-
-
-
-COPY . .
-WORKDIR /src/Adv.API
-RUN dotnet build "Adv.API.csproj" -c Release -o /app/build
-FROM build AS publish
-RUN dotnet publish "Adv.API.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app/publish
-COPY --from=publish /app/publish .
+    apt-get install -y build-essential nodejs
+# Copy everything else and build
+WORKDIR /app
+COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "Adv.API.dll"]
