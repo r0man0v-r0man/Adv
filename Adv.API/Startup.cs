@@ -24,6 +24,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
@@ -47,13 +48,17 @@ namespace Adv.API
 
 
             app.UseRouting();
-
+            app.UseCors(options =>
+            {
+                options.AllowAnyOrigin();
+                options.AllowAnyMethod();
+                options.AllowAnyHeader();
+            });
             //who are you?
             app.UseAuthentication();
          
             //are you allowed?
             app.UseAuthorization();
-
            
 
             app.UseEndpoints(endpoints =>
