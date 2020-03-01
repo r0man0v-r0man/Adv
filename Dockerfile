@@ -1,33 +1,35 @@
 
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+RUN apt-get update -yq \
+    && apt-get install curl gnupg -yq \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && apt-get install nodejs -yq
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-# Setup NodeJs
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y gnupg2 && \
-    wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get install -y build-essential nodejs
-# Copy everything else and build
-WORKDIR /source
-EXPOSE 19138
-EXPOSE 44335
+RUN apt-get update -yq \
+    && apt-get install curl gnupg -yq \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash \
+    && apt-get install nodejs -yq
+WORKDIR /src
 # Copy csproj and restore as distinct layers
 COPY Adv.sln .
 COPY Adv.API/Adv.API.csproj ./Adv.API/
 COPY Adv.DAL/Adv.DAL.csproj ./Adv.DAL/
 COPY Adv.BLL/Adv.BLL.csproj ./Adv.BLL/
 COPY XMLConverter/XMLConverter.csproj ./XMLConverter/
+
 RUN dotnet restore
-COPY adv.api/clientapp/package.json ./adv.api/clientapp/
-RUN cd ./adv.api/clientapp \ 
-&& npm i
-COPY Adv.API/. ./Adv.API/
-COPY Adv.DAL/. ./Adv.DAL/
-COPY Adv.BLL/. ./Adv.BLL/
-COPY XMLConverter/. ./XMLConverter/
-WORKDIR /source/Adv.API/
-RUN dotnet publish -c release -o /app 
-# final stage/image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+
+COPY . .
+
+WORKDIR /src/Adv.API/
+RUN dotnet build -c Release -o /app/build
+FROM build AS publish
+RUN dotnet publish -c Release -o /app/publish
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app ./
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Adv.API.dll"]
