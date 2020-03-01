@@ -24,7 +24,15 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy((builder) =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
@@ -45,15 +53,10 @@ namespace Adv.API
             {
                 app.UseSpaStaticFiles();
             }
-
+            app.UseCors();
 
             app.UseRouting();
-            app.UseCors(options =>
-            {
-                options.AllowAnyOrigin();
-                options.AllowAnyMethod();
-                options.AllowAnyHeader();
-            });
+
             //who are you?
             app.UseAuthentication();
          
