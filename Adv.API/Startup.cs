@@ -6,6 +6,7 @@ using Adv.BLL;
 using Adv.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,7 +48,14 @@ namespace Adv.API
 
             //app.UseHsts();
             //app.UseHttpsRedirection();
+            var forwarOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            };
+            forwarOptions.KnownNetworks.Clear();
+            forwarOptions.KnownProxies.Clear();
 
+            app.UseForwardedHeaders(forwarOptions);
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
