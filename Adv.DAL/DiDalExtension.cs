@@ -14,9 +14,10 @@ namespace Adv.DAL
     {
         public static IServiceCollection AddDal(this IServiceCollection services, IConfiguration configuration)
         {
-            var connection = configuration.GetConnectionString("AdvConnection");
             services.AddDbContextPool<AdvContext>(options =>
             {
+                var connection = configuration.GetConnectionString("AdvConnection");
+
                 options.UseSqlServer(connection);
             });
             services.AddTransient<IContextFactory, ContextFactory>();

@@ -14,14 +14,14 @@ namespace Adv.API
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup<Startup>().UseUrls("http://+:19138")
-                .Build();
+            CreateHostBuilder(args).Build().Run();
+            //var host = new WebHostBuilder()
+            //    .UseKestrel()
+            //    .UseContentRoot(Directory.GetCurrentDirectory())
+            //    .UseStartup<Startup>().UseUrls("http://+:19138")
+            //    .Build();
 
-            host.Run();
+            //host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -30,7 +30,7 @@ namespace Adv.API
                 {
                     webBuilder
                         .UseStartup<Startup>()
-                        .UseUrls("http://*:19138");
+                        .UseUrls("http://+:19138");
                 });
     }
 }

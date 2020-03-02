@@ -17,7 +17,7 @@ namespace Adv.DAL.Context
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
 
 

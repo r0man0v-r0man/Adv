@@ -16,7 +16,7 @@ namespace Adv.API
 {
     public class Startup
     {
-        private IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
         {
@@ -48,18 +48,11 @@ namespace Adv.API
 
             //app.UseHsts();
             //app.UseHttpsRedirection();
-            var forwarOptions = new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            };
-            forwarOptions.KnownNetworks.Clear();
-            forwarOptions.KnownProxies.Clear();
-
-            app.UseForwardedHeaders(forwarOptions);
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();
