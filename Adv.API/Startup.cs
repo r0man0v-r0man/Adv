@@ -26,11 +26,11 @@ namespace Adv.API
         {
             services.AddCors(options =>
             {
-                options.AddDefaultPolicy((builder) =>
+                options.AddDefaultPolicy(builder =>
                 {
                     builder.AllowAnyOrigin();
-                    builder.AllowAnyMethod();
                     builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
                 });
             });
             services.AddApi(Configuration);
@@ -45,15 +45,14 @@ namespace Adv.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHsts();
-            app.UseHttpsRedirection();
+            //app.UseHsts();
+            //app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
-            app.UseCors();
 
             app.UseRouting();
 
