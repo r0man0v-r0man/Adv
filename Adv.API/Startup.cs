@@ -52,7 +52,6 @@ namespace Adv.API
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
-                app.UseDeveloperExceptionPage();
             }
 
             app.UseRouting();

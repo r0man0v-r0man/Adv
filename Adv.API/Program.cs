@@ -15,6 +15,7 @@ namespace Adv.API
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+            //or use this if you are thing it's better choise
             //var host = new WebHostBuilder()
             //    .UseKestrel()
             //    .UseContentRoot(Directory.GetCurrentDirectory())
@@ -28,9 +29,7 @@ namespace Adv.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder
-                        .UseStartup<Startup>()
-                        .UseUrls("http://+:19138");
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

@@ -1,6 +1,8 @@
 
 #FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-buster-slim AS base
+#FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-buster-slim AS base 
+#use bionic cause from another images won't connect to sql
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS base
 RUN apt-get update -yq \
     && apt-get install curl gnupg -yq \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
@@ -8,7 +10,7 @@ RUN apt-get update -yq \
 WORKDIR /app
 EXPOSE 80
 #FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-bionic AS build
 RUN apt-get update -yq \
     && apt-get install curl gnupg -yq \
     && curl -sL https://deb.nodesource.com/setup_10.x | bash \
