@@ -93,15 +93,17 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType)
         {
             using var context = contextFactory.GetAdvContext();
-            var query = context.Flats
+            
+            return await context.Flats
                 .AsNoTracking()
                 .Where(flat =>
-                    flat.City == (Cities.CityName) city &&
-                    flat.IsActive &&
+                    flat.Price >= priceMin && flat.Price <= priceMax &&
+                    flat.City == (Cities.CityName)city &&
                     flat.Rooms == rooms &&
-                    flat.Duration == (Duration.RentTime) rentType &&
-                    (flat.Price >= priceMin && flat.Price <= priceMax));
-            return await query.ToListAsync();
+                    flat.Duration == (Duration.RentTime)rentType &&
+                    flat.IsActive == true)
+                .OrderByDescending(flat => flat.Created)
+                .ToListAsync().ConfigureAwait(false);
         }
 
         bool disposed = false;
