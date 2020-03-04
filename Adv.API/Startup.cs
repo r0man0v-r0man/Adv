@@ -25,15 +25,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin();
-                    builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                });
-            });
+            services.AddCors();
             services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
@@ -48,6 +40,9 @@ namespace Adv.API
 
             //app.UseHsts();
             //app.UseHttpsRedirection();
+            app.UseCors(options => {
+                options.WithOrigins("http://halupa.by").AllowAnyHeader().AllowAnyMethod();
+            });
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
