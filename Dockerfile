@@ -21,6 +21,7 @@ COPY Adv.sln .
 COPY Adv.API/Adv.API.csproj ./Adv.API/
 COPY Adv.DAL/Adv.DAL.csproj ./Adv.DAL/
 COPY Adv.BLL/Adv.BLL.csproj ./Adv.BLL/
+COPY XMLConverter/XMLConverter.csproj ./XMLConverter/
 
 RUN dotnet restore
 
