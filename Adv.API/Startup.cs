@@ -20,6 +20,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLetsEncrypt();
             services.AddCors();
             services.AddApi(Configuration);
             services.AddBll();
