@@ -34,10 +34,10 @@ namespace Adv.API
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseHsts();
-            //app.UseHttpsRedirection();
+            app.UseHsts();
+            app.UseHttpsRedirection();
             app.UseCors(options => {
-                options.WithOrigins("http://halupa.by").AllowAnyHeader().AllowAnyMethod();
+                options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
             });
             app.UseStaticFiles();
             if (!env.IsDevelopment())
