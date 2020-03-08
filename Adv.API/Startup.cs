@@ -41,7 +41,7 @@ namespace Adv.API
             }
 
             app.UseHsts();
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseCors(options => {
                 options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
             });
