@@ -16,7 +16,7 @@ namespace Adv.API
         public static void Main(string[] args)
         {
             //CreateHostBuilder(args).Build().Run();
-           // or use this if you are thing it's better choise
+            // or use this if you are thing it's better choise
             var host = new WebHostBuilder()
                 .UseKestrel(options =>
                 {
