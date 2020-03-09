@@ -15,19 +15,19 @@ namespace Adv.API
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
             // or use this if you are thing it's better choise
-            var host = new WebHostBuilder()
-                .UseKestrel(options =>
-                {
-                    options.Listen(IPAddress.Any, 80);
-                    options.Listen(IPAddress.Loopback, 443);
-                })
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup<Startup>()
-                .Build();
+            //var host = new WebHostBuilder()
+            //    .UseKestrel(options =>
+            //    {
+            //        options.Listen(IPAddress.Any, 80);
+            //        options.Listen(IPAddress.Loopback, 443);
+            //    })
+            //    .UseContentRoot(Directory.GetCurrentDirectory())
+            //    .UseStartup<Startup>()
+            //    .Build();
 
-            host.Run();
+            //host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
