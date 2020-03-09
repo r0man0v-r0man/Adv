@@ -21,7 +21,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLetsEncrypt();
+            //services.AddLetsEncrypt();
             services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
