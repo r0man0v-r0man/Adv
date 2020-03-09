@@ -19,9 +19,12 @@ namespace Adv.API
             Configuration = configuration;
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
         {
-            services.AddLetsEncrypt();
+            if (!env.IsDevelopment())
+            {
+                services.AddLetsEncrypt();
+            }
             //services.AddHttpsRedirection(options =>
             //{
             //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
