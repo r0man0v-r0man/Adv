@@ -21,7 +21,7 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         { 
-            services.AddLetsEncrypt();
+            //services.AddLetsEncrypt();
             //services.AddHttpsRedirection(options =>
             //{
             //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
@@ -38,16 +38,18 @@ namespace Adv.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(options => { options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()});
             }
 
-            app.UseHsts();
-            app.UseHttpsRedirection();
-            app.UseCors(options => {
-                options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
-            });
+            //app.UseHsts();
+            //app.UseHttpsRedirection();
+
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
+                app.UseCors(options => {
+                    options.WithOrigins("https://halupa.by").AllowAnyHeader().AllowAnyMethod();
+                });
                 app.UseSpaStaticFiles();
             }
 
