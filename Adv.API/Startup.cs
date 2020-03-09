@@ -21,12 +21,12 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddLetsEncrypt();
-            services.AddHttpsRedirection(options =>
-            {
-                options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-                options.HttpsPort = 443;
-            });
+            services.AddLetsEncrypt();
+            //services.AddHttpsRedirection(options =>
+            //{
+            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+            //    options.HttpsPort = 443;
+            //});
             services.AddCors();
             services.AddApi(Configuration);
             services.AddBll();
