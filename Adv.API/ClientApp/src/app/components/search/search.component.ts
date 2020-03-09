@@ -28,6 +28,8 @@ export class SearchComponent implements OnInit {
   selectedRentType: number = 0;
   listOfRentType: Array<{ label: string; value: number}> = [];
 
+  /** параметры поиска */
+  criteria: SearchFlatCriteria = new SearchFlatCriteria();
   constructor(
     private formBuilder: FormBuilder,
     private searchService: SearchFlatService
@@ -78,11 +80,12 @@ export class SearchComponent implements OnInit {
       );
   }
   submitSearchForm(){
-    let criteria = new SearchFlatCriteria(this.searchForm.value);
-    
-    this.searchService.findFlats(criteria).subscribe(response => {
+    this.criteria = this.searchForm.value;
+    this.criteria.pageNumber = 1;
+    this.searchService.findFlats(this.criteria).subscribe(response => {
       console.log(response);
     })
 
   }
+  
 }

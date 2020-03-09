@@ -75,9 +75,9 @@ namespace Adv.BLL.Services
             return result;
         }
 
-        public async Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType)
+        public async Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType, int pageNumber, byte size, int skip)
         {
-            var result = await flatRepository.FindByCriteriaAsync(city,rooms, priceMin, priceMax, rentType).ConfigureAwait(false);
+            var result = await flatRepository.FindByCriteriaAsync(city,rooms, priceMin, priceMax, rentType, pageNumber, size, skip).ConfigureAwait(false);
             return result.Select(flat => (FlatDTO)flat);
         }
     }

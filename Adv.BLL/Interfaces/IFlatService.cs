@@ -36,6 +36,6 @@ namespace Adv.BLL.Interfaces
         /// <param name="priceMax">price to</param>
         /// <param name="rentType">long or short</param>
         /// <returns></returns>
-        Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType);
+        Task<IEnumerable<FlatDTO>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType, int pageNumber, byte size, int skip);
     }
 }

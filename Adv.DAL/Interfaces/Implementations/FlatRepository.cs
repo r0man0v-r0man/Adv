@@ -90,7 +90,7 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             throw new FlatNotFoundException($"Мы не нашли объявления с номером {id}");
         }
-        public async Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType)
+        public async Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType, int pageNumber, byte size, int skip)
         {
             using var context = contextFactory.GetAdvContext();
             
@@ -103,6 +103,8 @@ namespace Adv.DAL.Interfaces.Implementations
                     flat.Duration == (Duration.RentTime)rentType &&
                     flat.IsActive == true)
                 .OrderByDescending(flat => flat.Created)
+                .Skip(skip)
+                .Take(size)
                 .ToListAsync().ConfigureAwait(false);
         }
 

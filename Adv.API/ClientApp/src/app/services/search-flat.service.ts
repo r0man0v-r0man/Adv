@@ -16,7 +16,7 @@ export class SearchFlatService {
   ) { }
 
   findFlats(criteria: SearchFlatCriteria){
-    return this.httpService.post<FlatModel[]>(this.searchFlatUrl, criteria , { headers: this.authService.SecureHeaders });
+    return this.httpService.post<FlatModel[]>(this.searchFlatUrl, criteria, { headers: this.authService.SecureHeaders });
   }
 
 }

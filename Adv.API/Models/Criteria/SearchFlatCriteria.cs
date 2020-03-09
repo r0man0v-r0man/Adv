@@ -12,6 +12,7 @@ namespace Adv.API.Models.Criteria
         public decimal PriceMin { get; set; }
         public decimal PriceMax { get; set; }
         public byte RentType { get; set; }
+        public int PageNumber { get; set; }
 
     }
 }

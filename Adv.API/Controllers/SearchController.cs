@@ -24,8 +24,10 @@ namespace Adv.API.Controllers
         [HttpPost]
         public async Task<ActionResult<List<FlatViewModel>>> SearchFlats(SearchFlatCriteria criteria)
         {
+            const byte SIZE = 20;
+            var skip = (SIZE * criteria.PageNumber) - SIZE;
             var result = await flatService
-                .FindByCriteriaAsync(criteria.City, criteria.Rooms, criteria.PriceMin, criteria.PriceMax, criteria.RentType)
+                .FindByCriteriaAsync(criteria.City, criteria.Rooms, criteria.PriceMin, criteria.PriceMax, criteria.RentType, criteria.PageNumber, SIZE, skip)
                 .ConfigureAwait(false);
             return Ok(result.Select(dto => (FlatViewModel)dto));
         }
