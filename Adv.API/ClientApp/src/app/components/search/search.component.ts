@@ -33,6 +33,9 @@ export class SearchComponent implements OnInit {
   /** параметры поиска */
   criteria: SearchFlatCriteria = new SearchFlatCriteria();
   pageNumber: number = 1;
+
+  /**spinner on/off  */
+  spinner: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private searchService: SearchFlatService,
@@ -87,15 +90,21 @@ export class SearchComponent implements OnInit {
   }
   submitSearchForm(){
     this.criteria = this.searchForm.value;
+    this.data.setSearchFields(this.criteria);
     this.searchService.findFlats(this.criteria).subscribe(response => {
-      
-      console.log(response);
-      
-    this.goToResult();
+      if(response && response.length != 0){
+        this.data.setSearchResult(response);
+        this.goToResult();
+      }
+    },
+    ()=>{
+      //для ошибок
+    },
+    ()=>{
     })
 
   }
-
+  /** go to search result page */
   goToResult(){
     this.router.navigate(['search-result']);
   }

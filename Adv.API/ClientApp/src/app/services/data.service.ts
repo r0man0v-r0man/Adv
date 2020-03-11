@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
+import { FlatModel } from '../models/flatModel';
+import { SearchFlatCriteria } from '../models/searchFlatCriteria';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  private data;
+  private searchFields: SearchFlatCriteria;
+  private searchResult: FlatModel[] = [];
   constructor() { }
-  setData(data){
-    this.data = data;
+  setSearchFields(searchFields: SearchFlatCriteria){
+    this.searchFields = searchFields;
   }
 
-  getData(){
-    let temp = this.data;
-    this.clearData();
+  getSearchFields(){
+    let temp = this.searchFields;
+    this.searchFields = undefined;
     return temp;
   }
 
-  clearData(){
-    this.data = undefined;
+  setSearchResult(result: FlatModel[]){
+    this.searchResult = result;
   }
+  getSearchResult(){
+    let temp = this.searchResult;
+    this.searchResult = undefined;
+    return temp;
+  }
+
 }
