@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppComponent } from './app.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
+import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,10 @@ const routes: Routes = [
     path: 'flats',
     component: FlatsComponent,
   },
-
+  {
+    path: 'search-result',
+    component: SearchResultComponent
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -58,7 +62,7 @@ const routes: Routes = [
   {  
     path: '**', 
     component: NotFoundComponent
-  },
+  }
   
 ];
 

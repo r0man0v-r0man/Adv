@@ -28,6 +28,7 @@ import { ProfileComponent } from './drawers/profile/profile.component';
 import { DurationPipe } from './customPipes/duration.pipe';
 import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
 import { SearchComponent } from './components/search/search.component';
+import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 
 registerLocaleData(ru);
 
@@ -49,7 +50,8 @@ registerLocaleData(ru);
     FooterComponent,
     ProfileComponent,
     EditAdvertComponent,
-    SearchComponent
+    SearchComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

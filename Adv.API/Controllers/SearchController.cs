@@ -24,6 +24,7 @@ namespace Adv.API.Controllers
         [HttpPost]
         public async Task<ActionResult<List<FlatViewModel>>> SearchFlats(SearchFlatCriteria criteria)
         {
+            var a = HttpContext;
             const byte SIZE = 20;
             var skip = (SIZE * criteria.PageNumber) - SIZE;
             var result = await flatService

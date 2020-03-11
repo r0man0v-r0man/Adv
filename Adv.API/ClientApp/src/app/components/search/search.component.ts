@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Duration } from 'src/app/models/duration';
 import { SearchFlatService } from 'src/app/services/search-flat.service';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-search',
@@ -30,9 +32,12 @@ export class SearchComponent implements OnInit {
 
   /** параметры поиска */
   criteria: SearchFlatCriteria = new SearchFlatCriteria();
+  pageNumber: number = 1;
   constructor(
     private formBuilder: FormBuilder,
-    private searchService: SearchFlatService
+    private searchService: SearchFlatService,
+    private router: Router,
+    private data: DataService
   ) { }
 
   ngOnInit() {
@@ -49,7 +54,8 @@ export class SearchComponent implements OnInit {
       rooms: [this.selectedRoom, [Validators.required]],
       priceMin: [this.priceMin, [Validators.required]],
       priceMax: [this.priceMax, [Validators.required]],
-      rentType: [this.selectedRentType, [Validators.required]]
+      rentType: [this.selectedRentType, [Validators.required]],
+      pageNumber: [this.pageNumber]
     })
   }
     /**
@@ -81,11 +87,17 @@ export class SearchComponent implements OnInit {
   }
   submitSearchForm(){
     this.criteria = this.searchForm.value;
-    this.criteria.pageNumber = 1;
     this.searchService.findFlats(this.criteria).subscribe(response => {
+      
       console.log(response);
+      
+    this.goToResult();
     })
 
+  }
+
+  goToResult(){
+    this.router.navigate(['search-result']);
   }
   
 }
