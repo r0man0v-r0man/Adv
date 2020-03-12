@@ -11,6 +11,7 @@ import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 export class SearchResultComponent implements OnInit {
   list: FlatModel[] = [];
   searchFields: SearchFlatCriteria;
+
   constructor(private data: DataService) { }
 
   ngOnInit() {

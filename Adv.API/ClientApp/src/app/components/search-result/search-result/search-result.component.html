@@ -1,3 +1,44 @@
-
-<p>{{this.list | json}}</p>
-<p>{{this.searchFields | json}}</p>
+<nz-layout>
+    <nz-content class="outer-content">   
+      <nz-layout>
+        <nz-content>
+          <nz-list 
+          [nzDataSource]="list" 
+          [nzRenderItem]="flat" 
+          [nzLoading]="initLoading"
+          [nzLoadMore]="loadMore" 
+          [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 12, lg: 8, xl: 6}">
+            <ng-template #flat let-item>
+              <nz-list-item 
+              [nzContent]="nzContent">
+                <ng-template #nzContent>
+                  <nz-card  
+                      [nzCover]="flatCoverTpl"
+                      [nzExtra]="more"
+                      nzTitle="{{item.price | currency : 'USD' : 'symbol' : '2.0-0'}}">
+                      <p>{{ item | address }}</p>
+                    </nz-card>
+                    <ng-template #flatCoverTpl>
+                      <div style="height: 160px; overflow: hidden;">
+                        <img src="{{ item.files[0].linkProps.download }}" style=" width: 100%; box-sizing: border-box;" >
+                      </div>
+                    </ng-template>
+                    <ng-template #more>
+                      <a [routerLink]="['/flats', item.id]"
+                      >Подробнее</a>
+                    </ng-template>
+                </ng-template>
+              </nz-list-item>
+            </ng-template>
+            <ng-template #loadMore >
+              <div class="loadmore" >
+                <button *ngIf="isShowMoreButton" nz-button nzBlock nzSize="large" (click)="onLoadMore()">Загрузить еще</button>
+              </div>
+            </ng-template>
+          </nz-list>
+            </nz-content>
+        </nz-layout>
+    </nz-content>
+  
+  </nz-layout>
+  
