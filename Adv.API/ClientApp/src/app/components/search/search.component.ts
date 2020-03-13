@@ -6,6 +6,7 @@ import { SearchFlatService } from 'src/app/services/search-flat.service';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-search',
@@ -35,12 +36,13 @@ export class SearchComponent implements OnInit {
   pageNumber: number = 1;
 
   /**spinner on/off  */
-  spinner: boolean = false;
+  isLoading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private searchService: SearchFlatService,
     private router: Router,
-    private data: DataService
+    private data: DataService,
+    private modalService: NzModalService
   ) { }
 
   ngOnInit() {
@@ -89,6 +91,7 @@ export class SearchComponent implements OnInit {
       );
   }
   submitSearchForm(){
+    this.isLoading = true;
     this.criteria = this.searchForm.value;
     this.data.setSearchFields(this.criteria);
     this.searchService.findFlats(this.criteria).subscribe(response => {
@@ -96,11 +99,18 @@ export class SearchComponent implements OnInit {
         this.data.setSearchResult(response);
         this.goToResult();
       }
+      else{
+        this.modalService.info({
+          nzTitle: 'Мы ничего не нашли!',
+          nzContent: 'Извините, по указанным параметрам сейчас нет объявлений'
+        })
+      }
     },
     ()=>{
-      //для ошибок
+      this.isLoading = false;
     },
     ()=>{
+      this.isLoading = false;
     })
 
   }
