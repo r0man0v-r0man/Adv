@@ -2,7 +2,6 @@ using Adv.BLL;
 using Adv.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,12 +20,6 @@ namespace Adv.API
 
         public void ConfigureServices(IServiceCollection services)
         { 
-            //services.AddLetsEncrypt();
-            //services.AddHttpsRedirection(options =>
-            //{
-            //    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-            //    options.HttpsPort = 443;
-            //});
             services.AddCors();
             services.AddApi(Configuration);
             services.AddBll();

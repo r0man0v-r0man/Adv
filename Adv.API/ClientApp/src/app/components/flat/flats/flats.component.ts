@@ -46,11 +46,6 @@ export class FlatsComponent implements OnInit {
           this.isShowMoreButton = false;
         }
         this.initLoading = false;
-
-
-
-        console.log(this.pageNumber);
-        console.log(this.list);
       });
     
   }
@@ -62,10 +57,12 @@ export class FlatsComponent implements OnInit {
           this.list = flats
           this.initLoading = false;
           this.pageNumber++;
-        }},()=>{}, ()=>
-        {
           this.isShowMoreButton = true;
-        })
+        } else {
+          this.initLoading = false;
+          this.isShowMoreButton = false;
+        }
+      })
   }
 
 }
