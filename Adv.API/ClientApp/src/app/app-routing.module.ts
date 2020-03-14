@@ -15,49 +15,52 @@ import { SearchResultComponent } from './components/search-result/search-result/
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      title: 'Halupa.by'
+    }
   },
   {
     path: 'flats/:id',
-    component: FlatDetailComponent
+    component: FlatDetailComponent,
+    data: {
+      title: 'Квартиры'
+    }
   },
   {
     path: 'flats',
     component: FlatsComponent,
+    data: {
+      title: 'Квартиры'
+    }
   },
   {
     path: 'search-result',
-    component: SearchResultComponent
+    component: SearchResultComponent,
+    data: {
+      title: 'Результаты поиска'
+    }
   },
   {
     path: 'login',
     component: LoginComponent,
-    // children:[
-    //   {
-    //     path: '',
-    //     component: LoginComponent
-    //   }
-    // ]
+    data: {
+      title: 'Войти'
+    }
   },
   {
     path: 'register',
     component: RegisterComponent,
-    // children:[
-    //   {
-    //     path: '',
-    //     component: RegisterComponent
-    //   }
-    // ]
+    data: {
+      title: 'Регистрация'
+    }
   },
   {
     path: 'access-denied',
     component: AccessDeniedComponent,
-    // children:[
-    //   {
-    //     path:'',
-    //     component: AccessDeniedComponent
-    //   }
-    // ]
+    data: {
+      title: 'Доступ запрещен'
+    }
   },
   {  
     path: '**', 

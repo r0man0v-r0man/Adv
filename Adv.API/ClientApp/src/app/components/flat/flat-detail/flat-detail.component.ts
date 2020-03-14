@@ -20,18 +20,20 @@ export class FlatDetailComponent implements OnInit {
 
   constructor(
     private flatService:FlatService,
-    private route: ActivatedRoute,
+    route: ActivatedRoute,
     private router: Router,
     private navService: NavbarService,
     private footerService: FooterService
 
-  ) {  }
+  ) { /** because in the same url component won't reload */
+    route.params.subscribe(val => {
+      this.getFlat(val['id']);
+    });
+   }
 
   ngOnInit() {
     this.navService.show();
     this.footerService.show();
-    this.routeReUseStrategy();
-    this.getFlat(this.getFlatIdFromRoute());
   }
   pre(){
     this.flatImageCarousel.pre();
@@ -46,29 +48,8 @@ export class FlatDetailComponent implements OnInit {
       this.flat = response
   });
   }
-  /** for open detail after modal close */
-  routeReUseStrategy(){
-    // override the route reuse strategy
-    this.router.routeReuseStrategy.shouldReuseRoute = function () {
-      return false;
-    };
-    this.router.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd) {
-        // trick the Router into believing it's last link wasn't previously loaded
-        this.router.navigated = false;
-      }
-    });
-  }
   onShowContacts(){
     this.isShowContacts = !this.isShowContacts;
-  }
-
-  getFlatIdFromRoute() : number {
-    let flatId: number;
-    this.route.params.subscribe(params =>{
-      flatId = params['id'];
-    })
-    return flatId;
   }
 
 }

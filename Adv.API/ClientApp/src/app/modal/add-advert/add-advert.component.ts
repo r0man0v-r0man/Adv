@@ -22,9 +22,9 @@ export class AddAdvertComponent implements OnInit {
   uploadUrl = Constants.uploadFileUrl;
 
   /** Minimum dimension/resolution for image */
-  minDimension = 1000;
+  minDimension = 250;
   /** Max file size in mb */
-  maxFileSize = 3;
+  maxFileSize = 5;
   /** Selected City, default district is: 0 */
   selectedCity: number = 0;
   /** Array of cities */
@@ -198,7 +198,7 @@ export class AddAdvertComponent implements OnInit {
         width = img.naturalWidth;
         height = img.naturalHeight;    
         const isMinDimension = (width >= resolution && height >= resolution)
-        if(!isMinDimension) throw new UserWarning('Разрешение изображения меньше 1000px');
+        if(!isMinDimension) throw new UserWarning('Разрешение изображения меньше 500px');
         
           observer.next(isMinDimension);
           observer.complete();

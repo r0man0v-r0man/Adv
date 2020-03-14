@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,6 +68,7 @@ registerLocaleData(ru);
     EditAdvertComponent
   ],
   providers: [
+    Title,
     AuthGuardService,
     { 
       provide: NZ_I18N, useValue: ru_RU 

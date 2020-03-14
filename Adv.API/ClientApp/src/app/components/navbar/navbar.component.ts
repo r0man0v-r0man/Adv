@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { NzModalService, NzDrawerService } from 'ng-zorro-antd';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NzModalService, NzDrawerService, NzNotificationService } from 'ng-zorro-antd';
 import { AddAdvertComponent } from 'src/app/modal/add-advert/add-advert.component';
 import { FlatService } from 'src/app/services/flat.service';
-import { Constants } from 'src/app/constants';
 import { FlatModel } from 'src/app/models/flatModel';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
 import { NavbarService } from 'src/app/services/navbar.service';
@@ -16,20 +15,18 @@ import { NavbarService } from 'src/app/services/navbar.service';
 })
 export class NavbarComponent implements OnInit {
   isLogedIn :boolean = false;
+  newFlatId;
   constructor(
     private modalService: NzModalService, 
     private flatService: FlatService,
     private router: Router, 
+    private route: ActivatedRoute,
     public authService: AuthService,
     private drawerService: NzDrawerService,
-    public navService: NavbarService
+    public navService: NavbarService,
+    private notificationService: NzNotificationService
     ) { }
   ngOnInit() {
-    
-  }
-
-  goToDetails(id: number){
-    this.router.navigate(['flats', id]);
   }
   showAddAdvertModal(){
   const modal = this.modalService.create({
@@ -48,9 +45,17 @@ export class NavbarComponent implements OnInit {
               newFlatAdvert.userId = this.authService.currentUser.sub;
               this.flatService
                 .createFlat(newFlatAdvert)
-                .subscribe(
-                  response => {
-                    this.goToDetails(response.id);
+                .subscribe(response => {
+                    if(response){
+                      this.notificationService.success(
+                        'Объявление создано',
+                        'Все хорошо, вы добавили новое объявление',
+                        {
+                          nzPauseOnHover: true
+                        }
+                      )
+                      this.router.navigate(['../flats', response.id], {relativeTo: this.route.parent})
+                    }
                   }
                 );
               modal.destroy();
