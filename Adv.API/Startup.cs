@@ -53,7 +53,6 @@ namespace Adv.API
          
             //are you allowed?
             app.UseAuthorization();
-           
 
             app.UseEndpoints(endpoints =>
             {

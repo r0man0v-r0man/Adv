@@ -1,14 +1,8 @@
-﻿using Adv.BLL.Exceptions;
-using Adv.BLL.Interfaces;
+﻿using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -35,10 +29,15 @@ namespace Adv.BLL.Services
             }
         }
 
+
         public async Task<string> UploadAsync(IFormFile file, CancellationToken ct)
         {
+            // добавить resize для изображений
+            
             var result = await fileRepository.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
             return result;
         }
+
+
     }
 }
