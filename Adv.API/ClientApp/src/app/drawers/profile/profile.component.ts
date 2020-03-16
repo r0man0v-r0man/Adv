@@ -39,11 +39,16 @@ export class ProfileComponent implements OnInit {
   }
   onLoadMore(){
     this.loadingMore = true;
-    setTimeout(() => {
-    this.loadingMore = false;
-      
-    }, 2500);
-    
+    this.flatService.getUserFlats(this.userId, this.pageNumber)
+      .subscribe(response => {
+        if(response && response.length > 0){
+          for(var i = 0; i < response.length; i++){
+            this.userFlats.push(response[i]);
+          }
+          this.pageNumber++;
+          this.loadingMore = false;
+        }
+      })
   }
   logOut(){
     this.drawerRef.close();
@@ -55,7 +60,6 @@ export class ProfileComponent implements OnInit {
       .subscribe(response => {
         if(response){
           this.user = response;
-          //this.userFlats = this.user.flatsViewModels;
           this.initLoading = false;
         }
       })
@@ -64,7 +68,8 @@ export class ProfileComponent implements OnInit {
     this.flatService.getUserFlats(this.userId, this.pageNumber)
       .subscribe(response => {
         console.log(response);
-        
+        this.userFlats = response;
+        this.pageNumber++;
       })
   }
   onDelete(item: FlatModel){
