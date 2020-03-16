@@ -74,9 +74,6 @@ registerLocaleData(ru);
       provide: NZ_I18N, useValue: ru_RU 
     },
     {
-      provide: ErrorHandler, useClass: AppErrorHandler
-    },
-    {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true

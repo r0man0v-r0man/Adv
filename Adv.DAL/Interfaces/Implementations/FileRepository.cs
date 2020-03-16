@@ -50,12 +50,7 @@ namespace Adv.DAL.Interfaces.Implementations
             {
                 var blockBlob = container.GetBlockBlobReference(SetUniqueName(file));
 
-                using var output = new MemoryStream();
-                using var image = Image.Load(file.OpenReadStream());
-                image.Mutate(x => x.Resize(30, 30));
-                image.SaveAsJpeg(output);
-                output.Position = 0;
-                await blockBlob.UploadFromStreamAsync(output).ConfigureAwait(false);
+                await blockBlob.UploadFromStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
 
                 return blockBlob.Uri.ToString();
             }
