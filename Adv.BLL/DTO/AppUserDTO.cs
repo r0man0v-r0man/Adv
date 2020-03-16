@@ -18,7 +18,6 @@ namespace Adv.BLL.DTO
         /// </summary>
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
-        public List<FlatDTO> flatDTOs { get; set; }
 
         /// <summary>
         /// Mapping to AppUserDTO
@@ -27,13 +26,7 @@ namespace Adv.BLL.DTO
         public static implicit operator AppUserDTO(AppUser appUser) => new AppUserDTO
         {
             UserName = appUser?.UserName,
-            Id = appUser.Id,
-            flatDTOs = appUser.Flats
-                .Select(flat =>
-                {
-                    return (FlatDTO)flat;
-                })
-                .ToList()
+            Id = appUser.Id
         };
         /// <summary>
         /// Mapping to AppUser

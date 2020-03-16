@@ -129,6 +129,16 @@ namespace Adv.DAL.Interfaces.Implementations
             disposed = true;
         }
 
+        public async Task<IEnumerable<Flat>> GetUserFlatsAsync(string userId, int pageCount, byte size, int skip, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
 
+            var flats = await context.Flats.Include(x => x.AppUser).AsNoTracking()
+                                                      .Where(prop => prop.IsActive == true && prop.AppUserId == userId)
+                                                      .OrderByDescending(property => property.Created)
+                                                      .Skip(skip)
+                                                      .Take(size).ToListAsync().ConfigureAwait(false);
+            return flats;
+        }
     }
 }

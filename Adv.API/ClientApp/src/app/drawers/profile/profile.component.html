@@ -1,10 +1,11 @@
 <h4>Мои объявления:</h4>
 <ul
       nz-list
-      [nzDataSource]="userFlats"
       nzSize="small"
+      [nzDataSource]="userFlats"
       [nzRenderItem]="Item"
-      [nzLoading]="loading"
+      [nzLoading]="initLoading"
+      [nzLoadMore]="loadMore"
       [nzNoResult]="NoFlats"
     >
     <ng-template #NoFlats>
@@ -41,6 +42,9 @@
         </ng-template>
       </ng-template>
     </ul>
+    <ng-template #loadMore>
+        <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+    </ng-template>
 <nz-divider></nz-divider>
 <button nz-button nzType="primary" nzBlock (click)="logOut()">
     <i nz-icon nzType="logout" nzTheme="outline"></i>    

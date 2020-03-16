@@ -11,7 +11,6 @@ namespace Adv.API.Models
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public List<FlatViewModel> FlatsViewModels { get; set; }
         /// <summary>
         /// Mapping to UserViewModel
         /// </summary>
@@ -19,8 +18,7 @@ namespace Adv.API.Models
         public static implicit operator UserViewModel(AppUserDTO appUserDTO) => new UserViewModel
         {
             UserName = appUserDTO?.UserName,
-            Id = appUserDTO.Id,
-            FlatsViewModels = appUserDTO.flatDTOs.Select(dto => (FlatViewModel)dto).ToList()
+            Id = appUserDTO.Id
         };
         /// <summary>
         /// Mapping to AppUserDTO

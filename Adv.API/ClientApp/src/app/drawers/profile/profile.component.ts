@@ -15,11 +15,13 @@ import { FlatUpdateModel } from 'src/app/models/updateModels/flatUpdateModel';
   styleUrls: ['./profile.component.less']
 })
 export class ProfileComponent implements OnInit {
-  loading : boolean = true;
+  initLoading : boolean = true;
+  loadingMore = false;
   userFlats: FlatModel[] = [];
   userId: string;
   user: UserModel;
-
+  /**pageNumber for Profiles flats */
+  pageNumber: number;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -30,10 +32,19 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.pageNumber = 1;
     this.userId = this.authService.currentUser.sub;
     this.getUserInfo();
+    this.getUserFlats();
   }
-
+  onLoadMore(){
+    this.loadingMore = true;
+    setTimeout(() => {
+    this.loadingMore = false;
+      
+    }, 2500);
+    
+  }
   logOut(){
     this.drawerRef.close();
     this.authService.logOut();
@@ -44,13 +55,20 @@ export class ProfileComponent implements OnInit {
       .subscribe(response => {
         if(response){
           this.user = response;
-          this.userFlats = this.user.flatsViewModels;
-          this.loading = false;
+          //this.userFlats = this.user.flatsViewModels;
+          this.initLoading = false;
         }
       })
   };
+  getUserFlats(){
+    this.flatService.getUserFlats(this.userId, this.pageNumber)
+      .subscribe(response => {
+        console.log(response);
+        
+      })
+  }
   onDelete(item: FlatModel){
-    this.loading = true;
+    this.initLoading = true;
     this.flatService.delete(item.id)
       .subscribe(response => { 
         if(response) {
@@ -59,7 +77,7 @@ export class ProfileComponent implements OnInit {
         if(index > -1) {
          this.userFlats.splice(index, 1);
         }
-        this.loading = false;
+        this.initLoading = false;
       }
     });
   }
@@ -81,11 +99,11 @@ export class ProfileComponent implements OnInit {
             let updatedFlat = new FlatUpdateModel(editForm.value);
             this.flatService.update(updatedFlat)
               .subscribe(response => {
-                this.loading = true;
+                this.initLoading = true;
               console.log(response);
               editModal.destroy();
             }, ()=>{
-              this.loading = false;
+              this.initLoading = false;
             }, ()=>{
                 this.getUserInfo();
             })

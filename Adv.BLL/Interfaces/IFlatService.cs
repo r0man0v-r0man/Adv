@@ -27,6 +27,8 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<bool> UpdateAsync(FlatUpdateDTO updatedProperties, int id, CancellationToken ct);
+        Task<List<FlatDTO>> GetUserFlatsAsync(string userId, int pageCount, byte size, int skip, CancellationToken ct);
+
         /// <summary>
         /// Find flats by criteria
         /// </summary>

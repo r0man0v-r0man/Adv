@@ -65,7 +65,7 @@ namespace Adv.DAL.Interfaces.Implementations
 
         public async Task<AppUser> FindByIdAsync(string currentUserId)
         {
-            var result = await userManager.Users.Include(x=>x.Flats).AsNoTracking().FirstOrDefaultAsync(x=>x.Id == currentUserId).ConfigureAwait(false);
+            var result = await userManager.Users.AsNoTracking().FirstOrDefaultAsync(x=>x.Id == currentUserId).ConfigureAwait(false);
             return result;
         }
 

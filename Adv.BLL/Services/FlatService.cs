@@ -80,5 +80,12 @@ namespace Adv.BLL.Services
             var result = await flatRepository.FindByCriteriaAsync(city,rooms, priceMin, priceMax, rentType, pageNumber, size, skip).ConfigureAwait(false);
             return result.Select(flat => (FlatDTO)flat);
         }
+
+        public async Task<List<FlatDTO>> GetUserFlatsAsync(string userId, int pageCount, byte size, int skip, CancellationToken ct)
+        {
+            var flats = await flatRepository.GetUserFlatsAsync(userId, pageCount, size, skip, ct).ConfigureAwait(false);
+
+            return flats.Select(flat => (FlatDTO)flat).ToList();
+        }
     }
 }

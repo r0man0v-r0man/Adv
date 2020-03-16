@@ -24,6 +24,30 @@ namespace Adv.API.Controllers
             this.flatService = flatService;
         }
 
+        [HttpGet("getAll")]
+        public async Task<ActionResult<List<FlatViewModel>>> GetAll(string userId, string pageNumber, CancellationToken ct = default)
+        {
+            var pageCount = Convert.ToInt32(pageNumber);
+            const byte SIZE = 5;
+            int skip = (SIZE * pageCount) - SIZE;
+            try
+            {
+                var flats = await flatService.GetUserFlatsAsync(userId, pageCount, SIZE, skip, ct).ConfigureAwait(false);
+                return flats.Select(flatDto => (FlatViewModel)flatDto).ToList();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return BadRequest(ex.Message);
+                throw;
+            }
+
+
+
+        }
+
+
         [HttpGet("getAll/{pageNumber}")]
         public async Task<ActionResult<List<FlatViewModel>>> GetAll(int pageNumber, CancellationToken ct = default)
         {

@@ -17,5 +17,6 @@ namespace Adv.DAL.Interfaces
         Task<bool> RemoveAsync(Flat flat, CancellationToken ct);
         Task<bool> UpdateAsync(FlatUpdate updatedProperties, int id, CancellationToken ct);
         Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType, int pageNumber, byte size, int skip);
+        Task<IEnumerable<Flat>> GetUserFlatsAsync(string userId, int pageCount, byte size, int skip, CancellationToken ct);
     }
 }
