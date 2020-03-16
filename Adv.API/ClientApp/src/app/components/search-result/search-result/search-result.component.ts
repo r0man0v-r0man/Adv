@@ -24,7 +24,7 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {
     this.list = this.data.getSearchResult();
     this.searchFields = this.data.getSearchFields();
-    this.pageNumber = this.searchFields.pageNumber;
+    this.pageNumber = this.searchFields.pageNumber + 1;
     this.isShowMoreButton = true;
 
   }
