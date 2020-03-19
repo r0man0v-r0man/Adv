@@ -38,15 +38,19 @@ export class ProfileComponent implements OnInit {
     this.getUserFlats();
   }
   onLoadMore(){
+    this.initLoading = true;
     this.loadingMore = true;
     this.flatService.getUserFlats(this.userId, this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
             this.userFlats.push(response[i]);
+            this.pageNumber++;
+            this.loadingMore = false;
+            this.initLoading = false;
           }
-          this.pageNumber++;
-          this.loadingMore = false;
+        }else{
+          this.initLoading = false;
         }
       })
   }
@@ -60,15 +64,14 @@ export class ProfileComponent implements OnInit {
       .subscribe(response => {
         if(response){
           this.user = response;
-          this.initLoading = false;
         }
       })
   };
   getUserFlats(){
     this.flatService.getUserFlats(this.userId, this.pageNumber)
       .subscribe(response => {
-        console.log(response);
         this.userFlats = response;
+        this.initLoading = false;
         this.pageNumber++;
       })
   }

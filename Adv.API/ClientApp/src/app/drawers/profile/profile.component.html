@@ -42,8 +42,8 @@
         </ng-template>
       </ng-template>
     </ul>
-    <ng-template #loadMore>
-        <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
+    <ng-template #loadMore >
+        <button nz-button *ngIf="!loadingMore" nzType="link" nzBlock nzSize="small" (click)="onLoadMore()" style="float: right; margin-top: 8px; margin-bottom: 8px;">Загрузить еще</button>
     </ng-template>
 <nz-divider></nz-divider>
 <button nz-button nzType="primary" nzBlock (click)="logOut()">
