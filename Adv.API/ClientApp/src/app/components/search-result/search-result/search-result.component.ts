@@ -3,6 +3,7 @@ import { DataService } from 'src/app/services/data.service';
 import { FlatModel } from 'src/app/models/flatModel';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { FlatService } from 'src/app/services/flat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-result',
@@ -18,7 +19,8 @@ export class SearchResultComponent implements OnInit {
   pageNumber: number;
   constructor(
     private data: DataService,
-    private flatService: FlatService
+    private flatService: FlatService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -26,7 +28,9 @@ export class SearchResultComponent implements OnInit {
     this.searchFields = this.data.getSearchFields();
     this.pageNumber = this.searchFields.pageNumber + 1;
     this.isShowMoreButton = true;
-
+  }
+  onCardClick(flat: FlatModel){
+    this.router.navigate(['../flats', flat.id]);
   }
   onLoadMore(){
     this.initLoading = true;

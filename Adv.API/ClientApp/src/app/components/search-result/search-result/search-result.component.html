@@ -17,7 +17,7 @@
               <nz-list-item 
               [nzContent]="nzContent">
                 <ng-template #nzContent>
-                  <nz-card  nzHoverable
+                  <nz-card  nzHoverable  (click)="onCardClick(item)"
                       [nzCover]="flatCoverTpl"
                       [nzExtra]="more"
                       nzTitle="{{item.price | currency : 'USD' : 'symbol' : '2.0-0'}}">
@@ -30,8 +30,7 @@
                       </div>
                     </ng-template>
                     <ng-template #more>
-                      <a [routerLink]="['/flats', item.id]"
-                      >Подробнее</a>
+                      <nz-tag [nzColor]="'white'" style="color: rgba(0, 0, 0, 0.45);">Кол-во комнат: {{ item.rooms }}</nz-tag>
                     </ng-template>
                 </ng-template>
               </nz-list-item>

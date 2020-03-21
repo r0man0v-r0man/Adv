@@ -13,7 +13,7 @@
             [nzContent]="nzContent" 
                >
               <ng-template #nzContent>
-                <nz-card  
+                <nz-card  (click)="onCardClick(item)"
                     nzHoverable 
                     [nzCover]="flatCoverTpl"
                     [nzExtra]="more"
@@ -26,8 +26,7 @@
                     </div>
                   </ng-template>
                   <ng-template #more>
-                    <a [routerLink]="[item.id]"
-                    >Подробнее</a>
+                    <nz-tag [nzColor]="'white'" style="color: rgba(0, 0, 0, 0.45);">Кол-во комнат: {{ item.rooms }}</nz-tag>
                   </ng-template>
               </ng-template>
             </nz-list-item>

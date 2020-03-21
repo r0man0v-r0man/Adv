@@ -3,6 +3,7 @@ import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flats',
@@ -19,8 +20,8 @@ export class FlatsComponent implements OnInit {
   constructor(
     private flatService: FlatService,
     private navService: NavbarService,
-    private footerService: FooterService
-
+    private footerService: FooterService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -28,7 +29,9 @@ export class FlatsComponent implements OnInit {
     this.footerService.show();
     this.initHomePage();
   }
-
+  onCardClick(flat: FlatModel){
+    this.router.navigate(['../flats', flat.id]);
+  }
   onLoadMore(){
     this.initLoading = true;
 
