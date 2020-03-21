@@ -2,6 +2,11 @@
     <nz-content class="outer-content">   
       <nz-layout>
         <nz-content>
+          <nz-page-header >
+            <nz-page-header-title>
+              Результаты поиска
+            </nz-page-header-title>
+          </nz-page-header>
           <nz-list 
           [nzDataSource]="list" 
           [nzRenderItem]="flat" 
@@ -12,11 +17,12 @@
               <nz-list-item 
               [nzContent]="nzContent">
                 <ng-template #nzContent>
-                  <nz-card  
+                  <nz-card  nzHoverable
                       [nzCover]="flatCoverTpl"
                       [nzExtra]="more"
                       nzTitle="{{item.price | currency : 'USD' : 'symbol' : '2.0-0'}}">
-                      <p>{{ item | address }}</p>
+                    <nz-card-meta nzTitle="{{ item | address }}" nzDescription="Тип аренды: {{ item.duration | duration }}"></nz-card-meta>
+                      
                     </nz-card>
                     <ng-template #flatCoverTpl>
                       <div style="height: 160px; overflow: hidden;">

@@ -87,7 +87,8 @@ export class SearchComponent implements OnInit {
     this.listOfRooms.push(
       { label: 'Однокомнатная', value: 1 },
       { label: 'Двухкомнатная', value: 2 },
-      { label: 'Трехкомнатная', value: 3 }
+      { label: 'Трехкомнатная', value: 3 },
+      { label: '4+ комнат', value: 4}
       );
   }
   submitSearchForm(){
