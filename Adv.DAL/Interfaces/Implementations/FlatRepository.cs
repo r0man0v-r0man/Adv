@@ -93,8 +93,24 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<IEnumerable<Flat>> FindByCriteriaAsync(byte city, byte rooms, decimal priceMin, decimal priceMax, byte rentType, int pageNumber, byte size, int skip)
         {
             using var context = contextFactory.GetAdvContext();
-            
-            return await context.Flats
+            if (rooms >= 4)
+            {
+                return await context.Flats
+                .AsNoTracking()
+                .Where(flat =>
+                    flat.Price >= priceMin && flat.Price <= priceMax &&
+                    flat.City == (Cities.CityName)city &&
+                    flat.Rooms >= rooms &&
+                    flat.Duration == (Duration.RentTime)rentType &&
+                    flat.IsActive == true)
+                .OrderByDescending(flat => flat.Created)
+                .Skip(skip)
+                .Take(size)
+                .ToListAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                return await context.Flats
                 .AsNoTracking()
                 .Where(flat =>
                     flat.Price >= priceMin && flat.Price <= priceMax &&
@@ -106,6 +122,8 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Skip(skip)
                 .Take(size)
                 .ToListAsync().ConfigureAwait(false);
+            }
+            
         }
 
         bool disposed = false;
