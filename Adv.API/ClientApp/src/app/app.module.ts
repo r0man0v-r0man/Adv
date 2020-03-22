@@ -1,9 +1,9 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, ru_RU, NzModalRef } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NZ_I18N, ru_RU } from 'ng-zorro-antd';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,7 +13,6 @@ import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FlatsComponent } from './components/flat/flats/flats.component';
-import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AddAdvertComponent } from './modal/add-advert/add-advert.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
 import { AddressPipe } from './customPipes/address.pipe';
