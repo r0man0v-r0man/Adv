@@ -10,22 +10,16 @@ export class DataService {
   private searchResult: FlatModel[] = [];
   constructor() { }
   setSearchFields(searchFields: SearchFlatCriteria){
-    this.searchFields = searchFields;
+    localStorage.setItem('searchFields', JSON.stringify(searchFields));
   }
-
   getSearchFields(){
-    let temp = this.searchFields;
-    this.searchFields = undefined;
-    return temp;
+    return JSON.parse(localStorage.getItem('searchFields'));
   }
-
   setSearchResult(result: FlatModel[]){
-    this.searchResult = result;
+    localStorage.setItem('searchResult', JSON.stringify(result));
   }
   getSearchResult(){
-    let temp = this.searchResult;
-    this.searchResult = undefined;
-    return temp;
+    return JSON.parse(localStorage.getItem('searchResult'));
   }
 
 }

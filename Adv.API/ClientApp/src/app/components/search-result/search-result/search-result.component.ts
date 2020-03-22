@@ -4,6 +4,7 @@ import { FlatModel } from 'src/app/models/flatModel';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { FlatService } from 'src/app/services/flat.service';
 import { Router } from '@angular/router';
+import { SearchFlatService } from 'src/app/services/search-flat.service';
 
 @Component({
   selector: 'app-search-result',
@@ -12,44 +13,42 @@ import { Router } from '@angular/router';
 })
 export class SearchResultComponent implements OnInit {
   list: FlatModel[] = [];
-  searchFields: SearchFlatCriteria;
+  searchParams: SearchFlatCriteria;
   initLoading = false; // bug
   /**Show or hide loadMore button */
   isShowMoreButton: boolean = false;
   pageNumber: number;
   constructor(
     private data: DataService,
-    private flatService: FlatService,
+    private searchFlatService: SearchFlatService,
     private router: Router
     ) { }
 
   ngOnInit() {
     this.list = this.data.getSearchResult();
-    this.searchFields = this.data.getSearchFields();
-    this.pageNumber = this.searchFields.pageNumber + 1;
+    this.searchParams = this.data.getSearchFields();
+    this.searchParams.pageNumber++;
     this.isShowMoreButton = true;
   }
   onCardClick(flat: FlatModel){
     this.router.navigate(['../flats', flat.id]);
   }
   onLoadMore(){
+    console.log(this.searchParams);
     this.initLoading = true;
-
-      this.flatService.getFlats(this.pageNumber)
+      this.searchFlatService.findFlats(this.searchParams)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
             this.list.push(response[i]);
           }
-          this.pageNumber++;
+          this.searchParams.pageNumber++;
         this.initLoading = false;
-
         }
         if(response && response.length === 0){
           this.isShowMoreButton = false;
         }
         this.initLoading = false;
-
       });
     
   }

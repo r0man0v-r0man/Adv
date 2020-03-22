@@ -9,7 +9,7 @@ import { FlatModel } from '../models/flatModel';
   providedIn: 'root'
 })
 export class SearchFlatService {
-  searchFlatUrl: string = Constants.searchFlat;
+  private searchFlatUrl: string = Constants.searchFlat;
   constructor(
     private httpService: HttpClient,
     private authService: AuthService

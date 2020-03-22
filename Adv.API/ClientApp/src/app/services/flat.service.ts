@@ -26,7 +26,6 @@ export class FlatService {
     params = params.append("pageNumber", pageNumber.toString());
     return this.httpService.get<FlatModel[]>(this.flatsUrl, {params: params})
   }
-  
   /**
    * Get flats
    * @param pageNumber number for fetch flats
