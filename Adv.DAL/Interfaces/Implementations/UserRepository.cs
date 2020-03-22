@@ -56,7 +56,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 configuration["TokenAudience"],
                 claims,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddDays(7),
                 signingCredentials);
             var tokenJson = new JwtSecurityTokenHandler().WriteToken(token);
             return tokenJson;
