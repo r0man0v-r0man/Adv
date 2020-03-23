@@ -1,5 +1,5 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 import { AdsenseModule } from 'ng2-adsense';
+import { AppErrorHandler } from './app-errors/app-error-handler';
 
 registerLocaleData(ru);
 
@@ -75,6 +76,9 @@ registerLocaleData(ru);
     AuthGuardService,
     { 
       provide: NZ_I18N, useValue: ru_RU 
+    },
+    {
+      provide: ErrorHandler, useClass: AppErrorHandler
     },
     {
       provide: HTTP_INTERCEPTORS,
