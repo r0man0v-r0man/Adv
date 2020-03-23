@@ -28,6 +28,7 @@ import { DurationPipe } from './customPipes/duration.pipe';
 import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
+import { AdsenseModule } from 'ng2-adsense';
 
 registerLocaleData(ru);
 
@@ -59,7 +60,10 @@ registerLocaleData(ru);
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AdsenseModule.forRoot({
+      adClient: 'ca-pub-5388127332601183'
+    })
   ],
   entryComponents: [
     AddAdvertComponent,

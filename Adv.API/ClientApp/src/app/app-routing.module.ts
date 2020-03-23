@@ -6,8 +6,6 @@ import { FlatsComponent } from './components/flat/flats/flats.component';
 import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { AppComponent } from './app.component';
-import { AuthGuardService } from './services/auth-guard.service';
 import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 
