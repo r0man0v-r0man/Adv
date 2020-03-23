@@ -22,6 +22,7 @@
     "@angular/router": "9.0.7",
     "@auth0/angular-jwt": "4.0.0",
     "ng-zorro-antd": "8.5.2",
+    "ng2-adsense": "^7.0.0",
     "rxjs": "6.5.4",
     "tslib": "^1.10.0",
     "ymaps": "0.2.1",
