@@ -6,7 +6,6 @@ import { UploadFile, NzMessageService } from 'ng-zorro-antd';
 import { UserWarning } from 'src/app/app-errors/userWarning';
 import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
-import ymaps from 'ymaps';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cities } from 'src/app/models/cities';
 import { Duration } from 'src/app/models/duration';
@@ -99,19 +98,6 @@ export class AddAdvertComponent implements OnInit {
   headers = () => {
     return this.authService.Token;
   };
-  /** setup yandex map */
-  yandexMapInitialize(){
-    ymaps
-  .load()
-  .then(maps => {
-    const map = new maps.Map('yandex-map-container', {
-      center: [-8.369326, 115.166023],
-      zoom: 7
-    });
-  })
-  .catch(error => console.log('Failed to load Yandex Maps', error));
-  }
-
 
   /**
    * Initialize form fields
