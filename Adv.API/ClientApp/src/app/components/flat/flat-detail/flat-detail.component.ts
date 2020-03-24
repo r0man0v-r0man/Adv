@@ -18,6 +18,11 @@ export class FlatDetailComponent implements OnInit {
   @ViewChild(NzCarouselComponent) 
   flatImageCarousel: NzCarouselComponent;
 
+  public clusterer = {
+    preset: 'islands#invertedVioletClusterIcons',
+    hasBaloon: false
+  };
+
   constructor(
     private flatService:FlatService,
     route: ActivatedRoute,
