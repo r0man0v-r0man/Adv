@@ -55,7 +55,7 @@ namespace Adv.API.Models.Flat
             NumberOfHouse = Convert.ToInt32(flat.Address["house"], CultureInfo.GetCultureInfo(1049)),
             NumberOfHouseCourpus = Convert.ToInt32(flat.Address["corpus"], CultureInfo.GetCultureInfo(1049)),
             NumberOfSubHouse = Convert.ToInt32(flat.Address["subHouse"], CultureInfo.GetCultureInfo(1049)),
-            NumberOfFlat = Convert.ToInt32(flat.Address["flat"], CultureInfo.GetCultureInfo(1049)),
+            NumberOfFlat = flat.Address["flat"] == "" ? 0 : Convert.ToInt32(flat.Address["flat"], CultureInfo.GetCultureInfo(1049)),
             Created = flat.Created,
             UserId = flat.UserId,
             Rooms = flat.Rooms,
@@ -88,7 +88,7 @@ namespace Adv.API.Models.Flat
                 ["house"] = flat.NumberOfHouse.ToString(CultureInfo.GetCultureInfo(1049)),
                 ["corpus"] = flat.NumberOfHouseCourpus.ToString(CultureInfo.GetCultureInfo(1049)),
                 ["subHouse"] = flat.NumberOfSubHouse.ToString(CultureInfo.GetCultureInfo(1049)),
-                ["flat"] = flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
+                ["flat"] = flat.NumberOfFlat == 0 ? "" : flat.NumberOfFlat.ToString(CultureInfo.GetCultureInfo(1049))
             },
             UserId = flat.UserId,
             Rooms = flat.Rooms,

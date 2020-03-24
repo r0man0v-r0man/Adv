@@ -26,8 +26,11 @@ export class AddressPipe implements PipeTransform{
             houseCourpus = `/${flat.numberOfHouseCourpus} `;
         }
         house = house + houseCourpus;
-
-        let flatNumber: string = `кв.${flat.numberOfFlat}`
+        /** если пользователь не заполнил поле квартира, значение равно 0 - мы его не показываем */
+        let flatNumber: string = '';
+        if(flat.numberOfFlat !== 0){
+            flatNumber = `кв.${flat.numberOfFlat}`
+        }
         /**calculate all address using additional param type*/
         if(type !== 'full'){
             result = street + house + flatNumber;
