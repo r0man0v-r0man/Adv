@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
             }, ()=>{
               this.initLoading = false;
             }, ()=>{
-                this.getUserInfo();
+              this.initLoading = false;
             })
           }
         }
