@@ -184,7 +184,7 @@ export class AddAdvertComponent implements OnInit {
         width = img.naturalWidth;
         height = img.naturalHeight;    
         const isMinDimension = (width >= resolution && height >= resolution)
-        if(!isMinDimension) throw new UserWarning('Разрешение изображения меньше 500px');
+        if(!isMinDimension) throw new UserWarning(`Разрешение изображения меньше ${this.minDimension}px`);
         
           observer.next(isMinDimension);
           observer.complete();
