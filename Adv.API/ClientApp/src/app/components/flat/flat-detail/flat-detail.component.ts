@@ -22,6 +22,22 @@ export class FlatDetailComponent implements OnInit {
     preset: 'islands#invertedVioletClusterIcons',
     hasBaloon: false
   };
+  public onLoad(event) {
+    
+    const ymaps = event.ymaps;
+    
+    ymaps.geocode('Несвиж, улица Лермонтова д.2')
+      .then((res) => {
+         // Координаты геообъекта.
+       let coords = res.geoObjects.get(0).geometry.getCoordinates();
+         // Область видимости геообъекта.
+        let bounds = res.geoObjects.get(0).properties.get('boundedBy');
+
+        console.log(coords);
+        console.log(bounds);
+        
+      });
+  }
 
   constructor(
     private flatService:FlatService,
