@@ -23,12 +23,12 @@ export class SearchComponent implements OnInit {
      /** rooms  */
   selectedRoom: number = 1;
   listOfRooms: Array<{ label: string; value: number}> = [];
-  priceMin: number = 100;
-  priceMax: number = 200;
+  priceMin: number = 10;
+  priceMax: number = 100;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
 
-  selectedRentType: number = 0;
+  selectedRentType: number = 1;
   listOfRentType: Array<{ label: string; value: number}> = [];
 
   /** параметры поиска */
