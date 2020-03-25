@@ -30,7 +30,6 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 import { AdsenseModule } from 'ng2-adsense';
 import { AppErrorHandler } from './app-errors/app-error-handler';
-import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 
 registerLocaleData(ru);
 
@@ -65,8 +64,7 @@ registerLocaleData(ru);
     BrowserAnimationsModule,
     AdsenseModule.forRoot({
       adClient: 'ca-pub-5388127332601183'
-    }),
-    AngularYandexMapsModule.forRoot('85e03f02-25be-40b3-971e-733f2a03e620')
+    })
   ],
   entryComponents: [
     AddAdvertComponent,

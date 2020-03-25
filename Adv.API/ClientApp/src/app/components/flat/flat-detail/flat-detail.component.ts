@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
+import ymaps from 'ymaps';
 
 @Component({
   selector: 'app-flat-detail',
@@ -22,7 +23,7 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
     preset: 'islands#invertedVioletClusterIcons',
     hasBaloon: false
   };
-  coords=[];
+  coords;
 
   constructor(
     private flatService:FlatService,
@@ -37,24 +38,31 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
     });
    }
   ngAfterViewInit(): void {
+
+ymaps.load("https://api-maps.yandex.ru/2.1/?apikey=85e03f02-25be-40b3-971e-733f2a03e620&lang=ru_RU").then(maps => {
+  var myMap = new maps.Map("map", {center:[55.753994, 37.622093], zoom:9});
+  maps.geocode("Несвиж, Лермонтова д.2", {results:1}).then(function(res) {
+    var firstGeoObject = res.geoObjects.get(0),
+    coords = firstGeoObject.geometry.getCoordinates(),
+    bounds = firstGeoObject.properties.get("boundedBy");
+    firstGeoObject.options.set("preset", "islands#darkBlueDotIconWithCaption");
+    firstGeoObject.properties.set("iconCaption", firstGeoObject.getAddressLine());
+    myMap.geoObjects
+     .add(firstGeoObject)
+    myMap.setCenter(coords, 14);
+    myMap.setBounds(bounds, {checkZoomRange:true});
+
+  })
+})
+    console.log(this.coords);
+    
   }
 
   ngOnInit() {
     this.navService.show();
     this.footerService.show();    
   }
-  public onLoad(event) {
-    
-    const ymaps = event.ymaps;
-    
-    ymaps.geocode('Несвиж, улица Лермонтова д.2')
-      .then((res) => {
-         // Координаты геообъекта.
-        this.coords = res.geoObjects.get(0).geometry.getCoordinates();
-         // Область видимости геообъекта.
-        //let bounds = res.geoObjects.get(0).properties.get('boundedBy');        
-      });
-  }
+
   pre(){
     this.flatImageCarousel.pre();
   }
