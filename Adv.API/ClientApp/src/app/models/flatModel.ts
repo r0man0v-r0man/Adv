@@ -3,7 +3,7 @@ import { UploadFile } from 'ng-zorro-antd';
 export class FlatModel{
 
     rooms: number;
-    isActive: boolean = true;
+    isActive: boolean;
     price: number;
     duration: number;
     description: string;

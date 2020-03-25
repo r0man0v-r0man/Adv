@@ -6,7 +6,7 @@
                     <nz-carousel [nzEffect]="'scrollx'"
                     [nzDotPosition]="'top'"
                      style="height: 350px;">
-                        <div nz-carousel-content *ngFor="let image of flat.files">
+                        <div nz-carousel-content *ngFor="let image of flat?.files">
                             <div >
                                 <img src="{{ image?.linkProps.download }}" style="height:350px; margin: 0 auto;">
                             </div>
@@ -24,20 +24,20 @@
                 <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
                     <nz-page-header>
                         <nz-page-header-title>{{ flat | address : 'full' }}</nz-page-header-title>
-                        <nz-page-header-subtitle>{{ flat.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
+                        <nz-page-header-subtitle>{{ flat?.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
                         <nz-page-header-content>
                               <nz-descriptions [nzColumn]="3">
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этаж">{{ flat.floor }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat?.duration | duration }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat?.rooms }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat?.city | city }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этаж">{{ flat?.floor }}</nz-descriptions-item>
+                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat?.allFloor }}</nz-descriptions-item>
                               </nz-descriptions>
                         </nz-page-header-content>
                         <nz-page-header-footer>
                             <nz-row nzJustify="start" >
                                 <div nz-col nzSpan="12">
-                                    <nz-statistic nzTitle="Цена" [nzValue]="flat.price" nzPrefix="$"></nz-statistic>
+                                    <nz-statistic nzTitle="Цена" [nzValue]="flat?.price" nzPrefix="$"></nz-statistic>
                                 </div>
                                 <div nz-col nzSpan="12" style=" height: 100%;">
                                     
@@ -62,7 +62,7 @@
                         </nz-divider>
                     </ng-template>
                         <nz-descriptions-item [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.furniture; then existFurniture; else notExistFurniture"></ng-container>
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat?.furniture; then existFurniture; else notExistFurniture"></ng-container>
                             <ng-template #existFurniture>
                                 <i nz-icon nzType="check" nzTheme="outline"></i>
                             </ng-template>
@@ -72,7 +72,7 @@
                             Мебель</nz-badge>
                         </nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.refrigerator; then existRefrigerator; else notExistRefrigerator"></ng-container>
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat?.refrigerator; then existRefrigerator; else notExistRefrigerator"></ng-container>
                             <ng-template #existRefrigerator>
                                 <i nz-icon nzType="check" nzTheme="outline"></i>
                             </ng-template>
@@ -82,7 +82,7 @@
                             Холодильник</nz-badge>
                         </nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.microwaveOven; then existMicrowaveOven; else notExistMicrowaveOven"></ng-container>
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat?.microwaveOven; then existMicrowaveOven; else notExistMicrowaveOven"></ng-container>
                             <ng-template #existMicrowaveOven>
                                 <i nz-icon nzType="check" nzTheme="outline"></i>
                             </ng-template>
@@ -92,7 +92,7 @@
                             Микроволновая печь</nz-badge>
                         </nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.internet; then existInternet; else notExistInternet"></ng-container>
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat?.internet; then existInternet; else notExistInternet"></ng-container>
                             <ng-template #existInternet>
                                 <i nz-icon nzType="check" nzTheme="outline"></i>
                             </ng-template>
@@ -102,7 +102,7 @@
                             Интернет</nz-badge>
                         </nz-descriptions-item>
                         <nz-descriptions-item [nzSpan]="1">
-                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat.washingMachine; then existWashingMachine; else notExistWashingMachine"></ng-container>
+                            <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="flat?.washingMachine; then existWashingMachine; else notExistWashingMachine"></ng-container>
                             <ng-template #existWashingMachine>
                                 <i nz-icon nzType="check" nzTheme="outline"></i>
                             </ng-template>
@@ -120,7 +120,7 @@
                             </ng-template>
                         </nz-divider>
                     </ng-template>
-                    <nz-descriptions-item [nzSpan]="3">{{ flat.description }}</nz-descriptions-item>
+                    <nz-descriptions-item [nzSpan]="3">{{ flat?.description }}</nz-descriptions-item>
                 </nz-descriptions>
                 </div>
                 <div nz-col id="map" style="height: 300px;" [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
@@ -14,26 +14,24 @@ import { YandexMapService } from 'src/app/services/yandex-map.service';
 })
 
 export class FlatDetailComponent implements OnInit, AfterViewInit {
-  flat: FlatModel = new FlatModel();
+  flat: FlatModel = new FlatModel;
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent) 
   flatImageCarousel: NzCarouselComponent;
 
-
   constructor(
     private flatService:FlatService,
     route: ActivatedRoute,
-    private router: Router,
     private navService: NavbarService,
     private footerService: FooterService,
     private yandexMapService: YandexMapService
-
   ) { /** because in the same url component won't reload */
     route.params.subscribe(val => {
       this.getFlat(val['id']);
     });
    }
-  ngAfterViewInit(): void {
+  
+  ngAfterViewInit(): void {    
     this.yandexMapService.loadMap('несвиж', this.flat.street + this.flat.numberOfHouse, 'map');
   }
 
@@ -50,9 +48,16 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
   }
   getFlat(id: number){
     this.flatService.getFlat(id)
-    .subscribe(
-      response => {
-      this.flat = response
+    .subscribe(response => {    
+      if(response){
+        console.log(response);
+        console.log(this.flat);
+        
+        this.flat = new FlatModel(response);
+        console.log(this.flat);
+      }
+
+      
   });
   }
   onShowContacts(){
