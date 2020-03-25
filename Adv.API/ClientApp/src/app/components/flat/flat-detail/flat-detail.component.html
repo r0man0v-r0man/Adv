@@ -124,8 +124,10 @@
                 </nz-descriptions>
                 </div>
                 <div nz-col style="height: 300px;" [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">
-                    <angular-yandex-map [onlyInstance]="true" (load)="onLoad($event)"></angular-yandex-map>
                     
+                    <angular-yandex-map (load)="onLoad($event)">
+                    
+                    </angular-yandex-map>
                 </div>
             </nz-content>
         </nz-layout>

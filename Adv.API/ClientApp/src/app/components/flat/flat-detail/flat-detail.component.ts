@@ -22,8 +22,7 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
     preset: 'islands#invertedVioletClusterIcons',
     hasBaloon: false
   };
-  coords;
-  
+  coords=[];
 
   constructor(
     private flatService:FlatService,
@@ -53,10 +52,7 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
          // Координаты геообъекта.
         this.coords = res.geoObjects.get(0).geometry.getCoordinates();
          // Область видимости геообъекта.
-        let bounds = res.geoObjects.get(0).properties.get('boundedBy');
-
-        console.log(this.coords);
-        
+        //let bounds = res.geoObjects.get(0).properties.get('boundedBy');        
       });
   }
   pre(){
