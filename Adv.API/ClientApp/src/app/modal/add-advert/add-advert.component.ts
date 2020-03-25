@@ -104,6 +104,7 @@ export class AddAdvertComponent implements OnInit {
    */
   initForm(){
     this.form = this.formBuilder.group({
+      isActive: [true],
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],
       files: [this.fileList, [Validators.required]],

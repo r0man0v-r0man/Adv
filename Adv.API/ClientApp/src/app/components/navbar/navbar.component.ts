@@ -43,6 +43,8 @@ export class NavbarComponent implements OnInit {
               let newFlatAdvert = modalForm.value;
               /** add userId for advert */
               newFlatAdvert.userId = this.authService.currentUser.sub;
+              console.log(newFlatAdvert);
+              
               this.flatService
                 .createFlat(newFlatAdvert)
                 .subscribe(response => {

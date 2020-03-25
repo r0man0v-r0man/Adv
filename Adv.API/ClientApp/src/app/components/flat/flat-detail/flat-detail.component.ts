@@ -21,7 +21,7 @@ export class FlatDetailComponent implements OnInit,  AfterViewInit {
 
   constructor(
     private flatService:FlatService,
-   private  route: ActivatedRoute,
+    private  route: ActivatedRoute,
     private navService: NavbarService,
     private footerService: FooterService,
     private yandexMapService: YandexMapService
@@ -32,8 +32,7 @@ export class FlatDetailComponent implements OnInit,  AfterViewInit {
    }
   
   ngAfterViewInit(): void {    
-    console.log(this.flat);
-    this.yandexMapService.loadMap('несвиж', this.flat.street + this.flat.numberOfHouse, 'map');
+    
   }
 
   ngOnInit() {
@@ -52,11 +51,11 @@ export class FlatDetailComponent implements OnInit,  AfterViewInit {
   }
   getFlat(id: number){
     this.flatService.getFlat(id)
-    .subscribe(response => {    
-
+    .subscribe(response => {
       if(response){
         this.flat = response;
-        console.log(this.flat);
+        const address = this.flat.street + ' ' + this.flat.numberOfHouse.toString();
+        this.yandexMapService.loadMap('несвиж', address, 'map');
       }
 
   });
