@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
@@ -12,7 +12,7 @@ import { FooterService } from 'src/app/services/footer.service';
   styleUrls: ['./flat-detail.component.less']
 })
 
-export class FlatDetailComponent implements OnInit {
+export class FlatDetailComponent implements OnInit, AfterViewInit {
   flat: FlatModel = new FlatModel();
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent) 
@@ -22,22 +22,8 @@ export class FlatDetailComponent implements OnInit {
     preset: 'islands#invertedVioletClusterIcons',
     hasBaloon: false
   };
-  public onLoad(event) {
-    
-    const ymaps = event.ymaps;
-    
-    ymaps.geocode('Несвиж, улица Лермонтова д.2')
-      .then((res) => {
-         // Координаты геообъекта.
-       let coords = res.geoObjects.get(0).geometry.getCoordinates();
-         // Область видимости геообъекта.
-        let bounds = res.geoObjects.get(0).properties.get('boundedBy');
-
-        console.log(coords);
-        console.log(bounds);
-        
-      });
-  }
+  coords;
+  
 
   constructor(
     private flatService:FlatService,
@@ -51,10 +37,27 @@ export class FlatDetailComponent implements OnInit {
       this.getFlat(val['id']);
     });
    }
+  ngAfterViewInit(): void {
+  }
 
   ngOnInit() {
     this.navService.show();
-    this.footerService.show();
+    this.footerService.show();    
+  }
+  public onLoad(event) {
+    
+    const ymaps = event.ymaps;
+    
+    ymaps.geocode('Несвиж, улица Лермонтова д.2')
+      .then((res) => {
+         // Координаты геообъекта.
+        this.coords = res.geoObjects.get(0).geometry.getCoordinates();
+         // Область видимости геообъекта.
+        let bounds = res.geoObjects.get(0).properties.get('boundedBy');
+
+        console.log(this.coords);
+        
+      });
   }
   pre(){
     this.flatImageCarousel.pre();

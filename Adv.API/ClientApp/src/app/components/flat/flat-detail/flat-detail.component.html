@@ -124,13 +124,8 @@
                 </nz-descriptions>
                 </div>
                 <div nz-col style="height: 300px;" [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">
-                    <angular-yandex-map  
-                    [center]="[55.74, 37.58]" 
-                    [zoom]="8" 
-                    [clusterer]="clusterer" 
-                    (load)="onLoad($event)">
-                        <angular-yandex-placemark [geometry]="[55.74, 37.58]"></angular-yandex-placemark>
-                      </angular-yandex-map>
+                    <angular-yandex-map [onlyInstance]="true" (load)="onLoad($event)"></angular-yandex-map>
+                    
                 </div>
             </nz-content>
         </nz-layout>
