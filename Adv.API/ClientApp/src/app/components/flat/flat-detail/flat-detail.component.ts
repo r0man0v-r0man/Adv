@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { YandexMapService } from 'src/app/services/yandex-map.service';
   styleUrls: ['./flat-detail.component.less']
 })
 
-export class FlatDetailComponent implements OnInit, AfterViewInit {
+export class FlatDetailComponent implements OnInit,  AfterViewInit {
   flat: FlatModel;
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent) 
@@ -21,25 +21,25 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
 
   constructor(
     private flatService:FlatService,
-    route: ActivatedRoute,
+   private  route: ActivatedRoute,
     private navService: NavbarService,
     private footerService: FooterService,
     private yandexMapService: YandexMapService
   ) { /** because in the same url component won't reload */
-    route.params.subscribe(val => {
-      this.getFlat(val['id']);
-    });
+    // route.params.subscribe(val => {
+    //   this.getFlat(val['id']);
+    // });
    }
   
   ngAfterViewInit(): void {    
     console.log(this.flat);
-    
     this.yandexMapService.loadMap('несвиж', this.flat.street + this.flat.numberOfHouse, 'map');
   }
 
   ngOnInit() {
-    console.log(this.flat);
-    
+    this.route.params.subscribe(val => {
+      this.getFlat(val['id']);
+    });
     this.navService.show();
     this.footerService.show();    
   }

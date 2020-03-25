@@ -3,12 +3,12 @@
         <nz-layout class="inner-layout">
             <nz-content class="inner-content" nz-row [nzGutter]="24" nzType="flex" nzJustify="center">
                 <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 22 }" [nzLg]="{ span : 16 }" [nzXl]="{ span : 12 }">
-                    <nz-carousel [nzEffect]="'scrollx'"
+                    <nz-carousel [nzEffect]="'scrollx'" *ngIf="flat"
                     [nzDotPosition]="'top'"
                      style="height: 350px;">
                         <div nz-carousel-content *ngFor="let image of flat.files">
                             <div >
-                                <img src="{{ image?.linkProps.download }}" style="height:350px; margin: 0 auto;">
+                                <img src="{{ image.linkProps.download }}" style="height:350px; margin: 0 auto;">
                             </div>
                         </div>
                       </nz-carousel>
@@ -22,7 +22,7 @@
                       </nz-button-group>
                 </div>
                 <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 24 }" [nzMd]="{ span : 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 12 }">
-                    <nz-page-header>
+                    <nz-page-header *ngIf="flat">
                         <nz-page-header-title>{{ flat | address : 'full' }}</nz-page-header-title>
                         <nz-page-header-subtitle>{{ flat.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
                         <nz-page-header-content>
@@ -53,7 +53,7 @@
                         </nz-page-header-footer>
                       </nz-page-header>
                 
-                <nz-descriptions [nzTitle]="flatDetailComfortTitle" [nzColumn]="3" [nzColon]="false">
+                <nz-descriptions [nzTitle]="flatDetailComfortTitle" [nzColumn]="3" [nzColon]="false" *ngIf="flat">
                     <ng-template #flatDetailComfortTitle>
                         <nz-divider [nzText]="detailComfortTitle">
                             <ng-template #detailComfortTitle>
@@ -120,7 +120,7 @@
                             </ng-template>
                         </nz-divider>
                     </ng-template>
-                    <nz-descriptions-item [nzSpan]="3">{{ flat.description }}</nz-descriptions-item>
+                    <nz-descriptions-item  [nzSpan]="3">{{ flat.description }}</nz-descriptions-item>
                 </nz-descriptions>
                 </div>
                 <div nz-col id="map" style="height: 300px;" [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 24 }" [nzLg]="{ span : 24 }" [nzXl]="{ span : 24 }">
