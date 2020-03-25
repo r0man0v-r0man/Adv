@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
-import ymaps from 'ymaps';
+import { YandexMapService } from 'src/app/services/yandex-map.service';
 
 @Component({
   selector: 'app-flat-detail',
@@ -19,18 +19,14 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
   @ViewChild(NzCarouselComponent) 
   flatImageCarousel: NzCarouselComponent;
 
-  public clusterer = {
-    preset: 'islands#invertedVioletClusterIcons',
-    hasBaloon: false
-  };
-  coords;
 
   constructor(
     private flatService:FlatService,
     route: ActivatedRoute,
     private router: Router,
     private navService: NavbarService,
-    private footerService: FooterService
+    private footerService: FooterService,
+    private yandexMapService: YandexMapService
 
   ) { /** because in the same url component won't reload */
     route.params.subscribe(val => {
@@ -38,24 +34,7 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
     });
    }
   ngAfterViewInit(): void {
-
-ymaps.load("https://api-maps.yandex.ru/2.1/?apikey=85e03f02-25be-40b3-971e-733f2a03e620&lang=ru_RU").then(maps => {
-  var myMap = new maps.Map("map", {center:[55.753994, 37.622093], zoom:9});
-  maps.geocode("Несвиж, Лермонтова д.2", {results:1}).then(function(res) {
-    var firstGeoObject = res.geoObjects.get(0),
-    coords = firstGeoObject.geometry.getCoordinates(),
-    bounds = firstGeoObject.properties.get("boundedBy");
-    firstGeoObject.options.set("preset", "islands#darkBlueDotIconWithCaption");
-    firstGeoObject.properties.set("iconCaption", firstGeoObject.getAddressLine());
-    myMap.geoObjects
-     .add(firstGeoObject)
-    myMap.setCenter(coords, 14);
-    myMap.setBounds(bounds, {checkZoomRange:true});
-
-  })
-})
-    console.log(this.coords);
-    
+    this.yandexMapService.loadMap('несвиж', this.flat.street + this.flat.numberOfHouse, 'map');
   }
 
   ngOnInit() {
