@@ -1,6 +1,6 @@
 import { UploadFile } from 'ng-zorro-antd';
 
-export class FlatModel{
+export interface FlatModel{
 
     rooms: number;
     isActive: boolean;
@@ -27,8 +27,5 @@ export class FlatModel{
     phoneNumberPrefix: string;
     phoneNumber: string;
 
-    public constructor(init?: Partial<FlatModel>){
-        Object.assign(this, init);
-    }
     
 }

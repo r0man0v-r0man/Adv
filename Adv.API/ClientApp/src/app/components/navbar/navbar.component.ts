@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
           onClick: ()=>{
             const modalForm = modal.getContentComponent().form;
             if(modalForm.valid){
-              let newFlatAdvert = new FlatModel(modalForm.value);
+              let newFlatAdvert = modalForm.value;
               /** add userId for advert */
               newFlatAdvert.userId = this.authService.currentUser.sub;
               this.flatService

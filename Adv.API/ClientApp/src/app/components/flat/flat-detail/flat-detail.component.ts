@@ -14,7 +14,7 @@ import { YandexMapService } from 'src/app/services/yandex-map.service';
 })
 
 export class FlatDetailComponent implements OnInit, AfterViewInit {
-  flat: FlatModel = new FlatModel;
+  flat: FlatModel;
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent) 
   flatImageCarousel: NzCarouselComponent;
@@ -32,10 +32,14 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
    }
   
   ngAfterViewInit(): void {    
+    console.log(this.flat);
+    
     this.yandexMapService.loadMap('несвиж', this.flat.street + this.flat.numberOfHouse, 'map');
   }
 
   ngOnInit() {
+    console.log(this.flat);
+    
     this.navService.show();
     this.footerService.show();    
   }
@@ -49,15 +53,12 @@ export class FlatDetailComponent implements OnInit, AfterViewInit {
   getFlat(id: number){
     this.flatService.getFlat(id)
     .subscribe(response => {    
+
       if(response){
-        console.log(response);
-        console.log(this.flat);
-        
-        this.flat = new FlatModel(response);
+        this.flat = response;
         console.log(this.flat);
       }
 
-      
   });
   }
   onShowContacts(){
