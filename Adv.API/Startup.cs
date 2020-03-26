@@ -63,7 +63,6 @@ namespace Adv.API
             {
                 spa.Options.SourcePath = "ClientApp";
 
-#pragma warning disable CS0618 // Type or member is obsolete
                 spa.UseSpaPrerendering(options =>
                 {
                     options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
@@ -72,7 +71,6 @@ namespace Adv.API
                         : null;
                     options.ExcludeUrls = new[] { "/sockjs-node" };
                 });
-#pragma warning restore CS0618 // Type or member is obsolete
 
                 if (env.IsDevelopment())
                 {
