@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, OnDestroy } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
-import { YandexMapService } from 'src/app/services/yandex-map.service';
+import ymaps from 'ymaps';
 
 @Component({
   selector: 'app-flat-detail',
@@ -18,31 +18,64 @@ export class FlatDetailComponent implements OnInit,  AfterViewInit {
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent) 
   flatImageCarousel: NzCarouselComponent;
-
+  myMap;
   constructor(
     private flatService:FlatService,
     private  route: ActivatedRoute,
     private navService: NavbarService,
-    private footerService: FooterService,
-    private yandexMapService: YandexMapService
-  ) { /** because in the same url component won't reload */
-    // route.params.subscribe(val => {
-    //   this.getFlat(val['id']);
-    // });
-   }
+    private footerService: FooterService
+  ) {  }
   
-  ngAfterViewInit(): void {    
+  ngAfterViewInit(): void {
     
   }
 
   ngOnInit() {
+
     this.route.params.subscribe(val => {
       this.getFlat(val['id']);
     });
     this.navService.show();
-    this.footerService.show();    
+    this.footerService.show();
   }
+  /** создание карты, в сервис пока не переносим - потому что глюк с созданием карты при переходе
+   */
+createMap(){
+  ymaps.load("https://api-maps.yandex.ru/2.1/?apikey=85e03f02-25be-40b3-971e-733f2a03e620&lang=ru_RU")
+  .then(maps => {
+    const address = this.flat.street + ' ' + this.flat.numberOfHouse.toString();
 
+    maps.geocode('Несвиж' + ' ' + address)
+      .then((res)=>{
+        if(!this.myMap){
+          this.myMap = new maps.Map('map', {
+            center: res.geoObjects.get(0).geometry.getCoordinates(),
+            zoom : 14
+          });
+          var firstGeoObject = res.geoObjects.get(0);  
+               
+          var bounds = firstGeoObject.properties.get("boundedBy");
+          firstGeoObject.options.set("preset", "islands#darkBlueDotIconWithCaption");
+          firstGeoObject.properties.set("iconCaption", firstGeoObject.getAddressLine());
+          this.myMap.geoObjects.add(firstGeoObject)
+          
+          this.myMap.setBounds(bounds);
+        }
+        else{
+          this.myMap.geoObjects.removeAll();
+
+          var firstGeoObject = res.geoObjects.get(0);  
+          var coords = firstGeoObject.geometry.getCoordinates();      
+          var bounds = firstGeoObject.properties.get("boundedBy");
+          firstGeoObject.options.set("preset", "islands#darkBlueDotIconWithCaption");
+          firstGeoObject.properties.set("iconCaption", firstGeoObject.getAddressLine());
+          this.myMap.geoObjects.add(firstGeoObject)
+          this.myMap.setCenter(coords, 14);
+          this.myMap.setBounds(bounds); 
+        }
+    });
+  });
+}
   pre(){
     this.flatImageCarousel.pre();
   }
@@ -54,10 +87,9 @@ export class FlatDetailComponent implements OnInit,  AfterViewInit {
     .subscribe(response => {
       if(response){
         this.flat = response;
-        const address = this.flat.street + ' ' + this.flat.numberOfHouse.toString();
-        this.yandexMapService.loadMap('несвиж', address, 'map');
+        
+        this.createMap();
       }
-
   });
   }
   onShowContacts(){
