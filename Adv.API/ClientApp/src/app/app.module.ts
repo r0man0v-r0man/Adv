@@ -55,7 +55,7 @@ registerLocaleData(ru);
     SearchResultComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     NgZorroAntdModule,
     FormsModule,
