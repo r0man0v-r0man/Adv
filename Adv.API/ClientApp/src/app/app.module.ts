@@ -62,7 +62,7 @@ registerLocaleData(ru);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AdsenseModule
+    AdsenseModule.forRoot()
   ],
   entryComponents: [
     AddAdvertComponent,
