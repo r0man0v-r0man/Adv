@@ -26,20 +26,20 @@
                         <nz-page-header-title>{{ flat | address : 'full' }}</nz-page-header-title>
                         <nz-page-header-subtitle>{{ flat.created | date : 'shortDate' : '' : 'ru'}}</nz-page-header-subtitle>
                         <nz-page-header-content>
-                              <nz-descriptions [nzColumn]="3">
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этаж">{{ flat.floor }}</nz-descriptions-item>
-                                <nz-descriptions-item [nzSpan]="1" nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>
+                              <nz-descriptions [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 2, sm: 1, xs: 1 }">
+                                <nz-descriptions-item  nzTitle="Тип аренды">{{ flat.duration | duration }}</nz-descriptions-item>
+                                <nz-descriptions-item  nzTitle="Кол-во комнат">{{ flat.rooms }}</nz-descriptions-item>
+                                <nz-descriptions-item  nzTitle="Город">{{ flat.city | city }}</nz-descriptions-item>
+                                <nz-descriptions-item  nzTitle="Этаж">{{ flat.floor }}</nz-descriptions-item>
+                                <nz-descriptions-item  nzTitle="Этажей в доме">{{ flat.allFloor }}</nz-descriptions-item>
                               </nz-descriptions>
                         </nz-page-header-content>
                         <nz-page-header-footer>
                             <nz-row nzJustify="start" >
-                                <div nz-col nzSpan="12">
+                                <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 12 }" [nzMd]="{ span : 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 12 }">
                                     <nz-statistic nzTitle="Цена" [nzValue]="flat.price" nzPrefix="$"></nz-statistic>
                                 </div>
-                                <div nz-col nzSpan="12" style=" height: 100%;">
+                                <div nz-col [nzXs]="{ span : 24 }" [nzSm]="{ span : 12 }" [nzMd]="{ span : 12 }" [nzLg]="{ span : 12 }" [nzXl]="{ span : 12 }" style=" height: 100%;">
                                     
                                     <nz-statistic *ngIf="isShowContacts" nzTitle="Телефон" [nzValue]="flat.phoneNumberPrefix + flat.phoneNumber"></nz-statistic>
                                     <nz-statistic *ngIf="!isShowContacts"  [nzValueTemplate]="contactsButtonTpl"></nz-statistic>
@@ -53,7 +53,11 @@
                         </nz-page-header-footer>
                       </nz-page-header>
                 
-                <nz-descriptions [nzTitle]="flatDetailComfortTitle" [nzColumn]="3" [nzColon]="false" *ngIf="flat">
+                <nz-descriptions 
+                [nzTitle]="flatDetailComfortTitle" 
+                [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 2, sm: 1, xs: 1 }" 
+                [nzColon]="false" 
+                *ngIf="flat">
                     <ng-template #flatDetailComfortTitle>
                         <nz-divider [nzText]="detailComfortTitle">
                             <ng-template #detailComfortTitle>
