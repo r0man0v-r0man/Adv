@@ -2,7 +2,7 @@
 #FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
 #FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.2-buster-slim AS base 
 #use bionic cause from another images won't connect to sql
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1.3-bionic AS base
 RUN apt-get update -yq \
     && apt-get install curl gnupg -yq \
     && curl -sL https://deb.nodesource.com/setup_12.x | bash \
