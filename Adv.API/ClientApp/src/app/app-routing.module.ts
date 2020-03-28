@@ -15,49 +15,58 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     data: {
-      title: 'Halupa.by'
+      title: 'Halupa.by - Сайт по аренде жилья в Несвиже',
+      descrption: 'Сайт по аренде жилья в Несвиже. Объявления об аренде квартир и домов, на сутки/часы или на длительное время. У нас можно снять квартиру или дом, наличный и безналичный расчет.'
     }
   },
   {
     path: 'flats/:id',
     component: FlatDetailComponent,
     data: {
-      title: 'Квартиры'
+      title: 'Halupa.by - Информация о квартире',
+      descrption: 'Подробная информация о квартире',
+      robots: 'noindex, nofollow'
     }
   },
   {
     path: 'flats',
     component: FlatsComponent,
     data: {
-      title: 'Квартиры'
+      title: 'Halupa.by - Все квартиры',
+      descrption: 'Все квартиры, которые можно снять в Несвиже на часы/сутки или на длительное время'
     }
   },
   {
     path: 'search-result',
     component: SearchResultComponent,
     data: {
-      title: 'Результаты поиска'
+      title: 'Halupa.by - Результаты поиска',
+      descrption: 'Результаты поиска квартиры',
+      robots: 'noindex, nofollow'
     }
   },
   {
     path: 'login',
     component: LoginComponent,
     data: {
-      title: 'Войти'
+      title: 'Halupa.by - Войти',
+      descrption: 'Войти на Halupa.by'
     }
   },
   {
     path: 'register',
     component: RegisterComponent,
     data: {
-      title: 'Регистрация'
+      title: 'Halupa.by - Регистрация',
+      descrption: 'Зарегистрироваться на Halupa.by'
     }
   },
   {
     path: 'access-denied',
     component: AccessDeniedComponent,
     data: {
-      title: 'Доступ запрещен'
+      title: 'Halupa.by - Доступ запрещен',
+      descrption: 'Извните, но у вас нет доступа'
     }
   },
   {  

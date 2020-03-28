@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -9,33 +9,50 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  title = 'Halupa.by';
 
   constructor(
     private titleService: Title,
+    private metaService: Meta,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ){  }
 
   ngOnInit(): void {
-    const appTitle = this.titleService.getTitle();
-    this.router
-      .events.pipe(
-        filter(event => event instanceof NavigationEnd),
-        map(() => {
-          const child = this.activatedRoute.firstChild;
-          if (child.snapshot.data['title']) {
-            return child.snapshot.data['title'];
-          }
-          return appTitle;
-        })
-      ).subscribe((ttl: string) => {
-        
-        if(this.title != ttl){
-          this.titleService.setTitle(this.title + ' - ' + ttl);
-        }else{
-          this.titleService.setTitle(this.title)
-        }
-      });
+    this.setApplicationMetaInfo();
   }
+
+
+  /**set meta tags for SEO */
+  setApplicationMetaInfo(){
+    this.router.events
+    .pipe(
+      filter(event => event instanceof NavigationEnd),
+    )
+    .subscribe(() => {
+        var rt = this.getChild(this.activatedRoute)
+        rt.data.subscribe(data => {
+          console.log(data);
+          if(data.title){
+            this.titleService.setTitle(data.title)
+          }
+          if (data.descrption) {
+            this.metaService.updateTag({ name: 'description', content: data.descrption })
+          } else {
+            this.metaService.removeTag("name='description'")
+          }
+          if (data.robots) {
+            this.metaService.updateTag({ name: 'robots', content: data.robots })
+          } else {
+            this.metaService.updateTag({ name: 'robots', content: "follow,index" })
+          }
+        })
+      })
+    }
+    getChild(activatedRoute: ActivatedRoute) {
+      if (activatedRoute.firstChild) {
+        return this.getChild(activatedRoute.firstChild);
+      } else {
+        return activatedRoute;
+      }
+    }
 }
