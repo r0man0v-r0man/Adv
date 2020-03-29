@@ -2,10 +2,15 @@
     <nz-content class="outer-content">
         <nz-layout class="inner-layout">
             <nz-content class="inner-content" nz-row [nzGutter]="24">
-              
-                <form nz-form  [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm.value)">
+                <form 
+                nz-form  
+                [formGroup]="registerForm" 
+                [ngClass]="{
+                  'center-align': true
+                }"
+                (ngSubmit)="submitForm(registerForm.value)">
                   <nz-spin [nzSpinning]="isLoading" >
-                  <nz-form-item style="text-align: center;">
+                  <nz-form-item >
                       <h1 nz-title>Halupa.by</h1>
                   </nz-form-item>
                   <nz-form-item>
@@ -46,7 +51,7 @@
                     </nz-form-control>
                   </nz-form-item>
                   <nz-form-item>
-                    <nz-form-control style="text-align: center;">
+                    <nz-form-control>
                       <a  [routerLink]="[ '' ]" routerLinkActive="active" >
                         <small>Вернуться на главную</small>
                       </a>
