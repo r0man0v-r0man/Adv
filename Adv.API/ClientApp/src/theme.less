@@ -4,16 +4,26 @@
 @upload-picture-card-size: 100%;
 app-navbar{
   background-color: #fff;
-
-    // padding: 0 2rem;
-    // background-color: #fff;
-
-    // li:last-child{
-    //   float: right;
-    // }
-    // li:nth-child(3){
-    //   float: right;
-    // }
+    li{
+      float: left;
+    }
+    li:nth-child(3){
+      float: right;
+    }
+    li:last-child{
+      float: right;
+    }
+    @media (max-width:768px) {
+      li{
+        float: unset;
+      }
+      li:nth-child(3){
+        float: unset;
+      }
+      li:last-child{
+        float: unset;
+      }
+    }
 }
 app-navbar::before{
   box-sizing: content-box !important;
