@@ -1,3 +1,35 @@
-[nz-menu]{
-    line-height: 5rem;
+
+ul{
+    width: 90%;
+    padding: 0;
+    margin: 0 auto;
+    border: none;
+}
+ul li{
+    display: inline-block;
+    padding: 16px;
+}
+.toggle{
+    width: 100%;
+    padding: 16px;
+    text-align: right;
+    display: none;
+    font-size: larger;
+}
+@media (max-width:768px){
+    .toggle{
+        display: block;
+    }
+    ul{
+        width: 100%;
+        display: none;
+    }
+    ul li{
+        display: block;
+        text-align: center;
+        padding: 8px;
+    }
+    .visibleMenu{
+        display: block;
+    }
 }

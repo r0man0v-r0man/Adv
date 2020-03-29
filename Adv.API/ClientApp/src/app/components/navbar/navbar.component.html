@@ -1,4 +1,7 @@
-<ul *ngIf="navService.visible" nz-menu nzMode="horizontal" >
+<div class="toggle">
+    <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle()"></i>
+</div>
+<ul *ngIf="navService.visible" nz-menu nzMode="horizontal" [ngClass]={visibleMenu:isToggleMenu}>
     <li nz-menu-item nzSelected="true" >
         <a [routerLink]="[ '/' ]" routerLinkActive="active">
             <i nz-icon nzType="home" nzTheme="outline"></i>
@@ -11,24 +14,6 @@
         </a>
     </li>
     <li nz-menu-item >
-        <ng-container *ngIf="authService.isLogedIn(); then isLogedInButton else isNotLogedInButton"></ng-container>
-        <ng-template #isLogedInButton>
-            <button  nz-button nzType="dashed" nzSize="large" nzShape="round" (click)="showAddAdvertModal()">
-                <i nz-icon nzType="plus-circle"></i>
-                Добавить объявление
-            </button>
-        </ng-template>
-        <ng-template #isNotLogedInButton>
-            <button nz-button 
-            nzType="primary" nzSize="large" nzShape="round" (click)="registerThenAddAdvert()">
-                <i nz-icon nzType="plus-circle"></i>
-                Добавить объявление
-            </button>
-        </ng-template>
-    </li>
-    <li nz-menu-item >
-    
-
         <ng-container *ngIf="authService.isLogedIn(); then cabinet else enter"></ng-container>
         <ng-template #enter>
             <a [routerLink]="[ '/login' ]" style="margin-right: 8px;">
@@ -41,6 +26,21 @@
             style="margin-right: 8px;">
                 <i nz-icon nzType="user" nzTheme="outline"></i>    
                 Кабинет
+            </a>
+        </ng-template>
+    </li>
+    <li nz-menu-item >
+        <ng-container *ngIf="authService.isLogedIn(); then isLogedInButton else isNotLogedInButton"></ng-container>
+        <ng-template #isLogedInButton>
+            <a (click)="showAddAdvertModal()">
+                <i nz-icon nzType="plus-circle"></i>
+                Добавить объявление
+            </a>
+        </ng-template>
+        <ng-template #isNotLogedInButton>
+            <a (click)="registerThenAddAdvert()">
+                <i nz-icon nzType="plus-circle"></i>
+                Добавить объявление
             </a>
         </ng-template>
     </li>

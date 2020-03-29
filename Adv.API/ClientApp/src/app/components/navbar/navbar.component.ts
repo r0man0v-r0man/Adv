@@ -16,6 +16,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
 export class NavbarComponent implements OnInit {
   isLogedIn :boolean = false;
   newFlatId;
+  isToggleMenu: boolean = false;
   constructor(
     private modalService: NzModalService, 
     private flatService: FlatService,
@@ -27,6 +28,10 @@ export class NavbarComponent implements OnInit {
     private notificationService: NzNotificationService
     ) { }
   ngOnInit() {
+  }
+  /** переключение видимости меню если экран меньше 768 */
+  onToggle(){
+    this.isToggleMenu = !this.isToggleMenu;    
   }
   showAddAdvertModal(){
   const modal = this.modalService.create({
