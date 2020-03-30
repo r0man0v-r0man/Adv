@@ -47,10 +47,10 @@ export class ProfileComponent implements OnInit {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
             this.userFlats.push(response[i]);
-            this.pageNumber++;
             this.loadingMore = false;
             this.initLoading = false;
           }
+          this.pageNumber++;
         }else{
           this.initLoading = false;
         }
