@@ -33,7 +33,7 @@
           </ng-template>
           <ng-template #loadMore >
             <div class="loadmore" >
-              <button *ngIf="isShowMoreButton && list.length > 19" nz-button nzBlock nzSize="large" (click)="onLoadMore()">Загрузить еще</button>
+              <button *ngIf="isShowMoreButton && list.length >= 20" nz-button nzBlock nzSize="large" (click)="onLoadMore()">Загрузить еще</button>
             </div>
           </ng-template>
         </nz-list>
