@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NzModalService, NzDrawerService, NzNotificationService } from 'ng-zorro-antd';
 import { AddAdvertComponent } from 'src/app/modal/add-advert/add-advert.component';
 import { FlatService } from 'src/app/services/flat.service';
-import { FlatModel } from 'src/app/models/flatModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
@@ -17,6 +16,8 @@ export class NavbarComponent implements OnInit {
   isLogedIn :boolean = false;
   newFlatId;
   isToggleMenu: boolean = false;
+  /** меняет ширину профиля по клику на гамбургер */
+  isFullProfileDrawerWidth: boolean;
   constructor(
     private modalService: NzModalService, 
     private flatService: FlatService,
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
     private notificationService: NzNotificationService
     ) { }
   ngOnInit() {
+    this.isFullProfileDrawerWidth = false;
   }
   /** переключение видимости меню если экран меньше 768 */
   onToggle(){
@@ -85,7 +87,11 @@ export class NavbarComponent implements OnInit {
     const drawer = this.drawerService.create({
       nzTitle: `${user.unique_name} - Кабинет пользователя`,
       nzContent: ProfileComponent,
-      nzWidth: '50%', nzClosable: false
+      nzWidth: this.isFullProfileDrawerWidth ? '100%' : '50%'
     })
+  }
+  /** ширина профиля */
+  onDrawer(){
+    this.isFullProfileDrawerWidth = true;
   }
 }
