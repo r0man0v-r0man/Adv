@@ -29,7 +29,13 @@ nzLayout="vertical"
 </nz-divider>
   
 <div nz-row [nzGutter]="16">
-    <div nz-col [nzSpan]="12">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
             <nz-form-control 
@@ -50,7 +56,13 @@ nzLayout="vertical"
             </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="12">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-label nzRequired nzFor="street">Укажите улицу</nz-form-label>
             <nz-form-control>
@@ -74,7 +86,13 @@ nzLayout="vertical"
     </ng-template>
 </nz-divider>
 <div nz-row [nzGutter]="16" >
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
             <nz-form-item >
                 <nz-form-label nzRequired nzFor="numberOfHouse">Дом</nz-form-label>
                 <nz-form-control
@@ -93,7 +111,13 @@ nzLayout="vertical"
                 </nz-form-control>
             </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item>
             <nz-form-label nzFor="numberOfHouseCourpus">Корпус</nz-form-label>
             <nz-form-control>
@@ -110,7 +134,13 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item>
             <nz-form-label nzFor="numberOfSubHouse">Подъезд</nz-form-label>
             <nz-form-control
@@ -129,7 +159,13 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item>
             <nz-form-label nzFor="numberOfFlat">Квартира</nz-form-label>
             <nz-form-control
@@ -148,9 +184,13 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
-</div>
-<div nz-row nzGutter="16">
-    <div nz-col nzSpan="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="floor">Этаж</nz-form-label>
             <nz-form-control 
@@ -169,7 +209,13 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col nzSpan="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="allFloor">Этажей всего</nz-form-label>
             <nz-form-control
@@ -188,7 +234,13 @@ nzLayout="vertical"
                 </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col nzSpan="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 12 }" 
+    [nzSm]="{ span : 8 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 8 }" 
+    [nzXl]="{ span : 8 }">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="rooms">Комнат</nz-form-label>
             <nz-form-control
@@ -214,35 +266,65 @@ nzLayout="vertical"
     </ng-template>
 </nz-divider>
 <div nz-row [nzGutter]="16">
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-control>
               <label nz-checkbox formControlName="furniture">Мебель</label>
             </nz-form-control>
           </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="8">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-control>
               <label nz-checkbox formControlName="refrigerator">Холодильник</label>
             </nz-form-control>
           </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="10">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-control>
               <label nz-checkbox formControlName="microwaveOven">Микроволновая печь</label>
             </nz-form-control>
           </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="6">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-control>
               <label nz-checkbox formControlName="internet">Интернет</label>
             </nz-form-control>
           </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="10">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-control>
               <label nz-checkbox formControlName="washingMachine">Стиральная машина</label>
@@ -256,7 +338,13 @@ nzLayout="vertical"
     </ng-template>
 </nz-divider>
 <div nz-row [nzGutter]="16">
-    <div nz-col [nzSpan]="12">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item >
             <nz-form-label nzRequired nzFor="duration">Тип аренды</nz-form-label>
             <nz-form-control 
@@ -277,7 +365,13 @@ nzLayout="vertical"
             </nz-form-control>
         </nz-form-item>
     </div>
-    <div nz-col [nzSpan]="12" >
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item>
             <nz-form-label  nzRequired nzFor="price">Цена</nz-form-label>
             <nz-form-control 
@@ -305,7 +399,13 @@ nzLayout="vertical"
     </ng-template>
 </nz-divider>
 <div nz-row [nzGutter]="16">
-    <div nz-col [nzSpan]="12">
+    <div 
+    nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }">
         <nz-form-item >
             <nz-form-label  nzRequired nzFor="phoneNumber">Телефон</nz-form-label>
             <nz-form-control             
