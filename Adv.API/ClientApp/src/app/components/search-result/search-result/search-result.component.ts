@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { FlatModel } from 'src/app/models/flatModel';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
-import { FlatService } from 'src/app/services/flat.service';
 import { Router } from '@angular/router';
 import { SearchFlatService } from 'src/app/services/search-flat.service';
 
@@ -34,7 +33,7 @@ export class SearchResultComponent implements OnInit {
     this.router.navigate(['../flats', flat.id]);
   }
   onLoadMore(){
-    console.log(this.searchParams);
+    console.log(this.list.length);
     this.initLoading = true;
       this.searchFlatService.findFlats(this.searchParams)
       .subscribe(response => {
