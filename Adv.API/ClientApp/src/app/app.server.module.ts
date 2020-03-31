@@ -5,11 +5,13 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UniversalInterceptor } from './universal.interceptor';
+import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
+    ModuleMapLoaderModule
   ],
   bootstrap: [AppComponent],
   providers: [{
