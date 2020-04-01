@@ -20,6 +20,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'flats',
+    component: FlatsComponent,
+    data: {
+      title: 'Halupa.by - Все квартиры',
+      descrption: 'Все квартиры, которые можно снять в Несвиже на часы/сутки или на длительное время'
+    }
+  },
+  {
     path: 'flats/:id',
     component: FlatDetailComponent,
     data: {
@@ -28,14 +36,7 @@ const routes: Routes = [
       robots: 'noindex, nofollow'
     }
   },
-  {
-    path: 'flats',
-    component: FlatsComponent,
-    data: {
-      title: 'Halupa.by - Все квартиры',
-      descrption: 'Все квартиры, которые можно снять в Несвиже на часы/сутки или на длительное время'
-    }
-  },
+  
   {
     path: 'search-result',
     component: SearchResultComponent,

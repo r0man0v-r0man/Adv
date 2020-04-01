@@ -27,5 +27,4 @@ export interface FlatModel{
     phoneNumberPrefix: string;
     phoneNumber: string;
 
-    
 }

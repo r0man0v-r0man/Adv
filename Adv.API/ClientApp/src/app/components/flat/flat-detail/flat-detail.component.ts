@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, OnDestroy } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
 import { FlatService } from 'src/app/services/flat.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
@@ -13,30 +13,38 @@ import ymaps from 'ymaps';
   styleUrls: ['./flat-detail.component.less']
 })
 
-export class FlatDetailComponent implements OnInit,  AfterViewInit {
+export class FlatDetailComponent implements OnInit{
   flat: FlatModel;
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent, { static: false }) 
   flatImageCarousel: NzCarouselComponent;
   myMap;
+  flatId: number;
   constructor(
     private flatService:FlatService,
     private  route: ActivatedRoute,
     private navService: NavbarService,
     private footerService: FooterService
-  ) {  }
-  
-  ngAfterViewInit(): void {
-    
+  ) {  
+    //     this.route.params.subscribe(val => {
+    //   this.getFlat(val['id']);
+    // });
   }
 
   ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.flatId = +params['id'];
+          this.getFlat(this.flatId);
+          console.log(this.flat);
 
-    this.route.params.subscribe(val => {
-      this.getFlat(val['id']);
-    });
+        }
+      );
+      
     this.navService.show();
     this.footerService.show();
+    
   }
   /** создание карты, в сервис пока не переносим - потому что глюк с созданием карты при переходе
    */
@@ -87,6 +95,7 @@ createMap(){
     .subscribe(response => {
       if(response){
         this.flat = response;
+        console.log(this.flat);
         
         this.createMap();
       }

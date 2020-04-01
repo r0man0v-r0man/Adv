@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BadInput } from './bad-input';
 import { NotFoundError } from './not-found-error';
-import { AccessDenied } from './access-denied';
 import { AppError } from './app-error';
 import { Router } from '@angular/router';
 

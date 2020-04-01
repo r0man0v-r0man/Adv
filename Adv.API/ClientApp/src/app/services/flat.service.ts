@@ -14,7 +14,7 @@ export class FlatService {
   flatUrl:string = Constants.flat;
   deleteFlatUrl: string = Constants.deleteFlat;
   updateFlatUrl: string = Constants.updateFlat;
-/**http:// */
+/** for SSR */
   private baseUrl: string;
 
   constructor(
@@ -44,8 +44,9 @@ export class FlatService {
    * get one flat
    * @param flatId flat id
    */
-  getFlat( flatId: number){
-    return this.httpService.get<FlatModel>(this.flatUrl + '/' + flatId)
+  getFlat(flatId: number){
+    // return this.httpService.get<FlatModel>(this.flatUrl + '/' + flatId)
+    return this.httpService.get<FlatModel>(`${this.baseUrl}${this.flatUrl}/${flatId}`)
   }
   /**
    * Create new flat advert
