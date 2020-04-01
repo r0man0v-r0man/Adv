@@ -32,11 +32,9 @@ const routes: Routes = [
     component: FlatDetailComponent,
     data: {
       title: 'Halupa.by - Информация о квартире',
-      descrption: 'Подробная информация о квартире',
-      robots: 'noindex, nofollow'
+      descrption: 'Подробная информация о квартире'
     }
   },
-  
   {
     path: 'search-result',
     component: SearchResultComponent,

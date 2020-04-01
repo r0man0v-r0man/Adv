@@ -21,7 +21,7 @@ export class FlatsComponent implements OnInit {
     private flatService: FlatService,
     private navService: NavbarService,
     private footerService: FooterService,
-    private router: Router
+    private router: Router,
     ) { }
 
   ngOnInit() {

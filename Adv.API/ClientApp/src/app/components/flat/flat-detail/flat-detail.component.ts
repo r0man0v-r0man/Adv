@@ -25,23 +25,17 @@ export class FlatDetailComponent implements OnInit{
     private  route: ActivatedRoute,
     private navService: NavbarService,
     private footerService: FooterService
-  ) {  
-    //     this.route.params.subscribe(val => {
-    //   this.getFlat(val['id']);
-    // });
-  }
+
+  ) { }
 
   ngOnInit() {
-    this.route.params
+      this.route.params
       .subscribe(
         (params: Params) => {
           this.flatId = +params['id'];
           this.getFlat(this.flatId);
-          console.log(this.flat);
-
         }
       );
-      
     this.navService.show();
     this.footerService.show();
     
@@ -94,9 +88,7 @@ createMap(){
     this.flatService.getFlat(id)
     .subscribe(response => {
       if(response){
-        this.flat = response;
-        console.log(this.flat);
-        
+        this.flat = response;        
         this.createMap();
       }
   });
