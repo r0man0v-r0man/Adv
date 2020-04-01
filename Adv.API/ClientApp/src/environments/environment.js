@@ -5,7 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
     production: false,
-    webApi: 'http://localhost:19138/api/'
+    webApi: '/api/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

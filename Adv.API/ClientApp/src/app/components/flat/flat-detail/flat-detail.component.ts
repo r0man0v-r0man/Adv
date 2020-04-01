@@ -16,7 +16,7 @@ import ymaps from 'ymaps';
 export class FlatDetailComponent implements OnInit,  AfterViewInit {
   flat: FlatModel;
   isShowContacts: boolean = false;
-  @ViewChild(NzCarouselComponent) 
+  @ViewChild(NzCarouselComponent, { static: false }) 
   flatImageCarousel: NzCarouselComponent;
   myMap;
   constructor(

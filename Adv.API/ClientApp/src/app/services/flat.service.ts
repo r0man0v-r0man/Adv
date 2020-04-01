@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FlatModel } from '../models/flatModel';
 import { AuthService } from './auth.service';
@@ -14,11 +14,16 @@ export class FlatService {
   flatUrl:string = Constants.flat;
   deleteFlatUrl: string = Constants.deleteFlat;
   updateFlatUrl: string = Constants.updateFlat;
+/**http:// */
+  private baseUrl: string;
 
   constructor(
     private httpService: HttpClient,
-    private authService: AuthService
-    ) { }
+    private authService: AuthService,
+    private injector: Injector
+    ) {
+      this.baseUrl = this.injector.get('BASE_URL');
+     }
   /** get user's flats only */
   getUserFlats(userId: string, pageNumber: number){
     let params = new HttpParams();
@@ -31,7 +36,9 @@ export class FlatService {
    * @param pageNumber number for fetch flats
    */
   getFlats( pageNumber: number){
-    return this.httpService.get<FlatModel[]>(this.flatsUrl + '/' + pageNumber)
+    // return this.httpService.get<FlatModel[]>(this.flatsUrl + '/' + pageNumber)
+    return this.httpService.get<FlatModel[]>(`${this.baseUrl}${this.flatsUrl}/${pageNumber}`)
+
   }
   /**
    * get one flat
