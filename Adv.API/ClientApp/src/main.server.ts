@@ -22,7 +22,7 @@ export default createServerRenderer(params => {
   };
 
   // Bypass ssr api call cert warnings in development
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
   const renderPromise = renderModule(AppServerModule, options);
 
