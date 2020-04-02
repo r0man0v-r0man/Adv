@@ -92,6 +92,7 @@ export class SearchComponent implements OnInit {
       );
   }
   submitSearchForm(){
+    //todo переделать, потому что SSR рендерить - "нет данных", на стр. с результатами
     this.isLoading = true;
     this.criteria = this.searchForm.value;
     this.data.setSearchFields(this.criteria);
