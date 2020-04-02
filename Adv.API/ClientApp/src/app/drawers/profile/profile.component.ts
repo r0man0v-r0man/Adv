@@ -38,8 +38,6 @@ export class ProfileComponent implements OnInit {
     this.getUserFlats();
   }
   onLoadMore(){
-    console.log(this.userFlats.length);
-
     this.initLoading = true;
     this.loadingMore = true;
     this.flatService.getUserFlats(this.userId, this.pageNumber)

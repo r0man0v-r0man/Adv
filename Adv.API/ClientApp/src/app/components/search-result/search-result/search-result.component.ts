@@ -30,7 +30,7 @@ export class SearchResultComponent implements OnInit {
     this.isShowMoreButton = true;
   }
   onCardClick(flat: FlatModel){
-    this.router.navigate(['../flats', flat.id]);
+    this.router.navigate(['flats/', flat.id]);
   }
   onLoadMore(){
     console.log(this.list.length);

@@ -15,6 +15,6 @@ export class AccessDeniedComponent implements OnInit {
   ngOnInit() {
   }
   onClick(){
-    this.router.navigate([''])
+    this.router.navigate(['/'])
   }
 }

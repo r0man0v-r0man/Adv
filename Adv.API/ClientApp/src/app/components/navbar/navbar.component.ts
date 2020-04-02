@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NzModalService, NzDrawerService, NzNotificationService } from 'ng-zorro-antd';
 import { AddAdvertComponent } from 'src/app/modal/add-advert/add-advert.component';
 import { FlatService } from 'src/app/services/flat.service';
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
                           nzPauseOnHover: true
                         }
                       )
-                      this.router.navigate(['../flats', response.id], {relativeTo: this.route.parent})
+                      this.router.navigate(['flats/', response.id], {relativeTo: this.route.parent})
                     }
                   }
                 );

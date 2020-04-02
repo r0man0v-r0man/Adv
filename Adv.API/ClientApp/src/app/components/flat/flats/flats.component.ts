@@ -30,7 +30,7 @@ export class FlatsComponent implements OnInit {
     this.initHomePage();
   }
   onCardClick(flat: FlatModel){
-    this.router.navigate(['../flats', flat.id]);
+    this.router.navigate(['flats/', flat.id]);
   }
   onLoadMore(){
     this.initLoading = true;
