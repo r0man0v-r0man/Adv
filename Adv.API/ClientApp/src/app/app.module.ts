@@ -30,7 +30,6 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AdsenseModule } from 'ng2-adsense';
-
 registerLocaleData(ru);
 
 @NgModule({

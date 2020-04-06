@@ -7,7 +7,7 @@ export interface FlatModel{
     price: number;
     duration: number;
     description: string;
-    files?: UploadFile[];
+    files: UploadFile[];
     id: number;
     city: number;
     street: string;

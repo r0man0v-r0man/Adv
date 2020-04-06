@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DescriptionValidators } from 'src/app/validators/description.validators';
 import { Constants } from 'src/app/constants';
 import { UploadFile, NzMessageService } from 'ng-zorro-antd';
-import { UserWarning } from 'src/app/app-errors/userWarning';
 import { Observable } from 'rxjs';
 import { FileService } from 'src/app/services/file.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Cities } from 'src/app/models/cities';
 import { Duration } from 'src/app/models/duration';
 import { StreetsService } from 'src/app/services/streets.service';
+import { CompressorService } from 'src/app/services/compressor.service';
 
 @Component({
   selector: 'app-add-advert',
@@ -29,7 +29,7 @@ export class AddAdvertComponent implements OnInit {
   /** Array of cities */
   listOfCities: Array<{ label: string; value: number}> = [];
   /** Flat's price, default is: 200 */
-  price: number = 200;
+  price: number = 50;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
   /** Street, part of address */
@@ -85,7 +85,8 @@ export class AddAdvertComponent implements OnInit {
     private messageService: NzMessageService,
     private fileService: FileService,
     private authService: AuthService,
-    private streetService: StreetsService
+    private streetService: StreetsService,
+    private compressor: CompressorService
     ) { }
 
   ngOnInit() {
@@ -127,7 +128,7 @@ export class AddAdvertComponent implements OnInit {
       phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]]
     });
   }
-
+/**установка улиц для выпадающего селекта */
   setStreets(){
     this.streetService.getStreets().subscribe(response => {
       if(response){
@@ -142,6 +143,7 @@ export class AddAdvertComponent implements OnInit {
       }
     });
   }
+  /**на будущее, может другие появятся */
   setPhoneNumberPrefixes(){
     this.listOfPhoneNumberPrefix.push(
       { text: '+375', value: '+375' }
@@ -166,40 +168,16 @@ export class AddAdvertComponent implements OnInit {
   }
   onChange(info: { file : UploadFile} ){
      if(info.file.status === 'done' && info.file.response) 
-
+      
      this.files.push(info.file.response);
 
      this.setFormControlValue('files', this.files);
-  }
-  /**
-   * Check resolution of image
-   * @param file checked file
-   * @param resolution minimum dimension
-   */
-  checkImageResolution(file: File, resolution: number) : Observable<boolean>{
-    return new Observable(observer=>{
-      let width: number, height: number;
-      const img = new Image();
-      img.src = window.URL.createObjectURL(file);
-      img.onload = () => {
-        width = img.naturalWidth;
-        height = img.naturalHeight;    
-        const isMinDimension = (width >= resolution && height >= resolution)
-        if(!isMinDimension) throw new UserWarning(`Разрешение изображения меньше ${this.minDimension}px`);
-        
-          observer.next(isMinDimension);
-          observer.complete();
-          window.URL.revokeObjectURL(img.src);
-          return;
-      }
-    })
   }
   /**
    * Delete file
    */
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
-      console.info(file);
       if(file){
         this.fileService.deleteFile(this.deleteFileUrl, file.response.name)
         .subscribe(response =>{
@@ -228,24 +206,16 @@ export class AddAdvertComponent implements OnInit {
     this.form.controls[formControlName].setValue(value);
   };
   /**
-   * Check file size and file resolution
+   * manage image
    */
-  beforeUpload = (file: File) : Observable<boolean> => {
-    return new Observable(observer => {
-      const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
+  beforeUpload = (file: File) : Observable<any> => {
+    const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
       if (!isSizeLimit) {
         this.messageService.warning(`Максимальный размер изображения ${this.maxFileSize}mb`);
-        observer.complete();
         return;
+      } else {
+        return this.compressor.compress(file);
       }
-
-      this.checkImageResolution(file, this.minDimension).subscribe(
-        isResolutionLimit => {
-          observer.next(isSizeLimit && isResolutionLimit);
-          observer.complete();
-        }
-      );
-    });
   }
-
+  
 }

@@ -1,7 +1,8 @@
 <div *ngIf="navService.visible" class="toggle">
     <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();"></i>
 </div>
-<ul *ngIf="navService.visible" (nzClick)="onToggle()" nz-menu nzMode="horizontal" [ngClass]={visibleMenu:isToggleMenu}>
+<ul *ngIf="navService.visible" (nzClick)="onToggle()" nz-menu nzMode="horizontal" 
+[ngClass]={visibleMenu:isToggleMenu}>
     <li nz-menu-item nzSelected="true">
         <a [routerLink]="[ '/' ]" routerLinkActive="active" >
             <i nz-icon nzType="home" nzTheme="outline"></i>
