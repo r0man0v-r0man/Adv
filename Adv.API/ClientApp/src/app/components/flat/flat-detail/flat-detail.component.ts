@@ -20,7 +20,7 @@ export class FlatDetailComponent implements OnInit{
   flatImageCarousel: NzCarouselComponent;
   myMap;
   flatId: number;
-  images = [];
+  images;
   constructor(
     private flatService:FlatService,
     private  route: ActivatedRoute,
@@ -33,7 +33,6 @@ export class FlatDetailComponent implements OnInit{
     this.createMap();
     this.navService.show();
     this.footerService.show();
-    
   }
   initPage(){
     this.route.params.subscribe((params: Params)=>{
@@ -43,6 +42,8 @@ export class FlatDetailComponent implements OnInit{
           if(response){
             this.flat = { ...response }
             this.createMap();
+            this.images = [];
+
             response.files.forEach((image, index)=>{
               let img = {
                 url: image.linkProps.download

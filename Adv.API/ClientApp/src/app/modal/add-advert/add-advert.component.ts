@@ -10,6 +10,8 @@ import { Cities } from 'src/app/models/cities';
 import { Duration } from 'src/app/models/duration';
 import { StreetsService } from 'src/app/services/streets.service';
 import { CompressorService } from 'src/app/services/compressor.service';
+import { AppError } from 'src/app/app-errors/app-error';
+import { UserWarning } from 'src/app/app-errors/userWarning';
 
 @Component({
   selector: 'app-add-advert',
@@ -211,8 +213,7 @@ export class AddAdvertComponent implements OnInit {
   beforeUpload = (file: File) : Observable<any> => {
     const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
       if (!isSizeLimit) {
-        this.messageService.warning(`Максимальный размер изображения ${this.maxFileSize}mb`);
-        return;
+        throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
       } else {
         return this.compressor.compress(file);
       }
