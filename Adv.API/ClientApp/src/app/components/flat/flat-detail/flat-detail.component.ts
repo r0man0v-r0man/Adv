@@ -21,6 +21,7 @@ export class FlatDetailComponent implements OnInit{
   myMap;
   flatId: number;
   images;
+  isModal: boolean = false;
   constructor(
     private flatService:FlatService,
     private  route: ActivatedRoute,
@@ -101,8 +102,12 @@ export class FlatDetailComponent implements OnInit{
     goToSlide(index:number){
       this.flatImageCarousel.goTo(index);
     }
-    onImgClick(id: number){
-      alert(id);
+    onOpenModal(){
+      this.isModal = true;
+      console.log(this.isModal);
+    }
+    onCloseModal(){
+      this.isModal = false;
     }
     /** показать телефон */
     onShowContacts(){

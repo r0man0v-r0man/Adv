@@ -1,5 +1,18 @@
 // -------- import official less file -----------
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+.prev, .next{
+  position: absolute;
+  bottom: 0;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+.next{
+  right: 0;
+}
 .img-row {
   img{
     width: 50px;
@@ -20,6 +33,54 @@
   }
   @media (min-width: 480px) {
     height: 300px;
+  }
+}
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+.carousel-wrap-modal{
+  display: block;
+  z-index: 1;
+  position: fixed;
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,1); /* Black w/ opacity */
+}
+/* Modal Content (Image) */
+.carousel-modal-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+  margin: 0 auto;
+  display: block;
+}
+.carousel-modal-img{
+  animation-name: zoom;
+  animation-duration: 0.6s;
+  display: block;
+  height: 475px;
+  width: 475px;
+  img{
+    width: 475px;
+    height: 475px;
   }
 }
 .carousel-wrap{
