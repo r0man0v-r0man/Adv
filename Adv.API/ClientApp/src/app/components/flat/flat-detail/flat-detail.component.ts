@@ -30,7 +30,6 @@ export class FlatDetailComponent implements OnInit{
 
   ngOnInit() {
     this.initPage();
-    this.createMap();
     this.navService.show();
     this.footerService.show();
   }
@@ -43,10 +42,10 @@ export class FlatDetailComponent implements OnInit{
             this.flat = { ...response }
             this.createMap();
             this.images = [];
-
             response.files.forEach((image, index)=>{
               let img = {
-                url: image.linkProps.download
+                url: image.linkProps.download,
+                alt: this.flat.street
               }
               this.images.push(img);
             })
