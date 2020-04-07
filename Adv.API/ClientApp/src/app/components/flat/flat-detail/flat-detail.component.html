@@ -3,22 +3,24 @@
         <nz-layout class="inner-layout">
             <nz-content class="inner-content" nz-row [nzGutter]="24" nzType="flex" nzJustify="center">
                 <div nz-col  [nzXs]="{ span : 24}" [nzSm]="{ span : 24}" [nzMd]="{ span: 22 }" [nzLg]="{ span : 16 }" [nzXl]="{ span : 12}">
-                    <nz-carousel [nzEffect]="'scrollx'" 
-                    [nzDotPosition]="'top'">
+                    <div class="carousel-wrap">
+                        <nz-carousel [nzEffect]="'scrollx'" 
+                        [nzDotPosition]="'top'">
                     
-                    <div nz-carousel-content *ngFor="let image of images; let i = index" class="carousel-image">
-                        <img src="{{ image.url }}" (click)="onImgClick(i)" >
-                    </div>
-                    
-                    </nz-carousel>
-                    <button class="prev" nz-button nzType="primary" nzSize="large" (click)="pre()" style="border-radius: 0;">
-                        <i nz-icon nzType="left"></i>
-                    </button>
-                    <button class="next" nz-button nzType="primary" nzSize="large" (click)="next()" style="border-radius: 0;">
-                        <i nz-icon nzType="right"></i>
-                    </button>
-                    <div class="img-row">
-                        <img  *ngFor="let image of images; let i = index" src="{{ image.url }}" alt="">
+                        <div nz-carousel-content *ngFor="let image of images; let i = index" class="carousel-img">
+                            <img src="{{ image.url }}" (click)="onImgClick(i)">
+                        </div>
+                        
+                        </nz-carousel>
+                        <button class="prev" nz-button nzType="primary" nzSize="large" (click)="pre()" style="border-radius: 0; width: 50%">
+                            <i nz-icon nzType="left"></i>
+                        </button>
+                        <button class="next" nz-button nzType="primary" nzSize="large" (click)="next()" style="border-radius: 0; width: 50%;">
+                            <i nz-icon nzType="right"></i>
+                        </button>
+                        <div class="img-row">
+                            <img  *ngFor="let image of images; let i = index" src="{{ image.url }}" alt="" >
+                        </div>
                     </div>
                     <!-- <nz-carousel [nzEffect]="'scrollx'" *ngIf="flat"
                     [nzDotPosition]="'top'"
