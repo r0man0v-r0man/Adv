@@ -98,6 +98,9 @@ export class FlatDetailComponent implements OnInit{
     next(){
       this.flatImageCarousel.next();
     }
+    goToSlide(index:number){
+      this.flatImageCarousel.goTo(index);
+    }
     onImgClick(id: number){
       alert(id);
     }

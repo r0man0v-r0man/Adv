@@ -6,11 +6,11 @@
                     <div class="carousel-wrap">
                         <nz-carousel [nzEffect]="'scrollx'" 
                         [nzDotPosition]="'top'">
-                    
-                        <div nz-carousel-content *ngFor="let image of images; let i = index" class="carousel-img">
+                        <div nz-carousel-content 
+                        *ngFor="let image of images; let i = index" 
+                        class="carousel-img">
                             <img src="{{ image.url }}" (click)="onImgClick(i)">
                         </div>
-                        
                         </nz-carousel>
                         <button class="prev" nz-button nzType="primary" nzSize="large" (click)="pre()" style="border-radius: 0; width: 50%">
                             <i nz-icon nzType="left"></i>
@@ -19,7 +19,9 @@
                             <i nz-icon nzType="right"></i>
                         </button>
                         <div class="img-row">
-                            <img  *ngFor="let image of images; let i = index" src="{{ image.url }}" alt="" >
+                            <img  *ngFor="let image of images; let i = index" 
+                            (click)="goToSlide(i)"
+                            src="{{ image.url }}" alt="" >
                         </div>
                     </div>
                     <!-- <nz-carousel [nzEffect]="'scrollx'" *ngIf="flat"
