@@ -104,7 +104,6 @@ export class FlatDetailComponent implements OnInit{
     }
     onOpenModal(){
       this.isModal = true;
-      console.log(this.isModal);
     }
     onCloseModal(){
       this.isModal = false;
