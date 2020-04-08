@@ -24,6 +24,10 @@ export class CompressorService {
           var offsetX = 0.5;   // center x
           var offsetY = 0.5;   // center y
           this.drawImageProp(ctx, img, 0, 0, width, img.naturalHeight * scaleFactor, offsetX, offsetY);
+          ctx.font = "20px Verdana";
+          ctx.fillStyle = "white";
+          ctx.globalAlpha = 0.5;
+          ctx.fillText('halupa.by', 20 , width - 20);
           ctx.canvas.toBlob(
             blob => {
               observer.next(
