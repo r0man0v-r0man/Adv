@@ -12,7 +12,6 @@
                         *ngFor="let image of images; let i = index" 
                         class="carousel-img">
                             <img 
-                            style="cursor: pointer;"
                             alt="{{ image.alt }}"
                             src="{{ image.url }}" 
                             (click)="onOpenModal()">
@@ -25,7 +24,7 @@
                             <i nz-icon nzType="right"></i>
                         </button>
                         <div class="img-row">
-                            <img  *ngFor="let image of images; let i = index" 
+                            <img  *ngFor="let image of images; let i = index"
                             (click)="goToSlide(i)"
                             src="{{ image.url }}" alt="{{ image.alt }}" >
                         </div>
