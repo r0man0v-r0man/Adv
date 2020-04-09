@@ -1,5 +1,5 @@
 <div *ngIf="navService.visible" class="toggle">
-    <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();"></i>
+    <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();" style="cursor: pointer;"></i>
 </div>
 <ul *ngIf="navService.visible" (nzClick)="onToggle()" nz-menu nzMode="horizontal" 
 [ngClass]={visibleMenu:isToggleMenu}>

@@ -10,8 +10,9 @@ import { Cities } from 'src/app/models/cities';
 import { Duration } from 'src/app/models/duration';
 import { StreetsService } from 'src/app/services/streets.service';
 import { CompressorService } from 'src/app/services/compressor.service';
-import { AppError } from 'src/app/app-errors/app-error';
 import { UserWarning } from 'src/app/app-errors/userWarning';
+import { AdvertType } from 'src/app/models/advertType';
+import { RealEstaties } from 'src/app/models/realEstaties';
 
 @Component({
   selector: 'app-add-advert',
@@ -19,7 +20,7 @@ import { UserWarning } from 'src/app/app-errors/userWarning';
   styleUrls: ['./add-advert.component.less']
 })
 export class AddAdvertComponent implements OnInit {
-  deleteFileUrl: string = Constants.deleteFileUrl;
+  /** uploadUrl используется в шаблоне */
   uploadUrl = Constants.uploadFileUrl;
 
   /** Minimum dimension/resolution for image */
@@ -30,7 +31,7 @@ export class AddAdvertComponent implements OnInit {
   selectedCity: number = 0;
   /** Array of cities */
   listOfCities: Array<{ label: string; value: number}> = [];
-  /** Flat's price, default is: 200 */
+  /** Flat's price, default is: 50 */
   price: number = 50;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
@@ -82,9 +83,16 @@ export class AddAdvertComponent implements OnInit {
   selectedPhoneNumberPrefix:string = '+375';
   listOfPhoneNumberPrefix: Array<{ value: string; text: string }> = [];
   phoneNumber: number;
+
+  selectedAdvertType: string = AdvertType.rent.toString();
+  advertTypesList: Array<{ value: string; label: string }> = [];
+
+  selectedRealEstate = RealEstaties.flat.toString();
+  listOfRealEstaties: Array<{ value: string; label: string }> = [];
+  helperForm: FormGroup;
+
   constructor(
-    private formBuilder: FormBuilder, 
-    private messageService: NzMessageService,
+    private formBuilder: FormBuilder,
     private fileService: FileService,
     private authService: AuthService,
     private streetService: StreetsService,
@@ -92,20 +100,34 @@ export class AddAdvertComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this.initHelperForm();
     this.initForm();
-    this.setCities();
-    this.setDurations();
-    this.setStreets();
-    this.setPhoneNumberPrefixes();
+  }
+  initHelperForm(){
+    this.setAdvertTypes();
+    this.setListOfRealEstaties();
+    this.helperForm = this.formBuilder.group({
+      realEstateType: [this.selectedRealEstate],
+      advertType: [this.selectedAdvertType]
+    })
   }
   headers = () => {
     return this.authService.Token;
   };
-
+  setListOfRealEstaties(){
+    this.listOfRealEstaties.push(
+      { value: RealEstaties.flat.toString(), label: 'квартиру' },
+      { value: RealEstaties.house.toString(), label: 'дом' }
+    )
+  }
   /**
    * Initialize form fields
    */
   initForm(){
+    this.setCities();
+    this.setDurations();
+    this.setStreets();
+    this.setPhoneNumberPrefixes();
     this.form = this.formBuilder.group({
       isActive: [true],
       price: [null, [Validators.required]],
@@ -151,6 +173,12 @@ export class AddAdvertComponent implements OnInit {
       { text: '+375', value: '+375' }
     )
   }
+  setAdvertTypes(){
+    this.advertTypesList.push(
+      { label: 'Сдать', value: AdvertType.rent },
+      { label: 'Продать', value: AdvertType.sale }
+    )
+  }
   /**
    * Set list of districts for select menu
    */
@@ -181,7 +209,7 @@ export class AddAdvertComponent implements OnInit {
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
       if(file){
-        this.fileService.deleteFile(this.deleteFileUrl, file.response.name)
+        this.fileService.deleteFile(file.response.name)
         .subscribe(response =>{
           if(response) {
             

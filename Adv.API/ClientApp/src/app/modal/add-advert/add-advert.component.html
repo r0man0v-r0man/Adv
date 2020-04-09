@@ -1,4 +1,59 @@
-<form 
+<form nz-form [formGroup]="helperForm" nzLayout="vertical">
+    <div nz-row [nzGutter]="16">
+        <div nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 24 }" 
+        [nzMd]="{ span : 24 }" 
+        [nzLg]="{ span : 24 }" 
+        [nzXl]="{ span : 24 }">
+        <nz-form-item >
+            <nz-form-control >
+                <nz-radio-group 
+                formControlName="advertType" 
+                [(ngModel)]="selectedAdvertType" 
+                [nzButtonStyle]="'solid'" 
+                [nzSize]="'large'"
+                style="width: 100%;"
+                 >
+                    <label style="width: 50%;" nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">
+                        {{ advertType.label }}
+                    </label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+            
+        </div>
+    </div>
+    
+    <div nz-row [nzGutter]="16">
+        <div
+        *ngIf="selectedAdvertType"
+        nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+            <nz-form-item >
+                <nz-form-control>
+                    <nz-select 
+                    formControlName="realEstateType" 
+                    [(ngModel)]="selectedRealEstate"
+                    [nzSize]="'large'">
+                    <nz-option
+                        *ngFor="let realEstate of listOfRealEstaties"
+                        [nzLabel]="realEstate.label"
+                        [nzValue]="realEstate.value"
+                        >
+                    </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
+<p>{{helperForm.value | json}}</p>
+<form
 nz-form 
 [formGroup]="form" 
 nzLayout="vertical"
