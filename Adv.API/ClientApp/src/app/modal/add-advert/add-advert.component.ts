@@ -67,7 +67,7 @@ export class AddAdvertComponent implements OnInit {
   /** Count all floor of house */
   allFloor?: number; 
 
-  form: FormGroup;
+  flatRentForm: FormGroup;
   fileList : UploadFile[] = [];
   /**file from success status from server */
   files: UploadFile[] = [];
@@ -91,6 +91,9 @@ export class AddAdvertComponent implements OnInit {
   listOfRealEstaties: Array<{ value: string; label: string }> = [];
   helperForm: FormGroup;
 
+  /** форма добавления объявления */
+  addAdvertForm: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -101,14 +104,45 @@ export class AddAdvertComponent implements OnInit {
 
   ngOnInit() {
     this.initHelperForm();
-    this.initForm();
+    this.initFlatRentForm();
   }
+
+  initAddAdvertForm(){
+    this.setCities();
+    this.setDurations();
+    this.setStreets();
+    this.setPhoneNumberPrefixes();
+    this.addAdvertForm = this.formBuilder.group({
+      isActive: [true],
+      price: [null, [Validators.required]],
+      description: [null, [DescriptionValidators.notOnlySpace]],
+      files: [this.fileList, [Validators.required]],
+      city: [this.selectedCity, [Validators.required]],
+      street: [this.selectedStreet, [Validators.required]],
+      numberOfHouse: [null, [Validators.required]],
+      numberOfHouseCourpus: [this.numberOfHouseCourpus],
+      numberOfSubHouse: [ this.numberOfSubHouse],
+      numberOfFlat: [this.numberOfFlat],
+      floor: [this.floor, [Validators.required]],
+      allFloor: [this.allFloor, [Validators.required]],
+      furniture: [this.furniture],
+      refrigerator: [this.refrigerator],
+      microwaveOven: [this.microwaveOven],
+      internet: [this.internet],
+      washingMachine: [this.washingMachine],
+      rooms: [this.rooms, [Validators.required]],
+      duration: [this.selectedDuration, [Validators.required]],
+      phoneNumberPrefix:[this.selectedPhoneNumberPrefix],
+      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]]
+    })
+  }
+
   initHelperForm(){
     this.setAdvertTypes();
     this.setListOfRealEstaties();
     this.helperForm = this.formBuilder.group({
+      advertType: [this.selectedAdvertType],
       realEstateType: [this.selectedRealEstate],
-      advertType: [this.selectedAdvertType]
     })
   }
   headers = () => {
@@ -123,12 +157,12 @@ export class AddAdvertComponent implements OnInit {
   /**
    * Initialize form fields
    */
-  initForm(){
+  initFlatRentForm(){
     this.setCities();
     this.setDurations();
     this.setStreets();
     this.setPhoneNumberPrefixes();
-    this.form = this.formBuilder.group({
+    this.flatRentForm = this.formBuilder.group({
       isActive: [true],
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],

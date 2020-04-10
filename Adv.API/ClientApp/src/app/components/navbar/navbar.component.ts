@@ -43,9 +43,9 @@ export class NavbarComponent implements OnInit {
         {
           type: 'primary',
           label: 'Добавить',
-          disabled: ()=> !modal.getContentComponent().form.valid,
+          disabled: ()=> !modal.getContentComponent().flatRentForm.valid,
           onClick: ()=>{
-            const modalForm = modal.getContentComponent().form;
+            const modalForm = modal.getContentComponent().flatRentForm;
             if(modalForm.valid){
               let newFlatAdvert = modalForm.value;
               /** add userId for advert */

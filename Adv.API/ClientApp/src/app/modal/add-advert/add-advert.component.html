@@ -14,17 +14,15 @@
                 [nzButtonStyle]="'solid'" 
                 [nzSize]="'large'"
                 style="width: 100%;"
-                 >
+                >
                     <label style="width: 50%; text-align: center;" nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">
                         {{ advertType.label }}
                     </label>
                 </nz-radio-group>
             </nz-form-control>
         </nz-form-item>
-            
         </div>
     </div>
-    
     <div nz-row [nzGutter]="16">
         <div
         *ngIf="selectedAdvertType"
@@ -52,10 +50,10 @@
         </div>
     </div>
 </form>
-<p>{{helperForm.value | json}}</p>
-<form
+<p>{{ helperForm.value | json }}</p>
+<form *ngIf="selectedAdvertType === 'сдать' && selectedRealEstate === 'квартира'"
 nz-form 
-[formGroup]="form" 
+[formGroup]="flatRentForm" 
 nzLayout="vertical"
 >
 <nz-upload 
@@ -513,3 +511,4 @@ nzLayout="vertical"
         </nz-form-control>        
     </nz-form-item>
 </form>
+<p>{{ flatRentForm.value | json }}</p>
