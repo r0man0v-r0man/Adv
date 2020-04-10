@@ -46,8 +46,7 @@ export class FlatService {
     return this.httpService.get<FlatModel>(`${this.baseUrl}${this.flatUrl}/${flatId}`)
   }
   /**
-   * Create new flat advert
-   * @param url 
+   * Создание объявления - квартира снять
    * @param newFlat flatModel object
    */
   createFlat(newFlat: FlatModel){

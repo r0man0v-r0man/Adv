@@ -99,44 +99,13 @@ export class AddAdvertComponent implements OnInit {
     private fileService: FileService,
     private authService: AuthService,
     private streetService: StreetsService,
-    private compressor: CompressorService
+    private compressor: CompressorService,
     ) { }
 
   ngOnInit() {
     this.initHelperForm();
     this.initFlatRentForm();
   }
-
-  initAddAdvertForm(){
-    this.setCities();
-    this.setDurations();
-    this.setStreets();
-    this.setPhoneNumberPrefixes();
-    this.addAdvertForm = this.formBuilder.group({
-      isActive: [true],
-      price: [null, [Validators.required]],
-      description: [null, [DescriptionValidators.notOnlySpace]],
-      files: [this.fileList, [Validators.required]],
-      city: [this.selectedCity, [Validators.required]],
-      street: [this.selectedStreet, [Validators.required]],
-      numberOfHouse: [null, [Validators.required]],
-      numberOfHouseCourpus: [this.numberOfHouseCourpus],
-      numberOfSubHouse: [ this.numberOfSubHouse],
-      numberOfFlat: [this.numberOfFlat],
-      floor: [this.floor, [Validators.required]],
-      allFloor: [this.allFloor, [Validators.required]],
-      furniture: [this.furniture],
-      refrigerator: [this.refrigerator],
-      microwaveOven: [this.microwaveOven],
-      internet: [this.internet],
-      washingMachine: [this.washingMachine],
-      rooms: [this.rooms, [Validators.required]],
-      duration: [this.selectedDuration, [Validators.required]],
-      phoneNumberPrefix:[this.selectedPhoneNumberPrefix],
-      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]]
-    })
-  }
-
   initHelperForm(){
     this.setAdvertTypes();
     this.setListOfRealEstaties();
@@ -163,6 +132,7 @@ export class AddAdvertComponent implements OnInit {
     this.setStreets();
     this.setPhoneNumberPrefixes();
     this.flatRentForm = this.formBuilder.group({
+      userId: [this.authService.currentUser.sub, [Validators.required]],
       isActive: [true],
       price: [null, [Validators.required]],
       description: [null, [DescriptionValidators.notOnlySpace]],

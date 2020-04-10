@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
 import { NavbarService } from 'src/app/services/navbar.service';
+import { FlatModel } from 'src/app/models/flatModel';
 
 @Component({
   selector: 'app-navbar',
@@ -43,35 +44,46 @@ export class NavbarComponent implements OnInit {
         {
           type: 'primary',
           label: 'Добавить',
-          disabled: ()=> !modal.getContentComponent().flatRentForm.valid,
+          disabled: ()=> 
+            !modal.getContentComponent().flatRentForm.valid || 
+            !modal.getContentComponent().helperForm.valid,
           onClick: ()=>{
-            const modalForm = modal.getContentComponent().flatRentForm;
-            if(modalForm.valid){
-              let newFlatAdvert = modalForm.value;
-              /** add userId for advert */
-              newFlatAdvert.userId = this.authService.currentUser.sub;
-              
-              this.flatService
-                .createFlat(newFlatAdvert)
-                .subscribe(response => {
-                    if(response){
-                      this.notificationService.success(
-                        'Объявление создано',
-                        'Все хорошо, вы добавили новое объявление',
-                        {
-                          nzPauseOnHover: true
-                        }
-                      )
-                      this.router.navigate(['flats/', response.id], {relativeTo: this.route.parent})
-                    }
-                  }
-                );
-              modal.destroy();
-            }
+            this.createAdvert(modal);
+            modal.destroy();
           }
         }
       ]
     });
+  }
+  /** Создание объявления */
+  createAdvert(modal: any){
+    //модель объявления - сдать квартиру
+    const flatRent: FlatModel = { 
+      ...modal.getContentComponent().flatRentForm.value
+    } 
+    //helper.advertType - сдать/продать и helper.realEstateType - квартира/дом
+    const helper = modal.getContentComponent().helperForm.value;
+    if(helper.advertType === 'сдать' && helper.realEstateType === 'квартира'){      
+      this.flatService.createFlat(flatRent).subscribe(response => {
+        if(response){
+          this.showUserSuccessNotification();
+          this.navigateToNewAdvert(response.id);
+        }
+      });
+    }
+  }
+  /** показывает уведомление о создании объявления */
+  showUserSuccessNotification(){
+    this.notificationService.success(
+      'Объявление создано',
+      'Все хорошо, вы добавили новое объявление',
+      {
+        nzPauseOnHover: true
+      })
+  }
+  /** переход на страницу с объявлением */
+  navigateToNewAdvert(id:number){
+    this.router.navigate(['flats/', id], {relativeTo: this.route.parent})
   }
   /**
    * redirect to login page if user is not logedIn

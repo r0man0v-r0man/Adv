@@ -56,6 +56,7 @@ nz-form
 [formGroup]="flatRentForm" 
 nzLayout="vertical"
 >
+<input nz-input type="hidden" formControlName="userId">
 <nz-upload 
     nzAction="{{uploadUrl}}"
     [nzHeaders]="headers"
