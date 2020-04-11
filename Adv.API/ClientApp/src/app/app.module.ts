@@ -30,6 +30,8 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
 import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AdsenseModule } from 'ng2-adsense';
+import { HouseComponent } from './components/house/house.component';
+import { HouseDetailComponent } from './components/house/house-detail/house-detail.component';
 registerLocaleData(ru);
 
 @NgModule({
@@ -51,7 +53,9 @@ registerLocaleData(ru);
     ProfileComponent,
     EditAdvertComponent,
     SearchComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    HouseComponent,
+    HouseDetailComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

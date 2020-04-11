@@ -119,8 +119,8 @@ export class AddAdvertComponent implements OnInit {
   };
   setListOfRealEstaties(){
     this.listOfRealEstaties.push(
-      { value: RealEstaties.flat.toString(), label: 'квартиру' },
-      { value: RealEstaties.house.toString(), label: 'дом' }
+      { value: RealEstaties.flat.toString(), label: 'Квартиру' },
+      { value: RealEstaties.house.toString(), label: 'Дом' }
     )
   }
   /**
@@ -205,7 +205,7 @@ export class AddAdvertComponent implements OnInit {
       
      this.files.push(info.file.response);
 
-     this.setFormControlValue('files', this.files);
+     this.setFlatRentFormControlValue('files', this.files);
   }
   /**
    * Delete file
@@ -222,7 +222,7 @@ export class AddAdvertComponent implements OnInit {
           if(index > -1) {
             this.files.splice(index, 1);
           }
-          this.setFormControlValue('files', this.files);
+          this.setFlatRentFormControlValue('files', this.files);
 
           observer.next(response);
           observer.complete();
@@ -236,8 +236,8 @@ export class AddAdvertComponent implements OnInit {
    * @param formControlName name of form control 
    * @param value value 
    */
-  setFormControlValue(formControlName: string, value: any){
-    this.form.controls[formControlName].setValue(value);
+  setFlatRentFormControlValue(formControlName: string, value: any){
+    this.flatRentForm.controls[formControlName].setValue(value);
   };
   /**
    * manage image

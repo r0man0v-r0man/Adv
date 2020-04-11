@@ -20,8 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.setApplicationMetaInfo();
   }
-
-
+  
   /**set meta tags for SEO */
   setApplicationMetaInfo(){
     this.router.events

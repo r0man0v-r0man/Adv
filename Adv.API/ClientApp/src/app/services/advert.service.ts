@@ -53,13 +53,14 @@ export class AdvertService {
   }
   /** создание объявления */
   createAdvert(modal: NzModalComponent){
-    //модель объявления - сдать квартиру
-    const flatRent: FlatModel = { 
-      ...modal.getContentComponent().flatRentForm.value
-    } 
     //helper.advertType - сдать/продать и helper.realEstateType - квартира/дом
     const helper = modal.getContentComponent().helperForm.value;
-    if(helper.advertType === 'сдать' && helper.realEstateType === 'квартира'){      
+    
+    if(helper.advertType === 'сдать' && helper.realEstateType === 'квартира'){   
+      //модель объявления - сдать квартиру
+      const flatRent: FlatModel = { 
+        ...modal.getContentComponent().flatRentForm.value
+      }    
       this.createFlat(flatRent).subscribe(response => {
         if(response){
           this.showUserSuccessNotification();
@@ -67,6 +68,9 @@ export class AdvertService {
         }
       });
     }
+    
+    
+    
   }
   /** показывает уведомление о создании объявления */
   private showUserSuccessNotification(){

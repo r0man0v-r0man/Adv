@@ -19,7 +19,7 @@ import { NZ_I18N, NzI18nModule, ru_RU } from 'ng-zorro-antd/i18n';
   ],
   bootstrap: [AppComponent, RenderStyleComponent],
   providers: [
-  { provide: NZ_I18N, useValue: ru_RU }
+    { provide: NZ_I18N, useValue: ru_RU }
   ]
 })
 export class AppServerModule {}
