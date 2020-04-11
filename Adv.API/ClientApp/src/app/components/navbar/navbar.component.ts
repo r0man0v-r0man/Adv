@@ -6,6 +6,10 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ProfileComponent } from 'src/app/drawers/profile/profile.component';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { AdvertService } from 'src/app/services/advert.service';
+import { AdvertType } from 'src/app/models/advertType';
+import { RealEstaties } from 'src/app/models/realEstaties';
+import { CreateFlatRentComponent } from '../createAdvert/create-flat-rent/create-flat-rent.component';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,8 +23,7 @@ export class NavbarComponent implements OnInit {
   /** меняет ширину профиля по клику на гамбургер */
   isFullProfileDrawerWidth: boolean;
   constructor(
-    private modalService: NzModalService, 
-    private advertService: AdvertService,
+    private modalService: ModalService,
     private router: Router, 
     public authService: AuthService,
     private drawerService: NzDrawerService,
@@ -35,23 +38,7 @@ export class NavbarComponent implements OnInit {
   }
   /** показать модальное окно для добавления объявления */
   showAddAdvertModal(){
-  const modal = this.modalService.create({
-      nzTitle: 'Добавить объявление',
-      nzContent: AddAdvertComponent,
-      nzFooter:[
-        {
-          type: 'primary',
-          label: 'Добавить',
-          disabled: ()=> 
-            !modal.getContentComponent().helperForm.valid ||
-            !modal.getContentComponent().createFlatRent.flatRentForm.valid,
-          onClick: ()=>{
-            this.advertService.createAdvert(modal);
-            modal.destroy();
-          }
-        }
-      ]
-    });
+    this.modalService.advertCreateModal();
   }
   
   /**

@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { RealEstaties } from 'src/app/models/realEstaties';
 import { CreateFlatRentComponent } from 'src/app/components/createAdvert/create-flat-rent/create-flat-rent.component';
+import { CreateFlatSaleComponent } from 'src/app/components/createAdvert/create-flat-sale/create-flat-sale.component';
 
 @Component({
   selector: 'app-add-advert',
@@ -10,7 +11,7 @@ import { CreateFlatRentComponent } from 'src/app/components/createAdvert/create-
   styleUrls: ['./add-advert.component.less']
 })
 export class AddAdvertComponent implements OnInit {
-  
+  isValid: boolean;
   selectedAdvertType: string = AdvertType.rent.toString();
   advertTypesList: Array<{ value: string; label: string }> = [];
 
@@ -20,6 +21,9 @@ export class AddAdvertComponent implements OnInit {
 
   @ViewChild(CreateFlatRentComponent, { static: false}) 
     createFlatRent:CreateFlatRentComponent;
+    
+  @ViewChild(CreateFlatSaleComponent, { static: false}) 
+    createFlatSale:CreateFlatSaleComponent;
   constructor(
     private formBuilder: FormBuilder,
     ) { }

@@ -54,31 +54,26 @@ export class AdvertService {
   getFlat(flatId: number){
     return this.httpService.get<FlatRentModel>(`${this.baseUrl}${this.flatUrl}/${flatId}`)
   }
-  /** создание объявления */
-  createAdvert(modal: NzModalComponent){    
-    //helper.advertType - сдать/продать и helper.realEstateType - квартира/дом
-    const helper = modal.getContentComponent().helperForm.value;
-    
-    if(helper.advertType === AdvertType.rent && helper.realEstateType === RealEstaties.flat){   
+  /** создание объявления "квартира сдать" */
+  createAdvertFlatRent(modal: NzModalComponent){ 
       //модель объявления - сдать квартиру
       const flatRent: FlatRentModel = { 
-        ...modal.getContentComponent().createFlatRent.flatRentForm.value
+        ...modal.getContentComponent().flatRentForm.value
       }    
-      this.createFlat(flatRent).subscribe(response => {
+      this.createFlatRent(flatRent).subscribe(response => {
         if(response){
           this.showUserSuccessNotification();
           this.navigateToNewAdvert(response.id);
         }
       });
+  }
+  /** создание объявления "квартира продать" */
+  createAdvertFlatSale(modal: NzModalComponent){
+    console.log(modal);
+    // модель объявления - продать квартиру
+    const flatSale: FlatSaleModel = {
+      ...modal.getContentComponent().flatSaleForm.value
     }
-    
-    if(helper.advertType === AdvertType.sale && helper.realEstateType === RealEstaties.flat){
-      const flatSale: FlatSaleModel = {
-        ...modal.getContentComponent().flatSaleForm.value
-      }
-    }
-    
-    
   }
   /** показывает уведомление о создании объявления */
   private showUserSuccessNotification(){
@@ -97,7 +92,7 @@ export class AdvertService {
    * Создание объявления - квартира снять
    * @param newFlat flatModel object
    */
-  private createFlat(newFlat: FlatRentModel){
+  private createFlatRent(newFlat: FlatRentModel){
     return this.httpService.post<FlatRentModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
   }
   delete(id: number){

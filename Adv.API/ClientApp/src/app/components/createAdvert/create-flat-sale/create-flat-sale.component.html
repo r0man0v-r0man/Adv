@@ -1,1 +1,8 @@
-<p>create-flat-sale works!</p>
+<form 
+nz-form 
+[formGroup]="flatSaleForm" 
+nzLayout="vertical"
+>
+    <input nz-input type="hidden" formControlName="userId">
+</form>
+<p>{{ flatSaleForm.value | json }}</p>

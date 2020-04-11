@@ -78,7 +78,9 @@ registerLocaleData(ru);
   entryComponents: [
     AddAdvertComponent,
     ProfileComponent,
-    EditAdvertComponent
+    EditAdvertComponent,
+    CreateFlatRentComponent,
+    CreateFlatSaleComponent
   ],
   providers: [
     Title,
