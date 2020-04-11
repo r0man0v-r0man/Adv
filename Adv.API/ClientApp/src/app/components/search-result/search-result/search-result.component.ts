@@ -3,7 +3,7 @@ import { DataService } from 'src/app/services/data.service';
 import { FlatModel } from 'src/app/models/flatModel';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { Router } from '@angular/router';
-import { SearchFlatService } from 'src/app/services/search-flat.service';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-search-result',
@@ -19,7 +19,7 @@ export class SearchResultComponent implements OnInit {
   pageNumber: number;
   constructor(
     private data: DataService,
-    private searchFlatService: SearchFlatService,
+    private advertService: AdvertService,
     private router: Router
     ) { }
 
@@ -35,7 +35,7 @@ export class SearchResultComponent implements OnInit {
   onLoadMore(){
     console.log(this.list.length);
     this.initLoading = true;
-      this.searchFlatService.findFlats(this.searchParams)
+      this.advertService.findFlats(this.searchParams)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Cities } from 'src/app/models/cities';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Duration } from 'src/app/models/duration';
-import { SearchFlatService } from 'src/app/services/search-flat.service';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { NzModalService } from 'ng-zorro-antd';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-search',
@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
   isLoading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
-    private searchService: SearchFlatService,
+    private advertService: AdvertService,
     private router: Router,
     private data: DataService,
     private modalService: NzModalService
@@ -96,7 +96,7 @@ export class SearchComponent implements OnInit {
     this.isLoading = true;
     this.criteria = this.searchForm.value;
     this.data.setSearchFields(this.criteria);
-    this.searchService.findFlats(this.criteria).subscribe(response => {
+    this.advertService.findFlats(this.criteria).subscribe(response => {
       if(response && response.length != 0){
         this.data.setSearchResult(response);
         this.goToResult();

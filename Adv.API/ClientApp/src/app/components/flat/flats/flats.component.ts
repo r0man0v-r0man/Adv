@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
-import { FlatService } from 'src/app/services/flat.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
 import { Router } from '@angular/router';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-flats',
@@ -18,7 +18,7 @@ export class FlatsComponent implements OnInit {
   isShowMoreButton: boolean = false;
   pageNumber: number = 1;
   constructor(
-    private flatService: FlatService,
+    private advertService: AdvertService,
     private navService: NavbarService,
     private footerService: FooterService,
     private router: Router,
@@ -35,7 +35,7 @@ export class FlatsComponent implements OnInit {
   onLoadMore(){
     this.initLoading = true;
 
-      this.flatService.getFlats(this.pageNumber)
+      this.advertService.getFlats(this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
@@ -54,7 +54,7 @@ export class FlatsComponent implements OnInit {
   }
   initHomePage(){
     this.initLoading = true;
-    this.flatService.getFlats(this.pageNumber)
+    this.advertService.getFlats(this.pageNumber)
       .subscribe(flats => {
         if(flats && flats.length !== 0){
           this.list = flats

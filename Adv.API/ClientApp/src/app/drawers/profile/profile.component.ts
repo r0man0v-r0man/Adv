@@ -5,9 +5,9 @@ import { NzDrawerRef, NzModalService } from 'ng-zorro-antd';
 import { FlatModel } from 'src/app/models/flatModel';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/UserModel';
-import { FlatService } from 'src/app/services/flat.service';
 import { EditAdvertComponent } from 'src/app/modal/edit-advert/edit-advert.component';
 import { FlatUpdateModel } from 'src/app/models/updateModels/flatUpdateModel';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     private drawerRef: NzDrawerRef,
     private userService: UserService,
     private modalService: NzModalService, 
-    private flatService: FlatService
+    private advertService: AdvertService
   ) { }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
   onLoadMore(){
     this.initLoading = true;
     this.loadingMore = true;
-    this.flatService.getUserFlats(this.userId, this.pageNumber)
+    this.advertService.getUserFlats(this.userId, this.pageNumber)
       .subscribe(response => {
         if(response && response.length > 0){
           for(var i = 0; i < response.length; i++){
@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
       })
   };
   getUserFlats(){
-    this.flatService.getUserFlats(this.userId, this.pageNumber)
+    this.advertService.getUserFlats(this.userId, this.pageNumber)
       .subscribe(response => {
         this.userFlats = response;
         this.initLoading = false;
@@ -77,7 +77,7 @@ export class ProfileComponent implements OnInit {
   }
   onDelete(item: FlatModel){
     this.initLoading = true;
-    this.flatService.delete(item.id)
+    this.advertService.delete(item.id)
       .subscribe(response => { 
         if(response) {
         let index = this.userFlats.findIndex(x=>x.id === item.id);
@@ -100,12 +100,16 @@ export class ProfileComponent implements OnInit {
       nzFooter:[{
         type: 'primary',
         label: 'Сохранить изменения',
-        disabled: ()=> !editModal.getContentComponent().editForm.valid,
-        onClick: ()=>{
+        disabled: () => 
+          !editModal.getContentComponent().editForm.valid,
+        onClick: () => {
           const editForm = editModal.getContentComponent().editForm;
           if(editForm.valid){
-            let updatedFlat = new FlatUpdateModel(editForm.value);
-            this.flatService.update(updatedFlat)
+            let updatedFlat = {
+              ...editForm.value
+            }
+            // todo переделать, т.к. у нас теперь не только квартиры
+            this.advertService.update(updatedFlat)
               .subscribe(response => {
                 this.initLoading = true;
               console.log(response);

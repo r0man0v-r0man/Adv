@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlatModel } from 'src/app/models/flatModel';
-import { FlatService } from 'src/app/services/flat.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
 import ymaps from 'ymaps';
+import { AdvertService } from 'src/app/services/advert.service';
  
 @Component({
   selector: 'app-flat-detail',
@@ -23,8 +23,8 @@ export class FlatDetailComponent implements OnInit{
   images;
   isModal: boolean = false;
   constructor(
-    private flatService:FlatService,
-    private  route: ActivatedRoute,
+    private advertService: AdvertService,
+    private route: ActivatedRoute,
     private navService: NavbarService,
     private footerService: FooterService
   ) { }
@@ -37,7 +37,7 @@ export class FlatDetailComponent implements OnInit{
   initPage(){
     this.route.params.subscribe((params: Params)=>{
       let flatId = params['id'];
-      this.flatService.getFlat(flatId).subscribe(
+      this.advertService.getFlat(flatId).subscribe(
         response => {
           if(response){
             this.flat = { ...response }
