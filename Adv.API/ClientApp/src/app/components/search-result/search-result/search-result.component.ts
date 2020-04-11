@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { FlatModel } from 'src/app/models/flatModel';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { SearchFlatCriteria } from 'src/app/models/searchFlatCriteria';
 import { Router } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
@@ -11,7 +11,7 @@ import { AdvertService } from 'src/app/services/advert.service';
   styleUrls: ['./search-result.component.less']
 })
 export class SearchResultComponent implements OnInit {
-  list: FlatModel[] = [];
+  list: FlatRentModel[] = [];
   searchParams: SearchFlatCriteria;
   initLoading = false; // bug
   /**Show or hide loadMore button */
@@ -29,7 +29,7 @@ export class SearchResultComponent implements OnInit {
     this.searchParams.pageNumber++;
     this.isShowMoreButton = true;
   }
-  onCardClick(flat: FlatModel){
+  onCardClick(flat: FlatRentModel){
     this.router.navigate(['flats/', flat.id]);
   }
   onLoadMore(){

@@ -32,6 +32,10 @@ import { AppErrorHandler } from './app-errors/app-error-handler';
 import { AdsenseModule } from 'ng2-adsense';
 import { HouseComponent } from './components/house/house.component';
 import { HouseDetailComponent } from './components/house/house-detail/house-detail.component';
+import { CreateFlatRentComponent } from './components/createAdvert/create-flat-rent/create-flat-rent.component';
+import { CreateFlatSaleComponent } from './components/createAdvert/create-flat-sale/create-flat-sale.component';
+import { CreateHouseRentComponent } from './components/createAdvert/create-house-rent/create-house-rent.component';
+import { CreateHouseSaleComponent } from './components/createAdvert/create-house-sale/create-house-sale.component';
 registerLocaleData(ru);
 
 @NgModule({
@@ -55,7 +59,11 @@ registerLocaleData(ru);
     SearchComponent,
     SearchResultComponent,
     HouseComponent,
-    HouseDetailComponent
+    HouseDetailComponent,
+    CreateFlatRentComponent,
+    CreateFlatSaleComponent,
+    CreateHouseRentComponent,
+    CreateHouseSaleComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

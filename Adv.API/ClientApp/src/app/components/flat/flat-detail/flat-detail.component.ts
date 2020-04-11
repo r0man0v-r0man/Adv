@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FlatModel } from 'src/app/models/flatModel';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { NavbarService } from 'src/app/services/navbar.service';
@@ -14,7 +14,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 })
 
 export class FlatDetailComponent implements OnInit{
-  flat: FlatModel;
+  flat: FlatRentModel;
   isShowContacts: boolean = false;
   @ViewChild(NzCarouselComponent, { static: false })
   flatImageCarousel: NzCarouselComponent;

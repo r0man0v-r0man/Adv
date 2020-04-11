@@ -1,5 +1,5 @@
 import { PipeTransform, Pipe } from '@angular/core';
-import { FlatModel } from '../models/flatModel';
+import { FlatRentModel } from '../models/flatRentModel';
 
 @Pipe({
     name: 'address'
@@ -7,7 +7,7 @@ import { FlatModel } from '../models/flatModel';
 
 export class AddressPipe implements PipeTransform{
     /** transform flat to Address string. Additional: 'full' - to add subHouse */
-    transform(flat: FlatModel, type?: string) {
+    transform(flat: FlatRentModel, type?: string) {
         if(!flat) return null;
         if(flat.street == null || 
             flat.numberOfHouse == null || 

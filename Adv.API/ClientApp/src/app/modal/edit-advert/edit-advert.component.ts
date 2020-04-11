@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FlatModel } from 'src/app/models/flatModel';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DescriptionValidators } from 'src/app/validators/description.validators';
 
@@ -10,7 +10,7 @@ import { DescriptionValidators } from 'src/app/validators/description.validators
 })
 export class EditAdvertComponent implements OnInit {
 
-  @Input() flat: FlatModel;
+  @Input() flat: FlatRentModel;
   editForm: FormGroup;
 
   formatterDollar = (value: number) => `$ ${value}`;

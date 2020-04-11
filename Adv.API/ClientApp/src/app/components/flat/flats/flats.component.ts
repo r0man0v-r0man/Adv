@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlatModel } from 'src/app/models/flatModel';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { FooterService } from 'src/app/services/footer.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 })
 export class FlatsComponent implements OnInit {
 
-  list: FlatModel[] = [];
+  list: FlatRentModel[] = [];
   initLoading = false; // bug
   /**Show or hide loadMore button */
   isShowMoreButton: boolean = false;
@@ -29,7 +29,7 @@ export class FlatsComponent implements OnInit {
     this.footerService.show();
     this.initHomePage();
   }
-  onCardClick(flat: FlatModel){
+  onCardClick(flat: FlatRentModel){
     this.router.navigate(['flats/', flat.id]);
   }
   onLoadMore(){

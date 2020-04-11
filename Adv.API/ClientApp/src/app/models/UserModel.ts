@@ -1,8 +1,8 @@
-import { FlatModel } from './flatModel';
+import { FlatRentModel } from './flatRentModel';
 
 export class UserModel{
     id: string;
     userName: string;
     password: string;
-    flatsViewModels: FlatModel[];
+    flatRentViewModels: FlatRentModel[];
 }

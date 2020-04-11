@@ -1,7 +1,6 @@
 import { UploadFile } from 'ng-zorro-antd';
 
-export interface FlatModel{
-
+export interface FlatRentModel{
     rooms: number;
     isActive: boolean;
     price: number;

@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NzDrawerRef, NzModalService } from 'ng-zorro-antd';
-import { FlatModel } from 'src/app/models/flatModel';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { UserService } from 'src/app/services/user.service';
 import { UserModel } from 'src/app/models/UserModel';
 import { EditAdvertComponent } from 'src/app/modal/edit-advert/edit-advert.component';
@@ -17,7 +17,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class ProfileComponent implements OnInit {
   initLoading : boolean = true;
   loadingMore = false;
-  userFlats: FlatModel[] = [];
+  userFlats: FlatRentModel[] = [];
   userId: string;
   user: UserModel;
   /**pageNumber for Profiles flats */
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
         this.pageNumber++;
       })
   }
-  onDelete(item: FlatModel){
+  onDelete(item: FlatRentModel){
     this.initLoading = true;
     this.advertService.delete(item.id)
       .subscribe(response => { 
@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
       }
     });
   }
-  onEdit(item: FlatModel){
+  onEdit(item: FlatRentModel){
     const editModal = this.modalService.create({
       nzTitle: 'Редактирование',
       nzContent: EditAdvertComponent,
@@ -124,7 +124,7 @@ export class ProfileComponent implements OnInit {
       }]
     });
   }
-  onMove(item: FlatModel){    
+  onMove(item: FlatRentModel){    
     this.router.navigate(['flats/', item.id]);
     this.drawerRef.close();
   }

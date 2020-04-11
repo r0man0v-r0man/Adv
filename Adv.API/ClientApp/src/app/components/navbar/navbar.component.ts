@@ -43,8 +43,8 @@ export class NavbarComponent implements OnInit {
           type: 'primary',
           label: 'Добавить',
           disabled: ()=> 
-            !modal.getContentComponent().flatRentForm.valid || 
-            !modal.getContentComponent().helperForm.valid,
+            !modal.getContentComponent().helperForm.valid ||
+            !modal.getContentComponent().createFlatRent.flatRentForm.valid,
           onClick: ()=>{
             this.advertService.createAdvert(modal);
             modal.destroy();

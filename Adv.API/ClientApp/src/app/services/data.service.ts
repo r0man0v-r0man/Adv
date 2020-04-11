@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FlatModel } from '../models/flatModel';
+import { FlatRentModel } from '../models/flatRentModel';
 import { SearchFlatCriteria } from '../models/searchFlatCriteria';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { SearchFlatCriteria } from '../models/searchFlatCriteria';
 })
 export class DataService {
   private searchFields: SearchFlatCriteria;
-  private searchResult: FlatModel[] = [];
+  private searchResult: FlatRentModel[] = [];
   constructor() { }
   setSearchFields(searchFields: SearchFlatCriteria){
     localStorage.setItem('searchFields', JSON.stringify(searchFields));
@@ -15,7 +15,7 @@ export class DataService {
   getSearchFields(){
     return JSON.parse(localStorage.getItem('searchFields'));
   }
-  setSearchResult(result: FlatModel[]){
+  setSearchResult(result: FlatRentModel[]){
     localStorage.setItem('searchResult', JSON.stringify(result));
   }
   getSearchResult(){

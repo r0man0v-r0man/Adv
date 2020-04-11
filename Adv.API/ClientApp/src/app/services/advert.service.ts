@@ -2,11 +2,14 @@ import { Injectable, Injector } from '@angular/core';
 import { Constants } from '../constants';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { FlatModel } from '../models/flatModel';
+import { FlatRentModel } from '../models/flatRentModel';
 import { FlatUpdateModel } from '../models/updateModels/flatUpdateModel';
 import { NzNotificationService, NzModalComponent } from 'ng-zorro-antd';
 import { Router } from '@angular/router';
 import { SearchFlatCriteria } from '../models/searchFlatCriteria';
+import { FlatSaleModel } from '../models/flatSaleModel';
+import { AdvertType } from '../models/advertType';
+import { RealEstaties } from '../models/realEstaties';
 
 @Injectable({
   providedIn: 'root'
@@ -35,31 +38,31 @@ export class AdvertService {
     let params = new HttpParams();
     params = params.append("userId", userId);
     params = params.append("pageNumber", pageNumber.toString());
-    return this.httpService.get<FlatModel[]>(this.flatsUrl, {params: params})
+    return this.httpService.get<FlatRentModel[]>(this.flatsUrl, {params: params})
   }
   /**
    * Get flats
    * @param pageNumber number for fetch flats
    */
   getFlats( pageNumber: number){
-    return this.httpService.get<FlatModel[]>(`${this.baseUrl}${this.flatsUrl}/${pageNumber}`)
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${this.flatsUrl}/${pageNumber}`)
   }
   /**
    * get one flat
    * @param flatId flat id
    */
   getFlat(flatId: number){
-    return this.httpService.get<FlatModel>(`${this.baseUrl}${this.flatUrl}/${flatId}`)
+    return this.httpService.get<FlatRentModel>(`${this.baseUrl}${this.flatUrl}/${flatId}`)
   }
   /** создание объявления */
-  createAdvert(modal: NzModalComponent){
+  createAdvert(modal: NzModalComponent){    
     //helper.advertType - сдать/продать и helper.realEstateType - квартира/дом
     const helper = modal.getContentComponent().helperForm.value;
     
-    if(helper.advertType === 'сдать' && helper.realEstateType === 'квартира'){   
+    if(helper.advertType === AdvertType.rent && helper.realEstateType === RealEstaties.flat){   
       //модель объявления - сдать квартиру
-      const flatRent: FlatModel = { 
-        ...modal.getContentComponent().flatRentForm.value
+      const flatRent: FlatRentModel = { 
+        ...modal.getContentComponent().createFlatRent.flatRentForm.value
       }    
       this.createFlat(flatRent).subscribe(response => {
         if(response){
@@ -69,6 +72,11 @@ export class AdvertService {
       });
     }
     
+    if(helper.advertType === AdvertType.sale && helper.realEstateType === RealEstaties.flat){
+      const flatSale: FlatSaleModel = {
+        ...modal.getContentComponent().flatSaleForm.value
+      }
+    }
     
     
   }
@@ -89,8 +97,8 @@ export class AdvertService {
    * Создание объявления - квартира снять
    * @param newFlat flatModel object
    */
-  private createFlat(newFlat: FlatModel){
-    return this.httpService.post<FlatModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
+  private createFlat(newFlat: FlatRentModel){
+    return this.httpService.post<FlatRentModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
   }
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
@@ -100,6 +108,6 @@ export class AdvertService {
   }
   /** поиск квартир по параметрам */
   findFlats(criteria: SearchFlatCriteria){
-    return this.httpService.post<FlatModel[]>(`${this.baseUrl}${this.searchFlatUrl}`, criteria, { headers: this.authService.headers});
+    return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${this.searchFlatUrl}`, criteria, { headers: this.authService.headers});
   }
 }
