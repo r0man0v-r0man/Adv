@@ -4,6 +4,10 @@ import { FileService } from 'src/app/services/file.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { StreetsService } from 'src/app/services/streets.service';
 import { CompressorService } from 'src/app/services/compressor.service';
+import { Constants } from 'src/app/constants';
+import { UploadFile } from 'ng-zorro-antd';
+import { Observable } from 'rxjs';
+import { Cities } from 'src/app/models/cities';
 
 @Component({
   selector: 'app-create-house-sale',
@@ -12,7 +16,41 @@ import { CompressorService } from 'src/app/services/compressor.service';
 })
 export class CreateHouseSaleComponent implements OnInit {
   /** форма добавления объявления - дом продать */
-  houseSaleForm: FormGroup;
+  houseSaleForm: FormGroup;  
+  /** uploadUrl используется в шаблоне */
+  uploadUrl = Constants.uploadFileUrl;
+  /** фото к объявлению */
+  fileList : UploadFile[] = [];
+  files: UploadFile[] = [];
+  showUploadList = {
+    showPreviewIcon: false,
+    showRemoveIcon: true
+  }
+  
+  /** Selected City, default district is: 0 */
+  selectedCity: number = 0;
+  /** Array of cities */
+  listOfCities: Array<{ label: string; value: number}> = [];
+  /** streets */
+  selectedStreet = null;
+  listOfStreet: Array<{ value: string; text: string }> = [];
+  nzFilterOption = () => true;
+
+  selectedPhoneNumberPrefix:string = '+375';
+  listOfPhoneNumberPrefix: Array<{ value: string; text: string }> = [];
+  phoneNumber: number;
+  /** count of rooms */
+  rooms: number;
+  /** Number of House, part of address */
+  numberOfHouse: number;
+  /** общая площадь дома */
+  houseArea: number;
+  /** жилая площадь дома */
+  houseLiveArea: number;
+  /** площадь кухни */
+  kitchenArea: number;
+  /** площадь участка */
+  housePlot:number;
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -25,8 +63,88 @@ export class CreateHouseSaleComponent implements OnInit {
     this.initHouseSaleForm();
   }
   initHouseSaleForm(){
+    this.setPhoneNumberPrefixes();
+    this.setStreets();
+    this.setCities();
     this.houseSaleForm = this.formBuilder.group({
-      userId: [this.authService.currentUser.sub, [Validators.required]]
+      userId: [this.authService.currentUser.sub, [Validators.required]],
+      isActive: [true],
+      files: [this.fileList, [Validators.required]],
+      city: [this.selectedCity, [Validators.required]],
+      street: [this.selectedStreet, [Validators.required]],
+      numberOfHouse: [null, [Validators.required]],
+      rooms: [this.rooms, [Validators.required]]
     })
   }
+  /**установка улиц для выпадающего селекта */
+  setStreets(){
+    this.streetService.getStreets().subscribe(response => {
+      if(response){
+        const listOfOption: Array<{ value: string; text: string }> = [];
+        response.streets.forEach(street => {
+          listOfOption.push(
+            { value: street.name, text: street.name }
+            );
+        });
+        this.listOfStreet = listOfOption;
+      }
+    });
+  }
+  /**на будущее, может другие появятся */
+  setPhoneNumberPrefixes(){
+    this.listOfPhoneNumberPrefix.push(
+      { text: '+375', value: '+375' }
+    )
+  }
+  /**
+   * Set list of districts for select menu
+   */
+  setCities(){
+    this.listOfCities.push(
+      { label: 'Несвиж', value: Cities.nesvizh }
+      );
+  }
+    /** header c JWT токеном для загрузки фото */
+    headers = () => {
+      return this.authService.Token;
+    };
+     /**
+   * Delete file
+   */
+  onDelete = (file: UploadFile) : Observable<boolean> => {
+    return new Observable(observer =>{
+      if(file){
+        this.fileService.deleteFile(file.response.name)
+        .subscribe(response =>{
+          if(response) {
+            
+          let index = this.files.findIndex(x=>x.uid === file.response.uid);
+          
+          if(index > -1) {
+            this.files.splice(index, 1);
+          }
+          this.setHouseSaleFormControlValue('files', this.files);
+
+          observer.next(response);
+          observer.complete();
+          }
+        });
+      }
+    })
+  }
+    /**
+   * Set value to formControl
+   * @param formControlName name of form control 
+   * @param value value 
+   */
+  setHouseSaleFormControlValue(formControlName: string, value: any){
+    this.houseSaleForm.controls[formControlName].setValue(value);
+  };
+  onChange(info: { file : UploadFile} ){
+    if(info.file.status === 'done' && info.file.response) 
+     
+    this.files.push(info.file.response);
+
+    this.setHouseSaleFormControlValue('files', this.files);
+ }
 }

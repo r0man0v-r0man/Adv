@@ -86,7 +86,7 @@ export class CreateFlatSaleComponent implements OnInit {
     private fileService: FileService,
     private authService: AuthService,
     private streetService: StreetsService,
-    private compressor: CompressorService
+    public compressor: CompressorService
   ) { }
 
   ngOnInit() {
@@ -206,15 +206,4 @@ export class CreateFlatSaleComponent implements OnInit {
   setFlatSaleFormControlValue(formControlName: string, value: any){
     this.flatSaleForm.controls[formControlName].setValue(value);
   };
-  /**
-   * manage image
-   */
-  beforeUpload = (file: File) : Observable<any> => {
-    const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
-      if (!isSizeLimit) {
-        throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
-      } else {
-        return this.compressor.compress(file);
-      }
-  }
 }

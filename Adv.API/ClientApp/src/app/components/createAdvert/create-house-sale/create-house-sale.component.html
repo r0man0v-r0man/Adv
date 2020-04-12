@@ -1,1 +1,249 @@
-<p>create-house-sale works!</p>
+<form
+nz-form 
+[formGroup]="houseSaleForm" 
+nzLayout="vertical"
+>
+    <input nz-input type="hidden" formControlName="userId">
+    <nz-upload 
+    nzAction="{{uploadUrl}}"
+    [nzHeaders]="headers"
+    nzListType="picture-card"
+    [nzBeforeUpload]="compressor.beforeUpload"
+    [nzRemove]="onDelete"
+    [nzShowUploadList]="showUploadList"
+    [(nzFileList)]="fileList"
+    [nzShowButton]="fileList.length < 5"
+    [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
+    nzFileType="image/png,image/jpeg,image/gif,image/jpg"
+    (nzChange)="onChange($event)"
+    ><!--nzSize 5mb-->
+    <p class="ant-upload-drag-icon">
+        <i nz-icon nzType="upload"></i>       
+    </p>
+    <p class="ant-upload-text">Загрузите изображение<br/><small>Максимальный размер фото 5mb.</small></p>
+    </nz-upload>
+    <input nz-input type="hidden" formControlName="files">
+    <nz-divider [nzText]="cityStreet">
+        <ng-template #cityStreet>
+            Город, улица
+        </ng-template>
+    </nz-divider>
+    <div nz-row [nzGutter]="16">
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item >
+                <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
+                <nz-form-control 
+                nzHasFeedback
+                nzErrorTip="Выберите город!">
+                    <nz-select 
+                    [(ngModel)]="selectedCity"
+                    formControlName="city"
+                    [nzSize]="'large'"
+                    nzPlaceHolder="Выберите город">
+                      <nz-option
+                        *ngFor="let city of listOfCities"
+                        [nzLabel]="city.label"
+                        [nzValue]="city.value"
+                        >
+                      </nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="street">Укажите улицу</nz-form-label>
+                <nz-form-control>
+                    <nz-select
+                    nzShowSearch 
+                    [nzSize]="'large'"
+                    formControlName="street"
+                    nzPlaceHolder="Название"
+                    [(ngModel)]="selectedStreet"
+                    [nzShowArrow]="false"
+                  >
+                    <nz-option *ngFor="let o of listOfStreet" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <nz-divider [nzText]="house">
+        <ng-template #house>
+            Дом
+        </ng-template>
+    </nz-divider>
+    <div nz-row [nzGutter]="16" >
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+                <nz-form-item >
+                    <nz-form-label nzRequired nzFor="numberOfHouse">Номер дома</nz-form-label>
+                    <nz-form-control
+                    nzHasFeedback
+                    nzErrorTip="Укажите номер">
+                        <nz-input-number style="width: 100%;"
+                        [(ngModel)]="numberOfHouse"
+                        [nzSize]="'large'"
+                        formControlName="numberOfHouse"
+                        nzPlaceHolder="№"
+                        [nzMin]="1"
+                        [nzMax]="1000"
+                        [nzStep]="1"
+                        [nzId]="numberOfHouse"
+                        ></nz-input-number>
+                    </nz-form-control>
+                </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item >
+                <nz-form-label nzRequired nzFor="rooms">Комнат</nz-form-label>
+                <nz-form-control
+                nzHasFeedback
+                nzErrorTip="Сколько комнат в доме?">
+                        <nz-input-number style="width: 100%;"
+                        [(ngModel)]="rooms"
+                        [nzSize]="'large'"
+                        formControlName="rooms"
+                        nzPlaceHolder="Кол-во"
+                        [nzMin]="1"
+                        [nzMax]="100"
+                        [nzStep]="1"
+                        [nzId]="rooms"
+                        ></nz-input-number>
+                    </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+    <nz-divider [nzText]="areaInfo">
+        <ng-template #areaInfo>
+            Площадь
+        </ng-template>
+    </nz-divider>
+    <div nz-row [nzGutter]="16">
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="houseArea">Общая площадь, кв.м</nz-form-label>
+                <nz-form-control 
+                nzHasFeedback 
+                nzErrorTip="Укажите общую площадь!">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="houseArea"
+                    [nzSize]="'large'"
+                    formControlName="houseArea"
+                    [nzPlaceHolder]="100"
+                    [nzMin]="10"
+                    [nzMax]="10000"
+                    [nzStep]="1"
+                    [nzId]="houseArea"
+                    ></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+        <nz-form-item>
+            <nz-form-label nzRequired nzFor="houseLiveArea">Жилая площадь, кв.м</nz-form-label>
+            <nz-form-control 
+            nzHasFeedback 
+            nzErrorTip="Укажите жилую площадь!">
+                <nz-input-number style="width: 100%;"
+                [(ngModel)]="houseLiveArea"
+                [nzSize]="'large'"
+                formControlName="houseLiveArea"
+                [nzPlaceHolder]="100"
+                [nzMin]="10"
+                [nzMax]="10000"
+                [nzStep]="1"
+                [nzId]="houseLiveArea"
+                ></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+        </div>
+    </div>
+    <div nz-row [nzGutter]="16">
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="kitchenArea">Площадь кухни, кв.м</nz-form-label>
+                <nz-form-control 
+                nzHasFeedback 
+                nzErrorTip="Укажите общую площадь!">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="kitchenArea"
+                    [nzSize]="'large'"
+                    formControlName="kitchenArea"
+                    [nzPlaceHolder]="100"
+                    [nzMin]="10"
+                    [nzMax]="10000"
+                    [nzStep]="1"
+                    [nzId]="kitchenArea"
+                    ></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="housePlot">Площадь участка, сот.</nz-form-label>
+                <nz-form-control 
+                nzHasFeedback 
+                nzErrorTip="Укажите общую площадь!">
+                    <nz-input-number style="width: 100%;"
+                    [(ngModel)]="housePlot"
+                    [nzSize]="'large'"
+                    formControlName="housePlot"
+                    [nzPlaceHolder]="100"
+                    [nzMin]="10"
+                    [nzMax]="10000"
+                    [nzStep]="1"
+                    [nzId]="housePlot"
+                    ></nz-input-number>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
+</form>
