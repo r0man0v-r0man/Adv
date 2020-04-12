@@ -41,7 +41,8 @@
                     [nzSize]="'large'"
                     style="width: 100%;"
                     >
-                        <label style="width: 50%; text-align: center;" nz-radio-button [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">
+                        <label style="width: 50%; text-align: center;" nz-radio-button 
+                            [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">
                             {{ realEstate.label }}
                         </label>
                     </nz-radio-group>
