@@ -7,6 +7,7 @@ import { CreateFlatRentComponent } from '../components/createAdvert/create-flat-
 import { AdvertService } from './advert.service';
 import { CreateFlatSaleComponent } from '../components/createAdvert/create-flat-sale/create-flat-sale.component';
 import { CreateHouseRentComponent } from '../components/createAdvert/create-house-rent/create-house-rent.component';
+import { CreateHouseSaleComponent } from '../components/createAdvert/create-house-sale/create-house-sale.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,35 @@ export class ModalService {
   }
   /** открытие модалього окна с формой добавления объявления дом продать */
   private createHouseSaleModal(){
-    console.log('реализации пока нет');
-    
+    const createAdvertModal = this.modalService.create({
+      nzTitle: 'Добавить объявление - дом, продать',
+      nzContent: CreateHouseSaleComponent,
+      nzFooter:[
+        {
+          label: 'Отмена',
+          type: 'link',
+          onClick: ()=>{
+            createAdvertModal.destroy();
+          }
+        },
+        {
+          label: 'Назад',
+          type: 'default',
+          onClick: ()=>{
+            this.advertCreateModal();
+            createAdvertModal.destroy();
+          }
+        },
+        {
+          label: 'Добавить',
+          type: 'primary',
+          disabled: () => !createAdvertModal.getContentComponent().houseSaleForm.valid,
+          onClick: () => {
+            this.advertService.createAdvertHouseSale(createAdvertModal);
+            createAdvertModal.destroy();
+          }
+      }]
+    })    
   }
   /** открытие модалього окна с формой добавления объявления дом сдать */
   private createHouseRentModal(){
