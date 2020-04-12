@@ -22,6 +22,13 @@ export class ModalService {
       nzContent: AddAdvertComponent,
       nzFooter:[
         {
+          label: 'Отмена',
+          type: 'default',
+          onClick: ()=>{
+            modal.destroy();
+          }
+        },
+        {
           type: 'primary',
           label: 'Далее',
           disabled: ()=> 
@@ -60,14 +67,29 @@ export class ModalService {
   /** открытие модалього окна с формой добавления объявления дом сдать */
   private createHouseRentModal(){
     console.log('реализации пока нет');
-    
   }
   /** открытие модального окна с формой добавления объявления квартира продать */
   private createFlatSaleModal(){
     const createAdvertModal = this.modalService.create({
       nzTitle: 'Добавить объявление - квартира, продать',
       nzContent: CreateFlatSaleComponent,
-      nzFooter: [{
+      nzFooter: [
+        {
+          label: 'Отмена',
+          type: 'link',
+          onClick: ()=>{
+            createAdvertModal.destroy();
+          }
+        },
+        {
+          label: 'Назад',
+          type: 'default',
+          onClick: ()=>{
+            this.advertCreateModal();
+            createAdvertModal.destroy();
+          }
+        },
+        {
         label: 'Добавить',
         type: 'primary',
         disabled: () => !createAdvertModal.getContentComponent().flatSaleForm.valid,
@@ -83,7 +105,23 @@ export class ModalService {
     const createAdvertModal = this.modalService.create({
       nzTitle: 'Добавить объявление - квартира, сдать',
       nzContent: CreateFlatRentComponent,
-      nzFooter: [{
+      nzFooter: [
+        {
+          label: 'Отмена',
+          type: 'link',
+          onClick: ()=>{
+            createAdvertModal.destroy();
+          }
+        },
+        {
+          label: 'Назад',
+          type: 'default',
+          onClick: ()=>{
+            this.advertCreateModal();
+            createAdvertModal.destroy();
+          }
+        },
+        {
         label: 'Добавить',
         type: 'primary',
         disabled: () => !createAdvertModal.getContentComponent().flatRentForm.valid,
