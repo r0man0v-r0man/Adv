@@ -18,4 +18,5 @@ export class FileService {
    deleteFile(fileName: string){
     return this.httpService.delete<boolean>(this.deleteFileUrl + '/' + fileName, { headers: this.authService.SecureHeaders })
   }
+  
 }

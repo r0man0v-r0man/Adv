@@ -33,18 +33,18 @@
             [nzLg]="{ span : 24 }" 
             [nzXl]="{ span : 24 }">
             <nz-form-item >
-                <nz-form-control>
-                    <nz-select 
+                <nz-form-control >
+                    <nz-radio-group 
                     formControlName="realEstateType" 
-                    [(ngModel)]="selectedRealEstate"
-                    [nzSize]="'large'">
-                    <nz-option
-                        *ngFor="let realEstate of listOfRealEstaties"
-                        [nzLabel]="realEstate.label"
-                        [nzValue]="realEstate.value"
-                        >
-                    </nz-option>
-                    </nz-select>
+                    [(ngModel)]="selectedRealEstate" 
+                    [nzButtonStyle]="'solid'" 
+                    [nzSize]="'large'"
+                    style="width: 100%;"
+                    >
+                        <label style="width: 50%; text-align: center;" nz-radio-button [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">
+                            {{ realEstate.label }}
+                        </label>
+                    </nz-radio-group>
                 </nz-form-control>
             </nz-form-item>
         </div>

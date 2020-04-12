@@ -67,6 +67,11 @@ export class AdvertService {
         }
       });
   }
+  /** создание объявления "дом сдать" */
+  createAdvertHouseRent(modal: NzModalComponent){
+    console.log(modal);
+    
+  }
   /** создание объявления "квартира продать" */
   createAdvertFlatSale(modal: NzModalComponent){
     console.log(modal);

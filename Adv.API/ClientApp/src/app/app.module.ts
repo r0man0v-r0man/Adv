@@ -80,7 +80,9 @@ registerLocaleData(ru);
     ProfileComponent,
     EditAdvertComponent,
     CreateFlatRentComponent,
-    CreateFlatSaleComponent
+    CreateFlatSaleComponent,
+    CreateHouseRentComponent,
+    CreateHouseSaleComponent
   ],
   providers: [
     Title,

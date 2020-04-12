@@ -20,7 +20,7 @@ nzLayout="vertical"
     <p class="ant-upload-drag-icon">
         <i nz-icon nzType="upload"></i>       
     </p>
-    <p class="ant-upload-text">Загрузите изображение</p>
+    <p class="ant-upload-text">Загрузите изображение<br/><small>Максимальный размер фото 5mb.</small></p>
 </nz-upload>
 <input nz-input type="hidden" formControlName="files">
 <nz-divider [nzText]="cityStreet">
@@ -497,4 +497,3 @@ nzLayout="vertical"
         </nz-form-control>        
     </nz-form-item>
 </form>
-<p>{{ flatSaleForm.value | json }}</p>

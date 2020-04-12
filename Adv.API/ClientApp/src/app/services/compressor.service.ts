@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserWarning } from '../app-errors/userWarning';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompressorService {
+    /** Max file size in mb */
+    maxFileSize = 5;
   constructor() { }
   /** изменение длины/ширины изображения */
   compress(file: File): Observable<any> {
@@ -100,7 +103,14 @@ drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
   // fill image in dest. rectangle
   ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
 }
-
+beforeUpload = (file: File) : Observable<any> => {
+  const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
+    if (!isSizeLimit) {
+      throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
+    } else {
+      return this.compress(file);
+    }
+}
 
 
 }
