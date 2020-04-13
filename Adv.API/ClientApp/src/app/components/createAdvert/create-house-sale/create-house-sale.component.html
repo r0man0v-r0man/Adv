@@ -246,4 +246,101 @@ nzLayout="vertical"
             </nz-form-item>
         </div>
     </div>
+    <nz-divider [nzText]="comfort">
+        <ng-template #comfort>
+            Удобства
+        </ng-template>
+    </nz-divider>
+    <div nz-row [nzGutter]="16">
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="heating">Отопление</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="water">Вода</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div><div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="gas">Газ</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="sewage">Канализация</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="electricity">Электричество</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                  <label nz-checkbox formControlName="bathhouse">Баня</label>
+                </nz-form-control>
+              </nz-form-item>
+        </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <nz-form-item>
+                <nz-form-control>
+                <label nz-checkbox formControlName="garage">Гараж</label>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+    </div>
 </form>

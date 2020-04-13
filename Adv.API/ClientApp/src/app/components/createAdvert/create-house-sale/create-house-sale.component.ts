@@ -51,6 +51,20 @@ export class CreateHouseSaleComponent implements OnInit {
   kitchenArea: number;
   /** площадь участка */
   housePlot:number;
+  /** отопление */
+  heating: boolean = false;
+  /** вода */
+  water:boolean = false;
+  /** газ */
+  gas:boolean = false;
+  /** канализация */
+  sewage:boolean = false;
+  /** электричество */
+  electricity: boolean = false;
+  /** баня */
+  bathhouse:boolean = false;
+  /** гараж */
+  garage: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -73,7 +87,18 @@ export class CreateHouseSaleComponent implements OnInit {
       city: [this.selectedCity, [Validators.required]],
       street: [this.selectedStreet, [Validators.required]],
       numberOfHouse: [null, [Validators.required]],
-      rooms: [this.rooms, [Validators.required]]
+      rooms: [this.rooms, [Validators.required]],
+      houseArea: [this.houseArea, [Validators.required]],
+      houseLiveArea: [this.houseLiveArea, [Validators.required]],
+      kitchenArea: [this.kitchenArea, [Validators.required]],
+      housePlot: [this.housePlot, [Validators.required]],
+      heating: [this.heating],
+      water: [this.water],
+      gas: [this.gas],
+      sewage: [this.sewage],
+      electricity: [this.electricity],
+      bathhouse: [this.bathhouse],
+      garage: [this.garage]
     })
   }
   /**установка улиц для выпадающего селекта */
