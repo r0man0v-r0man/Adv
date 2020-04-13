@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import ymaps from 'ymaps';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,18 @@ import ymaps from 'ymaps';
 export class YandexMapService {
   myMap;
   mapExist: boolean;
+  res;
   constructor() { }
+  createSuggest(htmlContainerId: string){
+    
+      ymaps.load("https://api-maps.yandex.ru/2.1/?apikey=85e03f02-25be-40b3-971e-733f2a03e620&lang=ru_RU")
+      .then(maps => {
+        let suggestView = new maps.SuggestView(htmlContainerId);
+          suggestView.events.add('select', function (event) {
+            console.log(event.get('item').value);
+        });
+      })
+  }
 /**отрабатывает только при обновлении страницы - баг */
   createMap(city: string, address: string, htmlContainerId:string){
     ymaps.load("https://api-maps.yandex.ru/2.1/?apikey=85e03f02-25be-40b3-971e-733f2a03e620&lang=ru_RU")

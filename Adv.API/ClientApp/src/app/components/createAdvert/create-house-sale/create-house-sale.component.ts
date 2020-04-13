@@ -9,6 +9,7 @@ import { UploadFile } from 'ng-zorro-antd';
 import { Observable } from 'rxjs';
 import { Cities } from 'src/app/models/cities';
 import { DescriptionValidators } from 'src/app/validators/description.validators';
+import { YandexMapService } from 'src/app/services/yandex-map.service';
 
 @Component({
   selector: 'app-create-house-sale',
@@ -70,17 +71,21 @@ export class CreateHouseSaleComponent implements OnInit {
     price: number = 30000;
     formatterDollar = (value: number) => `$ ${value}`;
     parserDollar = (value: string) => value.replace('$ ', '');
+    yandex: string;
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
     private authService: AuthService,
     private streetService: StreetsService,
-    public compressor: CompressorService
+    public compressor: CompressorService,
+    public yandexService: YandexMapService
   ) { }
 
   ngOnInit() {
     this.initHouseSaleForm();
+    this.yandexService.createSuggest('suggest');
   }
+
   initHouseSaleForm(){
     this.setPhoneNumberPrefixes();
     this.setStreets();
@@ -110,6 +115,7 @@ export class CreateHouseSaleComponent implements OnInit {
       description: [null, [DescriptionValidators.notOnlySpace]]
     })
   }
+
   /**установка улиц для выпадающего селекта */
   setStreets(){
     this.streetService.getStreets().subscribe(response => {
