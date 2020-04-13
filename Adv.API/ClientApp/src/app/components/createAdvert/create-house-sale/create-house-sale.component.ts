@@ -8,6 +8,7 @@ import { Constants } from 'src/app/constants';
 import { UploadFile } from 'ng-zorro-antd';
 import { Observable } from 'rxjs';
 import { Cities } from 'src/app/models/cities';
+import { DescriptionValidators } from 'src/app/validators/description.validators';
 
 @Component({
   selector: 'app-create-house-sale',
@@ -65,6 +66,10 @@ export class CreateHouseSaleComponent implements OnInit {
   bathhouse:boolean = false;
   /** гараж */
   garage: boolean = false;
+    /** Flat's price, default is: 50 */
+    price: number = 30000;
+    formatterDollar = (value: number) => `$ ${value}`;
+    parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -98,7 +103,11 @@ export class CreateHouseSaleComponent implements OnInit {
       sewage: [this.sewage],
       electricity: [this.electricity],
       bathhouse: [this.bathhouse],
-      garage: [this.garage]
+      garage: [this.garage],
+      price: [null, [Validators.required]],
+      phoneNumberPrefix:[this.selectedPhoneNumberPrefix],
+      phoneNumber: [ this.phoneNumber, [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern("[0-9]*")]],
+      description: [null, [DescriptionValidators.notOnlySpace]]
     })
   }
   /**установка улиц для выпадающего селекта */

@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="helperForm" nzLayout="vertical">
+<form id="modal-form" nz-form [formGroup]="helperForm" nzLayout="vertical">
     <div nz-row [nzGutter]="16">
         <div nz-col 
         [nzXs]="{ span : 24 }" 
@@ -33,7 +33,7 @@
             [nzLg]="{ span : 24 }" 
             [nzXl]="{ span : 24 }">
             <nz-form-item >
-                <nz-form-control >
+                <nz-form-control>
                     <nz-radio-group 
                     formControlName="realEstateType" 
                     [(ngModel)]="selectedRealEstate" 

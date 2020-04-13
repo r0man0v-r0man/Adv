@@ -2,6 +2,7 @@
 nz-form 
 [formGroup]="flatSaleForm" 
 nzLayout="vertical"
+id="modal-form"
 >
     <input nz-input type="hidden" formControlName="userId">
 <nz-upload 
@@ -422,7 +423,7 @@ nzLayout="vertical"
                 formControlName="price"
                 [nzPlaceHolder]="100"
                 [nzMin]="10"
-                [nzMax]="10000"
+                [nzMax]="10000000"
                 [nzStep]="10"
                 [nzFormatter]="formatterDollar"
                 [nzParser]="parserDollar"
