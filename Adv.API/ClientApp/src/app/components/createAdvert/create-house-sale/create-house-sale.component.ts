@@ -71,7 +71,8 @@ export class CreateHouseSaleComponent implements OnInit {
     price: number = 30000;
     formatterDollar = (value: number) => `$ ${value}`;
     parserDollar = (value: string) => value.replace('$ ', '');
-    yandex: string;
+    address: string;
+    
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
@@ -85,18 +86,17 @@ export class CreateHouseSaleComponent implements OnInit {
     this.initHouseSaleForm();
     this.yandexService.createSuggest('suggest');
   }
-
+  /** при выборе устанавливаем значение полю адрес */
+  selectSuggestView(selectedSuggest: string){
+    this.address = selectedSuggest.trim();
+  }
   initHouseSaleForm(){
     this.setPhoneNumberPrefixes();
-    this.setStreets();
-    this.setCities();
     this.houseSaleForm = this.formBuilder.group({
       userId: [this.authService.currentUser.sub, [Validators.required]],
       isActive: [true],
       files: [this.fileList, [Validators.required]],
-      city: [this.selectedCity, [Validators.required]],
-      street: [this.selectedStreet, [Validators.required]],
-      numberOfHouse: [null, [Validators.required]],
+      address: [this.address, [Validators.required]],
       rooms: [this.rooms, [Validators.required]],
       houseArea: [this.houseArea, [Validators.required]],
       houseLiveArea: [this.houseLiveArea, [Validators.required]],
@@ -116,34 +116,13 @@ export class CreateHouseSaleComponent implements OnInit {
     })
   }
 
-  /**установка улиц для выпадающего селекта */
-  setStreets(){
-    this.streetService.getStreets().subscribe(response => {
-      if(response){
-        const listOfOption: Array<{ value: string; text: string }> = [];
-        response.streets.forEach(street => {
-          listOfOption.push(
-            { value: street.name, text: street.name }
-            );
-        });
-        this.listOfStreet = listOfOption;
-      }
-    });
-  }
   /**на будущее, может другие появятся */
   setPhoneNumberPrefixes(){
     this.listOfPhoneNumberPrefix.push(
       { text: '+375', value: '+375' }
     )
   }
-  /**
-   * Set list of districts for select menu
-   */
-  setCities(){
-    this.listOfCities.push(
-      { label: 'Несвиж', value: Cities.nesvizh }
-      );
-  }
+  
     /** header c JWT токеном для загрузки фото */
     headers = () => {
       return this.authService.Token;

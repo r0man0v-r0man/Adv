@@ -33,50 +33,22 @@ id="modal-form"
         <div 
         nz-col 
         [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 12 }" 
-        [nzMd]="{ span : 12 }" 
-        [nzLg]="{ span : 12 }" 
-        [nzXl]="{ span : 12 }">
+        [nzSm]="{ span : 24 }" 
+        [nzMd]="{ span : 24 }" 
+        [nzLg]="{ span : 24 }" 
+        [nzXl]="{ span : 24 }">
             <nz-form-item >
-                <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
+                <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
                 <nz-form-control 
                 nzHasFeedback
-                nzErrorTip="Выберите город!">
-                    <nz-select 
-                    [(ngModel)]="selectedCity"
-                    formControlName="city"
-                    [nzSize]="'large'"
-                    nzPlaceHolder="Выберите город">
-                      <nz-option
-                        *ngFor="let city of listOfCities"
-                        [nzLabel]="city.label"
-                        [nzValue]="city.value"
-                        >
-                      </nz-option>
-                    </nz-select>
-                </nz-form-control>
-            </nz-form-item>
-        </div>
-        <div 
-        nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 12 }" 
-        [nzMd]="{ span : 12 }" 
-        [nzLg]="{ span : 12 }" 
-        [nzXl]="{ span : 12 }">
-            <nz-form-item>
-                <nz-form-label nzRequired nzFor="street">Укажите улицу</nz-form-label>
-                <nz-form-control>
-                    <nz-select
-                    nzShowSearch 
-                    [nzSize]="'large'"
-                    formControlName="street"
-                    nzPlaceHolder="Название"
-                    [(ngModel)]="selectedStreet"
-                    [nzShowArrow]="false"
-                  >
-                    <nz-option *ngFor="let o of listOfStreet" [nzLabel]="o.text" [nzValue]="o.value"></nz-option>
-                  </nz-select>
+                nzErrorTip="укажите адрес!">
+                    <input nz-input 
+                    [nzSize]="'large'" 
+                    id="suggest" 
+                    [ngModel]="address" 
+                    formControlName="address" 
+                    (change)="selectSuggestView($event.target.value)" 
+                    placeholder="Например: Несвиж, Лермонтова 2" />
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -87,31 +59,6 @@ id="modal-form"
         </ng-template>
     </nz-divider>
     <div nz-row [nzGutter]="16" >
-        <div 
-        nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 12 }" 
-        [nzMd]="{ span : 12 }" 
-        [nzLg]="{ span : 12 }" 
-        [nzXl]="{ span : 12 }">
-                <nz-form-item >
-                    <nz-form-label nzRequired nzFor="numberOfHouse">Номер дома</nz-form-label>
-                    <nz-form-control
-                    nzHasFeedback
-                    nzErrorTip="Укажите номер">
-                        <nz-input-number style="width: 100%;"
-                        [(ngModel)]="numberOfHouse"
-                        [nzSize]="'large'"
-                        formControlName="numberOfHouse"
-                        nzPlaceHolder="№"
-                        [nzMin]="1"
-                        [nzMax]="1000"
-                        [nzStep]="1"
-                        [nzId]="numberOfHouse"
-                        ></nz-input-number>
-                    </nz-form-control>
-                </nz-form-item>
-        </div>
         <div 
         nz-col 
         [nzXs]="{ span : 24 }" 
@@ -137,6 +84,16 @@ id="modal-form"
                     </nz-form-control>
             </nz-form-item>
         </div>
+        <div 
+        nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 12 }" 
+        [nzLg]="{ span : 12 }" 
+        [nzXl]="{ span : 12 }">
+            <p>материал стен добавить</p>
+        </div>
+        
     </div>
     <nz-divider [nzText]="areaInfo">
         <ng-template #areaInfo>
@@ -443,5 +400,4 @@ id="modal-form"
             </nz-form-control>        
         </nz-form-item>
 </form>
-<input id="suggest" nz-input [(ngModel)]="yandex"/>
-<p>{{ yandex | json }}</p>
+<p>{{ houseSaleForm.value | json }}</p>
