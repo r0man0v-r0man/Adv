@@ -42,12 +42,14 @@ id="modal-form"
                 <nz-form-control 
                 nzHasFeedback
                 nzErrorTip="укажите адрес!">
-                    <input nz-input 
+                    <input 
+                    (change)="selectSuggestView(suggestYandex.value)"
+                    nz-input 
                     [nzSize]="'large'" 
                     id="suggest" 
-                    [ngModel]="address" 
+                    [(ngModel)]="address" 
                     formControlName="address" 
-                    (change)="selectSuggestView($event.target.value)" 
+                    #suggestYandex
                     placeholder="Например: Несвиж, Лермонтова 2" />
                 </nz-form-control>
             </nz-form-item>

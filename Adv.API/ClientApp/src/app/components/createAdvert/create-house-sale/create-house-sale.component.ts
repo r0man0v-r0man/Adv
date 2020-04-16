@@ -87,9 +87,13 @@ export class CreateHouseSaleComponent implements OnInit {
     this.yandexService.createSuggest('suggest');
   }
   /** при выборе устанавливаем значение полю адрес */
-  selectSuggestView(selectedSuggest: string){
-    this.address = selectedSuggest.trim();
+  selectSuggestView(selectedSuggest){
+    // console.log(selectedSuggest);
+    //this.address = selectedSuggest.trim();
+    console.log('адресс=====>   ', selectedSuggest);
+    
   }
+  
   initHouseSaleForm(){
     this.setPhoneNumberPrefixes();
     this.houseSaleForm = this.formBuilder.group({
