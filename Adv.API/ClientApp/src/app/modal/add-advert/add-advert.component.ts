@@ -19,10 +19,10 @@ export class AddAdvertComponent implements OnInit {
   listOfRealEstaties: Array<{ value: string; label: string }> = [];
   helperForm: FormGroup;
 
-  @ViewChild(CreateFlatRentComponent, { static: false}) 
+  @ViewChild(CreateFlatRentComponent) 
     createFlatRent:CreateFlatRentComponent;
     
-  @ViewChild(CreateFlatSaleComponent, { static: false}) 
+  @ViewChild(CreateFlatSaleComponent) 
     createFlatSale:CreateFlatSaleComponent;
   constructor(
     private formBuilder: FormBuilder,

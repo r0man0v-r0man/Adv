@@ -69,14 +69,12 @@ export class ModalService {
       nzFooter:[
         {
           label: 'Отмена',
-          type: 'link',
           onClick: ()=>{
             createAdvertModal.destroy();
           }
         },
         {
           label: 'Назад',
-          type: 'default',
           onClick: ()=>{
             this.advertCreateModal();
             createAdvertModal.destroy();
@@ -84,7 +82,6 @@ export class ModalService {
         },
         {
           label: 'Добавить',
-          type: 'primary',
           disabled: () => !createAdvertModal.getContentComponent().houseSaleForm.valid,
           onClick: () => {
             this.advertService.createAdvertHouseSale(createAdvertModal);
@@ -101,14 +98,12 @@ export class ModalService {
       nzFooter:[
         {
           label: 'Отмена',
-          type: 'link',
           onClick: ()=>{
             createAdvertModal.destroy();
           }
         },
         {
           label: 'Назад',
-          type: 'default',
           onClick: ()=>{
             this.advertCreateModal();
             createAdvertModal.destroy();
@@ -134,14 +129,12 @@ export class ModalService {
       nzFooter: [
         {
           label: 'Отмена',
-          type: 'link',
           onClick: ()=>{
             createAdvertModal.destroy();
           }
         },
         {
           label: 'Назад',
-          type: 'default',
           onClick: ()=>{
             this.advertCreateModal();
             createAdvertModal.destroy();
@@ -149,7 +142,6 @@ export class ModalService {
         },
         {
         label: 'Добавить',
-        type: 'primary',
         disabled: () => !createAdvertModal.getContentComponent().flatSaleForm.valid,
         onClick: () => {
           this.advertService.createAdvertFlatSale(createAdvertModal);
@@ -166,14 +158,12 @@ export class ModalService {
       nzFooter: [
         {
           label: 'Отмена',
-          type: 'link',
           onClick: ()=>{
             createAdvertModal.destroy();
           }
         },
         {
           label: 'Назад',
-          type: 'default',
           onClick: ()=>{
             this.advertCreateModal();
             createAdvertModal.destroy();
@@ -181,7 +171,6 @@ export class ModalService {
         },
         {
         label: 'Добавить',
-        type: 'primary',
         disabled: () => !createAdvertModal.getContentComponent().flatRentForm.valid,
         onClick: () => {
           this.advertService.createAdvertFlatRent(createAdvertModal);

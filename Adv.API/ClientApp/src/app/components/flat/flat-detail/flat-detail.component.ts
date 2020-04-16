@@ -16,7 +16,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 export class FlatDetailComponent implements OnInit{
   flat: FlatRentModel;
   isShowContacts: boolean = false;
-  @ViewChild(NzCarouselComponent, { static: false })
+  @ViewChild(NzCarouselComponent)
   flatImageCarousel: NzCarouselComponent;
   myMap;
   flatId: number;
