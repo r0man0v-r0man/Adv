@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FileService } from 'src/app/services/file.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { StreetsService } from 'src/app/services/streets.service';
 import { CompressorService } from 'src/app/services/compressor.service';
 import { Constants } from 'src/app/constants';
 import { UploadFile } from 'ng-zorro-antd';
 import { Observable } from 'rxjs';
-import { Cities } from 'src/app/models/cities';
 import { DescriptionValidators } from 'src/app/validators/description.validators';
 import { YandexMapService } from 'src/app/services/yandex-map.service';
 
@@ -16,7 +14,7 @@ import { YandexMapService } from 'src/app/services/yandex-map.service';
   templateUrl: './create-house-sale.component.html',
   styleUrls: ['./create-house-sale.component.less']
 })
-export class CreateHouseSaleComponent implements OnInit {
+export class CreateHouseSaleComponent implements OnInit  {
   /** форма добавления объявления - дом продать */
   houseSaleForm: FormGroup;  
   /** uploadUrl используется в шаблоне */
@@ -28,15 +26,6 @@ export class CreateHouseSaleComponent implements OnInit {
     showPreviewIcon: false,
     showRemoveIcon: true
   }
-  
-  /** Selected City, default district is: 0 */
-  selectedCity: number = 0;
-  /** Array of cities */
-  listOfCities: Array<{ label: string; value: number}> = [];
-  /** streets */
-  selectedStreet = null;
-  listOfStreet: Array<{ value: string; text: string }> = [];
-  nzFilterOption = () => true;
 
   selectedPhoneNumberPrefix:string = '+375';
   listOfPhoneNumberPrefix: Array<{ value: string; text: string }> = [];
@@ -71,36 +60,37 @@ export class CreateHouseSaleComponent implements OnInit {
     price: number = 30000;
     formatterDollar = (value: number) => `$ ${value}`;
     parserDollar = (value: string) => value.replace('$ ', '');
-    address: string;
+    selectedAddress = null;
+    listOfAdresses: Array<{ displayName: string; value: string }> = [];
+    nzFilterOption = () => true;
     
   constructor(
     private formBuilder: FormBuilder,
     private fileService: FileService,
     private authService: AuthService,
-    private streetService: StreetsService,
     public compressor: CompressorService,
     public yandexService: YandexMapService
   ) { }
 
   ngOnInit() {
     this.initHouseSaleForm();
-    this.yandexService.createSuggest('suggest');
   }
-  /** при выборе устанавливаем значение полю адрес */
-  selectSuggestView(selectedSuggest){
-    // console.log(selectedSuggest);
-    //this.address = selectedSuggest.trim();
-    console.log('адресс=====>   ', selectedSuggest);
+  onSearchAddress(value: string){
+    if(value.length > 0){
+      this.yandexService.getSuggests(value);
+      console.log(this.yandexService.listOfAdresses);
+      this.listOfAdresses = this.yandexService.listOfAdresses;
+    }
+    
     
   }
-  
   initHouseSaleForm(){
     this.setPhoneNumberPrefixes();
     this.houseSaleForm = this.formBuilder.group({
       userId: [this.authService.currentUser.sub, [Validators.required]],
       isActive: [true],
       files: [this.fileList, [Validators.required]],
-      address: [this.address, [Validators.required]],
+      address: [this.selectedAddress, [Validators.required]],
       rooms: [this.rooms, [Validators.required]],
       houseArea: [this.houseArea, [Validators.required]],
       houseLiveArea: [this.houseLiveArea, [Validators.required]],

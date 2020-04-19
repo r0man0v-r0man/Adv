@@ -39,18 +39,27 @@ id="modal-form"
         [nzXl]="{ span : 24 }">
             <nz-form-item >
                 <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
-                <nz-form-control 
-                nzHasFeedback
-                nzErrorTip="укажите адрес!">
-                    <input 
-                    (change)="selectSuggestView(suggestYandex.value)"
-                    nz-input 
-                    [nzSize]="'large'" 
-                    id="suggest" 
-                    [(ngModel)]="address" 
-                    formControlName="address" 
-                    #suggestYandex
-                    placeholder="Например: Несвиж, Лермонтова 2" />
+                <nz-form-control>
+                    <nz-select
+                    [nzDropdownClassName]="'select-address'"
+                    [nzOpen]="false"
+                    [nzLoading]="true"
+                    [nzAllowClear]="true"
+                    nzServerSearch
+                    [nzFilterOption]="nzFilterOption"
+                    (nzOnSearch)="onSearchAddress($event)"
+                    [nzShowSearch]="true"
+                    [nzSize]="'large'"
+                    formControlName="address"
+                    nzPlaceHolder="Например: Несвиж, Лермонтова 2"
+                    [(ngModel)]="selectedAddress"
+                    [nzShowArrow]="false"
+                    >
+                    <nz-option
+                    *ngFor="let address of listOfAdresses" 
+                    [nzLabel]="address.displayName" 
+                    [nzValue]="address.value"></nz-option>
+                </nz-select>
                 </nz-form-control>
             </nz-form-item>
         </div>

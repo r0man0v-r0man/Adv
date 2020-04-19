@@ -1,130 +1,14 @@
 // -------- import official less file -----------
-@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@import "~ng-zorro-antd/ng-zorro-antd.less";
 #modal-form {
-  nz-form-item{
-    margin-bottom: 0px;
-  }
+  // nz-form-item{
+  //   margin-bottom: 0px;
+  // }
+  
 }
 ::-webkit-scrollbar{
   width: 0;
 }
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
-.prev, .next{
-  position: absolute;
-  bottom: 0;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-.next{
-  right: 0;
-}
-.img-row {
-  img{
-    width: 50px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-  img:first-child{
-    margin-left: 0;
-  }
-  img:hover{
-    opacity: 0.8;
-  }
-}
-.slick-list{
-  height: 227px;
-  @media (min-width:425px){
-    height: 277px;
-  }
-  @media (min-width: 480px) {
-    height: 300px;
-  }
-}
-/* The Close Button */
-.close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.close:hover,
-.close:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-.carousel-wrap-modal{
-  display: block;
-  z-index: 1;
-  position: fixed;
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,1); /* Black w/ opacity */
-}
-/* Modal Content (Image) */
-.carousel-modal-content {
-  animation-name: zoom;
-  animation-duration: 0.6s;
-  margin: 0 auto;
-  display: block;
-}
-.carousel-modal-img{
-  animation-name: zoom;
-  animation-duration: 0.6s;
-  display: block;
-  height: 475px;
-  width: 475px;
-  img{
-    width: 475px;
-    height: 475px;
-  }
-}
-.carousel-wrap{
-  width: 227px;  
-  margin: 0 auto;
-  @media (min-width: 425px){
-    width: 277px;
-  }
-  @media (min-width: 480px) {
-    width: 300px;
-  }
-}
-.carousel-img{
-  display: block;
-  height: 227px;
-  width: 227px;
-  img{
-    width: 100%; 
-    height: 227px;
-    cursor: pointer;
-    @media (min-width:425px){
-      height: 277px;
-    }
-    @media (min-width: 480px) {
-      height: 300px;
-    }
-  }
-  @media (min-width:425px){
-    height: 277px;
-  }
-  @media (min-width: 480px) {
-    height: 300px;
-  }
-}
-
-@upload-picture-card-size: 100%;
 app-navbar{
   background-color: #fff;
     li{
@@ -176,13 +60,6 @@ nz-footer {
 .inner-layout {
   padding: 24px 0;
   background: #fff;
-}
-[nz-carousel-content] {
-  text-align: center;
-  height: 350px;
-  line-height: 350px;
-  color: #fff;
-  overflow: hidden;
 }
 body{
   background-color:@layout-body-background;

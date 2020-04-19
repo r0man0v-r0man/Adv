@@ -36,6 +36,7 @@ import { CreateFlatRentComponent } from './components/createAdvert/create-flat-r
 import { CreateFlatSaleComponent } from './components/createAdvert/create-flat-sale/create-flat-sale.component';
 import { CreateHouseRentComponent } from './components/createAdvert/create-house-rent/create-house-rent.component';
 import { CreateHouseSaleComponent } from './components/createAdvert/create-house-sale/create-house-sale.component';
+
 registerLocaleData(ru);
 
 @NgModule({
