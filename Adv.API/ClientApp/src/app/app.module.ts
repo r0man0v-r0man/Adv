@@ -21,7 +21,7 @@ registerLocaleData(ru);
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     IconsProviderModule,
     NzLayoutModule,
