@@ -21,6 +21,31 @@ nz-header {
   padding: 0;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  .toggle{
+    width: 100%;
+    padding: 0 24px;
+    text-align: right;
+    display: none;
+    font-size: larger;
+  }
+  ul{
+    padding: 0 24px;
+  }
+  @media (max-width: 768px){
+    .toggle{
+      display: block;
+    }
+    .visibleMenu{
+      display: block;
+    }
+    ul{
+      display: none;
+    }
+    ul li{
+      text-align: center;
+      display: block;
+    }
+  }
 }
 
 nz-content {
