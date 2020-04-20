@@ -1,11 +1,11 @@
 <nz-layout class="app-layout">
   <nz-layout>
-    <nz-header>
+    <nz-header *ngIf="displayService.isDisplayNavBar">
       <div class="app-header">
-        <div *ngIf="isShowNavBar" class="toggle">
+        <div  class="toggle">
           <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();" style="cursor: pointer;"></i>
       </div>
-      <ul *ngIf="isShowNavBar" (nzClick)="onToggle()" nz-menu nzMode="horizontal" 
+      <ul (nzClick)="onToggle()" nz-menu nzMode="horizontal" 
       [ngClass]={visibleMenu:isToggleMenu}>
           <li nz-menu-item nzSelected="true">
               <a [routerLink]="[ '/' ]" routerLinkActive="active" >
@@ -19,7 +19,7 @@
               </a>
           </li>
           <li nz-menu-item >
-              <ng-container *ngIf="isUserLogin; then cabinet else enter"></ng-container>
+              <ng-container *ngIf="authService.isLogedIn(); then cabinet else enter"></ng-container>
               <ng-template #enter>
                   <a [routerLink]="[ '/login' ]" style="margin-right: 8px;">
                       <i nz-icon nzType="login" nzTheme="outline"></i>    
@@ -35,7 +35,7 @@
               </ng-template>
           </li>
           <li nz-menu-item >
-              <ng-container *ngIf="isUserLogin; then isLogedInButton else isNotLogedInButton"></ng-container>
+              <ng-container *ngIf="authService.isLogedIn(); then isLogedInButton else isNotLogedInButton"></ng-container>
               <ng-template #isLogedInButton>
                   <a (click)="showAddAdvertModal()">
                       <i nz-icon nzType="plus-circle"></i>
@@ -58,7 +58,7 @@
       </div>
     </nz-content>
     <nz-footer 
-    *ngIf="isShowFooter">
+    *ngIf="displayService.isDisplayFooter">
     halupa.by - Сайт по аренде и продаже недвижимости, 2020 - Created by <a [href]="linkedInUrl" target="_blank">Романов Роман</a>
     </nz-footer>
   </nz-layout>

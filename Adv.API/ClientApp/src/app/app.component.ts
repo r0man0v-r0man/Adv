@@ -11,21 +11,18 @@ import { ModalService } from './services/modal.service';
 })
 export class AppComponent implements OnInit {
   linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a';
-  isShowFooter: boolean;
-  isShowNavBar: boolean;
-  isUserLogin: boolean;
+
   /** меняет ширину профиля по клику на гамбургер */
   isFullProfileDrawerWidth: boolean = false;
   isToggleMenu: boolean = false;
   constructor(
-    private displayService: DisplayService,
+    public displayService: DisplayService,
     private modalService: ModalService,
     private router: Router, 
-    private authService: AuthService
+    public authService: AuthService
   ) { }
   ngOnInit() {
-    this.isShowFooter = this.displayService.isDisplayFooter;
-    this.isShowNavBar = this.displayService.isDisplayNavBar;
+    
   }
   /** переключение видимости меню если экран меньше 768 */
   onToggle(){
@@ -44,6 +41,8 @@ export class AppComponent implements OnInit {
     this.modalService.advertCreateModal();
   }
   registerThenAddAdvert(){
+    console.log('asd');
+    
     this.router.navigate(['/login']);
   }
 }

@@ -30,7 +30,14 @@ nz-header {
   }
   ul{
     padding: 0 24px;
+    li:nth-child(3){
+      float: right;
+    }
+    li:last-child{
+      float: right;
+    }
   }
+  
   @media (max-width: 768px){
     .toggle{
       display: block;
@@ -40,10 +47,16 @@ nz-header {
     }
     ul{
       display: none;
-    }
-    ul li{
-      text-align: center;
-      display: block;
+      li{
+        text-align: center;
+        display: block;
+      }
+      li:nth-child(3){
+        float: unset;
+      }
+      li:last-child{
+        float: unset;
+      }
     }
   }
 }
