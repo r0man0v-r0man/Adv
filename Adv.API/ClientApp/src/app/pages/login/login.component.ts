@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DisplayService } from 'src/app/services/display.service';
 import { UserModel } from 'src/app/models/userModel';
 import { UserWarning } from 'src/app/errors/userWarning';
 
@@ -14,19 +13,16 @@ import { UserWarning } from 'src/app/errors/userWarning';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  isLoading=false;
+  isLoading = false;
   
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,
-    private displayService: DisplayService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.displayService.hideFooter();
-    this.displayService.hideNavBar();
     this.initializeLoginForm();
   }
   initializeLoginForm(){

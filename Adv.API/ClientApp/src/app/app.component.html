@@ -1,6 +1,6 @@
 <nz-layout class="app-layout">
   <nz-layout>
-    <nz-header *ngIf="displayService.isDisplayNavBar">
+    <nz-header *ngIf="isVisible" >
       <div class="app-header">
         <div  class="toggle">
           <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();" style="cursor: pointer;"></i>
@@ -58,7 +58,8 @@
       </div>
     </nz-content>
     <nz-footer 
-    *ngIf="displayService.isDisplayFooter">
+    *ngIf="isVisible"
+    >
     halupa.by - Сайт по аренде и продаже недвижимости, 2020 - Created by <a [href]="linkedInUrl" target="_blank">Романов Роман</a>
     </nz-footer>
   </nz-layout>

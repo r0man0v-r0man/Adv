@@ -126,26 +126,12 @@ namespace Adv.DAL.Interfaces.Implementations
             
         }
 
-        bool disposed = false;
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+     
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
-
-            if (disposing)
-            {
-                contextFactory?.Dispose();
-            }
-
-            disposed = true;
-        }
 
         public async Task<IEnumerable<Flat>> GetUserFlatsAsync(string userId, int pageCount, byte size, int skip, CancellationToken ct)
         {

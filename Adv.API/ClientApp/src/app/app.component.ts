@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { DisplayService } from './services/display.service';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, Event } from '@angular/router';
 import { ModalService } from './services/modal.service';
 
 @Component({
@@ -11,18 +10,36 @@ import { ModalService } from './services/modal.service';
 })
 export class AppComponent implements OnInit {
   linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a';
-
+  currentUrl: string;
+  isVisible: boolean = true;
   /** меняет ширину профиля по клику на гамбургер */
   isFullProfileDrawerWidth: boolean = false;
   isToggleMenu: boolean = false;
   constructor(
-    public displayService: DisplayService,
     private modalService: ModalService,
     private router: Router, 
     public authService: AuthService
   ) { }
   ngOnInit() {
-    
+    this.getCurrentUrl();
+  }
+  /** текущий URL */
+  getCurrentUrl(){
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd ) {
+        this.currentUrl = event.url;
+        console.log(this.currentUrl); 
+        this.isVisible = this.setVisible(this.currentUrl);
+      }
+    });
+  }
+  /** установка видимости блоков */
+  private setVisible(url: string){
+    if(url === '/login'){
+      return false;
+    }else {
+      return true;
+    }
   }
   /** переключение видимости меню если экран меньше 768 */
   onToggle(){
@@ -41,8 +58,6 @@ export class AppComponent implements OnInit {
     this.modalService.advertCreateModal();
   }
   registerThenAddAdvert(){
-    console.log('asd');
-    
     this.router.navigate(['/login']);
   }
 }
