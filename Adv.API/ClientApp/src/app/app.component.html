@@ -53,7 +53,7 @@
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
+      <div [ngClass]="isVisible?'inner-content':'inner-content-for-login'">
         <router-outlet></router-outlet>
       </div>
     </nz-content>

@@ -1,57 +1,61 @@
-<form nz-form  [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)">
-    <nz-spin [nzSpinning]="isLoading">
-                    <nz-form-item >
-                      <h1 nz-title>Halupa.by</h1>
-                  </nz-form-item>
-                  <nz-form-item>
-                    <nz-form-control>
-                      <nz-input-group nzPrefixIcon="user"  [nzSize]="'large'">
-                        <input nz-input 
-                        formControlName="userName" 
-                        id="userName"
-                        placeHolder="Имя пользователя"/>
-                      </nz-input-group>
-                    </nz-form-control>
-                  </nz-form-item>
-                  <nz-form-item>
-                    <nz-form-control>
-                      <nz-input-group nzPrefixIcon="lock" [nzSize]="'large'">
-                        <input nz-input 
-                        
-                        type="password"
-                        formControlName="password" 
-                        id="password" 
-                        placeholder="Пароль"
-                        />
-                      </nz-input-group>
-                    </nz-form-control>
-                  </nz-form-item>
-                  <nz-form-item>
-                    <nz-form-control >
-                      <button nz-button 
-                      nzType="primary" 
-                      [nzSize]="'large'" 
-                      [disabled]="!loginForm.valid"
-                       nzBlock="true">  <i nz-icon nzType="login" nzTheme="outline"></i>Войти</button>
-                    </nz-form-control>
-                  </nz-form-item>
-                  <nz-form-item>
-                    <nz-form-control>
-                      <nz-divider [nzText]="text">
-                        <ng-template #text>
-                          <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
-                            Зарегистрироваться
-                          </a>
-                        </ng-template>
-                    </nz-divider>
-                    </nz-form-control>
-                  </nz-form-item>
-                  <nz-form-item>
-                    <nz-form-control >
-                      <a  [routerLink]="[ '/' ]" routerLinkActive="active" >
-                        <small>Вернуться на главную</small>
-                      </a>
-                    </nz-form-control>
-                  </nz-form-item>
-    </nz-spin>
-</form>
+<div nz-row nzJustify="space-around" nzAlign="middle">
+  <div nz-col class="center-block">
+    <form nz-form
+    [formGroup]="loginForm" (ngSubmit)="signIn(loginForm.value)">
+       <nz-spin [nzSpinning]="isLoading">
+         <div nz-row nzJustify="center">
+           <h1 nz-typography>Halupa.by</h1>
+         </div>
+                     <nz-form-item>
+                       <nz-form-control>
+                         <nz-input-group nzPrefixIcon="user"  [nzSize]="'large'">
+                           <input nz-input 
+                           formControlName="userName" 
+                           id="userName"
+                           placeHolder="Имя пользователя"/>
+                         </nz-input-group>
+                       </nz-form-control>
+                     </nz-form-item>
+                     <nz-form-item>
+                       <nz-form-control>
+                         <nz-input-group nzPrefixIcon="lock" [nzSize]="'large'">
+                           <input nz-input 
+                           
+                           type="password"
+                           formControlName="password" 
+                           id="password" 
+                           placeholder="Пароль"
+                           />
+                         </nz-input-group>
+                       </nz-form-control>
+                     </nz-form-item>
+                     <nz-form-item>
+                       <nz-form-control >
+                         <button nz-button 
+                         nzType="primary" 
+                         [nzSize]="'large'" 
+                         [disabled]="!loginForm.valid"
+                          nzBlock="true">  
+                          <i nz-icon nzType="login" nzTheme="outline"></i>Войти</button>
+                       </nz-form-control>
+                     </nz-form-item>
+                     <nz-form-item>
+                       <nz-form-control>
+                         <nz-divider [nzText]="text">
+                           <ng-template #text>
+                             <a  [routerLink]="[ '/register' ]" routerLinkActive="active" >
+                               Зарегистрироваться
+                             </a>
+                           </ng-template>
+                       </nz-divider>
+                       </nz-form-control>
+                     </nz-form-item>
+       <div nz-row nzJustify="center"> 
+         <a  [routerLink]="[ '/' ]" routerLinkActive="active" >
+           <small>Вернуться на главную</small>
+         </a>
+       </div>            
+     </nz-spin>
+   </form>
+  </div>
+</div>

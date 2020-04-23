@@ -10,6 +10,9 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 @NgModule({
   imports: [
     LoginRoutingModule,
@@ -19,7 +22,9 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzSpinModule,
     NzDividerModule,
     NzButtonModule,
-    NzInputModule
+    NzInputModule,
+    NzTypographyModule,
+    NzIconModule
   ],
   declarations: [LoginComponent],
   exports: [LoginComponent]
