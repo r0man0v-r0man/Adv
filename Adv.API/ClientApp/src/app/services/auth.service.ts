@@ -11,11 +11,12 @@ export class AuthService {
   headers = new HttpHeaders().set('content-type', 'application/json');
   registerUrl: string = Constants.registerUser;
   loginUrl: string = Constants.login;
+  isUserNameDublicatedUrl: string = Constants.IsUserNameDuplicated;
   constructor(
     private httpService: HttpClient
   ) { }
-   /**login user */
-   login(user: UserModel){
+  /**login user */
+  login(user: UserModel){
     return this.httpService.post(this.loginUrl, user)
       .pipe(
         map((response:any)=>{
@@ -30,6 +31,15 @@ export class AuthService {
         })
       )
   }
+  
+    /** register new user */
+    registerUser(newUser: UserModel){
+      return this.httpService.post<boolean>(this.registerUrl, newUser, { headers: this.headers })
+    }
+    /**check the duplicate username */
+    IsUserNameExist(userName: string){
+      return this.httpService.get(this.isUserNameDublicatedUrl + '/' + userName)
+    }
   get SecureHeaders(){
     const token = localStorage.getItem('access_token');
     if(!token) return null;
