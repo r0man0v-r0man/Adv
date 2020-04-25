@@ -4,7 +4,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserModel } from 'src/app/models/userModel';
 import { UserNameValidators } from 'src/app/validators/userName.validators';
-import { BadInput } from 'src/app/errors/badInput';
 
 @Component({
   selector: 'app-register',
@@ -38,7 +37,7 @@ export class RegisterComponent implements OnInit {
       password:[null, [Validators.required]]
     })
   }
-
+  /** регистрация пользователя */
   submitForm(registerUser: UserModel){
     if(registerUser){
       this.isLoadingSwitch();
@@ -48,12 +47,12 @@ export class RegisterComponent implements OnInit {
             this.router.navigate(['/login']);
           }
         })
-
     }
     setTimeout(() => {
       this.isLoadingSwitch();
     }, 3000);
   }
+  /** переключение спиннера */
   isLoadingSwitch(){
     this.isLoading = !this.isLoading;
   }

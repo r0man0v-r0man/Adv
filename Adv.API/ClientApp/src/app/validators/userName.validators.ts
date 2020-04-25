@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Injectable } from '@angular/core';
 @Injectable()
 export class UserNameValidators {
+    /** проверка на сущестование имени пользователя */
    static duplicated(authService: AuthService){
     return (control: FormControl) =>
         new Observable((observer: Observer<ValidationErrors | null>) => {

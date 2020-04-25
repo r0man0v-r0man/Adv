@@ -41,14 +41,11 @@ export class LoginComponent implements OnInit {
           let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
           this.router.navigate([returnUrl || '/']);
         }
-      },
-      (error)=>{
-        setTimeout(() => {
-          this.isLoadingSwitch();
-        }, 5000);
-        throw new UserWarning(error.error);
       })
     }
+    setTimeout(() => {
+      this.isLoadingSwitch();
+    }, 3000);
   }
   isLoadingSwitch(){
     this.isLoading = !this.isLoading;
