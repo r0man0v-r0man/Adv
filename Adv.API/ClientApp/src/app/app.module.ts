@@ -19,6 +19,7 @@ import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
+import { NgtUniversalModule } from '@ng-toolkit/universal';
 registerLocaleData(ru);
 
 @NgModule({
@@ -35,7 +36,8 @@ registerLocaleData(ru);
     NzNotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzMessageModule
+    NzMessageModule,
+    NgtUniversalModule
   ],
   providers: [
     Title,

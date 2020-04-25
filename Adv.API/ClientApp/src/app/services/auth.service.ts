@@ -1,21 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserModel } from '../models/userModel';
 import { map } from 'rxjs/operators';
 import { Constants } from '../constants';
 import { Observable } from 'rxjs';
+import { LOCAL_STORAGE } from '@ng-toolkit/universal'
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private tempStorage;
   headers = new HttpHeaders().set('content-type', 'application/json');
   private registerUrl: string = Constants.registerUser;
   private loginUrl: string = Constants.login;
   private isUserNameDublicatedUrl: string = Constants.IsUserNameDuplicated;
   constructor(
-    private httpService: HttpClient
+    private httpService: HttpClient,
+    @Inject(LOCAL_STORAGE) private localStorage: any
   ) { }
   /**login user */
   login(user: UserModel){
@@ -24,7 +25,7 @@ export class AuthService {
         map((response:any)=>{
           let token = response.access_token;
           if(token){
-            localStorage.setItem('access_token', token);
+            this.localStorage.setItem('access_token', token);
             return true;
           }
           else{
@@ -43,7 +44,7 @@ export class AuthService {
       return this.httpService.get(this.isUserNameDublicatedUrl + '/' + userName)
     }
   get SecureHeaders(){
-    const token = localStorage.getItem('access_token');
+    const token = this.localStorage.getItem('access_token');
     if(!token) return null;
 
     return this.headers.append("Authorization", 'Bearer ' + token);
@@ -52,7 +53,7 @@ export class AuthService {
   isLogedIn(): Observable<boolean>{
     return new Observable<boolean>(observer => {
       const jwtHelper = new JwtHelperService();
-      let token = localStorage.getItem('access_token');
+      let token = this.localStorage.getItem('access_token');
       
       if(!token) return observer.next(false);
 
@@ -66,13 +67,13 @@ export class AuthService {
     * текущий пользователь
     */
    get currentUser(){
-    const token = localStorage.getItem('access_token');
+    const token = this.localStorage.getItem('access_token');
     if(!token) return null;
 
     return new JwtHelperService().decodeToken(token);
   }
       /**logout user */
       logOut(){
-        localStorage.removeItem("access_token");
+        this.localStorage.removeItem("access_token");
       }
 }
