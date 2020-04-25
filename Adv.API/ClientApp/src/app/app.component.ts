@@ -32,7 +32,8 @@ export class AppComponent implements OnInit {
   }
   /** установка видимости блоков */
   private setVisible(url: string){
-    if(url === '/login' || url === '/register'){
+
+    if(url.includes('/login') || url.includes('/register')){
       return false;
     }else {
       return true;
