@@ -4,10 +4,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserModel } from '../models/userModel';
 import { map } from 'rxjs/operators';
 import { Constants } from '../constants';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private tempStorage;
   headers = new HttpHeaders().set('content-type', 'application/json');
   private registerUrl: string = Constants.registerUser;
   private loginUrl: string = Constants.login;
@@ -47,15 +49,18 @@ export class AuthService {
     return this.headers.append("Authorization", 'Bearer ' + token);
   }
   /** Is User Login */
-  isLogedIn(){
-    const jwtHelper = new JwtHelperService();
-    let token = localStorage.getItem('access_token');
-    
-    if(!token) return false;
+  isLogedIn(): Observable<boolean>{
+    return new Observable<boolean>(observer => {
+      const jwtHelper = new JwtHelperService();
+      let token = localStorage.getItem('access_token');
+      
+      if(!token) return observer.next(false);
 
-    const isExpired = jwtHelper.isTokenExpired(token);
-
-    return !isExpired;
+      const isExpired = jwtHelper.isTokenExpired(token);
+  
+      return observer.next(!isExpired);
+    })
+ 
   }
   /**
     * текущий пользователь
@@ -66,4 +71,8 @@ export class AuthService {
 
     return new JwtHelperService().decodeToken(token);
   }
+      /**logout user */
+      logOut(){
+        localStorage.removeItem("access_token");
+      }
 }

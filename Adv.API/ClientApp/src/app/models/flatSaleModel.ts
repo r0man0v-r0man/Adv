@@ -1,3 +1,3 @@
 export interface FlatSaleModel {
-    // props
+    id: number;
 }
