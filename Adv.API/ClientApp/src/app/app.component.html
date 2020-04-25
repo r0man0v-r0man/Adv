@@ -9,8 +9,7 @@
       [ngClass]={visibleMenu:isToggleMenu}>
           <li nz-menu-item nzSelected="true">
               <a [routerLink]="[ '/' ]" routerLinkActive="active" >
-                  <i nz-icon nzType="home" nzTheme="outline"></i>
-                  halupa.by
+                  <i nz-icon nzType="home" nzTheme="outline"></i>halupa.by
               </a>
           </li>
           <li nz-menu-item >
@@ -19,14 +18,19 @@
               </a>
           </li>
           <li nz-menu-item >
-              <ng-container *ngIf="authService.isLogedIn() |async; then cabinet else enter"></ng-container>
+            <a [routerLink]="[ '/houses' ]" >
+                Дома
+            </a>
+        </li>
+          <li nz-menu-item >
+              <ng-container *ngIf="authService.isLogedIn() |async; then profile else enter"></ng-container>
               <ng-template #enter>
                   <a [routerLink]="[ '/login' ]" style="margin-right: 8px;">
                       <i nz-icon nzType="login" nzTheme="outline"></i>    
                       Войти
                   </a>
               </ng-template>
-              <ng-template #cabinet>
+              <ng-template #profile>
                   <a [routerLink]="[ '/profile' ]"
                   style="margin-right: 8px;">
                       <i nz-icon nzType="user" nzTheme="outline"></i>    
