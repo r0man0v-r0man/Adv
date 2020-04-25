@@ -2,6 +2,7 @@ import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { ModalService } from './services/modal.service';
+import { DrawerService } from './services/drawer.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
   isToggleMenu: boolean = false;
   constructor(
     private modalService: ModalService,
+    private drawerService: DrawerService,
     private router: Router, 
     public authService: AuthService
   ) { }
@@ -50,7 +52,7 @@ export class AppComponent implements OnInit {
   }
   /** показать профиль пользователя */
   openProfileDrawer(){
-
+    this.drawerService.openCabinet(this.isFullProfileDrawerWidth);
   }
   /** показать модальное окно для добавления объявления */
   showAddAdvertModal(){

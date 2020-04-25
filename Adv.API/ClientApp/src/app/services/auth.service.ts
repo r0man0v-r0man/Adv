@@ -9,9 +9,9 @@ import { Constants } from '../constants';
 })
 export class AuthService {
   headers = new HttpHeaders().set('content-type', 'application/json');
-  registerUrl: string = Constants.registerUser;
-  loginUrl: string = Constants.login;
-  isUserNameDublicatedUrl: string = Constants.IsUserNameDuplicated;
+  private registerUrl: string = Constants.registerUser;
+  private loginUrl: string = Constants.login;
+  private isUserNameDublicatedUrl: string = Constants.IsUserNameDuplicated;
   constructor(
     private httpService: HttpClient
   ) { }
@@ -56,5 +56,14 @@ export class AuthService {
     const isExpired = jwtHelper.isTokenExpired(token);
 
     return !isExpired;
+  }
+  /**
+    * текущий пользователь
+    */
+   get currentUser(){
+    const token = localStorage.getItem('access_token');
+    if(!token) return null;
+
+    return new JwtHelperService().decodeToken(token);
   }
 }

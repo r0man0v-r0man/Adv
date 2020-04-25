@@ -7,6 +7,8 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,6 +33,7 @@ registerLocaleData(ru);
     NzLayoutModule,
     NzMenuModule,
     NzModalModule,
+    NzDrawerModule,
     NzNotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
