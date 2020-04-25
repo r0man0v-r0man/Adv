@@ -3,7 +3,7 @@
     <nz-header *ngIf="isVisible" >
       <div class="app-header">
         <div  class="toggle">
-          <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle(); onDrawer();" style="cursor: pointer;"></i>
+          <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle();" style="cursor: pointer;"></i>
       </div>
       <ul (nzClick)="onToggle()" nz-menu nzMode="horizontal" 
       [ngClass]={visibleMenu:isToggleMenu}>
@@ -27,10 +27,10 @@
                   </a>
               </ng-template>
               <ng-template #cabinet>
-                  <a (click)="openProfileDrawer()"
+                  <a [routerLink]="[ '/profile' ]"
                   style="margin-right: 8px;">
                       <i nz-icon nzType="user" nzTheme="outline"></i>    
-                      Кабинет
+                      Профиль
                   </a>
               </ng-template>
           </li>
