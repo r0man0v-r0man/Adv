@@ -3,16 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Adv.BLL.Exceptions
+namespace Adv.DAL.Exceptions
 {
     public class RussianIdentityErrorDescriber : IdentityErrorDescriber
     {
-        public override IdentityError DuplicateUserName(string userName) 
-        { 
-            return new IdentityError 
-            { 
-                Code = nameof(DuplicateUserName), Description = $"Пользователь с именем '{userName}' уже существует."
-            }; 
+        public override IdentityError DuplicateUserName(string userName)
+        {
+            return new IdentityError
+            {
+                Code = nameof(DuplicateUserName),
+                Description = $"Пользователь с именем '{userName}' уже существует."
+            };
         }
         public override IdentityError PasswordRequiresLower()
         {

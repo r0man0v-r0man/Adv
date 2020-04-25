@@ -1,4 +1,4 @@
-﻿using Adv.BLL.Exceptions;
+﻿
 using Adv.BLL.Interfaces;
 using Adv.BLL.Services;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +14,6 @@ namespace Adv.BLL
             services.AddScoped<IFlatService, FlatService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
 
             return services;

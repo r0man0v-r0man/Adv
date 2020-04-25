@@ -16,20 +16,20 @@ export class HttpErrorInterceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request)
             .pipe(
-                catchError((error)=>this.handleError(error))
+                catchError((error: HttpErrorResponse) =>this.handleError(error))
             )
     }
     private handleError(error: HttpErrorResponse){
         if(error.status === 400)
-        return throwError(new BadInput(error.error));
-      
-        if(error.status === 404)
-        return throwError(new NotFoundError(error.error));
+        {
+            return throwError(new BadInput(error.error));
+        }
     
         if(error.status === 401)
         return throwError(new AccessDeniedError(error.error));
 
-    
+        if(error.status === 404)
+        return throwError(new NotFoundError(error.error));
         
       return throwError(new AppError(error));
       }

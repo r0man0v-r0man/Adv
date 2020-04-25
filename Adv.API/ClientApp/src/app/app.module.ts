@@ -17,6 +17,7 @@ import ru from '@angular/common/locales/ru';
 import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { AuthGuardService } from './services/auth-guard.service';
 registerLocaleData(ru);
 
 @NgModule({
@@ -37,6 +38,7 @@ registerLocaleData(ru);
   ],
   providers: [
     Title,
+    AuthGuardService,
     { 
       provide: NZ_I18N, useValue: ru_RU 
     },

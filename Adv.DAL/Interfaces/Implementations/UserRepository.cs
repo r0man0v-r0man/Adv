@@ -84,11 +84,7 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            return result != null;
         }
 
         public void Dispose()

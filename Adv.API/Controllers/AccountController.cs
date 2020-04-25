@@ -52,8 +52,17 @@ namespace Adv.API.Controllers
         [HttpGet("IsValidateUserName/{userName}")]
         public async Task<ActionResult<bool>> IsValidateUserName(string userName)
         {
-            var result = await userService.IsValidateUserNameAsync(userName).ConfigureAwait(false);
-            return result;
+            try
+            {
+                var result = await userService.IsValidateUserNameAsync(userName).ConfigureAwait(false);
+                return result;
+            }
+            catch (Exception e)
+            {
+                // log e
+                return BadRequest(e.Message);
+                throw;
+            }
         }
         [HttpGet("userInfo/{userId}")]
         [Authorize]

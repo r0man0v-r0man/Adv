@@ -1,6 +1,7 @@
 ﻿using Adv.DAL.Context;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
+using Adv.DAL.Exceptions;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,7 @@ namespace Adv.DAL
             services.AddScoped(typeof(IFlatRepository), typeof(FlatRepository));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IFileRepository), typeof(FileRepository));
+            services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
             return services;
         }

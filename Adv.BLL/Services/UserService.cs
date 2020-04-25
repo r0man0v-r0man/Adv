@@ -30,7 +30,8 @@ namespace Adv.BLL.Services
 
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
-            var result = await userRepository.IsValidateUserNameAsync(userName).ConfigureAwait(false);
+            var result = await userRepository.IsValidateUserNameAsync(userName)
+                .ConfigureAwait(false);
             return result;
         }
 

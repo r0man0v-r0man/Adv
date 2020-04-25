@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { RegisterRoutingModule } from './register-routing.module';
 
@@ -11,6 +11,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CommonModule } from '@angular/common';
+import { AppErrorHandler } from 'src/app/errors/appErrorHandler';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptor } from 'src/app/errors/httpError.interceptor';
 
 @NgModule({
   imports: [
@@ -22,7 +26,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzButtonModule,
     NzInputModule,
     NzTypographyModule,
-    NzIconModule
+    NzIconModule,
+    CommonModule
   ],
   declarations: [RegisterComponent],
   exports: [RegisterComponent]
