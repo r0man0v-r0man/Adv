@@ -23,7 +23,8 @@ const routes: Routes =
     loadChildren: () => import('./pages/login/login.module').then(m=>m.LoginModule),
     data: {
       hideComponents: true,
-      title: 'Halupa.by - Войти'
+      title: 'Halupa.by - Войти',
+      description: 'Войти на сайт'
     }
   },
   { 
@@ -31,7 +32,8 @@ const routes: Routes =
     loadChildren: () => import('./pages/register/register.module').then(m=>m.RegisterModule),
     data: {
       hideComponents: true,
-      title: 'Halupa.by - Регистрация'
+      title: 'Halupa.by - Регистрация',
+      description: 'Регистрация нового пользователя'
     }
   },
   { 
@@ -39,6 +41,8 @@ const routes: Routes =
     loadChildren: () => import('./pages/profile/profile.module').then(m=> m.ProfileModule),
     data: {
       hideComponents: false,
+      title: 'Halupa.by - Профиль пользователя',
+      description: 'Профиль пользователя, информация о пользователе'
     },
     canActivate: [AuthGuardService] 
   },
@@ -47,6 +51,8 @@ const routes: Routes =
     loadChildren: () => import('./pages/create-advert/create-advert.module').then(m => m.CreateAdvertModule),
     data: {
       hideComponents: false,
+      title: 'Halupa.by - Добавить объявление',
+      description: 'Добавить объявление о продаже или аренде недвижимости'
     },
     canActivate: [AuthGuardService]
   }

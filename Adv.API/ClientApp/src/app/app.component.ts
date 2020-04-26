@@ -4,6 +4,7 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { ModalService } from './services/modal.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
+import { SeoService } from './services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,7 @@ export class AppComponent implements OnInit {
   // переключение меню, моб. версия
   isToggleMenu: boolean = false;
   constructor(
-    private titleService: Title,
-    private metaService: Meta,
+    private seoService: SeoService,
     private router: Router, 
     private activatedRoute: ActivatedRoute,
     public authService: AuthService
@@ -35,27 +35,12 @@ export class AppComponent implements OnInit {
     .subscribe(() => {
       var routes = this.getChild(this.activatedRoute);
       routes.data.subscribe(data => {
-        this.setMetaInfo(data);
+        this.seoService.setMetaInfo(data);
         this.isVisible = this.setVisible(data);
       })
     });
   }
-  /** установка СЕО данных для страницы */
-  private setMetaInfo(data){
-    if(data.title){
-      this.titleService.setTitle(data.title)
-    }
-    if (data.description) {
-      this.metaService.updateTag({ name: 'description', content: data.description })
-    } else {
-      this.metaService.removeTag("name='description'")
-    }
-    if (data.robots) {
-      this.metaService.updateTag({ name: 'robots', content: data.robots })
-    } else {
-      this.metaService.updateTag({ name: 'robots', content: "follow,index" })
-    }
-  }
+  
   private getChild(activatedRoute: ActivatedRoute) {
     if (activatedRoute.firstChild) {
       return this.getChild(activatedRoute.firstChild);
