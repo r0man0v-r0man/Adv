@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { ru_RU } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
@@ -39,7 +39,8 @@ registerLocaleData(ru);
     HttpClientModule,
     BrowserAnimationsModule,
     NzMessageModule,
-    NgtUniversalModule
+    NgtUniversalModule,
+    CommonModule
   ],
   providers: [
     Title,

@@ -1,1 +1,65 @@
-<p>create-advert works!</p>
+<div nz-row>
+    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" (ngSubmit)="submitHelperForm()" nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 12 }" 
+    [nzLg]="{ span : 12 }" 
+    [nzXl]="{ span : 12 }" >
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 24 }" 
+        [nzMd]="{ span : 24 }" 
+        [nzLg]="{ span : 24 }" 
+        [nzXl]="{ span : 24 }">
+            <h3 nz-typography>Добавить объявление:</h3>
+        </nz-form-item>
+        <nz-form-item nz-row >
+            <nz-form-label nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }" nzRequired="true" nzFor="advertType">Выберите тип</nz-form-label>
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+                <nz-radio-group formControlName="advertType" [(ngModel)]="selectedAdvertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
+                <label nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">{{ advertType.label }}</label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row >
+            <nz-form-label nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }" nzRequired="true" nzFor="realEstateType">Выберите недвижимость</nz-form-label>
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+            <nz-radio-group formControlName="realEstateType" [(ngModel)]="selectedRealEstate" [nzButtonStyle]="'solid'" [nzSize]="'large'">
+                <label nz-radio-button [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">{{ realEstate.label }}</label>
+            </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row>
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 12, offset: 12 }" 
+            [nzSm]="{ span : 12 }" 
+            [nzMd]="{ span : 12 }" 
+            [nzLg]="{ span : 12 }" 
+            [nzXl]="{ span : 12 }">
+                <button nzBlock="true" nz-button nzType="default">Далее<i nz-icon nzType="right" nzTheme="outline"></i></button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+    
+</div>
+<p>{{ helperForm.value | json }}</p> 

@@ -55,7 +55,8 @@ const routes: Routes =
     data: {
       hideComponents: false,
       title: 'Halupa.by - Добавить объявление',
-      description: 'Добавить объявление о продаже или аренде недвижимости'
+      description: 'Добавить объявление о продаже или аренде недвижимости',
+      robots: 'noindex, nofollow'
     },
     canActivate: [AuthGuardService]
   }

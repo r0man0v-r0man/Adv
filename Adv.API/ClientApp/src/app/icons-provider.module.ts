@@ -8,7 +8,8 @@ import {
   PlusCircleOutline,
   MenuOutline,
   LockOutline,
-  UserOutline
+  UserOutline,
+  RightOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -18,7 +19,8 @@ const icons = [
   PlusCircleOutline,
   MenuOutline,
   LockOutline,
-  UserOutline
+  UserOutline,
+  RightOutline
 ];
 
 @NgModule({
