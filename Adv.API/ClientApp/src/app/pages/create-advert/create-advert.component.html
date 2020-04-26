@@ -60,20 +60,5 @@
             </nz-form-control>
         </nz-form-item>
     </form>
-    <form *ngIf="rentFlatForm" nz-form [formGroup]="rentFlatForm" (ngSubmit)="submitRentFlatForm(rentFlatForm.value)" nzLayout="vertical">
-
-        <p>{{rentFlatForm.value | json }}</p>
-    </form>
-    <form *ngIf="rentHouseForm" nz-form [formGroup]="rentHouseForm" (ngSubmit)="submitRentHouseForm(rentHouseForm.value)" nzLayout="vertical">
-
-        <p>{{rentHouseForm.value | json }}</p>
-    </form>
-    <form *ngIf="saleFlatForm" nz-form [formGroup]="saleFlatForm" (ngSubmit)="submitSaleFlatForm(saleFlatForm.value)" nzLayout="vertical">
-
-        <p>{{saleFlatForm.value | json }}</p>
-    </form>
-    <form *ngIf="saleHouseForm" nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitSaleHouseForm(saleHouseForm.value)" nzLayout="vertical">
-
-        <p>{{saleHouseForm.value | json }}</p>
-    </form>
+    <rent-flat *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'квартира'"></rent-flat>
 </div>

@@ -41,7 +41,6 @@ export class CreateAdvertComponent implements OnInit {
   }
   submitHelperForm(){   
     this.helper = { ...this.helperForm.value };
-    this.initCreateAdvertForm(this.helper);
   }
   /** выбираем какую форму показывать */
   private initCreateAdvertForm(helper:{ advertType: string; realEstateType: string }){
