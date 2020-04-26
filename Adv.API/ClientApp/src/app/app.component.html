@@ -38,20 +38,10 @@
                   </a>
               </ng-template>
           </li>
-          <li nz-menu-item >
-              <ng-container *ngIf="authService.isLogedIn()|async; then isLogedInButton else isNotLogedInButton"></ng-container>
-              <ng-template #isLogedInButton>
-                  <a (click)="showAddAdvertModal()">
-                      <i nz-icon nzType="plus-circle"></i>
-                      Добавить объявление
-                  </a>
-              </ng-template>
-              <ng-template #isNotLogedInButton>
-                  <a (click)="registerThenAddAdvert()">
-                      <i nz-icon nzType="plus-circle"></i>
-                      Добавить объявление
-                  </a>
-              </ng-template>
+          <li nz-menu-item>
+              <a [routerLink]="[ '/create-advert' ]">
+                <i nz-icon nzType="plus-circle"></i>
+                Добавить объявление</a>
           </li>
       </ul>
       </div>
