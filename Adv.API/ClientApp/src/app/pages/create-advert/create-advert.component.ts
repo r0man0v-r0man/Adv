@@ -22,15 +22,6 @@ export class CreateAdvertComponent implements OnInit {
   /** типы недвижимости */
   listOfRealEstaties: Array<{ value: string; label: string }> = [];
 
-  /** форма - сдать квартиру */
-  rentFlatForm: FormGroup;
-  /** форма - сдать дом */
-  rentHouseForm: FormGroup;
-  /** форма - продать квартиру */
-  saleFlatForm: FormGroup;
-  /** форма - продать дом */
-  saleHouseForm: FormGroup;
-
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
@@ -42,42 +33,7 @@ export class CreateAdvertComponent implements OnInit {
   submitHelperForm(){   
     this.helper = { ...this.helperForm.value };
   }
-  /** выбираем какую форму показывать */
-  private initCreateAdvertForm(helper:{ advertType: string; realEstateType: string }){
-    if(helper.advertType === AdvertType.rent) this.initCreateRentForms(helper.realEstateType);
-    if(helper.advertType === AdvertType.sale) this.initCreateSaleForms(helper.realEstateType);
-  }
-  /** инициализация формы для аренды */
-  private initCreateRentForms(realEstateType: string){
-    if (realEstateType === RealEstaties.flat) this.initRentFlat();
-    if (realEstateType === RealEstaties.house) this.initRentHouse();
-  }
-  /** инициализация формы для продажи */
-  private initCreateSaleForms(realEstateType:string){
-    if (realEstateType === RealEstaties.flat) this.initSaleFlat();
-    if (realEstateType === RealEstaties.house) this.initSaleHouse();
-  }
-  /** форма объявления сдать квартиру */
-  private initRentFlat(){
-    this.rentFlatForm = this.formBuilder.group({
-      userId: [this.authService.currentUser.sub, [Validators.required]],
-    })    
-  }
-  /** форма объявления сдать дом */
-  private initRentHouse(){
-    console.log('в работе форма объявления сдать дом');
-    
-  }
-  /** форма объявления продать квартиру */
-  private initSaleFlat(){
-    console.log('в работе форма объявления продать квартиру');
-    
-  }
-  /** форма объявления продать дом */
-  private initSaleHouse(){
-    console.log('в работе форма объявления продать дом');
-    
-  }
+  
   private initHelperForm(){
     this.setAdvertTypes();
     this.setListOfRealEstaties();
