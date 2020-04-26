@@ -24,7 +24,8 @@ const routes: Routes =
     data: {
       hideComponents: true,
       title: 'Halupa.by - Войти',
-      description: 'Войти на сайт'
+      description: 'Войти на сайт',
+      robots: 'noindex, nofollow'
     }
   },
   { 
@@ -33,7 +34,8 @@ const routes: Routes =
     data: {
       hideComponents: true,
       title: 'Halupa.by - Регистрация',
-      description: 'Регистрация нового пользователя'
+      description: 'Регистрация нового пользователя',
+      robots: 'noindex, nofollow'
     }
   },
   { 
@@ -42,7 +44,8 @@ const routes: Routes =
     data: {
       hideComponents: false,
       title: 'Halupa.by - Профиль пользователя',
-      description: 'Профиль пользователя, информация о пользователе'
+      description: 'Профиль пользователя, информация о пользователе',
+      robots: 'noindex, nofollow'
     },
     canActivate: [AuthGuardService] 
   },
