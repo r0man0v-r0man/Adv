@@ -43,6 +43,15 @@ export class AuthService {
     IsUserNameExist(userName: string){
       return this.httpService.get(this.isUserNameDublicatedUrl + '/' + userName)
     }
+    /** get JWT token for upload image */
+  get Token(){
+    const token = localStorage.getItem('access_token');
+    if(!token) return null;
+    const XCMG = `Bearer ${token}`;
+    return {
+      Authorization: XCMG
+    }
+  }
   get SecureHeaders(){
     const token = this.localStorage.getItem('access_token');
     if(!token) return null;
