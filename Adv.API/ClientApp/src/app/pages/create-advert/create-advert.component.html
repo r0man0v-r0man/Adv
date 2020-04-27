@@ -1,10 +1,16 @@
 <div nz-row >
-    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" (ngSubmit)="submitHelperForm()" nz-col 
+    <div nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
     [nzMd]="{ span : 12 }" 
     [nzLg]="{ span : 12 }" 
-    [nzXl]="{ span : 12 }" >
+    [nzXl]="{ span : 12 }">
+    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" (ngSubmit)="submitHelperForm()" nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }" >
         <nz-form-item nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
@@ -64,4 +70,7 @@
     <rent-house *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'дом'"></rent-house>
     <sale-flat *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'квартира'"></sale-flat>
     <sale-house *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'дом'"></sale-house>
+    </div>
+    
+    
 </div>

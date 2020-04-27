@@ -1,9 +1,9 @@
 <form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nz-col 
 [nzXs]="{ span : 24 }" 
 [nzSm]="{ span : 24 }" 
-[nzMd]="{ span : 12 }" 
-[nzLg]="{ span : 12 }" 
-[nzXl]="{ span : 12 }" >
+[nzMd]="{ span : 24 }" 
+[nzLg]="{ span : 24 }" 
+[nzXl]="{ span : 24 }" >
     <nz-form-item nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
@@ -16,10 +16,10 @@
         [nzMd]="{ span : 24 }" 
         [nzLg]="{ span : 24 }" 
         [nzXl]="{ span : 24 }">
-            <nz-upload 
+            <nz-upload
             nzAction="{{uploadUrl}}"
             [nzHeaders]="headers"
-            nzListType="picture-card"
+            nzListType="picture"
             [nzBeforeUpload]="imageService.beforeUpload"
             [nzRemove]="onDelete"
             [nzShowUploadList]="showUploadList"
@@ -29,10 +29,12 @@
             nzFileType="image/png,image/jpeg,image/gif,image/jpg"
             (nzChange)="onChange($event)"
             ><!--nzSize 5mb-->
-            <p class="ant-upload-drag-icon">
-                <i nz-icon nzType="upload" nzTheme="outline"></i>       
+            <button nzBlock="true" nz-button nzSize="large">
+                <i nz-icon nzType="upload" nzTheme="outline"></i> 
+                Загрузите изображение      
+            </button>
+            <p><small>Максимальный размер фото 5mb.</small>
             </p>
-            <p class="ant-upload-text">Загрузите изображение<br/><small>Максимальный размер фото 5mb.</small></p>
             </nz-upload>
             <input nz-input type="hidden" formControlName="images">
         </nz-form-control>
