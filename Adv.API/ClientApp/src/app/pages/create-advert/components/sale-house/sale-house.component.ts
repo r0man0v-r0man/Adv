@@ -20,6 +20,10 @@ export class SaleHouseComponent implements OnInit {
   imageList : UploadFile[] = [];
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  /** адрес */
+  selectedAddress = null;
+  listOfAdresses: Array<{ displayName: string; value: string }> = [];
+  nzFilterOption = () => true;
   /** форма */
   saleHouseForm: FormGroup;
   constructor(
@@ -36,11 +40,18 @@ export class SaleHouseComponent implements OnInit {
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [true],
       images: [ this.imageList, [Validators.required]],
-
+      address: [ this.selectedAddress, [Validators.required]],
     })
   }
   submitForm(){
 
+  }
+  onSearchAddress(value: string){
+    if(value.length > 0){
+      this.yandexService.getSuggests(value);
+      console.log(this.yandexService.listOfAdresses);
+      this.listOfAdresses = this.yandexService.listOfAdresses;
+    }
   }
   /** Delete file */
   onDelete = (file: UploadFile) : Observable<boolean> => {

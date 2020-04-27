@@ -12,6 +12,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 import { RentFlatComponent } from './components/rent-flat/rent-flat.component';
 import { SaleFlatComponent } from './components/sale-flat/sale-flat.component';
@@ -30,7 +31,8 @@ import { RentHouseComponent } from './components/rent-house/rent-house.component
     NzTypographyModule,
     NzButtonModule,
     NzIconModule,
-    NzUploadModule
+    NzUploadModule,
+    NzSelectModule
   ]
 })
 export class CreateAdvertModule { }

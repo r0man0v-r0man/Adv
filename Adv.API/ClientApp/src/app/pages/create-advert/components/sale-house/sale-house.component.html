@@ -39,4 +39,44 @@
             <input nz-input type="hidden" formControlName="images">
         </nz-form-control>
     </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-label nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 24 }" 
+        [nzMd]="{ span : 24 }" 
+        [nzLg]="{ span : 24 }" 
+        [nzXl]="{ span : 24 }" nzRequired="true" nzFor="address">Укажите адрес</nz-form-label>    
+        <nz-form-control nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 24 }" 
+        [nzMd]="{ span : 24 }" 
+        [nzLg]="{ span : 24 }" 
+        [nzXl]="{ span : 24 }">
+            <nz-select
+            [nzDropdownClassName]="'select-address'"
+            [nzOpen]="false"
+            [nzLoading]="true"
+            [nzAllowClear]="true"
+            nzServerSearch
+            [nzFilterOption]="nzFilterOption"
+            (nzOnSearch)="onSearchAddress($event)"
+            [nzShowSearch]="true"
+            [nzSize]="'large'"
+            formControlName="address"
+            nzPlaceHolder="Например: Несвиж, Лермонтова 2"
+            [(ngModel)]="selectedAddress"
+            [nzShowArrow]="false" >
+            <nz-option
+            *ngFor="let address of listOfAdresses" 
+            [nzLabel]="address.displayName" 
+            [nzValue]="address.value"></nz-option>
+            </nz-select>     
+        </nz-form-control>
+    </nz-form-item>
+    <p>{{saleHouseForm.value | json}}</p>
 </form>
