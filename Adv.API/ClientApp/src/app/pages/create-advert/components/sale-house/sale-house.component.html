@@ -1,4 +1,4 @@
-<form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nz-col 
+<form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nz-col
 [nzXs]="{ span : 24 }" 
 [nzSm]="{ span : 24 }" 
 [nzMd]="{ span : 24 }" 
@@ -39,44 +39,30 @@
             <input nz-input type="hidden" formControlName="images">
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
-    [nzXl]="{ span : 24 }">
+
+    <nz-form-item nz-row >
         <nz-form-label nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
         [nzMd]="{ span : 24 }" 
         [nzLg]="{ span : 24 }" 
-        [nzXl]="{ span : 24 }" nzRequired="true" nzFor="address">Укажите адрес</nz-form-label>    
+        [nzXl]="{ span : 24 }" nzRequired="true" nzFor="address" >ваш адрес</nz-form-label>
         <nz-form-control nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
         [nzMd]="{ span : 24 }" 
         [nzLg]="{ span : 24 }" 
         [nzXl]="{ span : 24 }">
-            <nz-select
-            [nzDropdownClassName]="'select-address'"
-            [nzOpen]="false"
-            [nzLoading]="true"
-            [nzAllowClear]="true"
-            nzServerSearch
-            [nzFilterOption]="nzFilterOption"
-            (nzOnSearch)="onSearchAddress($event)"
-            [nzShowSearch]="true"
-            [nzSize]="'large'"
-            formControlName="address"
-            nzPlaceHolder="Например: Несвиж, Лермонтова 2"
-            [(ngModel)]="selectedAddress"
-            [nzShowArrow]="false" >
-            <nz-option
-            *ngFor="let address of listOfAdresses" 
-            [nzLabel]="address.displayName" 
-            [nzValue]="address.value"></nz-option>
-            </nz-select>     
+
+            <input formControlName="address" nzSize="large"  nz-input [nzAutocomplete]="auto" (input)="yandexService.getSuggests($event.target?.value)" >
+            <nz-autocomplete  #auto >
+            <nz-auto-option 
+            *ngFor="let suggest of yandexService.listOfAddresses$ |async" 
+             [nzValue]="suggest.value" >{{suggest.displayName}}</nz-auto-option>
+            </nz-autocomplete>
+
         </nz-form-control>
     </nz-form-item>
-    <p>{{saleHouseForm.value | json}}</p>
+
 </form>
+<p>{{ saleHouseForm.value |json}}</p>

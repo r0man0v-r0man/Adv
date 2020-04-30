@@ -66,6 +66,7 @@
             </nz-form-control>
         </nz-form-item>
     </form>
+    
     <rent-flat *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'квартира'"></rent-flat>
     <rent-house *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'дом'"></rent-house>
     <sale-flat *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'квартира'"></sale-flat>

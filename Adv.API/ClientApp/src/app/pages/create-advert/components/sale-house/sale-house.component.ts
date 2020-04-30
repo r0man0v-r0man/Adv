@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { ImageService } from 'src/app/services/image.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { UploadFile } from 'ng-zorro-antd/upload';
+import { YandexService } from 'src/app/services/yandex.service';
 
 @Component({
   selector: 'sale-house',
   templateUrl: './sale-house.component.html',
   styleUrls: ['./sale-house.component.less']
 })
-export class SaleHouseComponent implements OnInit {
+export class SaleHouseComponent implements OnInit{
   /** uploadUrl используется в шаблоне */
   uploadUrl = Constants.uploadFileUrl;
   /** header c JWT токеном для загрузки фото */
@@ -21,15 +22,17 @@ export class SaleHouseComponent implements OnInit {
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
   /** адрес */
-  selectedAddress = null;
-  listOfAdresses: Array<{ displayName: string; value: string }> = [];
-  nzFilterOption = () => true;
+ 
+  listOfAddresses : Array<{ displayName: string; value: string }> = [];
   /** форма */
   saleHouseForm: FormGroup;
+  address: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    public imageService: ImageService
+    public imageService: ImageService,
+    public yandexService: YandexService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -40,18 +43,11 @@ export class SaleHouseComponent implements OnInit {
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [true],
       images: [ this.imageList, [Validators.required]],
-      address: [ this.selectedAddress, [Validators.required]],
+      address: [ this.address ]
     })
   }
   submitForm(){
 
-  }
-  onSearchAddress(value: string){
-    if(value.length > 0){
-      this.yandexService.getSuggests(value);
-      console.log(this.yandexService.listOfAdresses);
-      this.listOfAdresses = this.yandexService.listOfAdresses;
-    }
   }
   /** Delete file */
   onDelete = (file: UploadFile) : Observable<boolean> => {

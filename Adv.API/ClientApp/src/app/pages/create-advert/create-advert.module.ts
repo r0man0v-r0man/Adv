@@ -12,14 +12,20 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzSelectModule } from 'ng-zorro-antd/select';
-
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { RentFlatComponent } from './components/rent-flat/rent-flat.component';
 import { SaleFlatComponent } from './components/sale-flat/sale-flat.component';
 import { SaleHouseComponent } from './components/sale-house/sale-house.component';
 import { RentHouseComponent } from './components/rent-house/rent-house.component';
 @NgModule({
-  declarations: [CreateAdvertComponent, RentFlatComponent, SaleFlatComponent, SaleHouseComponent, RentHouseComponent],
+  declarations: [
+    CreateAdvertComponent, 
+    RentFlatComponent, 
+    SaleFlatComponent, 
+    SaleHouseComponent, 
+    RentHouseComponent
+  ],
   imports: [
     CommonModule,
     CreateAdvertRoutingModule,
@@ -32,7 +38,8 @@ import { RentHouseComponent } from './components/rent-house/rent-house.component
     NzButtonModule,
     NzIconModule,
     NzUploadModule,
-    NzSelectModule
+    NzAutocompleteModule,
+    NzInputModule
   ]
 })
 export class CreateAdvertModule { }

@@ -56,4 +56,5 @@ export class CreateAdvertComponent implements OnInit {
       { value: RealEstaties.house, label: 'Дом' }
     )
   }
+  
 }
