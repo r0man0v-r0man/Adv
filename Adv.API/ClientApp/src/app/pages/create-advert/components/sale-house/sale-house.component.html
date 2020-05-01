@@ -1,21 +1,11 @@
-<form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nz-col
-[nzXs]="{ span : 24 }" 
-[nzSm]="{ span : 24 }" 
-[nzMd]="{ span : 24 }" 
-[nzLg]="{ span : 24 }" 
-[nzXl]="{ span : 24 }" >
+<form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
     <nz-form-item nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
     [nzMd]="{ span : 24 }" 
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
-        <nz-form-control nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
-        [nzXl]="{ span : 24 }">
+        <nz-form-control >
             <nz-upload
             nzAction="{{uploadUrl}}"
             [nzHeaders]="headers"
@@ -39,30 +29,184 @@
             <input nz-input type="hidden" formControlName="images">
         </nz-form-control>
     </nz-form-item>
-
-    <nz-form-item nz-row >
-        <nz-form-label nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
-        [nzXl]="{ span : 24 }" nzRequired="true" nzFor="address" >ваш адрес</nz-form-label>
-        <nz-form-control nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
-        [nzXl]="{ span : 24 }">
-
-            <input formControlName="address" nzSize="large"  nz-input [nzAutocomplete]="auto" (input)="yandexService.getSuggests($event.target?.value)" >
-            <nz-autocomplete  #auto >
-            <nz-auto-option 
-            *ngFor="let suggest of yandexService.listOfAddresses$ |async" 
-             [nzValue]="suggest.value" >{{suggest.displayName}}</nz-auto-option>
-            </nz-autocomplete>
-
+    <nz-divider [nzText]="addressTpl">
+        <ng-template #addressTpl>
+            Адрес
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <!-- <nz-form-label  nzRequired="true" nzFor="address" >Ваш адрес</nz-form-label> -->
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!">
+        <nz-select
+        nzShowSearch
+        nzServerSearch
+        nzSize="large"
+        nzPlaceHolder="Например: Несвиж, Лермонтова 2"
+        nzNotFoundContent="Начинайте вводить, мы подскажем"
+        [(ngModel)]="address"
+        [nzShowArrow]="false"
+        (nzOnSearch)="yandexService.getSuggests($event)" 
+        formControlName="address">
+            <nz-option *ngFor="let o of yandexService.listOfAddresses$ |async" [nzLabel]="o.displayName" [nzValue]="o.value"></nz-option>
+        </nz-select>
         </nz-form-control>
     </nz-form-item>
-
+    <nz-divider [nzText]="area">
+        <ng-template #area>
+            Площадь
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="houseArea" >Общая площадь, кв.м</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите общую площадь!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="houseArea"
+            [(ngModel)]="houseArea"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzMax]="10000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="houseLiveArea" >Жилая площадь, кв.м</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите жилую площадь!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="houseLiveArea"
+            [(ngModel)]="houseLiveArea"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzMax]="10000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="kitchenArea" >Площадь кухни, кв.м</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите площадь кухни!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="kitchenArea"
+            [(ngModel)]="kitchenArea"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzMax]="10000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="housePlotArea" >Площадь участка, кв.м</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите площадь участка!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="housePlotArea"
+            [(ngModel)]="housePlotArea"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzMax]="10000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="comfortTpl">
+        <ng-template #comfortTpl>
+            Удобства
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="heating" [(ngModel)]="heating">Отопление</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="water" [(ngModel)]="water">Вода</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="gas" [(ngModel)]="gas">Газ</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="sewage" [(ngModel)]="sewage">Канализация</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="electricity" [(ngModel)]="electricity">Электричество</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="bathhouse" [(ngModel)]="bathhouse">Баня</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control >
+            <label nz-checkbox formControlName="garage" [(ngModel)]="garage">Гараж</label>
+        </nz-form-control>
+    </nz-form-item>
 </form>
 <p>{{ saleHouseForm.value |json}}</p>

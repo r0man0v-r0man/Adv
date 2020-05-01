@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { ImageService } from 'src/app/services/image.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, fromEvent } from 'rxjs';
 import { UploadFile } from 'ng-zorro-antd/upload';
 import { YandexService } from 'src/app/services/yandex.service';
 
@@ -27,25 +27,59 @@ export class SaleHouseComponent implements OnInit{
   /** форма */
   saleHouseForm: FormGroup;
   address: string = '';
+  /** общая площадь дома */
+  houseArea: number;
+  /** жилая площадь дома */
+  houseLiveArea: number;
+  /** площадь кухни */
+  kitchenArea: number;
+  /** площадь участка */
+  housePlotArea:number;
+  /** отопление */
+  heating: boolean = false;
+  /** вода */
+  water:boolean = false;
+  /** газ */
+  gas:boolean = false;
+  /** канализация */
+  sewage:boolean = false;
+  /** электричество */
+  electricity: boolean = false;
+  /** баня */
+  bathhouse:boolean = false;
+  /** гараж */
+  garage: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
-    public yandexService: YandexService,
-    private cd: ChangeDetectorRef
+    public yandexService: YandexService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
+    
   }
   initForm(){
     this.saleHouseForm = this.formBuilder.group({
       userId:[ this.authService.currentUser.sub,[Validators.required]],
-      isActive: [true],
+      isActive: [ true ],
       images: [ this.imageList, [Validators.required]],
-      address: [ this.address ]
+      address: [ this.address, [Validators.required]],
+      houseArea: [ this.houseArea, [Validators.required]],
+      houseLiveArea: [ this.houseLiveArea, [Validators.required]],
+      kitchenArea: [ this.kitchenArea, [Validators.required] ],
+      housePlotArea: [ this.housePlotArea, [Validators.required]],
+      heating: [ this.heating ],
+      water: [ this.water ],
+      gas: [ this.gas ],
+      sewage: [ this.sewage ],
+      electricity: [ this.electricity ],
+      bathhouse: [ this.bathhouse ],
+      garage: [ this.garage ]
     })
   }
+  
   submitForm(){
 
   }
