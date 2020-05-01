@@ -49,6 +49,10 @@ export class SaleHouseComponent implements OnInit{
   bathhouse:boolean = false;
   /** гараж */
   garage: boolean = false;
+  /** цена */
+  price: number = 30000;
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -76,7 +80,8 @@ export class SaleHouseComponent implements OnInit{
       sewage: [ this.sewage ],
       electricity: [ this.electricity ],
       bathhouse: [ this.bathhouse ],
-      garage: [ this.garage ]
+      garage: [ this.garage ],
+      price: [null, [Validators.required]],
     })
   }
   

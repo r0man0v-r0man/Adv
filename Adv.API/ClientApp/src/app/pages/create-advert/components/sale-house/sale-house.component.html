@@ -208,5 +208,35 @@
             <label nz-checkbox formControlName="garage" [(ngModel)]="garage">Гараж</label>
         </nz-form-control>
     </nz-form-item>
+    <nz-divider [nzText]="priceSector">
+        <ng-template #priceSector>
+            Стоимость
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="price"
+            [(ngModel)]="price"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzFormatter]="formatterDollar"
+            [nzParser]="parserDollar"
+            [nzMax]="900000000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="contactsTpl">
+        <ng-template #contactsTpl>
+            Контакты
+        </ng-template>
+    </nz-divider>
 </form>
 <p>{{ saleHouseForm.value |json}}</p>
