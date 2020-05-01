@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AdvertType } from 'src/app/models/advertType';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RealEstaties } from 'src/app/models/realEstaties';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create-advert',
@@ -23,17 +22,20 @@ export class CreateAdvertComponent implements OnInit {
   listOfRealEstaties: Array<{ value: string; label: string }> = [];
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.initHelperForm();
+    this.getHelperFormValues();
   }
-  submitHelperForm(){   
-    this.helper = { ...this.helperForm.value };
+  /** получение значений формы */
+  private getHelperFormValues() {
+    this.helperForm.valueChanges.subscribe(values => {
+      this.helper = { ...this.helperForm.value };
+    })
   }
-  
+  /** инициализация формы */
   private initHelperForm(){
     this.setAdvertTypes();
     this.setListOfRealEstaties();

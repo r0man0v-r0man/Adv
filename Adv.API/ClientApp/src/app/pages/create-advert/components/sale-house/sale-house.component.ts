@@ -6,6 +6,7 @@ import { ImageService } from 'src/app/services/image.service';
 import { Observable, BehaviorSubject, fromEvent } from 'rxjs';
 import { UploadFile } from 'ng-zorro-antd/upload';
 import { YandexService } from 'src/app/services/yandex.service';
+import { DescriptionValidators } from '../../validators/description.validators';
 
 @Component({
   selector: 'sale-house',
@@ -66,6 +67,8 @@ export class SaleHouseComponent implements OnInit{
 
   ngOnInit(): void {
     this.initForm();
+    console.log(this.saleHouseForm.controls['address']);
+    
     
   }
   initForm(){

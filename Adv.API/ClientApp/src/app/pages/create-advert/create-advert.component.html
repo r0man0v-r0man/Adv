@@ -5,7 +5,7 @@
     [nzMd]="{ span : 12 }" 
     [nzLg]="{ span : 12 }" 
     [nzXl]="{ span : 12 }">
-    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" (ngSubmit)="submitHelperForm()" nz-col 
+    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
     [nzMd]="{ span : 24 }" 
@@ -53,16 +53,6 @@
             <nz-radio-group formControlName="realEstateType" [(ngModel)]="selectedRealEstate" [nzButtonStyle]="'solid'" [nzSize]="'large'">
                 <label nz-radio-button [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">{{ realEstate.label }}</label>
             </nz-radio-group>
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item nz-row>
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 12, offset: 12 }" 
-            [nzSm]="{ span : 12 }" 
-            [nzMd]="{ span : 12 }" 
-            [nzLg]="{ span : 12 }" 
-            [nzXl]="{ span : 12 }">
-                <button nzBlock="true" nz-button nzType="default">Далее<i nz-icon nzType="right" nzTheme="outline"></i></button>
             </nz-form-control>
         </nz-form-item>
     </form>
