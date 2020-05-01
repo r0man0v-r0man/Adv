@@ -53,6 +53,10 @@ export class SaleHouseComponent implements OnInit{
   price: number = 30000;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
+  /** телефон */
+  phone: number = 80291234567;
+  /** описание */
+  description: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -81,7 +85,9 @@ export class SaleHouseComponent implements OnInit{
       electricity: [ this.electricity ],
       bathhouse: [ this.bathhouse ],
       garage: [ this.garage ],
-      price: [null, [Validators.required]],
+      price: [ null, [Validators.required]],
+      phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
+      description: [ null, [DescriptionValidators.notOnlySpace]]
     })
   }
   
