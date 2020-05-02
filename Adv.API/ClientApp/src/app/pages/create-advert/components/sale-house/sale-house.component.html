@@ -40,19 +40,23 @@
     [nzMd]="{ span : 24 }" 
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
-        <!-- <nz-form-label  nzRequired="true" nzFor="address" >Ваш адрес</nz-form-label> -->
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!">
         <nz-select
         nzShowSearch
         nzServerSearch
         nzSize="large"
-        nzPlaceHolder="Например: Несвиж, Лермонтова 2"
-        nzNotFoundContent="Начинайте вводить, мы подскажем"
+        nzPlaceHolder="Например: Несвиж лермонтова 2"
+        nzNotFoundContent="Вводите, мы подскажем"
         [(ngModel)]="address"
         [nzShowArrow]="false"
-        (nzOnSearch)="yandexService.getSuggests($event)" 
+        (nzOnSearch)="suggestService.onSearch($event)" 
         formControlName="address">
-            <nz-option *ngFor="let o of yandexService.listOfAddresses$ |async" [nzLabel]="o.displayName" [nzValue]="o.value"></nz-option>
+        <ng-container *ngFor="let o of suggestService.suggestions">
+            <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text"></nz-option>
+        </ng-container>
+            <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
+                <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...
+            </nz-option>
         </nz-select>
         </nz-form-control>
     </nz-form-item>

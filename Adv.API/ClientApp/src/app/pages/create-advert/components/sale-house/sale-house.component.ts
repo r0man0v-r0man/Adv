@@ -1,12 +1,12 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { ImageService } from 'src/app/services/image.service';
-import { Observable, BehaviorSubject, fromEvent } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UploadFile } from 'ng-zorro-antd/upload';
-import { YandexService } from 'src/app/services/yandex.service';
 import { DescriptionValidators } from '../../validators/description.validators';
+import { SuggestService } from 'src/app/services/suggest.service';
 
 @Component({
   selector: 'sale-house',
@@ -62,14 +62,11 @@ export class SaleHouseComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
-    public yandexService: YandexService
+    public suggestService: SuggestService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.saleHouseForm.controls['address']);
-    
-    
   }
   initForm(){
     this.saleHouseForm = this.formBuilder.group({
@@ -127,9 +124,9 @@ export class SaleHouseComponent implements OnInit{
     this.setHouseSaleFormControlValue('files', this.images);
   }
   /**
-   * Set value to formControl
-   * @param formControlName name of form control 
-   * @param value value 
+   * установка значения для поля формы
+   * @param formControlName имя поля 
+   * @param value значение 
    */
   private setHouseSaleFormControlValue(formControlName: string, value: any){
     this.saleHouseForm.controls[formControlName].setValue(value);
