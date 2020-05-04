@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
@@ -23,7 +23,6 @@ export class SaleHouseComponent implements OnInit{
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
   /** адрес */
- 
   listOfAddresses : Array<{ displayName: string; value: string }> = [];
   /** форма */
   saleHouseForm: FormGroup;
@@ -62,6 +61,7 @@ export class SaleHouseComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
+    private cd: ChangeDetectorRef,
     public suggestService: SuggestService
   ) { }
 
@@ -117,11 +117,12 @@ export class SaleHouseComponent implements OnInit{
     })
   }
   onChange(info: { file : UploadFile} ){
-    if(info.file.status === 'done' && info.file.response) 
+    console.log(info.file);
+    if(info.file.status === 'done' && info.file.response) {
+      this.images.push(info.file.response);
+      this.setHouseSaleFormControlValue('images', this.images);
+    }
      
-    this.images.push(info.file.response);
-
-    this.setHouseSaleFormControlValue('files', this.images);
   }
   /**
    * установка значения для поля формы
@@ -129,6 +130,6 @@ export class SaleHouseComponent implements OnInit{
    * @param value значение 
    */
   private setHouseSaleFormControlValue(formControlName: string, value: any){
-    this.saleHouseForm.controls[formControlName].setValue(value);
+    this.saleHouseForm.controls[formControlName].patchValue(value);
   };
 }

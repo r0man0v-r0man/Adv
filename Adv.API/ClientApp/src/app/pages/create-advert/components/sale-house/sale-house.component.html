@@ -10,6 +10,7 @@
             nzAction="{{uploadUrl}}"
             [nzHeaders]="headers"
             nzListType="picture"
+             [nzTransformFile]="imageService.compress"
             [nzBeforeUpload]="imageService.beforeUpload"
             [nzRemove]="onDelete"
             [nzShowUploadList]="showUploadList"
@@ -17,7 +18,7 @@
             [nzShowButton]="imageList.length < 5"
             [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
             nzFileType="image/png,image/jpeg,image/gif,image/jpg"
-            (nzChange)="onChange($event)"
+            (nzChange)="onChange($event)" 
             ><!--nzSize 5mb-->
             <button nzBlock="true" nz-button nzSize="large">
                 <i nz-icon nzType="upload" nzTheme="outline"></i> 
@@ -286,3 +287,4 @@
         </nz-form-control>
     </nz-form-item>
 </form>
+<p>{{saleHouseForm.value|json}}</p>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { UserWarning } from '../errors/userWarning';
 import { Constants } from '../constants';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
+import { UploadFile } from 'ng-zorro-antd/upload';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,32 @@ export class ImageService {
     private authService: AuthService,
     private httpService: HttpClient
   ) { }
+  transformFile = (file: UploadFile) => {
+    return new Observable((observer: Observer<Blob>) => {
+      const width = 600; // For scaling relative to width
+      const reader = new FileReader();
+      // tslint:disable-next-line: no-any
+      reader.readAsDataURL(file as any);
+      reader.onload = () => {
+        const canvas = document.createElement('canvas');
+        const img = document.createElement('img');
+        img.src = reader.result as string;
+        img.onload = () => {
+          const ctx = canvas.getContext('2d')!;
+          ctx.drawImage(img, 0, 0);
+          ctx.fillStyle = 'red';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('Ant Design', 20, 20);
+          canvas.toBlob(blob => {
+            observer.next(blob!);
+            observer.complete();
+          });
+        };
+      };
+    });
+  };
     /** изменение длины/ширины изображения */
-  private  compress(file: File): Observable<any> {
+   compress(file: File): Observable<any> {
       const width = 600; // For scaling relative to width
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -110,13 +135,16 @@ export class ImageService {
     // fill image in dest. rectangle
     ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
   }
-  beforeUpload = (file: File) : Observable<any> => {
+  beforeUpload = (file: File) : boolean => {
     const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
       if (!isSizeLimit) {
         throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
       } else {
-        return this.compress(file);
+        return true
       }
+      // else {
+      //   return this.compress(file);
+      // }
   }
   /** удалить изображение */
   delete(fileName: string){

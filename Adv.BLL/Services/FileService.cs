@@ -34,7 +34,7 @@ namespace Adv.BLL.Services
         {
             // добавить resize для изображений
             
-            var result = await fileRepository.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
+            var result = await fileRepository.UploadFileAsync(file, ct).ConfigureAwait(false);
             return result;
         }
 

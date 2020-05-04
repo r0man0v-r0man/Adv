@@ -11,5 +11,6 @@ namespace Adv.DAL.Interfaces
     {
         Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct);
         Task<bool> CloudDeleteFileAsync(string fileName);
+        Task<string> UploadFileAsync(IFormFile file, CancellationToken ct);
     }
 }
