@@ -9,8 +9,7 @@ namespace Adv.DAL.Interfaces
 {
     public interface IFileRepository : IBaseRepository
     {
-        Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct);
-        Task<bool> CloudDeleteFileAsync(string fileName);
+        Task<bool> DeleteFileAsync(string fileName);
         Task<string> UploadFileAsync(IFormFile file, CancellationToken ct);
     }
 }

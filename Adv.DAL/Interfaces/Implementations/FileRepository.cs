@@ -31,7 +31,24 @@ namespace Adv.DAL.Interfaces.Implementations
             ImgurClientId = _config.GetValue<string>("Imgur:ClientId");
             ImgurClientSecretId = _config.GetValue<string>("Imgur:ClientSecretKey");
         }
-
+        /// <summary>
+        /// удаление картинки
+        /// </summary>
+        /// <param name="fileName">uid картинки, имя без пути и расширения</param>
+        /// <returns></returns>
+        public async Task<bool> DeleteFileAsync(string fileName)
+        {
+            var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
+            var endpoint = new ImageEndpoint(client);
+            var deleted = await endpoint.DeleteImageAsync(fileName).ConfigureAwait(false);
+            return deleted;
+        }
+        /// <summary>
+        /// Загрузка картинки 
+        /// </summary>
+        /// <param name="file">файл</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         public async Task<string> UploadFileAsync(IFormFile file, CancellationToken ct)
         {
             try
@@ -50,66 +67,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 throw;
             }
         }
-        public async Task<bool> CloudDeleteFileAsync(string fileName)
-        {
-            try
-            {
-                var container = GetBlobContainer(AzureConnectionString, ContainerName);
-                if (await container.ExistsAsync().ConfigureAwait(false))
-                {
-                    var file = container.GetBlobReference(fileName);
-                    await file.DeleteIfExistsAsync().ConfigureAwait(false);
-                }
-                return true;
-            }
-            catch
-            {
-                return false;
-                throw;
-            }
-        }
 
-        public async Task<string> CloudUploadFileAsync(IFormFile file, CancellationToken ct)
-        {
-            var container = GetBlobContainer(AzureConnectionString, ContainerName);
-            if (await container.ExistsAsync().ConfigureAwait(false))
-            {
-                var blockBlob = container.GetBlockBlobReference(SetUniqueName(file));
-
-                await blockBlob.UploadFromStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
-
-                return blockBlob.Uri.ToString();
-            }
-            else
-            {
-                throw new BadCloudUploadException($"Загрузить файл {file.FileName} не получилось! Попробуйте еще раз");
-            }
-        }
-        /// <summary>
-        /// Получаем облачный контейнер
-        /// </summary>
-        /// <param name="azureConnectionString">Строка подключения</param>
-        /// <param name="containerName">Имя контейнера</param>
-        /// <returns></returns>
-        private CloudBlobContainer GetBlobContainer(string azureConnectionString, string containerName)
-        {
-            var storageAccount = CloudStorageAccount.Parse(azureConnectionString);
-
-            var blobClient = storageAccount.CreateCloudBlobClient();
-
-            return blobClient.GetContainerReference(containerName);
-        }
-        /// <summary>
-        /// Установка уникального имени для файла
-        /// </summary>
-        /// <param name="file">Файл для переименования</param>
-        /// <returns></returns>
-        private string SetUniqueName(IFormFile file)
-        {
-            var uniqueName = Guid.NewGuid().ToString();
-            var fileExtension = Path.GetExtension(file.FileName);
-            return string.Concat(uniqueName, fileExtension);
-        }
 
         public void Dispose()
         {

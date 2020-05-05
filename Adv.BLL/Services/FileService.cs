@@ -17,7 +17,7 @@ namespace Adv.BLL.Services
         }
         public async Task<bool> DeleteAsync(string fileName)
         {
-            var result = await fileRepository.CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+            var result = await fileRepository.DeleteFileAsync(fileName).ConfigureAwait(false);
             return result;
         }
 
@@ -25,7 +25,7 @@ namespace Adv.BLL.Services
         {
             foreach (var image in flatsImages)
             {
-                await fileRepository.CloudDeleteFileAsync(image.Value).ConfigureAwait(false);
+                await fileRepository.DeleteFileAsync(image.Value).ConfigureAwait(false);
             }
         }
 

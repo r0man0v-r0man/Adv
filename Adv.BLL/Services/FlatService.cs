@@ -61,7 +61,7 @@ namespace Adv.BLL.Services
         public async Task<bool> DeleteAsync(int flatId, CancellationToken ct)
         {
             FlatDTO flat = await flatRepository.GetByIdAsync(flatId, ct).ConfigureAwait(false);
-            var tasks = flat.Images.Select(image => fileRepository.CloudDeleteFileAsync(Path.GetFileName(image.Value))).ToList();
+            var tasks = flat.Images.Select(image => fileRepository.DeleteFileAsync(Path.GetFileName(image.Value))).ToList();
 
             tasks.Add(flatRepository.RemoveAsync(flat, ct));
             var result = await Task.WhenAll(tasks).ConfigureAwait(false);
