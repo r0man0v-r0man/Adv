@@ -10,7 +10,7 @@ namespace Adv.API.Models.Files
         public string Name { get; set; }
         public string Status { get; set; }
         public Links LinkProps { get; set; }
-
+        public string DeleteHash { get; set; }
         /// <summary>
         /// Mapping to FileModel from string
         /// </summary>

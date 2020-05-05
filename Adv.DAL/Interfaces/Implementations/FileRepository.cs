@@ -36,13 +36,13 @@ namespace Adv.DAL.Interfaces.Implementations
         /// </summary>
         /// <param name="fileName">uid картинки, имя без пути и расширения</param>
         /// <returns></returns>
-        public async Task<bool> DeleteFileAsync(string fileName)
+        public async Task<bool> DeleteFileAsync(string deleteHash)
         {
             try
             {
-                var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
+                var client = new ImgurClient(ImgurClientId);
                 var endpoint = new ImageEndpoint(client);
-                var deleted = await endpoint.DeleteImageAsync(fileName).ConfigureAwait(false);
+                var deleted = await endpoint.DeleteImageAsync(deleteHash).ConfigureAwait(false);
                 return deleted;
             }
             catch (Exception e)
@@ -58,17 +58,14 @@ namespace Adv.DAL.Interfaces.Implementations
         /// <param name="file">файл</param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<string> UploadFileAsync(IFormFile file, CancellationToken ct)
+        public async Task<IImage> UploadFileAsync(IFormFile file, CancellationToken ct)
         {
             try
             {
                 var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
                 var endpoint = new ImageEndpoint(client);
-                IImage image;
-                image = await endpoint.UploadImageStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
-                
 
-                return image.Link;
+                return await endpoint.UploadImageStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
             }
             catch (ImgurException e)
             {

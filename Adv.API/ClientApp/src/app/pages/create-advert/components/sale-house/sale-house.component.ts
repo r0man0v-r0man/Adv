@@ -98,7 +98,7 @@ export class SaleHouseComponent implements OnInit{
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
       if(file){
-        this.imageService.delete(file.response.uid)
+        this.imageService.delete(file.response.deleteHash)
         .subscribe(response =>{
           if(response) {
             
@@ -107,7 +107,7 @@ export class SaleHouseComponent implements OnInit{
           if(index > -1) {
             this.images.splice(index, 1);
           }
-          this.setHouseSaleFormControlValue('files', this.images);
+          this.setHouseSaleFormControlValue('images', this.images);
 
           observer.next(response);
           observer.complete();
@@ -117,7 +117,6 @@ export class SaleHouseComponent implements OnInit{
     })
   }
   onChange(info: { file : UploadFile} ){
-    console.log(info.file);
     if(info.file.status === 'done' && info.file.response) {
       this.images.push(info.file.response);
       this.setHouseSaleFormControlValue('images', this.images);
@@ -130,6 +129,6 @@ export class SaleHouseComponent implements OnInit{
    * @param value значение 
    */
   private setHouseSaleFormControlValue(formControlName: string, value: any){
-    this.saleHouseForm.controls[formControlName].patchValue(value);
+    this.saleHouseForm.controls[formControlName].setValue(value);
   };
 }
