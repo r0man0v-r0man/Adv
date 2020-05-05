@@ -10,7 +10,7 @@
             nzAction="{{uploadUrl}}"
             [nzHeaders]="headers"
             nzListType="picture"
-             [nzTransformFile]="imageService.compress"
+            [nzTransformFile]="imageService.transformFile"
             [nzBeforeUpload]="imageService.beforeUpload"
             [nzRemove]="onDelete"
             [nzShowUploadList]="showUploadList"

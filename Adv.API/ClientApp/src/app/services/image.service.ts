@@ -19,20 +19,26 @@ export class ImageService {
   ) { }
   transformFile = (file: UploadFile) => {
     return new Observable((observer: Observer<Blob>) => {
-      const width = 600; // For scaling relative to width
+      const width = 600; // разрешение картинки
       const reader = new FileReader();
-      // tslint:disable-next-line: no-any
       reader.readAsDataURL(file as any);
       reader.onload = () => {
         const canvas = document.createElement('canvas');
         const img = document.createElement('img');
         img.src = reader.result as string;
+       
         img.onload = () => {
+          const scale = width / img.naturalHeight;
+          canvas.width = width;
+          canvas.height = img.naturalHeight * scale;
           const ctx = canvas.getContext('2d')!;
-          ctx.drawImage(img, 0, 0);
-          ctx.fillStyle = 'red';
-          ctx.textBaseline = 'middle';
-          ctx.fillText('Ant Design', 20, 20);
+          var offsetX = 0.5;   // center x
+          var offsetY = 0.5;   // center y
+          this.drawImageProp(ctx, img, 0, 0, width, img.naturalHeight * scale, offsetX, offsetY);
+          ctx.font = "20px Verdana";
+            ctx.fillStyle = "white";
+            ctx.globalAlpha = 0.5;
+            ctx.fillText('halupa.by', 20 , width - 20);
           canvas.toBlob(blob => {
             observer.next(blob!);
             observer.complete();
@@ -135,13 +141,18 @@ export class ImageService {
     // fill image in dest. rectangle
     ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
   }
-  beforeUpload = (file: File) : boolean => {
-    const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
+  beforeUpload = (file: File) : Observable<boolean> => {
+    return new Observable((observer: Observer<boolean>)=>{
+      const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
       if (!isSizeLimit) {
+        observer.complete();
         throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
       } else {
-        return true
+        observer.next(true);
+        observer.complete();
       }
+    })
+
       // else {
       //   return this.compress(file);
       // }
