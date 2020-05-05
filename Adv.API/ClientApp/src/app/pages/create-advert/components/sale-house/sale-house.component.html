@@ -9,7 +9,6 @@
             <nz-upload
             nzAction="{{uploadUrl}}"
             [nzHeaders]="headers"
-            nzListType="picture"
             [nzTransformFile]="imageService.transformFile"
             [nzBeforeUpload]="imageService.beforeUpload"
             [nzRemove]="onDelete"

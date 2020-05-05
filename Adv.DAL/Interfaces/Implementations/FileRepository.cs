@@ -38,10 +38,19 @@ namespace Adv.DAL.Interfaces.Implementations
         /// <returns></returns>
         public async Task<bool> DeleteFileAsync(string fileName)
         {
-            var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
-            var endpoint = new ImageEndpoint(client);
-            var deleted = await endpoint.DeleteImageAsync(fileName).ConfigureAwait(false);
-            return deleted;
+            try
+            {
+                var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
+                var endpoint = new ImageEndpoint(client);
+                var deleted = await endpoint.DeleteImageAsync(fileName).ConfigureAwait(false);
+                return deleted;
+            }
+            catch (Exception e)
+            {
+                
+                throw;
+            }
+            
         }
         /// <summary>
         /// Загрузка картинки 
@@ -63,7 +72,6 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             catch (ImgurException e)
             {
-                Console.WriteLine(e);
                 throw;
             }
         }

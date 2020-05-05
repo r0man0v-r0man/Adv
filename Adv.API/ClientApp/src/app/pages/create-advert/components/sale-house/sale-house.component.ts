@@ -98,7 +98,7 @@ export class SaleHouseComponent implements OnInit{
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
       if(file){
-        this.imageService.delete(file.response.name)
+        this.imageService.delete(file.response.uid)
         .subscribe(response =>{
           if(response) {
             
