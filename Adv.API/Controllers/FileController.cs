@@ -25,30 +25,27 @@ namespace Adv.API.Controllers
         [HttpPost]
         public async Task<ActionResult<FileModel>> Post(IFormFile file, CancellationToken ct = default)
         {
-            if (!(file is null))
+            if (file is null) return StatusCode(StatusCodes.Status503ServiceUnavailable);
+            try
             {
-                try
-                {
-                    var result = await fileService.UploadAsync(file, ct).ConfigureAwait(false);
-                    return CreatedAtAction(nameof(Post),
-                        new FileModel
-                        {
-                            LinkProps = result["link"],
-                            Name = Path.GetFileName(result["link"]),
-                            Size = file.Length,
-                            Status = FileResponseStatus.Response.Success.ToString().ToLower(CultureInfo.GetCultureInfo(1049)),
-                            Uid = Path.GetFileNameWithoutExtension(result["link"]),
-                            DeleteHash = result["deleteHash"]
-                        });
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                    throw;
-                }
+                var result = await fileService.UploadAsync(file, ct).ConfigureAwait(false);
+                return CreatedAtAction(nameof(Post),
+                    new FileModel
+                    {
+                        LinkProps = result["link"],
+                        Name = Path.GetFileName(result["link"]),
+                        Size = file.Length,
+                        Status = FileResponseStatus.Response.Success.ToString().ToLower(CultureInfo.GetCultureInfo(1049)),
+                        Uid = Path.GetFileNameWithoutExtension(result["link"]),
+                        DeleteHash = result["deleteHash"]
+                    });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+                throw;
             }
 
-            return StatusCode(StatusCodes.Status503ServiceUnavailable);
         }
         [HttpDelete("{deleteHash}")]
         public async Task<IActionResult> Delete(string deleteHash)

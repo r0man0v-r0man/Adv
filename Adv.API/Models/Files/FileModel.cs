@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Adv.API.Models.Files.Link;
 
 namespace Adv.API.Models.Files
@@ -10,16 +11,11 @@ namespace Adv.API.Models.Files
         public string Name { get; set; }
         public string Status { get; set; }
         public Links LinkProps { get; set; }
-        public string DeleteHash { get; set; }
         /// <summary>
-        /// Mapping to FileModel from string
+        /// HASH полученный при создании файла, необходим для удаления
         /// </summary>
-        /// <param name="image">Path to the image</param>
-        public static implicit operator FileModel(string image) =>
-            new FileModel
-            {
-                LinkProps = image
-            };
+        public string DeleteHash { get; set; }
+
         /// <summary>
         /// Mapping to string
         /// </summary>
