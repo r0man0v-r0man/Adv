@@ -88,7 +88,7 @@ export class SaleHouseComponent implements OnInit{
   }
   
   submitForm(){
-
+    console.log(this.saleHouseForm.value);
   }
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {

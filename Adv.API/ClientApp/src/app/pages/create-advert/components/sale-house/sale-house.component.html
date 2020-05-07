@@ -1,5 +1,5 @@
 
-<form nz-form [formGroup]="saleHouseForm" (ngSubmit)="submitForm()" [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
+<form nz-form [formGroup]="saleHouseForm" [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
     <nz-form-item nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
@@ -286,5 +286,20 @@
             </ng-template>
         </nz-form-control>
     </nz-form-item>
-    <p>{{ saleHouseForm.value | json }}</p>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control >
+          <button nz-button 
+          nzType="primary" 
+          [nzSize]="'large'"  
+          (click)="submitForm()"
+          [disabled]="!saleHouseForm.valid"
+           nzBlock="true">  
+           <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
+        </nz-form-control>
+      </nz-form-item>
 </form>
