@@ -1,10 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Constants } from 'src/app/constants';
 import { ImageService } from 'src/app/services/image.service';
 import { Observable } from 'rxjs';
-import { UploadFile } from 'ng-zorro-antd/upload';
+import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { SuggestService } from 'src/app/services/suggest.service';
 
@@ -14,10 +14,6 @@ import { SuggestService } from 'src/app/services/suggest.service';
   styleUrls: ['./sale-house.component.less']
 })
 export class SaleHouseComponent implements OnInit{
-  /** uploadUrl используется в шаблоне */
-  uploadUrl = Constants.uploadFileUrl;
-  /** header c JWT токеном для загрузки фото */
-  headers = () => { return this.authService.Token; };
   /** фото к объявлению */
   imageList : UploadFile[] = [];
   images: UploadFile[] = [];
@@ -61,7 +57,7 @@ export class SaleHouseComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
-    private cd: ChangeDetectorRef,
+    private cd: ChangeDetectorRef, // для загрузки картинок
     public suggestService: SuggestService
   ) { }
 
@@ -72,7 +68,7 @@ export class SaleHouseComponent implements OnInit{
     this.saleHouseForm = this.formBuilder.group({
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
-      images: [ this.imageList, [Validators.required]],
+      images: [ this.images , [Validators.required]],
       address: [ this.address, [Validators.required]],
       houseArea: [ this.houseArea, [Validators.required]],
       houseLiveArea: [ this.houseLiveArea, [Validators.required]],
@@ -94,6 +90,13 @@ export class SaleHouseComponent implements OnInit{
   submitForm(){
 
   }
+  onUploadChange(info:  UploadChangeParam ){
+    this.imageService.handleChange(info).subscribe(response => {
+      this.images = response;
+      this.setHouseSaleFormControlValue('images',this.images);
+      this.cd.detectChanges();
+    })
+  }
   /** Delete file */
   onDelete = (file: UploadFile) : Observable<boolean> => {
     return new Observable(observer =>{
@@ -108,7 +111,6 @@ export class SaleHouseComponent implements OnInit{
             this.images.splice(index, 1);
           }
           this.setHouseSaleFormControlValue('images', this.images);
-
           observer.next(response);
           observer.complete();
           }
@@ -116,13 +118,7 @@ export class SaleHouseComponent implements OnInit{
       }
     })
   }
-  onChange(info: { file : UploadFile} ){
-    if(info.file.status === 'done' && info.file.response) {
-      this.images.push(info.file.response);
-      this.setHouseSaleFormControlValue('images', this.images);
-    }
-     
-  }
+
   /**
    * установка значения для поля формы
    * @param formControlName имя поля 

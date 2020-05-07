@@ -22,6 +22,7 @@ import { RentHouseComponent } from './components/rent-house/rent-house.component
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+
 @NgModule({
   declarations: [
     CreateAdvertComponent, 

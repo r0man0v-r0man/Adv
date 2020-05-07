@@ -4,19 +4,29 @@ import { UserWarning } from '../errors/userWarning';
 import { Constants } from '../constants';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
-import { UploadFile } from 'ng-zorro-antd/upload';
+import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
+  /** uploadUrl используется в шаблоне */
+  uploadUrl = Constants.uploadFileUrl;
+  /** header c JWT токеном для загрузки фото */
+  headers = () => { return this.authService.Token; };
   /** Max file size in mb */
   maxFileSize = 5;
   deleteImageUrl: string = Constants.deleteFileUrl;
+  /** для nz-upload */
+  imageList: UploadFile[] = [];
+  /** для формы */
+  images: UploadFile[] = [];
+  
   constructor(
     private authService: AuthService,
     private httpService: HttpClient
   ) { }
+  /** изменение разрешения изображения */
   transformFile = (file: UploadFile) => {
     return new Observable((observer: Observer<Blob>) => {
       const width = 600; // разрешение картинки
@@ -47,45 +57,6 @@ export class ImageService {
       };
     });
   };
-    /** изменение длины/ширины изображения */
-   compress(file: File): Observable<any> {
-      const width = 600; // For scaling relative to width
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      return Observable.create(observer => {
-        reader.onload = ev => {
-          const img = new Image();
-          img.src = (ev.target as any).result;
-          (img.onload = () => {
-            const elem = document.createElement('canvas'); // Use Angular's Renderer2 method
-            const scaleFactor = width / img.naturalHeight;
-            elem.width = width;
-            elem.height = img.naturalHeight * scaleFactor;
-            const ctx = <CanvasRenderingContext2D>elem.getContext('2d');
-            var offsetX = 0.5;   // center x
-            var offsetY = 0.5;   // center y
-            this.drawImageProp(ctx, img, 0, 0, width, img.naturalHeight * scaleFactor, offsetX, offsetY);
-            ctx.font = "20px Verdana";
-            ctx.fillStyle = "white";
-            ctx.globalAlpha = 0.5;
-            ctx.fillText('halupa.by', 20 , width - 20);
-            ctx.canvas.toBlob(
-              blob => {
-                observer.next(
-                  new File([blob], file.name, {
-                    type: 'image/jpeg',
-                    lastModified: Date.now(),
-                  }),
-                );
-              },
-              'image/jpeg',
-              1,
-            );
-          }),
-            (reader.onerror = error => observer.error(error));
-        };
-      });
-    }
   
   /**
    * By Ken Fyrstenberg Nilsen
@@ -152,10 +123,30 @@ export class ImageService {
         observer.complete();
       }
     })
-
-      // else {
-      //   return this.compress(file);
-      // }
+  }
+  /** загрузка картинки */
+  handleChange(info: UploadChangeParam): Observable<UploadFile[]> {
+    return new Observable(observer => {
+      let fileList = [...info.fileList];
+      // 2. Read from response and show file link
+      fileList = fileList.map(file => {
+        if (file.response) {
+          // Component will show file.url as link
+          file.url = file.response.url;
+        }
+        return file;
+      });
+      this.imageList = fileList;
+      /** только response сохранять в инфо о картинке к объявлению */
+      let images = fileList.map(file => {
+        if(file.response){
+          file = file.response;
+        }
+        return file
+      });
+      observer.next(images);
+      observer.complete();
+    })
   }
   /** удалить изображение */
   delete(deleteHash: string){
