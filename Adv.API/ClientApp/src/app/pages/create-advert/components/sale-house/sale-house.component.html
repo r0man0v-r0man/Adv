@@ -43,12 +43,12 @@
     [nzXl]="{ span : 24 }">
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!">
         <nz-select
+        nzAllowClear
         nzShowSearch
         nzServerSearch
         nzSize="large"
         nzPlaceHolder="Например: Несвиж лермонтова 2"
         nzNotFoundContent="Вводите, мы подскажем"
-        [(ngModel)]="address"
         [nzShowArrow]="false"
         (nzOnSearch)="suggestService.onSearch($event)" 
         formControlName="address">

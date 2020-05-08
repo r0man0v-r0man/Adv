@@ -1,12 +1,13 @@
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Constants } from 'src/app/constants';
 import { ImageService } from 'src/app/services/image.service';
 import { Observable } from 'rxjs';
 import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { SuggestService } from 'src/app/services/suggest.service';
+import { HouseSaleModel } from 'src/app/models/house-sale.model';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'sale-house',
@@ -58,7 +59,8 @@ export class SaleHouseComponent implements OnInit{
     private authService: AuthService,
     public imageService: ImageService,
     private cd: ChangeDetectorRef, // для загрузки картинок
-    public suggestService: SuggestService
+    public suggestService: SuggestService,
+    private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +71,7 @@ export class SaleHouseComponent implements OnInit{
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
       images: [ this.images , [Validators.required]],
-      address: [ this.address, [Validators.required]],
+      address: [ null, [Validators.required]],
       houseArea: [ this.houseArea, [Validators.required]],
       houseLiveArea: [ this.houseLiveArea, [Validators.required]],
       kitchenArea: [ this.kitchenArea, [Validators.required] ],
@@ -88,8 +90,10 @@ export class SaleHouseComponent implements OnInit{
   }
   
   submitForm(){
-    console.log(this.saleHouseForm.value);
+    const advert: HouseSaleModel = { ...this.saleHouseForm.value }
+    this.advertService.add(advert);
   }
+  /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
       this.images = response;
