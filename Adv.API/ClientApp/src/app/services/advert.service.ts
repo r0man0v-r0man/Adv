@@ -48,10 +48,15 @@ export class AdvertService {
   private createFlatRent(newFlat: FlatRentModel){
     return this.httpService.post<FlatRentModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
   }
-  /** создание объявления */
-  add(advert: HouseSaleModel | HouseRentModel){
-    console.log(advert);
+  /** создание объявления дом сдать */
+  addHouseRent(advert: HouseRentModel){
+    console.log('дом сдать -> ', advert);
     
+  }
+  /** создание объявления дом продать */
+  addHouseSale(advert: HouseSaleModel){
+    console.log('дом продать -> ', advert);
+
   }
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });

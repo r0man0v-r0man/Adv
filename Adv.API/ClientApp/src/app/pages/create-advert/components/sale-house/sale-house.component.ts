@@ -91,7 +91,7 @@ export class SaleHouseComponent implements OnInit{
   
   submitForm(){
     const advert: HouseSaleModel = { ...this.saleHouseForm.value }
-    this.advertService.add(advert);
+    this.advertService.addHouseSale(advert);
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){

@@ -35,4 +35,20 @@
             Адрес
         </ng-template>
     </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control >
+          <button nz-button 
+          nzType="primary" 
+          [nzSize]="'large'"  
+          (click)="submitForm()"
+          [disabled]="!rentHouseForm.valid"
+           nzBlock="true">  
+           <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
+        </nz-form-control>
+      </nz-form-item>
 </form>
