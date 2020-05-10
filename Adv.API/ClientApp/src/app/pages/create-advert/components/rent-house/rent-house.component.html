@@ -160,10 +160,10 @@
         </nz-divider>
         <nz-form-item nz-col 
         [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
-        [nzXl]="{ span : 24 }">
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
             <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
             <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
                 <nz-input-number
@@ -176,6 +176,28 @@
                 [nzParser]="parserDollar"
                 [nzMax]="900000000"
                 [nzStep]="1"></nz-input-number>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-label nzRequired="true" nzFor="duration" >Тип аренды</nz-form-label>
+            <nz-form-control  nzHasFeedback  nzErrorTip="Укажите тип!">
+                <nz-select 
+                [(ngModel)]="selectedDuration"
+                formControlName="duration"
+                [nzSize]="'large'"
+                nzPlaceHolder="Выберите срок">
+                  <nz-option
+                    *ngFor="let duration of listOfDuration"
+                    [nzLabel]="duration.label"
+                    [nzValue]="duration.value"
+                    >
+                  </nz-option>
+                </nz-select>
             </nz-form-control>
         </nz-form-item>
         <nz-divider [nzText]="contactsTpl">

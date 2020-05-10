@@ -8,6 +8,7 @@ import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { DescriptionValidators } from '../../validators/description.validators';
+import { Duration } from 'src/app/models/duration';
 
 @Component({
   selector: 'rent-house',
@@ -42,6 +43,9 @@ export class RentHouseComponent implements OnInit {
   price: number = 30000;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
+  /** тип аренды */
+  selectedDuration: number = 0;
+  listOfDuration: Array<{ label: string; value: number}> = [];
   /** телефон */
   phone: number = 80291234567;
   /** описание */
@@ -59,6 +63,7 @@ export class RentHouseComponent implements OnInit {
     this.initRentHouseForm();
   }
   private initRentHouseForm(){
+    this.setDurations();
     this.rentHouseForm = this.formBuilder.group({
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
@@ -73,6 +78,7 @@ export class RentHouseComponent implements OnInit {
       bathhouse: [ this.bathhouse],
       garage: [ this.garage],
       price: [ null, [Validators.required]],
+      duration: [ this.selectedDuration, [Validators.required]],
       phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
       description: [ null, [DescriptionValidators.notOnlySpace]]
     })
@@ -119,4 +125,11 @@ export class RentHouseComponent implements OnInit {
   private setHouseRentFormControlValue(formControlName: string, value: any){
     this.rentHouseForm.controls[formControlName].setValue(value);
   };
+  /** установка списка типов аренды */
+  setDurations(){
+    this.listOfDuration.push(
+      { label: 'Длительная', value: Duration.long },
+      { label: 'Часы/сутки', value: Duration.short }
+      );
+  }
 }
