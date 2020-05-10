@@ -7,6 +7,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
+import { DescriptionValidators } from '../../validators/description.validators';
 
 @Component({
   selector: 'rent-house',
@@ -24,19 +25,27 @@ export class RentHouseComponent implements OnInit {
   /** кол-во комнат */
   rooms: number;
   /** мебель */
-  furniture: boolean;
+  furniture: boolean = false;
   /** холодильник */
-  refrigerator: boolean;
+  refrigerator: boolean = false;
   /** микроволновая печь */
-  microwaveOven: boolean;
+  microwaveOven: boolean = false;
   /** интернет */
-  internet: boolean;
+  internet: boolean = false;
   /** стиральная машина */
-  washingMachine: boolean;
+  washingMachine: boolean = false;
   /** баня/сауна */
-  bathhouse: boolean;
+  bathhouse: boolean = false;
   /** гараж */
-  garage: boolean;
+  garage: boolean = false;
+  /** цена */
+  price: number = 30000;
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
+  /** телефон */
+  phone: number = 80291234567;
+  /** описание */
+  description: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -62,7 +71,10 @@ export class RentHouseComponent implements OnInit {
       internet: [ this.internet],
       washingMachine: [ this.washingMachine],
       bathhouse: [ this.bathhouse],
-      garage: [this.garage]
+      garage: [ this.garage],
+      price: [ null, [Validators.required]],
+      phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
+      description: [ null, [DescriptionValidators.notOnlySpace]]
     })
   }
   submitForm(){
