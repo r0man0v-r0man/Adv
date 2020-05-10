@@ -13,4 +13,8 @@ export interface HouseRentModel {
     washingMachine:  boolean;
     bathhouse:  boolean;
     garage: boolean;
+    price: number;
+    duration: number;
+    phone: number;
+    description: string;
 }
