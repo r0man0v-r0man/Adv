@@ -42,7 +42,7 @@
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!">
-        <nz-select
+        <nz-select 
         nzAllowClear
         nzShowSearch
         nzServerSearch
@@ -53,7 +53,7 @@
         (nzOnSearch)="suggestService.onSearch($event)" 
         formControlName="address">
         <ng-container *ngFor="let o of suggestService.suggestions">
-            <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text"></nz-option>
+            <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text" ></nz-option>
         </ng-container>
             <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
                 <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...

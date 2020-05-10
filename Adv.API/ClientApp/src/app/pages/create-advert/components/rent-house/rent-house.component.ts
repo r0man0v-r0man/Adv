@@ -20,6 +20,7 @@ export class RentHouseComponent implements OnInit {
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
 
+  address: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -36,8 +37,13 @@ export class RentHouseComponent implements OnInit {
     this.rentHouseForm = this.formBuilder.group({
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
-      images: [ this.images , [Validators.required]],
+      images: [ this.images, [Validators.required]],
+      address: [ this.address, [Validators.required]],
     })
+  }
+  onFocus(event){
+    console.log('1');
+    
   }
   submitForm(){
     const rentHouseModel: HouseRentModel = { ...this.rentHouseForm.value }
