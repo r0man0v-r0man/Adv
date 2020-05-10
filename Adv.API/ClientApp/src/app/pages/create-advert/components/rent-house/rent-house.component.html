@@ -44,32 +44,120 @@
             <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
                 <input nz-input #suggest 
                 [(ngModel)]="address"
-                nzSize="large" 
+                nzSize="large"  
+                placeholder="Несвиж Лермонтова 2"
                 formControlName="address"
                 (ngModelChange)="suggestService.onSearch($event)"
                 [nzAutocomplete]="auto">
                 <nz-autocomplete #auto>
                   <nz-auto-option *ngFor="let o of suggestService.suggestions" [nzValue]="o.text" >{{o.text}}</nz-auto-option>
-                </nz-autocomplete>                
-            <!-- <nz-select 
-            nzAllowClear
-            nzShowSearch
-            nzServerSearch
-            nzSize="large"
-            nzPlaceHolder="Например: Несвиж лермонтова 2"
-            nzNotFoundContent="Вводите, мы подскажем"
-            [nzShowArrow]="false"
-            (nzOnSearch)="suggestService.onSearch($event)" 
-            formControlName="address">
-            <ng-container  *ngFor="let o of suggestService.suggestions">
-                <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text"></nz-option>
-            </ng-container>
-                <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
-                    <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...
-                </nz-option>
-            </nz-select> -->
+                </nz-autocomplete> 
+            </nz-form-control>
+            <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>
+        </nz-form-item>
+        <nz-divider [nzText]="houseTPL">
+            <ng-template #houseTPL>
+                Дом
+            </ng-template>
+        </nz-divider>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-label nzFor="rooms" >Кол-во комнат</nz-form-label>
+            <nz-form-control  nzHasFeedback  nzErrorTip="Сколько комнат!">
+                <nz-input-number
+                nzSize="large"
+                formControlName="rooms"
+                [(ngModel)]="rooms"
+                [nzPlaceHolder]="3"
+                [nzMin]="1"
+                [nzMax]="10000"
+                [nzStep]="1"></nz-input-number>
             </nz-form-control>
         </nz-form-item>
+        <nz-divider [nzText]="comfort">
+            <ng-template #comfort>
+                Удобства
+            </ng-template>
+        </nz-divider>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="furniture">Мебель</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="refrigerator">Холодильник</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="microwaveOven">Микроволновая печь</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="internet">Интернет</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="washingMachine">Стиральная машина</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="bathhouse">Баня/сауна</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-col 
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 11 }" 
+        [nzMd]="{ span : 11 }" 
+        [nzLg]="{ span : 11 }" 
+        [nzXl]="{ span : 11 }">
+            <nz-form-control>
+                <label nz-checkbox formControlName="garage">Гараж</label>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-divider [nzText]="priceSectorTPL">
+            <ng-template #priceSectorTPL>
+                Стоимость
+            </ng-template>
+        </nz-divider>
         <nz-form-item nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
@@ -85,5 +173,5 @@
                nzBlock="true">  
                <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
             </nz-form-control>
-          </nz-form-item>
+        </nz-form-item>
     </form>

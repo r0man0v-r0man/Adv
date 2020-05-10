@@ -19,8 +19,24 @@ export class RentHouseComponent implements OnInit {
   /** фото к объявлению */
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
-
+  /** адрес */
   address: string = '';
+  /** кол-во комнат */
+  rooms: number;
+  /** мебель */
+  furniture: boolean;
+  /** холодильник */
+  refrigerator: boolean;
+  /** микроволновая печь */
+  microwaveOven: boolean;
+  /** интернет */
+  internet: boolean;
+  /** стиральная машина */
+  washingMachine: boolean;
+  /** баня/сауна */
+  bathhouse: boolean;
+  /** гараж */
+  garage: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -39,11 +55,15 @@ export class RentHouseComponent implements OnInit {
       isActive: [ true ],
       images: [ this.images, [Validators.required]],
       address: [ this.address, [Validators.required]],
+      rooms: [ this.rooms ],
+      furniture: [this.furniture],
+      refrigerator: [ this.refrigerator],
+      microwaveOven: [ this.microwaveOven],
+      internet: [ this.internet],
+      washingMachine: [ this.washingMachine],
+      bathhouse: [ this.bathhouse],
+      garage: [this.garage]
     })
-  }
-  onFocus(event){
-    console.log('1');
-    
   }
   submitForm(){
     const rentHouseModel: HouseRentModel = { ...this.rentHouseForm.value }
