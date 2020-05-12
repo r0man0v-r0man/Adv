@@ -50,7 +50,7 @@
                 nzPlaceHolder="Например: Несвиж лермонтова 2"
                 nzNotFoundContent="Вводите, мы подскажем"
                 [nzShowArrow]="false"
-                (nzOnSearch)="suggestService.onSearch($event)" 
+                (nzOnSearch)="suggestService.searchChange$.next($event)" 
                 formControlName="address">
                 <ng-container *ngFor="let o of suggestService.suggestions">
                     <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text" ></nz-option>
