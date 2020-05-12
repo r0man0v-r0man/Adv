@@ -1,5 +1,5 @@
 
-    <form nz-form [formGroup]="rentHouseForm" [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
+    <form nz-form [formGroup]="rentHouseForm"  [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
         <nz-form-item nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
@@ -7,7 +7,7 @@
         [nzLg]="{ span : 24 }" 
         [nzXl]="{ span : 24 }">
             <nz-form-control >
-                <nz-upload
+                <nz-upload 
                 nzAction="{{imageService.uploadUrl}}"
                 [nzHeaders]="imageService.headers"
                 [nzTransformFile]="imageService.transformFile"
@@ -42,16 +42,23 @@
         [nzLg]="{ span : 24 }" 
         [nzXl]="{ span : 24 }">
             <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
-                <input nz-input #suggest 
-                [(ngModel)]="address"
-                nzSize="large"  
-                placeholder="Несвиж Лермонтова 2"
-                formControlName="address"
-                (ngModelChange)="suggestService.onSearch($event)"
-                [nzAutocomplete]="auto">
-                <nz-autocomplete #auto>
-                  <nz-auto-option *ngFor="let o of suggestService.suggestions" [nzValue]="o.text" >{{o.text}}</nz-auto-option>
-                </nz-autocomplete> 
+                <nz-select 
+                nzAllowClear
+                nzShowSearch
+                nzServerSearch
+                nzSize="large"
+                nzPlaceHolder="Например: Несвиж лермонтова 2"
+                nzNotFoundContent="Вводите, мы подскажем"
+                [nzShowArrow]="false"
+                (nzOnSearch)="suggestService.onSearch($event)" 
+                formControlName="address">
+                <ng-container *ngFor="let o of suggestService.suggestions">
+                    <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text" ></nz-option>
+                </ng-container>
+                    <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
+                        <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...
+                    </nz-option>
+                </nz-select>    
             </nz-form-control>
             <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>
         </nz-form-item>

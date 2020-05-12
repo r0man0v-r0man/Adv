@@ -21,8 +21,8 @@ export class SuggestService  {
   /** запрос на поиск адреса для подсказки */
   getSuggestList = (value: string) => this.http.get(`${this.urlBase}+${value}+${this.urlEnd}`).pipe(map((res: any) => { return res.suggestions }));
   constructor(
-    private http: HttpClient) {
-   }
+    private http: HttpClient
+    ) { }
    /** поиск подсказки */
    onSearch(value: string): void {
      if(value.length > 5){
@@ -30,7 +30,7 @@ export class SuggestService  {
       this.searchChange$.next(value);
       this.optionList$ = this.searchChange$
       .asObservable()
-      .pipe(debounceTime(1000),distinctUntilChanged())
+      .pipe(debounceTime(5000),distinctUntilChanged())
       .pipe(switchMap(this.getSuggestList));
       this.optionList$.subscribe(data => {
         this.suggestions = data;

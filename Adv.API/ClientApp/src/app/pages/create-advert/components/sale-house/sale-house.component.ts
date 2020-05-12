@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -58,7 +58,6 @@ export class SaleHouseComponent implements OnInit{
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
-    private cd: ChangeDetectorRef, // для загрузки картинок
     public suggestService: SuggestService,
     private advertService: AdvertService
   ) { }
@@ -98,7 +97,7 @@ export class SaleHouseComponent implements OnInit{
     this.imageService.handleChange(info).subscribe(response => {
       this.images = response;
       this.setHouseSaleFormControlValue('images',this.images);
-      this.cd.detectChanges();
+     
     })
   }
   /** Delete file */

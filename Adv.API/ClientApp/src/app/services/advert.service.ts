@@ -58,6 +58,11 @@ export class AdvertService {
     console.log('дом продать -> ', advert);
 
   }
+  /** создать объявление квартира продать */
+  addFlatSale(advert: FlatSaleModel){
+    console.log('квартира продать -> ', advert);
+
+  }
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
