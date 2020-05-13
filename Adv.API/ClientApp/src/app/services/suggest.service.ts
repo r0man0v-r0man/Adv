@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { debounceTime, switchMap, map, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, switchMap, map, distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,7 @@ export class SuggestService  {
     this.isLoading = true;
     this.optionList$ = this.searchChange$
     .pipe(debounceTime(1000),distinctUntilChanged())
+    .pipe(filter((val:string)=> val.length > 3 ))
     .pipe(switchMap(this.getSuggestList));
     this.optionList$.subscribe(data => {
       this.suggestions = data;
