@@ -14,7 +14,9 @@ export class AppErrorHandler implements ErrorHandler {
     constructor(
         private injector: Injector,
         private router: Router
-        ){}
+        ){
+            
+        }
     handleError(error: AppError) {
         const msg = this.injector.get(NzMessageService);
         if(error instanceof BadInput){
@@ -32,7 +34,7 @@ export class AppErrorHandler implements ErrorHandler {
             console.log(error.error);
         }
         
-        console.log(error);
+        console.log(error.error);
     }
 
 }

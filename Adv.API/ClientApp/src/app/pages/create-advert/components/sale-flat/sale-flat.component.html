@@ -1,1 +1,49 @@
-<p>sale-flat works!</p>
+<form nz-form [formGroup]="saleFlatForm"  [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control >
+            <nz-upload 
+            nzAction="{{imageService.uploadUrl}}"
+            [nzHeaders]="imageService.headers"
+            [nzTransformFile]="imageService.transformFile"
+            [nzBeforeUpload]="imageService.beforeUpload"
+            [nzRemove]="onDelete"
+            [nzShowUploadList]="showUploadList"
+            [nzFileList]="imageService.imageList"
+            [nzShowButton]="imageService.imageList.length < 8"
+            [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
+            nzFileType="image/png,image/jpeg,image/gif,image/jpg"
+            (nzChange)="onUploadChange($event)"
+            [nzListType]="'picture'"
+            ><!--nzSize 5mb-->
+            <button nzBlock="true" nz-button nzSize="large">
+                <i nz-icon nzType="upload" nzTheme="outline"></i> 
+                Загрузите изображение      
+            </button>
+            <p><small>Максимальный размер фото 5mb.</small>
+            </p>
+            </nz-upload>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control >
+          <button nz-button 
+          nzType="primary" 
+          [nzSize]="'large'"  
+          (click)="submitForm()"
+          [disabled]="!saleFlatForm.valid"
+          nzBlock="true">  
+           <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
+        </nz-form-control>
+    </nz-form-item>
+</form>
+<p>{{saleFlatForm.value |json}}</p>

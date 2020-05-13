@@ -91,7 +91,6 @@ export class RentHouseComponent implements OnInit {
     this.imageService.handleChange(info).subscribe(response => {
       this.images = response;
       this.setHouseRentFormControlValue('images',this.images);
-      
     })
   }
   /** Delete file */
