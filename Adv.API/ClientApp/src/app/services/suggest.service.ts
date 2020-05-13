@@ -30,7 +30,7 @@ export class SuggestService  {
     this.isLoading = true;
     this.optionList$ = this.searchChange$
     .pipe(debounceTime(1000),distinctUntilChanged())
-    .pipe(filter((val:string)=> val.length > 3 ))
+    .pipe(filter( val => val.length > 5 ))
     .pipe(switchMap(this.getSuggestList));
     this.optionList$.subscribe(data => {
       this.suggestions = data;
