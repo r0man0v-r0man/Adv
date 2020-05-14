@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { UserWarning } from '../errors/userWarning';
 import { Constants } from '../constants';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,8 @@ export class ImageService {
   
   constructor(
     private authService: AuthService,
-    private httpService: HttpClient
+    private httpService: HttpClient,
+    private msg: NzMessageService
   ) { }
   /** изменение разрешения изображения */
   transformFile = (file: UploadFile) => {
@@ -116,8 +117,9 @@ export class ImageService {
     return new Observable((observer: Observer<boolean>)=>{
       const isSizeLimit = file.size / 1024 / 1024 < this.maxFileSize;
       if (!isSizeLimit) {
+        observer.next(false);
         observer.complete();
-        throw new UserWarning(`Максимальный размер изображения ${this.maxFileSize}mb`);
+        this.msg.warning(`Максимальный размер изображения ${this.maxFileSize}mb`);
       } else {
         observer.next(true);
         observer.complete();

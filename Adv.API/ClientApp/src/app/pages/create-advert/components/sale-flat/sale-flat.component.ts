@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { FlatSaleModel } from 'src/app/models/flatSaleModel';
@@ -6,7 +6,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { UploadChangeParam, UploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
-import { UserWarning } from 'src/app/errors/userWarning';
+import { SuggestService } from 'src/app/services/suggest.service';
 
 @Component({
   selector: 'sale-flat',
@@ -19,11 +19,15 @@ export class SaleFlatComponent implements OnInit {
   /** фото к объявлению */
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  /** этаж */
+  floor: number;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private advertService: AdvertService,
-    public imageService: ImageService
+    public imageService: ImageService,
+    public suggestService: SuggestService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -35,21 +39,21 @@ export class SaleFlatComponent implements OnInit {
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
       images: [ this.images, [Validators.required]],
-      
+      address: [ null, [Validators.required]],
+      floor: [ this.floor, [Validators.required]]
     })
   }
   /** создание объявления */
   submitForm(){
     const saleFlatModel: FlatSaleModel = { ...this.saleFlatForm.value }
     this.advertService.addFlatSale(saleFlatModel);
-    throw new UserWarning('asdfasdfasdfasdf');
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
       this.images = response;
       this.setSaleFlatFormControlValue('images',this.images);
-      
+      this.cd.detectChanges();
     })
   }
   /** Delete file */
@@ -73,7 +77,6 @@ export class SaleFlatComponent implements OnInit {
       }
     })
   }
-
   /**
    * установка значения для поля формы
    * @param formControlName имя поля 

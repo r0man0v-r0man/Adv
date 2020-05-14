@@ -29,6 +29,60 @@
             </nz-upload>
         </nz-form-control>
     </nz-form-item>
+    <nz-divider [nzText]="addressTpl">
+        <ng-template #addressTpl>
+            Адрес
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!">
+        <nz-select 
+        nzAllowClear
+        nzShowSearch
+        nzServerSearch
+        nzSize="large"
+        nzPlaceHolder="Например: Несвиж лермонтова 2"
+        nzNotFoundContent="Вводите, мы подскажем"
+        [nzShowArrow]="false"
+        (nzOnSearch)="suggestService.searchChange$.next($event)" 
+        formControlName="address">
+        <ng-container *ngFor="let o of suggestService.suggestions">
+            <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text" ></nz-option>
+        </ng-container>
+            <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
+                <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...
+            </nz-option>
+        </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="houseTPL">
+        <ng-template #houseTPL>
+            Дом
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="floor" >Этаж</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите этаж!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="floor"
+            [(ngModel)]="floor"
+            [nzPlaceHolder]="3"
+            [nzMin]="1"
+            [nzMax]="1000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
     <nz-form-item nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 

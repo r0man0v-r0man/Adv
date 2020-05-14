@@ -16,7 +16,7 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
-import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
 
 // SSR 
