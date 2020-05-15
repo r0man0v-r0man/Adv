@@ -7,6 +7,7 @@ import { ImageService } from 'src/app/services/image.service';
 import { UploadChangeParam, UploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { SuggestService } from 'src/app/services/suggest.service';
+import { DescriptionValidators } from '../../validators/description.validators';
 
 @Component({
   selector: 'sale-flat',
@@ -21,6 +22,30 @@ export class SaleFlatComponent implements OnInit {
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
   /** этаж */
   floor: number;
+  /** этажей всего */
+  allFloor: number;
+  /** кол-во комнат */
+  rooms: number;
+  /** общая площадь, кв.м */
+  flatArea: number;
+  /** жилая площадь, кв.м */
+  flatLiveArea: number;
+  /** площадь кухни, кв.м */
+  kitchenArea: number;
+  /** балкон */
+  selectedBalcony: number = 1;
+  listOfBalcony: Array<{ label: string, value: number }> = [];
+  /** санузел */
+  selectedToilet: number = 1;
+  listOfToilet: Array<{ label: string, value: number }> = [];
+  /** цена */
+  price: number = 30000;
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
+  /** телефон */
+  phone: number = 80291234567;
+  /** описание */
+  description: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -35,12 +60,24 @@ export class SaleFlatComponent implements OnInit {
   }
   /** инициализация формы */
   private initForm(){
+    this.setListOfBalcony();
+    this.setListOfToilet();
     this.saleFlatForm = this.formBuilder.group({
       userId:[ this.authService.currentUser.sub,[Validators.required]],
       isActive: [ true ],
       images: [ this.images, [Validators.required]],
       address: [ null, [Validators.required]],
-      floor: [ this.floor, [Validators.required]]
+      floor: [ this.floor, [Validators.required]],
+      allFloor: [ this.allFloor, [Validators.required]],
+      rooms: [ this.rooms, [Validators.required]],
+      flatArea: [ this.flatArea, [Validators.required]],
+      flatLiveArea: [ this.flatLiveArea, [Validators.required]],
+      kitchenArea: [ this.kitchenArea, [Validators.required]],
+      balcony: [ this.selectedBalcony, [Validators.required]],
+      toilet: [ this.selectedToilet, [Validators.required]],
+      price: [ null, [Validators.required]],
+      phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
+      description: [ null, [DescriptionValidators.notOnlySpace]]
     })
   }
   /** создание объявления */
@@ -76,6 +113,18 @@ export class SaleFlatComponent implements OnInit {
         });
       }
     })
+  }
+  setListOfToilet(){
+    this.listOfToilet.push(
+      { label: 'Раздельный', value: 0 },
+      { label: 'Совмещенный', value: 1 }
+    )
+  }
+  setListOfBalcony(){
+    this.listOfBalcony.push(
+      { label: 'Есть', value: 1 },
+      { label: 'Нет', value: 0 }
+    )
   }
   /**
    * установка значения для поля формы
