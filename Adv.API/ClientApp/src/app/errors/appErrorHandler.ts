@@ -34,7 +34,7 @@ export class AppErrorHandler implements ErrorHandler {
             console.log(error.error);
         }
         
-        console.log(error.error);
+        console.log(error);
     }
 
 }

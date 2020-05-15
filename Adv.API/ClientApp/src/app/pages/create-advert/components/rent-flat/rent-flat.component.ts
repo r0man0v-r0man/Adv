@@ -18,7 +18,13 @@ export class RentFlatComponent implements OnInit {
   flatRentForm: FormGroup;
   /** фото к объявлению */
   images: UploadFile[] = [];
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  showUploadList = { showPreviewIcon: false, showRemoveIcon: true };
+  /** этаж */
+  floor: number;
+  /** этажей всего */
+  allFloor: number;
+  /** кол-во комнат */
+  rooms: number;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -29,7 +35,7 @@ export class RentFlatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    this.initForm();
   }
   initForm(){
     this.flatRentForm = this.formBuilder.group({
@@ -37,6 +43,9 @@ export class RentFlatComponent implements OnInit {
       isActive: [ true ],
       images: [ this.images, [Validators.required]],
       address: [ null, [Validators.required]],
+      floor: [ this.floor, [Validators.required]],
+      allFloor: [ this.allFloor, [Validators.required]],
+      rooms: [ this.rooms, [Validators.required]],
     })
   }
 
