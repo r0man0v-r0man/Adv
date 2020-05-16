@@ -126,6 +126,179 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired nzFor="balcony">Балкон</nz-form-label>
+        <nz-form-control 
+        nzHasFeedback
+        nzErrorTip="Балкон есть?">
+            <nz-select 
+            [(ngModel)]="selectedBalcony"
+            formControlName="balcony"
+            [nzSize]="'large'">
+            <nz-option
+                *ngFor="let balcony of listOfBalcony"
+                [nzLabel]="balcony.label"
+                [nzValue]="balcony.value"
+                >
+            </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="comfortTPL">
+        <ng-template #comfortTPL>
+            Удобства
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control>
+            <label nz-checkbox formControlName="furniture">Мебель</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control>
+            <label nz-checkbox formControlName="refrigerator">Холодильник</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control>
+            <label nz-checkbox formControlName="microwaveOven">Микроволновая печь</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control>
+            <label nz-checkbox formControlName="internet">Интернет</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-control>
+            <label nz-checkbox formControlName="washingMachine">Стиральная машина</label>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="priceSectorTPL">
+        <ng-template #priceSectorTPL>
+            Стоимость
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
+            <nz-input-number
+            nzSize="large"
+            formControlName="price"
+            [(ngModel)]="price"
+            [nzPlaceHolder]="100"
+            [nzMin]="1"
+            [nzFormatter]="formatterDollar"
+            [nzParser]="parserDollar"
+            [nzMax]="900000000"
+            [nzStep]="1"></nz-input-number>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="duration" >Тип аренды</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите тип!">
+            <nz-select 
+            [(ngModel)]="selectedDuration"
+            formControlName="duration"
+            [nzSize]="'large'"
+            nzPlaceHolder="Выберите срок">
+              <nz-option
+                *ngFor="let duration of listOfDuration"
+                [nzLabel]="duration.label"
+                [nzValue]="duration.value"
+                >
+              </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="contactsTpl">
+        <ng-template #contactsTpl>
+            Контакты
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 11 }" 
+    [nzMd]="{ span : 11 }" 
+    [nzLg]="{ span : 11 }" 
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="phone" >Телефон</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите телефон!">
+            <input nz-input placeholder="80291234567"
+            nzSize="large"
+            formControlName="phone"
+            [(ngModel)]="phone"
+            type="tel">
+        </nz-form-control>
+    </nz-form-item>
+    <nz-divider [nzText]="descriptionTpl">
+        <ng-template #descriptionTpl>
+            Описание
+        </ng-template>
+    </nz-divider>
+    <nz-form-item nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <nz-form-control nzHasFeedback [nzErrorTip]="descriptionErrorTpl">
+            <textarea 
+            [nzSize]="'large'"
+            formControlName="description"
+            placeholder="Ваше описание"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }" 
+            nz-input></textarea>
+            <ng-template #descriptionErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                    Добавьте описание!
+                </ng-container>
+                <ng-container *ngIf="control.hasError('notOnlySpace')">
+                    Описание не должно быть пустым!
+                </ng-container>
+            </ng-template>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-col 
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 24 }" 
         [nzMd]="{ span : 24 }" 
