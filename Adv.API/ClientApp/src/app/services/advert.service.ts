@@ -15,7 +15,9 @@ import { HouseRentModel } from '../models/house-rent.model';
 })
 export class AdvertService {
   private addFlatRentURL: string = Constants.addFlatRent;
-  private createFlatRentUrl: string = Constants.flat;
+  private addFlatSaleUrl: string = Constants.addFlatSale;
+  private addHouseRentUrl: string = Constants.addHouseRent;
+  private addHouseSaleUrl: string = Constants.addHouseSale;
   private deleteFlatUrl: string = Constants.deleteFlat;
   private updateFlatUrl: string = Constants.updateFlat;
   /** for SSR */
@@ -47,18 +49,15 @@ export class AdvertService {
   }
   /** создание объявления дом сдать */
   addHouseRent(advert: HouseRentModel){
-    console.log('дом сдать -> ', advert);
-    
+    return this.httpService.post<HouseRentModel>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders});
   }
   /** создание объявления дом продать */
   addHouseSale(advert: HouseSaleModel){
-    console.log('дом продать -> ', advert);
-
+    return this.httpService.post<HouseSaleModel>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders});
   }
   /** создать объявление квартира продать */
   addFlatSale(advert: FlatSaleModel){
-    console.log('квартира продать -> ', advert);
-
+    return this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders});
   }
   /** создать объявление квартира сдать */
   addFlatRent(advert: FlatRentModel){

@@ -1,6 +1,7 @@
 import { UploadFile } from 'ng-zorro-antd/upload';
 
 export interface FlatSaleModel {
+    id: number;
     userId: string;
     isActive: boolean;
     images: UploadFile[];

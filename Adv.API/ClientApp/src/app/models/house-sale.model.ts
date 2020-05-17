@@ -1,6 +1,7 @@
 import { UploadFile } from 'ng-zorro-antd/upload/interface';
 
 export interface HouseSaleModel{
+    id: number;
     userId: string;
     isActive: boolean;
     images: UploadFile[];
