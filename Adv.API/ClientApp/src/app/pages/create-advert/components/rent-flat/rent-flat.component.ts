@@ -48,7 +48,7 @@ export class RentFlatComponent implements OnInit {
   selectedDuration: number = 0;
   listOfDuration: Array<{ label: string; value: number}> = [];
   /** телефон */
-  phone: number = 80291234567;
+  phone: string = '80291234567';
   /** описание */
   description: string = '';
   constructor(
@@ -90,7 +90,10 @@ export class RentFlatComponent implements OnInit {
   /** создание объявления */
   submitForm(){
     const rentFlatModel: FlatRentModel = { ...this.flatRentForm.value }
-    this.advertService.addFlatRent(rentFlatModel);
+    this.advertService.addFlatRent(rentFlatModel).subscribe(response => {
+      console.log(response);
+      
+    })
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){

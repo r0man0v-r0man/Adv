@@ -14,6 +14,7 @@ namespace Adv.BLL
             services.AddScoped<IFlatService, FlatService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAdvertService, AdvertService>();
 
 
             return services;

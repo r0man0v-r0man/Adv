@@ -49,7 +49,7 @@ export class SaleHouseComponent implements OnInit{
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
   /** телефон */
-  phone: number = 80291234567;
+  phone: string = '80291234567';
   /** описание */
   description: string = '';
   constructor(

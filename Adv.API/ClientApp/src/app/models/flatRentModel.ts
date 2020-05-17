@@ -16,6 +16,6 @@ export interface FlatRentModel {
     washingMachine:  boolean;
     price: number;
     duration: number;
-    phone: number;
+    phone: string;
     description: string;
 }

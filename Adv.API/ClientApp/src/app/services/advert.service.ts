@@ -14,7 +14,8 @@ import { HouseRentModel } from '../models/house-rent.model';
   providedIn: 'root'
 })
 export class AdvertService {
-  private createFlatUrl: string = Constants.flat;
+  private addFlatRentURL: string = Constants.addFlatRent;
+  private createFlatRentUrl: string = Constants.flat;
   private deleteFlatUrl: string = Constants.deleteFlat;
   private updateFlatUrl: string = Constants.updateFlat;
   /** for SSR */
@@ -44,10 +45,6 @@ export class AdvertService {
         nzPauseOnHover: true
       })
   }
-  /** создание объявления: квартира - сдать */
-  private createFlatRent(newFlat: FlatRentModel){
-    return this.httpService.post<FlatRentModel>(this.createFlatUrl, newFlat, { headers: this.authService.SecureHeaders });
-  }
   /** создание объявления дом сдать */
   addHouseRent(advert: HouseRentModel){
     console.log('дом сдать -> ', advert);
@@ -65,12 +62,13 @@ export class AdvertService {
   }
   /** создать объявление квартира сдать */
   addFlatRent(advert: FlatRentModel){
-    console.log('квартира сдать ->', advert);
-    
+    return this.httpService.post<FlatRentModel>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders});
   }
+  /** удалить объявление */
   delete(id: number){
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
+  /** обновить объявление */
   update(updateFlat:FlatUpdateModel){
     return this.httpService.put<boolean>(this.updateFlatUrl, updateFlat, { headers: this.authService.SecureHeaders });
   }

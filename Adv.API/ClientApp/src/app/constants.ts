@@ -7,6 +7,11 @@ export class Constants {
   static login = environment.webApi +  'account/login';
   static IsUserNameDuplicated = environment.webApi + 'account/IsValidateUserName';
   static getUserInfo = environment.webApi + 'account/userInfo'
+  //adverts
+  static addFlatRent = environment.webApi + 'advert/addFlatRent';
+  static addFlatSale = environment.webApi + 'advert/addFlatSale';
+  static addHouseRent = environment.webApi + 'advert/addHouseRent';
+  static addHouseSale = environment.webApi + 'advert/addHouseSale';
   //flat
   static flat = environment.webApi +  'flat'; 
   static getAllFlats = environment.webApi +  'flat/getAll';

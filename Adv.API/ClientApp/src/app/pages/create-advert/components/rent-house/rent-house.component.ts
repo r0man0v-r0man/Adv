@@ -47,7 +47,7 @@ export class RentHouseComponent implements OnInit {
   selectedDuration: number = 0;
   listOfDuration: Array<{ label: string; value: number}> = [];
   /** телефон */
-  phone: number = 80291234567;
+  phone: string = '80291234567';
   /** описание */
   description: string = '';
   constructor(
