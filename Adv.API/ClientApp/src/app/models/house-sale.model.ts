@@ -9,6 +9,7 @@ export interface HouseSaleModel{
     houseArea: number;
     houseLiveArea: number;
     kitchenArea: number;
+    /** площадь участка */
     housePlotArea: number;
     heating: boolean;
     water: boolean;

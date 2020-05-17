@@ -29,7 +29,14 @@ namespace Adv.API.Controllers
         }
         [HttpPost("addFlatSale")]
         [Authorize]
-        public async Task<ActionResult<FlatRentViewModel>> AddFlatSale(FlatSaleViewModel flatSaleViewModel,
+        public async Task<ActionResult<FlatSaleViewModel>> AddFlatSale(FlatSaleViewModel flatSaleViewModel,
+            CancellationToken ct = default)
+        {
+            return Ok();
+        }
+        [HttpPost("addHouseSale")]
+        [Authorize]
+        public async Task<ActionResult<HouseSaleViewModel>> AddHouseSale(HouseSaleViewModel houseSaleViewModel,
             CancellationToken ct = default)
         {
             return Ok();
