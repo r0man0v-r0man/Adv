@@ -41,23 +41,19 @@
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
-            <nz-select 
-            nzAllowClear
-            nzShowSearch
-            nzServerSearch
-            nzSize="large"
-            nzPlaceHolder="Например: Несвиж лермонтова 2"
-            nzNotFoundContent="Вводите, мы подскажем"
-            [nzShowArrow]="false"
-            (nzOnSearch)="suggestService.searchChange$.next($event)" 
-            formControlName="address">
-            <ng-container *ngFor="let o of suggestService.suggestions">
-                <nz-option *ngIf="!suggestService.isLoading" [nzValue]="o.text" [nzLabel]="o.text" ></nz-option>
-            </ng-container>
-                <nz-option *ngIf="suggestService.isLoading" nzDisabled nzCustomContent>
-                    <i nz-icon nzType="loading" class="loading-icon"></i> Поиск...
-                </nz-option>
-            </nz-select>    
+            <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
+                <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="address"
+                (ngModelChange)="suggestService.searchChange$.next($event)" 
+                [nzAutocomplete]="auto" />
+            </nz-input-group>
+            <ng-template #suffixIcon>
+                <i nz-icon nzType="search"></i>
+            </ng-template>
+            <nz-autocomplete #auto>
+                <nz-auto-option *ngFor="let option of suggestService.suggestions" [nzLabel]="option.text" [nzValue]="option.text">
+                    {{ option.text }}
+                </nz-auto-option>
+            </nz-autocomplete>
         </nz-form-control>
         <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>
     </nz-form-item>
