@@ -25,7 +25,15 @@ namespace Adv.API.Controllers
         public async Task<ActionResult<FlatRentViewModel>> AddFlatRent(FlatRentViewModel flatRentViewModel,
             CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
         }
         [HttpPost("addFlatSale")]
         [Authorize]

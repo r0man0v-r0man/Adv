@@ -1,14 +1,10 @@
-﻿using Adv.API.Models.Files;
-using Adv.BLL.DTO.Adverts;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 
-namespace Adv.API.Models.Adverts
+namespace Adv.BLL.DTO.Adverts
 {
-    /// <summary>
-    /// View Модель объявления - квартира сдать
-    /// </summary>
-    public class FlatRentViewModel : API.Models.Common.AuditableEntity
+    public class FlatRentDTO
     {
         /// <summary>
         /// номер объявления
@@ -25,7 +21,7 @@ namespace Adv.API.Models.Adverts
         /// <summary>
         /// фотографии объявления
         /// </summary>
-        public List<FileModel> Images { get; set; }
+        public Dictionary<string, string> Images { get; set; }
         /// <summary>
         /// адрес объявления
         /// </summary>
@@ -82,33 +78,5 @@ namespace Adv.API.Models.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// конвертация в DTO объект
-        /// </summary>
-        /// <param name="flatRentViewModel"></param>
-        public static implicit operator FlatRentDTO(FlatRentViewModel flatRentViewModel) =>
-            new FlatRentDTO
-            {
-                Id = flatRentViewModel.Id,
-                UserId = flatRentViewModel.UserId,
-                IsActive = flatRentViewModel.IsActive,
-                Images = flatRentViewModel.Images.ToDictionary(image => image.DeleteHash, image => image.LinkProps.Download),
-                Address = flatRentViewModel.Address,
-                Floor = flatRentViewModel.Floor,
-                AllFloor = flatRentViewModel.AllFloor,
-                Rooms = flatRentViewModel.Rooms,
-                Balcony = flatRentViewModel.Balcony,
-                Furniture = flatRentViewModel.Furniture,
-                Refrigerator = flatRentViewModel.Refrigerator,
-                MicrowaveOven = flatRentViewModel.MicrowaveOven,
-                Internet = flatRentViewModel.Internet,
-                WashingMachine = flatRentViewModel.WashingMachine,
-                Price = flatRentViewModel.Price,
-                Duration = flatRentViewModel.Duration,
-                Phone = flatRentViewModel.Phone,
-                Description = flatRentViewModel.Description
-            };
-
     }
 }

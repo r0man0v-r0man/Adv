@@ -19,4 +19,8 @@
     <ProjectReference Include="..\Adv.DAL\Adv.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\Adverts\Update\" />
+  </ItemGroup>
+
 </Project>
