@@ -6,7 +6,7 @@ using Adv.API.Models.Files;
 
 namespace Adv.API.Models.Adverts
 {
-    public class FlatSaleViewModel : API.Models.Common.AuditableEntity
+    public class HouseRentViewModel : API.Models.Common.AuditableEntity
     {
         /// <summary>
         /// номер объявления
@@ -29,41 +29,45 @@ namespace Adv.API.Models.Adverts
         /// </summary>
         public string Address { get; set; }
         /// <summary>
-        /// этаж 
-        /// </summary>
-        public int Floor { get; set; }
-        /// <summary>
-        /// всего этажей
-        /// </summary>
-        public int AllFloor { get; set; }
-        /// <summary>
         /// количество комнат
         /// </summary>
         public byte Rooms { get; set; }
         /// <summary>
-        /// Общая площадь
+        /// наличие мебели
         /// </summary>
-        public int FlatArea { get; set; }
+        public bool Furniture { get; set; }
         /// <summary>
-        /// Жилая площадь
+        /// наличие холодильника
         /// </summary>
-        public int FlatLiveArea { get; set; }
+        public bool Refrigerator { get; set; }
         /// <summary>
-        /// Площадь кухни
+        /// наличие микроволновой печи
         /// </summary>
-        public int KitchenArea { get; set; }
+        public bool MicrowaveOven { get; set; }
         /// <summary>
-        /// наличие балкона
+        /// наличие интернета
         /// </summary>
-        public byte Balcony { get; set; }
+        public bool Internet { get; set; }
         /// <summary>
-        /// туалет
+        /// наличие стиральной машины
         /// </summary>
-        public byte Toilet { get; set; }
+        public bool WashingMachine { get; set; }
+        /// <summary>
+        /// баня
+        /// </summary>
+        public bool Bathhouse { get; set; }
+        /// <summary>
+        /// гараж
+        /// </summary>
+        public bool Garage { get; set; }
         /// <summary>
         /// цена
         /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// тип аренды
+        /// </summary>
+        public byte Duration { get; set; }
         /// <summary>
         /// телефон
         /// </summary>

@@ -41,5 +41,12 @@ namespace Adv.API.Controllers
         {
             return Ok();
         }
+        [HttpPost("addHouseRent")]
+        [Authorize]
+        public async Task<ActionResult<HouseRentViewModel>> AddHouseRent(HouseRentViewModel houseRentViewModel,
+            CancellationToken ct = default)
+        {
+            return Ok();
+        }
     }
 }

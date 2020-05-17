@@ -6,7 +6,7 @@ using Adv.API.Models.Files;
 
 namespace Adv.API.Models.Adverts
 {
-    public class HouseSaleViewModel
+    public class HouseSaleViewModel : API.Models.Common.AuditableEntity
     {
         /// <summary>
         /// номер объявления
