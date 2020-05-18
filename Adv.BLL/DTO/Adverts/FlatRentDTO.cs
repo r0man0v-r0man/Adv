@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Adv.BLL.DTO.Images;
 
 namespace Adv.BLL.DTO.Adverts

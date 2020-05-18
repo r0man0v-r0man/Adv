@@ -6,6 +6,7 @@ namespace Adv.BLL.DTO.Images
 {
     public class ImageDTO
     {
+        public int Id { get; set; }
         /// <summary>
         /// уникальная строка для удаления
         /// </summary>
