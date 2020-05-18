@@ -12,7 +12,7 @@ namespace Adv.DAL.EntitiesConfigurations
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder
-                .HasMany(prop => prop.Flats)
+                .HasMany(prop => prop.FlatRents)
                 .WithOne(prop => prop.AppUser);
         }
     }

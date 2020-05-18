@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
+using Adv.DAL.Entities.Adverts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Adv.DAL.Context
@@ -13,7 +14,7 @@ namespace Adv.DAL.Context
     public class AdvContext : IdentityDbContext<AppUser>, IAdvContext
     {
         //
-        public DbSet<Flat> Flats { get; set; }
+        public DbSet<FlatRent> FlatRents { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base (options)
         {
@@ -22,7 +23,7 @@ namespace Adv.DAL.Context
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder?.ApplyConfiguration(new FlatConfiguration());
+            modelBuilder?.ApplyConfiguration(new FlatRentConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
             base.OnModelCreating(modelBuilder);
         }

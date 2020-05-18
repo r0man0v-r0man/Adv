@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Adv.DAL.Entities.Images;
 
 namespace Adv.BLL.DTO.Images
 {
@@ -23,5 +24,14 @@ namespace Adv.BLL.DTO.Images
         /// размер файла
         /// </summary>
         public long Size { get; set; }
+
+        public static implicit operator Image(ImageDTO dto) => new Image
+        {
+            Id = dto.Id,
+            DeleteHash = dto.DeleteHash,
+            URL = dto.URL,
+            Uid = dto.Uid,
+            Size = dto.Size
+        };
     }
 }

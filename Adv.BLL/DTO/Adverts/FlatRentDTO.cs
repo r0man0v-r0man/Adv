@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Adv.BLL.DTO.Images;
+using Adv.DAL.Entities.Adverts;
+using Adv.DAL.Entities.Images;
 
 namespace Adv.BLL.DTO.Adverts
 {
-    public class FlatRentDTO
+    public class FlatRentDTO : Common.AuditableEntity
     {
         /// <summary>
         /// номер объявления
@@ -82,5 +85,27 @@ namespace Adv.BLL.DTO.Adverts
         {
             Images = new List<ImageDTO>();
         }
+
+        public static implicit operator FlatRent(FlatRentDTO dto) => new FlatRent()
+        {
+            Id = dto.Id,
+            AppUserId = dto.UserId,
+            IsActive = dto.IsActive,
+            Images = dto.Images.Select(imgDTO => (Image) imgDTO).ToList(),
+            Address = dto.Address,
+            Floor = dto.Floor,
+            AllFloor = dto.AllFloor,
+            Rooms = dto.Rooms,
+            Balcony = dto.Balcony,
+            Furniture = dto.Furniture,
+            Refrigerator = dto.Refrigerator,
+            MicrowaveOven = dto.MicrowaveOven,
+            Internet = dto.Internet,
+            WashingMachine = dto.WashingMachine,
+            Price = dto.Price,
+            Duration = dto.Duration,
+            Phone = dto.Phone,
+            Description = dto.Description
+        };
     }
 }
