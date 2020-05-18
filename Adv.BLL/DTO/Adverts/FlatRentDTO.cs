@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Adv.BLL.DTO.Images;
 
 namespace Adv.BLL.DTO.Adverts
 {
@@ -21,7 +22,7 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// фотографии объявления
         /// </summary>
-        public Dictionary<string, string> Images { get; set; }
+        public List<ImageDTO> Images { get; set; }
         /// <summary>
         /// адрес объявления
         /// </summary>
@@ -78,5 +79,10 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+
+        public FlatRentDTO()
+        {
+            Images = new List<ImageDTO>();
+        }
     }
 }

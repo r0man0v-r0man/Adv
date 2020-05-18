@@ -2,6 +2,7 @@
 using Adv.BLL.DTO.Adverts;
 using System.Collections.Generic;
 using System.Linq;
+using Adv.BLL.DTO.Images;
 
 namespace Adv.API.Models.Adverts
 {
@@ -93,7 +94,13 @@ namespace Adv.API.Models.Adverts
                 Id = flatRentViewModel.Id,
                 UserId = flatRentViewModel.UserId,
                 IsActive = flatRentViewModel.IsActive,
-                Images = flatRentViewModel.Images.ToDictionary(image => image.DeleteHash, image => image.LinkProps.Download),
+                Images = flatRentViewModel.Images.Select(image => new ImageDTO
+                    {
+                        DeleteHash = image.DeleteHash,
+                        URL = image.LinkProps.Download,
+                        Uid = image.Uid,
+                        Size = image.Size
+                    }).ToList(),
                 Address = flatRentViewModel.Address,
                 Floor = flatRentViewModel.Floor,
                 AllFloor = flatRentViewModel.AllFloor,
