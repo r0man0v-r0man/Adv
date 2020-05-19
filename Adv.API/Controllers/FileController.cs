@@ -35,7 +35,6 @@ namespace Adv.API.Controllers
                         LinkProps = result["link"],
                         Name = Path.GetFileName(result["link"]),
                         Size = file.Length,
-                        Status = FileResponseStatus.Response.Success.ToString().ToLower(CultureInfo.GetCultureInfo(1049)),
                         Uid = Path.GetFileNameWithoutExtension(result["link"]),
                         DeleteHash = result["deleteHash"]
                     });

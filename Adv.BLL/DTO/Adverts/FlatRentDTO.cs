@@ -6,7 +6,7 @@ using Adv.DAL.Entities.Images;
 
 namespace Adv.BLL.DTO.Adverts
 {
-    public class FlatRentDTO : Common.AuditableEntity
+    public class FlatRentDto : Common.AuditableEntity
     {
         /// <summary>
         /// номер объявления
@@ -81,17 +81,17 @@ namespace Adv.BLL.DTO.Adverts
         /// </summary>
         public string Description { get; set; }
 
-        public FlatRentDTO()
+        public FlatRentDto()
         {
             Images = new List<ImageDTO>();
         }
 
-        public static implicit operator FlatRent(FlatRentDTO dto) => new FlatRent()
+        public static implicit operator FlatRent(FlatRentDto dto) => new FlatRent()
         {
             Id = dto.Id,
             AppUserId = dto.UserId,
             IsActive = dto.IsActive,
-            Images = dto.Images.Select(imgDTO => (Image) imgDTO).ToList(),
+            Images = dto.Images.Select(imgDto => (Image) imgDto).ToList(),
             Address = dto.Address,
             Floor = dto.Floor,
             AllFloor = dto.AllFloor,

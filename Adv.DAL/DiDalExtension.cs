@@ -37,9 +37,9 @@ namespace Adv.DAL
                 .AddEntityFrameworkStores<AdvContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped(typeof(IFlatRepository), typeof(FlatRepository));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IFileRepository), typeof(FileRepository));
+            services.AddScoped(typeof(IAdvertRepository), typeof(AdvertRepository));
             services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
             return services;

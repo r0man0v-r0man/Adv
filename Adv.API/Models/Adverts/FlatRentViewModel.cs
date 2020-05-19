@@ -88,19 +88,13 @@ namespace Adv.API.Models.Adverts
         /// конвертация в DTO объект
         /// </summary>
         /// <param name="flatRentViewModel"></param>
-        public static implicit operator FlatRentDTO(FlatRentViewModel flatRentViewModel) =>
-            new FlatRentDTO
+        public static implicit operator FlatRentDto(FlatRentViewModel flatRentViewModel) =>
+            new FlatRentDto
             {
                 Id = flatRentViewModel.Id,
                 UserId = flatRentViewModel.UserId,
                 IsActive = flatRentViewModel.IsActive,
-                Images = flatRentViewModel.Images.Select(image => new ImageDTO
-                    {
-                        DeleteHash = image.DeleteHash,
-                        URL = image.LinkProps.Download,
-                        Uid = image.Uid,
-                        Size = image.Size
-                    }).ToList(),
+                Images = flatRentViewModel.Images.Select(fileModel => (ImageDTO) fileModel).ToList(),
                 Address = flatRentViewModel.Address,
                 Floor = flatRentViewModel.Floor,
                 AllFloor = flatRentViewModel.AllFloor,

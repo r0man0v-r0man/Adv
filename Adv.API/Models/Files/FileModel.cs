@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using Adv.API.Models.Files.Link;
+using Adv.BLL.DTO.Images;
 
 namespace Adv.API.Models.Files
 {
     public class FileModel
     {
+        public int Id { get; set; }
         public string Uid { get; set; }
         public long Size { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
         public Links LinkProps { get; set; }
         /// <summary>
         /// HASH полученный при создании файла, необходим для удаления
         /// </summary>
         public string DeleteHash { get; set; }
 
-        /// <summary>
-        /// Mapping to string
-        /// </summary>
-        /// <param name="file"></param>
-        public static implicit operator string(FileModel file)
+        public static implicit operator ImageDTO(FileModel fileModel) => new ImageDTO
         {
-            return file?.LinkProps.Download;
-        }
+            Id = fileModel.Id,
+            Uid = fileModel.Uid,
+            Size = fileModel.Size,
+            URL = fileModel.LinkProps.Download,
+            DeleteHash = fileModel.DeleteHash
+        };
     }
 }
