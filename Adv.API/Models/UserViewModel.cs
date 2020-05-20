@@ -1,5 +1,4 @@
-﻿using Adv.API.Models.Flat;
-using Adv.BLL.DTO;
+﻿using Adv.BLL.DTO;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;

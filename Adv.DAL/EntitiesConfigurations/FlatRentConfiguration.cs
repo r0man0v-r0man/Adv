@@ -35,11 +35,9 @@ namespace Adv.DAL.EntitiesConfigurations
                 .IsRequired();
             builder
                 .Property(prop => prop.Rooms)
-                .HasConversion<byte>()
                 .IsRequired();
             builder
                 .Property(prop => prop.Balcony)
-                .HasConversion<byte>()
                 .IsRequired();
             builder
                 .Property(prop => prop.Furniture)
@@ -55,11 +53,10 @@ namespace Adv.DAL.EntitiesConfigurations
                 .IsRequired();
             builder
                 .Property(prop => prop.Price)
-                .HasConversion<decimal>()
+                .HasColumnType("money")
                 .IsRequired();
             builder
                 .Property(prop => prop.Duration)
-                .HasConversion<byte>()
                 .IsRequired();
             builder
                 .Property(prop => prop.Phone)
