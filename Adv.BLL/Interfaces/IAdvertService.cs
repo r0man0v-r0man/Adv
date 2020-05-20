@@ -9,6 +9,12 @@ namespace Adv.BLL.Interfaces
 {
     public interface IAdvertService
     {
+        /// <summary>
+        /// Создание объявления квартира-сдать
+        /// </summary>
+        /// <param name="flatRentDto"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         Task<FlatRentDto> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct);
     }
 }

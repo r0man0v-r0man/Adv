@@ -21,12 +21,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             
         }
-        /// <summary>
-        /// создание объявления квартира-сдать
-        /// </summary>
-        /// <param name="flatRent"></param>
-        /// <param name="ct"></param>
-        /// <returns>объявление</returns>
+
         public async Task<FlatRent> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct)
         {
             using var context = contextFactory.GetAdvContext();

@@ -23,7 +23,7 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// фотографии объявления
         /// </summary>
-        public List<ImageDTO> Images { get; set; }
+        public List<ImageDto> Images { get; set; }
         /// <summary>
         /// адрес объявления
         /// </summary>
@@ -83,9 +83,12 @@ namespace Adv.BLL.DTO.Adverts
 
         public FlatRentDto()
         {
-            Images = new List<ImageDTO>();
+            Images = new List<ImageDto>();
         }
-
+        /// <summary>
+        /// DTO -> DAL
+        /// </summary>
+        /// <param name="dto"></param>
         public static implicit operator FlatRent(FlatRentDto dto) => new FlatRent()
         {
             Id = dto.Id,
@@ -106,6 +109,31 @@ namespace Adv.BLL.DTO.Adverts
             Duration = dto.Duration,
             Phone = dto.Phone,
             Description = dto.Description
+        };
+        /// <summary>
+        /// DAL -> DTO
+        /// </summary>
+        /// <param name="dal"></param>
+        public static implicit operator FlatRentDto(FlatRent dal) => new FlatRentDto
+        {
+            Id = dal.Id,
+            UserId = dal.AppUserId,
+            IsActive = dal.IsActive,
+            Images = dal.Images.Select(imgDal => (ImageDto) imgDal).ToList(),
+            Address = dal.Address,
+            Floor = dal.Floor,
+            AllFloor = dal.AllFloor,
+            Rooms = dal.Rooms,
+            Balcony = dal.Balcony,
+            Furniture = dal.Furniture,
+            Refrigerator = dal.Refrigerator,
+            MicrowaveOven = dal.MicrowaveOven,
+            Internet = dal.Internet,
+            WashingMachine = dal.WashingMachine,
+            Price = dal.Price,
+            Duration = dal.Duration,
+            Phone = dal.Phone,
+            Description = dal.Description
         };
     }
 }
