@@ -20,8 +20,7 @@ namespace Adv.BLL.Services
 
         public async Task<FlatRentDto> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct)
         {
-            var result = await advertRepository.CreateFlatRentAsync(flatRentDto, ct).ConfigureAwait(false);
-            return result;
+            return await advertRepository.CreateFlatRentAsync(flatRentDto, ct).ConfigureAwait(false);
         }
     }
 }

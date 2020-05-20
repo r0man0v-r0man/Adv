@@ -1,8 +1,8 @@
 ﻿using Adv.API.Models.Files;
 using Adv.BLL.DTO.Adverts;
+using Adv.BLL.DTO.Images;
 using System.Collections.Generic;
 using System.Linq;
-using Adv.BLL.DTO.Images;
 
 namespace Adv.API.Models.Adverts
 {
@@ -85,31 +85,54 @@ namespace Adv.API.Models.Adverts
         public string Description { get; set; }
 
         /// <summary>
-        /// конвертация в DTO объект
+        /// View -> DTO
         /// </summary>
         /// <param name="flatRentViewModel"></param>
-        public static implicit operator FlatRentDto(FlatRentViewModel flatRentViewModel) =>
-            new FlatRentDto
-            {
-                Id = flatRentViewModel.Id,
-                UserId = flatRentViewModel.UserId,
-                IsActive = flatRentViewModel.IsActive,
-                Images = flatRentViewModel.Images.Select(fileModel => (ImageDTO) fileModel).ToList(),
-                Address = flatRentViewModel.Address,
-                Floor = flatRentViewModel.Floor,
-                AllFloor = flatRentViewModel.AllFloor,
-                Rooms = flatRentViewModel.Rooms,
-                Balcony = flatRentViewModel.Balcony,
-                Furniture = flatRentViewModel.Furniture,
-                Refrigerator = flatRentViewModel.Refrigerator,
-                MicrowaveOven = flatRentViewModel.MicrowaveOven,
-                Internet = flatRentViewModel.Internet,
-                WashingMachine = flatRentViewModel.WashingMachine,
-                Price = flatRentViewModel.Price,
-                Duration = flatRentViewModel.Duration,
-                Phone = flatRentViewModel.Phone,
-                Description = flatRentViewModel.Description
-            };
-
+        public static implicit operator FlatRentDto(FlatRentViewModel flatRentViewModel) => new FlatRentDto
+        {
+            Id = flatRentViewModel.Id,
+            UserId = flatRentViewModel.UserId,
+            IsActive = flatRentViewModel.IsActive,
+            Images = flatRentViewModel.Images.Select(fileModel => (ImageDto)fileModel).ToList(),
+            Address = flatRentViewModel.Address,
+            Floor = flatRentViewModel.Floor,
+            AllFloor = flatRentViewModel.AllFloor,
+            Rooms = flatRentViewModel.Rooms,
+            Balcony = flatRentViewModel.Balcony,
+            Furniture = flatRentViewModel.Furniture,
+            Refrigerator = flatRentViewModel.Refrigerator,
+            MicrowaveOven = flatRentViewModel.MicrowaveOven,
+            Internet = flatRentViewModel.Internet,
+            WashingMachine = flatRentViewModel.WashingMachine,
+            Price = flatRentViewModel.Price,
+            Duration = flatRentViewModel.Duration,
+            Phone = flatRentViewModel.Phone,
+            Description = flatRentViewModel.Description
+        };
+        /// <summary>
+        /// DTO -> View
+        /// </summary>
+        /// <param name="dto"></param>
+        public static implicit operator FlatRentViewModel(FlatRentDto dto) => new FlatRentViewModel
+        {
+            Id = dto.Id,
+            UserId = dto.UserId,
+            IsActive = dto.IsActive,
+            Images = dto.Images.Select(imgDto => (FileModel) imgDto).ToList(),
+            Address = dto.Address,
+            Floor = dto.Floor,
+            AllFloor = dto.AllFloor,
+            Rooms = dto.Rooms,
+            Balcony = dto.Balcony,
+            Furniture = dto.Furniture,
+            Refrigerator = dto.Refrigerator,
+            MicrowaveOven = dto.MicrowaveOven,
+            Internet = dto.Internet,
+            WashingMachine = dto.WashingMachine,
+            Price = dto.Price,
+            Duration = dto.Duration,
+            Phone = dto.Phone,
+            Description = dto.Description
+        };
     }
 }

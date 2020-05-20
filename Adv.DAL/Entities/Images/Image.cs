@@ -25,6 +25,7 @@ namespace Adv.DAL.Entities.Images
         /// </summary>
         public long Size { get; set; }
 
+        public int FlatRentId { get; set; }
         public FlatRent FlatRent { get; set; }
     }
 }

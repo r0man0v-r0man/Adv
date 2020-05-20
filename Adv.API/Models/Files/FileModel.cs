@@ -16,14 +16,31 @@ namespace Adv.API.Models.Files
         /// HASH полученный при создании файла, необходим для удаления
         /// </summary>
         public string DeleteHash { get; set; }
-
-        public static implicit operator ImageDTO(FileModel fileModel) => new ImageDTO
+        /// <summary>
+        /// View -> DTO
+        /// </summary>
+        /// <param name="fileModel"></param>
+        public static implicit operator ImageDto(FileModel fileModel) => new ImageDto
         {
             Id = fileModel.Id,
             Uid = fileModel.Uid,
             Size = fileModel.Size,
             URL = fileModel.LinkProps.Download,
             DeleteHash = fileModel.DeleteHash
+        };
+
+        /// <summary>
+        /// DTO -> View
+        /// </summary>
+        /// <param name="dto"></param>
+        public static implicit operator FileModel(ImageDto dto) => new FileModel
+        {
+            Id = dto.Id,
+            Uid = dto.Uid,
+            Size = dto.Size,
+            LinkProps = dto.URL,
+            DeleteHash = dto.DeleteHash,
+            Name = dto.Uid
         };
     }
 }

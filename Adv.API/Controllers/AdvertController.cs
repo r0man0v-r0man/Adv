@@ -27,7 +27,8 @@ namespace Adv.API.Controllers
         {
             try
             {
-
+                FlatRentViewModel result = await _advertService.CreateFlatRentAsync(flatRentViewModel, ct).ConfigureAwait(false);
+                return CreatedAtAction(nameof(AddFlatRent),result);
             }
             catch (Exception e)
             {
