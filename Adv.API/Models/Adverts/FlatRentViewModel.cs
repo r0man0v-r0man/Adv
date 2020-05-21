@@ -132,7 +132,9 @@ namespace Adv.API.Models.Adverts
             Price = dto.Price,
             Duration = dto.Duration,
             Phone = dto.Phone,
-            Description = dto.Description
+            Description = dto.Description,
+            Created = dto.Created,
+            LastModified = dto.LastModified
         };
     }
 }

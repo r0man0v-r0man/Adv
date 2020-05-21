@@ -133,7 +133,9 @@ namespace Adv.BLL.DTO.Adverts
             Price = dal.Price,
             Duration = dal.Duration,
             Phone = dal.Phone,
-            Description = dal.Description
+            Description = dal.Description,
+            Created = dal.Created,
+            LastModified = dal.LastModified
         };
     }
 }
