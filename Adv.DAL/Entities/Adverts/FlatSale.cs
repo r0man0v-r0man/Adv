@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Adv.BLL.DTO.Images;
-using Adv.DAL.Entities.Adverts;
+using Adv.DAL.Entities.Common;
 using Adv.DAL.Entities.Images;
 
-namespace Adv.BLL.DTO.Adverts
+namespace Adv.DAL.Entities.Adverts
 {
-    public class FlatSaleDto : Common.AuditableEntity
+    public class FlatSale : AuditableEntity
     {
         /// <summary>
-        /// номер объявления
+        /// уникальный номер объявления
         /// </summary>
         public int Id { get; set; }
         /// <summary>
         /// создатель объявления
         /// </summary>
-        public string UserId { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
         /// <summary>
         /// активность объявления
         /// </summary>
@@ -25,7 +24,7 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// фотографии объявления
         /// </summary>
-        public List<ImageDto> Images { get; set; }
+        public List<Image> Images { get; set; }
         /// <summary>
         /// адрес объявления
         /// </summary>
@@ -74,33 +73,5 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-
-        public FlatSaleDto()
-        {
-            Images = new List<ImageDto>();
-        }
-        /// <summary>
-        /// DTO -> DAL
-        /// </summary>
-        /// <param name="dto"></param>
-        public static implicit operator FlatSale(FlatSaleDto dto) => new FlatSale
-        {
-            Id = dto.Id,
-            AppUserId = dto.UserId,
-            IsActive = dto.IsActive,
-            Images = dto.Images.Select(img => (Image) img).ToList(),
-            Address = dto.Address,
-            Floor = dto.Floor,
-            AllFloor = dto.AllFloor,
-            Rooms = dto.Rooms,
-            FlatArea = dto.FlatArea,
-            FlatLiveArea = dto.FlatLiveArea,
-            KitchenArea = dto.KitchenArea,
-            Balcony = dto.Balcony,
-            Toilet = dto.Toilet,
-            Price = dto.Price,
-            Phone = dto.Phone,
-            Description = dto.Description
-        };
     }
 }

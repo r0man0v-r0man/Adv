@@ -81,10 +81,6 @@ namespace Adv.BLL.DTO.Adverts
         /// </summary>
         public string Description { get; set; }
 
-        public FlatRentDto()
-        {
-            Images = new List<ImageDto>();
-        }
         /// <summary>
         /// DTO -> DAL
         /// </summary>
