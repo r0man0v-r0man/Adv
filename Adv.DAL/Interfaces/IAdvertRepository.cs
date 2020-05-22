@@ -16,5 +16,12 @@ namespace Adv.DAL.Interfaces
         /// <param name="ct"></param>
         /// <returns>объявление</returns>
         Task<FlatRent> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct);
+        /// <summary>
+        /// создание объявления квартира-продать
+        /// </summary>
+        /// <param name="flatRent"></param>
+        /// <param name="ct"></param>
+        /// <returns>объявление</returns>
+        Task<FlatSale> CreateFlatSaleAsync(FlatSale flatSale, CancellationToken ct);
     }
 }

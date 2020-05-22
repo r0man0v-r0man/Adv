@@ -102,5 +102,30 @@ namespace Adv.BLL.DTO.Adverts
             Phone = dto.Phone,
             Description = dto.Description
         };
+        /// <summary>
+        /// DAL -> DTO
+        /// </summary>
+        /// <param name="dal"></param>
+        public static implicit operator FlatSaleDto(FlatSale dal) => new FlatSaleDto
+        {
+            Id = dal.Id,
+            UserId = dal.AppUserId,
+            IsActive = dal.IsActive,
+            Images = dal.Images.Select(img => (ImageDto) img).ToList(),
+            Address = dal.Address,
+            Floor = dal.Floor,
+            AllFloor = dal.AllFloor,
+            Rooms = dal.Rooms,
+            FlatArea = dal.FlatArea,
+            FlatLiveArea = dal.FlatLiveArea,
+            KitchenArea = dal.KitchenArea,
+            Balcony = dal.Balcony,
+            Toilet = dal.Toilet,
+            Price = dal.Price,
+            Phone = dal.Phone,
+            Description = dal.Description,
+            Created = dal.Created,
+            LastModified = dal.LastModified
+        };
     }
 }

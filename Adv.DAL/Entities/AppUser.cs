@@ -10,5 +10,9 @@ namespace Adv.DAL.Entities
         /// объявления квартира сдать
         /// </summary>
         public List<FlatRent> FlatRents { get; set; }
+        /// <summary>
+        /// объявления квартира продать
+        /// </summary>
+        public List<FlatSale> FlatSales { get; set; }
     }
 }

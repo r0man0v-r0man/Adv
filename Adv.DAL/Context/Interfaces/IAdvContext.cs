@@ -10,5 +10,6 @@ namespace Adv.DAL.Context.Interfaces
     public interface IAdvContext : IBaseContext
     {
         DbSet<FlatRent> FlatRents { get; set; }
+        DbSet<FlatSale> FlatSales { get; set; }
     }
 }

@@ -17,10 +17,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             this.contextFactory = contextFactory;
         }
-        public void Dispose()
-        {
-            
-        }
+        public void Dispose(){ }
 
         public async Task<FlatRent> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct)
         {
@@ -30,5 +27,12 @@ namespace Adv.DAL.Interfaces.Implementations
             return result >= 0 ? flatRent : throw new BadCreateException("Мы не смогли создать объявление");
         }
 
+        public async Task<FlatSale> CreateFlatSaleAsync(FlatSale flatSale, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
+            await context.FlatSales.AddAsync(flatSale, ct).ConfigureAwait(false);
+            var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
+            return result >= 0 ? flatSale : throw new BadCreateException("Мы не смогли создать объявление");
+        }
     }
 }

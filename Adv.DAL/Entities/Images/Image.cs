@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Adv.DAL.Entities.Adverts;
+﻿
+using Adv.DAL.Entities.Common;
 
 namespace Adv.DAL.Entities.Images
 {
@@ -24,11 +22,9 @@ namespace Adv.DAL.Entities.Images
         /// размер файла
         /// </summary>
         public long Size { get; set; }
-
-        public int FlatRentId { get; set; }
-        public FlatRent FlatRent { get; set; }
-
-        public int FlatSaleId { get; set; }
-        public FlatSale FlatSale { get; set; }
+        /// <summary>
+        /// Объявление
+        /// </summary>
+        public BaseAdvert BaseAdvert { get; set; }
     }
 }

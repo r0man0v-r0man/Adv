@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class initializeAdv9 : Migration
+    public partial class baseAdvertInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -153,7 +153,7 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FlatRents",
+                name: "BaseAdvert",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -163,25 +163,43 @@ namespace Adv.DAL.Migrations
                     AppUserId = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
                     Address = table.Column<string>(nullable: false),
-                    Floor = table.Column<int>(nullable: false),
-                    AllFloor = table.Column<int>(nullable: false),
-                    Rooms = table.Column<byte>(nullable: false),
-                    Balcony = table.Column<byte>(nullable: false),
-                    Furniture = table.Column<bool>(nullable: false),
-                    Refrigerator = table.Column<bool>(nullable: false),
-                    MicrowaveOven = table.Column<bool>(nullable: false),
-                    Internet = table.Column<bool>(nullable: false),
-                    WashingMachine = table.Column<bool>(nullable: false),
-                    Price = table.Column<decimal>(type: "money", nullable: false),
-                    Duration = table.Column<byte>(nullable: false),
-                    Phone = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Discriminator = table.Column<string>(nullable: false),
+                    Floor = table.Column<int>(nullable: true),
+                    AllFloor = table.Column<int>(nullable: true),
+                    Rooms = table.Column<byte>(nullable: true),
+                    Balcony = table.Column<byte>(nullable: true),
+                    Furniture = table.Column<bool>(nullable: true),
+                    Refrigerator = table.Column<bool>(nullable: true),
+                    MicrowaveOven = table.Column<bool>(nullable: true),
+                    Internet = table.Column<bool>(nullable: true),
+                    WashingMachine = table.Column<bool>(nullable: true),
+                    Price = table.Column<decimal>(type: "money", nullable: true),
+                    Duration = table.Column<byte>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    FlatSale_Floor = table.Column<int>(nullable: true),
+                    FlatSale_AllFloor = table.Column<int>(nullable: true),
+                    FlatSale_Rooms = table.Column<byte>(nullable: true),
+                    FlatArea = table.Column<int>(nullable: true),
+                    FlatLiveArea = table.Column<int>(nullable: true),
+                    KitchenArea = table.Column<int>(nullable: true),
+                    FlatSale_Balcony = table.Column<byte>(nullable: true),
+                    Toilet = table.Column<byte>(nullable: true),
+                    FlatSale_Price = table.Column<decimal>(type: "money", nullable: true),
+                    FlatSale_Phone = table.Column<string>(nullable: true),
+                    FlatSale_Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FlatRents", x => x.Id);
+                    table.PrimaryKey("PK_BaseAdvert", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FlatRents_AspNetUsers_AppUserId",
+                        name: "FK_BaseAdvert_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BaseAdvert_AspNetUsers_AppUserId1",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -198,17 +216,17 @@ namespace Adv.DAL.Migrations
                     URL = table.Column<string>(nullable: true),
                     Uid = table.Column<string>(nullable: true),
                     Size = table.Column<long>(nullable: false),
-                    FlatRentId = table.Column<int>(nullable: false)
+                    BaseAdvertId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Image", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_FlatRents_FlatRentId",
-                        column: x => x.FlatRentId,
-                        principalTable: "FlatRents",
+                        name: "FK_Image_BaseAdvert_BaseAdvertId",
+                        column: x => x.BaseAdvertId,
+                        principalTable: "BaseAdvert",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -251,14 +269,19 @@ namespace Adv.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FlatRents_AppUserId",
-                table: "FlatRents",
+                name: "IX_BaseAdvert_AppUserId",
+                table: "BaseAdvert",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_FlatRentId",
+                name: "IX_BaseAdvert_AppUserId1",
+                table: "BaseAdvert",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_BaseAdvertId",
                 table: "Image",
-                column: "FlatRentId");
+                column: "BaseAdvertId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -285,7 +308,7 @@ namespace Adv.DAL.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "FlatRents");
+                name: "BaseAdvert");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

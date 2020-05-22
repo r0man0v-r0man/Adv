@@ -13,17 +13,16 @@ namespace Adv.DAL.Context
     // IdentityDbCOntext contains all the AppUser tables
     public class AdvContext : IdentityDbContext<AppUser>, IAdvContext
     {
-        //
         public DbSet<FlatRent> FlatRents { get; set; }
+        public DbSet<FlatSale> FlatSales { get; set; }
 
-        public AdvContext(DbContextOptions<AdvContext> options) : base (options)
-        {
+        public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 
-        }
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder?.ApplyConfiguration(new FlatSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new FlatRentConfiguration());
+            modelBuilder?.ApplyConfiguration(new ImageConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
