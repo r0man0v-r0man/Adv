@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Adverts\UpdateModels\" />
+    <Folder Include="Models\Enums\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Adv.API.Models.Files;
+using Adv.BLL.DTO.Adverts;
+using Adv.BLL.DTO.Images;
 
 namespace Adv.API.Models.Adverts
 {
@@ -72,5 +74,53 @@ namespace Adv.API.Models.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// View -> DTO
+        /// </summary>
+        /// <param name="view"></param>
+        public static implicit operator FlatSaleDto(FlatSaleViewModel view) => new FlatSaleDto
+        {
+            Id = view.Id,
+            UserId = view.UserId,
+            IsActive = view.IsActive,
+            Images = view.Images.Select(img => (ImageDto) img).ToList(),
+            Address = view.Address,
+            Floor = view.Floor,
+            AllFloor = view.AllFloor,
+            Rooms = view.Rooms,
+            FlatArea = view.FlatArea,
+            FlatLiveArea = view.FlatLiveArea,
+            KitchenArea = view.KitchenArea,
+            Balcony = view.Balcony,
+            Toilet = view.Toilet,
+            Price = view.Price,
+            Phone = view.Phone,
+            Description = view.Description
+        };
+        /// <summary>
+        /// DTO -> View
+        /// </summary>
+        /// <param name="dto"></param>
+        public static implicit operator FlatSaleViewModel(FlatSaleDto dto) => new FlatSaleViewModel
+        {
+            Id = dto.Id,
+            UserId = dto.UserId,
+            IsActive = dto.IsActive,
+            Images = dto.Images.Select(imgDto => (FileModel) imgDto).ToList(),
+            Address = dto.Address,
+            Floor = dto.Floor,
+            AllFloor = dto.AllFloor,
+            Rooms = dto.Rooms,
+            FlatArea = dto.FlatArea,
+            FlatLiveArea = dto.FlatLiveArea,
+            KitchenArea = dto.KitchenArea,
+            Balcony = dto.Balcony,
+            Toilet = dto.Toilet,
+            Price = dto.Price,
+            Phone = dto.Phone,
+            Description = dto.Description,
+            Created = dto.Created,
+            LastModified = dto.LastModified
+        };
     }
 }

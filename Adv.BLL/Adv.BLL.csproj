@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="DTO\Adverts\Update\" />
+    <Folder Include="DTO\Enums\" />
   </ItemGroup>
 
 </Project>
