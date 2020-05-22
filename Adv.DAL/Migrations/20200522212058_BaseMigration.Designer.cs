@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Adv.DAL.Migrations
 {
     [DbContext(typeof(AdvContext))]
-    [Migration("20200522203634_baseAdvertInit")]
-    partial class baseAdvertInit
+    [Migration("20200522212058_BaseMigration")]
+    partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,142 @@ namespace Adv.DAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AllFloor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Balcony")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Duration")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Furniture")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Internet")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("MicrowaveOven")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.Property<bool>("Refrigerator")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Rooms")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("WashingMachine")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("FlatRents");
+                });
+
+            modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AllFloor")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Balcony")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FlatArea")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlatLiveArea")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Floor")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("KitchenArea")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.Property<byte>("Rooms")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("Toilet")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("FlatSales");
+                });
 
             modelBuilder.Entity("Adv.DAL.Entities.AppUser", b =>
                 {
@@ -86,40 +222,6 @@ namespace Adv.DAL.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Adv.DAL.Entities.Common.BaseAdvert", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BaseAdvert");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("BaseAdvert");
-                });
-
             modelBuilder.Entity("Adv.DAL.Entities.Images.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -127,11 +229,14 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BaseAdvertId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DeleteHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FlatRentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FlatSaleId")
+                        .HasColumnType("int");
 
                     b.Property<long>("Size")
                         .HasColumnType("bigint");
@@ -144,7 +249,9 @@ namespace Adv.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BaseAdvertId");
+                    b.HasIndex("FlatRentId");
+
+                    b.HasIndex("FlatSaleId");
 
                     b.ToTable("Image");
                 });
@@ -282,111 +389,27 @@ namespace Adv.DAL.Migrations
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
                 {
-                    b.HasBaseType("Adv.DAL.Entities.Common.BaseAdvert");
-
-                    b.Property<int>("AllFloor")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("Balcony")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte>("Duration")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("Floor")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Furniture")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("Internet")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("MicrowaveOven")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
-
-                    b.Property<bool>("Refrigerator")
-                        .HasColumnType("bit");
-
-                    b.Property<byte>("Rooms")
-                        .HasColumnType("tinyint");
-
-                    b.Property<bool>("WashingMachine")
-                        .HasColumnType("bit");
-
-                    b.HasIndex("AppUserId");
-
-                    b.HasDiscriminator().HasValue("FlatRent");
+                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
+                        .WithMany("FlatRents")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatSale", b =>
                 {
-                    b.HasBaseType("Adv.DAL.Entities.Common.BaseAdvert");
-
-                    b.Property<int>("AllFloor")
-                        .HasColumnName("FlatSale_AllFloor")
-                        .HasColumnType("int");
-
-                    b.Property<byte>("Balcony")
-                        .HasColumnName("FlatSale_Balcony")
-                        .HasColumnType("tinyint");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnName("FlatSale_Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FlatArea")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlatLiveArea")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Floor")
-                        .HasColumnName("FlatSale_Floor")
-                        .HasColumnType("int");
-
-                    b.Property<int>("KitchenArea")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnName("FlatSale_Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnName("FlatSale_Price")
-                        .HasColumnType("money");
-
-                    b.Property<byte>("Rooms")
-                        .HasColumnName("FlatSale_Rooms")
-                        .HasColumnType("tinyint");
-
-                    b.Property<byte>("Toilet")
-                        .HasColumnType("tinyint");
-
-                    b.HasIndex("AppUserId")
-                        .HasName("IX_BaseAdvert_AppUserId1");
-
-                    b.HasDiscriminator().HasValue("FlatSale");
+                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
+                        .WithMany("FlatSales")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Images.Image", b =>
                 {
-                    b.HasOne("Adv.DAL.Entities.Common.BaseAdvert", "BaseAdvert")
+                    b.HasOne("Adv.DAL.Entities.Adverts.FlatRent", "FlatRent")
                         .WithMany("Images")
-                        .HasForeignKey("BaseAdvertId");
+                        .HasForeignKey("FlatRentId");
+
+                    b.HasOne("Adv.DAL.Entities.Adverts.FlatSale", "FlatSale")
+                        .WithMany("Images")
+                        .HasForeignKey("FlatSaleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -438,21 +461,6 @@ namespace Adv.DAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
-                {
-                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
-                        .WithMany("FlatRents")
-                        .HasForeignKey("AppUserId");
-                });
-
-            modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatSale", b =>
-                {
-                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
-                        .WithMany("FlatSales")
-                        .HasForeignKey("AppUserId")
-                        .HasConstraintName("FK_BaseAdvert_AspNetUsers_AppUserId1");
                 });
 #pragma warning restore 612, 618
         }

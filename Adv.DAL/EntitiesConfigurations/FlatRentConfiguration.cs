@@ -22,6 +22,10 @@ namespace Adv.DAL.EntitiesConfigurations
                 .Property(prop => prop.IsActive)
                 .IsRequired();
             builder
+                .HasMany(prop => prop.Images)
+                .WithOne(prop => prop.FlatRent)
+                .HasForeignKey(prop => prop.FlatRentId);
+            builder
                 .Property(prop => prop.Address)
                 .IsRequired();
             builder

@@ -22,7 +22,6 @@ namespace Adv.DAL.Context
         {
             modelBuilder?.ApplyConfiguration(new FlatSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new FlatRentConfiguration());
-            modelBuilder?.ApplyConfiguration(new ImageConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
