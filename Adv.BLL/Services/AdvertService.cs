@@ -28,9 +28,14 @@ namespace Adv.BLL.Services
             return await advertRepository.CreateFlatSaleAsync(flatSaleDto, ct).ConfigureAwait(false);
         }
 
-        public async Task<HouseRentDTO> CreateHouseRentAsync(HouseRentDTO houseRentDto, CancellationToken ct)
+        public async Task<HouseRentDto> CreateHouseRentAsync(HouseRentDto houseRentDto, CancellationToken ct)
         {
             return await advertRepository.CreateHouseRentAsync(houseRentDto, ct).ConfigureAwait(false);
+        }
+
+        public async Task<HouseSaleDto> CreateHouseSaleAsync(HouseSaleDto houseSaleDto, CancellationToken ct)
+        {
+            return await advertRepository.CreateHouseSaleAsync(houseSaleDto, ct).ConfigureAwait(false);
         }
     }
 }

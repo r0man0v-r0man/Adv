@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Adv.API.Models.Files;
+using Adv.BLL.DTO.Adverts;
+using Adv.BLL.DTO.Images;
 
 namespace Adv.API.Models.Adverts
 {
@@ -84,5 +86,59 @@ namespace Adv.API.Models.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// View -> DTO
+        /// </summary>
+        /// <param name="view"></param>
+        public static implicit operator HouseSaleDto(HouseSaleViewModel view) => new HouseSaleDto
+        {
+            Id = view.Id,
+            IsActive = view.IsActive,
+            UserId = view.UserId,
+            Images = view.Images.Select(img => (ImageDto) img).ToList(),
+            Address = view.Address,
+            HouseArea = view.HouseArea,
+            HouseLiveArea = view.HouseLiveArea,
+            HousePlotArea = view.HousePlotArea,
+            KitchenArea = view.KitchenArea,
+            Heating = view.Heating,
+            Water = view.Water,
+            Gas = view.Gas,
+            Sewage = view.Sewage,
+            Electricity = view.Electricity,
+            Bathhouse = view.Bathhouse,
+            Garage = view.Garage,
+            Price = view.Price,
+            Phone = view.Phone,
+            Description = view.Description
+        };
+        /// <summary>
+        /// DTO -> View
+        /// </summary>
+        /// <param name="dto"></param>
+        public static implicit operator HouseSaleViewModel(HouseSaleDto dto) => new HouseSaleViewModel
+        {
+            Id = dto.Id,
+            IsActive = dto.IsActive,
+            UserId = dto.UserId,
+            Images = dto.Images.Select(img => (FileModel) img).ToList(),
+            Address = dto.Address,
+            HouseArea = dto.HouseArea,
+            HouseLiveArea = dto.HouseLiveArea,
+            HousePlotArea = dto.HousePlotArea,
+            KitchenArea = dto.KitchenArea,
+            Heating = dto.Heating,
+            Water = dto.Water,
+            Gas = dto.Gas,
+            Sewage = dto.Sewage,
+            Electricity = dto.Electricity,
+            Bathhouse = dto.Bathhouse,
+            Garage = dto.Garage,
+            Price = dto.Price,
+            Phone = dto.Phone,
+            Description = dto.Description,
+            Created = dto.Created,
+            LastModified = dto.LastModified
+        };
     }
 }

@@ -8,7 +8,7 @@ using Adv.DAL.Entities.Images;
 
 namespace Adv.BLL.DTO.Adverts
 {
-    public class HouseRentDTO : Common.AuditableEntity
+    public class HouseRentDto : Common.AuditableEntity
     {
         /// <summary>
         /// номер объявления
@@ -82,7 +82,7 @@ namespace Adv.BLL.DTO.Adverts
         ///  DTO -> DAL
         /// </summary>
         /// <param name="dto"></param>
-        public static implicit operator HouseRent(HouseRentDTO dto) => new HouseRent
+        public static implicit operator HouseRent(HouseRentDto dto) => new HouseRent
         {
             Id = dto.Id,
             IsActive = dto.IsActive,
@@ -107,7 +107,7 @@ namespace Adv.BLL.DTO.Adverts
         /// DAL -> DTO
         /// </summary>
         /// <param name="dal"></param>
-        public static implicit operator HouseRentDTO(HouseRent dal) => new HouseRentDTO
+        public static implicit operator HouseRentDto(HouseRent dal) => new HouseRentDto
         {
             Id = dal.Id,
             IsActive = dal.IsActive,

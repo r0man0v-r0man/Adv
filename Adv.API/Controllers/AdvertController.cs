@@ -57,7 +57,16 @@ namespace Adv.API.Controllers
         public async Task<ActionResult<HouseSaleViewModel>> AddHouseSale(HouseSaleViewModel houseSaleViewModel,
             CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+                HouseSaleViewModel result = await _advertService.CreateHouseSaleAsync(houseSaleViewModel, ct).ConfigureAwait(false);
+                return CreatedAtAction(nameof(AddHouseSale), result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
         }
         [HttpPost("addHouseRent")]
         [Authorize]

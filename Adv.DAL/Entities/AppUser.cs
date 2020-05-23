@@ -18,5 +18,9 @@ namespace Adv.DAL.Entities
         /// объявления дом сдать
         /// </summary>
         public List<HouseRent> HouseRents { get; set; }
+        /// <summary>
+        /// объявления дом продать
+        /// </summary>
+        public List<HouseSale> HouseSales { get; set; }
     }
 }

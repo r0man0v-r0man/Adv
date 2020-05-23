@@ -23,11 +23,17 @@ namespace Adv.DAL.Entities.Images
         /// размер файла
         /// </summary>
         public long Size { get; set; }
+
         public int? FlatRentId { get; set; }
         public FlatRent FlatRent { get; set; }
+
         public int? FlatSaleId { get; set; }
         public FlatSale FlatSale { get; set; }
+
         public int? HouseRentId { get; set; }
         public HouseRent HouseRent { get; set; }
+
+        public int? HouseSaleId { get; set; }
+        public HouseSale HouseSale { get; set; }
     }
 }

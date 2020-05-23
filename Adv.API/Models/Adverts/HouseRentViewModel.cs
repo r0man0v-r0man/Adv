@@ -80,7 +80,7 @@ namespace Adv.API.Models.Adverts
         /// View -> DAL
         /// </summary>
         /// <param name="view"></param>
-        public static implicit operator HouseRentDTO(HouseRentViewModel view) => new HouseRentDTO
+        public static implicit operator HouseRentDto(HouseRentViewModel view) => new HouseRentDto
         {
             Id = view.Id,
             IsActive = view.IsActive,
@@ -104,7 +104,7 @@ namespace Adv.API.Models.Adverts
         /// DTO -> View
         /// </summary>
         /// <param name="dto"></param>
-        public static implicit operator HouseRentViewModel(HouseRentDTO dto) => new HouseRentViewModel
+        public static implicit operator HouseRentViewModel(HouseRentDto dto) => new HouseRentViewModel
         {
             Id = dto.Id,
             IsActive = dto.IsActive,
