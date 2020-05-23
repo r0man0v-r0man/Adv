@@ -22,5 +22,10 @@ namespace Adv.BLL.Services
         {
             return await advertRepository.CreateFlatRentAsync(flatRentDto, ct).ConfigureAwait(false);
         }
+
+        public async Task<FlatSaleDto> CreateFlatSaleAsync(FlatSaleDto flatSaleDto, CancellationToken ct)
+        {
+            return await advertRepository.CreateFlatSaleAsync(flatSaleDto, ct).ConfigureAwait(false);
+        }
     }
 }

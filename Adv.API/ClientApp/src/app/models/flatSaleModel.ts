@@ -17,4 +17,6 @@ export interface FlatSaleModel {
     price: number;
     phone: number;
     description: string;
+    created: Date;
+    lastModified: Date;
 }

@@ -21,4 +21,6 @@ export interface HouseSaleModel{
     price: number;
     phone: number;
     description: string;
+    created: Date;
+    lastModified: Date;
 }

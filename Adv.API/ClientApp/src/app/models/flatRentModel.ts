@@ -19,4 +19,7 @@ export interface FlatRentModel {
     duration: number;
     phone: string;
     description: string;
+    created: Date;
+    lastModified: Date;
+
 }

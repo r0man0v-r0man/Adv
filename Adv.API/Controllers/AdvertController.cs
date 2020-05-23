@@ -41,7 +41,16 @@ namespace Adv.API.Controllers
         public async Task<ActionResult<FlatSaleViewModel>> AddFlatSale(FlatSaleViewModel flatSaleViewModel,
             CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+                FlatSaleViewModel result = await _advertService.CreateFlatSaleAsync(flatSaleViewModel, ct).ConfigureAwait(false);
+                return CreatedAtAction(nameof(AddFlatSale), result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
         }
         [HttpPost("addHouseSale")]
         [Authorize]

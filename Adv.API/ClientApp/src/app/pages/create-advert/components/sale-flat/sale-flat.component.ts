@@ -83,7 +83,10 @@ export class SaleFlatComponent implements OnInit {
   /** создание объявления */
   submitForm(){
     const saleFlatModel: FlatSaleModel = { ...this.saleFlatForm.value }
-    this.advertService.addFlatSale(saleFlatModel);
+    this.advertService.addFlatSale(saleFlatModel).subscribe(advert => {
+      console.log(advert);
+      
+    })
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){

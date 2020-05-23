@@ -18,4 +18,6 @@ export interface HouseRentModel {
     duration: number;
     phone: number;
     description: string;
+    created: Date;
+    lastModified: Date;
 }
