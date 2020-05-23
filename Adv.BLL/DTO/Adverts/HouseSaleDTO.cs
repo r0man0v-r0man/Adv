@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Adv.BLL.DTO.Adverts
 {
-    class HouseSaleDTO
+    public class HouseSaleDTO : Common.AuditableEntity
     {
     }
 }

@@ -7,38 +7,29 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Adv.DAL.EntitiesConfigurations
 {
-    public class FlatRentConfiguration : IEntityTypeConfiguration<FlatRent>
+    public class HouseRentConfiguration : IEntityTypeConfiguration<HouseRent>
     {
-        public void Configure(EntityTypeBuilder<FlatRent> builder)
+        public void Configure(EntityTypeBuilder<HouseRent> builder)
         {
             builder
                 .Property(prop => prop.Id)
                 .IsRequired();
             builder
                 .HasOne(prop => prop.AppUser)
-                .WithMany(prop => prop.FlatRents)
+                .WithMany(prop => prop.HouseRents)
                 .HasForeignKey(prop => prop.AppUserId);
             builder
                 .Property(prop => prop.IsActive)
                 .IsRequired();
             builder
                 .HasMany(prop => prop.Images)
-                .WithOne(prop => prop.FlatRent)
-                .HasForeignKey(prop => prop.FlatRentId);
+                .WithOne(prop => prop.HouseRent)
+                .HasForeignKey(prop => prop.HouseRentId);
             builder
                 .Property(prop => prop.Address)
                 .IsRequired();
             builder
-                .Property(prop => prop.Floor)
-                .IsRequired();
-            builder
-                .Property(prop => prop.AllFloor)
-                .IsRequired();
-            builder
                 .Property(prop => prop.Rooms)
-                .IsRequired();
-            builder
-                .Property(prop => prop.Balcony)
                 .IsRequired();
             builder
                 .Property(prop => prop.Furniture)
@@ -54,6 +45,12 @@ namespace Adv.DAL.EntitiesConfigurations
                 .IsRequired();
             builder
                 .Property(prop => prop.WashingMachine)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Bathhouse)
+                .IsRequired();
+            builder
+                .Property(prop => prop.Garage)
                 .IsRequired();
             builder
                 .Property(prop => prop.Price)

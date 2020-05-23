@@ -155,6 +155,74 @@ namespace Adv.DAL.Migrations
                     b.ToTable("FlatSales");
                 });
 
+            modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseRent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Bathhouse")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Duration")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("Furniture")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Garage")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Internet")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("MicrowaveOven")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.Property<bool>("Refrigerator")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Rooms")
+                        .HasColumnType("tinyint");
+
+                    b.Property<bool>("WashingMachine")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("HouseRents");
+                });
+
             modelBuilder.Entity("Adv.DAL.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -236,6 +304,9 @@ namespace Adv.DAL.Migrations
                     b.Property<int?>("FlatSaleId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("HouseRentId")
+                        .HasColumnType("int");
+
                     b.Property<long>("Size")
                         .HasColumnType("bigint");
 
@@ -250,6 +321,8 @@ namespace Adv.DAL.Migrations
                     b.HasIndex("FlatRentId");
 
                     b.HasIndex("FlatSaleId");
+
+                    b.HasIndex("HouseRentId");
 
                     b.ToTable("Image");
                 });
@@ -399,6 +472,13 @@ namespace Adv.DAL.Migrations
                         .HasForeignKey("AppUserId");
                 });
 
+            modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseRent", b =>
+                {
+                    b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
+                        .WithMany("HouseRents")
+                        .HasForeignKey("AppUserId");
+                });
+
             modelBuilder.Entity("Adv.DAL.Entities.Images.Image", b =>
                 {
                     b.HasOne("Adv.DAL.Entities.Adverts.FlatRent", "FlatRent")
@@ -408,6 +488,10 @@ namespace Adv.DAL.Migrations
                     b.HasOne("Adv.DAL.Entities.Adverts.FlatSale", "FlatSale")
                         .WithMany("Images")
                         .HasForeignKey("FlatSaleId");
+
+                    b.HasOne("Adv.DAL.Entities.Adverts.HouseRent", "HouseRent")
+                        .WithMany("Images")
+                        .HasForeignKey("HouseRentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class BaseMigration : Migration
+    public partial class start : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -223,6 +223,41 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HouseRents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    Rooms = table.Column<byte>(nullable: false),
+                    Furniture = table.Column<bool>(nullable: false),
+                    Refrigerator = table.Column<bool>(nullable: false),
+                    MicrowaveOven = table.Column<bool>(nullable: false),
+                    Internet = table.Column<bool>(nullable: false),
+                    WashingMachine = table.Column<bool>(nullable: false),
+                    Bathhouse = table.Column<bool>(nullable: false),
+                    Garage = table.Column<bool>(nullable: false),
+                    Price = table.Column<decimal>(type: "money", nullable: false),
+                    Duration = table.Column<byte>(nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HouseRents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HouseRents_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Image",
                 columns: table => new
                 {
@@ -233,7 +268,8 @@ namespace Adv.DAL.Migrations
                     Uid = table.Column<string>(nullable: true),
                     Size = table.Column<long>(nullable: false),
                     FlatRentId = table.Column<int>(nullable: true),
-                    FlatSaleId = table.Column<int>(nullable: true)
+                    FlatSaleId = table.Column<int>(nullable: true),
+                    HouseRentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -248,6 +284,12 @@ namespace Adv.DAL.Migrations
                         name: "FK_Image_FlatSales_FlatSaleId",
                         column: x => x.FlatSaleId,
                         principalTable: "FlatSales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Image_HouseRents_HouseRentId",
+                        column: x => x.HouseRentId,
+                        principalTable: "HouseRents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -302,6 +344,11 @@ namespace Adv.DAL.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HouseRents_AppUserId",
+                table: "HouseRents",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Image_FlatRentId",
                 table: "Image",
                 column: "FlatRentId");
@@ -310,6 +357,11 @@ namespace Adv.DAL.Migrations
                 name: "IX_Image_FlatSaleId",
                 table: "Image",
                 column: "FlatSaleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_HouseRentId",
+                table: "Image",
+                column: "HouseRentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -340,6 +392,9 @@ namespace Adv.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "FlatSales");
+
+            migrationBuilder.DropTable(
+                name: "HouseRents");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

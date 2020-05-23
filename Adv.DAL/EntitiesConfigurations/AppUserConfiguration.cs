@@ -14,6 +14,12 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .HasMany(prop => prop.FlatRents)
                 .WithOne(prop => prop.AppUser);
+            builder
+                .HasMany(prop => prop.FlatSales)
+                .WithOne(prop => prop.AppUser);
+            builder
+                .HasMany(prop => prop.HouseRents)
+                .WithOne(prop => prop.AppUser);
         }
     }
 }

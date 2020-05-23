@@ -11,5 +11,6 @@ namespace Adv.DAL.Context.Interfaces
     {
         DbSet<FlatRent> FlatRents { get; set; }
         DbSet<FlatSale> FlatSales { get; set; }
+        DbSet<HouseRent> HouseRents { get; set; }
     }
 }

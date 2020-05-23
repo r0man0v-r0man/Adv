@@ -34,5 +34,13 @@ namespace Adv.DAL.Interfaces.Implementations
             var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
             return result >= 0 ? flatSale : throw new BadCreateException("Мы не смогли создать объявление");
         }
+
+        public async Task<HouseRent> CreateHouseRentAsync(HouseRent houseRent, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
+            await context.HouseRents.AddAsync(houseRent, ct).ConfigureAwait(false);
+            var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
+            return result >= 0 ? houseRent : throw new BadCreateException("Мы не смогли создать объявление");
+        }
     }
 }

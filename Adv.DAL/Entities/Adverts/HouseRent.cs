@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Adv.BLL.DTO.Images;
-using Adv.DAL.Entities.Adverts;
+using Adv.DAL.Entities.Common;
 using Adv.DAL.Entities.Images;
 
-namespace Adv.BLL.DTO.Adverts
+namespace Adv.DAL.Entities.Adverts
 {
-    public class HouseRentDTO : Common.AuditableEntity
+    public class HouseRent : AuditableEntity
     {
         /// <summary>
-        /// номер объявления
+        /// уникальный номер объявления
         /// </summary>
         public int Id { get; set; }
         /// <summary>
         /// создатель объявления
         /// </summary>
-        public string UserId { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
         /// <summary>
         /// активность объявления
         /// </summary>
@@ -25,7 +24,7 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// фотографии объявления
         /// </summary>
-        public List<ImageDto> Images { get; set; }
+        public List<Image> Images { get; set; }
         /// <summary>
         /// адрес объявления
         /// </summary>
@@ -78,56 +77,5 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        /// <summary>
-        ///  DTO -> DAL
-        /// </summary>
-        /// <param name="dto"></param>
-        public static implicit operator HouseRent(HouseRentDTO dto) => new HouseRent
-        {
-            Id = dto.Id,
-            IsActive = dto.IsActive,
-            AppUserId = dto.UserId,
-            Images = dto.Images.Select(img => (Image) img).ToList(),
-            Address = dto.Address,
-            Rooms = dto.Rooms,
-            Furniture = dto.Furniture,
-            Refrigerator = dto.Refrigerator,
-            MicrowaveOven = dto.MicrowaveOven,
-            Internet = dto.Internet,
-            WashingMachine = dto.WashingMachine,
-            Bathhouse = dto.Bathhouse,
-            Garage = dto.Garage,
-            Price = dto.Price,
-            Duration = dto.Duration,
-            Phone = dto.Phone,
-            Description = dto.Description
-        };
-
-        /// <summary>
-        /// DAL -> DTO
-        /// </summary>
-        /// <param name="dal"></param>
-        public static implicit operator HouseRentDTO(HouseRent dal) => new HouseRentDTO
-        {
-            Id = dal.Id,
-            IsActive = dal.IsActive,
-            UserId = dal.AppUserId,
-            Images = dal.Images.Select(img => (ImageDto) img).ToList(),
-            Address = dal.Address,
-            Rooms = dal.Rooms,
-            Furniture = dal.Furniture,
-            Refrigerator = dal.Refrigerator,
-            MicrowaveOven = dal.MicrowaveOven,
-            Internet = dal.Internet,
-            WashingMachine = dal.WashingMachine,
-            Bathhouse = dal.Bathhouse,
-            Garage = dal.Garage,
-            Price = dal.Price,
-            Duration = dal.Duration,
-            Phone = dal.Phone,
-            Description = dal.Description,
-            Created = dal.Created,
-            LastModified = dal.LastModified
-        };
     }
 }

@@ -15,6 +15,7 @@ namespace Adv.DAL.Context
     {
         public DbSet<FlatRent> FlatRents { get; set; }
         public DbSet<FlatSale> FlatSales { get; set; }
+        public DbSet<HouseRent> HouseRents { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 
@@ -22,6 +23,7 @@ namespace Adv.DAL.Context
         {
             modelBuilder?.ApplyConfiguration(new FlatSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new FlatRentConfiguration());
+            modelBuilder?.ApplyConfiguration(new HouseRentConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
             base.OnModelCreating(modelBuilder);
         }

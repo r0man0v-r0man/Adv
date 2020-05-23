@@ -27,5 +27,7 @@ namespace Adv.DAL.Entities.Images
         public FlatRent FlatRent { get; set; }
         public int? FlatSaleId { get; set; }
         public FlatSale FlatSale { get; set; }
+        public int? HouseRentId { get; set; }
+        public HouseRent HouseRent { get; set; }
     }
 }

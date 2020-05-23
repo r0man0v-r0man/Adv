@@ -75,10 +75,6 @@ namespace Adv.BLL.DTO.Adverts
         /// </summary>
         public string Description { get; set; }
 
-        public FlatSaleDto()
-        {
-            Images = new List<ImageDto>();
-        }
         /// <summary>
         /// DTO -> DAL
         /// </summary>

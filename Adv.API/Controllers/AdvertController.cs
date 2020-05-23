@@ -64,7 +64,16 @@ namespace Adv.API.Controllers
         public async Task<ActionResult<HouseRentViewModel>> AddHouseRent(HouseRentViewModel houseRentViewModel,
             CancellationToken ct = default)
         {
-            return Ok();
+            try
+            {
+                HouseRentViewModel result = await _advertService.CreateHouseRentAsync(houseRentViewModel, ct).ConfigureAwait(false);
+                return CreatedAtAction(nameof(AddHouseRent), result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
         }
     }
 }
