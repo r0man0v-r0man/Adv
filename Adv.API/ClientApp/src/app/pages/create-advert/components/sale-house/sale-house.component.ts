@@ -19,6 +19,7 @@ export class SaleHouseComponent implements OnInit{
   imageList : UploadFile[] = [];
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  userId: string;
   /** форма */
   saleHouseForm: FormGroup;
   address: string = '';
@@ -62,11 +63,12 @@ export class SaleHouseComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.currentUser.sub;
     this.initForm();
   }
   initForm(){
     this.saleHouseForm = this.formBuilder.group({
-      userId:[ this.authService.currentUser.sub,[Validators.required]],
+      userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
       images: [ this.images , [Validators.required]],
       address: [ null, [Validators.required]],
@@ -89,7 +91,8 @@ export class SaleHouseComponent implements OnInit{
   
   submitForm(){
     const advert: HouseSaleModel = { ...this.saleHouseForm.value }
-    this.advertService.addHouseSale(advert);
+    this.advertService.addHouseSale(advert).subscribe(response => { console.log(response);
+    })
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){

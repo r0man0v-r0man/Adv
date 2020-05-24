@@ -21,6 +21,7 @@ export class RentFlatComponent implements OnInit {
   /** фото к объявлению */
   images: UploadFile[] = [];
   showUploadList = { showPreviewIcon: false, showRemoveIcon: true };
+  userId: string;
   /** этаж */
   floor: number;
   /** этажей всего */
@@ -61,13 +62,14 @@ export class RentFlatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.authService.currentUser.sub
     this.initForm();
   }
   initForm(){
     this.setListOfBalcony();
     this.setDurations();
     this.flatRentForm = this.formBuilder.group({
-      userId:[ this.authService.currentUser.sub,[Validators.required]],
+      userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
       images: [ this.images, [Validators.required]],
       address: [ null, [Validators.required]],
