@@ -87,10 +87,7 @@ export class RentHouseComponent implements OnInit {
   }
   submitForm(){
     const rentHouseModel: HouseRentModel = { ...this.rentHouseForm.value }
-    this.advertService.addHouseRent(rentHouseModel).subscribe(response => {
-      console.log(response);
-      
-    })
+    this.advertService.addHouseRent(rentHouseModel);
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){

@@ -9,6 +9,7 @@ import { FlatSaleModel } from '../models/flatSaleModel';
 import { HouseSaleModel } from '../models/house-sale.model';
 import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,14 @@ export class AdvertService {
     this.baseUrl = this.injector.get('BASE_URL');
   }
   
-  /** переход на страницу с объявлением */
+  /** переход на страницу с объявлением квартира */
   private navigateToNewAdvert(id:number){
     this.router.navigate(['flats/', id])
   }
-
+  /** переход на страинцу с объявлением дом */
+  private navigateToNewHouseAdvert(id: number){
+    this.router.navigate(['house/', id]);
+  }
   /** показывает уведомление о создании объявления */
   private showUserSuccessNotification(){
     this.notificationService.success(
@@ -49,7 +53,11 @@ export class AdvertService {
   }
   /** создание объявления дом сдать */
   addHouseRent(advert: HouseRentModel){
-    return this.httpService.post<HouseRentModel>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders});
+    this.httpService.post<HouseRentModel>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: HouseRentModel)=>{
+        this.navigateToNewHouseAdvert(response?.id);
+        this.showUserSuccessNotification();
+      })).subscribe();
   }
   /** создание объявления дом продать */
   addHouseSale(advert: HouseSaleModel){
