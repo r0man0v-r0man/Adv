@@ -35,7 +35,7 @@ export class AdvertService {
   }
   
   /** переход на страницу с объявлением квартира */
-  private navigateToNewAdvert(id:number){
+  private navigateToNewFlatAdvert(id:number){
     this.router.navigate(['flats/', id])
   }
   /** переход на страинцу с объявлением дом */
@@ -61,15 +61,30 @@ export class AdvertService {
   }
   /** создание объявления дом продать */
   addHouseSale(advert: HouseSaleModel){
-    return this.httpService.post<HouseSaleModel>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders});
+    this.httpService.post<HouseSaleModel>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: HouseSaleModel)=>{
+        this.navigateToNewHouseAdvert(response?.id);
+        this.showUserSuccessNotification();
+      })
+    ).subscribe();
   }
   /** создать объявление квартира продать */
   addFlatSale(advert: FlatSaleModel){
-    return this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders});
+    this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response:FlatSaleModel)=>{
+        this.navigateToNewFlatAdvert(response?.id);
+        this.showUserSuccessNotification();
+      })
+    ).subscribe();
   }
   /** создать объявление квартира сдать */
   addFlatRent(advert: FlatRentModel){
-    return this.httpService.post<FlatRentModel>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders});
+    this.httpService.post<FlatRentModel>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: FlatRentModel)=>{
+        this.navigateToNewFlatAdvert(response?.id);
+        this.showUserSuccessNotification();
+      })
+    )
   }
   /** удалить объявление */
   delete(id: number){

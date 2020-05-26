@@ -19,7 +19,8 @@ export class SaleFlatComponent implements OnInit {
   saleFlatForm: FormGroup;
   /** фото к объявлению */
   images: UploadFile[] = [];
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  imageList: UploadFile[] = [];
+  /** идентификатор пользователя */
   userId: string;
   /** этаж */
   floor: number;
@@ -85,14 +86,12 @@ export class SaleFlatComponent implements OnInit {
   /** создание объявления */
   submitForm(){
     const saleFlatModel: FlatSaleModel = { ...this.saleFlatForm.value }
-    this.advertService.addFlatSale(saleFlatModel).subscribe(advert => {
-      console.log(advert);
-      
-    })
+    this.advertService.addFlatSale(saleFlatModel);
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
+      this.imageList = [...this.imageService.imageList];
       this.images = response;
       this.setSaleFlatFormControlValue('images',this.images);
       this.cd.detectChanges();

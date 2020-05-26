@@ -20,7 +20,7 @@ export class RentHouseComponent implements OnInit {
   rentHouseForm: FormGroup;
   /** фото к объявлению */
   images: UploadFile[] = [];
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  imageList: UploadFile[] = [];
   userId: string;
   /** адрес */
   address: string = '';
@@ -41,7 +41,7 @@ export class RentHouseComponent implements OnInit {
   /** гараж */
   garage: boolean = false;
   /** цена */
-  price: number = 30000;
+  price: number = 300;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
   /** тип аренды */
@@ -92,6 +92,7 @@ export class RentHouseComponent implements OnInit {
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
+      this.imageList = [...this.imageService.imageList];
       this.images = response;
       this.setHouseRentFormControlValue('images',this.images);
       this.cd.detectChanges();

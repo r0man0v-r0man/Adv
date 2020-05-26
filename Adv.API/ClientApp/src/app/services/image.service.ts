@@ -21,6 +21,8 @@ export class ImageService {
   imageList: UploadFile[] = [];
   /** для формы */
   images: UploadFile[] = [];
+  /** настройки списка загруженных картинок */
+  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
   
   constructor(
     private authService: AuthService,

@@ -18,7 +18,7 @@ export class SaleHouseComponent implements OnInit{
   /** фото к объявлению */
   imageList : UploadFile[] = [];
   images: UploadFile[] = [];
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true }
+  /** идентификатор пользователя */
   userId: string;
   /** форма */
   saleHouseForm: FormGroup;
@@ -91,12 +91,12 @@ export class SaleHouseComponent implements OnInit{
   
   submitForm(){
     const advert: HouseSaleModel = { ...this.saleHouseForm.value }
-    this.advertService.addHouseSale(advert).subscribe(response => { console.log(response);
-    })
+    this.advertService.addHouseSale(advert);
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
+      this.imageList = [...this.imageService.imageList];
       this.images = response;
       this.setHouseSaleFormControlValue('images',this.images);
       this.cd.detectChanges();

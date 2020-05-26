@@ -20,7 +20,8 @@ export class RentFlatComponent implements OnInit {
   flatRentForm: FormGroup;
   /** фото к объявлению */
   images: UploadFile[] = [];
-  showUploadList = { showPreviewIcon: false, showRemoveIcon: true };
+  imageList: UploadFile[] = [];
+  /** идентификатор пользователя */
   userId: string;
   /** этаж */
   floor: number;
@@ -42,7 +43,7 @@ export class RentFlatComponent implements OnInit {
   /** стиральная машина */
   washingMachine: boolean = false;
   /** цена */
-  price: number = 30000;
+  price: number = 300;
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
   /** тип аренды */
@@ -92,14 +93,12 @@ export class RentFlatComponent implements OnInit {
   /** создание объявления */
   submitForm(){
     const rentFlatModel: FlatRentModel = { ...this.flatRentForm.value }
-    this.advertService.addFlatRent(rentFlatModel).subscribe(response => {
-      console.log(response);
-      
-    })
+    this.advertService.addFlatRent(rentFlatModel);
   }
   /** загрузка картинки */
   onUploadChange(info:  UploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
+      this.imageList = [...this.imageService.imageList];
       this.images = response;
       this.setRentFlatFormControlValue('images',this.images);
       this.cd.detectChanges();
