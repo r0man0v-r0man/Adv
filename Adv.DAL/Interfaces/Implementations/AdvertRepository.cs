@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -49,6 +50,13 @@ namespace Adv.DAL.Interfaces.Implementations
             await context.HouseSales.AddAsync(houseSale, ct).ConfigureAwait(false);
             var result = await context.SaveChangesAsync(ct).ConfigureAwait(false);
             return result >= 0 ? houseSale : throw new BadCreateException("Мы не смогли создать объявление");
+        }
+
+        public async Task<FlatRent> GetFlatRentAsync(int id, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
+            var result = await context.FlatRents.AsNoTracking().FirstOrDefaultAsync(flat => flat.Id == id, ct).ConfigureAwait(false);
+            return result ?? throw new NotFoundAdvertException("Такого объявления мы не нашли");
         }
     }
 }

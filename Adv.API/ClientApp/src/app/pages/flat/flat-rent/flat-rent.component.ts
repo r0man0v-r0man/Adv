@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { response } from 'express';
+import { FlatRentModel } from 'src/app/models/flatRentModel';
 
 @Component({
   selector: 'app-flat-rent',
@@ -11,6 +12,8 @@ import { response } from 'express';
 export class FlatRentComponent implements OnInit {
   /** индентификатор объявления */
   advertId: number;
+  /** объявление */
+  advert: FlatRentModel;
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService
@@ -24,7 +27,7 @@ export class FlatRentComponent implements OnInit {
   private initPage(){
     this.route.params.subscribe((params: Params) => {
       this.advertId = params['id'];
-      this.getAdvert(this.advertId)
+      this.getAdvert(this.advertId);
     })
   }
   /** получение информации об объявлении */

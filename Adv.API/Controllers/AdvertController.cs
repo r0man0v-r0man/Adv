@@ -20,6 +20,9 @@ namespace Adv.API.Controllers
         {
             _advertService = advertService;
         }
+
+        #region Методы создания
+
         [HttpPost("addFlatRent")]
         [Authorize]
         public async Task<ActionResult<FlatRentViewModel>> AddFlatRent(FlatRentViewModel flatRentViewModel,
@@ -28,7 +31,7 @@ namespace Adv.API.Controllers
             try
             {
                 FlatRentViewModel result = await _advertService.CreateFlatRentAsync(flatRentViewModel, ct).ConfigureAwait(false);
-                return CreatedAtAction(nameof(AddFlatRent),result);
+                return CreatedAtAction(nameof(AddFlatRent), result);
             }
             catch (Exception e)
             {
@@ -84,5 +87,26 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
+
+        #endregion
+
+        #region Методы получения
+        [HttpGet("getFlatRent")]
+        public async Task<ActionResult<FlatRentViewModel>> GetFlatRent(int id, CancellationToken ct = default)
+        {
+            try
+            {
+                FlatRentViewModel result = await _advertService.GetFlatRentAsync(id, ct).ConfigureAwait(false);
+                return result != null ? (ActionResult<FlatRentViewModel>) Ok(result) : NotFound();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
+
+        #endregion
+
     }
 }
