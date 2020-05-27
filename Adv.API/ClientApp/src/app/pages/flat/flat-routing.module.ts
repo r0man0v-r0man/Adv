@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FlatComponent } from './flat.component';
+import { FlatSaleComponent } from './flat-sale/flat-sale.component';
+import { FlatRentComponent } from './flat-rent/flat-rent.component';
 
 
 const routes: Routes = [
-  { path: ':id', component: FlatComponent}
+  { path: 'sale/:id', component: FlatSaleComponent},
+  { path: 'rent/:id', component: FlatRentComponent}
 ];
 
 @NgModule({

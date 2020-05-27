@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { ModalService } from './services/modal.service';
-import { Title, Meta } from '@angular/platform-browser';
 import { filter } from 'rxjs/operators';
 import { SeoService } from './services/seo.service';
 

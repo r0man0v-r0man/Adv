@@ -4,7 +4,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserWarning } from './userWarning';
 import { BadInput } from './badInput';
 import { NotFoundError } from './notFoundError';
-import { Router } from '@angular/router';
 import { AccessDeniedError } from './accessDeniedError';
 
 @Injectable({
@@ -12,8 +11,7 @@ import { AccessDeniedError } from './accessDeniedError';
   })
 export class AppErrorHandler implements ErrorHandler {
     constructor(
-        private injector: Injector,
-        private router: Router
+        private injector: Injector
         ){
             
         }
@@ -26,11 +24,9 @@ export class AppErrorHandler implements ErrorHandler {
             msg.warning(error.error);
         }
         if(error instanceof NotFoundError){
-            this.router.navigate(['/not-found']);
-            console.log(error.error);
+            console.log(error);
         }
         if(error instanceof AccessDeniedError){
-            this.router.navigate(['/access-denied']);
             console.log(error.error);
         }
         

@@ -77,6 +77,20 @@ const routes: Routes =
       title: 'Halupa.by - Подробности объявления',
       description: 'Подробности объявления, его характеристики, контакты и стоимость'
     }
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule),
+    data: {
+      hideComponents: true,
+      title: 'Halupa.by - Нет страницы',
+      description: 'Отсутствует запрашиваемая страница',
+      robots: 'noindex, nofollow'
+    }
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found'
   }
 ]
 

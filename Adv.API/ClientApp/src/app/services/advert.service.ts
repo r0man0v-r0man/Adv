@@ -21,6 +21,7 @@ export class AdvertService {
   private addHouseSaleUrl: string = Constants.addHouseSale;
   private deleteFlatUrl: string = Constants.deleteFlat;
   private updateFlatUrl: string = Constants.updateFlat;
+  private getFlatRentUrl: string = Constants.getFlatRent;
   /** for SSR */
   private baseUrl: string;
 
@@ -93,5 +94,9 @@ export class AdvertService {
   /** обновить объявление */
   update(updateFlat:FlatUpdateModel){
     return this.httpService.put<boolean>(this.updateFlatUrl, updateFlat, { headers: this.authService.SecureHeaders });
+  }
+  /** получить объявление квартира-сдать */
+  getFlatRent(id: number){
+    return this.httpService.get<FlatRentModel>(`${this.baseUrl}${this.getFlatRentUrl}/${id}`);
   }
 }

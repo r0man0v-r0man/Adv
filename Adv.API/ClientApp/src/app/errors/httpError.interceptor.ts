@@ -7,11 +7,14 @@ import { BadInput } from './badInput';
 import { AppError } from './appError';
 import { NotFoundError } from './notFoundError';
 import { AccessDeniedError } from './accessDeniedError';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor{
 
-    constructor(){}
+    constructor(
+        private router: Router
+    ){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request)
@@ -25,11 +28,15 @@ export class HttpErrorInterceptor implements HttpInterceptor{
             return throwError(new BadInput(error.error));
         }
     
-        if(error.status === 401)
-        return throwError(new AccessDeniedError(error.error));
+        if(error.status === 401){
+            this.router.navigate(['/access-denied']);
+            return throwError(new AccessDeniedError(error.error));
+        }
 
-        if(error.status === 404)
-        return throwError(new NotFoundError(error.error));
+        if(error.status === 404){
+            this.router.navigate(['/not-found']);
+            return throwError(new NotFoundError(error.error));
+        }
         
       return throwError(new AppError(error));
       }
