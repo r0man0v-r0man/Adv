@@ -36,7 +36,7 @@ export class AdvertService {
   
   /** переход на страницу с объявлением квартира */
   private navigateToNewFlatAdvert(id:number){
-    this.router.navigate(['flats/', id])
+    this.router.navigate(['flat/', id])
   }
   /** переход на страинцу с объявлением дом */
   private navigateToNewHouseAdvert(id: number){
@@ -84,7 +84,7 @@ export class AdvertService {
         this.navigateToNewFlatAdvert(response?.id);
         this.showUserSuccessNotification();
       })
-    )
+    ).subscribe();
   }
   /** удалить объявление */
   delete(id: number){
