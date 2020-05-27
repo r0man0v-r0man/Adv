@@ -59,6 +59,24 @@ const routes: Routes =
       robots: 'noindex, nofollow'
     },
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'flat',
+    loadChildren: () => import('./pages/flat/flat.module').then(m => m.FlatModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Подробности объявления',
+      description: 'Подробности объявления, его характеристики, контакты и стоимость'
+    }
+  },
+  {
+    path: 'house',
+    loadChildren: () => import('./pages/house/house.module').then(m => m.HouseModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Подробности объявления',
+      description: 'Подробности объявления, его характеристики, контакты и стоимость'
+    }
   }
 ]
 

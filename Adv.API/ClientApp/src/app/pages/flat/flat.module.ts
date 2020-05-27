@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FlatRoutingModule } from './flat-routing.module';
-import { FlatComponent } from './flat/flat.component';
+import { FlatComponent } from './flat.component';
 
 
 @NgModule({
