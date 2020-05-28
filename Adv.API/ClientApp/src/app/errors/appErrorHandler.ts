@@ -3,7 +3,6 @@ import { AppError } from './appError';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { UserWarning } from './userWarning';
 import { BadInput } from './badInput';
-import { NotFoundError } from './notFoundError';
 import { AccessDeniedError } from './accessDeniedError';
 
 @Injectable({
@@ -22,12 +21,6 @@ export class AppErrorHandler implements ErrorHandler {
         }
         if(error instanceof UserWarning){
             msg.warning(error.error);
-        }
-        if(error instanceof NotFoundError){
-            console.log(error);
-        }
-        if(error instanceof AccessDeniedError){
-            console.log(error.error);
         }
         
         console.log(error);

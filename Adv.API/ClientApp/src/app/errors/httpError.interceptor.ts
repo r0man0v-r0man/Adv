@@ -30,12 +30,11 @@ export class HttpErrorInterceptor implements HttpInterceptor{
     
         if(error.status === 401){
             this.router.navigate(['/access-denied']);
-            return throwError(new AccessDeniedError(error.error));
+            //return throwError(new AccessDeniedError(error.error));
         }
 
         if(error.status === 404){
             this.router.navigate(['/not-found']);
-            return throwError(new NotFoundError(error.error));
         }
         
       return throwError(new AppError(error));

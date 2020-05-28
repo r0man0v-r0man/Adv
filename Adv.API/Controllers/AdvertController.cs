@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Adv.API.Models.Adverts;
 using Adv.BLL.Interfaces;
+using Adv.DAL.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -99,9 +100,13 @@ namespace Adv.API.Controllers
                 FlatRentViewModel result = await _advertService.GetFlatRentAsync(id, ct).ConfigureAwait(false);
                 return result != null ? (ActionResult<FlatRentViewModel>) Ok(result) : NotFound();
             }
+            catch (NotFoundAdvertException e)
+            {
+                return NotFound(e.Message);
+            }
             catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
                 throw;
             }
         }

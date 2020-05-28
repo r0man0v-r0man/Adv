@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
-import { response } from 'express';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 
 @Component({
@@ -34,7 +33,7 @@ export class FlatRentComponent implements OnInit {
   private getAdvert(id: number){
     console.log(id);
     this.advertService.getFlatRent(id).subscribe(response => {
-      console.log(response);
-    })
+      this.advert = response;
+    });
   }
 }
