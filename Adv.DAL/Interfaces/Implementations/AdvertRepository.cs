@@ -55,7 +55,11 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<FlatRent> GetFlatRentAsync(int id, CancellationToken ct)
         {
             using var context = contextFactory.GetAdvContext();
-            var result = await context.FlatRents.AsNoTracking().FirstOrDefaultAsync(flat => flat.Id == id, ct).ConfigureAwait(false);
+            var result = await context.FlatRents
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(flat => flat.Id == id, ct)
+                .ConfigureAwait(false);
             return result ?? throw new NotFoundAdvertException("Такого объявления мы не нашли");
         }
     }
