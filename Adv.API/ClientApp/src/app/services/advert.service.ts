@@ -36,8 +36,8 @@ export class AdvertService {
   }
   
   /** переход на страницу с объявлением квартира */
-  private navigateToNewFlatAdvert(id:number){
-    this.router.navigate(['flat/', id])
+  private navigateToNewFlatRentAdvert(id:number){
+    this.router.navigate(['rent/', id])
   }
   /** переход на страинцу с объявлением дом */
   private navigateToNewHouseAdvert(id: number){
@@ -73,7 +73,7 @@ export class AdvertService {
   addFlatSale(advert: FlatSaleModel){
     this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
       map((response:FlatSaleModel)=>{
-        this.navigateToNewFlatAdvert(response?.id);
+        this.navigateToNewFlatRentAdvert(response?.id);//fix to sale
         this.showUserSuccessNotification();
       })
     ).subscribe();
@@ -82,7 +82,7 @@ export class AdvertService {
   addFlatRent(advert: FlatRentModel){
     this.httpService.post<FlatRentModel>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders}).pipe(
       map((response: FlatRentModel)=>{
-        this.navigateToNewFlatAdvert(response?.id);
+        this.navigateToNewFlatRentAdvert(response?.id);
         this.showUserSuccessNotification();
       })
     ).subscribe();

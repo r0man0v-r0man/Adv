@@ -24,8 +24,11 @@ export class AppErrorHandler implements ErrorHandler {
         if(error instanceof NotFoundError){
             console.log(error.error)
         }
+        if(error instanceof AccessDeniedError){
+            console.log(error.error)
+        }
         
-        //console.log(error);
+        console.log(error);
     }
 
 }

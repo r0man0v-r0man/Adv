@@ -31,7 +31,6 @@ export class FlatRentComponent implements OnInit {
   }
   /** получение информации об объявлении */
   private getAdvert(id: number){
-    console.log(id);
     this.advertService.getFlatRent(id).subscribe(response => {
       this.advert = response;
     });
