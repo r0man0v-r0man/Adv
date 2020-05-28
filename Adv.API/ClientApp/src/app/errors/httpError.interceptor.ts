@@ -5,9 +5,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { BadInput } from './badInput';
 import { AppError } from './appError';
-import { NotFoundError } from './notFoundError';
-import { AccessDeniedError } from './accessDeniedError';
 import { Router } from '@angular/router';
+import { NotFoundError } from './notFoundError';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor{
@@ -35,6 +34,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
 
         if(error.status === 404){
             this.router.navigate(['/not-found']);
+            return throwError(new NotFoundError(error.error))
         }
         
       return throwError(new AppError(error));
