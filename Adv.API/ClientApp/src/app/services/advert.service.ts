@@ -37,7 +37,7 @@ export class AdvertService {
   
   /** переход на страницу с объявлением квартира */
   private navigateToNewFlatRentAdvert(id:number){
-    this.router.navigate(['rent/', id])
+    this.router.navigate(['flat', 'rent', id])
   }
   /** переход на страинцу с объявлением дом */
   private navigateToNewHouseAdvert(id: number){

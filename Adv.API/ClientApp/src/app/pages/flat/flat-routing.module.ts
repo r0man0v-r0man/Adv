@@ -5,8 +5,19 @@ import { FlatRentComponent } from './flat-rent/flat-rent.component';
 
 
 const routes: Routes = [
-  { path: 'sale/:id', component: FlatSaleComponent},
-  { path: 'rent/:id', component: FlatRentComponent}
+  {
+    path: '',
+    children:[
+      {
+        path: 'sale/:id', 
+        component: FlatSaleComponent
+      },
+      { 
+        path: 'rent/:id', 
+        component: FlatRentComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
