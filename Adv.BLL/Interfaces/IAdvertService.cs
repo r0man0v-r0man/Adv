@@ -44,5 +44,12 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<FlatRentDto> GetFlatRentAsync(int id, CancellationToken ct);
+        /// <summary>
+        /// Получение объявления
+        /// </summary>
+        /// <param name="id">номер объявления</param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        Task<FlatSaleDto> GetFlatSaleAsync(int id, CancellationToken ct);
     }
 }

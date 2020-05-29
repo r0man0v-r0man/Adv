@@ -13,5 +13,9 @@ namespace Adv.DAL.Exceptions
         public NotFoundAdvertException(string message, Exception innerException) : base(message, innerException)
         {
         }
+
+        public NotFoundAdvertException() : base("Такого объявления мы не нашли")
+        {
+        }
     }
 }

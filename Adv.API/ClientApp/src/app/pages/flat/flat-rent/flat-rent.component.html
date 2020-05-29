@@ -5,6 +5,9 @@
     [nzMd]="{ span : 24 }" 
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
-<p>123</p>
+        <nz-descriptions  nzTitle="{{advert.address}}">
+            <nz-descriptions-item  nzTitle="Дата создания" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
+            <nz-descriptions-item  nzTitle="Цена" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
+        </nz-descriptions>
     </div>
 </div>

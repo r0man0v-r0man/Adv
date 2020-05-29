@@ -60,7 +60,18 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
                 .ConfigureAwait(false);
-            return result ?? throw new NotFoundAdvertException("Такого объявления мы не нашли");
+            return result ?? throw new NotFoundAdvertException();
+        }
+
+        public async Task<FlatSale> GetFlatSaleAsync(int id, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
+            var result = await context.FlatSales
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(flat => flat.Id == id)
+                .ConfigureAwait(false);
+            return result ?? throw new NotFoundAdvertException();
         }
     }
 }

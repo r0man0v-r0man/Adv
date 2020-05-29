@@ -110,7 +110,24 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
-
+        [HttpGet("getFlatSale")]
+        public async Task<ActionResult<FlatSaleViewModel>> GetFlatSale(int id, CancellationToken ct = default)
+        {
+            try
+            {
+                FlatSaleViewModel result = await _advertService.GetFlatSaleAsync(id, ct).ConfigureAwait(false);
+                return result != null ? (ActionResult<FlatSaleViewModel>) Ok(result) : NotFound();
+            }
+            catch (NotFoundAdvertException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
         #endregion
 
     }
