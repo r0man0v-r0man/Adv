@@ -35,13 +35,21 @@ export class AdvertService {
     this.baseUrl = this.injector.get('BASE_URL');
   }
   
-  /** переход на страницу с объявлением квартира */
+  /** переход на страницу с объявлением квартира сдать */
   private navigateToNewFlatRentAdvert(id:number){
     this.router.navigate(['flat', 'rent', id])
+  } 
+  /** переход на страницу с объявлением квартира продать */
+  private navigateToNewFlatSaleAdvert(id:number){
+    this.router.navigate(['flat', 'sale', id])
   }
-  /** переход на страинцу с объявлением дом */
-  private navigateToNewHouseAdvert(id: number){
-    this.router.navigate(['house/', id]);
+  /** переход на страинцу с объявлением дом сдать */
+  private navigateToNewHouseRentAdvert(id: number){
+    this.router.navigate(['house', 'rent', id]);
+  }
+  /** переход на страинцу с объявлением дом продать */
+  private navigateToNewHouseSaleAdvert(id: number){
+    this.router.navigate(['house', 'sale', id]);
   }
   /** показывает уведомление о создании объявления */
   private showUserSuccessNotification(){
@@ -56,7 +64,7 @@ export class AdvertService {
   addHouseRent(advert: HouseRentModel){
     this.httpService.post<HouseRentModel>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
       map((response: HouseRentModel)=>{
-        this.navigateToNewHouseAdvert(response?.id);
+        this.navigateToNewHouseRentAdvert(response?.id);
         this.showUserSuccessNotification();
       })).subscribe();
   }
@@ -64,7 +72,7 @@ export class AdvertService {
   addHouseSale(advert: HouseSaleModel){
     this.httpService.post<HouseSaleModel>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
       map((response: HouseSaleModel)=>{
-        this.navigateToNewHouseAdvert(response?.id);
+        this.navigateToNewHouseSaleAdvert(response?.id);
         this.showUserSuccessNotification();
       })
     ).subscribe();
@@ -73,7 +81,7 @@ export class AdvertService {
   addFlatSale(advert: FlatSaleModel){
     this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
       map((response:FlatSaleModel)=>{
-        this.navigateToNewFlatRentAdvert(response?.id);//fix to sale
+        this.navigateToNewFlatSaleAdvert(response?.id);
         this.showUserSuccessNotification();
       })
     ).subscribe();
