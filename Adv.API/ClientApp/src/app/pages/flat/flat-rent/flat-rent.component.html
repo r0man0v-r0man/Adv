@@ -5,9 +5,13 @@
     [nzMd]="{ span : 24 }" 
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }">
-        <nz-descriptions  nzTitle="{{advert.address}}">
-            <nz-descriptions-item  nzTitle="Дата создания" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
-            <nz-descriptions-item  nzTitle="Цена" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
-        </nz-descriptions>
+        <nz-skeleton [nzLoading]="isLoading">
+            <nz-descriptions *ngIf="!isLoading" nzTitle="{{advert.address}}">
+                <nz-descriptions-item nzTitle="Дата создания" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Цена" >{{advert.price | currency}}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Тип аренды">{{ advert.duration | duration }}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Описание">{{advert.description}}</nz-descriptions-item>
+            </nz-descriptions>
+        </nz-skeleton>
     </div>
 </div>

@@ -13,6 +13,8 @@ export class FlatRentComponent implements OnInit {
   advertId: number;
   /** объявление */
   advert: FlatRentModel;
+  /** флаг загрузки */
+  isLoading: boolean = true;
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService
@@ -32,7 +34,11 @@ export class FlatRentComponent implements OnInit {
   /** получение информации об объявлении */
   private getAdvert(id: number){
     this.advertService.getFlatRent(id).subscribe(response => {
-      this.advert = response;
+      if(response){
+        this.advert = response;
+        this.isLoading = !this.isLoading;
+      }
+
     });
   }
 }
