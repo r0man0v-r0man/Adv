@@ -8,11 +8,13 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { SliderComponent } from 'src/app/common/slider/slider.component';
 @NgModule({
   declarations: [
     FlatSaleComponent, 
     FlatRentComponent,
-    DurationPipe
+    DurationPipe,
+    SliderComponent
   ],
   imports: [
     CommonModule,

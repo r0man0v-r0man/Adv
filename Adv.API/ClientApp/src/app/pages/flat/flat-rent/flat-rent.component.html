@@ -6,6 +6,7 @@
         [nzMd]="{ span : 24 }" 
         [nzLg]="{ span : 24 }" 
         [nzXl]="{ span : 24 }">
+            <slider [images]="images"></slider>
             <div #slideshow_container class="slideshow-container" >
                 <div *ngFor="let image of images; let i = index" class="image-container" >
                     <img [style.display]="image.isVisible == true ? 'block' : 'none' " src="{{image.url}}" alt="{{image.alt}}" class="image">
