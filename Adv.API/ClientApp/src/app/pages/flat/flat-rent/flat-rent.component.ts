@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
@@ -16,16 +16,17 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   advert: FlatRentModel;
   /** флаг загрузки */
   isLoading: boolean = true;
-  @ViewChildren('slideshow-container') container: QueryList<any>;
+
+  @ViewChild('slideshow_container') s_c: ElementRef;
   constructor(
     private route: ActivatedRoute,
-    private advertService: AdvertService
+    private advertService: AdvertService,
+    private renderer: Renderer2,
+    private elem: ElementRef
   ) { }
   ngAfterViewInit(): void {
-    const slides = (document.getElementsByClassName('image-container') as HTMLCollectionOf<HTMLElement>)
-    console.log(slides[0]);
+    this.renderer.appendChild(this.s_c.nativeElement, this.renderer.createElement('img'));
     
-
   }
 
   ngOnInit(): void {
@@ -70,16 +71,5 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   prev(){
     (document.getElementsByClassName("image-container")[0] as HTMLElement).style.display = "none";
   }
-  carousel(n: number){
-    let slides = document.getElementsByClassName("image-container");
-    console.log(slides);
 
-    
-    // for (var i = 0; i < slides.length; i++) {
-    //   console.log((slides[i] as HTMLElement));
-      
-    // }
-    // slides[this.slideNo - 1].style.display = "block";
-    
-  }
 }
