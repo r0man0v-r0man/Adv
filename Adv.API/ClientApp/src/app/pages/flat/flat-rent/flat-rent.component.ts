@@ -25,7 +25,6 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
     private elem: ElementRef
   ) { }
   ngAfterViewInit(): void {
-    this.renderer.appendChild(this.s_c.nativeElement, this.renderer.createElement('img'));
     
   }
 
@@ -53,23 +52,40 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
 
 
 
-
-  slideNo = 1;
-  images: Array<{url: string; alt: string; }> = [];
+  slideNo = 0;
+  images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
   initSlides(images: UploadFile[]){
-    let slides: Array<{url: string; alt: string;  }> = [];
-    images.forEach((image)=>{
+    let slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
+    images.forEach((image, index)=>{
       let img = {
         url: image.linkProps.download,
-        alt: this.advert.address
+        alt: this.advert.address,
+        isVisible: false, 
+        id: index
       }
       slides.push(img);
     })
     this.images = [...slides];
-    
+    this.initCarousel(this.slideNo);
   }
   prev(){
-    (document.getElementsByClassName("image-container")[0] as HTMLElement).style.display = "none";
+    this.slideNo === 0 ? this.slideNo : this.slideNo--;
+    this.initCarousel(this.slideNo);
+  }
+  next(){
+    this.slideNo === this.images.length - 1 ? this.slideNo : this.slideNo++;
+    this.initCarousel(this.slideNo);
   }
 
+  initCarousel(index: number){
+    const activeSlideIndex = this.images.findIndex(img => img.id === index);
+    
+    this.images.map((image) => {
+      if(image.id === activeSlideIndex) {
+        image.isVisible = true;
+      } else {
+        image.isVisible = false;
+      }
+    })
+  }
 }
