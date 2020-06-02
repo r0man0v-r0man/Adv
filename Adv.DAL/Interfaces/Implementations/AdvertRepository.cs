@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +15,11 @@ namespace Adv.DAL.Interfaces.Implementations
     public class AdvertRepository : IAdvertRepository
     {
         private readonly IContextFactory contextFactory;
+        
+        private static ConcurrentDictionary<string, FlatRent> flatRentCache;
+        private static ConcurrentDictionary<string, FlatSale> flatSaleCache;
+        private static ConcurrentDictionary<string, HouseRent> houseRentCache;
+        private static ConcurrentDictionary<string, HouseSale> houseSaleCache;
 
         public AdvertRepository(IContextFactory contextFactory)
         {
