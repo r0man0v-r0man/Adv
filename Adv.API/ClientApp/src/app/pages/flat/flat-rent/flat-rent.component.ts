@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
@@ -17,12 +17,12 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   /** флаг загрузки */
   isLoading: boolean = true;
 
-  @ViewChild('slideshow_container') s_c: ElementRef;
+  images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
+
+  
   constructor(
     private route: ActivatedRoute,
-    private advertService: AdvertService,
-    private renderer: Renderer2,
-    private elem: ElementRef
+    private advertService: AdvertService
   ) { }
   ngAfterViewInit(): void {
     
@@ -52,8 +52,6 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
 
 
 
-  slideNo = 0;
-  images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
   initSlides(images: UploadFile[]){
     let slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
     images.forEach((image, index)=>{
@@ -66,26 +64,7 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
       slides.push(img);
     })
     this.images = [...slides];
-    this.initCarousel(this.slideNo);
-  }
-  prev(){
-    this.slideNo === 0 ? this.slideNo : this.slideNo--;
-    this.initCarousel(this.slideNo);
-  }
-  next(){
-    this.slideNo === this.images.length - 1 ? this.slideNo : this.slideNo++;
-    this.initCarousel(this.slideNo);
   }
 
-  initCarousel(index: number){
-    const activeSlideIndex = this.images.findIndex(img => img.id === index);
-    
-    this.images.map((image) => {
-      if(image.id === activeSlideIndex) {
-        image.isVisible = true;
-      } else {
-        image.isVisible = false;
-      }
-    })
-  }
+
 }
