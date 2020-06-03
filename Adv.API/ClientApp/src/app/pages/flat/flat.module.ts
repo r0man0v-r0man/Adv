@@ -9,11 +9,17 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { SliderComponent } from 'src/app/common/slider/slider.component';
+import { BalconyPipe } from 'src/app/pipes/balcony.pipe';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 @NgModule({
   declarations: [
     FlatSaleComponent, 
     FlatRentComponent,
     DurationPipe,
+    BalconyPipe,
     SliderComponent
   ],
   imports: [
@@ -21,7 +27,10 @@ import { SliderComponent } from 'src/app/common/slider/slider.component';
     FlatRoutingModule,
     NzGridModule,
     NzDescriptionsModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    NzDividerModule,
+    NzBadgeModule,
+    NzIconModule
   ]
 })
 export class FlatModule { }

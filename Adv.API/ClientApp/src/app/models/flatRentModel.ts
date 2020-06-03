@@ -21,5 +21,4 @@ export interface FlatRentModel {
     description: string;
     created: Date;
     lastModified: Date;
-
 }

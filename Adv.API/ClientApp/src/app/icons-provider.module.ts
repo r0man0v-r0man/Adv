@@ -10,7 +10,9 @@ import {
   LockOutline,
   UserOutline,
   RightOutline,
-  UploadOutline
+  UploadOutline,
+  CheckOutline,
+  StopOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -22,7 +24,9 @@ const icons = [
   LockOutline,
   UserOutline,
   RightOutline,
-  UploadOutline
+  UploadOutline,
+  CheckOutline,
+  StopOutline
 ];
 
 @NgModule({
