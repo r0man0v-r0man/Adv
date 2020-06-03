@@ -15,11 +15,6 @@ namespace Adv.DAL.Interfaces.Implementations
     public class AdvertRepository : IAdvertRepository
     {
         private readonly IContextFactory contextFactory;
-        
-        private static ConcurrentDictionary<string, FlatRent> flatRentCache;
-        private static ConcurrentDictionary<string, FlatSale> flatSaleCache;
-        private static ConcurrentDictionary<string, HouseRent> houseRentCache;
-        private static ConcurrentDictionary<string, HouseSale> houseSaleCache;
 
         public AdvertRepository(IContextFactory contextFactory)
         {
@@ -76,7 +71,7 @@ namespace Adv.DAL.Interfaces.Implementations
             var result = await context.FlatSales
                 .Include(prop => prop.Images)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(flat => flat.Id == id)
+                .FirstOrDefaultAsync(flat => flat.Id == id, ct)
                 .ConfigureAwait(false);
             return result ?? throw new NotFoundAdvertException();
         }
