@@ -15,7 +15,7 @@ export interface FlatSaleModel {
     balcony: number;
     toilet: number;
     price: number;
-    phone: number;
+    phone: string;
     description: string;
     created: Date;
     lastModified: Date;

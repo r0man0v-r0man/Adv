@@ -22,6 +22,7 @@ export class AdvertService {
   private deleteFlatUrl: string = Constants.deleteFlat;
   private updateFlatUrl: string = Constants.updateFlat;
   private getFlatRentUrl: string = Constants.getFlatRent;
+  private getFlatSaleUrl: string = Constants.getFlatSale;
   /** for SSR */
   private baseUrl: string;
 
@@ -108,5 +109,11 @@ export class AdvertService {
     let params = new HttpParams();
     params = params.append("id", id.toString());
     return this.httpService.get<FlatRentModel>(`${this.baseUrl}${this.getFlatRentUrl}`, { params : params});
+  }
+  /** получить объявление квартира-продать */
+  getFlatSale(id: number){
+    let params = new HttpParams();
+    params = params.append("id", id.toString());
+    return this.httpService.get<FlatSaleModel>(`${this.baseUrl}${this.getFlatSaleUrl}`, { params : params});
   }
 }

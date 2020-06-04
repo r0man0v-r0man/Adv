@@ -7,7 +7,6 @@ import { FlatRentComponent } from './flat-rent/flat-rent.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { DurationPipe } from 'src/app/pipes/duration.pipe';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { SliderComponent } from 'src/app/common/slider/slider.component';
 import { BalconyPipe } from 'src/app/pipes/balcony.pipe';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
@@ -29,7 +28,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     FlatRoutingModule,
     NzGridModule,
     NzDescriptionsModule,
-    NzSkeletonModule,
     NzDividerModule,
     NzBadgeModule,
     NzIconModule,

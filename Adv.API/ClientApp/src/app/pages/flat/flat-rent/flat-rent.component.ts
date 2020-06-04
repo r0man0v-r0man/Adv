@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
@@ -9,7 +9,7 @@ import { UploadFile } from 'ng-zorro-antd/upload/interface';
   templateUrl: './flat-rent.component.html',
   styleUrls: ['./flat-rent.component.less']
 })
-export class FlatRentComponent implements OnInit, AfterViewInit {
+export class FlatRentComponent implements OnInit {
   /** индентификатор объявления */
   advertId: number;
   /** объявление */
@@ -21,14 +21,11 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
 
   phone: string = '+375-XX-XXX-XX-XX';
-  
+
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService
   ) { }
-  ngAfterViewInit(): void {
-    
-  }
 
   ngOnInit(): void {
     this.initPage();
@@ -67,7 +64,7 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   }
 
   /** показать номер телефона */
-  onClickPhone(){
+  onClick(){
     this.phone = this.advert.phone;
   }
 

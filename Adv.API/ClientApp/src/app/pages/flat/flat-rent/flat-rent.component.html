@@ -1,4 +1,3 @@
-<nz-skeleton [nzLoading]="isLoading">
     <div nz-row nzJustify="center" *ngIf="!isLoading" nzGutter="24">
         <div nz-col
         [nzXs]="{ span : 24 }" 
@@ -87,14 +86,15 @@
                     Стиральная машина</nz-badge>
                 </nz-descriptions-item>
             </nz-descriptions>
-            <nz-descriptions  [nzTitle]='contactsTpl'>
+            <nz-descriptions nzColon="false" [nzTitle]='contactsTpl'>
                 <ng-template #contactsTpl>
                     <nz-divider nzText="Контакты"></nz-divider>
                 </ng-template>
-                <nz-descriptions-item nzTitle="Телефон">
-                    //добавить телефон
+                <nz-descriptions-item >
+                    <button nz-button nzSize="large" [nzType]="primary" (click)="onClick()">
+                        <i nz-icon nzType="phone" nzTheme="outline"></i>{{ phone }}
+                    </button>
                 </nz-descriptions-item>
             </nz-descriptions>
         </div>
     </div>
-</nz-skeleton>
