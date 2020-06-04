@@ -18,7 +18,7 @@
                 <ng-template #mainInfoTpl>
                     <nz-divider nzText="Основная информация"></nz-divider>
                 </ng-template>
-                <nz-descriptions-item nzTitle="Адрес" >{{advert.address}}</nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Адрес" nzSpan="3" >{{advert.address}}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Дата создания" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Цена" >{{advert.price | currency}}</nz-descriptions-item>
                 <nz-descriptions-item nzTitle="Тип аренды">{{ advert.duration | duration }}</nz-descriptions-item>
@@ -32,27 +32,69 @@
                     <nz-divider nzText="Дополнительная информация"></nz-divider>
                 </ng-template>
                 <nz-descriptions-item >
-                    <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="advert.furniture; then existFurniture; else notExistFurniture"></ng-container>
-                    <ng-template #existFurniture>
-                        <i nz-icon nzType="check" nzTheme="outline"></i>
-                    </ng-template>
-                    <ng-template #notExistFurniture>
-                        <i nz-icon nzType="stop" nzTheme="outline"></i>
-                    </ng-template>
+                    <nz-badge nzDot [nzShowDot]="false">
+                        <ng-container *ngIf="advert.furniture; then existFurnitureTpl; else notExistFurnitureTpl"></ng-container>
+                        <ng-template #existFurnitureTpl>
+                            <i nz-icon nzType="check" nzTheme="outline"></i>
+                        </ng-template>
+                        <ng-template #notExistFurnitureTpl>
+                            <i nz-icon nzType="stop" nzTheme="outline"></i>
+                        </ng-template>
                     Мебель</nz-badge>
                 </nz-descriptions-item>
                 <nz-descriptions-item >
-                    <nz-badge nzDot [nzShowDot]="false"><ng-container *ngIf="advert.refrigerator; then existRefrigerator; else notExistRefrigerator"></ng-container>
-                    <ng-template #existRefrigerator>
-                        <i nz-icon nzType="check" nzTheme="outline"></i>
-                    </ng-template>
-                    <ng-template #notExistRefrigerator>
-                        <i nz-icon nzType="stop" nzTheme="outline"></i>
-                    </ng-template>
+                    <nz-badge nzDot [nzShowDot]="false">
+                        <ng-container *ngIf="advert.refrigerator; then existRefrigeratorTpl; else notExistRefrigeratorTpl"></ng-container>
+                        <ng-template #existRefrigeratorTpl>
+                            <i nz-icon nzType="check" nzTheme="outline"></i>
+                        </ng-template>
+                        <ng-template #notExistRefrigeratorTpl>
+                            <i nz-icon nzType="stop" nzTheme="outline"></i>
+                        </ng-template>
                     Холодильник</nz-badge>
                 </nz-descriptions-item>
+                <nz-descriptions-item >
+                    <nz-badge nzDot [nzShowDot]="false">
+                        <ng-container *ngIf="advert.microwaveOven; then existMicrowaveOvenTpl; else notExistMicrowaveOvenTpl"></ng-container>
+                        <ng-template #existMicrowaveOvenTpl>
+                            <i nz-icon nzType="check" nzTheme="outline"></i>
+                        </ng-template>
+                        <ng-template #notExistMicrowaveOvenTpl>
+                            <i nz-icon nzType="stop" nzTheme="outline"></i>
+                        </ng-template>
+                    Микроволновая печь</nz-badge>
+                </nz-descriptions-item>
+                <nz-descriptions-item >
+                    <nz-badge nzDot [nzShowDot]="false">
+                        <ng-container *ngIf="advert.internet; then existInternetTpl; else notExistInternetTpl"></ng-container>
+                        <ng-template #existInternetTpl>
+                            <i nz-icon nzType="check" nzTheme="outline"></i>
+                        </ng-template>
+                        <ng-template #notExistInternetTpl>
+                            <i nz-icon nzType="stop" nzTheme="outline"></i>
+                        </ng-template>
+                    Интернет</nz-badge>
+                </nz-descriptions-item>
+                <nz-descriptions-item >
+                    <nz-badge nzDot [nzShowDot]="false">
+                        <ng-container *ngIf="advert.washingMachine; then existWashingMachinTpl; else notWashingMachinTpl"></ng-container>
+                        <ng-template #existWashingMachinTpl>
+                            <i nz-icon nzType="check" nzTheme="outline"></i>
+                        </ng-template>
+                        <ng-template #notWashingMachinTpl>
+                            <i nz-icon nzType="stop" nzTheme="outline"></i>
+                        </ng-template>
+                    Стиральная машина</nz-badge>
+                </nz-descriptions-item>
             </nz-descriptions>
-            
+            <nz-descriptions  [nzTitle]='contactsTpl'>
+                <ng-template #contactsTpl>
+                    <nz-divider nzText="Контакты"></nz-divider>
+                </ng-template>
+                <nz-descriptions-item nzTitle="Телефон">
+                    //добавить телефон
+                </nz-descriptions-item>
+            </nz-descriptions>
         </div>
     </div>
 </nz-skeleton>

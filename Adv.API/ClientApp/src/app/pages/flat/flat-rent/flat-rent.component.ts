@@ -17,8 +17,10 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
   /** флаг загрузки */
   isLoading: boolean = true;
 
+  /** изображения для слайдера */
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
 
+  phone: string = '+375-XX-XXX-XX-XX';
   
   constructor(
     private route: ActivatedRoute,
@@ -49,9 +51,7 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
-
-
+  /** преобразование картинок в слайды */
   initSlides(images: UploadFile[]){
     let slides: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
     images.forEach((image, index)=>{
@@ -66,5 +66,9 @@ export class FlatRentComponent implements OnInit, AfterViewInit {
     this.images = [...slides];
   }
 
+  /** показать номер телефона */
+  onClickPhone(){
+    this.phone = this.advert.phone;
+  }
 
 }

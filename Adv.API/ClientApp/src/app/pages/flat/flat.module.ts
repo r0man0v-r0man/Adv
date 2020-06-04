@@ -13,6 +13,8 @@ import { BalconyPipe } from 'src/app/pipes/balcony.pipe';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzSkeletonModule,
     NzDividerModule,
     NzBadgeModule,
-    NzIconModule
+    NzIconModule,
+    NzButtonModule
   ]
 })
 export class FlatModule { }
