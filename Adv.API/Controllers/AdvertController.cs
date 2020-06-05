@@ -128,6 +128,24 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
+        [HttpGet("getHouseRent")]
+        public async Task<ActionResult<HouseRentViewModel>> GetHouseRent(int id, CancellationToken ct = default)
+        {
+            try
+            {
+                HouseRentViewModel result = await _advertService.GetHouseRentAsync(id, ct).ConfigureAwait(false);
+                return result != null ? (ActionResult<HouseRentViewModel>)Ok(result) : NotFound();
+            }
+            catch (NotFoundAdvertException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
         #endregion
 
     }

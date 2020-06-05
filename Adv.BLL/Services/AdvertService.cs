@@ -47,5 +47,10 @@ namespace Adv.BLL.Services
         {
             return await advertRepository.GetFlatSaleAsync(id, ct).ConfigureAwait(false);
         }
+
+        public async Task<HouseRentDto> GetHouseRentAsync(int id, CancellationToken ct)
+        {
+            return await advertRepository.GetHouseRentAsync(id, ct).ConfigureAwait(false);
+        }
     }
 }

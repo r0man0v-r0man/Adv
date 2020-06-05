@@ -35,13 +35,8 @@
             <nz-descriptions-item nzTitle="Площадь кухни, кв.м." >{{ advert.kitchenArea }}</nz-descriptions-item>
             <nz-descriptions-item nzTitle="Туалет" >{{ advert.toilet | toilet }}</nz-descriptions-item>
         </nz-descriptions>
-        <nz-descriptions nzColon="false" [nzTitle]='contactsTpl'>
-            <ng-template #contactsTpl>
-                <nz-divider nzText="Контакты"></nz-divider>
-            </ng-template>
-            <nz-descriptions-item [nzTitle]="phoneTpl" ><ng-template #phoneTpl><i nz-icon nzType="phone" nzTheme="outline"></i></ng-template>
-                {{advert.phone}}
-            </nz-descriptions-item>
+        <nz-descriptions nzColon="false" [nzTitle]='contactsTpl'><ng-template #contactsTpl><nz-divider nzText="Контакты"></nz-divider></ng-template>
+            <nz-descriptions-item ><i nz-icon nzType="phone" nzTheme="outline"></i> {{advert.phone}}</nz-descriptions-item>
         </nz-descriptions>
     </div>
 </div>
