@@ -10,9 +10,9 @@ import { DurationPipe } from 'src/app/pipes/duration.pipe';
 import { SliderComponent } from 'src/app/common/slider/slider.component';
 import { BalconyPipe } from 'src/app/pipes/balcony.pipe';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ToiletPipe } from 'src/app/pipes/toilet.pipe';
 
 
 @NgModule({
@@ -21,6 +21,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     FlatRentComponent,
     DurationPipe,
     BalconyPipe,
+    ToiletPipe,
     SliderComponent
   ],
   imports: [
@@ -29,7 +30,6 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzGridModule,
     NzDescriptionsModule,
     NzDividerModule,
-    NzBadgeModule,
     NzIconModule,
     NzButtonModule
   ]
