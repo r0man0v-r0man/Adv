@@ -2,8 +2,6 @@
 using Imgur.API.Authentication.Impl;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.IO;
 using System.Threading;
@@ -16,8 +14,6 @@ namespace Adv.DAL.Interfaces.Implementations
     public class FileRepository : IFileRepository
     {
         private readonly IConfiguration _config;
-        private string AzureConnectionString { get; }
-        private string ContainerName { get; }
 
         private string ImgurClientId { get; }
         private string ImgurClientSecretId { get; }
@@ -25,8 +21,6 @@ namespace Adv.DAL.Interfaces.Implementations
         public FileRepository(IConfiguration configuration)
         {
             _config = configuration;
-            AzureConnectionString = _config.GetConnectionString("AzureStorageConnectionString");
-            ContainerName = "files";
 
             ImgurClientId = _config.GetValue<string>("Imgur:ClientId");
             ImgurClientSecretId = _config.GetValue<string>("Imgur:ClientSecretKey");
@@ -47,7 +41,6 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             catch (Exception e)
             {
-                
                 throw;
             }
             
