@@ -9,12 +9,12 @@ import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DurationModule } from 'src/app/pipes/modules/duration.module';
+import { SliderModule } from 'src/app/common/slider/slider.module';
 
 @NgModule({
   declarations: [
     HouseRentComponent,
-    HouseSaleComponent,
-    
+    HouseSaleComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +23,8 @@ import { DurationModule } from 'src/app/pipes/modules/duration.module';
     NzDescriptionsModule,
     NzDividerModule,
     NzIconModule,
-    DurationModule
+    DurationModule,
+    SliderModule
   ]
 })
 export class HouseModule { }

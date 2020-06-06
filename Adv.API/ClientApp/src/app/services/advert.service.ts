@@ -23,6 +23,7 @@ export class AdvertService {
   private updateFlatUrl: string = Constants.updateFlat;
   private getFlatRentUrl: string = Constants.getFlatRent;
   private getFlatSaleUrl: string = Constants.getFlatSale;
+  private getHouseRentUrl: string = Constants.getHouseRent;
   /** for SSR */
   private baseUrl: string;
 
@@ -115,5 +116,11 @@ export class AdvertService {
     let params = new HttpParams();
     params = params.append("id", id.toString());
     return this.httpService.get<FlatSaleModel>(`${this.baseUrl}${this.getFlatSaleUrl}`, { params : params});
+  }
+  /** получить объявление дом-сдать */
+  getHouseRent(id: number){
+    let params = new HttpParams();
+    params = params.append("id", id.toString());
+    return this.httpService.get<HouseRentModel>(`${this.baseUrl}${this.getHouseRentUrl}`, { params : params});
   }
 }

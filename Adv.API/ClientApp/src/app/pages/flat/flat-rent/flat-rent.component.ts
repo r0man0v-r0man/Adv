@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
-import { UploadFile } from 'ng-zorro-antd/upload/interface';
+import { UploadFile } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-flat-rent',

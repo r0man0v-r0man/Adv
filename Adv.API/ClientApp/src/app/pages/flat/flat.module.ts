@@ -6,12 +6,12 @@ import { FlatSaleComponent } from './flat-sale/flat-sale.component';
 import { FlatRentComponent } from './flat-rent/flat-rent.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
-import { SliderComponent } from 'src/app/common/slider/slider.component';
 import { BalconyPipe } from 'src/app/pipes/balcony.pipe';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ToiletPipe } from 'src/app/pipes/toilet.pipe';
 import { DurationModule } from 'src/app/pipes/modules/duration.module';
+import { SliderModule } from 'src/app/common/slider/slider.module';
 
 
 @NgModule({
@@ -20,8 +20,7 @@ import { DurationModule } from 'src/app/pipes/modules/duration.module';
     FlatRentComponent,
     
     BalconyPipe,
-    ToiletPipe,
-    SliderComponent
+    ToiletPipe
   ],
   imports: [
     CommonModule,
@@ -30,7 +29,8 @@ import { DurationModule } from 'src/app/pipes/modules/duration.module';
     NzDescriptionsModule,
     NzDividerModule,
     DurationModule,
-    NzIconModule
+    NzIconModule,
+    SliderModule
   ]
 })
 export class FlatModule { }

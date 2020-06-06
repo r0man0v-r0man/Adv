@@ -16,7 +16,7 @@ export interface HouseRentModel {
     garage: boolean;
     price: number;
     duration: number;
-    phone: number;
+    phone: string;
     description: string;
     created: Date;
     lastModified: Date;
