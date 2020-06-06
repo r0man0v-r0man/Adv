@@ -19,7 +19,7 @@ export interface HouseSaleModel{
     bathhouse: boolean;
     garage: boolean;
     price: number;
-    phone: number;
+    phone: string;
     description: string;
     created: Date;
     lastModified: Date;
