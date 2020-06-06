@@ -81,5 +81,15 @@ namespace Adv.DAL.Interfaces.Implementations
                 .ConfigureAwait(false);
             return result ?? throw new NotFoundAdvertException();
         }
+        public async Task<HouseSale> GetHouseSaleAsync(int id, CancellationToken ct)
+        {
+            using var context = contextFactory.GetAdvContext();
+            var result = await context.HouseSales
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(advert => advert.Id == id, ct)
+                .ConfigureAwait(false);
+            return result ?? throw new NotFoundAdvertException();
+        }
     }
 }

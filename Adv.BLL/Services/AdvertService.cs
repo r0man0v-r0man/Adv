@@ -102,5 +102,18 @@ namespace Adv.BLL.Services
                 return advert;
             }
         }
+        public async Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct)
+        {
+            if (memoryCache.TryGetValue(houseSaleCacheKey + id, out HouseSaleDto advertFromCache)
+            {
+                return advertFromCache;
+            }
+            else
+            {
+                HouseSaleDto advert = await advertRepository.GetHouseSaleAsync(id, ct).ConfigureAwait(false);
+                memoryCache.Set(houseSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
+                return advert;
+            }
+        }
     }
 }

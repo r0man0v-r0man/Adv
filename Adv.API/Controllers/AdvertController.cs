@@ -146,6 +146,24 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
+        [HttpGet("getHouseSale")]
+        public async Task<ActionResult<HouseSaleViewModel>> GetHouseSale(int id, CancellationToken ct = default)
+        {
+            try
+            {
+                HouseSaleViewModel result = await _advertService.GetHouseSaleAsync(id, ct).ConfigureAwait(false);
+                return result != null ? (ActionResult<HouseSaleViewModel>)Ok(result) : NotFound();
+            }
+            catch (NotFoundAdvertException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
         #endregion
 
     }
