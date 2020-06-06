@@ -2,8 +2,9 @@
 using Adv.BLL.Interfaces;
 using Adv.BLL.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
-
+using System;
 
 namespace Adv.BLL
 {
@@ -15,6 +16,7 @@ namespace Adv.BLL
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdvertService, AdvertService>();
 
+            services.AddMemoryCache();
 
             return services;
         }

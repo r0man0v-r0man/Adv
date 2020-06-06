@@ -33,7 +33,6 @@ namespace Adv.API
                 app.UseDeveloperExceptionPage();
                 app.UseCors(options => { options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             }
-
             //app.UseHsts();
             //app.UseHttpsRedirection();
 

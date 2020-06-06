@@ -2,6 +2,8 @@
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 using System.Threading.Tasks;
 
 namespace Adv.BLL.Services
@@ -9,11 +11,19 @@ namespace Adv.BLL.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository  userRepository;
+        private readonly IMemoryCache memoryCache;
+        private MemoryCacheEntryOptions memoryCacheEntryOptions
+        {
+            get
+            {
+                return memoryCacheEntryOptions ?? new MemoryCacheEntryOptions { SlidingExpiration = TimeSpan.FromDays(1) };
+            }
+        }
 
-
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMemoryCache memoryCache)
         {
             this.userRepository = userRepository;
+            this.memoryCache = memoryCache;
         }
 
         public async Task<IdentityResult> CreateAsync(AppUserDTO user, string password)
