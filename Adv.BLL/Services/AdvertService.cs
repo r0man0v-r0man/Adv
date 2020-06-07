@@ -104,7 +104,7 @@ namespace Adv.BLL.Services
         }
         public async Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct)
         {
-            if (memoryCache.TryGetValue(houseSaleCacheKey + id, out HouseSaleDto advertFromCache)
+            if (memoryCache.TryGetValue(houseSaleCacheKey + id, out HouseSaleDto advertFromCache))
             {
                 return advertFromCache;
             }
