@@ -19,7 +19,7 @@ namespace Adv.DAL
             {
                 var connection = configuration.GetConnectionString("AdvConnection");
 
-                options.UseSqlServer(connection);
+                options.UseNpgsql(connection);
             });
             services.AddTransient<IContextFactory, ContextFactory>();
 

@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class start : Migration
+    public partial class postgreStart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,7 +52,7 @@ namespace Adv.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -72,7 +73,7 @@ namespace Adv.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
@@ -157,7 +158,7 @@ namespace Adv.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true),
@@ -193,7 +194,7 @@ namespace Adv.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true),
@@ -227,7 +228,7 @@ namespace Adv.DAL.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Created = table.Column<DateTime>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     AppUserId = table.Column<string>(nullable: true),
@@ -258,18 +259,56 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HouseSales",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: false),
+                    Address = table.Column<string>(nullable: false),
+                    HouseArea = table.Column<int>(nullable: false),
+                    HouseLiveArea = table.Column<int>(nullable: false),
+                    KitchenArea = table.Column<int>(nullable: false),
+                    HousePlotArea = table.Column<int>(nullable: false),
+                    Heating = table.Column<bool>(nullable: false),
+                    Water = table.Column<bool>(nullable: false),
+                    Gas = table.Column<bool>(nullable: false),
+                    Sewage = table.Column<bool>(nullable: false),
+                    Electricity = table.Column<bool>(nullable: false),
+                    Bathhouse = table.Column<bool>(nullable: false),
+                    Garage = table.Column<bool>(nullable: false),
+                    Price = table.Column<decimal>(type: "money", nullable: false),
+                    Phone = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HouseSales", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HouseSales_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Image",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DeleteHash = table.Column<string>(nullable: true),
                     URL = table.Column<string>(nullable: true),
                     Uid = table.Column<string>(nullable: true),
                     Size = table.Column<long>(nullable: false),
                     FlatRentId = table.Column<int>(nullable: true),
                     FlatSaleId = table.Column<int>(nullable: true),
-                    HouseRentId = table.Column<int>(nullable: true)
+                    HouseRentId = table.Column<int>(nullable: true),
+                    HouseSaleId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,6 +331,12 @@ namespace Adv.DAL.Migrations
                         principalTable: "HouseRents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Image_HouseSales_HouseSaleId",
+                        column: x => x.HouseSaleId,
+                        principalTable: "HouseSales",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -303,8 +348,7 @@ namespace Adv.DAL.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -330,8 +374,7 @@ namespace Adv.DAL.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FlatRents_AppUserId",
@@ -349,6 +392,11 @@ namespace Adv.DAL.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HouseSales_AppUserId",
+                table: "HouseSales",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Image_FlatRentId",
                 table: "Image",
                 column: "FlatRentId");
@@ -362,6 +410,11 @@ namespace Adv.DAL.Migrations
                 name: "IX_Image_HouseRentId",
                 table: "Image",
                 column: "HouseRentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Image_HouseSaleId",
+                table: "Image",
+                column: "HouseSaleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -395,6 +448,9 @@ namespace Adv.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "HouseRents");
+
+            migrationBuilder.DropTable(
+                name: "HouseSales");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

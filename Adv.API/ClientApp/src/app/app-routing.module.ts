@@ -70,12 +70,30 @@ const routes: Routes =
     }
   },
   {
+    path: 'flats',
+    loadChildren: () => import('./pages/flats/flats.module').then(m => m.FlatsModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Квартиры',
+      description: 'Объявления о продаже, аренде квартир'
+    }
+  },
+  {
     path: 'house',
     loadChildren: () => import('./pages/house/house.module').then(m => m.HouseModule),
     data: {
       hideComponents: false,
       title: 'Halupa.by - Подробности объявления',
       description: 'Подробности объявления, его характеристики, контакты и стоимость'
+    }
+  },
+  {
+    path: 'houses',
+    loadChildren: () => import('./pages/houses/houses.module').then(m => m.HousesModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Дома',
+      description: 'Объявления о продаже, аренде домов'
     }
   },
   {
