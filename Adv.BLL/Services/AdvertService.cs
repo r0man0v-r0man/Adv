@@ -105,11 +105,32 @@ namespace Adv.BLL.Services
             }).ConfigureAwait(false);
           
         }
-        public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(byte size, int skip)
+        public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber)
         {
-            var adverts = await advertRepository.GetFlatRents(size, skip).ConfigureAwait(false);
+            var adverts = await advertRepository.GetFlatRents(pageNumber).ConfigureAwait(false);
 
             return adverts.Select(advert => (FlatRentDto)advert);
+        }
+
+        public async Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber)
+        {
+            var adverts = await advertRepository.GetFlatSales(pageNumber).ConfigureAwait(false);
+
+            return adverts.Select(advert => (FlatSaleDto)advert);
+        }
+
+        public async Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber)
+        {
+            var adverts = await advertRepository.GetHouseRents(pageNumber).ConfigureAwait(false);
+
+            return adverts.Select(advert => (HouseRentDto)advert);
+        }
+
+        public async Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber)
+        {
+            var adverts = await advertRepository.GetHouseSales(pageNumber).ConfigureAwait(false);
+
+            return adverts.Select(advert => (HouseSaleDto)advert);
         }
     }
 }

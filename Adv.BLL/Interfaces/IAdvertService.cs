@@ -65,6 +65,9 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct);
-        Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(byte size, int skip);
+        Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber);
+        Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber);
+        Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber);
+        Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber);
     }
 }

@@ -172,6 +172,30 @@ namespace Adv.API.Controllers
             return Ok(result);
             
         }
+        [HttpGet("getFlatSales/{pageNumber}")]
+        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetFlatSales(int pageNumber)
+        {
+
+            var result = await _advertService.GetFlatSalesAsync(pageNumber).ConfigureAwait(false);
+            return Ok(result);
+
+        }
+        [HttpGet("getHouseRents/{pageNumber}")]
+        public async Task<ActionResult<IEnumerable<HouseRentViewModel>>> GetHouseRents(int pageNumber)
+        {
+
+            var result = await _advertService.GetHouseRentsAsync(pageNumber).ConfigureAwait(false);
+            return Ok(result);
+
+        }
+        [HttpGet("getHouseSales/{pageNumber}")]
+        public async Task<ActionResult<IEnumerable<HouseSaleViewModel>>> GetHouseSales(int pageNumber)
+        {
+
+            var result = await _advertService.GetHouseSalesAsync(pageNumber).ConfigureAwait(false);
+            return Ok(result);
+
+        }
         #endregion
 
     }

@@ -10,19 +10,36 @@ import { FilterOptions } from 'src/app/models/filterOptions';
 })
 export class RentComponent implements OnInit {
 
-  list: FlatRentModel[] = [];
-
+  listFlatRent: FlatRentModel[] = [];
+  filterOption: FilterOptions;
+  initLoading: boolean = true;
+  isShowMoreButton: boolean = true;
   constructor(
     private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
-    let options: FilterOptions = {
+    this.initPage();
+  }
+  private setFilterOption(): FilterOptions {
+    return {
       pageNumber: 1
-    }
-    this.advertService.getFlatRents(options).subscribe(response => {
-      console.log(response);
-    })
+    };
   }
 
+  initPage(){
+    this.filterOption = this.setFilterOption();
+    this.advertService.getFlatRents(this.filterOption).subscribe(response => {
+      if(response && response.length !== 0){
+        this.listFlatRent = [...response];
+        this.initLoading = false;
+        this.filterOption.pageNumber++;
+        this.isShowMoreButton = true;
+      }
+      else{
+        this.initLoading = false;
+        this.isShowMoreButton = false;
+      }
+    })
+  }
 }

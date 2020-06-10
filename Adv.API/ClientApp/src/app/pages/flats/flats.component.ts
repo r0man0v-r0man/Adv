@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlatsComponent implements OnInit {
 
+  isShowFlatRents: boolean = false;
+  isShowFlatSales: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
