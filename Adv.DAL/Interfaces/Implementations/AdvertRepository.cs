@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.DAL.Context.Extensions;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
@@ -12,6 +13,7 @@ namespace Adv.DAL.Interfaces.Implementations
     public class AdvertRepository : IAdvertRepository
     {
         private readonly IContextFactory contextFactory;
+
 
         public AdvertRepository(IContextFactory contextFactory)
         {
@@ -94,17 +96,53 @@ namespace Adv.DAL.Interfaces.Implementations
             return result ?? throw new NotFoundAdvertException();
         }
 
-        public async Task<IEnumerable<FlatRent>> GetFlatRents(byte size, int skip)
+        public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber)
         {
+
             using var context = contextFactory.GetAdvContext();
             return await context.FlatRents.Include(prop => prop.Images).AsNoTracking()
                                                           .Where(prop => prop.IsActive == true)
                                                           .OrderByDescending(prop => prop.Created)
-                                                          .Skip(skip)
-                                                          .Take(size)
+                                                          .GetAdvertsByPage(pageNumber)
                                                           .ToListAsync()
                                                           .ConfigureAwait(false);
-            
+        }
+
+        public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber)
+        {
+
+            using var context = contextFactory.GetAdvContext();
+            return await context.FlatSales.Include(prop => prop.Images).AsNoTracking()
+                                                          .Where(prop => prop.IsActive == true)
+                                                          .OrderByDescending(prop => prop.Created)
+                                                          .GetAdvertsByPage(pageNumber)
+                                                          .ToListAsync()
+                                                          .ConfigureAwait(false);
+
+        }
+
+        public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber)
+        {
+
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseRents.Include(prop => prop.Images).AsNoTracking()
+                                                          .Where(prop => prop.IsActive == true)
+                                                          .OrderByDescending(prop => prop.Created)
+                                                          .GetAdvertsByPage(pageNumber)
+                                                          .ToListAsync()
+                                                          .ConfigureAwait(false);
+
+        }
+
+        public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseSales.Include(prop => prop.Images).AsNoTracking()
+                                                          .Where(prop => prop.IsActive == true)
+                                                          .OrderByDescending(prop => prop.Created)
+                                                          .GetAdvertsByPage(pageNumber)
+                                                          .ToListAsync()
+                                                          .ConfigureAwait(false);
         }
     }
 }

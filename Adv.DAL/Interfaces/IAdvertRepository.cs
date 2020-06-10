@@ -66,7 +66,10 @@ namespace Adv.DAL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<HouseSale> GetHouseSaleAsync(int id, CancellationToken ct);
-        Task<IEnumerable<FlatRent>> GetFlatRents(byte size, int skip);
+        Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber);
+        Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber);
+        Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber);
+        Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber);
 
     }
 }

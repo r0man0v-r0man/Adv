@@ -65,62 +65,50 @@ namespace Adv.BLL.Services
 
         public async Task<FlatRentDto> GetFlatRentAsync(int id, CancellationToken ct)
         {
-            if (memoryCache.TryGetValue(flatRentCacheKey + id, out FlatRentDto advertFromCache))
+            return await memoryCache.GetOrCreateAsync(flatRentCacheKey + id, async cacheEntry =>
             {
-                return advertFromCache;
-            }
-            else
-            {
+                cacheEntry.SlidingExpiration = MemoryCacheEntryOptions.SlidingExpiration;
                 FlatRentDto advert = await advertRepository.GetFlatRentAsync(id, ct).ConfigureAwait(false);
-                memoryCache.Set(flatRentCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
                 return advert;
-            }
+            }).ConfigureAwait(false);
+            
         }
 
         public async Task<FlatSaleDto> GetFlatSaleAsync(int id, CancellationToken ct)
         {
-            if (memoryCache.TryGetValue(flatRentCacheKey + id, out FlatSaleDto advertFromCache))
+            return await memoryCache.GetOrCreateAsync(flatSaleCacheKey + id, async cacheEntry =>
             {
-                return advertFromCache;
-            }
-            else
-            {
+                cacheEntry.SlidingExpiration = MemoryCacheEntryOptions.SlidingExpiration;
                 FlatSaleDto advert = await advertRepository.GetFlatSaleAsync(id, ct).ConfigureAwait(false);
-                memoryCache.Set(flatSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
                 return advert;
-            }
+            }).ConfigureAwait(false);
+            
         }
 
         public async Task<HouseRentDto> GetHouseRentAsync(int id, CancellationToken ct)
         {
-            if (memoryCache.TryGetValue(houseRentCacheKey + id, out HouseRentDto advertFromCache))
+            return await memoryCache.GetOrCreateAsync(houseRentCacheKey + id, async cacheEntry =>
             {
-                return advertFromCache;
-            }
-            else
-            {
+                cacheEntry.SlidingExpiration = MemoryCacheEntryOptions.SlidingExpiration;
                 HouseRentDto advert = await advertRepository.GetHouseRentAsync(id, ct).ConfigureAwait(false);
-                memoryCache.Set(houseRentCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
                 return advert;
-            }
+            }).ConfigureAwait(false);
+           
         }
         public async Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct)
         {
-            if (memoryCache.TryGetValue(houseSaleCacheKey + id, out HouseSaleDto advertFromCache))
+            return await memoryCache.GetOrCreateAsync(houseSaleCacheKey + id, async cacheEntry =>
             {
-                return advertFromCache;
-            }
-            else
-            {
+                cacheEntry.SlidingExpiration = MemoryCacheEntryOptions.SlidingExpiration;
                 HouseSaleDto advert = await advertRepository.GetHouseSaleAsync(id, ct).ConfigureAwait(false);
-                memoryCache.Set(houseSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
                 return advert;
-            }
+            }).ConfigureAwait(false);
+          
         }
         public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(byte size, int skip)
         {
             var adverts = await advertRepository.GetFlatRents(size, skip).ConfigureAwait(false);
-            
+
             return adverts.Select(advert => (FlatRentDto)advert);
         }
     }
