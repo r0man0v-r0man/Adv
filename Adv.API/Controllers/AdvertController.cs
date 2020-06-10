@@ -165,15 +165,13 @@ namespace Adv.API.Controllers
             }
         }
         [HttpGet("getFlatRents/{pageNumber}")]
-        public async IAsyncEnumerable<FlatRentViewModel> GetFlatRents(int pageNumber)
+        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetFlatRents(int pageNumber)
         {
             const byte SIZE = 20;
             var skip = (SIZE * pageNumber) - SIZE;
-            var result = _advertService.GetFlatRentsAsync(pageNumber, SIZE, skip).ConfigureAwait(false);
-            await foreach (var advert in result)
-            {
-                yield return advert;
-            }
+            var result = await _advertService.GetFlatRentsAsync(SIZE, skip).ConfigureAwait(false);
+            return Ok(result);
+            
         }
         #endregion
 

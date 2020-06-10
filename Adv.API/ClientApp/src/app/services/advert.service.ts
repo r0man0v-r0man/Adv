@@ -137,6 +137,6 @@ export class AdvertService {
    * @param pageNo номер страницы
    */
   getFlatRents(filterOptions: FilterOptions){
-    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}/${filterOptions.pageNo}`)
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}/${filterOptions.pageNumber}`)
   }
 }

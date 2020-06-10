@@ -94,22 +94,17 @@ namespace Adv.DAL.Interfaces.Implementations
             return result ?? throw new NotFoundAdvertException();
         }
 
-        public async IAsyncEnumerable<FlatRent> GetFlatRents(int pageNumber, byte size, int skip)
+        public async Task<IEnumerable<FlatRent>> GetFlatRents(byte size, int skip)
         {
             using var context = contextFactory.GetAdvContext();
-            var adverts = context.FlatRents.AsNoTracking()
+            return await context.FlatRents.Include(prop => prop.Images).AsNoTracking()
                                                           .Where(prop => prop.IsActive == true)
                                                           .OrderByDescending(prop => prop.Created)
                                                           .Skip(skip)
                                                           .Take(size)
-                                                          .AsAsyncEnumerable()
-                                                          
+                                                          .ToListAsync()
                                                           .ConfigureAwait(false);
-
-            await foreach (var advert in adverts)
-            {
-                yield return advert;
-            }
+            
         }
     }
 }
