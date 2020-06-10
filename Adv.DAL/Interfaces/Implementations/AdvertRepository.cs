@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities.Adverts;
@@ -90,6 +92,24 @@ namespace Adv.DAL.Interfaces.Implementations
                 .FirstOrDefaultAsync(advert => advert.Id == id, ct)
                 .ConfigureAwait(false);
             return result ?? throw new NotFoundAdvertException();
+        }
+
+        public async IAsyncEnumerable<FlatRent> GetFlatRents(int pageNumber, byte size, int skip)
+        {
+            using var context = contextFactory.GetAdvContext();
+            var adverts = context.FlatRents.AsNoTracking()
+                                                          .Where(prop => prop.IsActive == true)
+                                                          .OrderByDescending(prop => prop.Created)
+                                                          .Skip(skip)
+                                                          .Take(size)
+                                                          .AsAsyncEnumerable()
+                                                          
+                                                          .ConfigureAwait(false);
+
+            await foreach (var advert in adverts)
+            {
+                yield return advert;
+            }
         }
     }
 }

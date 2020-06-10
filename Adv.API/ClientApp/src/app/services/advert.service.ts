@@ -9,7 +9,8 @@ import { FlatSaleModel } from '../models/flatSaleModel';
 import { HouseSaleModel } from '../models/house-sale.model';
 import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
+import { FlatFilterOptions, FilterOptions } from '../models/filterOptions';
 
 @Injectable({
   providedIn: 'root'
@@ -129,5 +130,13 @@ export class AdvertService {
     let params = new HttpParams();
     params = params.append("id", id.toString());
     return this.httpService.get<HouseSaleModel>(`${this.baseUrl}${this.getHouseSaleUrl}`, { params : params});
+  }
+  /**
+   * получить объявления "квартиры"
+   * @param filterOptions опции фильтрации объявлений
+   * @param pageNo номер страницы
+   */
+  getFlatRents(filterOptions: FilterOptions){
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}/${filterOptions.pageNo}`)
   }
 }

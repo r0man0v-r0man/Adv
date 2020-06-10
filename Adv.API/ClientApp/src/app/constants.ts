@@ -16,6 +16,7 @@ export class Constants {
   static getFlatSale = environment.webApi + 'advert/getFlatSale';
   static getHouseSale = environment.webApi + 'advert/getHouseSale';
   static getHouseRent = environment.webApi + 'advert/getHouseRent';
+  static getFlatRentsURL = environment.webApi + 'advert/getFlatRents';
   //flat
   static flat = environment.webApi +  'flat'; 
   static getAllFlats = environment.webApi +  'flat/getAll';

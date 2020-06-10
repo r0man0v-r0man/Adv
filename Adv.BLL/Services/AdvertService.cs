@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.BLL.DTO.Adverts;
@@ -113,6 +114,15 @@ namespace Adv.BLL.Services
                 HouseSaleDto advert = await advertRepository.GetHouseSaleAsync(id, ct).ConfigureAwait(false);
                 memoryCache.Set(houseSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
                 return advert;
+            }
+        }
+        public async IAsyncEnumerable<FlatRentDto> GetFlatRentsAsync(int pageNumber, byte size, int skip)
+        {
+            var adverts = advertRepository.GetFlatRents(pageNumber, size, skip).ConfigureAwait(false);
+            await foreach (var advert in adverts)
+            {
+                memoryCache.Set(flatRentCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
+                yield return advert;
             }
         }
     }
