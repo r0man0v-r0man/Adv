@@ -13,7 +13,9 @@ import {
   UploadOutline,
   CheckOutline,
   StopOutline,
-  PhoneOutline
+  PhoneOutline,
+  FilterOutline,
+  DatabaseOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -28,7 +30,9 @@ const icons = [
   UploadOutline,
   CheckOutline,
   StopOutline,
-  PhoneOutline
+  PhoneOutline,
+  FilterOutline,
+  DatabaseOutline
 ];
 
 @NgModule({

@@ -30,7 +30,7 @@ export class RentComponent implements OnInit {
       if(response && response.length !== 0){
         this.listFlatRent = [...response];
         this.initLoading = false;
-        this.filterOption.pageNumber++;
+        // this.filterOption.pageNumber++;
         this.isShowMoreButton = true;
       }
       else{
@@ -40,6 +40,6 @@ export class RentComponent implements OnInit {
     })
   }
   onCardClick(advert: FlatRentModel){
-      this.router.navigate(['../flat', 'rent',advert.id], );
+      this.router.navigate(['flat', 'rent',advert.id], );
   }
 }

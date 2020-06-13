@@ -1,7 +1,7 @@
-<nz-list  
+<nz-list
 [nzLoading]="initLoading">
-    <div nz-row   nzGutter="16" >
-        <div nz-col 
+    <div nz-row  nzGutter="24" nzJustify="center" >
+        <div nz-col    
         [nzXs]="{ span : 24 }" 
         [nzSm]="{ span : 12 }" 
         [nzMd]="{ span : 8 }" 
@@ -16,13 +16,16 @@
                 nzHoverable="true"
                 [nzCover]="coverTpl"
                 [nzTitle]="item.price | currency" >
-                    <nz-card-meta [nzTitle]="item.address"></nz-card-meta>
+                    <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
                 </nz-card>
+                <ng-template #cardMetaTitleTpl>
+                    {{ item.address }}
+                </ng-template>
                 <ng-template #extraTpl>
                     Кол-во комнат: {{ item.rooms }}
                 </ng-template>
                 <ng-template #coverTpl>
-                    <img [src]="item.images[0]?.url" />
+                    <img [src]="item.images[0]?.url"/>
                 </ng-template>
             </nz-list-item>
         </div>

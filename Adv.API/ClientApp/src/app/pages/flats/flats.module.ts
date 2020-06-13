@@ -9,7 +9,11 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 @NgModule({
   declarations: [
     FlatsComponent, 
@@ -22,7 +26,13 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzListModule,
     NzCardModule,
     NzGridModule,
-    NzButtonModule
+    NzButtonModule,
+    NzRadioModule,
+    FormsModule,
+    NzDividerModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzIconModule
   ]
 })
 export class FlatsModule { }

@@ -131,12 +131,12 @@ export class AdvertService {
     params = params.append("id", id.toString());
     return this.httpService.get<HouseSaleModel>(`${this.baseUrl}${this.getHouseSaleUrl}`, { params : params});
   }
-  /**
-   * получить объявления "квартиры"
-   * @param filterOptions опции фильтрации объявлений
-   * @param pageNo номер страницы
-   */
+  /** получить объявления "квартиры" */
   getFlatRents(filterOptions: FilterOptions){
     return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}/${filterOptions.pageNumber}`)
+  }
+    /** получить объявления "квартиры" */
+  getFlatSales(filterOptions: FilterOptions){
+    return this.httpService.get<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}/${filterOptions.pageNumber}`)
   }
 }
