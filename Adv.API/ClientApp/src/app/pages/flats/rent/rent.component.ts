@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FilterOptions } from 'src/app/models/filterOptions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'flats-rent',
@@ -15,7 +16,8 @@ export class RentComponent implements OnInit {
   initLoading: boolean = true;
   isShowMoreButton: boolean = true;
   constructor(
-    private advertService: AdvertService
+    private advertService: AdvertService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,5 +38,8 @@ export class RentComponent implements OnInit {
         this.isShowMoreButton = false;
       }
     })
+  }
+  onCardClick(advert: FlatRentModel){
+      this.router.navigate(['../flat', 'rent',advert.id], );
   }
 }
