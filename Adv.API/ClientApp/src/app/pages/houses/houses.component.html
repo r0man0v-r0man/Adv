@@ -1,1 +1,39 @@
-<p>houses works!</p>
+<nz-divider [nzText]="filterTextTpl" nzOrientation="left"></nz-divider>
+<ng-template #filterTextTpl>
+    <i nz-icon nzType="filter" nzTheme="outline"></i> Фильтр
+</ng-template>
+<div nz-row >
+    <div nz-col    
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }" >
+    <form id="helper-form" nz-form [nzLayout]="'horizontal'" [formGroup]="helperForm" nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }" >
+        <nz-form-item nz-row >
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+                <nz-radio-group formControlName="advertType" [(ngModel)]="selectedAdvertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
+                <label nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">{{ advertType.label }}</label>
+                </nz-radio-group>
+            </nz-form-control>
+        </nz-form-item>
+        
+    </form>
+    </div>
+</div>
+<nz-divider [nzText]="advertsTextTpl" nzOrientation="left"></nz-divider>
+<ng-template #advertsTextTpl>
+    <i nz-icon nzType="database" nzTheme="outline"></i> Объявления
+</ng-template>
+<houses-sale *ngIf="isShowSales"  [filterOption]="filterOption"></houses-sale>
+<houses-rent *ngIf="isShowRents"  [filterOption]="filterOption" ></houses-rent>

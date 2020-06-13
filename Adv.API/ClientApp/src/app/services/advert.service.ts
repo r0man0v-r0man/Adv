@@ -139,4 +139,12 @@ export class AdvertService {
   getFlatSales(filterOptions: FilterOptions){
     return this.httpService.get<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}/${filterOptions.pageNumber}`)
   }
+      /** получить объявления "дом-продать" */
+      getHouseSales(filterOptions: FilterOptions){
+        return this.httpService.get<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}/${filterOptions.pageNumber}`)
+      }
+      /** получить объявления "дом-сдать" */
+      getHouseRents(filterOptions: FilterOptions){
+        return this.httpService.get<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}/${filterOptions.pageNumber}`)
+      }
 }
