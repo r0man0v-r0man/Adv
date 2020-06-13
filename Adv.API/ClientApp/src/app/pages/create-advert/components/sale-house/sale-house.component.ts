@@ -53,6 +53,10 @@ export class SaleHouseComponent implements OnInit{
   phone: string = '80291234567';
   /** описание */
   description: string = '';
+    /** Selected City, default district is: 0 */
+selectedCity: string = 'Несвиж';
+/** Array of cities */
+listOfCities: Array<{ label: string; value: string }> = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -67,6 +71,7 @@ export class SaleHouseComponent implements OnInit{
     this.initForm();
   }
   initForm(){
+    this.setCitiesName();
     this.saleHouseForm = this.formBuilder.group({
       userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
@@ -85,10 +90,24 @@ export class SaleHouseComponent implements OnInit{
       garage: [ this.garage ],
       price: [ null, [Validators.required]],
       phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
-      description: [ null, [DescriptionValidators.notOnlySpace]]
+      description: [ null, [DescriptionValidators.notOnlySpace]],
+      city: [this.selectedCity, [Validators.required]]
     })
   }
-  
+  setCitiesName(){
+    this.suggestService.getCities().subscribe(response => {
+      if(response){
+        const listOfOption: Array<{ label: string; value: string }> = [];
+        response.forEach(city => {
+          listOfOption.push({
+            value: city,
+            label: city
+          });
+        });
+        this.listOfCities = listOfOption;
+      }
+    })
+  }
   submitForm(){
     const advert: HouseSaleModel = { ...this.saleHouseForm.value }
     this.advertService.addHouseSale(advert);

@@ -51,6 +51,10 @@ export class RentHouseComponent implements OnInit {
   phone: string = '80291234567';
   /** описание */
   description: string = '';
+/** Selected City, default district is: 0 */
+selectedCity: string = 'Несвиж';
+/** Array of cities */
+listOfCities: Array<{ label: string; value: string }> = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -66,6 +70,7 @@ export class RentHouseComponent implements OnInit {
   }
   private initRentHouseForm(){
     this.setDurations();
+    this.setCitiesName();
     this.rentHouseForm = this.formBuilder.group({
       userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
@@ -82,7 +87,22 @@ export class RentHouseComponent implements OnInit {
       price: [ null, [Validators.required]],
       duration: [ this.selectedDuration, [Validators.required]],
       phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
-      description: [ null, [DescriptionValidators.notOnlySpace]]
+      description: [ null, [DescriptionValidators.notOnlySpace]],
+      city: [this.selectedCity, [Validators.required]]
+    })
+  }
+  setCitiesName(){
+    this.suggestService.getCities().subscribe(response => {
+      if(response){
+        const listOfOption: Array<{ label: string; value: string }> = [];
+        response.forEach(city => {
+          listOfOption.push({
+            value: city,
+            label: city
+          });
+        });
+        this.listOfCities = listOfOption;
+      }
     })
   }
   submitForm(){

@@ -19,4 +19,5 @@ export interface FlatSaleModel {
     description: string;
     created: Date;
     lastModified: Date;
+    city: string;
 }

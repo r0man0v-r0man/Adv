@@ -20,4 +20,5 @@ export interface HouseRentModel {
     description: string;
     created: Date;
     lastModified: Date;
+    city: string;
 }

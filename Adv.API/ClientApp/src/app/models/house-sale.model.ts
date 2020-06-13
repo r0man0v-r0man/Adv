@@ -23,4 +23,5 @@ export interface HouseSaleModel{
     description: string;
     created: Date;
     lastModified: Date;
+    city: string;
 }

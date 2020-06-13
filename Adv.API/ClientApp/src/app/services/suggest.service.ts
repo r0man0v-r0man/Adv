@@ -37,4 +37,9 @@ export class SuggestService  {
       this.isLoading = false;
     });
   }
+
+  getCities(){
+    return this.http.get<string[]>('assets/by_cities_names_min.json');
+  }
+
 }
