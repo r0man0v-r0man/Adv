@@ -3,15 +3,17 @@ using System;
 using Adv.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Adv.DAL.Migrations
 {
     [DbContext(typeof(AdvContext))]
-    partial class AdvContextModelSnapshot : ModelSnapshot
+    [Migration("20200614050221_startPosgreSQL")]
+    partial class startPosgreSQL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,6 +17,7 @@ namespace Adv.DAL.Context
         public DbSet<FlatSale> FlatSales { get; set; }
         public DbSet<HouseRent> HouseRents { get; set; }
         public DbSet<HouseSale> HouseSales { get; set; }
+        public DbSet<City> Cities { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 
@@ -27,6 +28,7 @@ namespace Adv.DAL.Context
             modelBuilder?.ApplyConfiguration(new HouseRentConfiguration());
             modelBuilder?.ApplyConfiguration(new HouseSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder?.ApplyConfiguration(new CityConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

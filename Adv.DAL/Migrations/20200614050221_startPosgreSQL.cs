@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class postgreStart : Migration
+    public partial class startPosgreSQL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,19 @@ namespace Adv.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +189,8 @@ namespace Adv.DAL.Migrations
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Duration = table.Column<byte>(nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,6 +201,12 @@ namespace Adv.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FlatRents_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,7 +230,8 @@ namespace Adv.DAL.Migrations
                     Toilet = table.Column<byte>(nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -221,6 +242,12 @@ namespace Adv.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FlatSales_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,7 +272,8 @@ namespace Adv.DAL.Migrations
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Duration = table.Column<byte>(nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -256,6 +284,12 @@ namespace Adv.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HouseRents_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -282,7 +316,8 @@ namespace Adv.DAL.Migrations
                     Garage = table.Column<bool>(nullable: false),
                     Price = table.Column<decimal>(type: "money", nullable: false),
                     Phone = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: false)
+                    Description = table.Column<string>(nullable: false),
+                    CityId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -293,6 +328,12 @@ namespace Adv.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HouseSales_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -382,9 +423,19 @@ namespace Adv.DAL.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FlatRents_CityId",
+                table: "FlatRents",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FlatSales_AppUserId",
                 table: "FlatSales",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FlatSales_CityId",
+                table: "FlatSales",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HouseRents_AppUserId",
@@ -392,9 +443,19 @@ namespace Adv.DAL.Migrations
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HouseRents_CityId",
+                table: "HouseRents",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_HouseSales_AppUserId",
                 table: "HouseSales",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HouseSales_CityId",
+                table: "HouseSales",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Image_FlatRentId",
@@ -454,6 +515,9 @@ namespace Adv.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Cities");
         }
     }
 }

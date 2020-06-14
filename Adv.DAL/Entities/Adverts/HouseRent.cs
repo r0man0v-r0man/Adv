@@ -77,5 +77,10 @@ namespace Adv.DAL.Entities.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// город
+        /// </summary>
+        public int CityId { get; set; }
+        public City City { get; set; }
     }
 }

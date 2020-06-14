@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Adv.DAL.Entities.Adverts;
+﻿using Adv.DAL.Entities.Adverts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -62,6 +59,10 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.Description)
                 .IsRequired();
+            builder
+                .HasOne(prop => prop.City)
+                .WithMany(prop => prop.FlatSales)
+                .HasForeignKey(prop => prop.CityId);
         }
     }
 }
