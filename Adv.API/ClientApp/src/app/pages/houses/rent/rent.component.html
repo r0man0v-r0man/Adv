@@ -19,7 +19,7 @@
                     <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
                 </nz-card>
                 <ng-template #cardMetaTitleTpl>
-                    {{ item.address }}
+                    {{ item.city.name }}
                 </ng-template>
                 <ng-template #extraTpl>
                     Кол-во комнат: {{ item.rooms }}

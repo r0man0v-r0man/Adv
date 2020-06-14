@@ -35,32 +35,24 @@ namespace Adv.BLL.Services
             };
         }
 
-        public async Task<FlatRentDto> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct)
+        public async Task<int> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct)
         {
-            FlatRentDto advert = await advertRepository.CreateFlatRentAsync(flatRentDto, ct).ConfigureAwait(false);
-            memoryCache.Set(flatRentCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
-            return advert;
+            return await advertRepository.CreateFlatRentAsync(flatRentDto, ct).ConfigureAwait(false);
         }
 
-        public async Task<FlatSaleDto> CreateFlatSaleAsync(FlatSaleDto flatSaleDto, CancellationToken ct)
+        public async Task<int> CreateFlatSaleAsync(FlatSaleDto flatSaleDto, CancellationToken ct)
         {
-            FlatSaleDto advert = await advertRepository.CreateFlatSaleAsync(flatSaleDto, ct).ConfigureAwait(false);
-            memoryCache.Set(flatSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
-            return advert;
+            return await advertRepository.CreateFlatSaleAsync(flatSaleDto, ct).ConfigureAwait(false);
         }
 
-        public async Task<HouseRentDto> CreateHouseRentAsync(HouseRentDto houseRentDto, CancellationToken ct)
+        public async Task<int> CreateHouseRentAsync(HouseRentDto houseRentDto, CancellationToken ct)
         {
-            HouseRentDto advert = await advertRepository.CreateHouseRentAsync(houseRentDto, ct).ConfigureAwait(false);
-            memoryCache.Set(houseRentCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
-            return advert;
+            return await advertRepository.CreateHouseRentAsync(houseRentDto, ct).ConfigureAwait(false);
         }
 
-        public async Task<HouseSaleDto> CreateHouseSaleAsync(HouseSaleDto houseSaleDto, CancellationToken ct)
+        public async Task<int> CreateHouseSaleAsync(HouseSaleDto houseSaleDto, CancellationToken ct)
         {
-            HouseSaleDto advert = await advertRepository.CreateHouseSaleAsync(houseSaleDto, ct).ConfigureAwait(false);
-            memoryCache.Set(houseSaleCacheKey + advert.Id, advert, MemoryCacheEntryOptions);
-            return advert;
+            return await advertRepository.CreateHouseSaleAsync(houseSaleDto, ct).ConfigureAwait(false);
         }
 
         public async Task<FlatRentDto> GetFlatRentAsync(int id, CancellationToken ct)

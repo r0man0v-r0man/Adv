@@ -88,7 +88,7 @@ namespace Adv.DAL.Entities.Adverts
         /// <summary>
         /// город
         /// </summary>
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         public City City { get; set; }
     }
 }

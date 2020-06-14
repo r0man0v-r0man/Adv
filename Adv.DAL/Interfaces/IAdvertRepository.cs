@@ -14,29 +14,29 @@ namespace Adv.DAL.Interfaces
         /// </summary>
         /// <param name="flatRent"></param>
         /// <param name="ct"></param>
-        /// <returns>объявление</returns>
-        Task<FlatRent> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct);
+        /// <returns>id</returns>
+        Task<int> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct);
         /// <summary>
         /// создание объявления квартира-продать
         /// </summary>
         /// <param name="flatSale"></param>
         /// <param name="ct"></param>
-        /// <returns>объявление</returns>
-        Task<FlatSale> CreateFlatSaleAsync(FlatSale flatSale, CancellationToken ct);
+        /// <returns>id</returns>
+        Task<int> CreateFlatSaleAsync(FlatSale flatSale, CancellationToken ct);
         /// <summary>
         /// создание объявления дом-сдать
         /// </summary>
         /// <param name="houseRent"></param>
         /// <param name="ct"></param>
-        /// <returns>объявление</returns>
-        Task<HouseRent> CreateHouseRentAsync(HouseRent houseRent, CancellationToken ct);
+        /// <returns>id</returns>
+        Task<int> CreateHouseRentAsync(HouseRent houseRent, CancellationToken ct);
         /// <summary>
         /// создание объявления дом-продать
         /// </summary>
         /// <param name="houseSale"></param>
         /// <param name="ct"></param>
-        /// <returns>объявление</returns>
-        Task<HouseSale> CreateHouseSaleAsync(HouseSale houseSale, CancellationToken ct);
+        /// <returns>id</returns>
+        Task<int> CreateHouseSaleAsync(HouseSale houseSale, CancellationToken ct);
         /// <summary>
         /// Получение объявления
         /// </summary>

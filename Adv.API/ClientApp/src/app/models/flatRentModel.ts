@@ -1,4 +1,5 @@
 import { UploadFile } from 'ng-zorro-antd/upload';
+import { City } from './city.model';
 
 export interface FlatRentModel {
     id: number;
@@ -21,5 +22,5 @@ export interface FlatRentModel {
     description: string;
     created: Date;
     lastModified: Date;
-    city: string;
+    city: City;
 }

@@ -24,7 +24,7 @@ namespace Adv.API.Controllers
         public async Task<ActionResult<IEnumerable<CityViewModel>>> GetCities()
         {
             var result = await cityService.GetCitiesAsync().ConfigureAwait(false);
-            return Ok(result.Select(c=> (CityViewModel)c));
+            return Ok(result.Select(city=> (CityViewModel)city));
         }
     }
 }

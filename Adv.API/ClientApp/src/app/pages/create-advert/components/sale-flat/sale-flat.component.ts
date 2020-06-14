@@ -8,6 +8,7 @@ import { UploadChangeParam, UploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { SuggestService } from 'src/app/services/suggest.service';
 import { DescriptionValidators } from '../../validators/description.validators';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'sale-flat',
@@ -48,10 +49,10 @@ export class SaleFlatComponent implements OnInit {
   phone: string = '80291234567';
   /** описание */
   description: string = '';
-  /** Selected City, default district is: 0 */
-selectedCity: string = 'Несвиж';
+/** Selected City, default district is: 0 */
+selectedCity: City;
 /** Array of cities */
-listOfCities: Array<{ label: string; value: string }> = [];
+listOfCities: City[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -91,14 +92,9 @@ listOfCities: Array<{ label: string; value: string }> = [];
   }
   setCitiesName(){
     this.suggestService.getCities().subscribe(response => {
-      if(response){
-        const listOfOption: Array<{ label: string; value: string }> = [];
-        response.forEach(city => {
-          listOfOption.push({
-            value: city,
-            label: city
-          });
-        });
+      if(response){        
+        let listOfOption: City[] = [];
+        listOfOption = [...response]
         this.listOfCities = listOfOption;
       }
     })

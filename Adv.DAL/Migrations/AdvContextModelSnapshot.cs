@@ -39,7 +39,7 @@ namespace Adv.DAL.Migrations
                     b.Property<byte>("Balcony")
                         .HasColumnType("smallint");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
@@ -115,7 +115,7 @@ namespace Adv.DAL.Migrations
                     b.Property<byte>("Balcony")
                         .HasColumnType("smallint");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
@@ -182,7 +182,7 @@ namespace Adv.DAL.Migrations
                     b.Property<bool>("Bathhouse")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
@@ -255,7 +255,7 @@ namespace Adv.DAL.Migrations
                     b.Property<bool>("Bathhouse")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
@@ -578,9 +578,7 @@ namespace Adv.DAL.Migrations
 
                     b.HasOne("Adv.DAL.Entities.City", "City")
                         .WithMany("FlatRents")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatSale", b =>
@@ -591,9 +589,7 @@ namespace Adv.DAL.Migrations
 
                     b.HasOne("Adv.DAL.Entities.City", "City")
                         .WithMany("FlatSales")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseRent", b =>
@@ -604,9 +600,7 @@ namespace Adv.DAL.Migrations
 
                     b.HasOne("Adv.DAL.Entities.City", "City")
                         .WithMany("HouseRents")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseSale", b =>
@@ -617,9 +611,7 @@ namespace Adv.DAL.Migrations
 
                     b.HasOne("Adv.DAL.Entities.City", "City")
                         .WithMany("HouseSales")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Images.Image", b =>

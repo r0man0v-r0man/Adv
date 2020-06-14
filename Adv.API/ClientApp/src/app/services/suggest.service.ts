@@ -1,8 +1,9 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, switchMap, map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Constants } from '../constants';
+import { LOCAL_STORAGE } from '@ng-toolkit/universal'
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class SuggestService  {
   private getSuggestList = (value: string) => this.http.get(`${this.urlBase}+${value}+${this.urlEnd}`).pipe(map((res: any) => { return res.suggestions }));
   constructor(
     private http: HttpClient,
-    private injector: Injector
+    private injector: Injector,
+    @Inject(LOCAL_STORAGE) private localStorage: any
     ) { 
       this.getSuggests();
       this.baseUrl = this.injector.get('BASE_URL');

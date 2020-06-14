@@ -66,35 +66,35 @@ export class AdvertService {
   }
   /** создание объявления дом сдать */
   addHouseRent(advert: HouseRentModel){
-    this.httpService.post<HouseRentModel>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: HouseRentModel)=>{
-        this.navigateToNewHouseRentAdvert(response?.id);
+    this.httpService.post<number>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: number)=>{
+        this.navigateToNewHouseRentAdvert(response);
         this.showUserSuccessNotification();
       })).subscribe();
   }
   /** создание объявления дом продать */
   addHouseSale(advert: HouseSaleModel){
-    this.httpService.post<HouseSaleModel>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: HouseSaleModel)=>{
-        this.navigateToNewHouseSaleAdvert(response?.id);
+    this.httpService.post<number>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: number)=>{
+        this.navigateToNewHouseSaleAdvert(response);
         this.showUserSuccessNotification();
       })
     ).subscribe();
   }
   /** создать объявление квартира продать */
   addFlatSale(advert: FlatSaleModel){
-    this.httpService.post<FlatSaleModel>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response:FlatSaleModel)=>{
-        this.navigateToNewFlatSaleAdvert(response?.id);
+    this.httpService.post<number>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response:number)=>{
+        this.navigateToNewFlatSaleAdvert(response);
         this.showUserSuccessNotification();
       })
     ).subscribe();
   }
   /** создать объявление квартира сдать */
   addFlatRent(advert: FlatRentModel){
-    this.httpService.post<FlatRentModel>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: FlatRentModel)=>{
-        this.navigateToNewFlatRentAdvert(response?.id);
+    this.httpService.post<number>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders}).pipe(
+      map((response: number)=>{
+        this.navigateToNewFlatRentAdvert(response);
         this.showUserSuccessNotification();
       })
     ).subscribe();

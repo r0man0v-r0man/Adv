@@ -83,6 +83,8 @@ namespace Adv.API.Models.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        public CityViewModel City { get; set; }
+
 
         /// <summary>
         /// View -> DTO
@@ -107,7 +109,9 @@ namespace Adv.API.Models.Adverts
             Price = flatRentViewModel.Price,
             Duration = flatRentViewModel.Duration,
             Phone = flatRentViewModel.Phone,
-            Description = flatRentViewModel.Description
+            Description = flatRentViewModel.Description,
+            City = flatRentViewModel.City,
+            CityId = flatRentViewModel.City.Id
         };
         /// <summary>
         /// DTO -> View
@@ -134,7 +138,8 @@ namespace Adv.API.Models.Adverts
             Phone = dto.Phone,
             Description = dto.Description,
             Created = dto.Created,
-            LastModified = dto.LastModified
+            LastModified = dto.LastModified,
+            City = dto.City
         };
     }
 }

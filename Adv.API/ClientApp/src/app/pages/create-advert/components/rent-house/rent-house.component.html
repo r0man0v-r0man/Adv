@@ -52,8 +52,8 @@
                 nzPlaceHolder="Выберите город">
                   <nz-option
                     *ngFor="let city of listOfCities"
-                    [nzLabel]="city.label"
-                    [nzValue]="city.value"
+                    [nzLabel]="city.name"
+                    [nzValue]="city"
                     >
                   </nz-option>
                 </nz-select>

@@ -15,28 +15,28 @@ namespace Adv.BLL.Interfaces
         /// <param name="flatRentDto"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<FlatRentDto> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct);
+        Task<int> CreateFlatRentAsync(FlatRentDto flatRentDto, CancellationToken ct);
         /// <summary>
         /// Создание объявления квартира-продать
         /// </summary>
         /// <param name="flatSaleDto"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<FlatSaleDto> CreateFlatSaleAsync(FlatSaleDto flatSaleDto, CancellationToken ct);
+        Task<int> CreateFlatSaleAsync(FlatSaleDto flatSaleDto, CancellationToken ct);
         /// <summary>
         /// Создание объявления дом-сдать
         /// </summary>
         /// <param name="houseRentDto"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<HouseRentDto> CreateHouseRentAsync(HouseRentDto houseRentDto, CancellationToken ct);
+        Task<int> CreateHouseRentAsync(HouseRentDto houseRentDto, CancellationToken ct);
         /// <summary>
         /// Создание объявления дом-продать
         /// </summary>
         /// <param name="houseSaleDto"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<HouseSaleDto> CreateHouseSaleAsync(HouseSaleDto houseSaleDto, CancellationToken ct);
+        Task<int> CreateHouseSaleAsync(HouseSaleDto houseSaleDto, CancellationToken ct);
         /// <summary>
         /// Получение объявления
         /// </summary>

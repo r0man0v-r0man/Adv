@@ -9,6 +9,7 @@ import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { Duration } from 'src/app/models/duration';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'rent-flat',
@@ -54,9 +55,9 @@ export class RentFlatComponent implements OnInit {
   /** описание */
   description: string = '';
 /** Selected City, default district is: 0 */
-selectedCity = 1;
+selectedCity: City;
 /** Array of cities */
-listOfCities: Array<{ label: string; value: number }> = [];
+listOfCities: City[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -98,13 +99,8 @@ listOfCities: Array<{ label: string; value: number }> = [];
   setCitiesName(){
     this.suggestService.getCities().subscribe(response => {
       if(response){        
-        const listOfOption: Array<{ label: string; value: number }> = [];
-        response.forEach((city: any) => {
-          listOfOption.push({
-            value: city.id,
-            label: city.name
-          });
-        });
+        let listOfOption: City[] = [];
+        listOfOption = [...response]
         this.listOfCities = listOfOption;
       }
     })

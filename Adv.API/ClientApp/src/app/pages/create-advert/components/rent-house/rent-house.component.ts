@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { Duration } from 'src/app/models/duration';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'rent-house',
@@ -52,9 +53,9 @@ export class RentHouseComponent implements OnInit {
   /** описание */
   description: string = '';
 /** Selected City, default district is: 0 */
-selectedCity: string = 'Несвиж';
+selectedCity: City;
 /** Array of cities */
-listOfCities: Array<{ label: string; value: string }> = [];
+listOfCities: City[] = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -93,14 +94,9 @@ listOfCities: Array<{ label: string; value: string }> = [];
   }
   setCitiesName(){
     this.suggestService.getCities().subscribe(response => {
-      if(response){
-        const listOfOption: Array<{ label: string; value: string }> = [];
-        response.forEach(city => {
-          listOfOption.push({
-            value: city,
-            label: city
-          });
-        });
+      if(response){        
+        let listOfOption: City[] = [];
+        listOfOption = [...response]
         this.listOfCities = listOfOption;
       }
     })

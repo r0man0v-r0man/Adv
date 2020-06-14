@@ -80,6 +80,9 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        public int? CityId { get; set; }
+        public CityDto City { get; set; }
+
 
         /// <summary>
         /// DTO -> DAL
@@ -104,7 +107,8 @@ namespace Adv.BLL.DTO.Adverts
             Price = dto.Price,
             Duration = dto.Duration,
             Phone = dto.Phone,
-            Description = dto.Description
+            Description = dto.Description,
+            CityId = dto.CityId
         };
         /// <summary>
         /// DAL -> DTO
@@ -131,7 +135,9 @@ namespace Adv.BLL.DTO.Adverts
             Phone = dal.Phone,
             Description = dal.Description,
             Created = dal.Created,
-            LastModified = dal.LastModified
+            LastModified = dal.LastModified,
+            City = dal?.City,
+            CityId = dal.CityId
         };
     }
 }

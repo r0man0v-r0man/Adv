@@ -74,6 +74,8 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
+        public CityDto CityDto { get; set; }
+
 
         /// <summary>
         /// DTO -> DAL
@@ -96,7 +98,8 @@ namespace Adv.BLL.DTO.Adverts
             Toilet = dto.Toilet,
             Price = dto.Price,
             Phone = dto.Phone,
-            Description = dto.Description
+            Description = dto.Description,
+            City = dto.CityDto
         };
         /// <summary>
         /// DAL -> DTO
@@ -121,7 +124,8 @@ namespace Adv.BLL.DTO.Adverts
             Phone = dal.Phone,
             Description = dal.Description,
             Created = dal.Created,
-            LastModified = dal.LastModified
+            LastModified = dal.LastModified,
+            CityDto = dal.City
         };
     }
 }

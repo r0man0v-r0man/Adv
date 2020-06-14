@@ -26,12 +26,12 @@ namespace Adv.API.Controllers
 
         [HttpPost("addFlatRent")]
         [Authorize]
-        public async Task<ActionResult<FlatRentViewModel>> AddFlatRent(FlatRentViewModel flatRentViewModel,
+        public async Task<ActionResult<int>> AddFlatRent(FlatRentViewModel flatRentViewModel,
             CancellationToken ct = default)
         {
             try
             {
-                FlatRentViewModel result = await _advertService.CreateFlatRentAsync(flatRentViewModel, ct).ConfigureAwait(false);
+                var result = await _advertService.CreateFlatRentAsync(flatRentViewModel, ct).ConfigureAwait(false);
                 return CreatedAtAction(nameof(AddFlatRent), result);
             }
             catch (Exception e)
@@ -42,12 +42,12 @@ namespace Adv.API.Controllers
         }
         [HttpPost("addFlatSale")]
         [Authorize]
-        public async Task<ActionResult<FlatSaleViewModel>> AddFlatSale(FlatSaleViewModel flatSaleViewModel,
+        public async Task<ActionResult<int>> AddFlatSale(FlatSaleViewModel flatSaleViewModel,
             CancellationToken ct = default)
         {
             try
             {
-                FlatSaleViewModel result = await _advertService.CreateFlatSaleAsync(flatSaleViewModel, ct).ConfigureAwait(false);
+                var result = await _advertService.CreateFlatSaleAsync(flatSaleViewModel, ct).ConfigureAwait(false);
                 return CreatedAtAction(nameof(AddFlatSale), result);
             }
             catch (Exception e)
@@ -58,12 +58,12 @@ namespace Adv.API.Controllers
         }
         [HttpPost("addHouseSale")]
         [Authorize]
-        public async Task<ActionResult<HouseSaleViewModel>> AddHouseSale(HouseSaleViewModel houseSaleViewModel,
+        public async Task<ActionResult<int>> AddHouseSale(HouseSaleViewModel houseSaleViewModel,
             CancellationToken ct = default)
         {
             try
             {
-                HouseSaleViewModel result = await _advertService.CreateHouseSaleAsync(houseSaleViewModel, ct).ConfigureAwait(false);
+                var result = await _advertService.CreateHouseSaleAsync(houseSaleViewModel, ct).ConfigureAwait(false);
                 return CreatedAtAction(nameof(AddHouseSale), result);
             }
             catch (Exception e)
@@ -74,12 +74,12 @@ namespace Adv.API.Controllers
         }
         [HttpPost("addHouseRent")]
         [Authorize]
-        public async Task<ActionResult<HouseRentViewModel>> AddHouseRent(HouseRentViewModel houseRentViewModel,
+        public async Task<ActionResult<int>> AddHouseRent(HouseRentViewModel houseRentViewModel,
             CancellationToken ct = default)
         {
             try
             {
-                HouseRentViewModel result = await _advertService.CreateHouseRentAsync(houseRentViewModel, ct).ConfigureAwait(false);
+                var result = await _advertService.CreateHouseRentAsync(houseRentViewModel, ct).ConfigureAwait(false);
                 return CreatedAtAction(nameof(AddHouseRent), result);
             }
             catch (Exception e)
