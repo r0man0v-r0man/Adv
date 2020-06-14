@@ -2,7 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FlatRentModel } from '../models/flatRentModel';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Constants } from '../constants';
 import { AuthService } from './auth.service';
 import { FlatSaleModel } from '../models/flatSaleModel';
@@ -132,8 +132,8 @@ export class AdvertService {
     return this.httpService.get<HouseSaleModel>(`${this.baseUrl}${this.getHouseSaleUrl}`, { params : params});
   }
   /** получить объявления "квартиры" */
-  getFlatRents(filterOptions: any){
-    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}/${filterOptions.pageNumber}`, { params : filterOptions.city})
+  getFlatRents(filterOptions: FilterOptions){
+    return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}`,filterOptions);
   }
     /** получить объявления "квартиры" */
   getFlatSales(filterOptions: FilterOptions){
