@@ -1,5 +1,6 @@
 import { Duration } from './duration';
 import { AdvertType } from './advertType';
+import { City } from './city.model';
 
 /** опции фильтрации для страницы квартиры */
 export interface FlatFilterOptions extends FilterOptions{
@@ -14,4 +15,5 @@ export interface HouseFilterOptions{
 export interface FilterOptions{
     /** номер страницы */
     pageNumber: number;
+    city: City;
 }

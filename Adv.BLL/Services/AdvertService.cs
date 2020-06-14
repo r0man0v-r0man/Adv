@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.BLL.DTO;
 using Adv.BLL.DTO.Adverts;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
@@ -97,30 +98,30 @@ namespace Adv.BLL.Services
             }).ConfigureAwait(false);
           
         }
-        public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber)
+        public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber, CityDto city)
         {
-            var adverts = await advertRepository.GetFlatRents(pageNumber).ConfigureAwait(false);
+            var adverts = await advertRepository.GetFlatRents(pageNumber, city).ConfigureAwait(false);
 
             return adverts.Select(advert => (FlatRentDto)advert);
         }
 
-        public async Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber)
+        public async Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber, CityDto city)
         {
-            var adverts = await advertRepository.GetFlatSales(pageNumber).ConfigureAwait(false);
+            var adverts = await advertRepository.GetFlatSales(pageNumber, city).ConfigureAwait(false);
 
             return adverts.Select(advert => (FlatSaleDto)advert);
         }
 
-        public async Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber)
+        public async Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber, CityDto city)
         {
-            var adverts = await advertRepository.GetHouseRents(pageNumber).ConfigureAwait(false);
+            var adverts = await advertRepository.GetHouseRents(pageNumber, city).ConfigureAwait(false);
 
             return adverts.Select(advert => (HouseRentDto)advert);
         }
 
-        public async Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber)
+        public async Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber, CityDto city)
         {
-            var adverts = await advertRepository.GetHouseSales(pageNumber).ConfigureAwait(false);
+            var adverts = await advertRepository.GetHouseSales(pageNumber, city).ConfigureAwait(false);
 
             return adverts.Select(advert => (HouseSaleDto)advert);
         }

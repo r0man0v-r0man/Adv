@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Adv.DAL.Entities.Adverts;
+using Adv.DAL.Entities;
 
 namespace Adv.DAL.Interfaces
 {
@@ -66,10 +67,10 @@ namespace Adv.DAL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<HouseSale> GetHouseSaleAsync(int id, CancellationToken ct);
-        Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber);
-        Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber);
-        Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber);
-        Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber);
+        Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city);
+        Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city);
+        Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city);
+        Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city);
 
     }
 }

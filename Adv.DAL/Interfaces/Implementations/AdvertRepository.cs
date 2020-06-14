@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
 using Adv.DAL.Context.Interfaces;
+using Adv.DAL.Entities;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -96,24 +97,26 @@ namespace Adv.DAL.Interfaces.Implementations
             return result ?? throw new NotFoundAdvertException();
         }
 
-        public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber)
+        public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city)
         {
 
             using var context = contextFactory.GetAdvContext();
-            return await context.FlatRents.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true)
-                                                          .OrderByDescending(prop => prop.Created)
-                                                          .GetAdvertsByPage(pageNumber)
-                                                          .ToListAsync()
-                                                          .ConfigureAwait(false);
+            return await context.FlatRents
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images).AsNoTracking()
+                .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
         }
 
-        public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber)
+        public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city)
         {
 
             using var context = contextFactory.GetAdvContext();
             return await context.FlatSales.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true)
+                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
                                                           .OrderByDescending(prop => prop.Created)
                                                           .GetAdvertsByPage(pageNumber)
                                                           .ToListAsync()
@@ -121,12 +124,12 @@ namespace Adv.DAL.Interfaces.Implementations
 
         }
 
-        public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber)
+        public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city)
         {
 
             using var context = contextFactory.GetAdvContext();
             return await context.HouseRents.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true)
+                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
                                                           .OrderByDescending(prop => prop.Created)
                                                           .GetAdvertsByPage(pageNumber)
                                                           .ToListAsync()
@@ -134,11 +137,11 @@ namespace Adv.DAL.Interfaces.Implementations
 
         }
 
-        public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber)
+        public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city)
         {
             using var context = contextFactory.GetAdvContext();
             return await context.HouseSales.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true)
+                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
                                                           .OrderByDescending(prop => prop.Created)
                                                           .GetAdvertsByPage(pageNumber)
                                                           .ToListAsync()

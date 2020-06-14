@@ -66,7 +66,11 @@ export class HousesComponent implements OnInit {
   }
   private setFilterOption(): FilterOptions {
     return {
-      pageNumber: 1
+      pageNumber: 1,
+      city: {
+        id: 15276,
+        name: "Несвиж"
+      }
     };
   }
 }

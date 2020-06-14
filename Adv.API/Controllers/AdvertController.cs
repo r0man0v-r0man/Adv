@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.API.Models;
 using Adv.API.Models.Adverts;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Exceptions;
@@ -165,34 +166,33 @@ namespace Adv.API.Controllers
             }
         }
         [HttpGet("getFlatRents/{pageNumber}")]
-        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetFlatRents(int pageNumber)
+        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetFlatRents(int pageNumber, CityViewModel city)
         {
-            
-            var result = await _advertService.GetFlatRentsAsync(pageNumber).ConfigureAwait(false);
-            return Ok(result);
+            var result = await _advertService.GetFlatRentsAsync(pageNumber, city).ConfigureAwait(false);
+            return Ok(result.Select(advert => (FlatRentViewModel)advert));
             
         }
         [HttpGet("getFlatSales/{pageNumber}")]
-        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetFlatSales(int pageNumber)
+        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetFlatSales(int pageNumber, CityViewModel city)
         {
 
-            var result = await _advertService.GetFlatSalesAsync(pageNumber).ConfigureAwait(false);
+            var result = await _advertService.GetFlatSalesAsync(pageNumber, city).ConfigureAwait(false);
             return Ok(result);
 
         }
         [HttpGet("getHouseRents/{pageNumber}")]
-        public async Task<ActionResult<IEnumerable<HouseRentViewModel>>> GetHouseRents(int pageNumber)
+        public async Task<ActionResult<IEnumerable<HouseRentViewModel>>> GetHouseRents(int pageNumber, CityViewModel city)
         {
 
-            var result = await _advertService.GetHouseRentsAsync(pageNumber).ConfigureAwait(false);
+            var result = await _advertService.GetHouseRentsAsync(pageNumber, city).ConfigureAwait(false);
             return Ok(result);
 
         }
         [HttpGet("getHouseSales/{pageNumber}")]
-        public async Task<ActionResult<IEnumerable<HouseSaleViewModel>>> GetHouseSales(int pageNumber)
+        public async Task<ActionResult<IEnumerable<HouseSaleViewModel>>> GetHouseSales(int pageNumber, CityViewModel city)
         {
 
-            var result = await _advertService.GetHouseSalesAsync(pageNumber).ConfigureAwait(false);
+            var result = await _advertService.GetHouseSalesAsync(pageNumber, city).ConfigureAwait(false);
             return Ok(result);
 
         }

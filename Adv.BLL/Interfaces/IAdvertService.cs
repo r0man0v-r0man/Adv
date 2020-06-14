@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Adv.BLL.DTO.Adverts;
+using Adv.BLL.DTO;
 
 namespace Adv.BLL.Interfaces
 {
@@ -65,9 +66,9 @@ namespace Adv.BLL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct);
-        Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber);
-        Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber);
-        Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber);
-        Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber);
+        Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber, CityDto city);
+        Task<IEnumerable<FlatSaleDto>> GetFlatSalesAsync(int pageNumber, CityDto city);
+        Task<IEnumerable<HouseRentDto>> GetHouseRentsAsync(int pageNumber, CityDto city);
+        Task<IEnumerable<HouseSaleDto>> GetHouseSalesAsync(int pageNumber, CityDto city);
     }
 }
