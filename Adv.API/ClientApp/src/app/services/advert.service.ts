@@ -9,8 +9,8 @@ import { FlatSaleModel } from '../models/flatSaleModel';
 import { HouseSaleModel } from '../models/house-sale.model';
 import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
-import { map, filter } from 'rxjs/operators';
-import { FlatFilterOptions, FilterOptions } from '../models/filterOptions';
+import { map } from 'rxjs/operators';
+import { FilterOptions } from '../models/filterOptions';
 
 @Injectable({
   providedIn: 'root'

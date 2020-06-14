@@ -1,13 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, switchMap, map, distinctUntilChanged, filter } from 'rxjs/operators';
+import { Constants } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class SuggestService  {
+    /** for SSR */
+    private baseUrl: string;
   /** значение поля ввода адреса */
   searchChange$ = new Subject<string>();
   /** статус поиска */
@@ -21,9 +24,11 @@ export class SuggestService  {
   /** запрос на поиск адреса для подсказки */
   private getSuggestList = (value: string) => this.http.get(`${this.urlBase}+${value}+${this.urlEnd}`).pipe(map((res: any) => { return res.suggestions }));
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private injector: Injector
     ) { 
       this.getSuggests();
+      this.baseUrl = this.injector.get('BASE_URL');
     }
   /** поиск подсказок */  
   private getSuggests(){
@@ -39,7 +44,7 @@ export class SuggestService  {
   }
 
   getCities(){
-    return this.http.get<string[]>('assets/by_cities_names_min.json');
+    return this.http.get<[]>(`${this.baseUrl}${Constants.getCitiesURL}`);
   }
 
 }

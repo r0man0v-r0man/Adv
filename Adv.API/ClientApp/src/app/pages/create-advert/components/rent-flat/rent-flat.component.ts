@@ -54,9 +54,9 @@ export class RentFlatComponent implements OnInit {
   /** описание */
   description: string = '';
 /** Selected City, default district is: 0 */
-selectedCity: string = 'Несвиж';
+selectedCity = 1;
 /** Array of cities */
-listOfCities: Array<{ label: string; value: string }> = [];
+listOfCities: Array<{ label: string; value: number }> = [];
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -97,12 +97,12 @@ listOfCities: Array<{ label: string; value: string }> = [];
   }
   setCitiesName(){
     this.suggestService.getCities().subscribe(response => {
-      if(response){
-        const listOfOption: Array<{ label: string; value: string }> = [];
-        response.forEach(city => {
+      if(response){        
+        const listOfOption: Array<{ label: string; value: number }> = [];
+        response.forEach((city: any) => {
           listOfOption.push({
-            value: city,
-            label: city
+            value: city.id,
+            label: city.name
           });
         });
         this.listOfCities = listOfOption;
