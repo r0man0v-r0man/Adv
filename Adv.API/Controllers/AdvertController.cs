@@ -177,7 +177,7 @@ namespace Adv.API.Controllers
         {
 
             var result = await _advertService.GetFlatSalesAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
-            return Ok(result);
+            return Ok(result.Select(advert => (FlatSaleViewModel)advert));
 
         }
         [HttpPost("getHouseRents")]
@@ -185,7 +185,7 @@ namespace Adv.API.Controllers
         {
 
             var result = await _advertService.GetHouseRentsAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
-            return Ok(result);
+            return Ok(result.Select(advert => (HouseRentViewModel)advert));
 
         }
         [HttpPost("getHouseSales")]
@@ -193,7 +193,7 @@ namespace Adv.API.Controllers
         {
 
             var result = await _advertService.GetHouseSalesAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
-            return Ok(result);
+            return Ok(result.Select(advert => (HouseSaleViewModel)advert));
 
         }
         #endregion
