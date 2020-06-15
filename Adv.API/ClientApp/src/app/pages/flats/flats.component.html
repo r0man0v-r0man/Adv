@@ -27,6 +27,26 @@
                 </nz-radio-group>
             </nz-form-control>
         </nz-form-item>
+        <nz-form-item nz-row >
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+                <nz-select nzShowSearch nzAllowClear
+                [nzSize]="'large'"
+                 formControlName="city"
+                nzPlaceHolder="Выберите город">
+                <nz-option
+                    *ngFor="let city of suggestService.listOfCities"
+                    [nzLabel]="city.name"
+                    [nzValue]="city"
+                    >
+                </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
         
     </form>
     </div>
@@ -36,4 +56,4 @@
     <i nz-icon nzType="database" nzTheme="outline"></i> Объявления
 </ng-template>
 <flats-sale  *ngIf="isShowFlatSales" [filterOption]="filterOption"></flats-sale>
-<flats-rent  *ngIf="isShowFlatRents" [filterOption]="filterOption"></flats-rent>
+<flats-rent  *ngIf="isShowFlatRents" [filterOption]="filterOption" (messageEvent)="receiveMessage($event)"></flats-rent>

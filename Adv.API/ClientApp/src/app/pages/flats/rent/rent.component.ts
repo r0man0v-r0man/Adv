@@ -23,7 +23,10 @@ export class RentComponent implements OnInit {
   ngOnInit(): void {
     this.initPage();    
   }
-
+  receiveMessage($event) {
+    console.log($event);
+    
+  }
 
   initPage(){
     this.advertService.getFlatRents(this.filterOption).subscribe(response => {

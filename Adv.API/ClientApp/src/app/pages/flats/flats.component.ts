@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FilterOptions } from 'src/app/models/filterOptions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
+import { SuggestService } from 'src/app/services/suggest.service';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'app-flats',
@@ -11,7 +13,7 @@ import { AdvertType } from 'src/app/models/advertType';
 export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: { advertType: string; };
+  helper: { advertType: string; city: City };
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.rent;
   /** типы объявлений */
@@ -21,22 +23,26 @@ export class FlatsComponent implements OnInit {
   isShowFlatSales: boolean = false;
 
   filterOption: FilterOptions;
-
+  @Output() messageEvent = new EventEmitter<City>();
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public suggestService: SuggestService
   ) { }
 
   ngOnInit(): void {
     this.initHelperForm();
     this.getHelperFormValues();
     this.filterOption = this.setFilterOption();
+    this.messageEvent.emit({id: 3, name: 'Пинск'})
     this.isShowFlatSales = true;
     this.isShowFlatRents = false;
+
   }
     /** получение значений формы */
   private getHelperFormValues() {
     this.helperForm.valueChanges.subscribe(() => {
       this.helper = { ...this.helperForm.value };
+      this.messageEvent.emit(this.helper.city);
       this.advertSwitcher();
     })
   }
@@ -55,7 +61,8 @@ export class FlatsComponent implements OnInit {
   private initHelperForm(){
     this.setAdvertTypes();
     this.helperForm = this.formBuilder.group({
-      advertType: [ this.selectedAdvertType ]
+      advertType: [ this.selectedAdvertType ],
+      city: [ null ]
     })
   }
   /** установка типов объявлений */

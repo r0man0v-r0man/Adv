@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 @NgModule({
   declarations: [
     FlatsComponent, 
@@ -32,7 +33,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzDividerModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzIconModule
+    NzIconModule,
+    NzSelectModule
   ]
 })
 export class FlatsModule { }
