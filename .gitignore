@@ -341,3 +341,6 @@ healthchecksdb
 /Adv.DAL/appsettings.json
 /Adv.API/appsettings.json
 /Adv.API/appsettings.Production.json
+/Adv.API/CA.pem
+/Adv.API/CA1.pem
+/Adv.API/CA2.pem
