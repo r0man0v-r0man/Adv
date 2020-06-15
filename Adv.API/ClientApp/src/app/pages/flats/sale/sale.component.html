@@ -25,7 +25,7 @@
                     Кол-во комнат: {{ item.rooms }}
                 </ng-template>
                 <ng-template #coverTpl>
-                    <img [src]="item.images[0]?.url"/>
+                    <img [src]="item.images[0]?.linkProps.download"/>
                 </ng-template>
             </nz-list-item>
         </div>

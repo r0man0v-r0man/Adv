@@ -137,14 +137,14 @@ export class AdvertService {
   }
     /** получить объявления "квартиры" */
   getFlatSales(filterOptions: FilterOptions){
-    return this.httpService.get<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}/${filterOptions.pageNumber}`)
+    return this.httpService.post<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}`,filterOptions)
   }
       /** получить объявления "дом-продать" */
       getHouseSales(filterOptions: FilterOptions){
-        return this.httpService.get<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}/${filterOptions.pageNumber}`)
+        return this.httpService.post<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}`,filterOptions)
       }
       /** получить объявления "дом-сдать" */
       getHouseRents(filterOptions: FilterOptions){
-        return this.httpService.get<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}/${filterOptions.pageNumber}`)
+        return this.httpService.post<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}`,filterOptions)
       }
 }
