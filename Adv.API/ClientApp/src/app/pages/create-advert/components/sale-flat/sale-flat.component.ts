@@ -49,10 +49,7 @@ export class SaleFlatComponent implements OnInit {
   phone: string = '80291234567';
   /** описание */
   description: string = '';
-/** Selected City, default district is: 0 */
-selectedCity: City;
-/** Array of cities */
-listOfCities: City[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -70,7 +67,6 @@ listOfCities: City[] = [];
   private initForm(){
     this.setListOfBalcony();
     this.setListOfToilet();
-    this.setCitiesName();
     this.saleFlatForm = this.formBuilder.group({
       userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
@@ -87,18 +83,10 @@ listOfCities: City[] = [];
       price: [ null, [Validators.required]],
       phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
       description: [ null, [DescriptionValidators.notOnlySpace]],
-      city: [this.selectedCity, [Validators.required]]
+      city: [ null, [Validators.required]]
     })
   }
-  setCitiesName(){
-    this.suggestService.getCities().subscribe(response => {
-      if(response){        
-        let listOfOption: City[] = [];
-        listOfOption = [...response]
-        this.listOfCities = listOfOption;
-      }
-    })
-  }
+
   /** создание объявления */
   submitForm(){
     const saleFlatModel: FlatSaleModel = { ...this.saleFlatForm.value }

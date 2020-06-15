@@ -54,10 +54,7 @@ export class RentFlatComponent implements OnInit {
   phone: string = '80291234567';
   /** описание */
   description: string = '';
-/** Selected City, default district is: 0 */
-selectedCity: City;
-/** Array of cities */
-listOfCities: City[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -74,7 +71,6 @@ listOfCities: City[] = [];
   initForm(){
     this.setListOfBalcony();
     this.setDurations();
-    this.setCitiesName();
     this.flatRentForm = this.formBuilder.group({
       userId:[ this.userId ,[Validators.required]],
       isActive: [ true ],
@@ -93,18 +89,10 @@ listOfCities: City[] = [];
       duration: [ this.selectedDuration, [Validators.required]],
       phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
       description: [ null, [DescriptionValidators.notOnlySpace]],
-      city: [this.selectedCity, [Validators.required]]
+      city: [ null, [Validators.required]]
     })
   }
-  setCitiesName(){
-    this.suggestService.getCities().subscribe(response => {
-      if(response){        
-        let listOfOption: City[] = [];
-        listOfOption = [...response]
-        this.listOfCities = listOfOption;
-      }
-    })
-  }
+
   /** создание объявления */
   submitForm(){
     const rentFlatModel: FlatRentModel = { ...this.flatRentForm.value }

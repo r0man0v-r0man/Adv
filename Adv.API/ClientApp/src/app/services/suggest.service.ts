@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { debounceTime, switchMap, map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Constants } from '../constants';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal'
+import { City } from '../models/city.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import { LOCAL_STORAGE } from '@ng-toolkit/universal'
 export class SuggestService  {
     /** for SSR */
     private baseUrl: string;
+    /** Array of cities */
+listOfCities: City[] = [];
   /** значение поля ввода адреса */
   searchChange$ = new Subject<string>();
   /** статус поиска */
@@ -31,6 +34,7 @@ export class SuggestService  {
     ) { 
       this.getSuggests();
       this.baseUrl = this.injector.get('BASE_URL');
+      this.getCities();
     }
   /** поиск подсказок */  
   private getSuggests(){
@@ -46,7 +50,11 @@ export class SuggestService  {
   }
 
   getCities(){
-    return this.http.get<[]>(`${this.baseUrl}${Constants.getCitiesURL}`);
+    this.http.get<City[]>(`${this.baseUrl}${Constants.getCitiesURL}`).subscribe(response => {
+      if(response){
+        this.listOfCities = [...response]
+      }
+    })
   }
 
 }

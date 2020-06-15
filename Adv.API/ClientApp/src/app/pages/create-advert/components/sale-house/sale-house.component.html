@@ -46,12 +46,11 @@
             nzHasFeedback
             nzErrorTip="Выберите город!">
                 <nz-select nzShowSearch nzAllowClear
-                [(ngModel)]="selectedCity"
                 formControlName="city"
                 [nzSize]="'large'"
                 nzPlaceHolder="Выберите город">
                   <nz-option
-                    *ngFor="let city of listOfCities"
+                    *ngFor="let city of suggestService.listOfCities"
                     [nzLabel]="city.name"
                     [nzValue]="city"
                     >
