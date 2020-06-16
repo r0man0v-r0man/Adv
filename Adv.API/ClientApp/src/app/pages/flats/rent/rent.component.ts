@@ -3,6 +3,7 @@ import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FilterOptions } from 'src/app/models/filterOptions';
 import { Router } from '@angular/router';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'flats-rent',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class RentComponent implements OnInit {
 
   listFlatRent: FlatRentModel[] = [];
-  @Input() filterOption: FilterOptions;
+  filterOption: FilterOptions;
   initLoading: boolean = true;
   isShowMoreButton: boolean = true;
   constructor(
@@ -21,14 +22,10 @@ export class RentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initPage();    
-  }
-  receiveMessage($event) {
-    console.log($event);
-    
   }
 
-  initPage(){
+  showAdverts(city: City){
+    
     this.advertService.getFlatRents(this.filterOption).subscribe(response => {
       if(response && response.length !== 0){
         this.listFlatRent = [...response];

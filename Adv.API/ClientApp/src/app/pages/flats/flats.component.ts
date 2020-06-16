@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FilterOptions } from 'src/app/models/filterOptions';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { SuggestService } from 'src/app/services/suggest.service';
 import { City } from 'src/app/models/city.model';
+import { RentComponent } from './rent/rent.component';
 
 @Component({
   selector: 'app-flats',
@@ -13,17 +14,16 @@ import { City } from 'src/app/models/city.model';
 export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: { advertType: string; city: City };
+  helper: {advertType:AdvertType; city: City}
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.rent;
   /** типы объявлений */
   advertTypesList: Array<{ value: string; label: string }> = [];
 
-  isShowFlatRents: boolean = false;
-  isShowFlatSales: boolean = false;
+  isShowRents: boolean = false;
+  isShowSales: boolean = false;
 
-  filterOption: FilterOptions;
-  @Output() messageEvent = new EventEmitter<City>();
+  @ViewChild(RentComponent) private rentComponent: RentComponent;
   constructor(
     private formBuilder: FormBuilder,
     public suggestService: SuggestService
@@ -31,32 +31,27 @@ export class FlatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initHelperForm();
-    this.getHelperFormValues();
-    this.filterOption = this.setFilterOption();
-    this.messageEvent.emit({id: 3, name: 'Пинск'})
-    this.isShowFlatSales = true;
-    this.isShowFlatRents = false;
+    this.isShowSales = false;
+    this.isShowRents = true;
 
   }
-    /** получение значений формы */
-  private getHelperFormValues() {
-    this.helperForm.valueChanges.subscribe(() => {
-      this.helper = { ...this.helperForm.value };
-      this.messageEvent.emit(this.helper.city);
-      this.advertSwitcher();
-    })
+  submitHelper(helperValues: {advertType:AdvertType; city: City}){    
+    this.helper = {...helperValues};
+    console.log(this.helper.city);
+    
+    this.advertSwitcher();
+    this.rentComponent.showAdverts(this.helper.city);
   }
   private advertSwitcher() {
     if (this.helper.advertType === AdvertType.rent) {
-      this.isShowFlatRents = true;
-      this.isShowFlatSales = false;
+      this.isShowRents = true;
+      this.isShowSales = false;
     }
     else if (this.helper.advertType === AdvertType.sale) {
-      this.isShowFlatRents = false;
-      this.isShowFlatSales = true;
+      this.isShowRents = false;
+      this.isShowSales = true;
     }
   }
-
   /** инициализация формы */
   private initHelperForm(){
     this.setAdvertTypes();
@@ -71,14 +66,5 @@ export class FlatsComponent implements OnInit {
       { label: 'сдаются', value: AdvertType.rent },
       { label: 'продаются', value: AdvertType.sale }
     )
-  }
-  private setFilterOption(): FilterOptions {
-    return {
-      pageNumber: 1,
-      city: {
-        id: 15276,
-        name: "Несвиж"
-      }
-    };
   }
 }

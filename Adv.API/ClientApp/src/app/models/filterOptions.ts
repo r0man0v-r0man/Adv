@@ -14,6 +14,5 @@ export interface HouseFilterOptions{
 }
 export interface FilterOptions{
     /** номер страницы */
-    pageNumber: number;
     city: City;
 }
