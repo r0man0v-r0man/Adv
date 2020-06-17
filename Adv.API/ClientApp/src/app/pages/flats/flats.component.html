@@ -64,5 +64,5 @@
 <ng-template #advertsTextTpl>
     <i nz-icon nzType="database" nzTheme="outline"></i> Объявления
 </ng-template>
-<flats-sale  *ngIf="isShowSales" ></flats-sale>
-<flats-rent  *ngIf="isShowRents" ></flats-rent>
+<flats-sale  *ngIf="isShowComponent" ></flats-sale>
+<flats-rent  *ngIf="!isShowComponent" (isReady)="onReady($event)" ></flats-rent>

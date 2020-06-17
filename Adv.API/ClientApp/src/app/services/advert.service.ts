@@ -137,15 +137,20 @@ export class AdvertService {
     return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}`,filterOptions, { params: params});
   }
     /** получить объявления "квартиры" */
-  getFlatSales(filterOptions: FilterOptions){
-    return this.httpService.post<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}`,filterOptions)
+  getFlatSales(pageNumber: number, filterOptions: FilterOptions){
+    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+    return this.httpService.post<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}`,filterOptions, { params: params})
   }
       /** получить объявления "дом-продать" */
-      getHouseSales(filterOptions: FilterOptions){
-        return this.httpService.post<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}`,filterOptions)
+      getHouseSales(pageNumber: number, filterOptions: FilterOptions){
+    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+
+        return this.httpService.post<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}`,filterOptions, { params: params})
       }
       /** получить объявления "дом-сдать" */
-      getHouseRents(filterOptions: FilterOptions){
-        return this.httpService.post<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}`,filterOptions)
+      getHouseRents(pageNumber: number, filterOptions: FilterOptions){
+    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+
+        return this.httpService.post<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}`,filterOptions, { params: params})
       }
 }
