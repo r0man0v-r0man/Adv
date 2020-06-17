@@ -166,33 +166,33 @@ namespace Adv.API.Controllers
             }
         }
         [HttpPost("getFlatRents")]
-        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetFlatRents(FilterOptions filterOptions)
+        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetFlatRents(FilterOptions filterOptions, int pageNumber)
         {
-            var result = await _advertService.GetFlatRentsAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
+            var result = await _advertService.GetFlatRentsAsync(pageNumber, filterOptions.City).ConfigureAwait(false);
             return Ok(result.Select(advert => (FlatRentViewModel)advert));
             
         }
         [HttpPost("getFlatSales")]
-        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetFlatSales(FilterOptions filterOptions)
+        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetFlatSales(FilterOptions filterOptions, int pageNumber)
         {
 
-            var result = await _advertService.GetFlatSalesAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
+            var result = await _advertService.GetFlatSalesAsync(pageNumber, filterOptions.City).ConfigureAwait(false);
             return Ok(result.Select(advert => (FlatSaleViewModel)advert));
 
         }
         [HttpPost("getHouseRents")]
-        public async Task<ActionResult<IEnumerable<HouseRentViewModel>>> GetHouseRents(FilterOptions filterOptions)
+        public async Task<ActionResult<IEnumerable<HouseRentViewModel>>> GetHouseRents(FilterOptions filterOptions, int pageNumber)
         {
 
-            var result = await _advertService.GetHouseRentsAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
+            var result = await _advertService.GetHouseRentsAsync(pageNumber, filterOptions.City).ConfigureAwait(false);
             return Ok(result.Select(advert => (HouseRentViewModel)advert));
 
         }
         [HttpPost("getHouseSales")]
-        public async Task<ActionResult<IEnumerable<HouseSaleViewModel>>> GetHouseSales(FilterOptions filterOptions)
+        public async Task<ActionResult<IEnumerable<HouseSaleViewModel>>> GetHouseSales(FilterOptions filterOptions, int pageNumber)
         {
 
-            var result = await _advertService.GetHouseSalesAsync(filterOptions.PageNumber, filterOptions.City).ConfigureAwait(false);
+            var result = await _advertService.GetHouseSalesAsync(pageNumber, filterOptions.City).ConfigureAwait(false);
             return Ok(result.Select(advert => (HouseSaleViewModel)advert));
 
         }

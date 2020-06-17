@@ -15,7 +15,9 @@ import {
   StopOutline,
   PhoneOutline,
   FilterOutline,
-  DatabaseOutline
+  DatabaseOutline,
+  EnterOutline,
+  EnvironmentOutline
 } from '@ant-design/icons-angular/icons';
 
 const icons = [
@@ -32,7 +34,9 @@ const icons = [
   StopOutline,
   PhoneOutline,
   FilterOutline,
-  DatabaseOutline
+  DatabaseOutline,
+  EnterOutline,
+  EnvironmentOutline
 ];
 
 @NgModule({

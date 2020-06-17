@@ -7,7 +7,6 @@ namespace Adv.API.Models
 {
     public class FilterOptions
     {
-        public int PageNumber { get; set; }
         public CityViewModel City { get; set; }
     }
 

@@ -16,24 +16,26 @@ export class RentComponent implements OnInit {
   filterOption: FilterOptions;
   initLoading: boolean = true;
   isShowMoreButton: boolean = true;
+  pageNumber: number = 1;
   constructor(
     private advertService: AdvertService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.showAdverts({id: 15276, name: 'Несвиж'});
   }
 
   showAdverts(city: City){
-    
-    this.advertService.getFlatRents(this.filterOption).subscribe(response => {
+    this.filterOption = { city: city };
+    this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
       if(response && response.length !== 0){
         this.listFlatRent = [...response];
         this.initLoading = false;
-        // this.filterOption.pageNumber++;
         this.isShowMoreButton = true;
       }
       else{
+        this.listFlatRent = [...response];
         this.initLoading = false;
         this.isShowMoreButton = false;
       }
@@ -41,5 +43,9 @@ export class RentComponent implements OnInit {
   }
   onCardClick(advert: FlatRentModel){
       this.router.navigate(['flat', 'rent',advert.id], );
+  }
+  onLoadMore(){
+    console.log('1');
+    
   }
 }

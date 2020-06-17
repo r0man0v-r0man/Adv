@@ -132,8 +132,9 @@ export class AdvertService {
     return this.httpService.get<HouseSaleModel>(`${this.baseUrl}${this.getHouseSaleUrl}`, { params : params});
   }
   /** получить объявления "квартиры" */
-  getFlatRents(filterOptions: FilterOptions){
-    return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}`,filterOptions);
+  getFlatRents(pageNumber: number, filterOptions: FilterOptions){
+    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+    return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}`,filterOptions, { params: params});
   }
     /** получить объявления "квартиры" */
   getFlatSales(filterOptions: FilterOptions){
