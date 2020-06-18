@@ -32,8 +32,9 @@ export class RentComponent implements OnInit {
   showAdverts(city: City){
     city ? this.showFilterAdverts(city) : this.showAnyAdverts();
   }
+  /** объявления без фильтра, любые */
   showAnyAdverts(){
-    // объявления без фильтра, любые
+    this.advertService.getAnyFlatRents(this.pageNumber)
   }
   /** Показать объявления с фильтром */
   showFilterAdverts(city: City){

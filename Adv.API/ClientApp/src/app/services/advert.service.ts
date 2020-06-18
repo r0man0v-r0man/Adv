@@ -133,24 +133,41 @@ export class AdvertService {
   }
   /** получить объявления "квартиры" */
   getFlatRents(pageNumber: number, filterOptions: FilterOptions){
-    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+    const params = this.setHttpParams(pageNumber)
     return this.httpService.post<FlatRentModel[]>(`${this.baseUrl}${Constants.getFlatRentsURL}`,filterOptions, { params: params});
   }
-    /** получить объявления "квартиры" */
+  /** получить объявления "квартиры" */
   getFlatSales(pageNumber: number, filterOptions: FilterOptions){
-    const params = new HttpParams().set('pageNumber', pageNumber.toString());
+    const params = this.setHttpParams(pageNumber)
     return this.httpService.post<FlatSaleModel[]>(`${this.baseUrl}${Constants.getFlatSalesURL}`,filterOptions, { params: params})
   }
-      /** получить объявления "дом-продать" */
-      getHouseSales(pageNumber: number, filterOptions: FilterOptions){
-    const params = new HttpParams().set('pageNumber', pageNumber.toString());
-
-        return this.httpService.post<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}`,filterOptions, { params: params})
-      }
-      /** получить объявления "дом-сдать" */
-      getHouseRents(pageNumber: number, filterOptions: FilterOptions){
-    const params = new HttpParams().set('pageNumber', pageNumber.toString());
-
-        return this.httpService.post<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}`,filterOptions, { params: params})
-      }
+  /** получить объявления "дом-продать" */
+  getHouseSales(pageNumber: number, filterOptions: FilterOptions){
+    const params = this.setHttpParams(pageNumber)
+    return this.httpService.post<HouseSaleModel[]>(`${this.baseUrl}${Constants.getHouseSalesURL}`,filterOptions, { params: params})
+  }
+  /** получить объявления "дом-сдать" */
+  getHouseRents(pageNumber: number, filterOptions: FilterOptions){
+    const params = this.setHttpParams(pageNumber)
+    return this.httpService.post<HouseRentModel[]>(`${this.baseUrl}${Constants.getHouseRentsURL}`,filterOptions, { params: params})
+  }
+  getAnyFlatRents(pageNumber: number){
+    const params = this.setHttpParams(pageNumber);
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getAnyFlatRentsURL}`, { params: params });
+  }
+  getAnyFlatSales(pageNumber: number){
+    const params = this.setHttpParams(pageNumber);
+    return this.httpService.get<FlatSaleModel[]>(`${this.baseUrl}${Constants.getAnyFlatSalesURL}`, { params: params });
+  }
+  getAnyHouseRents(pageNumber: number){
+    const params = this.setHttpParams(pageNumber);
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getAnyHouseRentsURL}`, { params: params });
+  }
+  getAnyHouseSales(pageNumber: number){
+    const params = this.setHttpParams(pageNumber);
+    return this.httpService.get<FlatRentModel[]>(`${this.baseUrl}${Constants.getAnyHouseSalesURL}`, { params: params });
+  }
+  private setHttpParams(pageNumber: number) {
+    return new HttpParams().set('pageNumber', pageNumber.toString());
+  }
 }
