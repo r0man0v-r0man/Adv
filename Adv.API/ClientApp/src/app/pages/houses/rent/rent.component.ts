@@ -15,7 +15,7 @@ export class RentComponent implements OnInit {
   listHouseRent: HouseRentModel[] = [];
   filterOption: FilterOptions;
   initLoading: boolean = true;
-  isShowMoreButton: boolean = true;
+  isShowMoreButton: boolean = false;
   pageNumber: number = 1;
   constructor(
     private advertService: AdvertService,

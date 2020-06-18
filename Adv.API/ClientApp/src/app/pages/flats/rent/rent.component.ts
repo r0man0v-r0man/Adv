@@ -15,7 +15,7 @@ export class RentComponent implements OnInit {
   listFlatRent: FlatRentModel[] = [];
   filterOption: FilterOptions;
   initLoading: boolean = true;
-  isShowMoreButton: boolean = true;
+  isShowMoreButton: boolean = false;
   pageNumber: number = 1;
   constructor(
     private advertService: AdvertService,
@@ -23,13 +23,20 @@ export class RentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.showAnyAdverts();
   }
   /**
    * Показать объявления
    * @param city Город, по которому фильтруем
    */
   showAdverts(city: City){
+    city ? this.showFilterAdverts(city) : this.showAnyAdverts();
+  }
+  showAnyAdverts(){
+    // объявления без фильтра, любые
+  }
+  /** Показать объявления с фильтром */
+  showFilterAdverts(city: City){
     this.filterOption = { city: city };
     this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
       if(response && response.length !== 0){

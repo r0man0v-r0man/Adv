@@ -15,7 +15,7 @@ export class SaleComponent implements OnInit {
   listHouseSale: HouseSaleModel[] = [];
   filterOption: FilterOptions;
   initLoading: boolean = true;
-  isShowMoreButton: boolean = true;
+  isShowMoreButton: boolean = false;
   pageNumber: number = 1;
   constructor(
     private advertService: AdvertService,
