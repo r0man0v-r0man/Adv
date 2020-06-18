@@ -1,6 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
-import { FilterOptions } from 'src/app/models/filterOptions';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { SuggestService } from 'src/app/services/suggest.service';
 import { City } from 'src/app/models/city.model';
@@ -12,7 +11,7 @@ import { SaleComponent } from './sale/sale.component';
   templateUrl: './flats.component.html',
   styleUrls: ['./flats.component.less']
 })
-export class FlatsComponent implements OnInit, AfterViewInit {
+export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
   helper: {advertType:AdvertType; city: City}
@@ -30,10 +29,6 @@ export class FlatsComponent implements OnInit, AfterViewInit {
     public suggestService: SuggestService,
     private changeDetector : ChangeDetectorRef
   ) { }
-  ngAfterViewInit(): void {
-    console.log('kjkjkj');
-    
-  }
 
   ngOnInit(): void {
     this.initHelperForm();
@@ -43,10 +38,9 @@ export class FlatsComponent implements OnInit, AfterViewInit {
     this.helper = {...helperValues};
     this.advertSwitcher();
     this.changeDetector.detectChanges();
-     this.isShowComponent ? this.saleComponent.showAdverts(this.helper.city) : this.rentComponent.showAdverts(this.helper.city);
-    
-    
+    this.isShowComponent ? this.saleComponent.showAdverts(this.helper.city) : this.rentComponent.showAdverts(this.helper.city);
   }
+  /** переключение типов объявлений сдать/продать */
   private advertSwitcher() {
     if (this.helper.advertType === AdvertType.rent) {
       this.isShowComponent = false

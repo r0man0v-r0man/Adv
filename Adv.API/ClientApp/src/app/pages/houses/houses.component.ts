@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
-import { FilterOptions } from 'src/app/models/filterOptions';
+import { RentComponent } from './rent/rent.component';
+import { SaleComponent } from './sale/sale.component';
+import { SuggestService } from 'src/app/services/suggest.service';
+import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'app-houses',
@@ -11,50 +14,48 @@ import { FilterOptions } from 'src/app/models/filterOptions';
 export class HousesComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: { advertType: string; };
+  helper: {advertType:AdvertType; city: City}
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.sale;
   /** типы объявлений */
   advertTypesList: Array<{ value: string; label: string }> = [];
 
-  isShowRents: boolean = false;
-  isShowSales: boolean = false;
+  isShowComponent: boolean = false;
 
-  filterOption: FilterOptions;
+  @ViewChild(RentComponent) private rentComponent: RentComponent;
+  @ViewChild(SaleComponent) private saleComponent: SaleComponent;
 
   constructor(
-    private formBuilder: FormBuilder
-
+    private formBuilder: FormBuilder,
+    public suggestService: SuggestService,
+    private changeDetector : ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
     this.initHelperForm();
-    this.getHelperFormValues();
-    this.filterOption = this.setFilterOption();
+    
   }
-  /** получение значений формы */
-  private getHelperFormValues() {
-    this.helperForm.valueChanges.subscribe(() => {
-      this.helper = { ...this.helperForm.value };
-      this.advertSwitcher();
-    })
+  submitHelper(helperValues: {advertType:AdvertType; city: City}){    
+    this.helper = {...helperValues};
+    this.advertSwitcher();
+    this.changeDetector.detectChanges();
+    this.isShowComponent ? this.saleComponent.showAdverts(this.helper.city) : this.rentComponent.showAdverts(this.helper.city);
   }
+  /** переключение типов объявлений сдать/продать */
   private advertSwitcher() {
     if (this.helper.advertType === AdvertType.rent) {
-      this.isShowRents = true;
-      this.isShowSales = false;
+      this.isShowComponent = false
     }
     else if (this.helper.advertType === AdvertType.sale) {
-      this.isShowRents = false;
-      this.isShowSales = true;
+      this.isShowComponent = true
     }
   }
-
   /** инициализация формы */
   private initHelperForm(){
     this.setAdvertTypes();
     this.helperForm = this.formBuilder.group({
-      advertType: [ this.selectedAdvertType ]
+      advertType: [ this.selectedAdvertType ],
+      city: [ null ]
     })
   }
   /** установка типов объявлений */
@@ -64,12 +65,5 @@ export class HousesComponent implements OnInit {
       { label: 'продаются', value: AdvertType.sale }
     )
   }
-  private setFilterOption(): FilterOptions {
-    return {
-      city: {
-        id: 15276,
-        name: "Несвиж"
-      }
-    };
-  }
+
 }

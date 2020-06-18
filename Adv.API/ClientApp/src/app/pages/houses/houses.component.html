@@ -9,7 +9,7 @@
     [nzMd]="{ span : 24 }" 
     [nzLg]="{ span : 24 }" 
     [nzXl]="{ span : 24 }" >
-    <form id="helper-form" nz-form [nzLayout]="'horizontal'" [formGroup]="helperForm" nz-col 
+    <form   (ngSubmit)="submitHelper(helperForm.value)" nz-form [nzLayout]="'horizontal'" [formGroup]="helperForm" nz-col 
     [nzXs]="{ span : 24 }" 
     [nzSm]="{ span : 24 }" 
     [nzMd]="{ span : 24 }" 
@@ -22,12 +22,41 @@
             [nzMd]="{ span : 24 }" 
             [nzLg]="{ span : 24 }" 
             [nzXl]="{ span : 24 }">
-                <nz-radio-group formControlName="advertType" [(ngModel)]="selectedAdvertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
+                <nz-radio-group formControlName="advertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
                 <label nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">{{ advertType.label }}</label>
                 </nz-radio-group>
             </nz-form-control>
         </nz-form-item>
-        
+        <nz-form-item nz-row >
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+                <nz-select nzShowSearch nzAllowClear
+                [nzSize]="'large'" 
+                formControlName="city"
+                nzPlaceHolder="Выберите город">
+                <nz-option
+                    *ngFor="let city of suggestService.listOfCities"
+                    [nzLabel]="city.name"
+                    [nzValue]="city"
+                    >
+                </nz-option>
+                </nz-select>
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item nz-row >
+            <nz-form-control nz-col 
+            [nzXs]="{ span : 24 }" 
+            [nzSm]="{ span : 24 }" 
+            [nzMd]="{ span : 24 }" 
+            [nzLg]="{ span : 24 }" 
+            [nzXl]="{ span : 24 }">
+                <button  nz-button nzBlock="true" nzSize="large"  nzType="dashed" ><i nz-icon nzType="enter" nzTheme="outline"></i>Применить</button>
+            </nz-form-control>
+        </nz-form-item>
     </form>
     </div>
 </div>
@@ -35,5 +64,5 @@
 <ng-template #advertsTextTpl>
     <i nz-icon nzType="database" nzTheme="outline"></i> Объявления
 </ng-template>
-<houses-sale *ngIf="isShowSales"  [filterOption]="filterOption"></houses-sale>
-<houses-rent *ngIf="isShowRents"  [filterOption]="filterOption" ></houses-rent>
+<houses-sale *ngIf="isShowComponent" ></houses-sale>
+<houses-rent *ngIf="!isShowComponent"></houses-rent>

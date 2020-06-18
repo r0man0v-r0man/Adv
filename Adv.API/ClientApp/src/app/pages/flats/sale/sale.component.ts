@@ -24,6 +24,10 @@ export class SaleComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  /**
+   * Показать объявления
+   * @param city Город, по которому фильтруем
+   */
   showAdverts(city: City){
     this.filterOption = { city: city };
     this.advertService.getFlatSales(this.pageNumber, this.filterOption).subscribe(response => {
@@ -40,6 +44,7 @@ export class SaleComponent implements OnInit {
       this.allowToShowMoreButton(response, false);
     })
   }
+  /** Определяемся, когда показывать кнопку "загрузить еще" */
   private allowToShowMoreButton(response: FlatSaleModel[], isLoadMore: boolean) {
     if(isLoadMore){
       response && response.length > 0 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
@@ -47,11 +52,12 @@ export class SaleComponent implements OnInit {
       response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false; 
     }
   }
-  private onCardClick(advert: FlatSaleModel){
+  /** переход на страницу с информацией об объявлении */
+   onCardClick(advert: FlatSaleModel){
       this.router.navigate(['flat', 'sale', advert.id], );
   }
-
-  private onLoadMore(){
+  /** Загрузить еще объявляений */
+   onLoadMore(){
     this.initLoading = true;
     this.pageNumber++;
     this.advertService.getFlatSales(this.pageNumber, this.filterOption).subscribe(response => {

@@ -6,7 +6,7 @@
         [nzSm]="{ span : 12 }" 
         [nzMd]="{ span : 8 }" 
         [nzLg]="{ span : 6 }" 
-        [nzXl]="{ span : 6 }" *ngFor="let item of listHouseSale">
+        [nzXl]="{ span : 6 }" *ngFor="let item of listHouseRent">
             <nz-list-item >
                 <nz-card
                 (click)="onCardClick(item)"
@@ -30,7 +30,7 @@
             </nz-list-item>
         </div>
     </div>
-    <!-- <div class="loadmore" nz-list-load-more>
-      <button nz-button *ngIf="!loadingMore" (click)="onLoadMore()">loading more</button>
-    </div> -->
+    <div class="loadmore" nz-list-load-more>
+        <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
+      </div>
 </nz-list>

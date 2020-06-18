@@ -14,7 +14,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
-
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzDividerModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzIconModule
+    NzIconModule,
+    NzSelectModule
   ]
 })
 export class HousesModule { }

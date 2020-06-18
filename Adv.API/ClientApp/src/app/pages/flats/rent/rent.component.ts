@@ -25,7 +25,10 @@ export class RentComponent implements OnInit {
   ngOnInit(): void {
     
   }
-
+  /**
+   * Показать объявления
+   * @param city Город, по которому фильтруем
+   */
   showAdverts(city: City){
     this.filterOption = { city: city };
     this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
@@ -42,6 +45,7 @@ export class RentComponent implements OnInit {
       this.allowToShowMoreButton(response, false);
     })
   }
+  /** Определяемся, когда показывать кнопку "загрузить еще" */
   private allowToShowMoreButton(response: FlatRentModel[], isLoadMore: boolean) {
     if(isLoadMore){
       response && response.length > 0 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
@@ -49,10 +53,11 @@ export class RentComponent implements OnInit {
       response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false; 
     }
   }
-
+  /** переход на страницу с информацией об объявлении */
   onCardClick(advert: FlatRentModel){
       this.router.navigate(['flat', 'rent',advert.id], );
   }
+  /** Загрузить еще объявляений */
   onLoadMore(){
     this.initLoading = true;
     this.pageNumber++;
