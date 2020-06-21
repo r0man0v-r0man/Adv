@@ -17,8 +17,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 @NgModule({
   declarations: [
-    FlatsComponent, 
-    SaleComponent, 
+    FlatsComponent,
+    SaleComponent,
     RentComponent
   ],
   imports: [

@@ -3,24 +3,24 @@
     <i nz-icon nzType="filter" nzTheme="outline"></i> Фильтр
 </ng-template>
 <div nz-row >
-    <div nz-col    
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <div nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }" >
-    <form   (ngSubmit)="submitHelper(helperForm.value)" nz-form [nzLayout]="'horizontal'" [formGroup]="helperForm" nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <form   (ngSubmit)="submitHelper(helperForm.value)" nz-form [nzLayout]="'horizontal'" [formGroup]="helperForm" nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }" >
         <nz-form-item nz-row >
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-control nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
                 <nz-radio-group formControlName="advertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
                 <label nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">{{ advertType.label }}</label>
@@ -28,14 +28,14 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row >
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-control nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
                 <nz-select nzShowSearch nzAllowClear
-                [nzSize]="'large'" 
+                [nzSize]="'large'"
                 formControlName="city"
                 nzPlaceHolder="Выберите город">
                 <nz-option
@@ -48,13 +48,13 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row >
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-control nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
-                <button  nz-button nzBlock="true" nzSize="large"  nzType="dashed" ><i nz-icon nzType="enter" nzTheme="outline"></i>Применить</button>
+                <button [disabled]="!helperForm.valid" nz-button nzBlock="true" nzSize="large"  nzType="dashed" ><i nz-icon nzType="enter" nzTheme="outline"></i>Применить</button>
             </nz-form-control>
         </nz-form-item>
     </form>

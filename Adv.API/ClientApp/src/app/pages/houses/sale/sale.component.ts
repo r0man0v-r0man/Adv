@@ -14,9 +14,9 @@ export class SaleComponent implements OnInit {
 
   listHouseSale: HouseSaleModel[] = [];
   filterOption: FilterOptions;
-  initLoading: boolean = true;
-  isShowMoreButton: boolean = false;
-  pageNumber: number = 1;
+  initLoading = true;
+  isShowMoreButton = false;
+  pageNumber = 1;
   constructor(
     private advertService: AdvertService,
     private router: Router
@@ -28,46 +28,43 @@ export class SaleComponent implements OnInit {
    * Показать объявления
    * @param city Город, по которому фильтруем
    */
-  showAdverts(city: City){
+  showAdverts(city: City) {
     this.filterOption = { city: city };
     this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
-      if(response && response.length !== 0){
+      if (response && response.length !== 0) {
         this.listHouseSale = [...response];
         this.initLoading = false;
         this.isShowMoreButton = true;
-      }
-      else{
+      } else {
         this.listHouseSale = [...response];
         this.initLoading = false;
         this.isShowMoreButton = false;
       }
       this.allowToShowMoreButton(response, false);
-    })
+    });
   }
   /** Определяемся, когда показывать кнопку "загрузить еще" */
   private allowToShowMoreButton(response: HouseSaleModel[], isLoadMore: boolean) {
-    if(isLoadMore){
+    if (isLoadMore) {
       response && response.length > 0 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
-    }else{
-      response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false; 
+    } else {
+      response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
     }
   }
   /** переход на страницу с информацией об объявлении */
-  onCardClick(advert: HouseSaleModel){
-      this.router.navigate(['house', 'sale', advert.id], );
+  onCardClick(advert: HouseSaleModel) {
+      this.router.navigate(['house', 'sale', advert.id]);
   }
   /** Загрузить еще объявляений */
-  onLoadMore(){
+  onLoadMore() {
     this.initLoading = true;
     this.pageNumber++;
     this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
-      if(response && response.length > 0){
+      if (response && response.length > 0) {
         this.listHouseSale = [...response];
       }
       this.allowToShowMoreButton(response, true);
-    })
-
+    });
     this.initLoading = false;
-    
   }
 }
