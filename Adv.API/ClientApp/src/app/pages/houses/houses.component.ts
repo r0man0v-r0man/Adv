@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { RentComponent } from './rent/rent.component';
 import { SaleComponent } from './sale/sale.component';
@@ -20,7 +20,7 @@ export class HousesComponent implements OnInit {
   /** типы объявлений */
   advertTypesList: Array<{ value: string; label: string }> = [];
 
-  isShowComponent = false;
+  isShowComponent = true;
 
   @ViewChild(RentComponent) private rentComponent: RentComponent;
   @ViewChild(SaleComponent) private saleComponent: SaleComponent;
@@ -33,6 +33,7 @@ export class HousesComponent implements OnInit {
 
   ngOnInit(): void {
     this.initHelperForm();
+    this.submitHelper(this.helperForm.value);
   }
   submitHelper(helperValues: {advertType: AdvertType; city: City}) {
     this.helper = {...helperValues};

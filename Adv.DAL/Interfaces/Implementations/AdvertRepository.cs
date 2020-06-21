@@ -104,7 +104,7 @@ namespace Adv.DAL.Interfaces.Implementations
             return await context.FlatRents
                 .Include(prop => prop.City)
                 .Include(prop => prop.Images).AsNoTracking()
-                .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
+                .Where(prop => prop.IsActive && prop.City.Id == city.Id)
                 .OrderByDescending(prop => prop.Created)
                 .GetAdvertsByPage(pageNumber)
                 .ToListAsync()
@@ -115,12 +115,15 @@ namespace Adv.DAL.Interfaces.Implementations
         {
 
             using var context = contextFactory.GetAdvContext();
-            return await context.FlatSales.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
-                                                          .OrderByDescending(prop => prop.Created)
-                                                          .GetAdvertsByPage(pageNumber)
-                                                          .ToListAsync()
-                                                          .ConfigureAwait(false);
+            return await context.FlatSales
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive && prop.City.Id == city.Id)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
 
         }
 
@@ -128,24 +131,28 @@ namespace Adv.DAL.Interfaces.Implementations
         {
 
             using var context = contextFactory.GetAdvContext();
-            return await context.HouseRents.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
-                                                          .OrderByDescending(prop => prop.Created)
-                                                          .GetAdvertsByPage(pageNumber)
-                                                          .ToListAsync()
-                                                          .ConfigureAwait(false);
+            return await context.HouseRents
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images).AsNoTracking()
+                .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
 
         }
 
         public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city)
         {
             using var context = contextFactory.GetAdvContext();
-            return await context.HouseSales.Include(prop => prop.City).Include(prop => prop.Images).AsNoTracking()
-                                                          .Where(prop => prop.IsActive == true && prop.City.Id == city.Id)
-                                                          .OrderByDescending(prop => prop.Created)
-                                                          .GetAdvertsByPage(pageNumber)
-                                                          .ToListAsync()
-                                                          .ConfigureAwait(false);
+            return await context.HouseSales
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images).AsNoTracking()
+                .Where(prop => prop.IsActive && prop.City.Id == city.Id)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
         }
 
         public async Task<IEnumerable<FlatRent>> GetAnyFlatRentsAsync(int pageNumber)
@@ -155,7 +162,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Include(prop => prop.City)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
-                .Where(prop => prop.IsActive == true)
+                .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
                 .GetAdvertsByPage(pageNumber)
                 .ToListAsync()
@@ -169,7 +176,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Include(prop => prop.City)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
-                .Where(prop => prop.IsActive == true)
+                .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
                 .GetAdvertsByPage(pageNumber)
                 .ToListAsync()
@@ -183,7 +190,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Include(prop => prop.City)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
-                .Where(prop => prop.IsActive == true)
+                .Where(prop => prop.IsActive )
                 .OrderByDescending(prop => prop.Created)
                 .GetAdvertsByPage(pageNumber)
                 .ToListAsync()
@@ -197,7 +204,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Include(prop => prop.City)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
-                .Where(prop => prop.IsActive == true)
+                .Where(prop => prop.IsActive )
                 .OrderByDescending(prop => prop.Created)
                 .GetAdvertsByPage(pageNumber)
                 .ToListAsync()

@@ -4,6 +4,7 @@ import { FilterOptions } from 'src/app/models/filterOptions';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Router } from '@angular/router';
 import { City } from 'src/app/models/city.model';
+import {HouseRentModel} from "../../../models/house-rent.model";
 
 @Component({
   selector: 'houses-sale',
@@ -17,6 +18,8 @@ export class SaleComponent implements OnInit {
   initLoading = true;
   isShowMoreButton = false;
   pageNumber = 1;
+  isAnyAdverts = false;
+
   constructor(
     private advertService: AdvertService,
     private router: Router
@@ -29,19 +32,35 @@ export class SaleComponent implements OnInit {
    * @param city Город, по которому фильтруем
    */
   showAdverts(city: City) {
+    city ? this.showFilterAdverts(city) : this.showAnyAdverts();
+  }
+  /** объявления без фильтра, любые */
+  showAnyAdverts() {
+    this.isAnyAdverts = true;
+    this.advertService.getAnyHouseSales(this.pageNumber).subscribe(response => {
+      this.AddAdvertsToList(response);
+    });
+  }
+  /** Показать объявления с фильтром */
+  showFilterAdverts(city: City) {
+    this.isAnyAdverts = false;
     this.filterOption = { city: city };
     this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
-      if (response && response.length !== 0) {
-        this.listHouseSale = [...response];
-        this.initLoading = false;
-        this.isShowMoreButton = true;
-      } else {
-        this.listHouseSale = [...response];
-        this.initLoading = false;
-        this.isShowMoreButton = false;
-      }
-      this.allowToShowMoreButton(response, false);
+      this.AddAdvertsToList(response);
     });
+  }
+  /** добавить объявления */
+  private AddAdvertsToList(response: HouseSaleModel[]) {
+    if (response && response.length !== 0) {
+      this.listHouseSale = [...response];
+      this.initLoading = false;
+      this.isShowMoreButton = true;
+    } else {
+      this.listHouseSale = [...response];
+      this.initLoading = false;
+      this.isShowMoreButton = false;
+    }
+    this.allowToShowMoreButton(response, false);
   }
   /** Определяемся, когда показывать кнопку "загрузить еще" */
   private allowToShowMoreButton(response: HouseSaleModel[], isLoadMore: boolean) {
@@ -59,12 +78,22 @@ export class SaleComponent implements OnInit {
   onLoadMore() {
     this.initLoading = true;
     this.pageNumber++;
-    this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
-      if (response && response.length > 0) {
-        this.listHouseSale = [...response];
-      }
-      this.allowToShowMoreButton(response, true);
-    });
+    if (this.isAnyAdverts) {
+      this.advertService.getAnyHouseSales(this.pageNumber).subscribe(response => {
+        this.addLoadMoreAdvertsToList(response);
+      });
+    } else {
+      this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
+        this.addLoadMoreAdvertsToList(response);
+      });
+    }
     this.initLoading = false;
+  }
+  /** Добавить еще объявлений  */
+  private addLoadMoreAdvertsToList(response: HouseSaleModel[]) {
+    if (response && response.length > 0) {
+      this.listHouseSale = [...response];
+    }
+    this.allowToShowMoreButton(response, true);
   }
 }

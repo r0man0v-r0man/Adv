@@ -24,7 +24,6 @@ export class RentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.showAnyAdverts();
   }
   /**
    * Показать объявления

@@ -32,6 +32,7 @@ export class FlatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initHelperForm();
+    this.submitHelper(this.helperForm.value);
   }
   submitHelper(helperValues: {advertType: AdvertType; city: City}) {
     this.helper = {...helperValues};
@@ -58,7 +59,7 @@ export class FlatsComponent implements OnInit {
     this.setAdvertTypes();
     this.helperForm = this.formBuilder.group({
       advertType: [ this.selectedAdvertType ],
-      city: [ null, [Validators.required] ]
+      city: [ null ]
     });
   }
   /** установка типов объявлений */
