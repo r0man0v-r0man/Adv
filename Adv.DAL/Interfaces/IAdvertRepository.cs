@@ -71,6 +71,9 @@ namespace Adv.DAL.Interfaces
         Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city);
         Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city);
         Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city);
-
+        Task<IEnumerable<FlatRent>> GetAnyFlatRentsAsync(int pageNumber);
+        Task<IEnumerable<FlatSale>> GetAnyFlatSalesAsync(int pageNumber);
+        Task<IEnumerable<HouseRent>> GetAnyHouseRentsAsync(int pageNumber);
+        Task<IEnumerable<HouseSale>> GetAnyHouseSalesAsync(int pageNumber);
     }
 }

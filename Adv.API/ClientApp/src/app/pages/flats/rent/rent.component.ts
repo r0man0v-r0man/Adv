@@ -17,6 +17,7 @@ export class RentComponent implements OnInit {
   initLoading: boolean = true;
   isShowMoreButton: boolean = false;
   pageNumber: number = 1;
+  isAnyAdverts: boolean = false;
   constructor(
     private advertService: AdvertService,
     private router: Router
@@ -34,25 +35,34 @@ export class RentComponent implements OnInit {
   }
   /** объявления без фильтра, любые */
   showAnyAdverts(){
-    this.advertService.getAnyFlatRents(this.pageNumber)
+    this.isAnyAdverts = true;
+    this.advertService.getAnyFlatRents(this.pageNumber).subscribe(response => {
+      this.AddAdvertsToList(response);
+    })
   }
   /** Показать объявления с фильтром */
   showFilterAdverts(city: City){
+    this.isAnyAdverts = false;
     this.filterOption = { city: city };
     this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
-      if(response && response.length !== 0){
-        this.listFlatRent = [...response];
-        this.initLoading = false;
-        this.isShowMoreButton = true;
-      }
-      else{
-        this.listFlatRent = [...response];
-        this.initLoading = false;
-        this.isShowMoreButton = false;
-      }
-      this.allowToShowMoreButton(response, false);
+      this.AddAdvertsToList(response);
     })
   }
+  /** добавить объявления */
+  private AddAdvertsToList(response: FlatRentModel[]) {
+    if (response && response.length !== 0) {
+      this.listFlatRent = [...response];
+      this.initLoading = false;
+      this.isShowMoreButton = true;
+    }
+    else {
+      this.listFlatRent = [...response];
+      this.initLoading = false;
+      this.isShowMoreButton = false;
+    }
+    this.allowToShowMoreButton(response, false);
+  }
+
   /** Определяемся, когда показывать кнопку "загрузить еще" */
   private allowToShowMoreButton(response: FlatRentModel[], isLoadMore: boolean) {
     if(isLoadMore){
@@ -69,14 +79,24 @@ export class RentComponent implements OnInit {
   onLoadMore(){
     this.initLoading = true;
     this.pageNumber++;
-    this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
-      if(response && response.length > 0){
-        this.listFlatRent = [...response];
-      }
-      this.allowToShowMoreButton(response, true);
-    })
 
+    if(this.isAnyAdverts){
+      this.advertService.getAnyFlatRents(this.pageNumber).subscribe(response => {
+        this.addLoadMoreAdvertsToList(response);
+      })
+    } else {
+      this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
+        this.addLoadMoreAdvertsToList(response);
+      })
+    }
     this.initLoading = false;
     
+  }
+  /** Добавить еще объявлений  */
+  private addLoadMoreAdvertsToList(response: FlatRentModel[]) {
+    if (response && response.length > 0) {
+      this.listFlatRent = [...response];
+    }
+    this.allowToShowMoreButton(response, true);
   }
 }

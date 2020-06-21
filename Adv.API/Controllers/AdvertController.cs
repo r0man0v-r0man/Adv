@@ -8,7 +8,6 @@ using Adv.API.Models.Adverts;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Exceptions;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Adv.API.Controllers
@@ -195,6 +194,62 @@ namespace Adv.API.Controllers
             var result = await _advertService.GetHouseSalesAsync(pageNumber, filterOptions.City).ConfigureAwait(false);
             return Ok(result.Select(advert => (HouseSaleViewModel)advert));
 
+        }
+        [HttpGet("getAnyFlatRents")]
+        public async Task<ActionResult<IEnumerable<FlatRentViewModel>>> GetAnyFlatRents(int pageNumber)
+        {
+            try
+            {
+                var result = await _advertService.GetAnyFlatRentsAsync(pageNumber).ConfigureAwait(false);
+                return Ok(result.Select(advert => (FlatRentViewModel)advert));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
+        [HttpGet("getAnyFlatSales")]
+        public async Task<ActionResult<IEnumerable<FlatSaleViewModel>>> GetAnyFlatSales(int pageNumber)
+        {
+            try
+            {
+                var result = await _advertService.GetAnyFlatSalesAsync(pageNumber).ConfigureAwait(false);
+                return Ok(result.Select(advert => (FlatSaleViewModel)advert));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
+        [HttpGet("getAnyHouseSales")]
+        public async Task<ActionResult<HouseSaleViewModel>> GetAnyHouseSales(int pageNumber)
+        {
+            try
+            {
+                var result = await _advertService.GetAnyHouseSalesAsync(pageNumber).ConfigureAwait(false);
+                return Ok(result.Select(advert => (HouseSaleViewModel)advert));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
+        }
+        [HttpGet("getAnyHouseRents")]
+        public async Task<ActionResult<HouseRentViewModel>> GetAnyHouseRents(int pageNumber)
+        {
+            try
+            {
+                var result = await _advertService.GetAnyFlatRentsAsync(pageNumber).ConfigureAwait(false);
+                return Ok(result.Select(advert => (FlatRentViewModel)advert));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
         }
         #endregion
 

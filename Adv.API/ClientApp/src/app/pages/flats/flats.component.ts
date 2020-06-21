@@ -38,7 +38,13 @@ export class FlatsComponent implements OnInit {
     this.helper = {...helperValues};
     this.advertSwitcher();
     this.changeDetector.detectChanges();
-    this.isShowComponent ? this.saleComponent.showAdverts(this.helper.city) : this.rentComponent.showAdverts(this.helper.city);
+    if(this.isShowComponent){
+      this.saleComponent.listFlatSale = [];
+      this.saleComponent.showAdverts(this.helper.city);
+    } else {
+      this.rentComponent.listFlatRent = [];
+      this.rentComponent.showAdverts(this.helper.city);
+    }
   }
   /** переключение типов объявлений сдать/продать */
   private advertSwitcher() {

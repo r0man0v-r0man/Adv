@@ -147,5 +147,61 @@ namespace Adv.DAL.Interfaces.Implementations
                                                           .ToListAsync()
                                                           .ConfigureAwait(false);
         }
+
+        public async Task<IEnumerable<FlatRent>> GetAnyFlatRentsAsync(int pageNumber)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.FlatRents
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive == true)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<FlatSale>> GetAnyFlatSalesAsync(int pageNumber)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.FlatSales
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive == true)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<HouseRent>> GetAnyHouseRentsAsync(int pageNumber)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseRents
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive == true)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<HouseSale>> GetAnyHouseSalesAsync(int pageNumber)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseSales
+                .Include(prop => prop.City)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive == true)
+                .OrderByDescending(prop => prop.Created)
+                .GetAdvertsByPage(pageNumber)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
     }
 }
