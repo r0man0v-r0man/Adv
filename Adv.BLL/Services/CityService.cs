@@ -1,10 +1,8 @@
 ﻿using Adv.BLL.DTO;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Adv.BLL.Services

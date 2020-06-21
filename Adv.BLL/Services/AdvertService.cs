@@ -16,7 +16,6 @@ namespace Adv.BLL.Services
     {
         private readonly IAdvertRepository advertRepository;
         private readonly IMemoryCache memoryCache;
-        private readonly IConfiguration _config;
 
         private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
         private const string flatRentCacheKey = "flatRent";
@@ -29,10 +28,9 @@ namespace Adv.BLL.Services
         {
             this.advertRepository = advertRepository;
             this.memoryCache = memoryCache;
-            _config = configuration;
             MemoryCacheEntryOptions = new MemoryCacheEntryOptions
             {
-                SlidingExpiration = TimeSpan.FromHours(_config.GetValue<int>("MemoryCacheEntryOptions:SlidingExpiration"))
+                SlidingExpiration = TimeSpan.FromHours(configuration.GetValue<int>("MemoryCacheEntryOptions:SlidingExpiration"))
             };
         }
 
@@ -149,5 +147,6 @@ namespace Adv.BLL.Services
             var adverts = await advertRepository.GetAnyHouseSalesAsync(pageNumber).ConfigureAwait(false);
             return adverts.Select(advert => (HouseSaleDto)advert);
         }
+        
     }
 }

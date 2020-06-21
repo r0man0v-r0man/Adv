@@ -210,5 +210,6 @@ namespace Adv.DAL.Interfaces.Implementations
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
+
     }
 }
