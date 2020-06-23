@@ -120,7 +120,7 @@ namespace Adv.DAL.Interfaces
         /// <returns></returns>
         Task<IEnumerable<HouseSale>> GetAnyHouseSalesAsync(int pageNumber);
 
-        Task<(IEnumerable<FlatRent> flatRents, IEnumerable<FlatSale> flatSales, IEnumerable<HouseRent> houseRents,
-            IEnumerable<HouseSale> houseSales)> GetUserAdverts(AppUser user, int pageNumber);
+        // Task<(IEnumerable<FlatRent> flatRents, IEnumerable<FlatSale> flatSales, IEnumerable<HouseRent> houseRents,
+        //     IEnumerable<HouseSale> houseSales)> GetUserAdverts(AppUser user, int pageNumber);
     }
 }
