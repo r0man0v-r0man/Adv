@@ -49,9 +49,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\common\Forms" />
     <Folder Include="Models\Adverts\UpdateModels\" />
     <Folder Include="Models\Enums\" />
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\address.interface.ts" />
   </ItemGroup>
 
 

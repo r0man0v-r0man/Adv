@@ -1,12 +1,12 @@
-import { UploadFile } from 'ng-zorro-antd/upload';
-import { City } from './city.model';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import {Address} from './address.interface';
 
 export interface FlatSaleModel {
     id: number;
     userId: string;
     isActive: boolean;
-    images: UploadFile[];
-    address: string;
+    images: NzUploadFile[];
+    address: Address;
     floor: number;
     allFloor: number;
     rooms: number;
@@ -20,5 +20,4 @@ export interface FlatSaleModel {
     description: string;
     created: Date;
     lastModified: Date;
-    city: City;
 }

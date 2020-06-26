@@ -3,12 +3,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
 import { Observable } from 'rxjs';
-import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { SuggestService } from 'src/app/services/suggest.service';
 import { HouseSaleModel } from 'src/app/models/house-sale.model';
 import { AdvertService } from 'src/app/services/advert.service';
-import { City } from 'src/app/models/city.model';
+import {Address} from '../../../../models/address.interface';
 
 @Component({
   selector: 'sale-house',
@@ -17,13 +17,13 @@ import { City } from 'src/app/models/city.model';
 })
 export class SaleHouseComponent implements OnInit{
   /** фото к объявлению */
-  imageList : UploadFile[] = [];
-  images: UploadFile[] = [];
+  imageList: NzUploadFile[] = [];
+  images: NzUploadFile[] = [];
   /** идентификатор пользователя */
   userId: string;
   /** форма */
   saleHouseForm: FormGroup;
-  address: string = '';
+  address: Address;
   /** общая площадь дома */
   houseArea: number;
   /** жилая площадь дома */
@@ -31,29 +31,29 @@ export class SaleHouseComponent implements OnInit{
   /** площадь кухни */
   kitchenArea: number;
   /** площадь участка */
-  housePlotArea:number;
+  housePlotArea: number;
   /** отопление */
-  heating: boolean = false;
+  heating = false;
   /** вода */
-  water:boolean = false;
+  water = false;
   /** газ */
-  gas:boolean = false;
+  gas = false;
   /** канализация */
-  sewage:boolean = false;
+  sewage = false;
   /** электричество */
-  electricity: boolean = false;
+  electricity = false;
   /** баня */
-  bathhouse:boolean = false;
+  bathhouse = false;
   /** гараж */
-  garage: boolean = false;
+  garage = false;
   /** цена */
-  price: number = 30000;
+  price = 30000;
+  /** телефон */
+  phone = '80291234567';
+  /** описание */
+  description = '';
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
-  /** телефон */
-  phone: string = '80291234567';
-  /** описание */
-  description: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,12 +68,15 @@ export class SaleHouseComponent implements OnInit{
     this.userId = this.authService.currentUser.sub;
     this.initForm();
   }
-  initForm(){
+  initForm() {
     this.saleHouseForm = this.formBuilder.group({
-      userId:[ this.userId ,[Validators.required]],
+      userId: [ this.userId, [Validators.required]],
       isActive: [ true ],
       images: [ this.images , [Validators.required]],
-      address: [ null, [Validators.required]],
+      address: [ this.formBuilder.group({
+        city: [ null ],
+        exactLocation: [ null ]
+      })],
       houseArea: [ this.houseArea, [Validators.required]],
       houseLiveArea: [ this.houseLiveArea, [Validators.required]],
       kitchenArea: [ this.kitchenArea, [Validators.required] ],
@@ -86,36 +89,33 @@ export class SaleHouseComponent implements OnInit{
       bathhouse: [ this.bathhouse ],
       garage: [ this.garage ],
       price: [ null, [Validators.required]],
-      phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
-      description: [ null, [DescriptionValidators.notOnlySpace]],
-      city: [ null, [Validators.required]]
-    })
+      phone: [ this.phone, [Validators.required, Validators.pattern('[0-9]*')]],
+      description: [ null, [DescriptionValidators.notOnlySpace]]
+    });
   }
 
-  submitForm(){
-    const advert: HouseSaleModel = { ...this.saleHouseForm.value }
+  submitForm() {
+    const advert: HouseSaleModel = { ...this.saleHouseForm.value };
     this.advertService.addHouseSale(advert);
   }
   /** загрузка картинки */
-  onUploadChange(info:  UploadChangeParam ){
+  onUploadChange(info: NzUploadChangeParam ){
     this.imageService.handleChange(info).subscribe(response => {
       this.imageList = [...this.imageService.imageList];
       this.images = response;
-      this.setHouseSaleFormControlValue('images',this.images);
+      this.setHouseSaleFormControlValue('images', this.images);
       this.cd.detectChanges();
-    })
+    });
   }
   /** Delete file */
-  onDelete = (file: UploadFile) : Observable<boolean> => {
-    return new Observable(observer =>{
-      if(file){
+  onDelete = (file: NzUploadFile): Observable<boolean> => {
+    return new Observable(observer => {
+      if (file) {
         this.imageService.delete(file.response.deleteHash)
-        .subscribe(response =>{
-          if(response) {
-            
-          let index = this.images.findIndex(x=>x.uid === file.response.uid);
-          
-          if(index > -1) {
+        .subscribe(response => {
+          if (response) {
+          const index = this.images.findIndex(x => x.uid === file.response.uid);
+          if (index > -1) {
             this.images.splice(index, 1);
           }
           this.setHouseSaleFormControlValue('images', this.images);
@@ -124,15 +124,15 @@ export class SaleHouseComponent implements OnInit{
           }
         });
       }
-    })
+    });
   }
 
   /**
    * установка значения для поля формы
-   * @param formControlName имя поля 
-   * @param value значение 
+   * @param formControlName имя поля
+   * @param value значение
    */
-  private setHouseSaleFormControlValue(formControlName: string, value: any){
+  private setHouseSaleFormControlValue(formControlName: string, value: any) {
     this.saleHouseForm.controls[formControlName].setValue(value);
-  };
+  }
 }

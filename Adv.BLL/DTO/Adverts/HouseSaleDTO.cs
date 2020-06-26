@@ -29,7 +29,8 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public string Address { get; set; }
+        public int AddressId { get; set; }
+        public AddressDto Address { get; set; }
         /// <summary>
         /// Общая площадь
         /// </summary>
@@ -112,8 +113,7 @@ namespace Adv.BLL.DTO.Adverts
             Garage = dto.Garage,
             Price = dto.Price,
             Phone = dto.Phone,
-            Description = dto.Description,
-            CityId = dto.CityDto.Id
+            Description = dto.Description
         };
         /// <summary>
         /// DAL -> DTO
@@ -141,8 +141,7 @@ namespace Adv.BLL.DTO.Adverts
             Phone = dal.Phone,
             Description = dal.Description,
             Created = dal.Created,
-            LastModified = dal.LastModified,
-            CityDto = dal.City
+            LastModified = dal.LastModified
         };
     }
 }

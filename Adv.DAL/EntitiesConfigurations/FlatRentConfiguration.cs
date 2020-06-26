@@ -68,10 +68,6 @@ namespace Adv.DAL.EntitiesConfigurations
             builder
                 .Property(prop => prop.Description)
                 .IsRequired();
-            builder
-                .HasOne(prop => prop.City)
-                .WithMany(prop => prop.FlatRents)
-                .HasForeignKey(prop => prop.CityId);
         }
     }
 }

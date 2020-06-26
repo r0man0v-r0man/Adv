@@ -4,15 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Adv.DAL.EntitiesConfigurations
 {
-    public class CityConfiguration : IEntityTypeConfiguration<City>
+    public class AddressConfiguration : IEntityTypeConfiguration<Address>
     {
-        public void Configure(EntityTypeBuilder<City> builder)
+        public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder?
+            builder
                 .Property(prop => prop.Id)
-                .IsRequired();
-            builder?
-                .Property(prop => prop.Name)
                 .IsRequired();
         }
     }

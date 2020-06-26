@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Adv.DAL.Entities.Common;
 using Adv.DAL.Entities.Images;
 
@@ -28,7 +26,8 @@ namespace Adv.DAL.Entities.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public string Address { get; set; }
+        public int AddressId { get; set; }
+        public Address Address { get; set; }
         /// <summary>
         /// количество комнат
         /// </summary>
@@ -77,10 +76,6 @@ namespace Adv.DAL.Entities.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        /// <summary>
-        /// город
-        /// </summary>
-        public int? CityId { get; set; }
-        public City City { get; set; }
+
     }
 }

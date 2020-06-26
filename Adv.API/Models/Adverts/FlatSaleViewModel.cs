@@ -29,7 +29,7 @@ namespace Adv.API.Models.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public string Address { get; set; }
+        public AddressViewModel Address { get; set; }
         /// <summary>
         /// этаж 
         /// </summary>
@@ -74,7 +74,6 @@ namespace Adv.API.Models.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        public CityViewModel City { get; set; }
 
         /// <summary>
         /// View -> DTO
@@ -97,8 +96,7 @@ namespace Adv.API.Models.Adverts
             Toilet = view.Toilet,
             Price = view.Price,
             Phone = view.Phone,
-            Description = view.Description,
-            CityDto = view.City
+            Description = view.Description
         };
         /// <summary>
         /// DTO -> View
@@ -123,8 +121,7 @@ namespace Adv.API.Models.Adverts
             Phone = dto.Phone,
             Description = dto.Description,
             Created = dto.Created,
-            LastModified = dto.LastModified,
-            City = dto.CityDto
+            LastModified = dto.LastModified
         };
     }
 }

@@ -8,61 +8,57 @@ namespace Adv.DAL.EntitiesConfigurations
     {
         public void Configure(EntityTypeBuilder<FlatSale> builder)
         {
-            builder
+            builder?
                 .Property(prop => prop.Id)
                 .IsRequired();
-            builder
+            builder?
                 .HasOne(prop => prop.AppUser)
                 .WithMany(prop => prop.FlatSales)
                 .HasForeignKey(prop => prop.AppUserId);
-            builder
+            builder?
                 .Property(prop => prop.IsActive)
                 .IsRequired();
-            builder
+            builder?
                 .HasMany(prop => prop.Images)
                 .WithOne(prop => prop.FlatSale)
                 .HasForeignKey(prop => prop.FlatSaleId);
-            builder
+            builder?
                 .Property(prop => prop.Address)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Floor)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.AllFloor)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Rooms)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.FlatArea)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.FlatLiveArea)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.KitchenArea)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Balcony)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Toilet)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Price)
                 .HasColumnType("money")
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Phone)
                 .IsRequired();
-            builder
+            builder?
                 .Property(prop => prop.Description)
                 .IsRequired();
-            builder
-                .HasOne(prop => prop.City)
-                .WithMany(prop => prop.FlatSales)
-                .HasForeignKey(prop => prop.CityId);
         }
     }
 }

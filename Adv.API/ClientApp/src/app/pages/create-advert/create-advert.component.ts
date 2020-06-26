@@ -33,7 +33,7 @@ export class CreateAdvertComponent implements OnInit {
   private getHelperFormValues() {
     this.helperForm.valueChanges.subscribe(values => {
       this.helper = { ...this.helperForm.value };
-    })
+    });
   }
   /** инициализация формы */
   private initHelperForm(){
@@ -41,22 +41,21 @@ export class CreateAdvertComponent implements OnInit {
     this.setListOfRealEstaties();
     this.helperForm = this.formBuilder.group({
       advertType: [ this.selectedAdvertType, [Validators.required]],
-      realEstateType: [ this.selectedRealEstate, [Validators.required]]  
-    })
+      realEstateType: [ this.selectedRealEstate, [Validators.required]]
+    });
   }
   /** установка типов объявлений */
   private setAdvertTypes(){
     this.advertTypesList.push(
       { label: 'Сдать', value: AdvertType.rent },
       { label: 'Продать', value: AdvertType.sale }
-    )
+    );
   }
   /** установка типов недвижимости */
   private setListOfRealEstaties(){
     this.listOfRealEstaties.push(
       { value: RealEstaties.flat, label: 'Квартира' },
       { value: RealEstaties.house, label: 'Дом' }
-    )
+    );
   }
-  
 }

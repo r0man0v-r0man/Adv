@@ -27,7 +27,8 @@ namespace Adv.BLL.DTO.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public string Address { get; set; }
+        public int AddressId { get; set; }
+        public AddressDto Address { get; set; }
         /// <summary>
         /// этаж 
         /// </summary>
@@ -80,7 +81,7 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
         public CityDto City { get; set; }
 
 
@@ -107,8 +108,7 @@ namespace Adv.BLL.DTO.Adverts
             Price = dto.Price,
             Duration = dto.Duration,
             Phone = dto.Phone,
-            Description = dto.Description,
-            CityId = dto.CityId
+            Description = dto.Description
         };
         /// <summary>
         /// DAL -> DTO
@@ -135,9 +135,7 @@ namespace Adv.BLL.DTO.Adverts
             Phone = dal.Phone,
             Description = dal.Description,
             Created = dal.Created,
-            LastModified = dal.LastModified,
-            City = dal?.City,
-            CityId = dal.CityId
+            LastModified = dal.LastModified
         };
     }
 }

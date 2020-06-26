@@ -1,10 +1,9 @@
-
 <form nz-form [formGroup]="saleHouseForm" [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }">
         <nz-form-control >
             <nz-upload
@@ -22,8 +21,8 @@
             [nzListType]="'picture'"
             ><!--nzSize 5mb-->
             <button nzBlock="true" nz-button nzSize="large">
-                <i nz-icon nzType="upload" nzTheme="outline"></i> 
-                Загрузите изображение      
+                <i nz-icon nzType="upload" nzTheme="outline"></i>
+                Загрузите изображение
             </button>
             <p><small>Максимальный размер фото 5mb.</small>
             </p>
@@ -35,14 +34,14 @@
             Адрес
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
+    <nz-form-item nz-col
+        [nzXs]="{ span : 24 }"
+        [nzSm]="{ span : 24 }"
+        [nzMd]="{ span : 24 }"
+        [nzLg]="{ span : 24 }"
         [nzXl]="{ span : 24 }" >
             <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
-            <nz-form-control 
+            <nz-form-control
             nzHasFeedback
             nzErrorTip="Выберите город!">
                 <nz-select nzShowSearch nzAllowClear
@@ -58,18 +57,17 @@
                 </nz-select>
             </nz-form-control>
         </nz-form-item>
-        <nz-form-item nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
+        <nz-form-item nz-col
+        [nzXs]="{ span : 24 }"
+        [nzSm]="{ span : 24 }"
+        [nzMd]="{ span : 24 }"
+        [nzLg]="{ span : 24 }"
         [nzXl]="{ span : 24 }">
             <nz-form-label nzRequired nzFor="address">Укажите точный адрес</nz-form-label>
-
             <nz-form-control  nzHasFeedback  nzErrorTip="Укажите точный адрес!" >
             <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
                 <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="address"
-                (ngModelChange)="suggestService.searchChange$.next($event)" 
+                (ngModelChange)="suggestService.searchChange$.next($event)"
                 [nzAutocomplete]="auto" />
             </nz-input-group>
             <ng-template #suffixIcon>
@@ -88,11 +86,11 @@
             Площадь
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-label nzRequired="true" nzFor="houseArea" >Общая площадь, кв.м</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите общую площадь!">
@@ -106,11 +104,11 @@
             [nzStep]="1"></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-label nzRequired="true" nzFor="houseLiveArea" >Жилая площадь, кв.м</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите жилую площадь!">
@@ -124,11 +122,11 @@
             [nzStep]="1"></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-label nzRequired="true" nzFor="kitchenArea" >Площадь кухни, кв.м</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите площадь кухни!">
@@ -142,11 +140,11 @@
             [nzStep]="1"></nz-input-number>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-label nzRequired="true" nzFor="housePlotArea" >Площадь участка, кв.м</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите площадь участка!">
@@ -165,71 +163,71 @@
             Удобства
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="heating" [(ngModel)]="heating">Отопление</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="water" [(ngModel)]="water">Вода</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="gas" [(ngModel)]="gas">Газ</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="sewage" [(ngModel)]="sewage">Канализация</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="electricity" [(ngModel)]="electricity">Электричество</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="bathhouse" [(ngModel)]="bathhouse">Баня</label>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
             <label nz-checkbox formControlName="garage" [(ngModel)]="garage">Гараж</label>
@@ -240,11 +238,11 @@
             Стоимость
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }">
         <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
@@ -265,11 +263,11 @@
             Контакты
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 11 }" 
-    [nzMd]="{ span : 11 }" 
-    [nzLg]="{ span : 11 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-label nzRequired="true" nzFor="phone" >Телефон</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите телефон!">
@@ -285,18 +283,18 @@
             Описание
         </ng-template>
     </nz-divider>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }">
         <nz-form-control nzHasFeedback [nzErrorTip]="descriptionErrorTpl">
-            <textarea 
+            <textarea
             [nzSize]="'large'"
             formControlName="description"
             placeholder="Ваше описание"
-            [nzAutosize]="{ minRows: 4, maxRows: 6 }" 
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
             nz-input></textarea>
             <ng-template #descriptionErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')">
@@ -308,19 +306,19 @@
             </ng-template>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <nz-form-item nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }">
         <nz-form-control >
-          <button nz-button 
-          nzType="primary" 
-          [nzSize]="'large'"  
+          <button nz-button
+          nzType="primary"
+          [nzSize]="'large'"
           (click)="submitForm()"
           [disabled]="!saleHouseForm.valid"
-           nzBlock="true">  
+           nzBlock="true">
            <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
         </nz-form-control>
       </nz-form-item>
