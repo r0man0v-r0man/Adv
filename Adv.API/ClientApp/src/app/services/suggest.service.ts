@@ -14,7 +14,7 @@ export class SuggestService  {
     /** for SSR */
     private baseUrl: string;
     /** Array of cities */
-listOfCities: City[] = [];
+  listOfCities: City[] = [];
   /** значение поля ввода адреса */
   searchChange$ = new Subject<string>();
   /** статус поиска */

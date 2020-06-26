@@ -11,7 +11,7 @@ import { AdvertService } from 'src/app/services/advert.service';
 import {Address} from '../../../../models/address.interface';
 
 @Component({
-  selector: 'sale-house',
+  selector: 'app-sale-house',
   templateUrl: './sale-house.component.html',
   styleUrls: ['./sale-house.component.less']
 })

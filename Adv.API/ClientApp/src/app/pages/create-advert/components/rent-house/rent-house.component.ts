@@ -9,10 +9,9 @@ import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { DescriptionValidators } from '../../validators/description.validators';
 import { Duration } from 'src/app/models/duration';
-import { City } from 'src/app/models/city.model';
 
 @Component({
-  selector: 'rent-house',
+  selector: 'app-rent-house',
   templateUrl: './rent-house.component.html',
   styleUrls: ['./rent-house.component.less']
 })
@@ -109,9 +108,9 @@ export class RentHouseComponent implements OnInit {
         this.imageService.delete(file.response.deleteHash)
         .subscribe(response =>{
           if(response) {
-            
+
           let index = this.images.findIndex(x=>x.uid === file.response.uid);
-          
+
           if(index > -1) {
             this.images.splice(index, 1);
           }
@@ -126,8 +125,8 @@ export class RentHouseComponent implements OnInit {
 
   /**
    * установка значения для поля формы
-   * @param formControlName имя поля 
-   * @param value значение 
+   * @param formControlName имя поля
+   * @param value значение
    */
   private setHouseRentFormControlValue(formControlName: string, value: any){
     this.rentHouseForm.controls[formControlName].setValue(value);

@@ -25,9 +25,9 @@ export class Constants {
   static getAnyHouseRentsURL = environment.webApi + 'advert/getAnyHouseRents';
   static getAnyHouseSalesURL = environment.webApi + 'advert/getAnyHouseSales';
   //city
-  static getCitiesURL = environment.webApi + 'cities/getCities'
+  static getCitiesURL = environment.webApi + 'cities/getCities';
   //flat
-  static flat = environment.webApi +  'flat'; 
+  static flat = environment.webApi +  'flat';
   static getAllFlats = environment.webApi +  'flat/getAll';
   static deleteFlat = environment.webApi +  'flat';
   static updateFlat = environment.webApi + 'flat';

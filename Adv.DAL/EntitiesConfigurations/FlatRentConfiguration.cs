@@ -25,9 +25,7 @@ namespace Adv.DAL.EntitiesConfigurations
                 .HasMany(prop => prop.Images)
                 .WithOne(prop => prop.FlatRent)
                 .HasForeignKey(prop => prop.FlatRentId);
-            builder
-                .Property(prop => prop.Address)
-                .IsRequired();
+            
             builder
                 .Property(prop => prop.Floor)
                 .IsRequired();

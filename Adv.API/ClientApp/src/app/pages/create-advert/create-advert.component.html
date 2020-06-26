@@ -1,36 +1,36 @@
 <div nz-row  >
-    <div nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 12 }" 
-    [nzLg]="{ span : 12 }" 
+    <div nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 12 }"
+    [nzLg]="{ span : 12 }"
     [nzXl]="{ span : 12 }">
-    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" nz-col 
-    [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
+    <form id="helper-form" nz-form [nzLayout]="'vertical'" [formGroup]="helperForm" nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }" >
-        <nz-form-item nz-col 
-        [nzXs]="{ span : 24 }" 
-        [nzSm]="{ span : 24 }" 
-        [nzMd]="{ span : 24 }" 
-        [nzLg]="{ span : 24 }" 
+        <nz-form-item nz-col
+        [nzXs]="{ span : 24 }"
+        [nzSm]="{ span : 24 }"
+        [nzMd]="{ span : 24 }"
+        [nzLg]="{ span : 24 }"
         [nzXl]="{ span : 24 }">
             <h3 nz-typography>Добавить объявление:</h3>
         </nz-form-item>
         <nz-form-item nz-row >
-            <nz-form-label nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-label nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }" nzRequired="true" nzFor="advertType">Выберите тип</nz-form-label>
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-control nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
                 <nz-radio-group formControlName="advertType" [(ngModel)]="selectedAdvertType" [nzButtonStyle]="'solid'" [nzSize]="'large'">
                 <label nz-radio-button [nzValue]="advertType.value" *ngFor="let advertType of advertTypesList">{{ advertType.label }}</label>
@@ -38,17 +38,17 @@
             </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row >
-            <nz-form-label nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-label nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }" nzRequired="true" nzFor="realEstateType">Выберите недвижимость</nz-form-label>
-            <nz-form-control nz-col 
-            [nzXs]="{ span : 24 }" 
-            [nzSm]="{ span : 24 }" 
-            [nzMd]="{ span : 24 }" 
-            [nzLg]="{ span : 24 }" 
+            <nz-form-control nz-col
+            [nzXs]="{ span : 24 }"
+            [nzSm]="{ span : 24 }"
+            [nzMd]="{ span : 24 }"
+            [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
             <nz-radio-group formControlName="realEstateType" [(ngModel)]="selectedRealEstate" [nzButtonStyle]="'solid'" [nzSize]="'large'">
                 <label nz-radio-button [nzValue]="realEstate.value" *ngFor="let realEstate of listOfRealEstaties">{{ realEstate.label }}</label>
@@ -56,12 +56,12 @@
             </nz-form-control>
         </nz-form-item>
     </form>
-    
-    <rent-flat *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'квартира'"></rent-flat>
-    <rent-house *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'дом'"></rent-house>
-    <sale-flat *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'квартира'"></sale-flat>
-    <sale-house *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'дом'"></sale-house>
+
+    <app-rent-flat *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'квартира'"></app-rent-flat>
+    <app-rent-house *ngIf="helper.advertType === 'сдать' && helper.realEstateType === 'дом'"></app-rent-house>
+    <app-sale-flat *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'квартира'"></app-sale-flat>
+    <app-sale-house *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'дом'"></app-sale-house>
     </div>
-    
-    
+
+
 </div>

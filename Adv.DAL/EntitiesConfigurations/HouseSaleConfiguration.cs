@@ -25,9 +25,7 @@ namespace Adv.DAL.EntitiesConfigurations
                 .HasMany(prop => prop.Images)
                 .WithOne(prop => prop.HouseSale)
                 .HasForeignKey(prop => prop.HouseSaleId);
-            builder
-                .Property(prop => prop.Address)
-                .IsRequired();
+            
             builder
                 .Property(prop => prop.HouseArea)
                 .IsRequired();

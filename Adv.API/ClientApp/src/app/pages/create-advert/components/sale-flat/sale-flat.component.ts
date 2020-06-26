@@ -11,7 +11,7 @@ import { DescriptionValidators } from '../../validators/description.validators';
 import { City } from 'src/app/models/city.model';
 
 @Component({
-  selector: 'sale-flat',
+  selector: 'app-sale-flat',
   templateUrl: './sale-flat.component.html',
   styleUrls: ['./sale-flat.component.less']
 })
@@ -108,9 +108,9 @@ export class SaleFlatComponent implements OnInit {
         this.imageService.delete(file.response.deleteHash)
         .subscribe(response =>{
           if(response) {
-            
+
           let index = this.images.findIndex(x=>x.uid === file.response.uid);
-          
+
           if(index > -1) {
             this.images.splice(index, 1);
           }
@@ -136,8 +136,8 @@ export class SaleFlatComponent implements OnInit {
   }
   /**
    * установка значения для поля формы
-   * @param formControlName имя поля 
-   * @param value значение 
+   * @param formControlName имя поля
+   * @param value значение
    */
   private setSaleFlatFormControlValue(formControlName: string, value: any){
     this.saleFlatForm.controls[formControlName].setValue(value);

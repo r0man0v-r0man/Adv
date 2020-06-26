@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Adv.DAL.Migrations
 {
     [DbContext(typeof(AdvContext))]
-    [Migration("20200614155005_start")]
-    partial class start
+    [Migration("20200626192815_PopulateCityTable")]
+    partial class PopulateCityTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,26 @@ namespace Adv.DAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("Adv.DAL.Entities.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ExactLocation")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Addresses");
+                });
+
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
                 {
                     b.Property<int>("Id")
@@ -28,9 +48,8 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AllFloor")
                         .HasColumnType("integer");
@@ -40,9 +59,6 @@ namespace Adv.DAL.Migrations
 
                     b.Property<byte>("Balcony")
                         .HasColumnType("smallint");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
@@ -90,9 +106,9 @@ namespace Adv.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("FlatRents");
                 });
@@ -104,9 +120,8 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("AllFloor")
                         .HasColumnType("integer");
@@ -116,9 +131,6 @@ namespace Adv.DAL.Migrations
 
                     b.Property<byte>("Balcony")
                         .HasColumnType("smallint");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
@@ -160,9 +172,9 @@ namespace Adv.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("FlatSales");
                 });
@@ -174,18 +186,14 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("text");
 
                     b.Property<bool>("Bathhouse")
                         .HasColumnType("boolean");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
@@ -233,9 +241,9 @@ namespace Adv.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("HouseRents");
                 });
@@ -247,18 +255,14 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("text");
 
                     b.Property<bool>("Bathhouse")
                         .HasColumnType("boolean");
-
-                    b.Property<int?>("CityId")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
@@ -312,9 +316,9 @@ namespace Adv.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AddressId");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("HouseSales");
                 });
@@ -391,6 +395,7 @@ namespace Adv.DAL.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -572,48 +577,65 @@ namespace Adv.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Adv.DAL.Entities.Address", b =>
+                {
+                    b.HasOne("Adv.DAL.Entities.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
                 {
+                    b.HasOne("Adv.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
                         .WithMany("FlatRents")
                         .HasForeignKey("AppUserId");
-
-                    b.HasOne("Adv.DAL.Entities.City", "City")
-                        .WithMany("FlatRents")
-                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatSale", b =>
                 {
+                    b.HasOne("Adv.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
                         .WithMany("FlatSales")
                         .HasForeignKey("AppUserId");
-
-                    b.HasOne("Adv.DAL.Entities.City", "City")
-                        .WithMany("FlatSales")
-                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseRent", b =>
                 {
+                    b.HasOne("Adv.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
                         .WithMany("HouseRents")
                         .HasForeignKey("AppUserId");
-
-                    b.HasOne("Adv.DAL.Entities.City", "City")
-                        .WithMany("HouseRents")
-                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.HouseSale", b =>
                 {
+                    b.HasOne("Adv.DAL.Entities.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Adv.DAL.Entities.AppUser", "AppUser")
                         .WithMany("HouseSales")
                         .HasForeignKey("AppUserId");
-
-                    b.HasOne("Adv.DAL.Entities.City", "City")
-                        .WithMany("HouseSales")
-                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Images.Image", b =>
