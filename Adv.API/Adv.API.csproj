@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\app\common\Forms" />
+    <Folder Include="ClientApp\src\app\pages\create-advert\components\rent-flat\services" />
     <Folder Include="Models\Adverts\UpdateModels\" />
     <Folder Include="Models\Enums\" />
     <Folder Include="wwwroot\" />

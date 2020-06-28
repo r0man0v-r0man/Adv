@@ -1,18 +1,21 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
-import { DescriptionValidators } from '../../validators/description.validators';
 import { Duration } from 'src/app/models/duration';
+import {RentFlatFormService} from './services/rent-flat-form.service';
 
 @Component({
   selector: 'app-rent-flat',
   templateUrl: './rent-flat.component.html',
-  styleUrls: ['./rent-flat.component.less']
+  styleUrls: ['./rent-flat.component.less'],
+  providers: [
+    RentFlatFormService
+  ]
 })
 export class RentFlatComponent implements OnInit {
   /** форма добавления объявления */
@@ -54,8 +57,14 @@ export class RentFlatComponent implements OnInit {
   parserDollar = (value: string) => value.replace('$ ', '');
 
 
+  get form(): FormGroup {
+    return this.rentFlatFormService.form;
+  }
+  get isValid() {
+    return this.rentFlatFormService.isValid;
+  }
   constructor(
-    private formBuilder: FormBuilder,
+    private rentFlatFormService: RentFlatFormService,
     private authService: AuthService,
     private advertService: AdvertService,
     public imageService: ImageService,
@@ -69,32 +78,13 @@ export class RentFlatComponent implements OnInit {
   initForm() {
     this.setListOfBalcony();
     this.setDurations();
-    this.flatRentForm = this.formBuilder.group({
-      userId: [ this.userId, [Validators.required]],
-      isActive: [ true ],
-      images: [ this.images, [Validators.required]],
-      address: [ null, [Validators.required]],
-      floor: [ this.floor, [Validators.required]],
-      allFloor: [ this.allFloor, [Validators.required]],
-      rooms: [ this.rooms, [Validators.required]],
-      balcony: [ this.selectedBalcony, [Validators.required]],
-      furniture: [this.furniture],
-      refrigerator: [ this.refrigerator],
-      microwaveOven: [ this.microwaveOven],
-      internet: [ this.internet],
-      washingMachine: [ this.washingMachine],
-      price: [ null, [Validators.required]],
-      duration: [ this.selectedDuration, [Validators.required]],
-      phone: [ this.phone, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]],
-      city: [ null, [Validators.required]]
-    });
   }
 
   /** создание объявления */
   submitForm() {
-    const rentFlatModel: FlatRentModel = { ...this.flatRentForm.value };
-    this.advertService.addFlatRent(rentFlatModel);
+    const rentFlatModel: FlatRentModel = { ...this.form.value };
+    console.log(rentFlatModel);
+    this.advertService.addFlatRent(this.form.value);
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {
@@ -144,6 +134,6 @@ export class RentFlatComponent implements OnInit {
    * @param value значение
    */
   private setRentFlatFormControlValue(formControlName: string, value: any) {
-    this.flatRentForm.controls[formControlName].setValue(value);
+    this.form.controls[formControlName].setValue(value);
   }
 }

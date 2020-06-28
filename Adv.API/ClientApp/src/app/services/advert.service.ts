@@ -52,7 +52,7 @@ export class AdvertService {
     this.router.navigate(['house', 'rent', id]);
   }
   /** переход на страинцу с объявлением дом продать */
-  private navigateToNewHouseSaleAdvert(id: number){
+  private navigateToNewHouseSaleAdvert(id: number) {
     this.router.navigate(['house', 'sale', id]);
   }
   /** показывает уведомление о создании объявления */
@@ -65,17 +65,17 @@ export class AdvertService {
       })
   }
   /** создание объявления дом сдать */
-  addHouseRent(advert: HouseRentModel){
+  addHouseRent(advert: HouseRentModel) {
     this.httpService.post<number>(this.addHouseRentUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: number)=>{
+      map((response: number) => {
         this.navigateToNewHouseRentAdvert(response);
         this.showUserSuccessNotification();
       })).subscribe();
   }
   /** создание объявления дом продать */
-  addHouseSale(advert: HouseSaleModel){
+  addHouseSale(advert: HouseSaleModel) {
     this.httpService.post<number>(this.addHouseSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: number)=>{
+      map((response: number) => {
         this.navigateToNewHouseSaleAdvert(response);
         this.showUserSuccessNotification();
       })
@@ -84,7 +84,7 @@ export class AdvertService {
   /** создать объявление квартира продать */
   addFlatSale(advert: FlatSaleModel){
     this.httpService.post<number>(this.addFlatSaleUrl, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response:number)=>{
+      map((response:number) => {
         this.navigateToNewFlatSaleAdvert(response);
         this.showUserSuccessNotification();
       })
@@ -93,7 +93,7 @@ export class AdvertService {
   /** создать объявление квартира сдать */
   addFlatRent(advert: FlatRentModel){
     this.httpService.post<number>(this.addFlatRentURL, advert, { headers: this.authService.SecureHeaders}).pipe(
-      map((response: number)=>{
+      map((response: number) => {
         this.navigateToNewFlatRentAdvert(response);
         this.showUserSuccessNotification();
       })
@@ -104,7 +104,7 @@ export class AdvertService {
     return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
   }
   /** обновить объявление */
-  update(updateFlat:FlatUpdateModel){
+  update(updateFlat: FlatUpdateModel) {
     return this.httpService.put<boolean>(this.updateFlatUrl, updateFlat, { headers: this.authService.SecureHeaders });
   }
   /** получить объявление квартира-сдать */

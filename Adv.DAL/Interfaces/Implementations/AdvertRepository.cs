@@ -34,7 +34,6 @@ namespace Adv.DAL.Interfaces.Implementations
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
                 throw;
             }
         }

@@ -23,6 +23,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import {AddressInputComponent} from '../../common/Forms/address-input/address-input.component';
+import {DescriptionInputComponent} from '../../common/Forms/description-input/description-input.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {AddressInputComponent} from '../../common/Forms/address-input/address-in
     SaleFlatComponent,
     SaleHouseComponent,
     RentHouseComponent,
-    AddressInputComponent
+    AddressInputComponent,
+    DescriptionInputComponent
   ],
   imports: [
     CommonModule,

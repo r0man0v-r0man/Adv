@@ -1,4 +1,4 @@
-<div [formGroup]="group">
+<div nz-row [formGroup]="group">
   <nz-divider [nzText]="addressTpl">
     <ng-template #addressTpl>
       Адрес
@@ -37,7 +37,7 @@
 
     <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
       <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
-        <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="address"
+        <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="exactLocation"
                (ngModelChange)="suggestService.searchChange$.next($event)"
                [nzAutocomplete]="auto" />
       </nz-input-group>
