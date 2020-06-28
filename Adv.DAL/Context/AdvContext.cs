@@ -20,6 +20,7 @@ namespace Adv.DAL.Context
         
         public DbSet<Address> Addresses { get; set; }
         public DbSet<City> Cities { get; set; }
+        public DbSet<StoreCity> StoreCities { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 

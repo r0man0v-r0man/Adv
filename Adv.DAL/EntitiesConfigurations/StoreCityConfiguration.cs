@@ -4,13 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Adv.DAL.EntitiesConfigurations
 {
-    public class CityConfiguration : IEntityTypeConfiguration<City>
+    public class StoreCityConfiguration : IEntityTypeConfiguration<StoreCity>
     {
-        public void Configure(EntityTypeBuilder<City> builder)
+        public void Configure(EntityTypeBuilder<StoreCity> builder)
         {
             builder?
                 .Property(prop => prop.Id)
-                .ValueGeneratedNever()
                 .IsRequired();
             builder?
                 .Property(prop => prop.Name)
