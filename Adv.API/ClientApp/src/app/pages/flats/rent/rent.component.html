@@ -19,10 +19,10 @@
                     <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
                 </nz-card>
                 <ng-template #cardMetaTitleTpl>
-                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.city.name }}
+                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.city.name }}
                 </ng-template>
                 <ng-template #extraTpl>
-                    Кол-во комнат: {{ item.rooms }}
+                    {{ item.created | date }}
                 </ng-template>
                 <ng-template #coverTpl>
                     <img [src]="item.images[0]?.linkProps.download"/>
