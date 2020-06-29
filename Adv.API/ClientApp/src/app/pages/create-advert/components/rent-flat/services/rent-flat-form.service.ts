@@ -3,9 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DescriptionValidators} from '../../../validators/description.validators';
 import {AuthService} from '../../../../../services/auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class RentFlatFormService {
   public form: FormGroup;
   constructor(

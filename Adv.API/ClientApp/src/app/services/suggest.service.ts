@@ -1,20 +1,16 @@
-import { Injectable, Injector, Inject } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { debounceTime, switchMap, map, distinctUntilChanged, filter } from 'rxjs/operators';
 import { Constants } from '../constants';
-import { LOCAL_STORAGE } from '@ng-toolkit/universal';
-import { City } from '../models/city.model';
+import { StoreCity } from '../models/city.model';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class SuggestService  {
-    /** for SSR */
-    private baseUrl: string;
-    /** Array of cities */
-  listOfCities: City[] = [];
+  /** for SSR */
+  private baseUrl: string;
+  /** Array of cities */
+  listOfCities: StoreCity[] = [];
   /** значение поля ввода адреса */
   searchChange$ = new Subject<string>();
   /** статус поиска */
@@ -30,28 +26,27 @@ export class SuggestService  {
     .pipe(map((res: any) => res.suggestions ))
   constructor(
     private http: HttpClient,
-    private injector: Injector,
-    @Inject(LOCAL_STORAGE) private localStorage: any
-    ) {
-      this.getSuggests();
-      this.baseUrl = this.injector.get('BASE_URL');
-      this.getCities();
-    }
+    private injector: Injector
+  ) {
+    this.getSuggests();
+    this.baseUrl = this.injector.get('BASE_URL');
+    this.getStoreCity();
+  }
   /** поиск подсказок */
   private getSuggests() {
     this.isLoading = true;
     this.optionList$ = this.searchChange$
-    .pipe(debounceTime(1000), distinctUntilChanged())
-    .pipe(filter( val => val.length > 5 ))
-    .pipe(switchMap(this.getSuggestList));
+      .pipe(debounceTime(1000), distinctUntilChanged())
+      .pipe(filter( val => val.length > 5 ))
+      .pipe(switchMap(this.getSuggestList));
     this.optionList$.subscribe(data => {
       this.suggestions = data;
       this.isLoading = false;
     });
   }
 
-  getCities() {
-    this.http.get<City[]>(`${this.baseUrl}${Constants.getCitiesURL}`).subscribe(response => {
+  getStoreCity() {
+    this.http.get<StoreCity[]>(`${this.baseUrl}${Constants.getStoreCityURL}`).subscribe(response => {
       if (response) {
         this.listOfCities = [...response];
       }

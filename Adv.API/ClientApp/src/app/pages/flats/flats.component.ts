@@ -9,7 +9,10 @@ import { SaleComponent } from './sale/sale.component';
 @Component({
   selector: 'app-flats',
   templateUrl: './flats.component.html',
-  styleUrls: ['./flats.component.less']
+  styleUrls: ['./flats.component.less'],
+  providers: [
+    SuggestService
+  ]
 })
 export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
