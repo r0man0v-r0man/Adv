@@ -15,5 +15,6 @@ namespace Adv.DAL.Context.Interfaces
         DbSet<HouseSale> HouseSales { get; set; }
         DbSet<Address> Addresses { get; set; }
         DbSet<City> Cities { get; set; }
+        DbSet<StoreCity> StoreCities { get; set; }
     }
 }

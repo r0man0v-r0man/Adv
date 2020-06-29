@@ -10,7 +10,7 @@ namespace Adv.API.Models
         /// </summary>
         public string ExactLocation { get; set; }
         
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         public CityViewModel City { get; set; }
 
         /// <summary>

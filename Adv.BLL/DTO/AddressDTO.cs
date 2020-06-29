@@ -10,7 +10,7 @@ namespace Adv.BLL.DTO
         /// </summary>
         public string ExactLocation { get; set; }
         
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         public CityDto City { get; set; }
 
         /// <summary>

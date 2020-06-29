@@ -26,7 +26,7 @@ namespace Adv.DAL.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ExactLocation")
@@ -388,9 +388,7 @@ namespace Adv.DAL.Migrations
             modelBuilder.Entity("Adv.DAL.Entities.City", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -443,6 +441,22 @@ namespace Adv.DAL.Migrations
                     b.HasIndex("HouseSaleId");
 
                     b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("Adv.DAL.Entities.StoreCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StoreCities");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -579,9 +593,7 @@ namespace Adv.DAL.Migrations
                 {
                     b.HasOne("Adv.DAL.Entities.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Adv.DAL.Entities.Adverts.FlatRent", b =>
