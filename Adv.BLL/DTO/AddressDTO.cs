@@ -10,7 +10,7 @@ namespace Adv.BLL.DTO
         /// </summary>
         public string ExactLocation { get; set; }
         
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
         public CityDto City { get; set; }
 
         /// <summary>
@@ -20,9 +20,7 @@ namespace Adv.BLL.DTO
         /// <returns></returns>
         public static implicit operator Address(AddressDto dto) => new Address
         {
-            Id = dto.Id,
             City = dto.City,
-            CityId = dto.CityId,
             ExactLocation = dto.ExactLocation
         };
         /// <summary>

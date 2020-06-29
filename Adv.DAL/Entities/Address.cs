@@ -10,7 +10,7 @@ namespace Adv.DAL.Entities
         /// </summary>
         public string ExactLocation { get; set; }
         
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
         public City City { get; set; }
         
     }

@@ -18,7 +18,6 @@ namespace Adv.API.Models
         };
         public static implicit operator CityDto(CityViewModel view) => new CityDto()
         {
-            Id = view.Id,
             Name = view.Name
         };
     }

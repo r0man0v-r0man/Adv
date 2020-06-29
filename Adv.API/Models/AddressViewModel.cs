@@ -10,7 +10,7 @@ namespace Adv.API.Models
         /// </summary>
         public string ExactLocation { get; set; }
         
-        public int? CityId { get; set; }
+        public int CityId { get; set; }
         public CityViewModel City { get; set; }
 
         /// <summary>
@@ -33,8 +33,6 @@ namespace Adv.API.Models
         public static implicit operator AddressDto(AddressViewModel view) => new AddressDto
         {
             City = view.City,
-            Id = view.Id,
-            CityId = view.CityId,
             ExactLocation = view.ExactLocation
         };
     }

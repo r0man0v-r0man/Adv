@@ -13,7 +13,6 @@ namespace Adv.BLL.DTO
 
         public static implicit operator City(CityDto dto) => new City()
         {
-            Id = dto.Id,
             Name = dto.Name
         };
         public static implicit operator CityDto(City dal) => new CityDto()

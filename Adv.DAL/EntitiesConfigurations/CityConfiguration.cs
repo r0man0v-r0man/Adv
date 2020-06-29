@@ -10,7 +10,6 @@ namespace Adv.DAL.EntitiesConfigurations
         {
             builder?
                 .Property(prop => prop.Id)
-                .ValueGeneratedNever()
                 .IsRequired();
             builder?
                 .Property(prop => prop.Name)
