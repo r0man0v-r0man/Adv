@@ -4,48 +4,48 @@
       Адрес
     </ng-template>
   </nz-divider>
-  <nz-form-item nz-col
-                [nzXs]="{ span : 24 }"
-                [nzSm]="{ span : 24 }"
-                [nzMd]="{ span : 24 }"
-                [nzLg]="{ span : 24 }"
-                [nzXl]="{ span : 24 }" >
-    <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>
-    <nz-form-control
-      nzHasFeedback
-      nzErrorTip="Выберите город!">
-      <nz-select nzShowSearch nzAllowClear
-                 formControlName="city"
-                 [nzSize]="'large'"
-                 nzPlaceHolder="Выберите город">
-        <nz-option
-          *ngFor="let city of suggestService.listOfCities"
-          [nzLabel]="city.name"
-          [nzValue]="city"
-        >
-        </nz-option>
-      </nz-select>
-    </nz-form-control>
-  </nz-form-item>
+<!--  <nz-form-item nz-col-->
+<!--                [nzXs]="{ span : 24 }"-->
+<!--                [nzSm]="{ span : 24 }"-->
+<!--                [nzMd]="{ span : 24 }"-->
+<!--                [nzLg]="{ span : 24 }"-->
+<!--                [nzXl]="{ span : 24 }" >-->
+<!--    <nz-form-label nzRequired nzFor="city">Выберите город</nz-form-label>-->
+<!--    <nz-form-control-->
+<!--      nzHasFeedback-->
+<!--      nzErrorTip="Выберите город!">-->
+<!--      <nz-select nzShowSearch nzAllowClear-->
+<!--                 formControlName="city"-->
+<!--                 [nzSize]="'large'"-->
+<!--                 nzPlaceHolder="Выберите город">-->
+<!--        <nz-option-->
+<!--          *ngFor="let city of suggestService.listOfCities"-->
+<!--          [nzLabel]="city.name"-->
+<!--          [nzValue]="city"-->
+<!--        >-->
+<!--        </nz-option>-->
+<!--      </nz-select>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
   <nz-form-item nz-col
                 [nzXs]="{ span : 24 }"
                 [nzSm]="{ span : 24 }"
                 [nzMd]="{ span : 24 }"
                 [nzLg]="{ span : 24 }"
                 [nzXl]="{ span : 24 }">
-    <nz-form-label nzRequired nzFor="address">Укажите точный адрес</nz-form-label>
+    <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
 
     <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
       <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
         <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="exactLocation"
-               (ngModelChange)="suggestService.searchChange$.next($event)"
+               (ngModelChange)="yandexGeocoderService.searchChange$.next($event)"
                [nzAutocomplete]="auto" />
       </nz-input-group>
       <ng-template #suffixIcon>
         <i nz-icon nzType="search"></i>
       </ng-template>
       <nz-autocomplete #auto>
-        <nz-auto-option *ngFor="let option of suggestService.suggestions" [nzLabel]="option.text" [nzValue]="option.text">
+        <nz-auto-option *ngFor="let option of yandexGeocoderService.listOfSuggestions" [nzLabel]="option.address.formatted" [nzValue]="option.address.formatted">
           {{ option.text }}
         </nz-auto-option>
       </nz-autocomplete>

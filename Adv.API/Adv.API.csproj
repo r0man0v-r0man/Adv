@@ -49,17 +49,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\common\Forms" />
-    <Folder Include="ClientApp\src\app\pages\create-advert\components\rent-flat\services" />
     <Folder Include="Models\Adverts\UpdateModels\" />
     <Folder Include="Models\Enums\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\models\address.interface.ts" />
-  </ItemGroup>
-
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

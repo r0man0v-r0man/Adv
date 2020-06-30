@@ -1,19 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {SuggestService} from '../../../services/suggest.service';
+import {YandexGeocoderService} from '../../../services/yandex-geocoder.service';
 
 @Component({
   selector: 'app-address-input',
   templateUrl: './address-input.component.html',
   styleUrls: ['./address-input.component.less'],
   providers: [
-    SuggestService
+    YandexGeocoderService
   ]
 })
 export class AddressInputComponent implements OnInit {
   @Input() group: FormGroup;
   constructor(
-    public suggestService: SuggestService
+    public yandexGeocoderService: YandexGeocoderService
   ) { }
 
   ngOnInit(): void {
