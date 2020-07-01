@@ -1,29 +1,44 @@
-﻿export interface GeoObjectCollection {
+﻿export interface YandexResponseGeocoder {
+  response: Response;
+}
+export interface Response {
+  GeoObjectCollection: GeoObjectCollection;
+}
+export interface GeoObjectCollection {
   metaDataProperty: GeocoderResponseMetaData;
-  featureMember: GeoObject[];
+  featureMember: FeatureMember[];
+}
+export interface FeatureMember {
+  GeoObject: GeoObject;
 }
 export interface GeoObject {
-  metaDataProperty: GeocoderMetaData;
-  description: string;
   name: string;
-  boundedBy: Envelope;
-  point: Point;
+  description: string;
+  Point: Point;
+  boundedBy: BoundedBy;
+  metaDataProperty: MetaDataProperty;
+}
+export interface MetaDataProperty {
+  GeocoderMetaData: GeocoderMetaData;
 }
 export interface GeocoderMetaData {
   kind: string;
   text: string;
   precision: string;
-  address: Address;
+  Address: Address;
 }
 export interface Address {
   country_code: string;
   postal_code: string;
   formatted: string;
-  components: AddressComponent[];
+  Components: Component[];
 }
-export interface AddressComponent {
+export interface Component {
   kind: string;
   name: string;
+}
+export interface BoundedBy {
+  Envelope: Envelope;
 }
 export interface Envelope {
   lowerCorner: string;
@@ -33,8 +48,7 @@ export interface Point {
   pos: string;
 }
 export interface GeocoderResponseMetaData {
-  request: string;
-  found: number;
-  results: number;
+  found: any;
+  request: any;
+  results: any;
 }
-

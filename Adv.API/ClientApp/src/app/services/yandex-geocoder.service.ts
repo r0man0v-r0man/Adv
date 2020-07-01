@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {GeoObject} from "../models/yandex";
-import {debounceTime, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
+import {debounceTime, distinctUntilChanged, filter, map, switchMap} from 'rxjs/operators';
+import {YandexResponseGeocoder} from '../models/yandex';
 
 @Injectable()
 export class YandexGeocoderService {
@@ -30,6 +30,8 @@ export class YandexGeocoderService {
       console.log(data);
       this.optionList = data.response.GeoObjectCollection.featureMember;
       console.log(this.optionList);
+      const mod: YandexResponseGeocoder = data;
+      console.log('yandex: ', mod.response.GeoObjectCollection.featureMember[0].GeoObject.metaDataProperty.GeocoderMetaData.Address.Components);
       this.isLoading = false;
     });
   }
