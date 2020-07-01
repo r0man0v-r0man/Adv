@@ -29,7 +29,12 @@
             </nz-upload>
         </nz-form-control>
     </nz-form-item>
-    <app-address-input [group]="form.get('address')"></app-address-input>
+    <app-address-input nz-col
+                       [nzXs]="{ span : 24 }"
+                       [nzSm]="{ span : 24 }"
+                       [nzMd]="{ span : 24 }"
+                       [nzLg]="{ span : 24 }"
+                       [nzXl]="{ span : 24 }" [group]="form.get('address')"></app-address-input>
     <nz-divider [nzText]="houseTPL">
         <ng-template #houseTPL>
             Дом
