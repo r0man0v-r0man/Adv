@@ -1,45 +1,40 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {GeocoderMetaData, GeoObjectCollection} from '../models/yandex';
-import {Observable, Subject} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter, map, switchMap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {GeoObject} from "../models/yandex";
+import {debounceTime, distinctUntilChanged, filter, map, switchMap} from "rxjs/operators";
 
 @Injectable()
 export class YandexGeocoderService {
   url = 'https://geocode-maps.yandex.ru/1.x/';
   apiKey = '85e03f02-25be-40b3-971e-733f2a03e620';
-  /** значение поля ввода адреса */
-  searchChange$ = new Subject<string>();
-  private optionList$: Observable<GeoObjectCollection>;
   format = 'json';
+  /** значение поля ввода адреса */
+  searchChange$ = new BehaviorSubject('');
   /** статус поиска */
   isLoading = false;
-  listOfSuggestions: GeocoderMetaData[] = [];
-  /** запрос на поиск адреса для подсказки */
-  private getSuggestList = (value: string) => this.httpClient.get<GeoObjectCollection>(
-    `${this.url}?apikey=${this.apiKey}&format=${this.format}&geocode=${value}`
-  ).pipe(
-    map((response) => response )
-  )
+  optionList: any;
   constructor(
     private httpClient: HttpClient
   ) {
-    this.getSuggests();
-  }
-  /** поиск подсказок */
-  private getSuggests() {
-    this.isLoading = true;
-    this.optionList$ = this.searchChange$
+    const getList = (value: string) =>
+      this.httpClient
+        .get(`${this.url}?apikey=${this.apiKey}&format=${this.format}&geocode=${value}`)
+        .pipe(map((res) => res ));
+    const optionList$: Observable<any> = this.searchChange$
+      .asObservable()
       .pipe(debounceTime(1000), distinctUntilChanged())
       .pipe(filter( val => val.length > 5 ))
-      .pipe(switchMap(this.getSuggestList));
-    this.optionList$.subscribe(data => {
-      const list: GeocoderMetaData[] = [];
-      data.featureMember.forEach((geo) => {
-        list.push(geo.metaDataProperty);
-      });
-      this.listOfSuggestions = list;
+      .pipe(switchMap(getList));
+    optionList$.subscribe(data => {
+      console.log(data);
+      this.optionList = data.response.GeoObjectCollection.featureMember;
+      console.log(this.optionList);
       this.isLoading = false;
     });
+  }
+  onSearch(value: string) {
+    this.isLoading = true;
+    this.searchChange$.next(value);
   }
 }

@@ -38,15 +38,17 @@
     <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
       <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
         <input placeholder="Например: Несвиж лермонтова 2" nz-input  formControlName="exactLocation"
-               (ngModelChange)="yandexGeocoderService.searchChange$.next($event)"
+               (ngModelChange)="yandexGeocoderService.onSearch($event)"
                [nzAutocomplete]="auto" />
       </nz-input-group>
       <ng-template #suffixIcon>
         <i nz-icon nzType="search"></i>
       </ng-template>
       <nz-autocomplete #auto>
-        <nz-auto-option *ngFor="let option of yandexGeocoderService.listOfSuggestions" [nzLabel]="option.address.formatted" [nzValue]="option.address.formatted">
-          {{ option.text }}
+        <nz-auto-option *ngFor="let option of yandexGeocoderService.optionList"
+                        [nzLabel]="option.GeoObject.metaDataProperty.GeocoderMetaData.text"
+                        [nzValue]="option.GeoObject.metaDataProperty.GeocoderMetaData.text">
+          {{ option.GeoObject.metaDataProperty.GeocoderMetaData.text }}
         </nz-auto-option>
       </nz-autocomplete>
     </nz-form-control>
