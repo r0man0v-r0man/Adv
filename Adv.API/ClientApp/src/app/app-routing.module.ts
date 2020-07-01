@@ -1,82 +1,116 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { FlatsComponent } from './components/flat/flats/flats.component';
-import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
-import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
-import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
-
-const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent,
+const routes: Routes = 
+[
+  { 
+    path: '', 
+    pathMatch: 'full', 
+    redirectTo: '/home' 
+  },
+  { 
+    path: 'home', 
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     data: {
-      title: 'Halupa.by - Сайт по аренде жилья в Несвиже',
-      descrption: 'Сайт по аренде жилья в Несвиже. Объявления об аренде квартир и домов, на сутки/часы или на длительное время. У нас можно снять квартиру или дом, наличный и безналичный расчет.'
+      hideComponents: false,
+      title: 'Halupa.by - Сайт по аренде и продаже недвижимости №1 в Беларуси',
+      description: 'Сайт по аренде и продаже недвижимости. Halupa.by - ваш помошник в поиске квартиры или дома для покупки или аренды. Объявления от собственника за наличный и безналичный расчет.'
+    }
+  },
+  { 
+    path: 'login', 
+    loadChildren: () => import('./pages/login/login.module').then(m=>m.LoginModule),
+    data: {
+      hideComponents: true,
+      title: 'Halupa.by - Войти',
+      description: 'Войти на сайт',
+      robots: 'noindex, nofollow'
+    }
+  },
+  { 
+    path: 'register', 
+    loadChildren: () => import('./pages/register/register.module').then(m=>m.RegisterModule),
+    data: {
+      hideComponents: true,
+      title: 'Halupa.by - Регистрация',
+      description: 'Регистрация нового пользователя',
+      robots: 'noindex, nofollow'
+    }
+  },
+  { 
+    path: 'profile', 
+    loadChildren: () => import('./pages/profile/profile.module').then(m=> m.ProfileModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Профиль пользователя',
+      description: 'Профиль пользователя, информация о пользователе',
+      robots: 'noindex, nofollow'
+    },
+    canActivate: [AuthGuardService] 
+  },
+  {
+    path: 'create-advert',
+    loadChildren: () => import('./pages/create-advert/create-advert.module').then(m => m.CreateAdvertModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Добавить объявление',
+      description: 'Добавить объявление о продаже или аренде недвижимости',
+      robots: 'noindex, nofollow'
+    },
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'flat',
+    loadChildren: () => import('./pages/flat/flat.module').then(m => m.FlatModule),
+    data: {
+      hideComponents: false,
+      title: 'Halupa.by - Подробности объявления',
+      description: 'Подробности объявления, его характеристики, контакты и стоимость'
     }
   },
   {
     path: 'flats',
-    component: FlatsComponent,
+    loadChildren: () => import('./pages/flats/flats.module').then(m => m.FlatsModule),
     data: {
-      title: 'Halupa.by - Все квартиры',
-      descrption: 'Все квартиры, которые можно снять в Несвиже на часы/сутки или на длительное время'
+      hideComponents: false,
+      title: 'Halupa.by - Квартиры',
+      description: 'Объявления о продаже, аренде квартир'
     }
   },
   {
-    path: 'flats/:id',
-    component: FlatDetailComponent,
+    path: 'house',
+    loadChildren: () => import('./pages/house/house.module').then(m => m.HouseModule),
     data: {
-      title: 'Halupa.by - Информация о квартире',
-      descrption: 'Подробная информация о квартире'
+      hideComponents: false,
+      title: 'Halupa.by - Подробности объявления',
+      description: 'Подробности объявления, его характеристики, контакты и стоимость'
     }
   },
   {
-    path: 'search-result',
-    component: SearchResultComponent,
+    path: 'houses',
+    loadChildren: () => import('./pages/houses/houses.module').then(m => m.HousesModule),
     data: {
-      title: 'Halupa.by - Результаты поиска',
-      descrption: 'Результаты поиска квартиры',
+      hideComponents: false,
+      title: 'Halupa.by - Дома',
+      description: 'Объявления о продаже, аренде домов'
+    }
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module').then(m => m.NotFoundModule),
+    data: {
+      hideComponents: true,
+      title: 'Halupa.by - Нет страницы',
+      description: 'Отсутствует запрашиваемая страница',
       robots: 'noindex, nofollow'
     }
   },
   {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Halupa.by - Войти',
-      descrption: 'Войти на Halupa.by'
-    }
-  },
-  {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Halupa.by - Регистрация',
-      descrption: 'Зарегистрироваться на Halupa.by'
-    }
-  },
-  {
-    path: 'access-denied',
-    component: AccessDeniedComponent,
-    data: {
-      title: 'Halupa.by - Доступ запрещен',
-      descrption: 'Извните, но у вас нет доступа'
-    }
-  },
-  {  
-    path: '**', 
-    component: NotFoundComponent,
-    data:{
-      robots: 'noindex, nofollow'
-    }
+    path: '**',
+    redirectTo: '/not-found'
   }
-  
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

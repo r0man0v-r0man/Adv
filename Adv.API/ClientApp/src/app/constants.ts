@@ -7,8 +7,27 @@ export class Constants {
   static login = environment.webApi +  'account/login';
   static IsUserNameDuplicated = environment.webApi + 'account/IsValidateUserName';
   static getUserInfo = environment.webApi + 'account/userInfo'
-  //flat
-  static flat = environment.webApi +  'flat'; 
+  //adverts
+  static addFlatRent = environment.webApi + 'advert/addFlatRent';
+  static addFlatSale = environment.webApi + 'advert/addFlatSale';
+  static addHouseRent = environment.webApi + 'advert/addHouseRent';
+  static addHouseSale = environment.webApi + 'advert/addHouseSale';
+  static getFlatRent = environment.webApi + 'advert/getFlatRent';
+  static getFlatSale = environment.webApi + 'advert/getFlatSale';
+  static getHouseSale = environment.webApi + 'advert/getHouseSale';
+  static getHouseRent = environment.webApi + 'advert/getHouseRent';
+  static getFlatRentsURL = environment.webApi + 'advert/getFlatRents';
+  static getFlatSalesURL = environment.webApi + 'advert/getFlatSales';
+  static getHouseSalesURL = environment.webApi + 'advert/getHouseSales';
+  static getHouseRentsURL = environment.webApi + 'advert/getHouseRents';
+  static getAnyFlatRentsURL = environment.webApi + 'advert/getAnyFlatRents';
+  static getAnyFlatSalesURL = environment.webApi + 'advert/getAnyFlatSales';
+  static getAnyHouseRentsURL = environment.webApi + 'advert/getAnyHouseRents';
+  static getAnyHouseSalesURL = environment.webApi + 'advert/getAnyHouseSales';
+  // city
+  static getStoreCityURL = environment.webApi + 'storeCity/getStoreCity';
+  // flat
+  static flat = environment.webApi +  'flat';
   static getAllFlats = environment.webApi +  'flat/getAll';
   static deleteFlat = environment.webApi +  'flat';
   static updateFlat = environment.webApi + 'flat';

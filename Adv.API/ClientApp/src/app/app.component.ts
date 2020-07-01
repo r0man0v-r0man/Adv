@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Title, Meta } from '@angular/platform-browser';
-import { filter, map } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { SeoService } from './services/seo.service';
 
 @Component({
   selector: 'app-root',
@@ -9,49 +10,48 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-
+  linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a';
+  currentUrl: string;
+  // видимость блоков навигации и футера
+  isVisible: boolean = true;
+  // переключение меню, моб. версия
+  isToggleMenu: boolean = false;
   constructor(
-    private titleService: Title,
-    private metaService: Meta,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ){  }
-
-  ngOnInit(): void {
-    this.setApplicationMetaInfo();
+    private seoService: SeoService,
+    private router: Router, 
+    private activatedRoute: ActivatedRoute,
+    public authService: AuthService
+  ) { }
+  ngOnInit() {
+    this.getCurrentUrl();
   }
-
-
-  /**set meta tags for SEO */
-  setApplicationMetaInfo(){
+  
+  /** текущий URL */
+  private getCurrentUrl(){
     this.router.events
-    .pipe(
-      filter(event => event instanceof NavigationEnd),
-    )
+    .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => {
-        var rt = this.getChild(this.activatedRoute)
-        rt.data.subscribe(data => {
-          if(data.title){
-            this.titleService.setTitle(data.title)
-          }
-          if (data.descrption) {
-            this.metaService.updateTag({ name: 'description', content: data.descrption })
-          } else {
-            this.metaService.removeTag("name='description'")
-          }
-          if (data.robots) {
-            this.metaService.updateTag({ name: 'robots', content: data.robots })
-          } else {
-            this.metaService.updateTag({ name: 'robots', content: "follow,index" })
-          }
-        })
+      var routes = this.getChild(this.activatedRoute);
+      routes.data.subscribe(data => {
+        this.seoService.setMetaInfo(data);
+        this.isVisible = this.setVisible(data);
       })
+    });
+  }
+  
+  private getChild(activatedRoute: ActivatedRoute) {
+    if (activatedRoute.firstChild) {
+      return this.getChild(activatedRoute.firstChild);
+    } else {
+      return activatedRoute;
     }
-    getChild(activatedRoute: ActivatedRoute) {
-      if (activatedRoute.firstChild) {
-        return this.getChild(activatedRoute.firstChild);
-      } else {
-        return activatedRoute;
-      }
-    }
+  }
+  /** установка видимости блоков */
+  private setVisible(data){
+    return data.hideComponents ? false : true;
+  }
+  /** переключение видимости меню если экран меньше 768 */
+  onToggle(){
+    this.isToggleMenu = !this.isToggleMenu;    
+  }  
 }

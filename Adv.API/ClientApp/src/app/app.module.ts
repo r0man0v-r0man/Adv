@@ -1,72 +1,46 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgZorroAntdModule, NZ_I18N, ru_RU } from 'ng-zorro-antd';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { IconsProviderModule } from './icons-provider.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { ru_RU } from 'ng-zorro-antd/i18n';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import ru from '@angular/common/locales/ru';
-import { HomeComponent } from './components/home/home.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FlatsComponent } from './components/flat/flats/flats.component';
-import { AddAdvertComponent } from './modal/add-advert/add-advert.component';
-import { FlatDetailComponent } from './components/flat/flat-detail/flat-detail.component';
-import { AddressPipe } from './customPipes/address.pipe';
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
+import { AppErrorHandler } from './errors/appErrorHandler';
+import { HttpErrorInterceptor } from './errors/httpError.interceptor';
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
-import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
-import { HttpErrorInterceptor } from './app-errors/http-error.interceptor';
-import { CityPipe } from './customPipes/city.pipe';
-import { FooterComponent } from './components/footer/footer.component';
-import { ProfileComponent } from './drawers/profile/profile.component';
-import { DurationPipe } from './customPipes/duration.pipe';
-import { EditAdvertComponent } from './modal/edit-advert/edit-advert.component';
-import { SearchComponent } from './components/search/search.component';
-import { SearchResultComponent } from './components/search-result/search-result/search-result.component';
-import { AppErrorHandler } from './app-errors/app-error-handler';
-import { AdsenseModule } from 'ng2-adsense';
+
+// SSR 
+import { NgtUniversalModule } from '@ng-toolkit/universal';
+
+
 registerLocaleData(ru);
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    NotFoundComponent,
-    NavbarComponent,
-    FlatsComponent,
-    AddAdvertComponent,
-    FlatDetailComponent,
-    AddressPipe,
-    CityPipe,
-    DurationPipe,
-    RegisterComponent,
-    LoginComponent,
-    AccessDeniedComponent,
-    FooterComponent,
-    ProfileComponent,
-    EditAdvertComponent,
-    SearchComponent,
-    SearchResultComponent
+    AppComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    NgZorroAntdModule,
-    FormsModule,
-    ReactiveFormsModule,
+    IconsProviderModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzNotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AdsenseModule.forRoot()
-  ],
-  entryComponents: [
-    AddAdvertComponent,
-    ProfileComponent,
-    EditAdvertComponent
+    NzMessageModule,
+    NgtUniversalModule,
+    CommonModule
   ],
   providers: [
     Title,

@@ -1,0 +1,66 @@
+<div nz-row nzJustify="center" *ngIf="!isLoading" nzGutter="24">
+    <div nz-col
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 18 }" 
+    [nzMd]="{ span : 14 }" 
+    [nzLg]="{ span : 10 }" 
+    [nzXl]="{ span : 8 }">
+        <app-slider *ngIf="images" [images]="images"></app-slider>
+    </div>
+    <div nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 14 }" 
+    [nzXl]="{ span : 16 }">
+        <nz-descriptions  [nzTitle]='mainInfoTpl'>
+            <ng-template #mainInfoTpl>
+                <nz-divider nzText="Основная информация"></nz-divider>
+            </ng-template>
+            <nz-descriptions-item nzTitle="Адрес" nzSpan="3" >{{advert.address}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Дата создания" >{{ advert.created | date : 'shortDate' : '' : 'ru' }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Цена" >{{advert.price | currency}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Общая площадь, кв.м." >{{ advert.houseArea }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Жилая площадь, кв.м." >{{ advert.houseLiveArea }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Площадь кухни, кв.м." >{{ advert.kitchenArea }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Площадь участка, кв.м." >{{ advert.housePlotArea }}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Описание">{{advert.description}}</nz-descriptions-item>
+        </nz-descriptions>
+        <nz-descriptions nzColon="false" [nzTitle]='additionalInfoTpl'>
+            <ng-template #additionalInfoTpl>
+                <nz-divider nzText="Дополнительная информация"></nz-divider>
+            </ng-template>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.heating ? 'check':'stop'" nzTheme="outline"></i>
+                Отопление
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.water ? 'check':'stop'" nzTheme="outline"></i>
+                Вода
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.gas ? 'check':'stop'" nzTheme="outline"></i>
+                Газ
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.sewage ? 'check':'stop'" nzTheme="outline"></i>
+                Канализация
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.electricity ? 'check':'stop'" nzTheme="outline"></i>
+                Электричество
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.bathhouse ? 'check':'stop'" nzTheme="outline"></i>
+                Баня
+            </nz-descriptions-item>
+            <nz-descriptions-item >
+                <i nz-icon [nzType]="advert.garage ? 'check':'stop'" nzTheme="outline"></i>
+                Гараж
+            </nz-descriptions-item>
+        </nz-descriptions>
+        <nz-descriptions nzColon="false" [nzTitle]='contactsTpl'><ng-template #contactsTpl><nz-divider nzText="Контакты"></nz-divider></ng-template>
+            <nz-descriptions-item ><i nz-icon nzType="phone" nzTheme="outline"></i> {{advert.phone}}</nz-descriptions-item>
+        </nz-descriptions>
+    </div>
+</div>

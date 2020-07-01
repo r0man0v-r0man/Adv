@@ -1,0 +1,36 @@
+<nz-list
+[nzLoading]="initLoading">
+    <div nz-row  nzGutter="24" nzJustify="center" >
+        <div nz-col    
+        [nzXs]="{ span : 24 }" 
+        [nzSm]="{ span : 12 }" 
+        [nzMd]="{ span : 8 }" 
+        [nzLg]="{ span : 6 }" 
+        [nzXl]="{ span : 6 }" *ngFor="let item of listFlatSale">
+            <nz-list-item >
+                <nz-card
+                (click)="onCardClick(item)"
+                [nzExtra]="extraTpl"
+                nzSize="small"
+                style="width: 100%;"
+                nzHoverable="true"
+                [nzCover]="coverTpl"
+                [nzTitle]="item.price | currency" >
+                    <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
+                </nz-card>
+                <ng-template #cardMetaTitleTpl>
+                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.city.name }}
+                </ng-template>
+                <ng-template #extraTpl>
+                    Кол-во комнат: {{ item.rooms }}
+                </ng-template>
+                <ng-template #coverTpl>
+                    <img [src]="item.images[0]?.linkProps.download"/>
+                </ng-template>
+            </nz-list-item>
+        </div>
+    </div>
+    <div class="loadmore" nz-list-load-more>
+        <button nz-button *ngIf="isShowMoreButton" (click)="onLoadMore()">Загрузить еще</button>
+      </div>
+</nz-list>

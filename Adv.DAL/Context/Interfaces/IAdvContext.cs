@@ -1,13 +1,17 @@
 ﻿using Adv.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Adv.DAL.Entities.Adverts;
 
 namespace Adv.DAL.Context.Interfaces
 {
     public interface IAdvContext : IBaseContext
     {
-        DbSet<Flat> Flats { get; set; }
+        DbSet<FlatRent> FlatRents { get; set; }
+        DbSet<FlatSale> FlatSales { get; set; }
+        DbSet<HouseRent> HouseRents { get; set; }
+        DbSet<HouseSale> HouseSales { get; set; }
+        DbSet<Address> Addresses { get; set; }
+        DbSet<City> Cities { get; set; }
+        DbSet<StoreCity> StoreCities { get; set; }
     }
 }

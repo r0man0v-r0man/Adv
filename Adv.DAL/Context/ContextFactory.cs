@@ -24,7 +24,7 @@ namespace Adv.DAL.Context
         public IAdvContext GetAdvContext()
         {
             var optionsBuilder = new DbContextOptionsBuilder<AdvContext>();
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("AdvConnection"));
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("AdvConnection"));
 
             return new AdvContext(optionsBuilder.Options);
         }

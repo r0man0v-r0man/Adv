@@ -5,25 +5,35 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
+using Adv.DAL.Entities.Adverts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Adv.DAL.Context
 {
-    // IdentityDbCOntext contains all the AppUser tables
+    // IdentityDbContext contains all the AppUser tables
     public class AdvContext : IdentityDbContext<AppUser>, IAdvContext
     {
-        //
-        public DbSet<Flat> Flats { get; set; }
-
-        public AdvContext(DbContextOptions<AdvContext> options) : base (options)
-        {
-
-        }
+        public DbSet<FlatRent> FlatRents { get; set; }
+        public DbSet<FlatSale> FlatSales { get; set; }
+        public DbSet<HouseRent> HouseRents { get; set; }
+        public DbSet<HouseSale> HouseSales { get; set; }
         
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<StoreCity> StoreCities { get; set; }
+
+        public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder?.ApplyConfiguration(new FlatConfiguration());
+            modelBuilder?.ApplyConfiguration(new FlatSaleConfiguration());
+            modelBuilder?.ApplyConfiguration(new FlatRentConfiguration());
+            modelBuilder?.ApplyConfiguration(new HouseRentConfiguration());
+            modelBuilder?.ApplyConfiguration(new HouseSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
+            modelBuilder?.ApplyConfiguration(new AddressConfiguration());
+            modelBuilder?.ApplyConfiguration(new CityConfiguration());
+            modelBuilder?.ApplyConfiguration(new StoreCityConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

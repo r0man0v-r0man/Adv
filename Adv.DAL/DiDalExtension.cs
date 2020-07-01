@@ -1,6 +1,11 @@
-﻿using Adv.DAL.Context;
+﻿using System.IO;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using Adv.DAL.Context;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
+using Adv.DAL.Exceptions;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +23,7 @@ namespace Adv.DAL
             {
                 var connection = configuration.GetConnectionString("AdvConnection");
 
-                options.UseSqlServer(connection);
+                options.UseNpgsql(connection, b=>b.RemoteCertificateValidationCallback(RemoteCertificateValidationCallback));
             });
             services.AddTransient<IContextFactory, ContextFactory>();
 
@@ -36,11 +41,51 @@ namespace Adv.DAL
                 .AddEntityFrameworkStores<AdvContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddScoped(typeof(IFlatRepository), typeof(FlatRepository));
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IFileRepository), typeof(FileRepository));
+            services.AddScoped(typeof(IAdvertRepository), typeof(AdvertRepository));
+            services.AddScoped(typeof(IStoreCityRepository), typeof(StoreCityRepository));
+            services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
             return services;
+        }
+        static bool RemoteCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain defaultChain, SslPolicyErrors defaultErrors)
+        {
+            string text1 = File.ReadAllText("CA1.pem");
+            string text2 = File.ReadAllText("CA2.pem");
+
+            X509Certificate2 ca1Cert = new X509Certificate2(Encoding.UTF8.GetBytes(text1));
+            X509Certificate2 ca2Cert = new X509Certificate2(Encoding.UTF8.GetBytes(text2));
+
+            X509Chain caCertChain = new X509Chain();
+            caCertChain.ChainPolicy = new X509ChainPolicy()
+            {
+                RevocationMode = X509RevocationMode.NoCheck,
+                RevocationFlag = X509RevocationFlag.EntireChain,
+            };
+
+            caCertChain.ChainPolicy.ExtraStore.Add(ca1Cert);
+            caCertChain.ChainPolicy.ExtraStore.Add(ca2Cert);
+
+            X509Certificate2 serverCert = new X509Certificate2(certificate);
+
+            caCertChain.Build(serverCert);
+
+            if (caCertChain.ChainStatus.Length == 0)
+            {
+                // No errors
+                return true;
+            }
+
+            foreach (X509ChainStatus status in caCertChain.ChainStatus)
+            {
+                // Check if we got any errors other than UntrustedRoot (which we will always get if we don't install the CA cert to the system store)
+                if (status.Status != X509ChainStatusFlags.UntrustedRoot)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

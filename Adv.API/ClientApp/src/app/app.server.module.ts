@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
-import { ServerModule, ServerTransferStateModule } from '@angular/platform-server';
+import { ServerModule } from '@angular/platform-server';
+import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { ModuleMapLoaderModule } from '@nguniversal/module-map-ngfactory-loader';
-import { RenderStyleComponent } from './services/render-style/render-style.component';
-import { RenderStyleModule } from './services/render-style/render-style.component.module';
-import { NZ_I18N, NzI18nModule, ru_RU } from 'ng-zorro-antd/i18n';
+
+// Import the require modules
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ru_RU, NZ_I18N, NzI18nModule } from 'ng-zorro-antd/i18n';
 
 @NgModule({
   imports: [
     AppModule,
     ServerModule,
     ModuleMapLoaderModule,
-    RenderStyleModule,
-    ServerTransferStateModule,
+    HttpClientModule,
+    NoopAnimationsModule,
     NzI18nModule
   ],
-  bootstrap: [AppComponent, RenderStyleComponent],
+  bootstrap: [AppComponent],
   providers: [
-  { provide: NZ_I18N, useValue: ru_RU }
+    { provide: NZ_I18N, useValue: ru_RU }
   ]
 })
 export class AppServerModule {}

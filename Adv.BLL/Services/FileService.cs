@@ -15,9 +15,9 @@ namespace Adv.BLL.Services
         {
             this.fileRepository = fileRepository;
         }
-        public async Task<bool> DeleteAsync(string fileName)
+        public async Task<bool> DeleteAsync(string deleteHash)
         {
-            var result = await fileRepository.CloudDeleteFileAsync(fileName).ConfigureAwait(false);
+            var result = await fileRepository.DeleteFileAsync(deleteHash).ConfigureAwait(false);
             return result;
         }
 
@@ -25,17 +25,21 @@ namespace Adv.BLL.Services
         {
             foreach (var image in flatsImages)
             {
-                await fileRepository.CloudDeleteFileAsync(image.Value).ConfigureAwait(false);
+                await fileRepository.DeleteFileAsync(image.Value).ConfigureAwait(false);
             }
         }
 
 
-        public async Task<string> UploadAsync(IFormFile file, CancellationToken ct)
+        public async Task<Dictionary<string,string>> UploadAsync(IFormFile file, CancellationToken ct)
         {
             // добавить resize для изображений
             
-            var result = await fileRepository.CloudUploadFileAsync(file, ct).ConfigureAwait(false);
-            return result;
+            var image = await fileRepository.UploadFileAsync(file, ct).ConfigureAwait(false);
+            return new Dictionary<string, string>
+            {
+                ["deleteHash"] = image.DeleteHash,
+                ["link"] = image.Link
+            };
         }
 
 

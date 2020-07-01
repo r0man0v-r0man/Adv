@@ -7,7 +7,7 @@ namespace Adv.BLL.Interfaces
 {
     public interface IFileService
     {
-        Task<string> UploadAsync(IFormFile file, CancellationToken ct);
+        Task<Dictionary<string, string>> UploadAsync(IFormFile file, CancellationToken ct);
         Task<bool> DeleteAsync(string fileName);
         /// <summary>
         /// Delete all Flat's images

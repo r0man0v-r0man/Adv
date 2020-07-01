@@ -84,33 +84,32 @@ namespace Adv.DAL.Interfaces.Implementations
         public async Task<bool> IsValidateUserNameAsync(string userName)
         {
             var result = await userManager.FindByNameAsync(userName).ConfigureAwait(false);
-            if (result == null)
-            {
-                return false;
-            }
-            return true;
+            return result != null;
         }
-
-
-        bool disposed = false;
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            
         }
+        //bool disposed = false;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposed)
-                return;
+        //public void Dispose()
+        //{
+        //    Dispose(true);
+        //    GC.SuppressFinalize(this);
+        //}
 
-            if (disposing)
-            {
-                userManager.Dispose();
-            }
+        //protected virtual void Dispose(bool disposing)
+        //{
+        //    if (disposed)
+        //        return;
 
-            disposed = true;
-        }
+        //    if (disposing)
+        //    {
+        //        userManager.Dispose();
+        //    }
+
+        //    disposed = true;
+        //}
     }
 }
