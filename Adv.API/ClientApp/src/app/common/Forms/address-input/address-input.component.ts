@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {YandexGeocoderService} from '../../../services/yandex-geocoder.service';
 
@@ -10,13 +10,9 @@ import {YandexGeocoderService} from '../../../services/yandex-geocoder.service';
     YandexGeocoderService
   ]
 })
-export class AddressInputComponent implements OnInit {
+export class AddressInputComponent {
   @Input() group: FormGroup;
   constructor(
     public yandexGeocoderService: YandexGeocoderService
   ) { }
-
-  ngOnInit(): void {
-  }
-
 }

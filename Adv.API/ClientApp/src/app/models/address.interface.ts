@@ -1,6 +1,5 @@
-﻿import {City} from './city.model';
+﻿import {GeoObject} from './yandex';
 
 export interface Address {
-  exactLocation: string;
-  city: City;
+  address: GeoObject;
 }

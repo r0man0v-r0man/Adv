@@ -11,18 +11,18 @@
                 [nzLg]="{ span : 24 }"
                 [nzXl]="{ span : 24 }">
     <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
-
-    <nz-form-control  nzHasFeedback  nzErrorTip="Укажите адрес!" >
-      <nz-select formControlName="exactLocation"
+    <nz-form-control nzHasFeedback nzErrorTip="Укажите адрес!" >
+      <nz-select
+        formControlName="address"
         nzShowSearch
         nzServerSearch
         nzPlaceHolder="input search text"
         [nzShowArrow]="false"
-        (nzOnSearch)="yandexGeocoderService.onSearch($event)"
-      >
+        (nzOnSearch)="yandexGeocoderService.onSearch($event)">
         <nz-option *ngFor="let option of yandexGeocoderService.optionList"
                    [nzLabel]="option.GeoObject.metaDataProperty.GeocoderMetaData.text"
-                   [nzValue]="option"> </nz-option>
+                   [nzValue]="option">
+        </nz-option>
       </nz-select>
     </nz-form-control>
     <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>

@@ -46,9 +46,7 @@ export class RentFlatComponent implements OnInit {
   washingMachine = false;
   /** цена */
   price = 300;
-  /** тип аренды */
-  selectedDuration = 0;
-  listOfDuration: Array<{ label: string; value: number}> = [];
+
   /** телефон */
   phone = '80291234567';
   /** описание */
@@ -72,12 +70,6 @@ export class RentFlatComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.authService.currentUser.sub;
-    this.initForm();
-  }
-  initForm() {
-    this.setListOfBalcony();
-    this.setDurations();
   }
 
   /** создание объявления */
@@ -113,20 +105,6 @@ export class RentFlatComponent implements OnInit {
         });
       }
     });
-  }
-  /** установка наличия балкона */
-  setListOfBalcony() {
-    this.listOfBalcony.push(
-      { label: 'Есть', value: 1 },
-      { label: 'Нет', value: 0 }
-    );
-  }
-  /** установка списка типов аренды */
-  setDurations() {
-    this.listOfDuration.push(
-      { label: 'Длительная', value: Duration.long },
-      { label: 'Часы/сутки', value: Duration.short }
-      );
   }
   /**
    * установка значения для поля формы

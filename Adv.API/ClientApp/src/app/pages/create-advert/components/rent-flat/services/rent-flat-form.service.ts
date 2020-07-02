@@ -2,21 +2,27 @@ import { Injectable } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DescriptionValidators} from '../../../validators/description.validators';
 import {AuthService} from '../../../../../services/auth.service';
+import {Duration} from '../../../../../models/duration';
 
 @Injectable()
 export class RentFlatFormService {
   public form: FormGroup;
+  /** тип аренды */
+  listOfDuration: Array<{ label: string; value: number}> = [];
+  /** балкон */
+  listOfBalcony: Array<{ label: string, value: number }> = [];
   constructor(
     private authService: AuthService,
     private fb: FormBuilder
   ) {
+    this.setListOfBalcony();
+    this.setDurations();
     this.form = this.fb.group({
       userId: [ this.authService.currentUser.sub, [Validators.required]],
       isActive: [ true ],
       images: [ null, [Validators.required]],
       address: this.fb.group({
-        exactLocation: [ null, [Validators.required]],
-        city: [ null, [Validators.required]]
+        address: [ null, [Validators.required]]
       }),
       floor: [ null, [Validators.required]],
       allFloor: [ null, [Validators.required]],
@@ -35,5 +41,19 @@ export class RentFlatFormService {
   }
   get isValid() {
     return this.form.valid;
+  }
+  /** установка наличия балкона */
+  setListOfBalcony() {
+    this.listOfBalcony.push(
+      { label: 'Есть', value: 1 },
+      { label: 'Нет', value: 0 }
+    );
+  }
+  /** установка списка типов аренды */
+  setDurations() {
+    this.listOfDuration.push(
+      { label: 'Длительная', value: Duration.long },
+      { label: 'Часы/сутки', value: Duration.short }
+    );
   }
 }
