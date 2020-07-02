@@ -15,6 +15,13 @@ export class RentFlatFormService {
     private authService: AuthService,
     private fb: FormBuilder
   ) {
+    this.initForm();
+  }
+  get isValid() {
+    return this.form.valid;
+  }
+  /* Инициализация формы */
+  private initForm() {
     this.setListOfBalcony();
     this.setDurations();
     this.form = this.fb.group({
@@ -22,7 +29,7 @@ export class RentFlatFormService {
       isActive: [ true ],
       images: [ null, [Validators.required]],
       address: this.fb.group({
-        address: [ null, [Validators.required]]
+        geoObject: [ null, [Validators.required]]
       }),
       floor: [ null, [Validators.required]],
       allFloor: [ null, [Validators.required]],
@@ -38,9 +45,6 @@ export class RentFlatFormService {
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
       description: [ null, [DescriptionValidators.notOnlySpace]]
     });
-  }
-  get isValid() {
-    return this.form.valid;
   }
   /** установка наличия балкона */
   setListOfBalcony() {
