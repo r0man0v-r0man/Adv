@@ -29,6 +29,12 @@ export class RentFlatComponent implements OnInit {
   get isValid() {
     return this.rentFlatFormService.isValid;
   }
+  get listOfBalcony() {
+    return this.rentFlatFormService.listOfBalcony;
+  }
+  get listOfDuration() {
+    return this.rentFlatFormService.listOfDuration;
+  }
   constructor(
     private rentFlatFormService: RentFlatFormService,
     private authService: AuthService,

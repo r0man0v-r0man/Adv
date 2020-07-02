@@ -3,11 +3,9 @@ import { HouseSaleModel } from 'src/app/models/house-sale.model';
 import { FilterOptions } from 'src/app/models/filterOptions';
 import { AdvertService } from 'src/app/services/advert.service';
 import { Router } from '@angular/router';
-import { City } from 'src/app/models/city.model';
-import {HouseRentModel} from "../../../models/house-rent.model";
 
 @Component({
-  selector: 'houses-sale',
+  selector: 'app-houses-sale',
   templateUrl: './sale.component.html',
   styleUrls: ['./sale.component.less']
 })
@@ -31,7 +29,7 @@ export class SaleComponent implements OnInit {
    * Показать объявления
    * @param city Город, по которому фильтруем
    */
-  showAdverts(city: City) {
+  showAdverts(city: any) {
     city ? this.showFilterAdverts(city) : this.showAnyAdverts();
   }
   /** объявления без фильтра, любые */
@@ -42,7 +40,7 @@ export class SaleComponent implements OnInit {
     });
   }
   /** Показать объявления с фильтром */
-  showFilterAdverts(city: City) {
+  showFilterAdverts(city: any) {
     this.isAnyAdverts = false;
     this.filterOption = { city: city };
     this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {

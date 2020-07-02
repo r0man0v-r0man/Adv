@@ -51,7 +51,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="houseArea"
-            [(ngModel)]="houseArea"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzMax]="10000"
@@ -69,7 +68,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="houseLiveArea"
-            [(ngModel)]="houseLiveArea"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzMax]="10000"
@@ -87,7 +85,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="kitchenArea"
-            [(ngModel)]="kitchenArea"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzMax]="10000"
@@ -105,7 +102,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="housePlotArea"
-            [(ngModel)]="housePlotArea"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzMax]="10000"
@@ -124,7 +120,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="heating" [(ngModel)]="heating">Отопление</label>
+            <label nz-checkbox formControlName="heating" >Отопление</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -134,7 +130,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="water" [(ngModel)]="water">Вода</label>
+            <label nz-checkbox formControlName="water" >Вода</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -144,7 +140,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="gas" [(ngModel)]="gas">Газ</label>
+            <label nz-checkbox formControlName="gas" >Газ</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -154,7 +150,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="sewage" [(ngModel)]="sewage">Канализация</label>
+            <label nz-checkbox formControlName="sewage" >Канализация</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -164,7 +160,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="electricity" [(ngModel)]="electricity">Электричество</label>
+            <label nz-checkbox formControlName="electricity" >Электричество</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -174,7 +170,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="bathhouse" [(ngModel)]="bathhouse">Баня</label>
+            <label nz-checkbox formControlName="bathhouse">Баня</label>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item nz-col
@@ -184,7 +180,7 @@
     [nzLg]="{ span : 11 }"
     [nzXl]="{ span : 11 }">
         <nz-form-control >
-            <label nz-checkbox formControlName="garage" [(ngModel)]="garage">Гараж</label>
+            <label nz-checkbox formControlName="garage" >Гараж</label>
         </nz-form-control>
     </nz-form-item>
     <nz-divider [nzText]="priceSector">
@@ -203,7 +199,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="price"
-            [(ngModel)]="price"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzFormatter]="formatterDollar"

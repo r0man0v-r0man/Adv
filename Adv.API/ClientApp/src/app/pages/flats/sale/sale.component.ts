@@ -3,10 +3,9 @@ import { FilterOptions } from 'src/app/models/filterOptions';
 import { FlatSaleModel } from 'src/app/models/flatSaleModel';
 import { Router } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
-import { City } from 'src/app/models/city.model';
 
 @Component({
-  selector: 'flats-sale',
+  selector: 'app-flats-sale',
   templateUrl: './sale.component.html',
   styleUrls: ['./sale.component.less']
 })
@@ -30,7 +29,7 @@ export class SaleComponent implements OnInit {
    * Показать объявления
    * @param city Город, по которому фильтруем
    */
-  showAdverts(city: City) {
+  showAdverts(city: any) {
     city ? this.showFilterAdverts(city) : this.showAnyAdverts();
   }
   /** объявления без фильтра, любые */
@@ -41,7 +40,7 @@ export class SaleComponent implements OnInit {
     });
   }
   /** Показать объявления с фильтром */
-  showFilterAdverts(city: City) {
+  showFilterAdverts(city: any) {
     this.isAnyAdverts = false;
     this.filterOption = { city: city };
     this.advertService.getFlatSales(this.pageNumber, this.filterOption).subscribe(response => {

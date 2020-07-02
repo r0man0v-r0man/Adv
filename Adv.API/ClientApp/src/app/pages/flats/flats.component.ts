@@ -1,23 +1,18 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder} from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
-import { SuggestService } from 'src/app/services/suggest.service';
-import { City } from 'src/app/models/city.model';
 import { RentComponent } from './rent/rent.component';
 import { SaleComponent } from './sale/sale.component';
 
 @Component({
   selector: 'app-flats',
   templateUrl: './flats.component.html',
-  styleUrls: ['./flats.component.less'],
-  providers: [
-    SuggestService
-  ]
+  styleUrls: ['./flats.component.less']
 })
 export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: {advertType: AdvertType; city: City};
+  helper: {advertType: AdvertType; city: any};
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.rent;
   /** типы объявлений */
@@ -29,7 +24,6 @@ export class FlatsComponent implements OnInit {
   @ViewChild(SaleComponent) private saleComponent: SaleComponent;
   constructor(
     private formBuilder: FormBuilder,
-    public suggestService: SuggestService,
     private changeDetector: ChangeDetectorRef
   ) { }
 
@@ -37,7 +31,7 @@ export class FlatsComponent implements OnInit {
     this.initHelperForm();
     this.submitHelper(this.helperForm.value);
   }
-  submitHelper(helperValues: {advertType: AdvertType; city: City}) {
+  submitHelper(helperValues: {advertType: AdvertType; city: any}) {
     this.helper = {...helperValues};
     this.advertSwitcher();
     this.changeDetector.detectChanges();

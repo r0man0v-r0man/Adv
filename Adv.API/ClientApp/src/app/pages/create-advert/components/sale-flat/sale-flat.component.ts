@@ -29,6 +29,12 @@ export class SaleFlatComponent implements OnInit {
   get isValid() {
     return this.saleFlatFormService.isValid;
   }
+  get listOfBalcony() {
+    return this.saleFlatFormService.listOfBalcony;
+  }
+  get listOfToilet() {
+    return this.saleFlatFormService.listOfToilet;
+  }
   constructor(
     private saleFlatFormService: SaleFlatFormService,
     private formBuilder: FormBuilder,

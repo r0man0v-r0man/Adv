@@ -34,17 +34,7 @@
             [nzMd]="{ span : 24 }"
             [nzLg]="{ span : 24 }"
             [nzXl]="{ span : 24 }">
-                <nz-select nzShowSearch nzAllowClear
-                [nzSize]="'large'"
-                formControlName="city"
-                nzPlaceHolder="Выберите город">
-                <nz-option
-                    *ngFor="let city of suggestService.listOfCities"
-                    [nzLabel]="city.name"
-                    [nzValue]="city"
-                    >
-                </nz-option>
-                </nz-select>
+
             </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row >
@@ -64,5 +54,5 @@
 <ng-template #advertsTextTpl>
     <i nz-icon nzType="database" nzTheme="outline"></i> Объявления
 </ng-template>
-<flats-sale  *ngIf="isShowComponent" ></flats-sale>
-<flats-rent  *ngIf="!isShowComponent"></flats-rent>
+<app-flats-sale  *ngIf="isShowComponent" ></app-flats-sale>
+<app-flats-rent  *ngIf="!isShowComponent"></app-flats-rent>

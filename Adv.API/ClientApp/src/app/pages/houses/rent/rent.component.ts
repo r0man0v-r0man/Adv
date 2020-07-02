@@ -3,10 +3,9 @@ import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { FilterOptions } from 'src/app/models/filterOptions';
 import { Router } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
-import { City } from 'src/app/models/city.model';
 
 @Component({
-  selector: 'houses-rent',
+  selector: 'app-houses-rent',
   templateUrl: './rent.component.html',
   styleUrls: ['./rent.component.less']
 })
@@ -30,7 +29,7 @@ export class RentComponent implements OnInit {
    * Показать объявления
    * @param city Город, по которому фильтруем
    */
-  showAdverts(city: City) {
+  showAdverts(city: any) {
     city ? this.showFilterAdverts(city) : this.showAnyAdverts();
   }
   /** объявления без фильтра, любые */
@@ -41,7 +40,7 @@ export class RentComponent implements OnInit {
     });
   }
   /** Показать объявления с фильтром */
-  showFilterAdverts(city: City) {
+  showFilterAdverts(city: any) {
     this.isAnyAdverts = false;
     this.filterOption = { city: city };
     this.advertService.getHouseRents(this.pageNumber, this.filterOption).subscribe(response => {

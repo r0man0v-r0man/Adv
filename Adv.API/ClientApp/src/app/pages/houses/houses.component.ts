@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder} from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { RentComponent } from './rent/rent.component';
 import { SaleComponent } from './sale/sale.component';
-import { SuggestService } from 'src/app/services/suggest.service';
-import { City } from 'src/app/models/city.model';
 
 @Component({
   selector: 'app-houses',
@@ -14,7 +12,7 @@ import { City } from 'src/app/models/city.model';
 export class HousesComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: {advertType: AdvertType; city: City};
+  helper: {advertType: AdvertType; city: any};
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.sale;
   /** типы объявлений */
@@ -27,7 +25,6 @@ export class HousesComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public suggestService: SuggestService,
     private changeDetector: ChangeDetectorRef
   ) { }
 
@@ -35,7 +32,7 @@ export class HousesComponent implements OnInit {
     this.initHelperForm();
     this.submitHelper(this.helperForm.value);
   }
-  submitHelper(helperValues: {advertType: AdvertType; city: City}) {
+  submitHelper(helperValues: {advertType: AdvertType; city: any}) {
     this.helper = {...helperValues};
     this.advertSwitcher();
     this.changeDetector.detectChanges();

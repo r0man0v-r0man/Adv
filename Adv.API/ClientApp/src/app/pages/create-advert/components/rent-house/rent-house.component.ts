@@ -29,6 +29,9 @@ export class RentHouseComponent implements OnInit {
   get isValid() {
     return this.rentHouseFormService.isValid;
   }
+  get listOfDuration() {
+    return this.rentHouseFormService.listOfDuration;
+  }
   constructor(
     private rentHouseFormService: RentHouseFormService,
     private formBuilder: FormBuilder,
