@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Adv.API.Models.Address;
 using Adv.API.Models.Files;
 using Adv.BLL.DTO.Adverts;
 using Adv.BLL.DTO.Images;
@@ -27,7 +28,7 @@ namespace Adv.API.Models.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public AddressViewModel Address { get; set; }
+        public YandexAddressViewModel Address { get; set; }
         /// <summary>
         /// количество комнат
         /// </summary>

@@ -31,7 +31,7 @@ namespace Adv.API.Models.Adverts
         /// <summary>
         /// адрес объявления
         /// </summary>
-        public AddressViewModel Address { get; set; }
+        public YandexAddressViewModel Address { get; set; }
         /// <summary>
         /// этаж 
         /// </summary>

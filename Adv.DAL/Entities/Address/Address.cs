@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Adv.BLL.DTO.Address
+namespace Adv.DAL.Entities.Address
 {
-    public class AddressDto
+    public class Address
     {
         public int Id { get; set; }
         public string Country_code { get; set; }
         public string Postal_code { get; set; }
         public string Formatted { get; set; }
-        public IEnumerable<ComponentDto> Components { get; set; }
+        public IEnumerable<Component> Components { get; set; }
     }
 }

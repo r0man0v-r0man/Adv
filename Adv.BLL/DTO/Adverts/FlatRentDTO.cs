@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Adv.BLL.DTO.Address;
 using Adv.BLL.DTO.Images;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Entities.Images;
@@ -28,7 +29,7 @@ namespace Adv.BLL.DTO.Adverts
         /// адрес объявления
         /// </summary>
         public int AddressId { get; set; }
-        public AddressDto Address { get; set; }
+        public YandexAddressDto Address { get; set; }
         /// <summary>
         /// этаж 
         /// </summary>
@@ -81,8 +82,6 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        public int CityId { get; set; }
-        public CityDto City { get; set; }
 
 
         /// <summary>

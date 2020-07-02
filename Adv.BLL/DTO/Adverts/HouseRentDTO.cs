@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Adv.BLL.DTO.Address;
 using Adv.BLL.DTO.Images;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Entities.Images;
@@ -30,7 +31,7 @@ namespace Adv.BLL.DTO.Adverts
         /// адрес объявления
         /// </summary>
         public int AddressId { get; set; }
-        public AddressDto Address { get; set; }
+        public YandexAddressDto Address { get; set; }
         /// <summary>
         /// количество комнат
         /// </summary>
@@ -79,7 +80,6 @@ namespace Adv.BLL.DTO.Adverts
         /// описание
         /// </summary>
         public string Description { get; set; }
-        public CityDto CityDto { get; set; }
 
         /// <summary>
         ///  DTO -> DAL

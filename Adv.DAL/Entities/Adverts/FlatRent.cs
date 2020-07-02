@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Adv.DAL.Entities.Address;
 using Adv.DAL.Entities.Common;
 using Adv.DAL.Entities.Images;
 namespace Adv.DAL.Entities.Adverts
@@ -26,7 +27,7 @@ namespace Adv.DAL.Entities.Adverts
         /// адрес объявления
         /// </summary>
         public int AddressId { get; set; }
-        public Address Address { get; set; }
+        public YandexAddress Address { get; set; }
         /// <summary>
         /// этаж 
         /// </summary>
