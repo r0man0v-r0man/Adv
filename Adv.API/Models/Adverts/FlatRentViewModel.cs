@@ -3,6 +3,7 @@ using Adv.BLL.DTO.Adverts;
 using Adv.BLL.DTO.Images;
 using System.Collections.Generic;
 using System.Linq;
+using Adv.API.Models.Address;
 
 namespace Adv.API.Models.Adverts
 {
