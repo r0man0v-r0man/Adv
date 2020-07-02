@@ -6,7 +6,6 @@ import { ImageService } from 'src/app/services/image.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
-import { Duration } from 'src/app/models/duration';
 import {RentFlatFormService} from './services/rent-flat-form.service';
 
 @Component({
@@ -18,42 +17,11 @@ import {RentFlatFormService} from './services/rent-flat-form.service';
   ]
 })
 export class RentFlatComponent implements OnInit {
-  /** форма добавления объявления */
-  flatRentForm: FormGroup;
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
-  /** идентификатор пользователя */
-  userId: string;
-  /** этаж */
-  floor: number;
-  /** этажей всего */
-  allFloor: number;
-  /** кол-во комнат */
-  rooms: number;
-  /** балкон */
-  selectedBalcony = 1;
-  listOfBalcony: Array<{ label: string, value: number }> = [];
-  /** мебель */
-  furniture = false;
-  /** холодильник */
-  refrigerator = false;
-  /** микроволновая печь */
-  microwaveOven = false;
-  /** интернет */
-  internet = false;
-  /** стиральная машина */
-  washingMachine = false;
-  /** цена */
-  price = 300;
-
-  /** телефон */
-  phone = '80291234567';
-  /** описание */
-  description = '';
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
-
 
   get form(): FormGroup {
     return this.rentFlatFormService.form;

@@ -51,7 +51,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="floor"
-            [(ngModel)]="floor"
             [nzPlaceHolder]="3"
             [nzMin]="1"
             [nzMax]="1000"
@@ -69,7 +68,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="allFloor"
-            [(ngModel)]="allFloor"
             [nzPlaceHolder]="3"
             [nzMin]="1"
             [nzMax]="1000"
@@ -92,7 +90,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="rooms"
-            [(ngModel)]="rooms"
             [nzPlaceHolder]="2"
             [nzMin]="1"
             [nzMax]="1000"
@@ -110,7 +107,6 @@
         nzHasFeedback
         nzErrorTip="Балкон есть?">
             <nz-select
-            [(ngModel)]="selectedBalcony"
             formControlName="balcony"
             [nzSize]="'large'">
             <nz-option
@@ -193,7 +189,6 @@
             <nz-input-number
             nzSize="large"
             formControlName="price"
-            [(ngModel)]="price"
             [nzPlaceHolder]="100"
             [nzMin]="1"
             [nzFormatter]="formatterDollar"
@@ -211,7 +206,6 @@
         <nz-form-label nzRequired="true" nzFor="duration" >Тип аренды</nz-form-label>
         <nz-form-control  nzHasFeedback  nzErrorTip="Укажите тип!">
             <nz-select
-            [(ngModel)]="selectedDuration"
             formControlName="duration"
             [nzSize]="'large'"
             nzPlaceHolder="Выберите срок">
@@ -240,7 +234,6 @@
             <input nz-input placeholder="80291234567"
             nzSize="large"
             formControlName="phone"
-            [(ngModel)]="phone"
             type="tel">
         </nz-form-control>
     </nz-form-item>

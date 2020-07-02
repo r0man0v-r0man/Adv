@@ -1,117 +1,70 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
-import { SuggestService } from 'src/app/services/suggest.service';
 import { AdvertService } from 'src/app/services/advert.service';
-import { UploadFile, UploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
-import { DescriptionValidators } from '../../validators/description.validators';
-import { Duration } from 'src/app/models/duration';
+import {RentHouseFormService} from './services/rent-house-form.service';
 
 @Component({
   selector: 'app-rent-house',
   templateUrl: './rent-house.component.html',
-  styleUrls: ['./rent-house.component.less']
+  styleUrls: ['./rent-house.component.less'],
+  providers: [
+    RentHouseFormService
+  ]
 })
 export class RentHouseComponent implements OnInit {
-  /** форма создания объявления */
-  rentHouseForm: FormGroup;
   /** фото к объявлению */
-  images: UploadFile[] = [];
-  imageList: UploadFile[] = [];
-  userId: string;
-  /** адрес */
-  address: string = '';
-  /** кол-во комнат */
-  rooms: number;
-  /** мебель */
-  furniture: boolean = false;
-  /** холодильник */
-  refrigerator: boolean = false;
-  /** микроволновая печь */
-  microwaveOven: boolean = false;
-  /** интернет */
-  internet: boolean = false;
-  /** стиральная машина */
-  washingMachine: boolean = false;
-  /** баня/сауна */
-  bathhouse: boolean = false;
-  /** гараж */
-  garage: boolean = false;
-  /** цена */
-  price: number = 300;
+  images: NzUploadFile[] = [];
+  imageList: NzUploadFile[] = [];
   formatterDollar = (value: number) => `$ ${value}`;
   parserDollar = (value: string) => value.replace('$ ', '');
-  /** тип аренды */
-  selectedDuration: number = 0;
-  listOfDuration: Array<{ label: string; value: number}> = [];
-  /** телефон */
-  phone: string = '80291234567';
-  /** описание */
-  description: string = '';
 
+  get form(): FormGroup {
+    return this.rentHouseFormService.form;
+  }
+  get isValid() {
+    return this.rentHouseFormService.isValid;
+  }
   constructor(
+    private rentHouseFormService: RentHouseFormService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     public imageService: ImageService,
-    public suggestService: SuggestService,
     private advertService: AdvertService,
     private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.authService.currentUser.sub;
-    this.initRentHouseForm();
-  }
-  private initRentHouseForm(){
-    this.setDurations();
-    this.rentHouseForm = this.formBuilder.group({
-      userId:[ this.userId ,[Validators.required]],
-      isActive: [ true ],
-      images: [ this.images, [Validators.required]],
-      address: [ this.address, [Validators.required]],
-      rooms: [ this.rooms ],
-      furniture: [this.furniture],
-      refrigerator: [ this.refrigerator],
-      microwaveOven: [ this.microwaveOven],
-      internet: [ this.internet],
-      washingMachine: [ this.washingMachine],
-      bathhouse: [ this.bathhouse],
-      garage: [ this.garage],
-      price: [ null, [Validators.required]],
-      duration: [ this.selectedDuration, [Validators.required]],
-      phone: [ this.phone, [Validators.required, Validators.pattern("[0-9]*")]],
-      description: [ null, [DescriptionValidators.notOnlySpace]],
-      city: [ null, [Validators.required]]
-    })
   }
 
-  submitForm(){
-    const rentHouseModel: HouseRentModel = { ...this.rentHouseForm.value }
+  submitForm() {
+    const rentHouseModel: HouseRentModel = { ...this.form.value };
     this.advertService.addHouseRent(rentHouseModel);
   }
   /** загрузка картинки */
-  onUploadChange(info:  UploadChangeParam ){
+  onUploadChange(info: NzUploadChangeParam ) {
     this.imageService.handleChange(info).subscribe(response => {
       this.imageList = [...this.imageService.imageList];
       this.images = response;
-      this.setHouseRentFormControlValue('images',this.images);
+      this.setHouseRentFormControlValue('images', this.images);
       this.cd.detectChanges();
-    })
+    });
   }
   /** Delete file */
-  onDelete = (file: UploadFile) : Observable<boolean> => {
-    return new Observable(observer =>{
-      if(file){
+  onDelete = (file: NzUploadFile) : Observable<boolean> => {
+    return new Observable(observer => {
+      if (file) {
         this.imageService.delete(file.response.deleteHash)
-        .subscribe(response =>{
-          if(response) {
+        .subscribe(response => {
+          if (response) {
 
-          let index = this.images.findIndex(x=>x.uid === file.response.uid);
+          const index = this.images.findIndex(x => x.uid === file.response.uid);
 
-          if(index > -1) {
+          if (index > -1) {
             this.images.splice(index, 1);
           }
           this.setHouseRentFormControlValue('images', this.images);
@@ -120,7 +73,7 @@ export class RentHouseComponent implements OnInit {
           }
         });
       }
-    })
+    });
   }
 
   /**
@@ -128,14 +81,7 @@ export class RentHouseComponent implements OnInit {
    * @param formControlName имя поля
    * @param value значение
    */
-  private setHouseRentFormControlValue(formControlName: string, value: any){
-    this.rentHouseForm.controls[formControlName].setValue(value);
-  };
-  /** установка списка типов аренды */
-  setDurations(){
-    this.listOfDuration.push(
-      { label: 'Длительная', value: Duration.long },
-      { label: 'Часы/сутки', value: Duration.short }
-      );
+  private setHouseRentFormControlValue(formControlName: string, value: any) {
+    this.form.controls[formControlName].setValue(value);
   }
 }
