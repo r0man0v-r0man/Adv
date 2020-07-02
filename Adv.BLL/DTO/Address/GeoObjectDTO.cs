@@ -1,4 +1,6 @@
-﻿namespace Adv.BLL.DTO.Address
+﻿using Adv.DAL.Entities.Address;
+
+namespace Adv.BLL.DTO.Address
 {
     public class GeoObjectDto
     {
@@ -9,5 +11,34 @@
         public BoundedByDto BoundedBy { get; set; }
         public int MetaDataPropertyId { get; set; }
         public MetaDataPropertyDto MetaDataProperty { get; set; }
+
+        /// <summary>
+        /// DAL -> DTO
+        /// </summary>
+        /// <param name="dal"></param>
+        /// <returns></returns>
+        public static implicit operator GeoObjectDto(GeoObject dal) => new GeoObjectDto
+        {
+            Id = dal.Id,
+            Name = dal.Name,
+            Description = dal.Description,
+            BoundedById = dal.BoundedById,
+            BoundedBy = dal.BoundedBy,
+            MetaDataPropertyId = dal.MetaDataPropertyId,
+            MetaDataProperty = dal.MetaDataProperty
+        };
+
+        /// <summary>
+        /// DTO -> DAL
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        public static implicit operator GeoObject(GeoObjectDto dto) => new GeoObject
+        {
+            Name = dto.Name,
+            Description = dto.Description,
+            BoundedBy = dto.BoundedBy,
+            MetaDataProperty = dto.MetaDataProperty
+        };
     }
 }
