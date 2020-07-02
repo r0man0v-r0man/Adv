@@ -10,6 +10,8 @@ export class RentHouseFormService {
   public form: FormGroup;
   /** тип аренды */
   listOfDuration: Array<{ label: string; value: number}> = [];
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
   get isValid() {
     return this.form.valid;
   }

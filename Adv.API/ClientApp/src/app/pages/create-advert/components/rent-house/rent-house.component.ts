@@ -20,8 +20,7 @@ export class RentHouseComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
-  formatterDollar = (value: number) => `$ ${value}`;
-  parserDollar = (value: string) => value.replace('$ ', '');
+
 
   get form(): FormGroup {
     return this.rentHouseFormService.form;
@@ -31,6 +30,12 @@ export class RentHouseComponent implements OnInit {
   }
   get listOfDuration() {
     return this.rentHouseFormService.listOfDuration;
+  }
+  get formatter() {
+    return this.rentHouseFormService.formatterDollar;
+  }
+  get parser() {
+    return this.rentHouseFormService.parserDollar;
   }
   constructor(
     private rentHouseFormService: RentHouseFormService,

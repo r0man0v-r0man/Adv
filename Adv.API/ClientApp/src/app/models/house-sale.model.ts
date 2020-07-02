@@ -1,12 +1,12 @@
 import { NzUploadFile } from 'ng-zorro-antd/upload/interface';
-import {Address} from './address.interface';
+import {GeoObject} from './yandex';
 
 export interface HouseSaleModel {
     id: number;
     userId: string;
     isActive: boolean;
     images: NzUploadFile[];
-    address: Address;
+    address: GeoObject;
     houseArea: number;
     houseLiveArea: number;
     kitchenArea: number;

@@ -10,6 +10,8 @@ export class SaleFlatFormService {
   listOfToilet: Array<{ label: string; value: number}> = [];
   /** балкон */
   listOfBalcony: Array<{ label: string, value: number }> = [];
+  formatterDollar = (value: number) => `$ ${value}`;
+  parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private fb: FormBuilder,
     private authService: AuthService

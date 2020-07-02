@@ -20,13 +20,18 @@ export class SaleHouseComponent implements OnInit{
   /** фото к объявлению */
   imageList: NzUploadFile[] = [];
   images: NzUploadFile[] = [];
-  formatterDollar = (value: number) => `$ ${value}`;
-  parserDollar = (value: string) => value.replace('$ ', '');
+
   get form(): FormGroup {
     return this.saleHouseFormService.form;
   }
   get isValid() {
     return this.saleHouseFormService.isValid;
+  }
+  get formatter() {
+    return this.saleHouseFormService.formatterDollar;
+  }
+  get parser() {
+    return this.saleHouseFormService.parserDollar;
   }
   constructor(
     private saleHouseFormService: SaleHouseFormService,
