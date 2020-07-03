@@ -11,6 +11,7 @@ using Adv.DAL.Entities;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -91,15 +92,14 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             var result = await context.FlatRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.Point)
+                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
                 .ConfigureAwait(false);
+            
             return result ?? throw new NotFoundAdvertException();
         }
 
@@ -107,12 +107,10 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             var result = await context.FlatSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.Point)
+                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
                 .ConfigureAwait(false);
@@ -123,12 +121,10 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             var result = await context.HouseRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.Point)
+                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(advert => advert.Id == id, ct)
                 .ConfigureAwait(false);
@@ -138,12 +134,10 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             var result = await context.HouseSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.Point)
+                .Include(prop => prop.Address.GeoObject.BoundedBy.Envelope)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(advert => advert.Id == id, ct)
                 .ConfigureAwait(false);
@@ -212,12 +206,8 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             return await context.FlatRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
@@ -230,12 +220,8 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             return await context.FlatSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
@@ -248,12 +234,8 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             return await context.HouseRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive )
                 .OrderByDescending(prop => prop.Created)
@@ -266,12 +248,8 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             using var context = contextFactory.GetAdvContext();
             return await context.HouseSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.GeoObject)
-                .ThenInclude(prop => prop.MetaDataProperty)
-                .ThenInclude(prop => prop.GeocoderMetaData)
-                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)

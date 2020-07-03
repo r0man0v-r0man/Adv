@@ -23,9 +23,7 @@ export class SaleHouseFormService {
       userId: [ this.authService.currentUser.sub, [Validators.required]],
       isActive: [ true ],
       images: [ null, [Validators.required]],
-      address: this.fb.group({
-        geoObject: [ null, [Validators.required]]
-      }),
+      address:  [ null, [Validators.required]],
       houseArea: [ null, [Validators.required]],
       houseLiveArea: [ null, [Validators.required]],
       kitchenArea: [ null, [Validators.required]],

@@ -1,4 +1,6 @@
-﻿using Adv.BLL.DTO.Address;
+﻿using System.Text.Json.Serialization;
+using Adv.BLL.DTO.Address;
+using Newtonsoft.Json;
 
 namespace Adv.API.Models.Address
 {

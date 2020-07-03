@@ -6,7 +6,7 @@ export interface HouseRentModel {
     userId: string;
     isActive: boolean;
     images: NzUploadFile[];
-    address: GeoObject;
+    address: any;
     rooms: number;
     furniture: boolean;
     refrigerator: boolean;

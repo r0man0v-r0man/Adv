@@ -29,9 +29,7 @@ export class SaleFlatFormService {
       userId: [ this.authService.currentUser.sub, [Validators.required]],
       isActive: [ true ],
       images: [ null, [Validators.required]],
-      address: this.fb.group({
-        geoObject: [ null, [Validators.required]]
-      }),
+      address:  [ null, [Validators.required]],
       floor: [ null, [Validators.required]],
       allFloor: [ null, [Validators.required]],
       rooms: [ null, [Validators.required]],

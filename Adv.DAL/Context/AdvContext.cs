@@ -19,7 +19,7 @@ namespace Adv.DAL.Context
         public DbSet<HouseRent> HouseRents { get; set; }
         public DbSet<HouseSale> HouseSales { get; set; }
         
-        public virtual DbSet<YandexAddress> YandexAddresses { get; set; }
+        public DbSet<YandexAddress> YandexAddresses { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 

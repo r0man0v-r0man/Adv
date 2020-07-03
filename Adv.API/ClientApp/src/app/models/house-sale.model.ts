@@ -6,7 +6,7 @@ export interface HouseSaleModel {
     userId: string;
     isActive: boolean;
     images: NzUploadFile[];
-    address: GeoObject;
+    address: any;
     houseArea: number;
     houseLiveArea: number;
     kitchenArea: number;

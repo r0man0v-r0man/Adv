@@ -1,4 +1,5 @@
-﻿using Adv.BLL.DTO.Address;
+﻿using System.Text.Json.Serialization;
+using Adv.BLL.DTO.Address;
 
 namespace Adv.API.Models.Address
 {

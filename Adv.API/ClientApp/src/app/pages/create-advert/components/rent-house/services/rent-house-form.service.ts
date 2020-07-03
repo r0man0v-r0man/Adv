@@ -28,9 +28,7 @@ export class RentHouseFormService {
       userId: [ this.authService.currentUser.sub, [Validators.required]],
       isActive: [ true ],
       images: [ null, [Validators.required]],
-      address: this.fb.group({
-        geoObject: [ null, [Validators.required]]
-      }),
+      address:  [ null, [Validators.required]],
       rooms: [ null ],
       furniture: [ null ],
       refrigerator: [ null ],

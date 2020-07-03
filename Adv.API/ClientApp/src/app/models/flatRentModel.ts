@@ -6,7 +6,7 @@ export interface FlatRentModel {
     userId: string;
     isActive: boolean;
     images: NzUploadFile[];
-    address: GeoObject;
+    address: any;
     floor: number;
     allFloor: number;
     rooms: number;
