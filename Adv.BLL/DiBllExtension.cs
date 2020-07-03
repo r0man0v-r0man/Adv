@@ -15,7 +15,6 @@ namespace Adv.BLL
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdvertService, AdvertService>();
-            services.AddScoped<IStoreCityService, StoreCityService>();
 
             services.AddMemoryCache();
 

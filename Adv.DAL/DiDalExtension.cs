@@ -44,7 +44,6 @@ namespace Adv.DAL
             services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
             services.AddScoped(typeof(IFileRepository), typeof(FileRepository));
             services.AddScoped(typeof(IAdvertRepository), typeof(AdvertRepository));
-            services.AddScoped(typeof(IStoreCityRepository), typeof(StoreCityRepository));
             services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
             return services;

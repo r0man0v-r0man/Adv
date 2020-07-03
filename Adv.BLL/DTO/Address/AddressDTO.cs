@@ -10,7 +10,7 @@ namespace Adv.BLL.DTO.Address
         public string Country_code { get; set; }
         public string Postal_code { get; set; }
         public string Formatted { get; set; }
-        public IEnumerable<ComponentDto> Components { get; set; }
+        public IList<ComponentDto> Components { get; set; }
 
         /// <summary>
         /// DAL -> DTO
@@ -23,7 +23,7 @@ namespace Adv.BLL.DTO.Address
             Country_code = dal.Country_code,
             Postal_code = dal.Postal_code,
             Formatted = dal.Formatted,
-            Components = dal.Components.Select(component => (ComponentDto) component)
+            Components = dal.Components.Select(component => (ComponentDto) component).ToList()
         };
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Adv.BLL.DTO.Address
             Country_code = dto.Country_code,
             Postal_code = dto.Postal_code,
             Formatted = dto.Formatted,
-            Components = dto.Components.Select(component => (Component) component)
+            Components = dto.Components.Select(component => (Component) component).ToList()
         };
     }
 }

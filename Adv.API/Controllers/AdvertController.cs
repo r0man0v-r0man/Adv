@@ -169,10 +169,12 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _advertService
-                    .GetFlatRentsAsync(pageNumber, filterOptions?.City)
-                    .ConfigureAwait(false);
-                return Ok(result.Select(advert => (FlatRentViewModel)advert));
+                // var result = await _advertService
+                //     .GetFlatRentsAsync(pageNumber, filterOptions?.City)
+                //     .ConfigureAwait(false);
+                // return Ok(result.Select(advert => (FlatRentViewModel)advert));
+                return Ok();
+
             }
             catch (Exception e)
             {
@@ -185,10 +187,12 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _advertService
-                    .GetFlatSalesAsync(pageNumber, filterOptions?.City)
-                    .ConfigureAwait(false);
-                return Ok(result.Select(advert => (FlatSaleViewModel)advert));
+                // var result = await _advertService
+                //     .GetFlatSalesAsync(pageNumber, filterOptions?.City)
+                //     .ConfigureAwait(false);
+                // return Ok(result.Select(advert => (FlatSaleViewModel)advert));
+                return Ok();
+
             }
             catch (Exception e)
             {
@@ -201,10 +205,12 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _advertService
-                    .GetHouseRentsAsync(pageNumber, filterOptions?.City)
-                    .ConfigureAwait(false);
-                return Ok(result.Select(advert => (HouseRentViewModel)advert));
+                // var result = await _advertService
+                //     .GetHouseRentsAsync(pageNumber, filterOptions?.City)
+                //     .ConfigureAwait(false);
+                // return Ok(result.Select(advert => (HouseRentViewModel)advert));
+                return Ok();
+
             }
             catch (Exception e)
             {
@@ -217,10 +223,11 @@ namespace Adv.API.Controllers
         {
             try
             {
-                var result = await _advertService
-                    .GetHouseSalesAsync(pageNumber, filterOptions?.City)
-                    .ConfigureAwait(false);
-                return Ok(result.Select(advert => (HouseSaleViewModel)advert));
+                // var result = await _advertService
+                //     .GetHouseSalesAsync(pageNumber, filterOptions?.City)
+                //     .ConfigureAwait(false);
+                // return Ok(result.Select(advert => (HouseSaleViewModel)advert));
+                return Ok();
             }
             catch (Exception e)
             {

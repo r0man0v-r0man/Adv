@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
+using Adv.DAL.Entities.Address;
 using Adv.DAL.Entities.Adverts;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -18,9 +19,7 @@ namespace Adv.DAL.Context
         public DbSet<HouseRent> HouseRents { get; set; }
         public DbSet<HouseSale> HouseSales { get; set; }
         
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<StoreCity> StoreCities { get; set; }
+        public virtual DbSet<YandexAddress> YandexAddresses { get; set; }
 
         public AdvContext(DbContextOptions<AdvContext> options) : base(options) { }
 
@@ -31,9 +30,6 @@ namespace Adv.DAL.Context
             modelBuilder?.ApplyConfiguration(new HouseRentConfiguration());
             modelBuilder?.ApplyConfiguration(new HouseSaleConfiguration());
             modelBuilder?.ApplyConfiguration(new AppUserConfiguration());
-            modelBuilder?.ApplyConfiguration(new AddressConfiguration());
-            modelBuilder?.ApplyConfiguration(new CityConfiguration());
-            modelBuilder?.ApplyConfiguration(new StoreCityConfiguration());
             base.OnModelCreating(modelBuilder);
         }
 

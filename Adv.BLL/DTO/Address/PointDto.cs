@@ -2,23 +2,20 @@
 
 namespace Adv.BLL.DTO.Address
 {
-    public class ComponentDto
+    public class PointDto
     {
         public int Id { get; set; }
-        
-        public string Kind { get; set; }
-        public string Name { get; set; }
+        public string Pos { get; set; }
 
         /// <summary>
         /// DAL -> DTO
         /// </summary>
         /// <param name="dal"></param>
         /// <returns></returns>
-        public static implicit operator ComponentDto(Component dal) => new ComponentDto
+        public static implicit operator PointDto(Point dal) => new PointDto
         {
-            Id = dal.Id,
-            Kind = dal.Kind,
-            Name = dal.Name
+            Pos = dal.Pos,
+            Id = dal.Id
         };
 
         /// <summary>
@@ -26,10 +23,9 @@ namespace Adv.BLL.DTO.Address
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public static implicit operator Component(ComponentDto dto) => new Component
+        public static implicit operator Point(PointDto dto) => new Point
         {
-            Kind = dto.Kind,
-            Name = dto.Name
+            Pos = dto.Pos
         };
     }
 }

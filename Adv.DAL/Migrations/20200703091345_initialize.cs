@@ -4,10 +4,25 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Adv.DAL.Migrations
 {
-    public partial class startDb : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Country_code = table.Column<string>(nullable: true),
+                    Postal_code = table.Column<string>(nullable: true),
+                    Formatted = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -48,29 +63,73 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cities",
+                name: "Envelope",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: false)
+                    LowerCorner = table.Column<string>(nullable: true),
+                    UpperCorner = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
+                    table.PrimaryKey("PK_Envelope", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreCities",
+                name: "Point",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(nullable: false)
+                    Pos = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StoreCities", x => x.Id);
+                    table.PrimaryKey("PK_Point", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Component",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Kind = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    AddressId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Component", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Component_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GeocoderMetaData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Kind = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
+                    Precision = table.Column<string>(nullable: true),
+                    AddressId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeocoderMetaData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GeocoderMetaData_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,21 +239,93 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Addresses",
+                name: "BoundedBy",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ExactLocation = table.Column<string>(nullable: true),
-                    CityId = table.Column<int>(nullable: false)
+                    EnvelopeId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.PrimaryKey("PK_BoundedBy", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Addresses_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
+                        name: "FK_BoundedBy_Envelope_EnvelopeId",
+                        column: x => x.EnvelopeId,
+                        principalTable: "Envelope",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MetaDataProperty",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GeocoderMetaDataId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MetaDataProperty", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MetaDataProperty_GeocoderMetaData_GeocoderMetaDataId",
+                        column: x => x.GeocoderMetaDataId,
+                        principalTable: "GeocoderMetaData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GeoObject",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    BoundedById = table.Column<int>(nullable: false),
+                    MetaDataPropertyId = table.Column<int>(nullable: false),
+                    PointId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GeoObject", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GeoObject_BoundedBy_BoundedById",
+                        column: x => x.BoundedById,
+                        principalTable: "BoundedBy",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GeoObject_MetaDataProperty_MetaDataPropertyId",
+                        column: x => x.MetaDataPropertyId,
+                        principalTable: "MetaDataProperty",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GeoObject_Point_PointId",
+                        column: x => x.PointId,
+                        principalTable: "Point",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "YandexAddresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    GeoObjectId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_YandexAddresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_YandexAddresses_GeoObject_GeoObjectId",
+                        column: x => x.GeoObjectId,
+                        principalTable: "GeoObject",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -228,9 +359,9 @@ namespace Adv.DAL.Migrations
                 {
                     table.PrimaryKey("PK_FlatRents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FlatRents_Addresses_AddressId",
+                        name: "FK_FlatRents_YandexAddresses_AddressId",
                         column: x => x.AddressId,
-                        principalTable: "Addresses",
+                        principalTable: "YandexAddresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -268,9 +399,9 @@ namespace Adv.DAL.Migrations
                 {
                     table.PrimaryKey("PK_FlatSales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FlatSales_Addresses_AddressId",
+                        name: "FK_FlatSales_YandexAddresses_AddressId",
                         column: x => x.AddressId,
-                        principalTable: "Addresses",
+                        principalTable: "YandexAddresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -309,9 +440,9 @@ namespace Adv.DAL.Migrations
                 {
                     table.PrimaryKey("PK_HouseRents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HouseRents_Addresses_AddressId",
+                        name: "FK_HouseRents_YandexAddresses_AddressId",
                         column: x => x.AddressId,
-                        principalTable: "Addresses",
+                        principalTable: "YandexAddresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -352,9 +483,9 @@ namespace Adv.DAL.Migrations
                 {
                     table.PrimaryKey("PK_HouseSales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HouseSales_Addresses_AddressId",
+                        name: "FK_HouseSales_YandexAddresses_AddressId",
                         column: x => x.AddressId,
-                        principalTable: "Addresses",
+                        principalTable: "YandexAddresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -410,11 +541,6 @@ namespace Adv.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Addresses_CityId",
-                table: "Addresses",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -452,6 +578,16 @@ namespace Adv.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_BoundedBy_EnvelopeId",
+                table: "BoundedBy",
+                column: "EnvelopeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Component_AddressId",
+                table: "Component",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FlatRents_AddressId",
                 table: "FlatRents",
                 column: "AddressId");
@@ -470,6 +606,26 @@ namespace Adv.DAL.Migrations
                 name: "IX_FlatSales_AppUserId",
                 table: "FlatSales",
                 column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeocoderMetaData_AddressId",
+                table: "GeocoderMetaData",
+                column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeoObject_BoundedById",
+                table: "GeoObject",
+                column: "BoundedById");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeoObject_MetaDataPropertyId",
+                table: "GeoObject",
+                column: "MetaDataPropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GeoObject_PointId",
+                table: "GeoObject",
+                column: "PointId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HouseRents_AddressId",
@@ -510,6 +666,16 @@ namespace Adv.DAL.Migrations
                 name: "IX_Image_HouseSaleId",
                 table: "Image",
                 column: "HouseSaleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MetaDataProperty_GeocoderMetaDataId",
+                table: "MetaDataProperty",
+                column: "GeocoderMetaDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_YandexAddresses_GeoObjectId",
+                table: "YandexAddresses",
+                column: "GeoObjectId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -530,10 +696,10 @@ namespace Adv.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Image");
+                name: "Component");
 
             migrationBuilder.DropTable(
-                name: "StoreCities");
+                name: "Image");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -551,13 +717,31 @@ namespace Adv.DAL.Migrations
                 name: "HouseSales");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "YandexAddresses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "GeoObject");
+
+            migrationBuilder.DropTable(
+                name: "BoundedBy");
+
+            migrationBuilder.DropTable(
+                name: "MetaDataProperty");
+
+            migrationBuilder.DropTable(
+                name: "Point");
+
+            migrationBuilder.DropTable(
+                name: "Envelope");
+
+            migrationBuilder.DropTable(
+                name: "GeocoderMetaData");
+
+            migrationBuilder.DropTable(
+                name: "Address");
         }
     }
 }

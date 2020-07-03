@@ -11,6 +11,9 @@ namespace Adv.API.Models.Address
         public BoundedByViewModel BoundedBy { get; set; }
         public int MetaDataPropertyId { get; set; }
         public MetaDataPropertyViewModel MetaDataProperty { get; set; }
+        public int PointId { get; set; }
+        public PointViewModel Point { get; set; }
+        
 
         /// <summary>
         /// DTO -> VIEW
@@ -25,7 +28,9 @@ namespace Adv.API.Models.Address
             BoundedById = dto.BoundedById,
             BoundedBy = dto.BoundedBy,
             MetaDataPropertyId = dto.MetaDataPropertyId,
-            MetaDataProperty = dto.MetaDataProperty
+            MetaDataProperty = dto.MetaDataProperty,
+            Point = dto.Point,
+            PointId = dto.PointId
         };
 
         /// <summary>
@@ -38,7 +43,8 @@ namespace Adv.API.Models.Address
             Name = view.Name,
             Description = view.Description,
             BoundedBy = view.BoundedBy,
-            MetaDataProperty = view.MetaDataProperty
+            MetaDataProperty = view.MetaDataProperty,
+            Point = view.Point
         };
     }
 }

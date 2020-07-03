@@ -92,7 +92,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             var result = await context.FlatRents
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
@@ -105,7 +108,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             var result = await context.FlatSales
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
@@ -118,7 +124,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             var result = await context.HouseRents
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(advert => advert.Id == id, ct)
@@ -130,7 +139,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             var result = await context.HouseSales
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(advert => advert.Id == id, ct)
@@ -138,70 +150,73 @@ namespace Adv.DAL.Interfaces.Implementations
             return result ?? throw new NotFoundAdvertException();
         }
 
-        public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city)
-        {
-            using var context = contextFactory.GetAdvContext();
-            return await context.FlatRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
-                .Include(prop => prop.Images)
-                .AsNoTracking()
-                .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-                .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-        }
-
-        public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city)
-        {
-            using var context = contextFactory.GetAdvContext();
-            return await context.FlatSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
-                .Include(prop => prop.Images)
-                .AsNoTracking()
-                .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-                .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-        }
-
-        public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city)
-        {
-            using var context = contextFactory.GetAdvContext();
-            return await context.HouseRents
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
-                .Include(prop => prop.Images).AsNoTracking()
-                .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-                .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-        }
-
-        public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city)
-        {
-            using var context = contextFactory.GetAdvContext();
-            return await context.HouseSales
-                .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
-                .Include(prop => prop.Images).AsNoTracking()
-                .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-                .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
-                .ToListAsync()
-                .ConfigureAwait(false);
-        }
+        // public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city)
+        // {
+        //     using var context = contextFactory.GetAdvContext();
+        //     return await context.FlatRents
+        //         .Include(prop => prop.Address)
+        //         .ThenInclude(prop => prop.City)
+        //         .Include(prop => prop.Images)
+        //         .AsNoTracking()
+        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
+        //         .OrderByDescending(prop => prop.Created)
+        //         .GetAdvertsByPage(pageNumber)
+        //         .ToListAsync()
+        //         .ConfigureAwait(false);
+        // }
+        //
+        // public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city)
+        // {
+        //     using var context = contextFactory.GetAdvContext();
+        //     return await context.FlatSales
+        //         .Include(prop => prop.Address)
+        //         .ThenInclude(prop => prop.City)
+        //         .Include(prop => prop.Images)
+        //         .AsNoTracking()
+        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
+        //         .OrderByDescending(prop => prop.Created)
+        //         .GetAdvertsByPage(pageNumber)
+        //         .ToListAsync()
+        //         .ConfigureAwait(false);
+        // }
+        //
+        // public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city)
+        // {
+        //     using var context = contextFactory.GetAdvContext();
+        //     return await context.HouseRents
+        //         .Include(prop => prop.Address)
+        //         .ThenInclude(prop => prop.City)
+        //         .Include(prop => prop.Images).AsNoTracking()
+        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
+        //         .OrderByDescending(prop => prop.Created)
+        //         .GetAdvertsByPage(pageNumber)
+        //         .ToListAsync()
+        //         .ConfigureAwait(false);
+        // }
+        //
+        // public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city)
+        // {
+        //     using var context = contextFactory.GetAdvContext();
+        //     return await context.HouseSales
+        //         .Include(prop => prop.Address)
+        //         .ThenInclude(prop => prop.City)
+        //         .Include(prop => prop.Images).AsNoTracking()
+        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
+        //         .OrderByDescending(prop => prop.Created)
+        //         .GetAdvertsByPage(pageNumber)
+        //         .ToListAsync()
+        //         .ConfigureAwait(false);
+        // }
 
         public async Task<IEnumerable<FlatRent>> GetAnyFlatRentsAsync(int pageNumber)
         {
             using var context = contextFactory.GetAdvContext();
             return await context.FlatRents
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
@@ -216,7 +231,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             return await context.FlatSales
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
@@ -231,7 +249,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             return await context.HouseRents
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive )
@@ -246,7 +267,10 @@ namespace Adv.DAL.Interfaces.Implementations
             using var context = contextFactory.GetAdvContext();
             return await context.HouseSales
                 .Include(prop => prop.Address)
-                .ThenInclude(prop => prop.City)
+                .ThenInclude(prop => prop.GeoObject)
+                .ThenInclude(prop => prop.MetaDataProperty)
+                .ThenInclude(prop => prop.GeocoderMetaData)
+                .ThenInclude(prop => prop.Address)
                 .Include(prop => prop.Images)
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)

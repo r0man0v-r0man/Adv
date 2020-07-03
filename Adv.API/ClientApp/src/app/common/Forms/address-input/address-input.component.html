@@ -1,30 +1,12 @@
-<div nz-row [formGroup]="group">
-  <nz-divider [nzText]="addressTpl">
-    <ng-template #addressTpl>
-      Адрес
-    </ng-template>
-  </nz-divider>
-  <nz-form-item nz-col
-                [nzXs]="{ span : 24 }"
-                [nzSm]="{ span : 24 }"
-                [nzMd]="{ span : 24 }"
-                [nzLg]="{ span : 24 }"
-                [nzXl]="{ span : 24 }">
-    <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
-    <nz-form-control nzHasFeedback nzErrorTip="Укажите адрес!" >
       <nz-select [nzSize]="'large'"
-        formControlName="geoObject"
         nzShowSearch
-        nzServerSearch
+        nzServerSearch [(ngModel)]="inputValue"
+                 (ngModelChange)="onSelectionChange()"
         nzPlaceHolder="Например: Лермонтова 2, Несвиж"
-        [nzShowArrow]="false"
+        [nzShowArrow]="false" (nzBlur)="onTouched()"
         (nzOnSearch)="yandexGeocoderService.onSearch($event)">
         <nz-option *ngFor="let option of yandexGeocoderService.optionList"
                    [nzLabel]="option.GeoObject.metaDataProperty.GeocoderMetaData.text"
                    [nzValue]="option">
         </nz-option>
       </nz-select>
-    </nz-form-control>
-    <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>
-  </nz-form-item>
-</div>

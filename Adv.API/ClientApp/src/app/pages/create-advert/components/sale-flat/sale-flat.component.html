@@ -29,12 +29,23 @@
             </nz-upload>
         </nz-form-control>
     </nz-form-item>
-    <app-address-input nz-col
-                     [nzXs]="{ span : 24 }"
-                     [nzSm]="{ span : 24 }"
-                     [nzMd]="{ span : 24 }"
-                     [nzLg]="{ span : 24 }"
-                     [nzXl]="{ span : 24 }" [group]="form.get('address')"></app-address-input>
+  <nz-divider [nzText]="addressTpl">
+    <ng-template #addressTpl>
+      Адрес
+    </ng-template>
+  </nz-divider>
+  <nz-form-item nz-col
+                [nzXs]="{ span : 24 }"
+                [nzSm]="{ span : 24 }"
+                [nzMd]="{ span : 24 }"
+                [nzLg]="{ span : 24 }"
+                [nzXl]="{ span : 24 }">
+    <nz-form-label nzRequired nzFor="address">Укажите адрес</nz-form-label>
+    <nz-form-control nzHasFeedback nzErrorTip="Укажите адрес!" >
+      <app-address-input formControlName="address"></app-address-input>
+    </nz-form-control>
+    <p><small>Начинайте вводить и выберите адрес из подсказок</small></p>
+  </nz-form-item>
     <nz-divider [nzText]="houseTPL">
         <ng-template #houseTPL>
             Дом

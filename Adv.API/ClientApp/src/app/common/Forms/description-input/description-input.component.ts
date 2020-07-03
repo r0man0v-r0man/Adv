@@ -14,7 +14,6 @@ import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validat
   ]
 })
 export class DescriptionInputComponent implements ControlValueAccessor {
-  @Input() errors: ValidationErrors[] = [];
   inputValue = null;
   constructor() { }
   onChange: any = () => {};

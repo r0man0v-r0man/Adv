@@ -10,7 +10,7 @@ namespace Adv.API.Models.Address
         public string Country_code { get; set; }
         public string Postal_code { get; set; }
         public string Formatted { get; set; }
-        public IEnumerable<ComponentViewModel> Components { get; set; }
+        public IList<ComponentViewModel> Components { get; set; }
 
         /// <summary>
         /// DTO -> VIEW
@@ -23,7 +23,7 @@ namespace Adv.API.Models.Address
             Country_code = dto.Country_code,
             Formatted = dto.Formatted,
             Postal_code = dto.Postal_code,
-            Components = dto.Components.Select(component => (ComponentViewModel) component)
+            Components = dto.Components.Select(component => (ComponentViewModel) component).ToList()
         };
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Adv.API.Models.Address
             Country_code = view.Country_code,
             Formatted = view.Formatted,
             Postal_code = view.Postal_code,
-            Components = view.Components.Select(component => (ComponentDto) component)
+            Components = view.Components.Select(component => (ComponentDto) component).ToList()
         };
     }
 }

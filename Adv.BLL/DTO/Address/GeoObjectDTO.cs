@@ -11,6 +11,8 @@ namespace Adv.BLL.DTO.Address
         public BoundedByDto BoundedBy { get; set; }
         public int MetaDataPropertyId { get; set; }
         public MetaDataPropertyDto MetaDataProperty { get; set; }
+        public int PointId { get; set; }
+        public PointDto Point { get; set; }
 
         /// <summary>
         /// DAL -> DTO
@@ -25,7 +27,9 @@ namespace Adv.BLL.DTO.Address
             BoundedById = dal.BoundedById,
             BoundedBy = dal.BoundedBy,
             MetaDataPropertyId = dal.MetaDataPropertyId,
-            MetaDataProperty = dal.MetaDataProperty
+            MetaDataProperty = dal.MetaDataProperty,
+            Point = dal.Point,
+            PointId = dal.PointId
         };
 
         /// <summary>
@@ -38,7 +42,8 @@ namespace Adv.BLL.DTO.Address
             Name = dto.Name,
             Description = dto.Description,
             BoundedBy = dto.BoundedBy,
-            MetaDataProperty = dto.MetaDataProperty
+            MetaDataProperty = dto.MetaDataProperty,
+            Point = dto.Point
         };
     }
 }
