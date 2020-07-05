@@ -6,7 +6,7 @@ namespace Adv.API.Models.Address
 {
     public class AddressViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Country_code { get; set; }
         public string Postal_code { get; set; }
         public string Formatted { get; set; }

@@ -4,7 +4,7 @@ namespace Adv.API.Models.Address
 {
     public class PointViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Pos { get; set; }
 
         /// <summary>

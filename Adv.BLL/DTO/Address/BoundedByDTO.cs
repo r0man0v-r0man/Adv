@@ -4,8 +4,8 @@ namespace Adv.BLL.DTO.Address
 {
     public class BoundedByDto
     {
-        public int Id { get; set; }
-        public int EnvelopeId { get; set; }
+        public int? Id { get; set; }
+        public int? EnvelopeId { get; set; }
         public EnvelopeDto Envelope { get; set; }
 
         /// <summary>
@@ -15,7 +15,7 @@ namespace Adv.BLL.DTO.Address
         /// <returns></returns>
         public static implicit operator BoundedByDto(BoundedBy dal) => new BoundedByDto
         {
-            Envelope = dal.Envelope,
+            Envelope = dal.Envelope ?? new Envelope(),
             Id = dal.Id,
             EnvelopeId = dal.EnvelopeId
         };

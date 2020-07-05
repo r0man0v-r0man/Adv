@@ -15,7 +15,7 @@ export class YandexMapComponent {
     return this.yandexMapService.getCoords(this.advert.address);
   }
   constructor(
-    private yandexMapService: YandexMapService
+    public yandexMapService: YandexMapService
   ) { }
 
 }

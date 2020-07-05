@@ -12,16 +12,14 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ToiletPipe } from 'src/app/pipes/toilet.pipe';
 import { DurationModule } from 'src/app/pipes/modules/duration.module';
 import { SliderModule } from 'src/app/common/slider/slider.module';
-import {AngularYandexMapsModule} from 'angular8-yandex-maps';
-import {YandexMapComponent} from '../../common/yandex-map/yandex-map.component';
+import {YandexMapModule} from '../../common/yandex-map/yandex-map.module';
 
 @NgModule({
   declarations: [
     FlatSaleComponent,
     FlatRentComponent,
     BalconyPipe,
-    ToiletPipe,
-    YandexMapComponent
+    ToiletPipe
   ],
   imports: [
     CommonModule,
@@ -32,7 +30,7 @@ import {YandexMapComponent} from '../../common/yandex-map/yandex-map.component';
     DurationModule,
     NzIconModule,
     SliderModule,
-    AngularYandexMapsModule
+    YandexMapModule
   ]
 })
 export class FlatModule { }

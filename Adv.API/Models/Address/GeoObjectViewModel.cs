@@ -4,14 +4,14 @@ namespace Adv.API.Models.Address
 {
     public class GeoObjectViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int BoundedById { get; set; }
+        public int? BoundedById { get; set; }
         public BoundedByViewModel BoundedBy { get; set; }
-        public int MetaDataPropertyId { get; set; }
+        public int? MetaDataPropertyId { get; set; }
         public MetaDataPropertyViewModel MetaDataProperty { get; set; }
-        public int PointId { get; set; }
+        public int? PointId { get; set; }
         public PointViewModel Point { get; set; }
         
 

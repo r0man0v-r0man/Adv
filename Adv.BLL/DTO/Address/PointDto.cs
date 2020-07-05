@@ -4,7 +4,7 @@ namespace Adv.BLL.DTO.Address
 {
     public class PointDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Pos { get; set; }
 
         /// <summary>

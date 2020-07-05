@@ -4,14 +4,14 @@ namespace Adv.BLL.DTO.Address
 {
     public class GeoObjectDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int BoundedById { get; set; }
+        public int? BoundedById { get; set; }
         public BoundedByDto BoundedBy { get; set; }
-        public int MetaDataPropertyId { get; set; }
+        public int? MetaDataPropertyId { get; set; }
         public MetaDataPropertyDto MetaDataProperty { get; set; }
-        public int PointId { get; set; }
+        public int? PointId { get; set; }
         public PointDto Point { get; set; }
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace Adv.BLL.DTO.Address
             Name = dal.Name,
             Description = dal.Description,
             BoundedById = dal.BoundedById,
-            BoundedBy = dal.BoundedBy,
+            BoundedBy = dal.BoundedBy ?? new BoundedBy(),
             MetaDataPropertyId = dal.MetaDataPropertyId,
             MetaDataProperty = dal.MetaDataProperty,
-            Point = dal.Point,
+            Point = dal.Point ?? new Point(),
             PointId = dal.PointId
         };
 

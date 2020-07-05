@@ -10,6 +10,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { DurationModule } from 'src/app/pipes/modules/duration.module';
 import { SliderModule } from 'src/app/common/slider/slider.module';
+import {YandexMapModule} from '../../common/yandex-map/yandex-map.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SliderModule } from 'src/app/common/slider/slider.module';
     NzDividerModule,
     NzIconModule,
     DurationModule,
-    SliderModule
+    SliderModule,
+    YandexMapModule
   ]
 })
 export class HouseModule { }

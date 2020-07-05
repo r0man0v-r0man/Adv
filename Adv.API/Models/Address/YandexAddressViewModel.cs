@@ -5,8 +5,8 @@ namespace Adv.API.Models.Address
 {
     public class YandexAddressViewModel
     {
-        public int Id { get; set; }
-        public int GeoObjectId { get; set; }
+        public int? Id { get; set; }
+        public int? GeoObjectId { get; set; }
         public GeoObjectViewModel GeoObject { get; set; }
 
         /// <summary>

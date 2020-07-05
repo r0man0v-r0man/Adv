@@ -19,7 +19,7 @@
                     <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
                 </nz-card>
                 <ng-template #cardMetaTitleTpl>
-                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.city.name }}
+                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.geoObject.name }}
                 </ng-template>
                 <ng-template #extraTpl>
                     {{ item.created | date }}
