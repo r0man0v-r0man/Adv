@@ -19,9 +19,16 @@ import { HttpErrorInterceptor } from './errors/httpError.interceptor';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
 
-// SSR 
+// SSR
 import { NgtUniversalModule } from '@ng-toolkit/universal';
+import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
 
+
+const mapConfig: IConfig = {
+  apikey: '85e03f02-25be-40b3-971e-733f2a03e620',
+  lang: 'ru_RU',
+  coordorder: 'latlong'
+};
 
 registerLocaleData(ru);
 
@@ -40,13 +47,14 @@ registerLocaleData(ru);
     BrowserAnimationsModule,
     NzMessageModule,
     NgtUniversalModule,
-    CommonModule
+    CommonModule,
+    AngularYandexMapsModule.forRoot(mapConfig)
   ],
   providers: [
     Title,
     AuthGuardService,
-    { 
-      provide: NZ_I18N, useValue: ru_RU 
+    {
+      provide: NZ_I18N, useValue: ru_RU
     },
     {
       provide: ErrorHandler, useClass: AppErrorHandler

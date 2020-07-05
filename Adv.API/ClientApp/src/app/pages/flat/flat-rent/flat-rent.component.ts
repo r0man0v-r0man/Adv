@@ -3,6 +3,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
+import {ILoadEvent} from 'angular8-yandex-maps';
 
 @Component({
   selector: 'app-flat-rent',
@@ -16,12 +17,11 @@ export class FlatRentComponent implements OnInit {
   advert: FlatRentModel;
   /** флаг загрузки */
   isLoading = true;
-
   /** изображения для слайдера */
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
 
   phone = '+375-XX-XXX-XX-XX';
-
+ggg;
   constructor(
     private route: ActivatedRoute,
     private advertService: AdvertService
@@ -29,6 +29,19 @@ export class FlatRentComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPage();
+    this.ggg = {
+      // Описание геометрии.
+      geometry: {
+        type: 'Point',
+        coordinates: [55.8, 37.8]
+      },
+      // Свойства.
+      properties: {
+        // Контент метки.
+        iconContent: 'Я тащусь',
+        hintContent: 'Ну давай уже тащи'
+      }
+    };
   }
 
   /** инициализация страницы */
@@ -62,5 +75,29 @@ export class FlatRentComponent implements OnInit {
       slides.push(img);
     });
     this.images = [...slides];
+  }
+
+  onLoad(event: ILoadEvent) {
+    const myGeoObject = new event.ymaps.GeoObject({
+      // Описание геометрии.
+      geometry: {
+        type: 'Point',
+        coordinates: [53.226433, 26.675931]
+      },
+      // Свойства.
+      properties: {
+        // Контент метки.
+        iconContent: 'Я тащусь',
+        hintContent: 'Ну давай уже тащи'
+      }
+    }, {
+      // Опции.
+      // Иконка метки будет растягиваться под размер ее содержимого.
+      preset: 'islands#blackStretchyIcon',
+      // Метку можно перемещать.
+      draggable: false
+    });
+    event.instance.geoObjects.add(myGeoObject);
+    console.log(event);
   }
 }

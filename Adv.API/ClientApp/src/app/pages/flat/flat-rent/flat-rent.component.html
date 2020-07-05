@@ -56,4 +56,15 @@
                 <nz-descriptions-item ><i nz-icon nzType="phone" nzTheme="outline"></i> {{advert.phone}}</nz-descriptions-item>
             </nz-descriptions>
         </div>
+      <div nz-col
+           [nzXs]="{ span : 24 }"
+           [nzSm]="{ span : 24 }"
+           [nzMd]="{ span : 24 }"
+           [nzLg]="{ span : 24 }"
+           [nzXl]="{ span : 24 }">
+        <div class="container">
+          <angular-yandex-map [center]="[53.226433, 26.675931]" [zoom]="14" (load)="onLoad($event)" >
+          </angular-yandex-map>
+        </div>
+      </div>
     </div>

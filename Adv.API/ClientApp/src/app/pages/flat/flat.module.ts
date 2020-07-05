@@ -12,13 +12,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ToiletPipe } from 'src/app/pipes/toilet.pipe';
 import { DurationModule } from 'src/app/pipes/modules/duration.module';
 import { SliderModule } from 'src/app/common/slider/slider.module';
-
+import {AngularYandexMapsModule} from 'angular8-yandex-maps';
 
 @NgModule({
   declarations: [
-    FlatSaleComponent, 
+    FlatSaleComponent,
     FlatRentComponent,
-    
     BalconyPipe,
     ToiletPipe
   ],
@@ -30,7 +29,8 @@ import { SliderModule } from 'src/app/common/slider/slider.module';
     NzDividerModule,
     DurationModule,
     NzIconModule,
-    SliderModule
+    SliderModule,
+    AngularYandexMapsModule
   ]
 })
 export class FlatModule { }

@@ -28,6 +28,7 @@
     "@ng-toolkit/universal": "^8.1.0",
     "@nguniversal/express-engine": "^9.1.1",
     "@nguniversal/module-map-ngfactory-loader": "8.2.6",
+    "angular8-yandex-maps": "^1.14.5",
     "aspnet-prerendering": "^3.0.1",
     "express": "^4.15.2",
     "ng-zorro-antd": "^9.2.2",
