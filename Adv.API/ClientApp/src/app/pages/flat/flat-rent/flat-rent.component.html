@@ -61,10 +61,7 @@
            [nzSm]="{ span : 24 }"
            [nzMd]="{ span : 24 }"
            [nzLg]="{ span : 24 }"
-           [nzXl]="{ span : 24 }">
-        <div class="container" *ngIf="advert">
-          <angular-yandex-map [center]="[mapCenter[1], mapCenter[0]]" [zoom]="14" (load)="yandexMapService.onLoad($event, advert.address)" >
-          </angular-yandex-map>
-        </div>
+           [nzXl]="{ span : 24 }" *ngIf="advert">
+        <app-yandex-map [advert]="advert" ></app-yandex-map>
       </div>
     </div>

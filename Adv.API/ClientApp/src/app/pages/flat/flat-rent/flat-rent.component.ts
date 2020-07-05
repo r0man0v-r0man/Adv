@@ -3,16 +3,11 @@ import { Params, ActivatedRoute } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import {ILoadEvent} from 'angular8-yandex-maps';
-import {YandexMapService} from '../../../services/yandex-map.service';
 
 @Component({
   selector: 'app-flat-rent',
   templateUrl: './flat-rent.component.html',
-  styleUrls: ['./flat-rent.component.less'],
-  providers: [
-    YandexMapService
-  ]
+  styleUrls: ['./flat-rent.component.less']
 })
 export class FlatRentComponent implements OnInit {
   /** индентификатор объявления */
@@ -26,13 +21,9 @@ export class FlatRentComponent implements OnInit {
 
   phone = '+375-XX-XXX-XX-XX';
 
-  get mapCenter() {
-    return this.yandexMapService.getCoords(this.advert.address);
-  }
   constructor(
     private route: ActivatedRoute,
-    private advertService: AdvertService,
-    private yandexMapService: YandexMapService
+    private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
