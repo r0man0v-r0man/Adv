@@ -4,11 +4,15 @@ import { AdvertService } from 'src/app/services/advert.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import {ILoadEvent} from 'angular8-yandex-maps';
+import {YandexMapService} from '../../../services/yandex-map.service';
 
 @Component({
   selector: 'app-flat-rent',
   templateUrl: './flat-rent.component.html',
-  styleUrls: ['./flat-rent.component.less']
+  styleUrls: ['./flat-rent.component.less'],
+  providers: [
+    YandexMapService
+  ]
 })
 export class FlatRentComponent implements OnInit {
   /** индентификатор объявления */
@@ -21,27 +25,18 @@ export class FlatRentComponent implements OnInit {
   images: Array<{ url: string; alt: string; isVisible: boolean; id: number }> = [];
 
   phone = '+375-XX-XXX-XX-XX';
-ggg;
+
+  get mapCenter() {
+    return this.yandexMapService.getCoords(this.advert.address);
+  }
   constructor(
     private route: ActivatedRoute,
-    private advertService: AdvertService
+    private advertService: AdvertService,
+    private yandexMapService: YandexMapService
   ) { }
 
   ngOnInit(): void {
     this.initPage();
-    this.ggg = {
-      // Описание геометрии.
-      geometry: {
-        type: 'Point',
-        coordinates: [55.8, 37.8]
-      },
-      // Свойства.
-      properties: {
-        // Контент метки.
-        iconContent: 'Я тащусь',
-        hintContent: 'Ну давай уже тащи'
-      }
-    };
   }
 
   /** инициализация страницы */
@@ -77,27 +72,4 @@ ggg;
     this.images = [...slides];
   }
 
-  onLoad(event: ILoadEvent) {
-    const myGeoObject = new event.ymaps.GeoObject({
-      // Описание геометрии.
-      geometry: {
-        type: 'Point',
-        coordinates: [53.226433, 26.675931]
-      },
-      // Свойства.
-      properties: {
-        // Контент метки.
-        iconContent: 'Я тащусь',
-        hintContent: 'Ну давай уже тащи'
-      }
-    }, {
-      // Опции.
-      // Иконка метки будет растягиваться под размер ее содержимого.
-      preset: 'islands#blackStretchyIcon',
-      // Метку можно перемещать.
-      draggable: false
-    });
-    event.instance.geoObjects.add(myGeoObject);
-    console.log(event);
-  }
 }
