@@ -22,7 +22,7 @@
                     <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.geoObject.name }}
                 </ng-template>
                 <ng-template #extraTpl>
-                    {{ item.created | date }}
+                    {{ item.created | date : 'shortDate' : '' : 'ru' }}
                 </ng-template>
                 <ng-template #coverTpl>
                     <img [src]="item.images[0]?.linkProps.download"/>

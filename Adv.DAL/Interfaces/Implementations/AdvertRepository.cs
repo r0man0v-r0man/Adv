@@ -18,6 +18,7 @@ namespace Adv.DAL.Interfaces.Implementations
     public class AdvertRepository : IAdvertRepository
     {
         private readonly IContextFactory contextFactory;
+        const byte SIZE = 20;
         public AdvertRepository(IContextFactory contextFactory)
         {
             this.contextFactory = contextFactory;
@@ -211,7 +212,8 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
@@ -225,7 +227,8 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
@@ -239,7 +242,8 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .Where(prop => prop.IsActive )
                 .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
@@ -253,10 +257,12 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
-                .GetAdvertsByPage(pageNumber)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
                 .ToListAsync()
                 .ConfigureAwait(false);
         }
 
+        private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
     }
 }
