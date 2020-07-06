@@ -15,11 +15,13 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ProvinceInputComponent } from 'src/app/common/Forms/province-input/province-input.component';
 @NgModule({
   declarations: [
     FlatsComponent,
     SaleComponent,
-    RentComponent
+    RentComponent,
+    ProvinceInputComponent
   ],
   imports: [
     CommonModule,

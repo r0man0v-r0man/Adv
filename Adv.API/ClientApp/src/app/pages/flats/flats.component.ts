@@ -56,7 +56,7 @@ export class FlatsComponent implements OnInit {
     this.setAdvertTypes();
     this.helperForm = this.formBuilder.group({
       advertType: [ this.selectedAdvertType ],
-      city: [ null ]
+      province: [ null ]
     });
   }
   /** установка типов объявлений */
