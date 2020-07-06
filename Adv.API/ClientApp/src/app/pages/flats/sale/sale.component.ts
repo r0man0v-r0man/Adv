@@ -91,7 +91,9 @@ export class SaleComponent implements OnInit {
   /** Добавить еще объявлений  */
   private addLoadMoreAdvertsToList(response: FlatSaleModel[]) {
     if (response && response.length > 0) {
-      this.listFlatSale = [...response];
+      response.forEach(advert => {
+        this.listFlatSale.push(advert)
+      })
     }
     this.allowToShowMoreButton(response, true);
   }

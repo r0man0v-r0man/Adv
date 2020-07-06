@@ -90,7 +90,9 @@ export class RentComponent implements OnInit {
   /** Добавить еще объявлений  */
   private addLoadMoreAdvertsToList(response: FlatRentModel[]) {
     if (response && response.length > 0) {
-      this.listFlatRent = [...response];
+      response.forEach(advert => {
+        this.listFlatRent.push(advert)
+      })
     }
     this.allowToShowMoreButton(response, true);
   }

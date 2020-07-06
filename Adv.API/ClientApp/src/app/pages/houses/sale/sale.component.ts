@@ -90,7 +90,9 @@ export class SaleComponent implements OnInit {
   /** Добавить еще объявлений  */
   private addLoadMoreAdvertsToList(response: HouseSaleModel[]) {
     if (response && response.length > 0) {
-      this.listHouseSale = [...response];
+      response.forEach(advert => {
+        this.listHouseSale.push(advert)
+      })
     }
     this.allowToShowMoreButton(response, true);
   }
