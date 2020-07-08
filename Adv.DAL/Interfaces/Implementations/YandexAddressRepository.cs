@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Adv.DAL.Context.Interfaces;
-using Adv.DAL.Entities.Address;
 using Microsoft.EntityFrameworkCore;
 
 namespace Adv.DAL.Interfaces.Implementations
@@ -17,16 +14,24 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             _contextFactory = contextFactory;
         }
-        public async Task<IList<IEnumerable<Component>>> GetProvinceAsync()
+        public async Task<IList<string>> GetProvinceAsync()
         {
-            using var context = _contextFactory.GetAdvContext();
-            var provincies = await context.YandexAddresses.Select(x =>
-                    x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components.Where(c => c.Kind == "province")
+            try
+            {
+                using var context = _contextFactory.GetAdvContext();
+                return await context.YandexAddresses
+                    .SelectMany(x => x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                        .Where(c => c.Kind == "province")
                         .Select(n => n.Name))
-                .Distinct()
-                .SelectMany((u, c) => u.Distinct()).ToListAsync().ConfigureAwait(false);
+                    .Distinct()
+                    .ToListAsync()
+                    .ConfigureAwait(false);
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
 
-            return new List<IEnumerable<Component>>();
         }
        
     }

@@ -2,7 +2,7 @@ import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { switchMap, debounceTime, map } from 'rxjs/operators';
+import { switchMap, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 import { Constants } from 'src/app/constants';
 
 @Component({
@@ -19,7 +19,6 @@ import { Constants } from 'src/app/constants';
 })
 export class ProvinceInputComponent implements ControlValueAccessor {
   inputValue = null;
-  randomUserUrl = Constants.getProvince;
   searchChange$ = new BehaviorSubject('');
   optionList: string[] = [];
   selectedUser?: string;
@@ -27,23 +26,19 @@ export class ProvinceInputComponent implements ControlValueAccessor {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    // tslint:disable:no-any
     const getRandomNameList = (name: string) =>
-      this.http
-        .get(`${this.randomUserUrl}`)
-        .pipe(map((res: any) => res.results))
-        .pipe(
-          map((list: any) => {
-            return list.map((item: any) => `${item.name.first} ${name}`);
+      this.http.get<string[]>(`${Constants.getProvinceURL}`)
+        .pipe(map((response: string[]) => {
+            return response
           })
         );
     const optionList$: Observable<string[]> = this.searchChange$
       .asObservable()
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(1500),distinctUntilChanged())
       .pipe(switchMap(getRandomNameList));
     optionList$.subscribe(data => {
       this.optionList = data;
-      this.isLoading = false;
+      this.isLoading = false;      
     });
   }
   onChange: any = () => {};

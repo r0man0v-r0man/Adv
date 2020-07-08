@@ -8,6 +8,6 @@ namespace Adv.BLL.Interfaces
 {
     public interface IYandexAddressService
     {
-        Task<IList<IEnumerable<ComponentDto>>> GetProvinceAsync();
+        Task<IList<string>> GetProvinceAsync();
     } 
 }
