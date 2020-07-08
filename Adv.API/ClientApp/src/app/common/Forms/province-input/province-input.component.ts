@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, debounceTime, map } from 'rxjs/operators';
+import { Constants } from 'src/app/constants';
 
 @Component({
   selector: 'app-province-input',
@@ -18,7 +19,7 @@ import { switchMap, debounceTime, map } from 'rxjs/operators';
 })
 export class ProvinceInputComponent implements ControlValueAccessor {
   inputValue = null;
-  randomUserUrl = 'https://api.randomuser.me/?results=5';
+  randomUserUrl = Constants.getProvince;
   searchChange$ = new BehaviorSubject('');
   optionList: string[] = [];
   selectedUser?: string;
