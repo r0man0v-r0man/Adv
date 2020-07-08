@@ -28,10 +28,7 @@ export class ProvinceInputComponent implements ControlValueAccessor {
   ngOnInit(): void {
     const getRandomNameList = (name: string) =>
       this.http.get<string[]>(`${Constants.getProvinceURL}`)
-        .pipe(map((response: string[]) => {
-            return response
-          })
-        );
+        .pipe(map((response: string[]) => response));
     const optionList$: Observable<string[]> = this.searchChange$
       .asObservable()
       .pipe(debounceTime(1500),distinctUntilChanged())
