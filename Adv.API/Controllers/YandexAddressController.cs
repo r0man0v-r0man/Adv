@@ -17,12 +17,12 @@ namespace Adv.API.Controllers
         {
             _yandexAddressService = yandexAddressService;
         }
-        [HttpGet("getProvince")]
-        public async Task<ActionResult<IEnumerable<string>>> GetProvince()
+        [HttpGet("getLocations")]
+        public async Task<ActionResult<IEnumerable<string>>> GetLocations()
         {
             try
             {
-                var result = await _yandexAddressService.GetProvinceAsync().ConfigureAwait(false);
+                var result = await _yandexAddressService.GetLocationsAsync().ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception e)

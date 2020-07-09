@@ -18,12 +18,12 @@ namespace Adv.BLL.Services
             _yandexAddressRepository = yandexAddressRepository;
             _memoryCache = memoryCache;
         }
-        public async Task<IList<string>> GetProvinceAsync()
+        public async Task<IList<string>> GetLocationsAsync()
         {
             return await _memoryCache.GetOrCreateAsync(ProvinceCacheKey, async cacheEntry =>
             {
                 cacheEntry.SlidingExpiration = TimeSpan.FromHours(2);
-                return await _yandexAddressRepository.GetProvinceAsync().ConfigureAwait(false);
+                return await _yandexAddressRepository.GetLocationsAsync().ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
     }

@@ -14,14 +14,13 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             _contextFactory = contextFactory;
         }
-        public async Task<IList<string>> GetProvinceAsync()
+        public async Task<IList<string>> GetLocationsAsync()
         {
             try
             {
                 using var context = _contextFactory.GetAdvContext();
                 return await context.YandexAddresses
                     .SelectMany(x => x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
-                        .Where(c => c.Kind == "province")
                         .Select(n => n.Name))
                     .Distinct()
                     .ToListAsync()

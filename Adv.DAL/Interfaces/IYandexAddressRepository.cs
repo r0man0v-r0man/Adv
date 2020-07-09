@@ -5,6 +5,6 @@ namespace Adv.DAL.Interfaces
 {
     public interface IYandexAddressRepository
     {
-        Task<IList<string>> GetProvinceAsync();
+        Task<IList<string>> GetLocationsAsync();
     }
 }
