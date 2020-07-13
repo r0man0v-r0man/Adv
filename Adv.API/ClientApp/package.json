@@ -31,7 +31,7 @@
     "angular8-yandex-maps": "^1.14.5",
     "aspnet-prerendering": "^3.0.1",
     "express": "^4.15.2",
-    "ng-zorro-antd": "^9.2.2",
+    "ng-zorro-antd": "^9.3.0",
     "rxjs": "~6.5.5",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.2"
