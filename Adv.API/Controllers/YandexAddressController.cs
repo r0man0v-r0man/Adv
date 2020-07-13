@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Adv.API.Models.Address;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _yandexAddressService.GetLocationsAsync().ConfigureAwait(false);
-                return Ok(result);
+                return Ok(result.Select(x => (ComponentViewModel)x));
             }
             catch (Exception e)
             {

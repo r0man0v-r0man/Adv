@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Linq;
 using System.Threading.Tasks;
+using Adv.BLL.DTO.Address;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
@@ -18,12 +21,13 @@ namespace Adv.BLL.Services
             _yandexAddressRepository = yandexAddressRepository;
             _memoryCache = memoryCache;
         }
-        public async Task<IList<string>> GetLocationsAsync()
+        public async Task<IList<ComponentDto>> GetLocationsAsync()
         {
             return await _memoryCache.GetOrCreateAsync(ProvinceCacheKey, async cacheEntry =>
             {
                 cacheEntry.SlidingExpiration = TimeSpan.FromHours(1);
-                return await _yandexAddressRepository.GetLocationsAsync().ConfigureAwait(false);
+                var result = await _yandexAddressRepository.GetLocationsAsync().ConfigureAwait(false);
+                return result.Select(x => (ComponentDto) x).ToImmutableList();
             }).ConfigureAwait(false);
         }
     }
