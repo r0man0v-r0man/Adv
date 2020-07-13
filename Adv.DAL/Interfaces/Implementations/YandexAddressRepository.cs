@@ -21,6 +21,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 using var context = _contextFactory.GetAdvContext();
                 return await context.YandexAddresses
                     .SelectMany(x => x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                        .Where(c => c.Kind != "house" && c.Kind != "country" && c.Kind != "street")
                         .Select(n => n.Name))
                     .Distinct()
                     .ToListAsync()

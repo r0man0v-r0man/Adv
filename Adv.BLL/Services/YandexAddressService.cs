@@ -22,7 +22,7 @@ namespace Adv.BLL.Services
         {
             return await _memoryCache.GetOrCreateAsync(ProvinceCacheKey, async cacheEntry =>
             {
-                cacheEntry.SlidingExpiration = TimeSpan.FromHours(2);
+                cacheEntry.SlidingExpiration = TimeSpan.FromHours(1);
                 return await _yandexAddressRepository.GetLocationsAsync().ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
