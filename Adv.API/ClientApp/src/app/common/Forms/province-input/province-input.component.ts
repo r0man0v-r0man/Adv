@@ -20,16 +20,16 @@ import { Constants } from 'src/app/constants';
 export class ProvinceInputComponent implements ControlValueAccessor {
   inputValue = null;
   searchChange$ = new BehaviorSubject('');
-  optionList: string[] = [];
+  optionList = [];
   selectedUser?: string;
   isLoading = false;
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     const getRandomNameList = (name: string) =>
-      this.http.get<string[]>(`${Constants.getLocationsURL}`)
-        .pipe(map((response: string[]) => response));
-    const optionList$: Observable<string[]> = this.searchChange$
+      this.http.get<any[]>(`${Constants.getLocationsURL}`)
+        .pipe(map((response: any[]) => response));
+    const optionList$: Observable<any[]> = this.searchChange$
       .asObservable()
       .pipe(debounceTime(1500),distinctUntilChanged())
       .pipe(switchMap(getRandomNameList));

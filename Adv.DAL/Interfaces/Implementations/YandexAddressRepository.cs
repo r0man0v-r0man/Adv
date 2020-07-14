@@ -23,9 +23,13 @@ namespace Adv.DAL.Interfaces.Implementations
                 return await context.YandexAddresses
                     .SelectMany(x => x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
                         .Where(c => c.Kind != "house" && c.Kind != "country" && c.Kind != "street"))
-                    .Distinct()
+                    .AsNoTracking()
+                    .AsAsyncEnumerable()
+                    .GroupBy(xx => xx.Name)
+                    .SelectAwait(cc => cc.FirstAsync())
                     .ToListAsync()
                     .ConfigureAwait(false);
+                    
             }
             catch (System.Exception)
             {
