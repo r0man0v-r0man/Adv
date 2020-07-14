@@ -21,12 +21,12 @@ namespace Adv.DAL.Interfaces.Implementations
             {
                 using var context = _contextFactory.GetAdvContext();
                 return await context.YandexAddresses
-                    .SelectMany(x => x.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
-                        .Where(c => c.Kind != "house" && c.Kind != "country" && c.Kind != "street"))
+                    .SelectMany(address => address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                        .Where(component => component.Kind != "house" && component.Kind != "country" && component.Kind != "street"))
                     .AsNoTracking()
                     .AsAsyncEnumerable()
-                    .GroupBy(xx => xx.Name)
-                    .SelectAwait(cc => cc.FirstAsync())
+                    .GroupBy(groupBy => groupBy.Name)
+                    .SelectAwait(item => item.FirstAsync())
                     .ToListAsync()
                     .ConfigureAwait(false);
                     
