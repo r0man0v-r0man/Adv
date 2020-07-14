@@ -1,14 +1,15 @@
 <nz-select
-      nzPlaceHolder="область"
+      nzSize="large"
+      nzPlaceHolder="область/район/город"
       nzAllowClear
       nzShowSearch
       nzServerSearch
       [(ngModel)]="inputValue"
       (ngModelChange)="onSelectionChange()"
-      (nzOnSearch)="onSearch($event)"
+      (nzOnSearch)="provinceInputService.onSearch($event)"
       (nzBlur)="onTouched()"
     >
-      <ng-container *ngFor="let o of optionList">
+      <ng-container *ngFor="let o of provinceInputService.optionList">
         <nz-option *ngIf="!isLoading" [nzValue]="o" [nzLabel]="o.name"></nz-option>
       </ng-container>
       <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>

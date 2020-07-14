@@ -4,12 +4,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { switchMap, debounceTime, map, distinctUntilChanged } from 'rxjs/operators';
 import { Constants } from 'src/app/constants';
+import { ProvinceInputService } from 'src/app/services/province-input.service';
 
 @Component({
   selector: 'app-province-input',
   templateUrl: './province-input.component.html',
   styleUrls: ['./province-input.component.less'],
   providers: [
+    ProvinceInputService,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ProvinceInputComponent),
@@ -19,24 +21,11 @@ import { Constants } from 'src/app/constants';
 })
 export class ProvinceInputComponent implements ControlValueAccessor {
   inputValue = null;
-  searchChange$ = new BehaviorSubject('');
-  optionList = [];
-  selectedUser?: string;
-  isLoading = false;
-  constructor(private http: HttpClient) {}
+  constructor(
+    public provinceInputService: ProvinceInputService
+  ) {}
 
   ngOnInit(): void {
-    const getRandomNameList = (name: string) =>
-      this.http.get<any[]>(`${Constants.getLocationsURL}`)
-        .pipe(map((response: any[]) => response));
-    const optionList$: Observable<any[]> = this.searchChange$
-      .asObservable()
-      .pipe(debounceTime(1500),distinctUntilChanged())
-      .pipe(switchMap(getRandomNameList));
-    optionList$.subscribe(data => {
-      this.optionList = data;
-      this.isLoading = false;      
-    });
   }
   onChange: any = () => {};
   onTouched: any = () => {};
@@ -48,11 +37,6 @@ export class ProvinceInputComponent implements ControlValueAccessor {
   }
   writeValue(input: string): void {
     this.inputValue = input;
-  }
-
-  onSearch(value: string): void {
-    this.isLoading = true;
-    this.searchChange$.next(value);
   }
   onSelectionChange() {
     this.onChange(this.inputValue);
