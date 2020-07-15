@@ -22,9 +22,14 @@ import { ProvinceInputService } from 'src/app/services/province-input.service';
 export class ProvinceInputComponent implements ControlValueAccessor {
   inputValue = null;
   constructor(
-    public provinceInputService: ProvinceInputService
+    private provinceInputService: ProvinceInputService
   ) {}
-
+  get optionList() {
+    return this.provinceInputService.optionList;
+  }
+  get isLoading() {
+    return this.provinceInputService.isLoading;
+  }
   ngOnInit(): void {
   }
   onChange: any = () => {};

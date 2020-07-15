@@ -10,22 +10,16 @@ export class ProvinceInputService {
   /** значение поля ввода адреса */
   searchChange$ = new Subject<string>();
   /** статус поиска */
-  isLoading = false;
+  isLoading = true;
   optionList: Component[];
   constructor(
     private httpClient: HttpClient
   ) { 
-    const getList = (value: string) => this.httpClient
-      .get<Component[]>(`${Constants.getLocationsURL}/${value}`)
+    this.httpClient
+      .get<Component[]>(`${Constants.getLocationsURL}`)
       .pipe(
         map((response: Component[]) => response)
-      );
-    const optionList$: Observable<Component[]> = this.searchChange$
-      .asObservable()
-      .pipe(debounceTime(1500), distinctUntilChanged())
-      .pipe(filter( val => val.length > 5 ))
-      .pipe(switchMap(getList));
-    optionList$.subscribe(data => {
+      ).subscribe(data => {
       this.optionList = data;
       this.isLoading = false;
     })

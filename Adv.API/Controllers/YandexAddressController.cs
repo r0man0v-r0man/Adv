@@ -18,8 +18,8 @@ namespace Adv.API.Controllers
         {
             _yandexAddressService = yandexAddressService;
         }
-        [HttpGet("getLocations/{value}")]
-        public async Task<ActionResult<IEnumerable<ComponentViewModel>>> GetLocations(string value)
+        [HttpGet("getLocations")]
+        public async Task<ActionResult<IEnumerable<ComponentViewModel>>> GetLocations()
         {
             try
             {
