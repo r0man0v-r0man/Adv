@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { RentComponent } from './rent/rent.component';
 import { SaleComponent } from './sale/sale.component';
+import { IComponent } from 'src/app/models/yandex';
 
 @Component({
   selector: 'app-houses',
@@ -12,7 +13,7 @@ import { SaleComponent } from './sale/sale.component';
 export class HousesComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: {advertType: AdvertType; city: any};
+  helper: {advertType: AdvertType; province: IComponent};
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.sale;
   /** типы объявлений */
@@ -32,11 +33,11 @@ export class HousesComponent implements OnInit {
     this.initHelperForm();
     this.submitHelper(this.helperForm.value);
   }
-  submitHelper(helperValues: {advertType: AdvertType; city: any}) {
+  submitHelper(helperValues: {advertType: AdvertType; province: IComponent}) {
     this.helper = {...helperValues};
     this.advertSwitcher();
     this.changeDetector.detectChanges();
-    this.isShowComponent ? this.saleComponent.showAdverts(this.helper.city) : this.rentComponent.showAdverts(this.helper.city);
+    this.isShowComponent ? this.saleComponent.showAdverts(this.helper.province) : this.rentComponent.showAdverts(this.helper.province);
   }
   /** переключение типов объявлений сдать/продать */
   private advertSwitcher() {
@@ -51,7 +52,7 @@ export class HousesComponent implements OnInit {
     this.setAdvertTypes();
     this.helperForm = this.formBuilder.group({
       advertType: [ this.selectedAdvertType ],
-      city: [ null ]
+      province: [ null ]
     });
   }
   /** установка типов объявлений */
