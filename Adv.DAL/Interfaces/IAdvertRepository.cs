@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Entities;
+using Adv.DAL.Entities.Address;
 
 namespace Adv.DAL.Interfaces
 {
@@ -67,34 +68,34 @@ namespace Adv.DAL.Interfaces
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<HouseSale> GetHouseSaleAsync(int id, CancellationToken ct);
-        // /// <summary>
-        // /// получить объявления квартира-сдать
-        // /// </summary>
-        // /// <param name="pageNumber"></param>
-        // /// <param name="city"></param>
-        // /// <returns></returns>
-        // Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city);
-        // /// <summary>
-        // /// получить объявления квартира-продать
-        // /// </summary>
-        // /// <param name="pageNumber"></param>
-        // /// <param name="city"></param>
-        // /// <returns></returns>
-        // Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city);
-        // /// <summary>
-        // /// получить объявления дом-сдать
-        // /// </summary>
-        // /// <param name="pageNumber"></param>
-        // /// <param name="city"></param>
-        // /// <returns></returns>
-        // Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city);
-        // /// <summary>
-        // /// получить объявления дом-продать
-        // /// </summary>
-        // /// <param name="pageNumber"></param>
-        // /// <param name="city"></param>
-        // /// <returns></returns>
-        // Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city);
+        /// <summary>
+        /// получить объявления квартира-сдать
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="province"></param>
+        /// <returns></returns>
+        Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, Component province);
+        /// <summary>
+        /// получить объявления квартира-продать
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="province"></param>
+        /// <returns></returns>
+        Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, Component province);
+        /// <summary>
+        /// получить объявления дом-сдать
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="province"></param>
+        /// <returns></returns>
+        Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, Component province);
+        /// <summary>
+        /// получить объявления дом-продать
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <param name="province"></param>
+        /// <returns></returns>
+        Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, Component province);
         /// <summary>
         /// получить любые объявления квартира-сдать
         /// </summary>

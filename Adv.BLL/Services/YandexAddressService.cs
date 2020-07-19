@@ -25,7 +25,7 @@ namespace Adv.BLL.Services
         {
             return await _memoryCache.GetOrCreateAsync(ProvinceCacheKey, async cacheEntry =>
             {
-                cacheEntry.SlidingExpiration = TimeSpan.FromHours(1);
+                cacheEntry.SlidingExpiration = TimeSpan.FromMinutes(15);
                 var result = await _yandexAddressRepository.GetLocationsAsync().ConfigureAwait(false);
                 return result.Select(x => (ComponentDto) x).ToImmutableList();
             }).ConfigureAwait(false);

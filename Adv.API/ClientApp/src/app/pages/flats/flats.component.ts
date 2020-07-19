@@ -3,6 +3,7 @@ import {FormGroup, FormBuilder} from '@angular/forms';
 import { AdvertType } from 'src/app/models/advertType';
 import { RentComponent } from './rent/rent.component';
 import { SaleComponent } from './sale/sale.component';
+import { IComponent } from 'src/app/models/yandex';
 
 @Component({
   selector: 'app-flats',
@@ -12,7 +13,7 @@ import { SaleComponent } from './sale/sale.component';
 export class FlatsComponent implements OnInit {
   /** форма для выбора создаваемого объявления */
   helperForm: FormGroup;
-  helper: {advertType: AdvertType; city: any};
+  helper: {advertType: AdvertType; province: IComponent}; 
   /** выбранный тип объявления */
   selectedAdvertType: string = AdvertType.rent;
   /** типы объявлений */
@@ -31,16 +32,16 @@ export class FlatsComponent implements OnInit {
     this.initHelperForm();
     this.submitHelper(this.helperForm.value);
   }
-  submitHelper(helperValues: {advertType: AdvertType; city: any}) {
-    this.helper = {...helperValues};
+  submitHelper(helperValues: {advertType: AdvertType; province: IComponent}) {    
+    this.helper = {...helperValues};    
     this.advertSwitcher();
     this.changeDetector.detectChanges();
     if (this.isShowComponent) {
       this.saleComponent.listFlatSale = [];
-      this.saleComponent.showAdverts(this.helper.city);
+      this.saleComponent.showAdverts(this.helper.province);
     } else {
       this.rentComponent.listFlatRent = [];
-      this.rentComponent.showAdverts(this.helper.city);
+      this.rentComponent.showAdverts(this.helper.province);
     }
   }
   /** переключение типов объявлений сдать/продать */

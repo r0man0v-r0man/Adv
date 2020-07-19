@@ -40,9 +40,9 @@ export class SaleComponent implements OnInit {
     });
   }
   /** Показать объявления с фильтром */
-  showFilterAdverts(city: any) {
+  showFilterAdverts(province: any) {
     this.isAnyAdverts = false;
-    this.filterOption = { city: city };
+    this.filterOption = { province: province };
     this.advertService.getHouseSales(this.pageNumber, this.filterOption).subscribe(response => {
       this.AddAdvertsToList(response);
     });

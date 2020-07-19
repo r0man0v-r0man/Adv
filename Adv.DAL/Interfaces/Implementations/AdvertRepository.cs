@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Adv.DAL.Context.Extensions;
 using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities;
+using Adv.DAL.Entities.Address;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
 using Microsoft.EntityFrameworkCore;
@@ -145,63 +146,65 @@ namespace Adv.DAL.Interfaces.Implementations
             return result ?? throw new NotFoundAdvertException();
         }
 
-        // public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, City city)
-        // {
-        //     using var context = contextFactory.GetAdvContext();
-        //     return await context.FlatRents
-        //         .Include(prop => prop.Address)
-        //         .ThenInclude(prop => prop.City)
-        //         .Include(prop => prop.Images)
-        //         .AsNoTracking()
-        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-        //         .OrderByDescending(prop => prop.Created)
-        //         .GetAdvertsByPage(pageNumber)
-        //         .ToListAsync()
-        //         .ConfigureAwait(false);
-        // }
-        //
-        // public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, City city)
-        // {
-        //     using var context = contextFactory.GetAdvContext();
-        //     return await context.FlatSales
-        //         .Include(prop => prop.Address)
-        //         .ThenInclude(prop => prop.City)
-        //         .Include(prop => prop.Images)
-        //         .AsNoTracking()
-        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-        //         .OrderByDescending(prop => prop.Created)
-        //         .GetAdvertsByPage(pageNumber)
-        //         .ToListAsync()
-        //         .ConfigureAwait(false);
-        // }
-        //
-        // public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, City city)
-        // {
-        //     using var context = contextFactory.GetAdvContext();
-        //     return await context.HouseRents
-        //         .Include(prop => prop.Address)
-        //         .ThenInclude(prop => prop.City)
-        //         .Include(prop => prop.Images).AsNoTracking()
-        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-        //         .OrderByDescending(prop => prop.Created)
-        //         .GetAdvertsByPage(pageNumber)
-        //         .ToListAsync()
-        //         .ConfigureAwait(false);
-        // }
-        //
-        // public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, City city)
-        // {
-        //     using var context = contextFactory.GetAdvContext();
-        //     return await context.HouseSales
-        //         .Include(prop => prop.Address)
-        //         .ThenInclude(prop => prop.City)
-        //         .Include(prop => prop.Images).AsNoTracking()
-        //         .Where(prop => prop.IsActive && prop.Address.CityId == city.Id)
-        //         .OrderByDescending(prop => prop.Created)
-        //         .GetAdvertsByPage(pageNumber)
-        //         .ToListAsync()
-        //         .ConfigureAwait(false);
-        // }
+        public async Task<IEnumerable<FlatRent>> GetFlatRents(int pageNumber, Component province)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.FlatRents
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive && prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components.Any(c => c.Kind == province.Kind && c.Name == province.Name))
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<FlatSale>> GetFlatSales(int pageNumber, Component province)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.FlatSales
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive && prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components.Any(c => c.Kind == province.Kind && c.Name == province.Name))
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<HouseRent>> GetHouseRents(int pageNumber, Component province)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseRents
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive && prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components.Any(c => c.Kind == province.Kind && c.Name == province.Name))
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
+
+        public async Task<IEnumerable<HouseSale>> GetHouseSales(int pageNumber, Component province)
+        {
+            using var context = contextFactory.GetAdvContext();
+            return await context.HouseSales
+                .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                .Include(prop => prop.Images)
+                .AsNoTracking()
+                .Where(prop => prop.IsActive && prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components.Any(c => c.Kind == province.Kind && c.Name == province.Name))
+                .OrderByDescending(prop => prop.Created)
+                .Skip(SkipCalc(pageNumber))
+                .Take(SIZE)
+                .ToListAsync()
+                .ConfigureAwait(false);
+        }
 
         public async Task<IEnumerable<FlatRent>> GetAnyFlatRentsAsync(int pageNumber)
         {

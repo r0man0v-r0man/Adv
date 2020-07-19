@@ -1,5 +1,6 @@
 import { Duration } from './duration';
 import { AdvertType } from './advertType';
+import { IComponent } from './yandex';
 
 /** опции фильтрации для страницы квартиры */
 export interface FlatFilterOptions extends FilterOptions {
@@ -12,5 +13,5 @@ export interface HouseFilterOptions {
     advertType: AdvertType;
 }
 export interface FilterOptions {
-    city: any;
+    province: IComponent;
 }

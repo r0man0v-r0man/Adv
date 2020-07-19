@@ -31,9 +31,9 @@ export interface Address {
   country_code: string;
   postal_code: string;
   formatted: string;
-  Components: Component[];
+  Components: IComponent[];
 }
-export interface Component {
+export interface IComponent {
   kind: string;
   name: string;
 }

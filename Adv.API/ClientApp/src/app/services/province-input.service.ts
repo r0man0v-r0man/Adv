@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Component } from '../models/yandex';
+import { IComponent } from '../models/yandex';
 import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Constants } from '../constants';
@@ -11,14 +11,14 @@ export class ProvinceInputService {
   searchChange$ = new Subject<string>();
   /** статус поиска */
   isLoading = true;
-  optionList: Component[];
+  optionList: IComponent[];
   constructor(
     private httpClient: HttpClient
   ) { 
     this.httpClient
-      .get<Component[]>(`${Constants.getLocationsURL}`)
+      .get<IComponent[]>(`${Constants.getLocationsURL}`)
       .pipe(
-        map((response: Component[]) => response)
+        map((response: IComponent[]) => response)
       ).subscribe(data => {
       this.optionList = data;
       this.isLoading = false;
