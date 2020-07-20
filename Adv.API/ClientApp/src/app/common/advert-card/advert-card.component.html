@@ -1,0 +1,25 @@
+<nz-card
+    (click)="onCardClick(item)"
+    [nzExtra]="extraTpl"
+    nzSize="small"
+    style="width: 100%;"
+    nzHoverable="true"
+    [nzCover]="coverTpl"
+    [nzTitle]="item.price | currency" >
+    <nz-card-meta 
+        [nzTitle]="cardMetaTitleTpl" 
+        [nzDescription]="descriptionTpl">
+    </nz-card-meta>
+</nz-card>
+<ng-template #descriptionTpl>
+    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.geoObject.metaDataProperty.geocoderMetaData.address.components[3].name }}
+</ng-template>
+<ng-template #cardMetaTitleTpl>
+    {{ item.address.geoObject.name }}
+</ng-template>
+<ng-template #extraTpl>
+    {{ item.created | date : 'shortDate' : '' : 'ru' }}
+</ng-template>
+<ng-template #coverTpl>
+    <img [src]="item.images[0]?.linkProps.download"/>
+</ng-template>

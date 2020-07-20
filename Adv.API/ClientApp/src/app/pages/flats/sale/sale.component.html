@@ -8,25 +8,7 @@
         [nzLg]="{ span : 6 }"
         [nzXl]="{ span : 6 }" *ngFor="let item of listFlatSale">
             <nz-list-item >
-                <nz-card
-                (click)="onCardClick(item)"
-                [nzExtra]="extraTpl"
-                nzSize="small"
-                style="width: 100%;"
-                nzHoverable="true"
-                [nzCover]="coverTpl"
-                [nzTitle]="item.price | currency" >
-                    <nz-card-meta [nzTitle]="cardMetaTitleTpl"></nz-card-meta>
-                </nz-card>
-                <ng-template #cardMetaTitleTpl>
-                    <i nz-icon nzType="environment" nzTheme="outline"></i> {{ item.address.geoObject.name }}
-                </ng-template>
-                <ng-template #extraTpl>
-                    Кол-во комнат: {{ item.rooms }}
-                </ng-template>
-                <ng-template #coverTpl>
-                    <img [src]="item.images[0]?.linkProps.download"/>
-                </ng-template>
+                <app-advert-card [item]="item"></app-advert-card>
             </nz-list-item>
         </div>
     </div>

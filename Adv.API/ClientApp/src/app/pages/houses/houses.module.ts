@@ -14,7 +14,8 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzSelectModule } from 'ng-zorro-antd/select';
+import { ProvinceInputModule } from 'src/app/common/Forms/province-input/province-input.module';
+import { AdvertCardModule } from 'src/app/common/advert-card/advert-card.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     ReactiveFormsModule,
     NzFormModule,
     NzIconModule,
-    NzSelectModule
+    ProvinceInputModule,
+    AdvertCardModule
   ]
 })
 export class HousesModule { }
