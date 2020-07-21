@@ -5,7 +5,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     ProvinceInputComponent
