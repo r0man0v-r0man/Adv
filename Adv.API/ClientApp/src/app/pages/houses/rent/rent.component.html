@@ -8,7 +8,7 @@
         [nzLg]="{ span : 6 }"
         [nzXl]="{ span : 6 }" *ngFor="let item of listHouseRent">
             <nz-list-item >
-                <app-advert-card [item]="item"></app-advert-card>
+                <app-advert-card [item]="item" [advertType]='typeOfAdvert'></app-advert-card>
             </nz-list-item>
         </div>
     </div>

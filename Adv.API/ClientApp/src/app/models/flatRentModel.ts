@@ -1,5 +1,4 @@
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import {GeoObject} from './yandex';
 
 export interface FlatRentModel {
     id: number;

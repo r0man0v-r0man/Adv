@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { AdvertService } from 'src/app/services/advert.service';
 import { FilterOptions } from 'src/app/models/filterOptions';
-import { Router } from '@angular/router';
 import { IComponent } from 'src/app/models/yandex';
+import { TypeOfAdvert } from 'src/app/models/advertType';
 
 @Component({
   selector: 'app-flats-rent',
@@ -11,7 +11,7 @@ import { IComponent } from 'src/app/models/yandex';
   styleUrls: ['./rent.component.less']
 })
 export class RentComponent implements OnInit {
-
+  typeOfAdvert = TypeOfAdvert.flatRent;
   listFlatRent: FlatRentModel[] = [];
   filterOption: FilterOptions;
   initLoading = true;
@@ -20,7 +20,6 @@ export class RentComponent implements OnInit {
   isAnyAdverts = false;
   constructor(
     private advertService: AdvertService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +42,7 @@ export class RentComponent implements OnInit {
   showFilterAdverts(province: IComponent) {
     this.isAnyAdverts = false;
     this.filterOption = { province: province };
-    this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {
+    this.advertService.getFlatRents(this.pageNumber, this.filterOption).subscribe(response => {      
       this.AddAdvertsToList(response);
     });
   }
@@ -68,10 +67,6 @@ export class RentComponent implements OnInit {
     } else {
       response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
     }
-  }
-  /** переход на страницу с информацией об объявлении */
-  onCardClick(advert: FlatRentModel) {
-      this.router.navigate(['flat', 'rent', advert.id]);
   }
   /** Загрузить еще объявляений */
   onLoadMore() {

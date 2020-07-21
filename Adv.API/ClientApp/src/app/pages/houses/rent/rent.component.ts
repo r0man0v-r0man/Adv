@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { FilterOptions } from 'src/app/models/filterOptions';
-import { Router } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
+import { TypeOfAdvert } from 'src/app/models/advertType';
 
 @Component({
   selector: 'app-houses-rent',
@@ -10,7 +10,7 @@ import { AdvertService } from 'src/app/services/advert.service';
   styleUrls: ['./rent.component.less']
 })
 export class RentComponent implements OnInit {
-
+  typeOfAdvert = TypeOfAdvert.houseRent;
   listHouseRent: HouseRentModel[] = [];
   filterOption: FilterOptions;
   initLoading = true;
@@ -19,8 +19,7 @@ export class RentComponent implements OnInit {
   isAnyAdverts = false;
 
   constructor(
-    private advertService: AdvertService,
-    private router: Router
+    private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
@@ -67,10 +66,6 @@ export class RentComponent implements OnInit {
     } else {
       response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
     }
-  }
-  /** переход на страницу с информацией об объявлении */
-  onCardClick(advert: HouseRentModel) {
-      this.router.navigate(['house', 'rent', advert.id]);
   }
   /** Загрузить еще объявляений */
   onLoadMore() {

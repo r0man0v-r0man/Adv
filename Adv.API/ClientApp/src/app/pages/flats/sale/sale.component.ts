@@ -4,6 +4,7 @@ import { FlatSaleModel } from 'src/app/models/flatSaleModel';
 import { Router } from '@angular/router';
 import { AdvertService } from 'src/app/services/advert.service';
 import { IComponent } from 'src/app/models/yandex';
+import { TypeOfAdvert } from 'src/app/models/advertType';
 
 @Component({
   selector: 'app-flats-sale',
@@ -11,7 +12,7 @@ import { IComponent } from 'src/app/models/yandex';
   styleUrls: ['./sale.component.less']
 })
 export class SaleComponent implements OnInit {
-
+  typeOfAdvert = TypeOfAdvert.flatSale;
   listFlatSale: FlatSaleModel[] = [];
   filterOption: FilterOptions;
   initLoading = true;
@@ -20,8 +21,7 @@ export class SaleComponent implements OnInit {
   isAnyAdverts = false;
 
   constructor(
-    private advertService: AdvertService,
-    private router: Router
+    private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
@@ -69,10 +69,6 @@ export class SaleComponent implements OnInit {
     } else {
       response && response.length >= 20 ? this.isShowMoreButton = true : this.isShowMoreButton = false;
     }
-  }
-  /** переход на страницу с информацией об объявлении */
-  onCardClick(advert: FlatSaleModel) {
-    this.router.navigate(['flat', 'sale', advert.id]);
   }
   /** Загрузить еще объявляений */
   onLoadMore() {

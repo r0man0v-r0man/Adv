@@ -41,7 +41,6 @@ export class FlatRentComponent implements OnInit {
   private getAdvert(id: number) {
     this.advertService.getFlatRent(id).subscribe(response => {
       if (response) {
-        console.log(response);
         this.advert = response;
         this.initSlides(this.advert.images);
         this.isLoading = !this.isLoading;
