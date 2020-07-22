@@ -4,15 +4,21 @@ import { HomeRoutingModule } from './home-routing.module';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 
 @NgModule({
   imports: [
     HomeRoutingModule,
     CommonModule,
-    NzGridModule
+    NzGridModule,
+    NzCardModule
   ],
-  declarations: [HomeComponent],
-  exports: [HomeComponent]
+  declarations: [
+    HomeComponent
+  ],
+  exports: [
+    HomeComponent
+  ]
 })
 export class HomeModule { }
