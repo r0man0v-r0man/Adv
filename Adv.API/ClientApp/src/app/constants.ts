@@ -24,7 +24,11 @@ export class Constants {
   static getAnyFlatSalesURL = environment.webApi + 'advert/getAnyFlatSales';
   static getAnyHouseRentsURL = environment.webApi + 'advert/getAnyHouseRents';
   static getAnyHouseSalesURL = environment.webApi + 'advert/getAnyHouseSales';
-  // city
+  static getLastFlatRentURL = environment.webApi + 'advert/getLastFlatRent';
+  static getLastFlatSaleURL = environment.webApi + 'advert/getLastFlatSale';
+  static getLastHouseRentURL = environment.webApi + 'advert/getLastHouseRent';
+  static getLastHouseSaleURL = environment.webApi + 'advert/getLastHouseSale';
+  // locations
   static getLocationsURL = environment.webApi + 'yandexAddress/getLocations';
   // flat
   static flat = environment.webApi +  'flat';

@@ -11,6 +11,7 @@ import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
 import { map } from 'rxjs/operators';
 import { FilterOptions } from '../models/filterOptions';
+import { constants } from 'buffer';
 
 @Injectable({
   providedIn: 'root'
@@ -188,6 +189,9 @@ export class AdvertService {
     return this.httpService.get<HouseSaleModel[]>(
       `${this.baseUrl}${Constants.getAnyHouseSalesURL}`,
       { params: params });
+  }
+  getLastFlatRent() {
+    return this.httpService.get<FlatRentModel>(Constants.getLastFlatRentURL);
   }
   /**
    * установка HttpParams

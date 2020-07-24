@@ -148,6 +148,13 @@ namespace Adv.BLL.Services
             var adverts = await advertRepository.GetAnyHouseSalesAsync(pageNumber).ConfigureAwait(false);
             return adverts.Select(advert => (HouseSaleDto)advert);
         }
-        
+
+        public async Task<FlatRentDto> GetLastFlatRentAsync()
+        {
+            FlatRentDto result = await advertRepository
+                .GetLastFlatRentAsync()
+                .ConfigureAwait(false);
+            return result;
+        }
     }
 }

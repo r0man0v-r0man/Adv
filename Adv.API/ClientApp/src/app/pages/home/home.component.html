@@ -23,3 +23,17 @@
         </span>
     </div>
 </div>
+<nz-divider [nzText]="lastAdvertsTpl" nzOrientation="left"></nz-divider>
+<ng-template #lastAdvertsTpl>
+    <i nz-icon nzType="filter" nzTheme="outline"></i> Последние объявления
+</ng-template>
+<div nz-row>
+    <div nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 24 }" 
+    [nzMd]="{ span : 24 }" 
+    [nzLg]="{ span : 24 }" 
+    [nzXl]="{ span : 24 }">
+        <app-advert-card [item]="advertFlatRent" [advertType]="flatRentType"></app-advert-card>
+    </div>
+</div>

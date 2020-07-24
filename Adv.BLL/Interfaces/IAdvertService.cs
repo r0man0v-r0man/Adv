@@ -75,5 +75,6 @@ namespace Adv.BLL.Interfaces
         Task<IEnumerable<FlatSaleDto>> GetAnyFlatSalesAsync(int pageNumber);
         Task<IEnumerable<HouseRentDto>> GetAnyHouseRentsAsync(int pageNumber);
         Task<IEnumerable<HouseSaleDto>> GetAnyHouseSalesAsync(int pageNumber);
+        Task<FlatRentDto> GetLastFlatRentAsync();
     }
 }

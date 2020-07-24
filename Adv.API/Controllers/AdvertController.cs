@@ -283,7 +283,20 @@ namespace Adv.API.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
-                throw;
+            }
+        }
+
+        [HttpGet("getLastFlatRent")]
+        public async Task<IActionResult> GetLastFlatRent()
+        {
+            try
+            {
+                FlatRentViewModel result = await _advertService.GetLastFlatRentAsync().ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
             }
         }
         #endregion

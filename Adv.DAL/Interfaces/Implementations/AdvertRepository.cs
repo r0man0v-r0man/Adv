@@ -266,6 +266,26 @@ namespace Adv.DAL.Interfaces.Implementations
                 .ConfigureAwait(false);
         }
 
+        public async Task<FlatRent> GetLastFlatRentAsync()
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var result = await context.FlatRents
+                    .Include(prop => prop.Images)
+                    .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .AsNoTracking()
+                    .LastAsync(prop => prop.IsActive)
+                    .ConfigureAwait(false);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                throw;
+            }
+        }
+
         private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
     }
 }
