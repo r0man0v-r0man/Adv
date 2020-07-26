@@ -299,6 +299,45 @@ namespace Adv.API.Controllers
                 return BadRequest(e);
             }
         }
+        [HttpGet("getLastFlatSale")]
+        public async Task<IActionResult> GetLastFlatSale()
+        {
+            try
+            {
+                FlatSaleViewModel result = await _advertService.GetLastFlatSaleAsync().ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        [HttpGet("getLastHouseRent")]
+        public async Task<IActionResult> GetLastHouseRent()
+        {
+            try
+            {
+                HouseRentViewModel result = await _advertService.GetLastHouseRentAsync().ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+        [HttpGet("getLastHouseSale")]
+        public async Task<IActionResult> GetLastHouseSale()
+        {
+            try
+            {
+                HouseSaleViewModel result = await _advertService.GetLastHouseSaleAsync().ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
         #endregion
 
     }

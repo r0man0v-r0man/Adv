@@ -1,18 +1,14 @@
-﻿  
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Adv.DAL.Context.Extensions;
 using Adv.DAL.Context.Interfaces;
-using Adv.DAL.Entities;
 using Adv.DAL.Entities.Address;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -271,21 +267,73 @@ namespace Adv.DAL.Interfaces.Implementations
             try
             {
                 using var context = contextFactory.GetAdvContext();
-                var result = await context.FlatRents
+                return await context.FlatRents
                     .Include(prop => prop.Images)
                     .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                     .AsNoTracking()
-                    .LastAsync(prop => prop.IsActive)
+                    .FirstOrDefaultAsync(prop => prop.Created == context.FlatRents.Max(x => x.Created))
                     .ConfigureAwait(false);
-                return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Debug.WriteLine(e);
+                throw;
+            }
+        }
+        
+        private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
+
+        public async Task<FlatSale> GetLastFlatSaleAsync()
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                return await context.FlatSales
+                    .Include(prop => prop.Images)
+                    .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(prop => prop.Created == context.FlatSales.Max(x => x.Created))
+                    .ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
 
-        private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
+        public async Task<HouseRent> GetLastHouseRentAsync()
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                return await context.HouseRents
+                    .Include(prop => prop.Images)
+                    .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(prop => prop.Created == context.HouseRents.Max(x => x.Created))
+                    .ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<HouseSale> GetLastHouseSaleAsync()
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                return await context.HouseSales
+                    .Include(prop => prop.Images)
+                    .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(prop => prop.Created == context.HouseSales.Max(x => x.Created))
+                    .ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

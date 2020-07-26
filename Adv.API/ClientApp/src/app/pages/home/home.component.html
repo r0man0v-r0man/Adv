@@ -27,13 +27,44 @@
 <ng-template #lastAdvertsTpl>
     <i nz-icon nzType="filter" nzTheme="outline"></i> Последние объявления
 </ng-template>
-<div nz-row>
+<div nz-row nzGutter="24">
     <div nz-col 
     [nzXs]="{ span : 24 }" 
-    [nzSm]="{ span : 24 }" 
-    [nzMd]="{ span : 24 }" 
-    [nzLg]="{ span : 24 }" 
-    [nzXl]="{ span : 24 }">
-        <app-advert-card [item]="advertFlatRent" [advertType]="flatRentType"></app-advert-card>
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 6 }" 
+    [nzXl]="{ span : 6 }">
+        <span style="text-align: center;">сдается</span>
+        <app-advert-card *ngIf="advertFlatRent" [item]="advertFlatRent" [advertType]="flatRentType"></app-advert-card>
+    </div>
+    <div nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 6 }" 
+    [nzXl]="{ span : 6 }">
+    <span style="text-align: center;">сдается</span>
+
+        <app-advert-card *ngIf="advertFlatSale" [item]="advertFlatSale" [advertType]="flatSaleType"></app-advert-card>
+    </div>
+    <div nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 6 }" 
+    [nzXl]="{ span : 6 }">
+    <span style="text-align: center;">сдается</span>
+
+        <app-advert-card *ngIf="advertHouseRent" [item]="advertHouseRent" [advertType]="houseRentType"></app-advert-card>
+    </div>
+    <div nz-col 
+    [nzXs]="{ span : 24 }" 
+    [nzSm]="{ span : 12 }" 
+    [nzMd]="{ span : 8 }" 
+    [nzLg]="{ span : 6 }" 
+    [nzXl]="{ span : 6 }">
+    <span style="text-align: center;">сдается</span>
+
+        <app-advert-card *ngIf="advertHouseSale" [item]="advertHouseSale" [advertType]="houseSaleType"></app-advert-card>
     </div>
 </div>

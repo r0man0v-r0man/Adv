@@ -122,5 +122,8 @@ namespace Adv.DAL.Interfaces
         Task<IEnumerable<HouseSale>> GetAnyHouseSalesAsync(int pageNumber);
 
         Task<FlatRent> GetLastFlatRentAsync();
+        Task<FlatSale> GetLastFlatSaleAsync();
+        Task<HouseRent> GetLastHouseRentAsync();
+        Task<HouseSale> GetLastHouseSaleAsync();
     }
 }

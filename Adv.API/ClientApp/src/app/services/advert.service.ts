@@ -193,6 +193,15 @@ export class AdvertService {
   getLastFlatRent() {
     return this.httpService.get<FlatRentModel>(Constants.getLastFlatRentURL);
   }
+  getLastFlatSale() {
+    return this.httpService.get<FlatSaleModel>(Constants.getLastFlatSaleURL);
+  }
+  getLastHouseRent() {
+    return this.httpService.get<HouseRentModel>(Constants.getLastHouseRentURL);
+  }
+  getLastHouseSale() {
+    return this.httpService.get<HouseSaleModel>(Constants.getLastHouseSaleURL);
+  }
   /**
    * установка HttpParams
    * @param pageNumber Номер страницы
