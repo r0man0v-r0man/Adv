@@ -26,8 +26,8 @@ namespace Adv.DAL
             services.AddDbContextPool<AdvContext>(options =>
             {
                 var connection = configuration.GetConnectionString("AdvConnection");
-
-                options.UseNpgsql(connection, b=>b.RemoteCertificateValidationCallback(RemoteCertificateValidationCallback));
+                options.UseNpgsql(connection);
+                // options.UseNpgsql(connection, b=>b.RemoteCertificateValidationCallback(RemoteCertificateValidationCallback));
             });
             services.AddTransient<IContextFactory, ContextFactory>();
 
