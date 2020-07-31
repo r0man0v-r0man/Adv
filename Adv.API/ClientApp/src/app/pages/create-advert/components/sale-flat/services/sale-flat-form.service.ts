@@ -38,7 +38,7 @@ export class SaleFlatFormService {
       kitchenArea: [ null, [Validators.required]],
       balcony: [ null, [Validators.required]],
       toilet: [ null, [Validators.required]],
-      price: [ null, [Validators.required]],
+      price: [ '', [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
       description: [ null, [DescriptionValidators.notOnlySpace]]
     });
