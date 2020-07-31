@@ -8,6 +8,10 @@ using Adv.DAL.Entities;
 using Adv.DAL.Exceptions;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
+using Imgur.API.Authentication;
+using Imgur.API.Authentication.Impl;
+using Imgur.API.Endpoints;
+using Imgur.API.Endpoints.Impl;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -47,8 +51,20 @@ namespace Adv.DAL
             services.AddScoped(typeof(IYandexAddressRepository), typeof(YandexAddressRepository));
             services.AddTransient<IdentityErrorDescriber, RussianIdentityErrorDescriber>();
 
+            var imgurClientId = configuration.GetValue<string>("Imgur:ClientId");
+            var imgurClientSecretId = configuration.GetValue<string>("Imgur:ClientSecretKey");
+
+            var imgurClient = new ImgurClient(imgurClientId, imgurClientSecretId);
+            var imgurEndpoint = new ImageEndpoint(imgurClient);
+
+            services.AddSingleton<IImgurClient>(imgurClient);
+            services.AddSingleton<IImageEndpoint>(imgurEndpoint);
+
             return services;
         }
+
+
+
         static bool RemoteCertificateValidationCallback(object sender, X509Certificate certificate, X509Chain defaultChain, SslPolicyErrors defaultErrors)
         {
             string text1 = File.ReadAllText("CA1.pem");

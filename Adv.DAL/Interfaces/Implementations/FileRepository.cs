@@ -1,29 +1,19 @@
 ﻿using Adv.DAL.Exceptions;
-using Imgur.API.Authentication.Impl;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Imgur.API.Endpoints.Impl;
+using Imgur.API.Endpoints;
 using Imgur.API.Models;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
     public class FileRepository : IFileRepository
     {
-        private readonly IConfiguration _config;
-
-        private string ImgurClientId { get; }
-        private string ImgurClientSecretId { get; }
-
-        public FileRepository(IConfiguration configuration)
+        private readonly IImageEndpoint _imageEndpoint;
+        public FileRepository(IImageEndpoint imageEndpoint)
         {
-            _config = configuration;
-
-            ImgurClientId = _config.GetValue<string>("Imgur:ClientId");
-            ImgurClientSecretId = _config.GetValue<string>("Imgur:ClientSecretKey");
+            _imageEndpoint = imageEndpoint;
         }
         /// <summary>
         /// удаление картинки
@@ -34,9 +24,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             try
             {
-                var client = new ImgurClient(ImgurClientId);
-                var endpoint = new ImageEndpoint(client);
-                var deleted = await endpoint.DeleteImageAsync(deleteHash).ConfigureAwait(false);
+                var deleted = await _imageEndpoint.DeleteImageAsync(deleteHash).ConfigureAwait(false);
                 return deleted;
             }
             catch (Exception e)
@@ -55,10 +43,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             try
             {
-                var client = new ImgurClient(ImgurClientId, ImgurClientSecretId);
-                var endpoint = new ImageEndpoint(client);
-
-                return await endpoint.UploadImageStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
+                return await _imageEndpoint.UploadImageStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
             }
             catch (ImgurException e)
             {
