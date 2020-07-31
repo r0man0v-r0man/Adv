@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Adv.BLL.DTO;
 using Adv.BLL.DTO.Address;
 using Adv.BLL.DTO.Adverts;
 using Adv.BLL.Interfaces;
@@ -23,6 +22,11 @@ namespace Adv.BLL.Services
         private const string flatSaleCacheKey = "flatSale";
         private const string houseRentCacheKey = "houseRent";
         private const string houseSaleCacheKey = "houseSale";
+
+        private const string lastFlatRentCacheKey = "lastFlatRent";
+        private const string lastFlatSaleCacheKey = "lastFlatSale";
+        private const string lastHouseRentCacheKey = "lastHouseRent";
+        private const string lastHouseSaleCacheKey = "lastHouseSale";
         public AdvertService(IAdvertRepository advertRepository,
                              IMemoryCache memoryCache,
                              IConfiguration configuration)
@@ -31,7 +35,8 @@ namespace Adv.BLL.Services
             this.memoryCache = memoryCache;
             MemoryCacheEntryOptions = new MemoryCacheEntryOptions
             {
-                SlidingExpiration = TimeSpan.FromHours(configuration.GetValue<int>("MemoryCacheEntryOptions:SlidingExpiration"))
+                SlidingExpiration = TimeSpan.FromHours(configuration.GetValue<int>("MemoryCacheEntryOptions:SlidingExpiration")),
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(10)
             };
         }
 
@@ -149,12 +154,44 @@ namespace Adv.BLL.Services
             return adverts.Select(advert => (HouseSaleDto)advert);
         }
 
-        public async Task<FlatRentDto> GetLastFlatRentAsync() => await advertRepository.GetLastFlatRentAsync().ConfigureAwait(false);
+        public async Task<FlatRentDto> GetLastFlatRentAsync()
+        {
+            return await memoryCache.GetOrCreateAsync(lastFlatRentCacheKey, async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                FlatRentDto advert = await advertRepository.GetLastFlatRentAsync().ConfigureAwait(false);
+                return advert;
+            }).ConfigureAwait(false);
+        }
 
-        public async Task<FlatSaleDto> GetLastFlatSaleAsync() => await advertRepository.GetLastFlatSaleAsync().ConfigureAwait(false);
+        public async Task<FlatSaleDto> GetLastFlatSaleAsync()
+        {
+            return await memoryCache.GetOrCreateAsync(lastFlatSaleCacheKey, async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                FlatSaleDto advert = await advertRepository.GetLastFlatSaleAsync().ConfigureAwait(false);
+                return advert;
+            }).ConfigureAwait(false);
+        }
 
-        public async Task<HouseRentDto> GetLastHouseRentAsync() => await advertRepository.GetLastHouseRentAsync().ConfigureAwait(false);
+        public async Task<HouseRentDto> GetLastHouseRentAsync()
+        {
+            return await memoryCache.GetOrCreateAsync(lastHouseRentCacheKey, async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                HouseRentDto advert = await advertRepository.GetLastHouseRentAsync().ConfigureAwait(false);
+                return advert;
+            }).ConfigureAwait(false);
+        }
 
-        public async Task<HouseSaleDto> GetLastHouseSaleAsync() => await advertRepository.GetLastHouseSaleAsync().ConfigureAwait(false);
+        public async Task<HouseSaleDto> GetLastHouseSaleAsync()
+        {
+            return await memoryCache.GetOrCreateAsync(lastHouseSaleCacheKey, async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                HouseSaleDto advert = await advertRepository.GetLastHouseSaleAsync().ConfigureAwait(false);
+                return advert;
+            }).ConfigureAwait(false);
+        }
     }
 }
