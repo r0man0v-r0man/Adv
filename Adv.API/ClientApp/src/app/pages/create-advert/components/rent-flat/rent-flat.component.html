@@ -6,27 +6,7 @@
     [nzLg]="{ span : 24 }"
     [nzXl]="{ span : 24 }">
         <nz-form-control >
-            <nz-upload
-            nzAction="{{imageService.uploadUrl}}"
-            [nzHeaders]="imageService.headers"
-            [nzTransformFile]="imageService.transformFile"
-            [nzBeforeUpload]="imageService.beforeUpload"
-            [nzRemove]="onDelete"
-            [nzShowUploadList]="imageService.showUploadList"
-            [nzFileList]="imageList"
-            [nzShowButton]="imageList.length < 8"
-            [nzAccept]="'image/png,image/jpeg,image/gif,image/jpg'"
-            nzFileType="image/png,image/jpeg,image/gif,image/jpg"
-            (nzChange)="onUploadChange($event)"
-            [nzListType]="'picture'"
-            ><!--nzSize 5mb-->
-            <button nzBlock="true" nz-button nzSize="large">
-                <i nz-icon nzType="upload" nzTheme="outline"></i>
-                Загрузите изображение
-            </button>
-            <p><small>Максимальный размер фото 5mb.</small>
-            </p>
-            </nz-upload>
+            <app-image-input formControlName='images'></app-image-input>
         </nz-form-control>
     </nz-form-item>
     <nz-divider [nzText]="addressTpl">
@@ -289,4 +269,5 @@
                <i nz-icon nzType="plus" nzTheme="outline"></i>Добавить объявление</button>
             </nz-form-control>
         </nz-form-item>
+        <pre>{{ form.value | json }}</pre>
 </form>

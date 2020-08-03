@@ -11,7 +11,6 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
@@ -24,6 +23,7 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import {AddressInputComponent} from '../../common/Forms/address-input/address-input.component';
 import {DescriptionInputComponent} from '../../common/Forms/description-input/description-input.component';
+import { ImageInputModule } from 'src/app/common/Forms/image-input/image-input.module';
 
 @NgModule({
   declarations: [
@@ -41,12 +41,12 @@ import {DescriptionInputComponent} from '../../common/Forms/description-input/de
     NzGridModule,
     NzRadioModule,
     FormsModule,
+    ImageInputModule,
     ReactiveFormsModule,
     NzFormModule,
     NzTypographyModule,
     NzButtonModule,
     NzIconModule,
-    NzUploadModule,
     NzAutocompleteModule,
     NzInputModule,
     NzSelectModule,
