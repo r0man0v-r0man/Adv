@@ -10,6 +10,10 @@ import { AdvertService } from 'src/app/services/advert.service';
 })
 export class ProfileComponent implements OnInit {
   userId;
+  userFlatRents;
+  userFlatSale;
+  userHouseRent;
+  userHouseSale;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -17,9 +21,11 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.authService.currentUser.sub;
-    this.advertService.getUserAdverts(this.userId).subscribe(data => {
-      console.log(data);
+    this.advertService.getUserAdverts().subscribe(data => {
+      this.userFlatRents = data.flatRent;
+      this.userFlatSale = data.flatSale;
+      this.userHouseRent = data.houseRent;
+      this.userHouseSale = data.houseSale;
     })
   }
 

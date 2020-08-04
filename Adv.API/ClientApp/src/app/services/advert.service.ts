@@ -202,7 +202,8 @@ export class AdvertService {
     return this.httpService.get<HouseSaleModel>(Constants.getLastHouseSaleURL);
   }
   /** получить объявления пользователя */
-  getUserAdverts(userId: string){
+  getUserAdverts(){
+    const userId = this.authService.currentUser.sub;
     return this.httpService.post<any>(Constants.getUserAdvertsURL, { userId }, { headers: this.authService.SecureHeaders});
   }
   /**

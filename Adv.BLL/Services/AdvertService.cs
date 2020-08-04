@@ -27,6 +27,8 @@ namespace Adv.BLL.Services
         private const string lastFlatSaleCacheKey = "lastFlatSale";
         private const string lastHouseRentCacheKey = "lastHouseRent";
         private const string lastHouseSaleCacheKey = "lastHouseSale";
+
+        private const string userAdvertsKey = "userAdverts";
         public AdvertService(IAdvertRepository advertRepository,
                              IMemoryCache memoryCache,
                              IConfiguration configuration)
@@ -196,7 +198,11 @@ namespace Adv.BLL.Services
 
         public async Task<Dictionary<string, Dictionary<int, string>>> GetUserAdvertsAsync(string userId, CancellationToken ct = default)
         {
-            return await advertRepository.GetUserAdvertsAsync(userId, ct).ConfigureAwait(false);
+            return await memoryCache.GetOrCreateAsync(userAdvertsKey, async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                return await advertRepository.GetUserAdvertsAsync(userId, ct).ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
     }
 }
