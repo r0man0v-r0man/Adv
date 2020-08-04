@@ -53,7 +53,7 @@ namespace Adv.API
                         NameClaimType = JwtRegisteredClaimNames.UniqueName
                     };
                 });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";

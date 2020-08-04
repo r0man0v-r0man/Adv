@@ -193,5 +193,10 @@ namespace Adv.BLL.Services
                 return advert;
             }).ConfigureAwait(false);
         }
+
+        public async Task<Dictionary<string, Dictionary<int, string>>> GetUserAdvertsAsync(string userId, CancellationToken ct = default)
+        {
+            return await advertRepository.GetUserAdvertsAsync(userId, ct).ConfigureAwait(false);
+        }
     }
 }

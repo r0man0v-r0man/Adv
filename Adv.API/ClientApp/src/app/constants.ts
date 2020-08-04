@@ -28,6 +28,7 @@ export class Constants {
   static getLastFlatSaleURL = environment.webApi + 'advert/getLastFlatSale';
   static getLastHouseRentURL = environment.webApi + 'advert/getLastHouseRent';
   static getLastHouseSaleURL = environment.webApi + 'advert/getLastHouseSale';
+  static getUserAdvertsURL = environment.webApi + 'advert/getUserAdverts';
   // locations
   static getLocationsURL = environment.webApi + 'yandexAddress/getLocations';
   // flat

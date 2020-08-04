@@ -1,26 +1,31 @@
-﻿using System;
+﻿using Adv.DAL.Context.Interfaces;
+using Adv.DAL.Entities;
+using Adv.DAL.Entities.Address;
+using Adv.DAL.Entities.Adverts;
+using Adv.DAL.Exceptions;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Adv.DAL.Context.Interfaces;
-using Adv.DAL.Entities.Address;
-using Adv.DAL.Entities.Adverts;
-using Adv.DAL.Exceptions;
-using Microsoft.EntityFrameworkCore;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
     public class AdvertRepository : IAdvertRepository
     {
         private readonly IContextFactory contextFactory;
+        private readonly UserManager<AppUser> userManager;
+
         const byte SIZE = 20;
-        public AdvertRepository(IContextFactory contextFactory)
+        public AdvertRepository(IContextFactory contextFactory, UserManager<AppUser> userManager)
         {
             this.contextFactory = contextFactory;
+            this.userManager = userManager;
         }
-        public void Dispose(){ }
+        public void Dispose() { }
 
         public async Task<int> CreateFlatRentAsync(FlatRent flatRent, CancellationToken ct)
         {
@@ -67,7 +72,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 Debug.WriteLine(e);
                 throw;
             }
-            
+
         }
 
         public async Task<int> CreateHouseSaleAsync(HouseSale houseSale, CancellationToken ct)
@@ -97,7 +102,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .AsNoTracking()
                 .FirstOrDefaultAsync(flat => flat.Id == id, ct)
                 .ConfigureAwait(false);
-            
+
             return result ?? throw new NotFoundAdvertException();
         }
 
@@ -239,7 +244,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 .Include(prop => prop.Images)
                 .Include(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
                 .AsNoTracking()
-                .Where(prop => prop.IsActive )
+                .Where(prop => prop.IsActive)
                 .OrderByDescending(prop => prop.Created)
                 .Skip(SkipCalc(pageNumber))
                 .Take(SIZE)
@@ -279,7 +284,7 @@ namespace Adv.DAL.Interfaces.Implementations
                 throw;
             }
         }
-        
+
         private int SkipCalc(int pageNumber) => (SIZE * pageNumber) - SIZE;
 
         public async Task<FlatSale> GetLastFlatSaleAsync()
@@ -329,6 +334,37 @@ namespace Adv.DAL.Interfaces.Implementations
                     .AsNoTracking()
                     .FirstOrDefaultAsync(prop => prop.Created == context.HouseSales.Max(x => x.Created))
                     .ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Dictionary<string, Dictionary<int, string>>> GetUserAdvertsAsync(string userId, CancellationToken ct = default)
+        {
+            try
+            {
+                var user = await userManager.Users
+                    .Include(prop => prop.FlatSales)
+                        .ThenInclude(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .Include(prop => prop.FlatRents)
+                        .ThenInclude(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .Include(prop => prop.HouseSales)
+                        .ThenInclude(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .Include(prop => prop.HouseRents)
+                        .ThenInclude(prop => prop.Address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components)
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(prop => prop.Id == userId, ct)
+                    .ConfigureAwait(false);
+                return new Dictionary<string, Dictionary<int, string>>
+                {
+                    {"flatRent", user.FlatRents.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"flatSale", user.FlatSales.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"houseRent", user.HouseRents.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"houseSale", user.HouseSales.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                };
+                
             }
             catch (Exception)
             {

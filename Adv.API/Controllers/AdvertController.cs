@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Adv.API.Models;
 using Adv.API.Models.Adverts;
+using Adv.API.Models.Profile;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Exceptions;
 using Microsoft.AspNetCore.Authorization;
@@ -340,5 +341,21 @@ namespace Adv.API.Controllers
         }
         #endregion
 
+        [HttpPost("getUserAdverts")]
+        public async Task<ActionResult<Dictionary<string, Dictionary<int, string>>>> GetUserAdverts(UserAdvertsViewModel userAdvertsViewModel)
+        {
+            try
+            {
+                var result = await _advertService
+                    .GetUserAdvertsAsync(userAdvertsViewModel.UserId, new CancellationTokenSource(15000).Token)
+                    .ConfigureAwait(false);
+               
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
     }
 }

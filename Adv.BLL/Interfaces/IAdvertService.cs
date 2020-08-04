@@ -79,5 +79,8 @@ namespace Adv.BLL.Interfaces
         Task<FlatSaleDto> GetLastFlatSaleAsync();
         Task<HouseRentDto> GetLastHouseRentAsync();
         Task<HouseSaleDto> GetLastHouseSaleAsync();
+
+        Task<Dictionary<string, Dictionary<int, string>>>
+           GetUserAdvertsAsync(string userId, CancellationToken ct = default);
     }
 }

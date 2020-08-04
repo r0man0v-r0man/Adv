@@ -11,7 +11,6 @@ import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
 import { map } from 'rxjs/operators';
 import { FilterOptions } from '../models/filterOptions';
-import { constants } from 'buffer';
 
 @Injectable({
   providedIn: 'root'
@@ -201,6 +200,10 @@ export class AdvertService {
   }
   getLastHouseSale() {
     return this.httpService.get<HouseSaleModel>(Constants.getLastHouseSaleURL);
+  }
+  /** получить объявления пользователя */
+  getUserAdverts(userId: string){
+    return this.httpService.post<any>(Constants.getUserAdvertsURL, { userId }, { headers: this.authService.SecureHeaders});
   }
   /**
    * установка HttpParams

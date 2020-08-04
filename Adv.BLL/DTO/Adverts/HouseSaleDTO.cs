@@ -124,7 +124,7 @@ namespace Adv.BLL.DTO.Adverts
             Id = dal.Id,
             IsActive = dal.IsActive,
             UserId = dal.AppUserId,
-            Images = dal.Images.Select(img => (ImageDto) img).ToList(),
+            Images = dal.Images == null ? new List<ImageDto>() : dal.Images.Select(img => (ImageDto) img).ToList(),
             Address = dal.Address,
             HouseArea = dal.HouseArea,
             HouseLiveArea = dal.HouseLiveArea,

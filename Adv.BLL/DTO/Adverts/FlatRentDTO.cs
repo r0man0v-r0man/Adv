@@ -118,7 +118,7 @@ namespace Adv.BLL.DTO.Adverts
             Id = dal.Id,
             UserId = dal.AppUserId,
             IsActive = dal.IsActive,
-            Images = dal.Images.Select(imgDal => (ImageDto) imgDal).ToList(),
+            Images = dal.Images == null ? new List<ImageDto>() : dal.Images.Select(imgDal => (ImageDto) imgDal).ToList(),
             Address = dal.Address,
             Floor = dal.Floor,
             AllFloor = dal.AllFloor,

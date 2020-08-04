@@ -125,5 +125,8 @@ namespace Adv.DAL.Interfaces
         Task<FlatSale> GetLastFlatSaleAsync();
         Task<HouseRent> GetLastHouseRentAsync();
         Task<HouseSale> GetLastHouseSaleAsync();
+
+        Task<Dictionary<string, Dictionary<int, string>>>
+            GetUserAdvertsAsync(string userId, CancellationToken ct = default);
     }
 }
