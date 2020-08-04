@@ -198,7 +198,7 @@ namespace Adv.BLL.Services
 
         public async Task<Dictionary<string, Dictionary<int, string>>> GetUserAdvertsAsync(string userId, CancellationToken ct = default)
         {
-            return await memoryCache.GetOrCreateAsync(userAdvertsKey, async cacheEntry =>
+            return await memoryCache.GetOrCreateAsync(userAdvertsKey + userId, async cacheEntry =>
             {
                 cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
                 return await advertRepository.GetUserAdvertsAsync(userId, ct).ConfigureAwait(false);
