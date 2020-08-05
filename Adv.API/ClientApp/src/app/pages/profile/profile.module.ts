@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 import { ProfileComponent } from './profile.component';
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-
+import { CutAdvertListModule } from 'src/app/common/cut-advert-list/cut-advert-list.module';
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    NzButtonModule
+    NzButtonModule,
+    NzTabsModule,
+    CutAdvertListModule
   ]
 })
 export class ProfileModule { }

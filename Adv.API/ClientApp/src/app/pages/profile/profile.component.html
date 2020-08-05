@@ -1,15 +1,11 @@
-<pre>
-   {{userFlatRents | json}} 
-</pre>
-<pre>
-    {{userFlatSale | json}}
-</pre>
-<pre>
-   {{ userHouseRent | json}}
-</pre>
-<pre>
-    {{userHouseSale | json}}
-</pre>
+<nz-tabset [nzTabPosition]="'left'" [nzType]="'line'">
+    <nz-tab [nzTitle]="'Объявления'"  >
+        <app-cut-advert-list [adverts]="userFlatRents" [type]='typeFlatRent'></app-cut-advert-list>
+        <app-cut-advert-list [adverts]="userFlatSale" [type]='typeFlatSale'></app-cut-advert-list>
+        <app-cut-advert-list [adverts]="userHouseRent" [type]='typeHouseRent'></app-cut-advert-list>
+        <app-cut-advert-list [adverts]="userHouseSale" [type]='typeHouseSale'></app-cut-advert-list>
+    </nz-tab>
+  </nz-tabset>
 <button nz-button nzType="primary" nzBlock (click)="logOut()">
     <i nz-icon nzType="logout" nzTheme="outline"></i>    
     Выйти

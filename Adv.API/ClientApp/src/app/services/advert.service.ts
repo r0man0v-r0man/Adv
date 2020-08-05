@@ -11,6 +11,8 @@ import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
 import { map } from 'rxjs/operators';
 import { FilterOptions } from '../models/filterOptions';
+import { AdvertLink } from '../models/advertLink.model';
+import { TypeOfAdvert } from '../models/advertType';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,13 @@ export class AdvertService {
     private notificationService: NzNotificationService
   ) {
     this.baseUrl = this.injector.get('BASE_URL');
+  }
+
+  navigateToAdvert(item: AdvertLink | FlatSaleModel | FlatRentModel | HouseSaleModel | HouseRentModel, type: TypeOfAdvert) {
+    if (type === TypeOfAdvert.flatRent) this.router.navigate(['flat', 'rent', item.id]);
+    if (type === TypeOfAdvert.flatSale) this.router.navigate(['flat', 'sale', item.id]);
+    if (type === TypeOfAdvert.houseRent) this.router.navigate(['house', 'rent', item.id]);
+    if (type === TypeOfAdvert.houseSale) this.router.navigate(['house', 'sale', item.id]);
   }
 
   /** переход на страницу с объявлением квартира сдать */

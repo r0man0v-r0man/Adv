@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { AdvertService } from 'src/app/services/advert.service';
+import { AdvertLink } from 'src/app/models/advertLink.model';
+import { TypeOfAdvert } from 'src/app/models/advertType';
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +11,14 @@ import { AdvertService } from 'src/app/services/advert.service';
   styleUrls: ['./profile.component.less']
 })
 export class ProfileComponent implements OnInit {
-  userId;
-  userFlatRents;
-  userFlatSale;
-  userHouseRent;
-  userHouseSale;
+  userFlatRents: AdvertLink[] = [];
+  typeFlatRent = TypeOfAdvert.flatRent;
+  userFlatSale: AdvertLink[] = [];
+  typeFlatSale = TypeOfAdvert.flatSale;
+  userHouseRent: AdvertLink[] = [];
+  typeHouseRent = TypeOfAdvert.houseRent;
+  userHouseSale: AdvertLink[] = [];
+  typeHouseSale = TypeOfAdvert.houseSale;
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -21,12 +26,24 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.fetchUserAdverts();
+  }
+
+  private fetchUserAdverts() {
     this.advertService.getUserAdverts().subscribe(data => {
-      this.userFlatRents = data.flatRent;
-      this.userFlatSale = data.flatSale;
-      this.userHouseRent = data.houseRent;
-      this.userHouseSale = data.houseSale;
-    })
+      for (const [key, value] of Object.entries(data.flatRent)) {
+        this.userFlatRents.push({ id: key, name: value });
+      }
+      for (const [key, value] of Object.entries(data.flatSale)) {
+        this.userFlatSale.push({ id: key, name: value });
+      }
+      for (const [key, value] of Object.entries(data.houseRent)) {
+        this.userHouseRent.push({ id: key, name: value });
+      }
+      for (const [key, value] of Object.entries(data.houseSale)) {
+        this.userHouseSale.push({ id: key, name: value });
+      }
+    });
   }
 
   logOut(){

@@ -4,7 +4,7 @@ import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { HouseSaleModel } from 'src/app/models/house-sale.model';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import { TypeOfAdvert } from 'src/app/models/advertType';
-import { Router } from '@angular/router';
+import { AdvertService } from 'src/app/services/advert.service';
 
 @Component({
   selector: 'app-advert-card',
@@ -17,7 +17,7 @@ export class AdvertCardComponent implements OnInit {
   /** тип объявления */
   @Input() advertType:TypeOfAdvert;
   constructor(
-    private router: Router
+    private advertService: AdvertService
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +25,6 @@ export class AdvertCardComponent implements OnInit {
 
   /** переход на страницу с информацией об объявлении */
   onCardClick(item: FlatSaleModel | FlatRentModel | HouseSaleModel | HouseRentModel) {
-    if (this.advertType === TypeOfAdvert.flatRent) this.router.navigate(['flat', 'rent', item.id]);
-    if (this.advertType === TypeOfAdvert.flatSale) this.router.navigate(['flat', 'sale', item.id]);
-    if (this.advertType === TypeOfAdvert.houseRent) this.router.navigate(['house', 'rent', item.id]);
-    if (this.advertType === TypeOfAdvert.houseSale) this.router.navigate(['house', 'sale', item.id]);
+    this.advertService.navigateToAdvert(item, this.advertType);
   }
 }
