@@ -11,38 +11,51 @@ import { TypeOfAdvert } from 'src/app/models/advertType';
   styleUrls: ['./profile.component.less']
 })
 export class ProfileComponent implements OnInit {
-  userFlatRents: AdvertLink[] = [];
+  data;
   typeFlatRent = TypeOfAdvert.flatRent;
-  userFlatSale: AdvertLink[] = [];
   typeFlatSale = TypeOfAdvert.flatSale;
-  userHouseRent: AdvertLink[] = [];
   typeHouseRent = TypeOfAdvert.houseRent;
-  userHouseSale: AdvertLink[] = [];
   typeHouseSale = TypeOfAdvert.houseSale;
   constructor(
     private router: Router,
     private authService: AuthService,
     private advertService: AdvertService
   ) { }
-
+  get userFlatRents() {
+    const list: AdvertLink[] = [];
+    for (const [key, value] of Object.entries(this.data.flatRent)) {
+        list.push({ id: key, name: value });
+      }
+    return list;
+  }
+  get userFlatSale() {
+    const list: AdvertLink[] = [];
+    for (const [key, value] of Object.entries(this.data.flatSale)) {
+        list.push({ id: key, name: value });
+      }
+    return list;
+  }
+  get userHouseRent() {
+    const list: AdvertLink[] = [];
+    for (const [key, value] of Object.entries(this.data.houseRent)) {
+        list.push({ id: key, name: value });
+      }
+    return list;
+  }
+  get userHouseSale() {
+    const list: AdvertLink[] = [];
+    for (const [key, value] of Object.entries(this.data.houseSale)) {
+        list.push({ id: key, name: value });
+      }
+    return list;
+  }
   ngOnInit(): void {
     this.fetchUserAdverts();
   }
 
   private fetchUserAdverts() {
     this.advertService.getUserAdverts().subscribe(data => {
-      for (const [key, value] of Object.entries(data.flatRent)) {
-        this.userFlatRents.push({ id: key, name: value });
-      }
-      for (const [key, value] of Object.entries(data.flatSale)) {
-        this.userFlatSale.push({ id: key, name: value });
-      }
-      for (const [key, value] of Object.entries(data.houseRent)) {
-        this.userHouseRent.push({ id: key, name: value });
-      }
-      for (const [key, value] of Object.entries(data.houseSale)) {
-        this.userHouseSale.push({ id: key, name: value });
-      }
+      this.data = data;
     });
   }
 
