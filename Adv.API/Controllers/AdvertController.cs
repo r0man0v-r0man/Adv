@@ -339,7 +339,6 @@ namespace Adv.API.Controllers
                 return BadRequest(e);
             }
         }
-        #endregion
 
         [HttpPost("getUserAdverts")]
         public async Task<ActionResult<Dictionary<string, Dictionary<int, string>>>> GetUserAdverts(UserAdvertsViewModel userAdvertsViewModel)
@@ -347,9 +346,9 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService
-                    .GetUserAdvertsAsync(userAdvertsViewModel.UserId, new CancellationTokenSource(15000).Token)
+                    .GetUserAdvertsAsync(userAdvertsViewModel?.UserId, new CancellationTokenSource(5000).Token)
                     .ConfigureAwait(false);
-               
+
                 return Ok(result);
             }
             catch (Exception e)
@@ -357,5 +356,7 @@ namespace Adv.API.Controllers
                 return BadRequest(e);
             }
         }
+        #endregion
+
     }
 }
