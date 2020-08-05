@@ -16,6 +16,7 @@ namespace Adv.BLL
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdvertService, AdvertService>();
             services.AddScoped<IYandexAddressService, YandexAddressService>();
+            services.AddScoped<ISitemapService, SitemapService>();
 
             services.AddMemoryCache();
 
