@@ -60,6 +60,10 @@ namespace Adv.DAL
             services.AddSingleton<IImgurClient>(imgurClient);
             services.AddSingleton<IImageEndpoint>(imgurEndpoint);
 
+
+
+            services.AddSingleton<ISitemapRepository, SitemapRepository>();
+
             return services;
         }
 

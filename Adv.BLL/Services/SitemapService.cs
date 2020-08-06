@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Adv.BLL.Interfaces;
+using Adv.DAL.Interfaces;
 
 namespace Adv.BLL.Services
 {
@@ -10,9 +11,14 @@ namespace Adv.BLL.Services
     {
         private const string BASE_URL = "https://halupa.by/";
         private const string SitemapPath = @"clientapp/src/assets/sitemap.xml";
-
+        private readonly ISitemapRepository sitemapRepository;
+        public SitemapService(ISitemapRepository sitemapRepository)
+        {
+            this.sitemapRepository = sitemapRepository;
+        }
         public async Task<XDocument> GetSitemapAsync(string path)
         {
+            await sitemapRepository.GetSitemapXmlAsync().ConfigureAwait(false);
             return await Task.Run(() => XDocument.Load(Path.Combine(path, SitemapPath))).ConfigureAwait(false);
         }
 
