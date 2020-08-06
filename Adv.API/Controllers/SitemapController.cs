@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +10,17 @@ namespace Adv.API.Controllers
     public class SitemapController : ControllerBase
     {
         private readonly ISitemapService sitemapService;
-        private readonly string ContentRootPath;
+        private readonly string contentRootPath;
 
         public SitemapController(ISitemapService sitemapService, IWebHostEnvironment webHostEnvironment)
         {
             this.sitemapService = sitemapService;
-            ContentRootPath = webHostEnvironment?.ContentRootPath;
+            contentRootPath = webHostEnvironment?.ContentRootPath;
         }
         [Route("/sitemap.xml")]
         public async Task<IActionResult> Sitemap()
         {
-            var doc = await sitemapService.GetSitemapAsync(ContentRootPath)
+            var doc = await sitemapService.GetSitemapAsync(contentRootPath)
                 .ConfigureAwait(false);
             
             return Content(doc.ToString(), "text/xml");

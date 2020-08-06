@@ -3,7 +3,13 @@
   <url>
     <loc>https://halupa.by/</loc>
   </url>
+  <url>
+    <loc>https://halupa.by/flats</loc>
+  </url>
+  <url>
+    <loc>https://halupa.by/houses</loc>
+  </url>
   <url xmlns="">
-    <loc>https://halupa.by/house/34</loc>
+    <loc>https://halupa.by/flat/rent/25</loc>
   </url>
 </urlset>

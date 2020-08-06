@@ -19,7 +19,7 @@ namespace Adv.BLL.Services
         public async Task AddUrl(string sitemapPath, string url)
         {
             var path = Path.Combine(sitemapPath, SitemapPath);
-            var sitemap = await GetSitemapAsync(path).ConfigureAwait(false);
+            var sitemap = await GetSitemapAsync(sitemapPath).ConfigureAwait(false);
             var root = sitemap.Root;
             var urlElement = new XElement("url");
             var locElement = new XElement("loc", BASE_URL + url);
