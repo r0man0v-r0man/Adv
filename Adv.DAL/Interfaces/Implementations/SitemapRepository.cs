@@ -15,6 +15,7 @@ namespace Adv.DAL.Interfaces.Implementations
         private static readonly string[] Scopes = { DriveService.Scope.Drive };
         private const string ApplicationName = "halupa.by";
         private const string SitemapId = "1I1ivMEMa8nbUwe_fq6j7j4M9d95rD5-C";
+        private const string SitemapPath = @"clientapp/src/assets/sitemap.xml";
         public static DriveService GetService()
         {
             var directory = Directory.GetCurrentDirectory();
@@ -33,7 +34,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             var service = GetService();
             var fileRequest = service.Files.Get(SitemapId);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), @"clientapp/src/assets/sitemap.xml");
+            var path = Path.Combine(Directory.GetCurrentDirectory(), SitemapPath);
             var stream = new MemoryStream();
             fileRequest.MediaDownloader.ProgressChanged += progress =>
             {
