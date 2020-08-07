@@ -345,3 +345,5 @@ healthchecksdb
 /Adv.API/CA1.pem
 /Adv.API/CA2.pem
 /Adv.API/appsettings.Development.json
+/Adv.API/credentials.json
+/Adv.API/token.json

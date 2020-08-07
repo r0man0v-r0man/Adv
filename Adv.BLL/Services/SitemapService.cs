@@ -16,16 +16,15 @@ namespace Adv.BLL.Services
         {
             this.sitemapRepository = sitemapRepository;
         }
-        public async Task<XDocument> GetSitemapAsync(string path)
+        public async Task<XDocument> GetSitemapAsync()
         {
-            await sitemapRepository.GetSitemapXmlAsync().ConfigureAwait(false);
-            return await Task.Run(() => XDocument.Load(Path.Combine(path, SitemapPath))).ConfigureAwait(false);
+            return await sitemapRepository.GetSitemapXmlAsync().ConfigureAwait(false);
         }
 
         public async Task AddUrl(string sitemapPath, string url)
         {
             var path = Path.Combine(sitemapPath, SitemapPath);
-            var sitemap = await GetSitemapAsync(sitemapPath).ConfigureAwait(false);
+            var sitemap = await GetSitemapAsync().ConfigureAwait(false);
             var root = sitemap.Root;
             var urlElement = new XElement("url");
             var locElement = new XElement("loc", BASE_URL + url);

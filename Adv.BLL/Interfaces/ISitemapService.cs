@@ -8,7 +8,7 @@ namespace Adv.BLL.Interfaces
 {
     public interface ISitemapService
     {
-        Task<XDocument> GetSitemapAsync(string path);
+        Task<XDocument> GetSitemapAsync();
         /// <summary>
         /// Добавление url -> loc в файл sitemap.xml
         /// </summary>

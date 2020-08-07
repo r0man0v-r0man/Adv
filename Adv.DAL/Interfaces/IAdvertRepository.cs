@@ -128,5 +128,6 @@ namespace Adv.DAL.Interfaces
 
         Task<Dictionary<string, Dictionary<int, string>>>
             GetUserAdvertsAsync(string userId, CancellationToken ct = default);
+
     }
 }

@@ -10,17 +10,15 @@ namespace Adv.API.Controllers
     public class SitemapController : ControllerBase
     {
         private readonly ISitemapService sitemapService;
-        private readonly string contentRootPath;
 
-        public SitemapController(ISitemapService sitemapService, IWebHostEnvironment webHostEnvironment)
+        public SitemapController(ISitemapService sitemapService)
         {
             this.sitemapService = sitemapService;
-            contentRootPath = webHostEnvironment?.ContentRootPath;
         }
         [Route("/sitemap.xml")]
         public async Task<IActionResult> Sitemap()
         {
-            var doc = await sitemapService.GetSitemapAsync(contentRootPath)
+            var doc = await sitemapService.GetSitemapAsync()
                 .ConfigureAwait(false);
             
             return Content(doc.ToString(), "text/xml");
