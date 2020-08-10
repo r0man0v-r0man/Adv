@@ -1,61 +1,40 @@
-﻿using System.IO;
-using System.Threading;
+﻿using Adv.DAL.Context.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Download;
-using Google.Apis.Drive.v3;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
     public class SitemapRepository : ISitemapRepository
     {
-        private static readonly string[] Scopes = { DriveService.Scope.Drive };
-        private const string ApplicationName = "halupa.by";
-        private const string SitemapId = "1I1ivMEMa8nbUwe_fq6j7j4M9d95rD5-C";
-        private const string SitemapPath = @"clientapp\src\assets\sitemap.xml";
-        public static DriveService GetService()
+        private readonly IContextFactory contextFactory;
+
+        public SitemapRepository(IContextFactory contextFactory)
         {
-            var directory = Directory.GetCurrentDirectory();
-            var filePath = Path.Combine(directory, @"credentials.json");
-            using var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            const string credPath = "token.json";
-            var credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, Scopes,
-                "user", CancellationToken.None, new FileDataStore(credPath, true)).Result;
-            return new DriveService(new BaseClientService.Initializer
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName
-            });
+            this.contextFactory = contextFactory;
         }
-        public async Task<XDocument> GetSitemapXmlAsync()
+
+        public async Task<XDocument> GenerateSitemapAsync()
         {
-            var service = GetService();
-            var fileRequest = service.Files.Get(SitemapId);
-            var path = Path.Combine(Directory.GetCurrentDirectory(), SitemapPath);
-            var stream = new MemoryStream();
-            fileRequest.MediaDownloader.ProgressChanged += progress =>
+            var context = contextFactory.GetAdvContext();
+            var flatRentsIds = await context.FlatRents.AsNoTracking().Select(prop => prop.Id).ToListAsync().ConfigureAwait(false);
+            var flatSalesIds = await context.FlatSales.AsNoTracking().Select(prop => prop.Id).ToListAsync().ConfigureAwait(false);
+            var houseRentsIds = await context.HouseRents.AsNoTracking().Select(prop => prop.Id).ToListAsync().ConfigureAwait(false);
+            var houseSalesIds = await context.HouseSales.AsNoTracking().Select(prop => prop.Id).ToListAsync().ConfigureAwait(false);
+            var locList = new List<XElement>
             {
-                switch (progress.Status)
-                {
-                    case DownloadStatus.Completed:
-                    {
-                        SaveStream(stream, path);
-                        break;
-                    }
-                }
+                new XElement("url", new XElement("loc", $"https://halupa.by/")),
+                new XElement("url", new XElement("loc", $"https://halupa.by/flats")),
+                new XElement("url", new XElement("loc", $"https://halupa.by/houses"))
             };
-            await fileRequest.DownloadAsync(stream, CancellationToken.None).ConfigureAwait(false);
-            
-            return await Task.Run(() => XDocument.Load(Path.Combine(path))).ConfigureAwait(false);
-        }
-        
-        private static void SaveStream(MemoryStream stream, string filePath)
-        {
-            using var file = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite);
-            stream.WriteTo(file);
+            locList.AddRange(flatRentsIds.Select(id => new XElement("url", new XElement("loc", $"https://halupa.by/flat/rent/{id}"))));
+            locList.AddRange(flatSalesIds.Select(id => new XElement("url", new XElement("loc", $"https://halupa.by/flat/sale/{id}"))));
+            locList.AddRange(houseRentsIds.Select(id => new XElement("url", new XElement("loc", $"https://halupa.by/house/rent/{id}"))));
+            locList.AddRange(houseSalesIds.Select(id => new XElement("url", new XElement("loc", $"https://halupa.by/house/sale/{id}"))));
+
+            return await Task.Run(() => new XDocument(new XElement("urlset", locList))).ConfigureAwait(false);
         }
     }
 }

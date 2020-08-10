@@ -1,39 +1,37 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Adv.BLL.Services
 {
     public class SitemapService : ISitemapService
     {
-        private const string BASE_URL = "https://halupa.by/";
-        private const string SitemapPath = @"clientapp/src/assets/sitemap.xml";
         private readonly ISitemapRepository sitemapRepository;
-        public SitemapService(ISitemapRepository sitemapRepository)
+        private readonly IMemoryCache memoryCache;
+        private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
+
+        public SitemapService(ISitemapRepository sitemapRepository, IMemoryCache memoryCache)
         {
             this.sitemapRepository = sitemapRepository;
-        }
-        public async Task<XDocument> GetSitemapAsync()
-        {
-            return await sitemapRepository.GetSitemapXmlAsync().ConfigureAwait(false);
+            this.memoryCache = memoryCache;
+            MemoryCacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1)
+            };
         }
 
-        public async Task AddUrl(string sitemapPath, string url)
+        public async Task<XDocument> GenerateSitemapAsync()
         {
-            var path = Path.Combine(sitemapPath, SitemapPath);
-            var sitemap = await GetSitemapAsync().ConfigureAwait(false);
-            var root = sitemap.Root;
-            var urlElement = new XElement("url");
-            var locElement = new XElement("loc", BASE_URL + url);
-            urlElement.Add(locElement);
-            root?.Add(urlElement);
-            await using var stream = new FileStream(path, FileMode.Open);
-            await sitemap.SaveAsync(stream, SaveOptions.None, CancellationToken.None)
-                .ConfigureAwait(false);
-            
+            return await memoryCache.GetOrCreateAsync("sitemap", async cacheEntry =>
+            {
+                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
+                return await sitemapRepository.GenerateSitemapAsync().ConfigureAwait(false);
+            }).ConfigureAwait(false);
         }
     }
 }

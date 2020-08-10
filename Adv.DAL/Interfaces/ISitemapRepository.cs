@@ -5,6 +5,6 @@ namespace Adv.DAL.Interfaces
 {
     public interface ISitemapRepository
     {
-        Task<XDocument> GetSitemapXmlAsync();
+        Task<XDocument> GenerateSitemapAsync();
     }
 }

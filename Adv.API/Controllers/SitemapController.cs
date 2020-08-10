@@ -18,7 +18,7 @@ namespace Adv.API.Controllers
         [Route("/sitemap.xml")]
         public async Task<IActionResult> Sitemap()
         {
-            var doc = await sitemapService.GetSitemapAsync()
+            var doc = await sitemapService.GenerateSitemapAsync()
                 .ConfigureAwait(false);
             
             return Content(doc.ToString(), "text/xml");

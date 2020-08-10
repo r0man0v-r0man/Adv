@@ -39,7 +39,6 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService.CreateFlatRentAsync(flatRentViewModel, ct).ConfigureAwait(false);
-                await _sitemapService.AddUrl(contentRootPath, "flat/rent/" + result).ConfigureAwait(false);
                 return CreatedAtAction(nameof(AddFlatRent), result);
             }
             catch (Exception e)
@@ -56,7 +55,6 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService.CreateFlatSaleAsync(flatSaleViewModel, ct).ConfigureAwait(false);
-                await _sitemapService.AddUrl(contentRootPath, "flat/sale/" + result).ConfigureAwait(false);
 
                 return CreatedAtAction(nameof(AddFlatSale), result);
             }
@@ -74,7 +72,6 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService.CreateHouseSaleAsync(houseSaleViewModel, ct).ConfigureAwait(false);
-                await _sitemapService.AddUrl(contentRootPath, "house/rent/" + result).ConfigureAwait(false);
 
                 return CreatedAtAction(nameof(AddHouseSale), result);
 
@@ -93,7 +90,6 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService.CreateHouseRentAsync(houseRentViewModel, ct).ConfigureAwait(false);
-                await _sitemapService.AddUrl(contentRootPath, "house/rent/" + result).ConfigureAwait(false);
 
                 return CreatedAtAction(nameof(AddHouseRent), result);
             }
