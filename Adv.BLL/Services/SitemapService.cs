@@ -1,37 +1,34 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Adv.BLL.Interfaces;
-using Adv.DAL.Interfaces;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace Adv.BLL.Services
 {
     public class SitemapService : ISitemapService
     {
-        private readonly ISitemapRepository sitemapRepository;
-        private readonly IMemoryCache memoryCache;
-        private MemoryCacheEntryOptions MemoryCacheEntryOptions { get; }
+        private const string BASE_URL = "https://halupa.by/";
+        private const string SitemapPath = @"clientapp/src/assets/sitemap.xml";
 
-        public SitemapService(ISitemapRepository sitemapRepository, IMemoryCache memoryCache)
+        public async Task<XDocument> GetSitemapAsync(string path)
         {
-            this.sitemapRepository = sitemapRepository;
-            this.memoryCache = memoryCache;
-            MemoryCacheEntryOptions = new MemoryCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1)
-            };
+            return await Task.Run(() => XDocument.Load(Path.Combine(path, SitemapPath))).ConfigureAwait(false);
         }
 
-        public async Task<XDocument> GenerateSitemapAsync()
+        public async Task AddUrl(string sitemapPath, string url)
         {
-            return await memoryCache.GetOrCreateAsync("sitemap", async cacheEntry =>
-            {
-                cacheEntry.AbsoluteExpirationRelativeToNow = MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow;
-                return await sitemapRepository.GenerateSitemapAsync().ConfigureAwait(false);
-            }).ConfigureAwait(false);
+            var path = Path.Combine(sitemapPath, SitemapPath);
+            var sitemap = await GetSitemapAsync(sitemapPath).ConfigureAwait(false);
+            var root = sitemap.Root;
+            var urlElement = new XElement("url");
+            var locElement = new XElement("loc", BASE_URL + url);
+            urlElement.Add(locElement);
+            root?.Add(urlElement);
+            await using var stream = new FileStream(path, FileMode.Open);
+            await sitemap.SaveAsync(stream, SaveOptions.None, CancellationToken.None)
+                .ConfigureAwait(false);
+            
         }
     }
 }

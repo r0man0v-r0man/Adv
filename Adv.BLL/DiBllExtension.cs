@@ -18,8 +18,6 @@ namespace Adv.BLL
             services.AddScoped<IYandexAddressService, YandexAddressService>();
             services.AddScoped<ISitemapService, SitemapService>();
 
-
-
             services.AddMemoryCache();
 
             return services;
