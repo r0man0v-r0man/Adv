@@ -8,6 +8,7 @@ namespace Adv.BLL.Interfaces
 {
     public interface ISitemapService
     {
-        Task<XDocument> GenerateSitemapAsync();
+        Task<XDocument> GetSitemapAsync(string path);
+        Task AddUrl(string sitemapPath, string url);
     }
 }
