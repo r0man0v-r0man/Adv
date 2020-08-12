@@ -372,6 +372,34 @@ namespace Adv.DAL.Interfaces.Implementations
             }
         }
 
-        
+        public async Task<(IEnumerable<int>, IEnumerable<int>, IEnumerable<int>, IEnumerable<int>)> GetAdvertsIds()
+        {
+            using var context = contextFactory.GetAdvContext();
+            var flatRents = await context.FlatRents
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .Select(prop => prop.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var flatSales = await context.FlatSales
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .Select(prop => prop.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var houseRents = await context.HouseRents
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .Select(prop => prop.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            var houseSales = await context.HouseSales
+                .AsNoTracking()
+                .Where(prop => prop.IsActive)
+                .Select(prop => prop.Id)
+                .ToListAsync()
+                .ConfigureAwait(false);
+            return (flatRents, flatSales, houseRents, houseSales);
+        }
     }
 }

@@ -61,14 +61,14 @@ namespace Adv.API
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-
+                
                 spa.UseSpaPrerendering(options =>
                 {
                     options.BootModulePath = $"{spa.Options.SourcePath}/dist/server/main.js";
                     options.BootModuleBuilder = env.IsDevelopment()
                         ? new AngularCliBuilder(npmScript: "build:ssr")
                         : null;
-                    options.ExcludeUrls = new[] { "/sockjs-node" };
+                    options.ExcludeUrls = new[] { "/sockjs-node", "/sitemap.xml" };
                 });
 
                 if (env.IsDevelopment())

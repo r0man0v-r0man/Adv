@@ -1,7 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Mime;
+using System.Text;
+using System.Threading.Tasks;
 using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Adv.API.Controllers
 {
@@ -19,10 +22,10 @@ namespace Adv.API.Controllers
         [Route("/sitemap.xml")]
         public async Task<IActionResult> Sitemap()
         {
-            var doc = await sitemapService.GetSitemapAsync(ContentRootPath)
+            var doc = await sitemapService.GetSitemapAsync()
                 .ConfigureAwait(false);
 
-            return Content(doc.ToString(), "text/xml");
+            return Content(doc.ToString());
         }
     }
 }

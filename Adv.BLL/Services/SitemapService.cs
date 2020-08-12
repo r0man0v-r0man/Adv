@@ -1,34 +1,60 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Adv.BLL.Interfaces;
+using Adv.DAL.Interfaces;
 
 namespace Adv.BLL.Services
 {
     public class SitemapService : ISitemapService
     {
         private const string BASE_URL = "https://halupa.by/";
-        private const string SitemapPath = @"clientapp/src/assets/sitemap.xml";
+        private readonly IAdvertRepository advertRepository;
 
-        public async Task<XDocument> GetSitemapAsync(string path)
+        public SitemapService(IAdvertRepository advertRepository)
         {
-            return await Task.Run(() => XDocument.Load(Path.Combine(path, SitemapPath))).ConfigureAwait(false);
+            this.advertRepository = advertRepository;
         }
 
-        public async Task AddUrl(string sitemapPath, string url)
+        public async Task<XDocument> GetSitemapAsync()
         {
-            var path = Path.Combine(sitemapPath, SitemapPath);
-            var sitemap = await GetSitemapAsync(sitemapPath).ConfigureAwait(false);
-            var root = sitemap.Root;
-            var urlElement = new XElement("url");
-            var locElement = new XElement("loc", BASE_URL + url);
-            urlElement.Add(locElement);
-            root?.Add(urlElement);
-            await using var stream = new FileStream(path, FileMode.Open);
-            await sitemap.SaveAsync(stream, SaveOptions.None, CancellationToken.None)
-                .ConfigureAwait(false);
-            
+            XNamespace xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9";
+            XElement root = new XElement(xmlns + "urlset");
+            var ids = await advertRepository.GetAdvertsIds().ConfigureAwait(false);
+            root.Add(new XElement(xmlns + "url", new XElement(xmlns + "loc", "https://halupa.by")));
+            root.Add(new XElement(xmlns + "url", new XElement(xmlns + "loc", "https://halupa.by/flats")));
+            root.Add(new XElement(xmlns + "url", new XElement(xmlns + "loc", "https://halupa.by/houses")));
+            foreach (var id in ids.Item1)
+            {
+                XElement urlElement = new XElement(
+                    xmlns + "url",
+                    new XElement(xmlns + "loc", $"https://halupa.by/flat/rent/{id}"));
+                root.Add(urlElement);
+            }
+            foreach (var id in ids.Item2)
+            {
+                XElement urlElement = new XElement(
+                    xmlns + "url",
+                    new XElement(xmlns + "loc", $"https://halupa.by/flat/sale/{id}"));
+                root.Add(urlElement);
+            }
+            foreach (var id in ids.Item3)
+            {
+                XElement urlElement = new XElement(
+                    xmlns + "url",
+                    new XElement(xmlns + "loc", $"https://halupa.by/house/rent/{id}"));
+                root.Add(urlElement);
+            }
+            foreach (var id in ids.Item4)
+            {
+                XElement urlElement = new XElement(
+                    xmlns + "url",
+                    new XElement(xmlns + "loc", $"https://halupa.by/house/sale/{id}"));
+                root.Add(urlElement);
+            }
+            return new XDocument(root);
         }
     }
 }
