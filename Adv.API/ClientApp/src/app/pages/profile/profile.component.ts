@@ -12,6 +12,8 @@ import { TypeOfAdvert } from 'src/app/models/advertType';
 })
 export class ProfileComponent implements OnInit {
   data;
+  userFlatRents;
+  userFlatSales;
   typeFlatRent = TypeOfAdvert.flatRent;
   typeFlatSale = TypeOfAdvert.flatSale;
   typeHouseRent = TypeOfAdvert.houseRent;
@@ -21,19 +23,21 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private advertService: AdvertService
   ) { }
-  get userFlatRents() {
+  private getUserFlatRents() {
     const list: AdvertLink[] = [];
     for (const [key, value] of Object.entries(this.data.flatRent)) {
         list.push({ id: key, name: value });
       }
-    return list;
+      this.userFlatRents = list;
+    return this.userFlatRents;
   }
-  get userFlatSale() {
+  private getUserFlatSale() {
     const list: AdvertLink[] = [];
     for (const [key, value] of Object.entries(this.data.flatSale)) {
         list.push({ id: key, name: value });
       }
-    return list;
+      this.userFlatSales = list;
+    return this.userFlatSales;
   }
   get userHouseRent() {
     const list: AdvertLink[] = [];
@@ -55,7 +59,9 @@ export class ProfileComponent implements OnInit {
 
   private fetchUserAdverts() {
     this.advertService.getUserAdverts().subscribe(data => {
-      this.data = data;
+      if (data) this.data = data;
+      this.getUserFlatRents();
+      this.getUserFlatSale();
     });
   }
 

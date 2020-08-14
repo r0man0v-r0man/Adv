@@ -22,7 +22,6 @@ namespace Adv.BLL.Services
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(60)
             };
         }
-
         public async Task<XDocument> GetSitemapAsync()
         {
             return await memoryCache.GetOrCreateAsync("sitemap", async cacheEntry =>
@@ -62,11 +61,8 @@ namespace Adv.BLL.Services
                         new XElement(xmlns + "loc", $"https://halupa.by/house/sale/{id}"));
                     root.Add(urlElement);
                 }
-
                 return new XDocument(root);
             }).ConfigureAwait(false);
-
-            
         }
     }
 }
