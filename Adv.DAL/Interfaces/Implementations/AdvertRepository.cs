@@ -401,5 +401,28 @@ namespace Adv.DAL.Interfaces.Implementations
                 .ConfigureAwait(false);
             return (flatRents, flatSales, houseRents, houseSales);
         }
+
+        public async Task<bool> DeleteFlatRentAsync(int id)
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.FlatRents
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(prop => prop.Id == id)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.IsActive = false;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -367,6 +367,20 @@ namespace Adv.API.Controllers
             }
         }
         #endregion
+        #region методы удаления
+        [HttpDelete("deleteFlatRent")]
+        public async Task<IActionResult> DeleteFlatRent(int id)
+        {
+            try
+            {
+                var result = await _advertService
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+        #endregion
     }
 }

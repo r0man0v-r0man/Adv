@@ -21,4 +21,8 @@ export class CutAdvertListComponent implements OnInit {
   onAdvertClick(advert: AdvertLink) {
     this.AdvertService.navigateToAdvert(advert, this.type);
   }
+  editAdvert(advert: any) {
+    console.log(advert);
+    
+  }
 }

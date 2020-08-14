@@ -1,5 +1,22 @@
 <ul nz-list [nzDataSource]="adverts">
     <li nz-list-item *ngFor="let advert of adverts" nzNoFlex>
         <a (click)="onAdvertClick(advert)">{{ advert.name }}</a>
+        <ul nz-list-item-actions>
+            <nz-list-item-action>
+                <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                    <i nz-icon nzType="setting" nzTheme="outline"></i>
+                </a>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item (click)="editAdvert(advert)">
+                            <i nz-icon nzType="edit" nzTheme="outline"></i> Изменить
+                        </li>
+                        <li nz-menu-item>
+                            <i nz-icon nzType="delete" nzTheme="outline"></i> Удалить
+                        </li>
+                    </ul>
+                  </nz-dropdown-menu>
+            </nz-list-item-action>
+        </ul>
     </li>
   </ul>

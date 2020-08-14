@@ -18,7 +18,6 @@ import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
 import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
-import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 // SSR
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
@@ -41,7 +40,6 @@ registerLocaleData(ru);
     AppRoutingModule,
     IconsProviderModule,
     NzLayoutModule,
-    NzBreadCrumbModule,
     NzMenuModule,
     NzNotificationModule,
     HttpClientModule,
