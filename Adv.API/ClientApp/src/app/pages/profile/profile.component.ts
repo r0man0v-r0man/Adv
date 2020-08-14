@@ -14,6 +14,8 @@ export class ProfileComponent implements OnInit {
   data;
   userFlatRents;
   userFlatSales;
+  userHouseRents;
+  userHouseSales;
   typeFlatRent = TypeOfAdvert.flatRent;
   typeFlatSale = TypeOfAdvert.flatSale;
   typeHouseRent = TypeOfAdvert.houseRent;
@@ -39,19 +41,21 @@ export class ProfileComponent implements OnInit {
       this.userFlatSales = list;
     return this.userFlatSales;
   }
-  get userHouseRent() {
+  private getUserHouseRent() {
     const list: AdvertLink[] = [];
     for (const [key, value] of Object.entries(this.data.houseRent)) {
         list.push({ id: key, name: value });
       }
-    return list;
+      this.userHouseRents = list;
+    return this.userHouseRents;
   }
-  get userHouseSale() {
+  private getUserHouseSale() {
     const list: AdvertLink[] = [];
     for (const [key, value] of Object.entries(this.data.houseSale)) {
         list.push({ id: key, name: value });
       }
-    return list;
+      this.userHouseSales = list;
+    return this.userHouseSales;
   }
   ngOnInit(): void {
     this.fetchUserAdverts();
@@ -62,6 +66,8 @@ export class ProfileComponent implements OnInit {
       if (data) this.data = data;
       this.getUserFlatRents();
       this.getUserFlatSale();
+      this.getUserHouseRent();
+      this.getUserHouseSale();
     });
   }
 

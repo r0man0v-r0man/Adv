@@ -1,9 +1,9 @@
 <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'">
     <nz-tab [nzTitle]="'Объявления'"  >
-        <app-cut-advert-list [adverts]="userFlatRents" [type]="typeFlatRent"></app-cut-advert-list>
-        <app-cut-advert-list [adverts]="userFlatSales" [type]='typeFlatSale'></app-cut-advert-list>
-        <app-cut-advert-list [adverts]="userHouseRent" [type]='typeHouseRent'></app-cut-advert-list>
-        <app-cut-advert-list [adverts]="userHouseSale" [type]='typeHouseSale'></app-cut-advert-list>
+        <app-cut-advert-list *ngIf="userFlatRents?.length > 0" [adverts]="userFlatRents" [type]="typeFlatRent"></app-cut-advert-list>
+        <app-cut-advert-list *ngIf="userFlatSales?.length > 0" [adverts]="userFlatSales" [type]='typeFlatSale'></app-cut-advert-list>
+        <app-cut-advert-list *ngIf="userHouseRents?.length > 0" [adverts]="userHouseRents" [type]='typeHouseRent'></app-cut-advert-list>
+        <app-cut-advert-list *ngIf="userHouseSales?.length > 0" [adverts]="userHouseSales" [type]='typeHouseSale'></app-cut-advert-list>
     </nz-tab>
   </nz-tabset>
 <button nz-button nzType="primary" nzBlock (click)="logOut()">
