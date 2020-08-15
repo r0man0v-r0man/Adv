@@ -129,6 +129,9 @@ namespace Adv.DAL.Interfaces
         Task<Dictionary<string, Dictionary<int, string>>>
             GetUserAdvertsAsync(string userId, CancellationToken ct = default);
         Task<(IEnumerable<int>, IEnumerable<int>, IEnumerable<int>, IEnumerable<int>)> GetAdvertsIds();
-        Task<bool> DeleteFlatRentAsync();
+        Task<bool> DeleteFlatRentAsync(int id);
+        Task<bool> DeleteFlatSaleAsync(int id);
+        Task<bool> DeleteHouseRentAsync(int id);
+        Task<bool> DeleteHouseSaleAsync(int id);
     }
 }

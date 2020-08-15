@@ -204,5 +204,17 @@ namespace Adv.BLL.Services
                 return await advertRepository.GetUserAdvertsAsync(userId, ct).ConfigureAwait(false);
             }).ConfigureAwait(false);
         }
+
+        public async Task<bool> DeleteFlatRentAsync(int id) => await advertRepository.DeleteFlatRentAsync(id).ConfigureAwait(false);
+
+        public async Task<bool> DeleteFlatSaleAsync(int id) => await advertRepository.DeleteFlatSaleAsync(id).ConfigureAwait(false);
+
+        public async Task<bool> DeleteHouseRentAsync(int id) => await advertRepository.DeleteHouseRentAsync(id).ConfigureAwait(false);
+
+        public async Task<bool> DeleteHouseSaleAsync(int id)
+        {
+            // cache
+            return await advertRepository.DeleteHouseSaleAsync(id).ConfigureAwait(false);
+        }
     }
 }

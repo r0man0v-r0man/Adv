@@ -82,5 +82,9 @@ namespace Adv.BLL.Interfaces
 
         Task<Dictionary<string, Dictionary<int, string>>>
            GetUserAdvertsAsync(string userId, CancellationToken ct = default);
+        Task<bool> DeleteFlatRentAsync(int id);
+        Task<bool> DeleteFlatSaleAsync(int id);
+        Task<bool> DeleteHouseRentAsync(int id);
+        Task<bool> DeleteHouseSaleAsync(int id);
     }
 }

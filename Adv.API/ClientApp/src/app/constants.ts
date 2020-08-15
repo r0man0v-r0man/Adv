@@ -29,13 +29,14 @@ export class Constants {
   static getLastHouseRentURL = environment.webApi + 'advert/getLastHouseRent';
   static getLastHouseSaleURL = environment.webApi + 'advert/getLastHouseSale';
   static getUserAdvertsURL = environment.webApi + 'advert/getUserAdverts';
+  static deleteFlatSaleURL = environment.webApi + 'advert/deleteFlatSale';
+  static deleteFlatRentURL = environment.webApi + 'advert/deleteFlatRent';
+  static deleteHouseRentURL = environment.webApi + 'advert/deleteHouseRent';
+  static deleteHouseSaleURL = environment.webApi + 'advert/deleteHouseSale';
+
+
   // locations
   static getLocationsURL = environment.webApi + 'yandexAddress/getLocations';
-  // flat
-  static flat = environment.webApi +  'flat';
-  static getAllFlats = environment.webApi +  'flat/getAll';
-  static deleteFlat = environment.webApi +  'flat';
-  static updateFlat = environment.webApi + 'flat';
   //file
   static uploadFileUrl = environment.webApi + 'file';
   static deleteFileUrl = environment.webApi +  'file';

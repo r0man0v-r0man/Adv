@@ -368,16 +368,55 @@ namespace Adv.API.Controllers
         }
         #endregion
         #region методы удаления
-        [HttpDelete("deleteFlatRent")]
+        [HttpDelete("deleteFlatRent/{id}")]
         public async Task<IActionResult> DeleteFlatRent(int id)
         {
             try
             {
-                var result = await _advertService
+                var result = await _advertService.DeleteFlatRentAsync(id).ConfigureAwait(false);
+                return Ok(result);
             }
             catch (Exception)
             {
-
+                throw;
+            }
+        }
+        [HttpDelete("deleteFlatSale/{id}")]
+        public async Task<IActionResult> DeleteFlatSale(int id)
+        {
+            try
+            {
+                var result = await _advertService.DeleteFlatSaleAsync(id).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpDelete("deleteHouseRent/{id}")]
+        public async Task<IActionResult> DeleteHouseRent(int id)
+        {
+            try
+            {
+                var result = await _advertService.DeleteHouseRentAsync(id).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpDelete("deleteHouseSale/{id}")]
+        public async Task<IActionResult> DeleteHouseSale(int id)
+        {
+            try
+            {
+                var result = await _advertService.DeleteHouseSaleAsync(id).ConfigureAwait(false);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

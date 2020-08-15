@@ -408,7 +408,6 @@ namespace Adv.DAL.Interfaces.Implementations
             {
                 using var context = contextFactory.GetAdvContext();
                 var advert = await context.FlatRents
-                    .AsNoTracking()
                     .FirstOrDefaultAsync(prop => prop.Id == id)
                     .ConfigureAwait(false);
                 if (advert != null)
@@ -424,5 +423,69 @@ namespace Adv.DAL.Interfaces.Implementations
                 throw;
             }
         }
+        public async Task<bool> DeleteFlatSaleAsync(int id)
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.FlatSales
+                    .FirstOrDefaultAsync(prop => prop.Id == id)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.IsActive = false;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<bool> DeleteHouseRentAsync(int id)
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.HouseRents
+                    .FirstOrDefaultAsync(prop => prop.Id == id)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.IsActive = false;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<bool> DeleteHouseSaleAsync(int id)
+        {
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.HouseSales
+                    .FirstOrDefaultAsync(prop =>prop.Id == id, CancellationToken.None)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.IsActive = false;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

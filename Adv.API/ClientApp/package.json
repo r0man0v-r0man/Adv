@@ -32,6 +32,7 @@
     "aspnet-prerendering": "^3.0.1",
     "express": "^4.15.2",
     "ng-zorro-antd": "^9.3.0",
+    "ng2-adsense": "^8.0.1",
     "rxjs": "~6.5.5",
     "tslib": "^1.13.0",
     "zone.js": "~0.10.2"

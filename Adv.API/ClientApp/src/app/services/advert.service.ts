@@ -22,8 +22,6 @@ export class AdvertService {
   private addFlatSaleUrl: string = Constants.addFlatSale;
   private addHouseRentUrl: string = Constants.addHouseRent;
   private addHouseSaleUrl: string = Constants.addHouseSale;
-  private deleteFlatUrl: string = Constants.deleteFlat;
-  private updateFlatUrl: string = Constants.updateFlat;
   private getFlatRentUrl: string = Constants.getFlatRent;
   private getFlatSaleUrl: string = Constants.getFlatSale;
   private getHouseRentUrl: string = Constants.getHouseRent;
@@ -109,12 +107,72 @@ export class AdvertService {
     ).subscribe();
   }
   /** удалить объявление */
-  delete(id: number){
-    return this.httpService.delete<boolean>(this.deleteFlatUrl + '/' + id, { headers: this.authService.SecureHeaders });
-  }
-  /** обновить объявление */
-  update(updateFlat: FlatUpdateModel) {
-    return this.httpService.put<boolean>(this.updateFlatUrl, updateFlat, { headers: this.authService.SecureHeaders });
+  delete(id: number, type: TypeOfAdvert){
+    if (type === TypeOfAdvert.flatSale) {
+      return this.httpService.delete<boolean>(Constants.deleteFlatSaleURL + '/' + id, { headers: this.authService.SecureHeaders })
+        .pipe(map((response: boolean) => {
+          if(response) {
+            return {
+              response: response,
+              type: TypeOfAdvert.flatSale
+            }
+          } else {
+            return {
+              response: response,
+              type: TypeOfAdvert.flatSale
+            }
+          }
+        }))
+      }
+    if (type === TypeOfAdvert.houseRent) {
+      return this.httpService.delete<boolean>(Constants.deleteHouseRentURL + '/' + id, { headers: this.authService.SecureHeaders })
+        .pipe(map((response: boolean) => {
+          if(response) {
+            return {
+              response: response,
+              type: TypeOfAdvert.houseRent
+            }
+          } else {
+            return {
+              response: response,
+              type: TypeOfAdvert.houseRent
+            }
+          }
+        }))
+      } 
+    if (type === TypeOfAdvert.houseSale) {
+      return this.httpService.delete<boolean>(Constants.deleteHouseSaleURL + '/' + id, { headers: this.authService.SecureHeaders })
+        .pipe(map((response: boolean) => {
+          if(response) {
+            return {
+              response: response,
+              type: TypeOfAdvert.houseSale
+            }
+          }
+          else {
+            return {
+              response: response,
+              type: TypeOfAdvert.houseSale
+            }
+          }
+        }))
+      }
+    if (type === TypeOfAdvert.flatRent) {
+      return this.httpService.delete<boolean>(Constants.deleteFlatRentURL + '/' + id, { headers: this.authService.SecureHeaders })
+        .pipe(map((response: boolean) => {
+          if(response) {
+            return {
+              response: response,
+              type: TypeOfAdvert.flatRent
+            }
+          } else {
+            return {
+              response: response,
+              type: TypeOfAdvert.flatRent
+            }
+          }
+        }))
+      } 
   }
   /** получить объявление квартира-сдать */
   getFlatRent(id: number){

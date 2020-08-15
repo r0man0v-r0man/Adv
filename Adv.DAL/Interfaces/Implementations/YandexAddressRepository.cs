@@ -24,9 +24,8 @@ namespace Adv.DAL.Interfaces.Implementations
                     .SelectMany(address => address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
                         .Where(component => component.Kind != "house" && component.Kind != "country" && component.Kind != "street"))
                     .AsNoTracking()
-                    .AsAsyncEnumerable()
                     .GroupBy(groupBy => groupBy.Name)
-                    .SelectAwait(item => item.FirstAsync())
+                    .Select(item => item.First())
                     .ToListAsync()
                     .ConfigureAwait(false);
                     
