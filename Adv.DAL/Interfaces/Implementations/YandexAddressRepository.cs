@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Adv.DAL.Context.Interfaces;
+﻿using Adv.DAL.Context.Interfaces;
 using Adv.DAL.Entities.Address;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -20,15 +20,15 @@ namespace Adv.DAL.Interfaces.Implementations
             try
             {
                 using var context = _contextFactory.GetAdvContext();
-                return await context.YandexAddresses
-                    .SelectMany(address => address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
-                        .Where(component => component.Kind != "house" && component.Kind != "country" && component.Kind != "street"))
-                    .AsNoTracking()
-                    .GroupBy(groupBy => groupBy.Name)
-                    .Select(item => item.First())
-                    .ToListAsync()
-                    .ConfigureAwait(false);
-                    
+                return context.YandexAddresses
+                     .SelectMany(address => address.GeoObject.MetaDataProperty.GeocoderMetaData.Address.Components
+                         .Where(component => component.Kind != "house" && component.Kind != "country" && component.Kind != "street"))
+                     .AsNoTracking()
+                     .AsEnumerable()
+                     .GroupBy(groupBy => groupBy.Name)
+                     .Select(item => item.First())
+                     .ToList();
+
             }
             catch (System.Exception)
             {
@@ -36,6 +36,6 @@ namespace Adv.DAL.Interfaces.Implementations
             }
 
         }
-       
+
     }
 }
