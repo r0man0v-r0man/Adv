@@ -26,7 +26,12 @@ export class CutAdvertListComponent implements OnInit {
   }
   delete(advert: AdvertLink) {
     this.AdvertService.delete(advert.id, this.type).subscribe(data => {
-      console.log(data);
+      if (data.response) {
+        const index = this.adverts.indexOf(advert);
+        if(index !== -1) {
+          this.adverts.splice(index, 1);
+        }
+      }
     })
   }
 }

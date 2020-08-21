@@ -43,7 +43,7 @@ namespace Adv.DAL.Interfaces.Implementations
         {
             try
             {
-                return await _imageEndpoint.UploadImageStreamAsync(file.OpenReadStream()).ConfigureAwait(false);
+                return await _imageEndpoint.UploadImageAsync(file?.OpenReadStream(), cancellationToken: ct).ConfigureAwait(false);
             }
             catch (ImgurException e)
             {

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -9,9 +10,7 @@ using Adv.DAL.Exceptions;
 using Adv.DAL.Interfaces;
 using Adv.DAL.Interfaces.Implementations;
 using Imgur.API.Authentication;
-using Imgur.API.Authentication.Impl;
 using Imgur.API.Endpoints;
-using Imgur.API.Endpoints.Impl;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -54,10 +53,10 @@ namespace Adv.DAL
             var imgurClientId = configuration.GetValue<string>("Imgur:ClientId");
             var imgurClientSecretId = configuration.GetValue<string>("Imgur:ClientSecretKey");
 
-            var imgurClient = new ImgurClient(imgurClientId, imgurClientSecretId);
-            var imgurEndpoint = new ImageEndpoint(imgurClient);
+            var imgurClient = new ApiClient(imgurClientId, imgurClientSecretId);
+            var imgurEndpoint = new ImageEndpoint(imgurClient, new HttpClient());
 
-            services.AddSingleton<IImgurClient>(imgurClient);
+            services.AddSingleton<IApiClient>(imgurClient);
             services.AddSingleton<IImageEndpoint>(imgurEndpoint);
 
 

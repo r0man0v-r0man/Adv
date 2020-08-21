@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Adv.BLL.DTO.Address;
+﻿using Adv.BLL.DTO.Address;
 using Adv.BLL.DTO.Adverts;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Adv.BLL.Services
 {
@@ -70,7 +70,7 @@ namespace Adv.BLL.Services
                 FlatRentDto advert = await advertRepository.GetFlatRentAsync(id, ct).ConfigureAwait(false);
                 return advert;
             }).ConfigureAwait(false);
-            
+
         }
 
         public async Task<FlatSaleDto> GetFlatSaleAsync(int id, CancellationToken ct)
@@ -81,7 +81,7 @@ namespace Adv.BLL.Services
                 FlatSaleDto advert = await advertRepository.GetFlatSaleAsync(id, ct).ConfigureAwait(false);
                 return advert;
             }).ConfigureAwait(false);
-            
+
         }
 
         public async Task<HouseRentDto> GetHouseRentAsync(int id, CancellationToken ct)
@@ -92,7 +92,7 @@ namespace Adv.BLL.Services
                 HouseRentDto advert = await advertRepository.GetHouseRentAsync(id, ct).ConfigureAwait(false);
                 return advert;
             }).ConfigureAwait(false);
-           
+
         }
         public async Task<HouseSaleDto> GetHouseSaleAsync(int id, CancellationToken ct)
         {
@@ -102,7 +102,7 @@ namespace Adv.BLL.Services
                 HouseSaleDto advert = await advertRepository.GetHouseSaleAsync(id, ct).ConfigureAwait(false);
                 return advert;
             }).ConfigureAwait(false);
-          
+
         }
         public async Task<IEnumerable<FlatRentDto>> GetFlatRentsAsync(int pageNumber, ComponentDto province)
         {
@@ -205,16 +205,48 @@ namespace Adv.BLL.Services
             }).ConfigureAwait(false);
         }
 
-        public async Task<bool> DeleteFlatRentAsync(int id) => await advertRepository.DeleteFlatRentAsync(id).ConfigureAwait(false);
-
-        public async Task<bool> DeleteFlatSaleAsync(int id) => await advertRepository.DeleteFlatSaleAsync(id).ConfigureAwait(false);
-
-        public async Task<bool> DeleteHouseRentAsync(int id) => await advertRepository.DeleteHouseRentAsync(id).ConfigureAwait(false);
-
-        public async Task<bool> DeleteHouseSaleAsync(int id)
+        public async Task<bool> DeleteFlatRentAsync(int id, string userId)
         {
-            // cache
-            return await advertRepository.DeleteHouseSaleAsync(id).ConfigureAwait(false);
+            var result = await advertRepository.DeleteFlatRentAsync(id).ConfigureAwait(false);
+            if (result)
+            {
+                DeleteUserAdvertsCacheKey(userId);
+            }
+            return result;
+        }
+
+        public async Task<bool> DeleteFlatSaleAsync(int id, string userId)
+        {
+            var result = await advertRepository.DeleteFlatSaleAsync(id).ConfigureAwait(false);
+            if (result)
+            {
+                DeleteUserAdvertsCacheKey(userId);
+            }
+            return result;
+        }
+
+        public async Task<bool> DeleteHouseRentAsync(int id, string userId)
+        {
+            var result = await advertRepository.DeleteHouseRentAsync(id).ConfigureAwait(false);
+            if (result)
+            {
+                DeleteUserAdvertsCacheKey(userId);
+            }
+            return result;
+        }
+
+        public async Task<bool> DeleteHouseSaleAsync(int id, string userId)
+        {
+            var result = await advertRepository.DeleteHouseSaleAsync(id).ConfigureAwait(false);
+            if (result)
+            {
+                DeleteUserAdvertsCacheKey(userId);
+            }
+            return result;
+        }
+        private void DeleteUserAdvertsCacheKey(string userId)
+        {
+            memoryCache.Remove(userAdvertsKey + userId);
         }
     }
 }

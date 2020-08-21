@@ -108,8 +108,11 @@ export class AdvertService {
   }
   /** удалить объявление */
   delete(id: number, type: TypeOfAdvert){
+    let params = new HttpParams();
+    params = params.append("id", id.toString());
+    params = params.append("userId", this.authService.currentUser.sub)
     if (type === TypeOfAdvert.flatSale) {
-      return this.httpService.delete<boolean>(Constants.deleteFlatSaleURL + '/' + id, { headers: this.authService.SecureHeaders })
+      return this.httpService.delete<boolean>(Constants.deleteFlatSaleURL, { headers: this.authService.SecureHeaders, params: params })
         .pipe(map((response: boolean) => {
           if(response) {
             return {
@@ -125,7 +128,7 @@ export class AdvertService {
         }))
       }
     if (type === TypeOfAdvert.houseRent) {
-      return this.httpService.delete<boolean>(Constants.deleteHouseRentURL + '/' + id, { headers: this.authService.SecureHeaders })
+      return this.httpService.delete<boolean>(Constants.deleteHouseRentURL, { headers: this.authService.SecureHeaders, params: params })
         .pipe(map((response: boolean) => {
           if(response) {
             return {
@@ -141,7 +144,7 @@ export class AdvertService {
         }))
       } 
     if (type === TypeOfAdvert.houseSale) {
-      return this.httpService.delete<boolean>(Constants.deleteHouseSaleURL + '/' + id, { headers: this.authService.SecureHeaders })
+      return this.httpService.delete<boolean>(Constants.deleteHouseSaleURL, { headers: this.authService.SecureHeaders, params: params })
         .pipe(map((response: boolean) => {
           if(response) {
             return {
@@ -158,7 +161,7 @@ export class AdvertService {
         }))
       }
     if (type === TypeOfAdvert.flatRent) {
-      return this.httpService.delete<boolean>(Constants.deleteFlatRentURL + '/' + id, { headers: this.authService.SecureHeaders })
+      return this.httpService.delete<boolean>(Constants.deleteFlatRentURL, { headers: this.authService.SecureHeaders, params: params })
         .pipe(map((response: boolean) => {
           if(response) {
             return {

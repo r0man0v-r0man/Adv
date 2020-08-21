@@ -359,14 +359,14 @@ namespace Adv.DAL.Interfaces.Implementations
                     .ConfigureAwait(false);
                 return new Dictionary<string, Dictionary<int, string>>
                 {
-                    {"flatRent", user.FlatRents.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
-                    {"flatSale", user.FlatSales.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
-                    {"houseRent", user.HouseRents.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
-                    {"houseSale", user.HouseSales.ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"flatRent", user.FlatRents.Where(prop => prop.IsActive).ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"flatSale", user.FlatSales.Where(prop => prop.IsActive).ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"houseRent", user.HouseRents.Where(prop => prop.IsActive).ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
+                    {"houseSale", user.HouseSales.Where(prop => prop.IsActive).ToDictionary(x => x.Id, x =>x.Address.GeoObject.Name)},
                 };
                 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }

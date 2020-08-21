@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Adv.API.Models;
 using Adv.API.Models.Adverts;
+using Adv.API.Models.Adverts.DeleteModels;
 using Adv.API.Models.Profile;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Exceptions;
@@ -368,12 +369,12 @@ namespace Adv.API.Controllers
         }
         #endregion
         #region методы удаления
-        [HttpDelete("deleteFlatRent/{id}")]
-        public async Task<IActionResult> DeleteFlatRent(int id)
+        [HttpDelete("deleteFlatRent")]
+        public async Task<IActionResult> DeleteFlatRent([FromQuery]DeleteProfileAdvertViewModel deleteModel)
         {
             try
             {
-                var result = await _advertService.DeleteFlatRentAsync(id).ConfigureAwait(false);
+                var result = await _advertService.DeleteFlatRentAsync(deleteModel.Id, deleteModel.UserId).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception)
@@ -381,12 +382,12 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
-        [HttpDelete("deleteFlatSale/{id}")]
-        public async Task<IActionResult> DeleteFlatSale(int id)
+        [HttpDelete("deleteFlatSale")]
+        public async Task<IActionResult> DeleteFlatSale([FromQuery]DeleteProfileAdvertViewModel deleteModel)
         {
             try
             {
-                var result = await _advertService.DeleteFlatSaleAsync(id).ConfigureAwait(false);
+                var result = await _advertService.DeleteFlatSaleAsync(deleteModel.Id, deleteModel.UserId).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception)
@@ -394,12 +395,12 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
-        [HttpDelete("deleteHouseRent/{id}")]
-        public async Task<IActionResult> DeleteHouseRent(int id)
+        [HttpDelete("deleteHouseRent")]
+        public async Task<IActionResult> DeleteHouseRent([FromQuery]DeleteProfileAdvertViewModel deleteModel)
         {
             try
             {
-                var result = await _advertService.DeleteHouseRentAsync(id).ConfigureAwait(false);
+                var result = await _advertService.DeleteHouseRentAsync(deleteModel.Id, deleteModel.UserId).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception)
@@ -407,12 +408,12 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
-        [HttpDelete("deleteHouseSale/{id}")]
-        public async Task<IActionResult> DeleteHouseSale(int id)
+        [HttpDelete("deleteHouseSale")]
+        public async Task<IActionResult> DeleteHouseSale([FromQuery]DeleteProfileAdvertViewModel deleteModel)
         {
             try
             {
-                var result = await _advertService.DeleteHouseSaleAsync(id).ConfigureAwait(false);
+                var result = await _advertService.DeleteHouseSaleAsync(deleteModel.Id, deleteModel.UserId).ConfigureAwait(false);
                 return Ok(result);
             }
             catch (Exception)
