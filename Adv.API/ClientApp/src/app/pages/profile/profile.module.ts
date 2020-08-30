@@ -6,6 +6,7 @@ import { ProfileComponent } from './profile.component';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CutAdvertListModule } from 'src/app/common/cut-advert-list/cut-advert-list.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
@@ -13,7 +14,9 @@ import { CutAdvertListModule } from 'src/app/common/cut-advert-list/cut-advert-l
     ProfileRoutingModule,
     NzButtonModule,
     NzTabsModule,
-    CutAdvertListModule
+    CutAdvertListModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ProfileModule { }
