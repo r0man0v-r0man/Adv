@@ -7,7 +7,6 @@ import { Constants } from '../constants';
 import { AuthService } from './auth.service';
 import { FlatSaleModel } from '../models/flatSaleModel';
 import { HouseSaleModel } from '../models/house-sale.model';
-import { FlatUpdateModel } from '../models/flatUpdateModel';
 import { HouseRentModel } from '../models/house-rent.model';
 import { map } from 'rxjs/operators';
 import { FilterOptions } from '../models/filterOptions';

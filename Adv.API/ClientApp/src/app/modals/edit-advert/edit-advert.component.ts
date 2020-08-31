@@ -10,17 +10,20 @@ import { UpdateAdvertService } from './service/update-advert.service';
   ]
 })
 export class EditAdvertComponent implements OnInit {
-  updateModel;
+  advertId;
+  advertType;
+  form;
   constructor(
     private updateAdvertService: UpdateAdvertService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.form);
-    
+    this.updateAdvertService.initForm(this.advertId, this.advertType);
+    this.updateAdvertService.form.subscribe(data => {
+      this.form = data;
+      console.log(this.form);
+      
+    })
   }
 
-  get form() {
-    return this.updateAdvertService.form;
-  }
 }

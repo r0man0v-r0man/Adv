@@ -29,7 +29,7 @@ export class CutAdvertListComponent implements OnInit {
     this.AdvertService.navigateToAdvert(advert, this.type);
   }
   edit(advert: AdvertLink) {
-    this.modalService.openEditModal();
+    this.modalService.openEditModal(advert.id, this.type);
   }
   delete(advert: AdvertLink) {
     this.AdvertService.delete(advert.id, this.type).subscribe(data => {
