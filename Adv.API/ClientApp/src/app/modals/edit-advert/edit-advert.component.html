@@ -1,1 +1,25 @@
-<p>edit-advert works!</p>
+<form nz-form [formGroup]="form"  [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
+  <nz-divider [nzText]="descriptionTpl">
+    <ng-template #descriptionTpl>
+      Описание
+    </ng-template>
+  </nz-divider>
+  <nz-form-item nz-col
+                [nzXs]="{ span : 24 }"
+                [nzSm]="{ span : 24 }"
+                [nzMd]="{ span : 24 }"
+                [nzLg]="{ span : 24 }"
+                [nzXl]="{ span : 24 }">
+    <nz-form-control nzHasFeedback [nzErrorTip]="descriptionErrorTpl">
+      <app-description-input formControlName='description'></app-description-input>
+      <ng-template #descriptionErrorTpl let-control>
+        <ng-container *ngIf="control.hasError('required')">
+          Добавьте описание!
+        </ng-container>
+        <ng-container *ngIf="control.hasError('notOnlySpace')">
+          Описание не должно быть пустым!
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+</form>

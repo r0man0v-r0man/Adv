@@ -17,7 +17,7 @@ export class ModalService {
         advertType: type 
       },
       nzOnOk: (instance) => {
-        console.log(instance);
+        console.log('instance: ', instance.form.value);
         
       } 
     })

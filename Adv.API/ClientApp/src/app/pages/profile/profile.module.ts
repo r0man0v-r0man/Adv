@@ -16,7 +16,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     NzTabsModule,
     CutAdvertListModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ProfileModule { }

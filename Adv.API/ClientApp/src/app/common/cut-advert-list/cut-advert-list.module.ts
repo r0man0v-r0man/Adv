@@ -9,6 +9,12 @@ import {
   EditOutline
 } from '@ant-design/icons-angular/icons';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { DescriptionInputModule } from '../Forms/description-input/description-input.module';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditAdvertComponent } from 'src/app/modals/edit-advert/edit-advert.component';
 const icons = [
   SettingOutline,
   DeleteOutline,
@@ -17,13 +23,20 @@ const icons = [
 
 @NgModule({
   declarations: [
-    CutAdvertListComponent
+    CutAdvertListComponent,
+    EditAdvertComponent
   ],
   imports: [
     CommonModule,
     NzListModule,
     NzIconModule,
-    NzDropDownModule
+    NzDropDownModule,
+    NzDividerModule,
+    DescriptionInputModule,
+    NzGridModule,
+    NzFormModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     CutAdvertListComponent

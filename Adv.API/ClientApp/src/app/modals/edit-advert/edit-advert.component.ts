@@ -21,9 +21,6 @@ export class EditAdvertComponent implements OnInit {
     this.updateAdvertService.initForm(this.advertId, this.advertType);
     this.updateAdvertService.form.subscribe(data => {
       this.form = data;
-      console.log(this.form);
-      
     })
   }
-
 }
