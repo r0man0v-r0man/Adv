@@ -15,6 +15,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditAdvertComponent } from 'src/app/modals/edit-advert/edit-advert.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzInputModule } from 'ng-zorro-antd/input';
 const icons = [
   SettingOutline,
   DeleteOutline,
@@ -36,7 +38,9 @@ const icons = [
     NzGridModule,
     NzFormModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzInputNumberModule,
+    NzInputModule
   ],
   exports:[
     CutAdvertListComponent

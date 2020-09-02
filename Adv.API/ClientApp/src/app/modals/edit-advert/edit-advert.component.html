@@ -1,5 +1,19 @@
-<form nz-form [formGroup]="form"  [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
-  <nz-divider [nzText]="descriptionTpl">
+<form nz-form *ngIf="form" [formGroup]="form"  [nzLayout]="'vertical'" nzJustify="space-between" nz-row >
+  
+  <nz-form-item nz-col
+    [nzXs]="{ span : 11 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="phone" >Телефон</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите телефон!">
+            <input nz-input placeholder="80291234567"
+            nzSize="large"
+            formControlName="phone"
+            type="tel">
+        </nz-form-control>
+    </nz-form-item><nz-divider [nzText]="descriptionTpl">
     <ng-template #descriptionTpl>
       Описание
     </ng-template>
