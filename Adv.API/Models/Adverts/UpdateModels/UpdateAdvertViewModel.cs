@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Adv.BLL.DTO.Adverts.Update;
+﻿using Adv.BLL.DTO.Adverts.Update;
 
 namespace Adv.API.Models.Adverts.UpdateModels
 {

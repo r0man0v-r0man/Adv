@@ -516,5 +516,92 @@ namespace Adv.DAL.Interfaces.Implementations
                 throw;
             }
         }
+
+        public async Task<bool> UpdateFlatSaleAsync(UpdateAdvert updateModel, int advertId)
+        {
+            if (updateModel == null)
+            {
+                return false;
+            }
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.FlatSales
+                    .FirstOrDefaultAsync(item => item.Id == advertId)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.Price = updateModel.Price;
+                    advert.Description = updateModel.Description;
+                    advert.Phone = updateModel.Phone;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> UpdateHouseRentAsync(UpdateAdvert updateModel, int advertId)
+        {
+            if (updateModel == null)
+            {
+                return false;
+            }
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.HouseRents
+                    .FirstOrDefaultAsync(item => item.Id == advertId)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.Price = updateModel.Price;
+                    advert.Description = updateModel.Description;
+                    advert.Phone = updateModel.Phone;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> UpdateHouseSaleAsync(UpdateAdvert updateModel, int advertId)
+        {
+            if (updateModel == null)
+            {
+                return false;
+            }
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.HouseSales
+                    .FirstOrDefaultAsync(item => item.Id == advertId)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.Price = updateModel.Price;
+                    advert.Description = updateModel.Description;
+                    advert.Phone = updateModel.Phone;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

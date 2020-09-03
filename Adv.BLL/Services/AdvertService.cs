@@ -209,63 +209,68 @@ namespace Adv.BLL.Services
         public async Task<bool> DeleteFlatRentAsync(int id, string userId)
         {
             var result = await advertRepository.DeleteFlatRentAsync(id).ConfigureAwait(false);
-            if (result)
-            {
-                DeleteUserAdvertsCacheKey(userId);
-            }
+            if (result) await Task.Run(() => DeleteUserAdvertsCacheKey(userId)).ConfigureAwait(false);
+
             return result;
         }
 
         public async Task<bool> DeleteFlatSaleAsync(int id, string userId)
         {
             var result = await advertRepository.DeleteFlatSaleAsync(id).ConfigureAwait(false);
-            if (result)
-            {
-                DeleteUserAdvertsCacheKey(userId);
-            }
+            if (result) await Task.Run(() => DeleteUserAdvertsCacheKey(userId)).ConfigureAwait(false);
+
             return result;
         }
 
         public async Task<bool> DeleteHouseRentAsync(int id, string userId)
         {
             var result = await advertRepository.DeleteHouseRentAsync(id).ConfigureAwait(false);
-            if (result)
-            {
-                DeleteUserAdvertsCacheKey(userId);
-            }
+            if (result) await Task.Run(() => DeleteUserAdvertsCacheKey(userId)).ConfigureAwait(false);
+
             return result;
         }
 
         public async Task<bool> DeleteHouseSaleAsync(int id, string userId)
         {
             var result = await advertRepository.DeleteHouseSaleAsync(id).ConfigureAwait(false);
-            if (result)
-            {
-                await Task.Run(() =>
-                {
-                    DeleteUserAdvertsCacheKey(userId);
-                }).ConfigureAwait(false);
-            }
+            if (result) await Task.Run(() => DeleteUserAdvertsCacheKey(userId)).ConfigureAwait(false);
+            
             return result;
         }
-
-        public async Task<bool> UpdateFlatRentAsync(UpdateAdvertDTO updateModel, int advertId)
-        {
-            var result = await advertRepository.UpdateFlatRentAsync(updateModel, advertId).ConfigureAwait(false);
-            if (result)
-            {
-                await Task.Run(() =>
-                {
-                    memoryCache.Remove(flatRentCacheKey + advertId);
-                }).ConfigureAwait(false);
-            }
-
-            return result;
-        }
-
         private void DeleteUserAdvertsCacheKey(string userId)
         {
             memoryCache.Remove(userAdvertsKey + userId);
+        }
+        public async Task<bool> UpdateFlatRentAsync(UpdateAdvertDTO updateModel, int advertId)
+        {
+            var result = await advertRepository.UpdateFlatRentAsync(updateModel, advertId).ConfigureAwait(false);
+            if (result) await Task.Run(() => memoryCache.Remove(flatRentCacheKey + advertId)).ConfigureAwait(false);
+
+            return result;
+        }
+
+        public async Task<bool> UpdateFlatSaleAsync(UpdateAdvertDTO updateModel, int advertId)
+        {
+            var result = await advertRepository.UpdateFlatSaleAsync(updateModel, advertId).ConfigureAwait(false);
+            if (result) await Task.Run(() => memoryCache.Remove(flatSaleCacheKey + advertId)).ConfigureAwait(false);
+
+            return result;
+        }
+
+        public async Task<bool> UpdateHouseRentAsync(UpdateAdvertDTO updateModel, int advertId)
+        {
+            var result = await advertRepository.UpdateHouseRentAsync(updateModel, advertId).ConfigureAwait(false);
+            if (result) await Task.Run(() => memoryCache.Remove(houseRentCacheKey + advertId)).ConfigureAwait(false);
+
+            return result;
+        }
+
+        public async Task<bool> UpdateHouseSaleAsync(UpdateAdvertDTO updateModel, int advertId)
+        {
+            var result = await advertRepository.UpdateHouseSaleAsync(updateModel, advertId).ConfigureAwait(false);
+            if (result) await Task.Run(() => memoryCache.Remove(houseSaleCacheKey + advertId)).ConfigureAwait(false);
+
+            return result;
         }
     }
 }

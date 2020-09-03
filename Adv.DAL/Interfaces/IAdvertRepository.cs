@@ -135,5 +135,8 @@ namespace Adv.DAL.Interfaces
         Task<bool> DeleteHouseRentAsync(int id);
         Task<bool> DeleteHouseSaleAsync(int id);
         Task<bool> UpdateFlatRentAsync(UpdateAdvert updateModel, int advertId);
+        Task<bool> UpdateFlatSaleAsync(UpdateAdvert updateModel, int advertId);
+        Task<bool> UpdateHouseRentAsync(UpdateAdvert updateModel, int advertId);
+        Task<bool> UpdateHouseSaleAsync(UpdateAdvert updateModel, int advertId);
     }
 }

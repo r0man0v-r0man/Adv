@@ -88,5 +88,8 @@ namespace Adv.BLL.Interfaces
         Task<bool> DeleteHouseRentAsync(int id, string userId);
         Task<bool> DeleteHouseSaleAsync(int id, string userId);
         Task<bool> UpdateFlatRentAsync(UpdateAdvertDTO updateModel, int advertId);
+        Task<bool> UpdateFlatSaleAsync(UpdateAdvertDTO updateModel, int advertId);
+        Task<bool> UpdateHouseRentAsync(UpdateAdvertDTO updateModel, int advertId);
+        Task<bool> UpdateHouseSaleAsync(UpdateAdvertDTO updateModel, int advertId);
     }
 }

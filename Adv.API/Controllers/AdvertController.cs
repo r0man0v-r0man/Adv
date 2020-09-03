@@ -437,15 +437,18 @@ namespace Adv.API.Controllers
             }
             if (typeOfAdvert == "flat-sale")
             {
-
+                var result = await _advertService.UpdateFlatSaleAsync(updateModel, advertId).ConfigureAwait(false);
+                return Ok(result);
             }
             if (typeOfAdvert == "house-rent")
             {
-
+                var result = await _advertService.UpdateHouseRentAsync(updateModel, advertId).ConfigureAwait(false);
+                return Ok(result);
             }
             if (typeOfAdvert == "house-sale")
             {
-
+                var result = await _advertService.UpdateHouseSaleAsync(updateModel, advertId).ConfigureAwait(false);
+                return Ok(result);
             }
 
             return BadRequest();
