@@ -6,8 +6,6 @@ import {DescriptionValidators} from '../../../validators/description.validators'
 @Injectable()
 export class SaleHouseFormService {
   form: FormGroup;
-  formatterDollar = (value: number) => `$ ${value}`;
-  parserDollar = (value: string) => value.replace('$ ', '');
   constructor(
     private fb: FormBuilder,
     private authService: AuthService

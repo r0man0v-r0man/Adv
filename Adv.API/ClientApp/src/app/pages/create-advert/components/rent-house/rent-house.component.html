@@ -157,15 +157,7 @@
         [nzXl]="{ span : 11 }">
             <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
             <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
-                <nz-input-number
-                nzSize="large"
-                formControlName="price"
-                [nzPlaceHolder]="100"
-                [nzMin]="1"
-                [nzFormatter]="formatter"
-                [nzParser]="parser"
-                [nzMax]="900000000"
-                [nzStep]="1"></nz-input-number>
+                <app-price-input formControlName='price'></app-price-input>
             </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-col

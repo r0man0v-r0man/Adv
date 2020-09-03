@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
 import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import {RentFlatFormService} from './services/rent-flat-form.service';
+import { PriceService } from 'src/app/services/price.service';
 
 @Component({
   selector: 'app-rent-flat',
@@ -21,7 +21,6 @@ export class RentFlatComponent implements OnInit {
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
 
-
   get form(): FormGroup {
     return this.rentFlatFormService.form;
   }
@@ -34,15 +33,8 @@ export class RentFlatComponent implements OnInit {
   get listOfDuration() {
     return this.rentFlatFormService.listOfDuration;
   }
-  get formatter() {
-    return this.rentFlatFormService.formatterDollar;
-  }
-  get parser() {
-    return this.rentFlatFormService.parserDollar;
-  }
   constructor(
     private rentFlatFormService: RentFlatFormService,
-    private authService: AuthService,
     private advertService: AdvertService,
     public imageService: ImageService,
     private cd: ChangeDetectorRef

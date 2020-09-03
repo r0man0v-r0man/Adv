@@ -13,7 +13,19 @@
             formControlName="phone"
             type="tel">
         </nz-form-control>
-    </nz-form-item><nz-divider [nzText]="descriptionTpl">
+    </nz-form-item>
+    <nz-form-item nz-col
+    [nzXs]="{ span : 11 }"
+    [nzSm]="{ span : 11 }"
+    [nzMd]="{ span : 11 }"
+    [nzLg]="{ span : 11 }"
+    [nzXl]="{ span : 11 }">
+        <nz-form-label nzRequired="true" nzFor="price" >Цена</nz-form-label>
+        <nz-form-control  nzHasFeedback  nzErrorTip="Укажите цену!">
+            <app-price-input formControlName='price'></app-price-input>
+        </nz-form-control>
+    </nz-form-item>
+  <nz-divider [nzText]="descriptionTpl">
     <ng-template #descriptionTpl>
       Описание
     </ng-template>
@@ -36,4 +48,5 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
+  <pre>{{form.value | json}}</pre>
 </form>

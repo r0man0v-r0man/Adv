@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup} from '@angular/forms';
 import { FlatSaleModel } from 'src/app/models/flatSaleModel';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -33,16 +32,9 @@ export class SaleFlatComponent implements OnInit {
   get listOfToilet() {
     return this.saleFlatFormService.listOfToilet;
   }
-  get formatter() {
-    return this.saleFlatFormService.formatterDollar;
-  }
-  get parser() {
-    return this.saleFlatFormService.parserDollar;
-  }
+
   constructor(
     private saleFlatFormService: SaleFlatFormService,
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
     private advertService: AdvertService,
     public imageService: ImageService,
     private cd: ChangeDetectorRef

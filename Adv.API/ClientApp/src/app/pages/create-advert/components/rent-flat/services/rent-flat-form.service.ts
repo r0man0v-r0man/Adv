@@ -11,8 +11,7 @@ export class RentFlatFormService {
   listOfDuration: Array<{ label: string; value: number}> = [];
   /** балкон */
   listOfBalcony: Array<{ label: string, value: number }> = [];
-  formatterDollar = (value: number) => `$ ${value}`;
-  parserDollar = (value: string) => value.replace('$ ', '');
+
   constructor(
     private authService: AuthService,
     private fb: FormBuilder

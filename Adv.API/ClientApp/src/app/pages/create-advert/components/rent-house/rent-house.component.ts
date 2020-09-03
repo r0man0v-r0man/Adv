@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup } from '@angular/forms';
 import { ImageService } from 'src/app/services/image.service';
 import { AdvertService } from 'src/app/services/advert.service';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
@@ -31,16 +30,9 @@ export class RentHouseComponent implements OnInit {
   get listOfDuration() {
     return this.rentHouseFormService.listOfDuration;
   }
-  get formatter() {
-    return this.rentHouseFormService.formatterDollar;
-  }
-  get parser() {
-    return this.rentHouseFormService.parserDollar;
-  }
+
   constructor(
     private rentHouseFormService: RentHouseFormService,
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
     public imageService: ImageService,
     private advertService: AdvertService,
     private cd: ChangeDetectorRef

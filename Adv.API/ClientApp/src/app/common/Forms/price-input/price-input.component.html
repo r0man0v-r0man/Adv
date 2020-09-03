@@ -1,0 +1,11 @@
+
+        <nz-input-number
+        nzSize="large"
+        [(ngModel)]="inputValue"
+        (ngModelChange)="onPriceChange()"
+        [nzPlaceHolder]="100"
+        [nzMin]="1"
+        [nzFormatter]="formatter"
+        [nzParser]="parser"
+        [nzMax]="900000000"
+        [nzStep]="1"></nz-input-number>

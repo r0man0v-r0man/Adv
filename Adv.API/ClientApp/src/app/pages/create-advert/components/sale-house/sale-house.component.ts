@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
+import { FormGroup } from '@angular/forms';
 import { ImageService } from 'src/app/services/image.service';
 import { Observable } from 'rxjs';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
@@ -27,16 +26,9 @@ export class SaleHouseComponent implements OnInit{
   get isValid() {
     return this.saleHouseFormService.isValid;
   }
-  get formatter() {
-    return this.saleHouseFormService.formatterDollar;
-  }
-  get parser() {
-    return this.saleHouseFormService.parserDollar;
-  }
+
   constructor(
     private saleHouseFormService: SaleHouseFormService,
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
     public imageService: ImageService,
     private advertService: AdvertService,
     private cd: ChangeDetectorRef
