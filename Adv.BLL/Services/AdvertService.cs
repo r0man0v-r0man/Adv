@@ -1,5 +1,6 @@
 ﻿using Adv.BLL.DTO.Address;
 using Adv.BLL.DTO.Adverts;
+using Adv.BLL.DTO.Adverts.Update;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Interfaces;
 using Microsoft.Extensions.Caching.Memory;
@@ -240,10 +241,28 @@ namespace Adv.BLL.Services
             var result = await advertRepository.DeleteHouseSaleAsync(id).ConfigureAwait(false);
             if (result)
             {
-                DeleteUserAdvertsCacheKey(userId);
+                await Task.Run(() =>
+                {
+                    DeleteUserAdvertsCacheKey(userId);
+                }).ConfigureAwait(false);
             }
             return result;
         }
+
+        public async Task<bool> UpdateFlatRentAsync(UpdateAdvertDTO updateModel, int advertId)
+        {
+            var result = await advertRepository.UpdateFlatRentAsync(updateModel, advertId).ConfigureAwait(false);
+            if (result)
+            {
+                await Task.Run(() =>
+                {
+                    memoryCache.Remove(flatRentCacheKey + advertId);
+                }).ConfigureAwait(false);
+            }
+
+            return result;
+        }
+
         private void DeleteUserAdvertsCacheKey(string userId)
         {
             memoryCache.Remove(userAdvertsKey + userId);

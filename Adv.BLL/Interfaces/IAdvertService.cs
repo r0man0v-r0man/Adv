@@ -6,6 +6,7 @@ using System.Threading;
 using Adv.BLL.DTO.Adverts;
 using Adv.BLL.DTO;
 using Adv.BLL.DTO.Address;
+using Adv.BLL.DTO.Adverts.Update;
 
 namespace Adv.BLL.Interfaces
 {
@@ -86,5 +87,6 @@ namespace Adv.BLL.Interfaces
         Task<bool> DeleteFlatSaleAsync(int id, string userId);
         Task<bool> DeleteHouseRentAsync(int id, string userId);
         Task<bool> DeleteHouseSaleAsync(int id, string userId);
+        Task<bool> UpdateFlatRentAsync(UpdateAdvertDTO updateModel, int advertId);
     }
 }

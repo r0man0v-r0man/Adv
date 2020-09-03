@@ -12,7 +12,6 @@ import { HouseRentModel } from 'src/app/models/house-rent.model';
 @Injectable()
 export class UpdateAdvertService {
   form = new Subject<FormGroup>();
-  advert = new Subject();
   constructor(
     private fb: FormBuilder,
     private advertService: AdvertService

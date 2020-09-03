@@ -12,11 +12,13 @@ import { map } from 'rxjs/operators';
 import { FilterOptions } from '../models/filterOptions';
 import { AdvertLink } from '../models/advertLink.model';
 import { TypeOfAdvert } from '../models/advertType';
+import { UpdateModel } from '../models/updateModels';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdvertService {
+
   private addFlatRentURL: string = Constants.addFlatRent;
   private addFlatSaleUrl: string = Constants.addFlatSale;
   private addHouseRentUrl: string = Constants.addHouseRent;
@@ -62,13 +64,20 @@ export class AdvertService {
     this.router.navigate(['house', 'sale', id]);
   }
   /** показывает уведомление о создании объявления */
-  private showUserSuccessNotification(){
-    this.notificationService.success(
-      'Объявление создано',
-      'Все хорошо, вы добавили новое объявление',
-      {
-        nzPauseOnHover: true
-      })
+  private showUserSuccessNotification(text?: string){
+      this.notificationService.success(
+        'Объявление создано',
+        'Все хорошо, вы добавили новое объявление',
+        {
+          nzPauseOnHover: true
+        })
+  }
+  /** показывает уведомление об обновлении объявления */
+  private showUpdateAdvertNotification(){
+    this.notificationService.info(
+        'Изменение объявления', 
+        'Все хорошо, мы обновили Объявление'
+      )
   }
   /** создание объявления дом сдать */
   addHouseRent(advert: HouseRentModel) {
@@ -104,6 +113,18 @@ export class AdvertService {
         this.showUserSuccessNotification();
       })
     ).subscribe();
+  }
+  /** обновить объявление */
+  updateAdvert(updateModel: UpdateModel, advertId: number, type: TypeOfAdvert) {
+    let params = new HttpParams();
+    params = params.append("advertId", advertId.toString());
+    params = params.append("typeOfAdvert", type)
+    if(type === TypeOfAdvert.flatRent) {
+      this.httpService.patch<boolean>(Constants.updateAdvertURL, updateModel, {headers: this.authService.SecureHeaders, params: params }).subscribe(response => {
+        console.log(response);
+        if(response) this.showUpdateAdvertNotification();
+      })
+    }
   }
   /** удалить объявление */
   delete(id: number, type: TypeOfAdvert){

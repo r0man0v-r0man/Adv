@@ -6,6 +6,7 @@ using System.Threading;
 using Adv.DAL.Entities.Adverts;
 using Adv.DAL.Entities;
 using Adv.DAL.Entities.Address;
+using Adv.DAL.Entities.Adverts.Update;
 
 namespace Adv.DAL.Interfaces
 {
@@ -133,5 +134,6 @@ namespace Adv.DAL.Interfaces
         Task<bool> DeleteFlatSaleAsync(int id);
         Task<bool> DeleteHouseRentAsync(int id);
         Task<bool> DeleteHouseSaleAsync(int id);
+        Task<bool> UpdateFlatRentAsync(UpdateAdvert updateModel, int advertId);
     }
 }

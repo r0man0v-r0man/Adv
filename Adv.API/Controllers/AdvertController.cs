@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Adv.API.Models;
 using Adv.API.Models.Adverts;
 using Adv.API.Models.Adverts.DeleteModels;
+using Adv.API.Models.Adverts.UpdateModels;
 using Adv.API.Models.Profile;
 using Adv.BLL.Interfaces;
 using Adv.DAL.Exceptions;
@@ -20,14 +21,10 @@ namespace Adv.API.Controllers
     public class AdvertController : ControllerBase
     {
         private readonly IAdvertService _advertService;
-        private readonly string contentRootPath;
-        private readonly ISitemapService _sitemapService;
 
-        public AdvertController(IAdvertService advertService, IWebHostEnvironment webHostEnvironment, ISitemapService sitemapService)
+        public AdvertController(IAdvertService advertService)
         {
             _advertService = advertService;
-            _sitemapService = sitemapService;
-            contentRootPath = webHostEnvironment?.ContentRootPath;
         }
 
         #region Методы создания
@@ -421,6 +418,39 @@ namespace Adv.API.Controllers
                 throw;
             }
         }
+        #endregion
+
+        #region методы обновления
+        [HttpPatch("updateAdvert")]
+        [Authorize]
+        public async Task<IActionResult> UpdateAdvert(UpdateAdvertViewModel updateModel, [FromQuery] int advertId,
+            [FromQuery] string typeOfAdvert)
+        {
+            if (string.IsNullOrEmpty(typeOfAdvert) || updateModel == null || advertId == 0)
+            {
+                return BadRequest();
+            }
+            if (typeOfAdvert == "flat-rent")
+            {
+                var result = await _advertService.UpdateFlatRentAsync(updateModel, advertId).ConfigureAwait(false);
+                return Ok(result);
+            }
+            if (typeOfAdvert == "flat-sale")
+            {
+
+            }
+            if (typeOfAdvert == "house-rent")
+            {
+
+            }
+            if (typeOfAdvert == "house-sale")
+            {
+
+            }
+
+            return BadRequest();
+        }
+
         #endregion
     }
 }

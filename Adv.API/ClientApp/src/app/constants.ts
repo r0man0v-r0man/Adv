@@ -33,7 +33,7 @@ export class Constants {
   static deleteFlatRentURL = environment.webApi + 'advert/deleteFlatRent';
   static deleteHouseRentURL = environment.webApi + 'advert/deleteHouseRent';
   static deleteHouseSaleURL = environment.webApi + 'advert/deleteHouseSale';
-
+  static updateAdvertURL = environment.webApi + 'advert/updateAdvert';
 
   // locations
   static getLocationsURL = environment.webApi + 'yandexAddress/getLocations';

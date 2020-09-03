@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Adv.DAL.Entities.Adverts.Update;
 
 namespace Adv.DAL.Interfaces.Implementations
 {
@@ -487,5 +488,33 @@ namespace Adv.DAL.Interfaces.Implementations
             }
         }
 
+        public async Task<bool> UpdateFlatRentAsync(UpdateAdvert updateModel, int advertId)
+        {
+            if (updateModel == null)
+            {
+                return false;
+            }
+            try
+            {
+                using var context = contextFactory.GetAdvContext();
+                var advert = await context.FlatRents
+                    .FirstOrDefaultAsync(item => item.Id == advertId)
+                    .ConfigureAwait(false);
+                if (advert != null)
+                {
+                    advert.Price = updateModel.Price;
+                    advert.Description = updateModel.Description;
+                    advert.Phone = updateModel.Phone;
+                    var result = await context.SaveChangesAsync(CancellationToken.None).ConfigureAwait(false);
+                    return result > 0;
+                }
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
