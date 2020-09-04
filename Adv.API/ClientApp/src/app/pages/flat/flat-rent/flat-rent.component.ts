@@ -53,7 +53,7 @@ export class FlatRentComponent implements OnInit {
     images.forEach((image, index) => {
       const img = {
         url: image.linkProps.download,
-        alt: this.advert.address.description,
+        alt: this.advert.address.geoObject.name,
         isVisible: false,
         id: index
       };
