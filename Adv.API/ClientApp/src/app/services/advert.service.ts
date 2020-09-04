@@ -119,12 +119,9 @@ export class AdvertService {
     let params = new HttpParams();
     params = params.append("advertId", advertId.toString());
     params = params.append("typeOfAdvert", type)
-    if(type === TypeOfAdvert.flatRent) {
-      this.httpService.patch<boolean>(Constants.updateAdvertURL, updateModel, {headers: this.authService.SecureHeaders, params: params }).subscribe(response => {
-        console.log(response);
-        if(response) this.showUpdateAdvertNotification();
-      })
-    }
+    this.httpService.patch<boolean>(Constants.updateAdvertURL, updateModel, {headers: this.authService.SecureHeaders, params: params }).subscribe(response => {
+      if(response) this.showUpdateAdvertNotification();
+    })
   }
   /** удалить объявление */
   delete(id: number, type: TypeOfAdvert){
