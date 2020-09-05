@@ -3,6 +3,7 @@
     <nz-header *ngIf="isVisible" >
       <div class="app-header">
         <div  class="toggle">
+          <app-logo [isMenu]="true"></app-logo>
           <i nz-icon nzType="menu" nzTheme="outline" (click)="onToggle();" style="cursor: pointer;"></i>
       </div>
       <ul (nzClick)="onToggle()" nz-menu nzMode="horizontal" 

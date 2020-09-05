@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { AdvertCardModule } from 'src/app/common/advert-card/advert-card.module';
+import { LogoModule } from 'src/app/common/logo/logo.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AdvertCardModule } from 'src/app/common/advert-card/advert-card.module'
     CommonModule,
     NzGridModule,
     NzDividerModule,
-    AdvertCardModule
+    AdvertCardModule,
+    LogoModule
   ],
   declarations: [
     HomeComponent

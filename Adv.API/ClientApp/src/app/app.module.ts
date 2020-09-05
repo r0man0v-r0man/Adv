@@ -16,11 +16,12 @@ import { registerLocaleData, CommonModule } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import { AppErrorHandler } from './errors/appErrorHandler';
 import { HttpErrorInterceptor } from './errors/httpError.interceptor';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { AuthGuardService } from './services/auth-guard.service';
 // SSR
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
+import { LogoModule } from './common/logo/logo.module';
 
 
 const mapConfig: IConfig = {
@@ -47,6 +48,7 @@ registerLocaleData(ru);
     NzMessageModule,
     NgtUniversalModule,
     CommonModule,
+    LogoModule,
     AngularYandexMapsModule.forRoot(mapConfig)
   ],
   providers: [
