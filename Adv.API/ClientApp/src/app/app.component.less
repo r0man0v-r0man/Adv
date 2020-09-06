@@ -22,6 +22,7 @@ nz-content {
 nz-footer {
   text-align: center;
 }
+
 .app-header {
   position: relative;
   height: 64px;
@@ -36,6 +37,11 @@ nz-footer {
     display: none;
     font-size: larger;
   }
+  .logo-menu{
+    display: block;
+    @media (min-width: 768px){
+      display: none;
+    }
   ul{
     padding: 0 24px;
     li:nth-child(4){
@@ -45,7 +51,8 @@ nz-footer {
       float: right;
     }
   }
-  
+
+  }
   @media (max-width: 768px){
     .toggle{
       display: block;

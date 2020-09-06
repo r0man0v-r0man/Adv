@@ -25,7 +25,6 @@ const icons = [
   LoginOutline,
   LogoutOutline,
   PlusCircleOutline,
-  MenuOutline,
   LockOutline,
   UserOutline,
   RightOutline,

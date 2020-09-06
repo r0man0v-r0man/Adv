@@ -22,6 +22,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
 import { LogoModule } from './common/logo/logo.module';
+import { NavbarModule } from './common/navbar/navbar.module';
 
 
 const mapConfig: IConfig = {
@@ -49,6 +50,7 @@ registerLocaleData(ru);
     NgtUniversalModule,
     CommonModule,
     LogoModule,
+    NavbarModule,
     AngularYandexMapsModule.forRoot(mapConfig)
   ],
   providers: [
