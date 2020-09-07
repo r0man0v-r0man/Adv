@@ -4,11 +4,15 @@ import { NavbarComponent } from './navbar.component';
 import { FormsModule } from '@angular/forms';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import {
-  MenuOutline
+  MenuOutline,
+  PlusCircleOutline,
+  CloseOutline
 } from '@ant-design/icons-angular/icons';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 const icons = [
-  MenuOutline
+  MenuOutline,
+  PlusCircleOutline,
+  CloseOutline
 ]
 @NgModule({
   declarations: [

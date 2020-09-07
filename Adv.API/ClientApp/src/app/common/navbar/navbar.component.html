@@ -1,18 +1,20 @@
-
-<nav *ngIf="isVisible">
-    
+<nav *ngIf="isVisible" [ngClass]="{fixedMenu:switch}">
         <input type="checkbox" id="check">
         <label for="check" class="checkbtn" (click)="onSwitchChange()">
-            <i nz-icon nzType="menu" nzTheme="outline" ></i>
+            <i nz-icon [nzType]="switch?'close':'menu'" nzTheme="outline" ></i>
         </label>
         <label >
             <a [routerLink]="[ '/' ]" (click)="onCloseMenu()">Halupa.by</a>
         </label>
-        
             <ul [style.left]="switch?'0':'-100%'" >
             <li><a [routerLink]="[ '/flats' ]" (click)="onSwitchChange()">Квартиры</a></li>
             <li><a [routerLink]="[ '/houses' ]" (click)="onSwitchChange()">Дома</a></li>
-            <li><a [routerLink]="[ '/create-advert' ]" (click)="onSwitchChange()">Добавить объявление</a></li>
+            <li>
+                <a [routerLink]="[ '/create-advert' ]" (click)="onSwitchChange()">
+                    <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+                    Добавить объявление
+                </a>
+            </li>
             <li>
                 <ng-container *ngIf="authService.isLogedIn() |async; then profile else enter"></ng-container>
                 <ng-template #enter>
