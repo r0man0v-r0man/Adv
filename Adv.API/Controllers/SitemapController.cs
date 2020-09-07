@@ -1,10 +1,6 @@
-﻿using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Adv.BLL.Interfaces;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace Adv.API.Controllers
 {
@@ -13,11 +9,9 @@ namespace Adv.API.Controllers
     public class SitemapController : ControllerBase
     {
         private readonly ISitemapService sitemapService;
-        private readonly string ContentRootPath;
-        public SitemapController(ISitemapService sitemapService, IWebHostEnvironment webHostEnvironment)
+        public SitemapController(ISitemapService sitemapService)
         {
             this.sitemapService = sitemapService;
-            ContentRootPath = webHostEnvironment?.ContentRootPath;
         }
         [Route("/sitemap.xml")]
         public async Task<IActionResult> Sitemap()
