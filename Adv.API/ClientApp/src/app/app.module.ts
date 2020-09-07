@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
-import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -42,7 +41,6 @@ registerLocaleData(ru);
     AppRoutingModule,
     IconsProviderModule,
     NzLayoutModule,
-    NzMenuModule,
     NzNotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
