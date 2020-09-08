@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Stripe;
 
 namespace Adv.API
 {
@@ -24,6 +25,10 @@ namespace Adv.API
             services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
+
+            // payment Stripe
+            var stripeSecretApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            services.AddSingleton<IStripeClient, StripeClient>(s => new StripeClient(stripeSecretApiKey));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,7 +39,7 @@ namespace Adv.API
                 app.UseCors(options => { options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); });
             }
             app.UseHsts();
-            //app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
