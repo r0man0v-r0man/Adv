@@ -20,6 +20,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 // SSR
 import { NgtUniversalModule } from '@ng-toolkit/universal';
 import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
+
 import { LogoModule } from './common/logo/logo.module';
 import { NavbarModule } from './common/navbar/navbar.module';
 
@@ -49,7 +50,7 @@ registerLocaleData(ru);
     CommonModule,
     LogoModule,
     NavbarModule,
-    AngularYandexMapsModule.forRoot(mapConfig)
+    AngularYandexMapsModule.forRoot(mapConfig),
   ],
   providers: [
     Title,

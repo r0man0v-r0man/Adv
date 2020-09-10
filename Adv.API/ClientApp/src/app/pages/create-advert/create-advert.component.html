@@ -62,6 +62,13 @@
     <app-sale-flat *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'квартира'"></app-sale-flat>
     <app-sale-house *ngIf="helper.advertType === 'продать' && helper.realEstateType === 'дом'"></app-sale-house>
     </div>
-
+    <div nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 24 }"
+    [nzMd]="{ span : 12 }"
+    [nzLg]="{ span : 12 }"
+    [nzXl]="{ span : 12 }">
+        <app-create-token></app-create-token>
+    </div>
 
 </div>

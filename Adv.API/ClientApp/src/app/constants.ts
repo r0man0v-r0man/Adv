@@ -35,6 +35,9 @@ export class Constants {
   static deleteHouseSaleURL = environment.webApi + 'advert/deleteHouseSale';
   static updateAdvertURL = environment.webApi + 'advert/updateAdvert';
 
+  // payment
+  static checkoutURL = environment.webApi + 'payment/checkout';
+
   // locations
   static getLocationsURL = environment.webApi + 'yandexAddress/getLocations';
   //file
