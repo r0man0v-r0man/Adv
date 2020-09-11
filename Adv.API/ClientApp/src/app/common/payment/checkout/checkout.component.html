@@ -1,19 +1,20 @@
 <div nz-row>
     <ngx-stripe-card nz-col
         [nzXs]="{ span : 24 }"
-        [nzSm]="{ span : 12 }"
-        [nzMd]="{ span : 12 }"
-        [nzLg]="{ span : 12 }"
-        [nzXl]="{ span : 12 }"
+        [nzSm]="{ span : 14 }"
+        [nzMd]="{ span : 24 }"
+        [nzLg]="{ span : 14 }"
+        [nzXl]="{ span : 14 }"
         [options]="cardOptions"
         [elementsOptions]="elementsOptions"
     ></ngx-stripe-card>
     <button nz-col
     [nzXs]="{ span : 24 }"
-    [nzSm]="{ span : 12 }"
-    [nzMd]="{ span : 12 }"
-    [nzLg]="{ span : 12 }"
-    [nzXl]="{ span : 12 }" type="submit" nz-button nzBlock="true" nzType="primary" (click)="createToken()">
-        <i nz-icon nzType="wallet" nzTheme="outline"></i> оплатить
+    [nzSm]="{ span : 10 }"
+    [nzMd]="{ span : 24 }"
+    [nzLg]="{ span : 10 }"
+    [nzXl]="{ span : 10 }" type="submit" nz-button nzBlock="true" nzType="primary" (click)="createToken()">
+        <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> оплатить
     </button> 
+    <pre>{{isPaySuccess}}</pre>
 </div>

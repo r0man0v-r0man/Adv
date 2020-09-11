@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StripeCardElementOptions } from '@stripe/stripe-js';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
 export class CheckoutFormService {
   form: FormGroup;
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) { 
     this.initForm();
   }
   initForm() {
     this.form = this.fb.group({
-      name: ['за объявление', [Validators.required]]
+      name: [ this.authService.currentUser.sub, [Validators.required]]
     });
   }
   initCardOptions(): StripeCardElementOptions {

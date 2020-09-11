@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup} from '@angular/forms';
 import { FlatSaleModel } from 'src/app/models/flatSaleModel';
 import { AdvertService } from 'src/app/services/advert.service';
@@ -6,6 +6,7 @@ import { ImageService } from 'src/app/services/image.service';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import {SaleFlatFormService} from './services/sale-flat-form.service';
+import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-sale-flat',
@@ -19,6 +20,9 @@ export class SaleFlatComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
+
+  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
+
 
   get form(): FormGroup {
     return this.saleFlatFormService.form;
@@ -46,7 +50,10 @@ export class SaleFlatComponent implements OnInit {
   /** создание объявления */
   submitForm() {
     const saleFlatModel: FlatSaleModel = { ...this.form.value };
-    this.advertService.addFlatSale(saleFlatModel);
+    if(this.checkout.isPaySuccess){
+      saleFlatModel.isActive = true;
+      this.advertService.addFlatSale(saleFlatModel); 
+    }
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ){

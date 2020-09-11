@@ -24,7 +24,7 @@ export class RentHouseFormService {
     this.setDurations();
     this.form = this.fb.group({
       userId: [ this.authService.currentUser.sub, [Validators.required]],
-      isActive: [ true ],
+      isActive: [ false ],
       images: [ null, [Validators.required]],
       address:  [ null, [Validators.required]],
       rooms: [ null ],

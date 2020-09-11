@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ImageService } from 'src/app/services/image.service';
 import { AdvertService } from 'src/app/services/advert.service';
@@ -6,6 +6,7 @@ import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import {RentHouseFormService} from './services/rent-house-form.service';
+import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-rent-house',
@@ -20,7 +21,7 @@ export class RentHouseComponent implements OnInit {
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
 
-
+  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
   get form(): FormGroup {
     return this.rentHouseFormService.form;
   }
@@ -43,7 +44,10 @@ export class RentHouseComponent implements OnInit {
 
   submitForm() {
     const rentHouseModel: HouseRentModel = { ...this.form.value };
-    this.advertService.addHouseRent(rentHouseModel);
+    if(this.checkout.isPaySuccess){
+      rentHouseModel.isActive = true;
+      this.advertService.addHouseRent(rentHouseModel);  
+    }
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

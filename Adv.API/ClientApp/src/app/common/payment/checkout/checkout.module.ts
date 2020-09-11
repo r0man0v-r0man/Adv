@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
 import {
-  WalletOutline
+  WalletOutline,
+  CheckOutline
 } from '@ant-design/icons-angular/icons';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 const icons = {
-  WalletOutline
+  WalletOutline,
+  CheckOutline
 }
 
 @NgModule({

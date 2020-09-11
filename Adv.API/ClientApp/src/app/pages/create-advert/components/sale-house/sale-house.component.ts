@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ImageService } from 'src/app/services/image.service';
 import { Observable } from 'rxjs';
@@ -6,6 +6,7 @@ import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { HouseSaleModel } from 'src/app/models/house-sale.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import {SaleHouseFormService} from './services/sale-house-form.service';
+import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-sale-house',
@@ -19,6 +20,8 @@ export class SaleHouseComponent implements OnInit{
   /** фото к объявлению */
   imageList: NzUploadFile[] = [];
   images: NzUploadFile[] = [];
+
+  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
 
   get form(): FormGroup {
     return this.saleHouseFormService.form;
@@ -39,7 +42,10 @@ export class SaleHouseComponent implements OnInit{
 
   submitForm() {
     const advert: HouseSaleModel = { ...this.form.value };
-    this.advertService.addHouseSale(advert);
+    if(this.checkout.isPaySuccess){
+      advert.isActive = true;
+      this.advertService.addHouseSale(advert);
+    }
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

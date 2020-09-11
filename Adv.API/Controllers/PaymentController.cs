@@ -17,7 +17,7 @@ namespace Adv.API.Controllers
         [HttpPost("checkout")]
         public async Task<IActionResult> Checkout(Checkout checkout)
         {
-            if (string.IsNullOrEmpty(checkout.Token)) return BadRequest();
+            if (string.IsNullOrEmpty(checkout.Token)) return BadRequest(false);
 
             var options = new ChargeCreateOptions
             {
@@ -30,7 +30,7 @@ namespace Adv.API.Controllers
             var service = new ChargeService(stripeClient);
             var result = await service.CreateAsync(options).ConfigureAwait(false);
             
-            return Ok();
+            return Ok(true);
         }
     }
 }
