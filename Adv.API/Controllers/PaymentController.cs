@@ -10,7 +10,6 @@ namespace Adv.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly IStripeClient stripeClient;
-
         public PaymentController(IStripeClient stripeClient)
         {
             this.stripeClient = stripeClient;
@@ -22,12 +21,12 @@ namespace Adv.API.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = 100,
+                Amount = 100, // 1 dollar
                 Currency = "usd",
                 Source = checkout.Token,
                 Description = "My First Test Charge (created for API docs)"
             };
-
+            
             var service = new ChargeService(stripeClient);
             var result = await service.CreateAsync(options).ConfigureAwait(false);
             

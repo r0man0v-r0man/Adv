@@ -25,8 +25,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import {AddressInputComponent} from '../../common/Forms/address-input/address-input.component';
 import { DescriptionInputModule } from 'src/app/common/Forms/description-input/description-input.module';
 import { PriceInputModule } from 'src/app/common/Forms/price-input/price-input.module';
-import { CreateTokenComponent } from 'src/app/common/payment/create-token/create-token.component';
-import { NgxStripeModule } from 'ngx-stripe';
+import { CheckoutModule } from 'src/app/common/payment/checkout/checkout.module';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     SaleFlatComponent,
     SaleHouseComponent,
     RentHouseComponent,
-    AddressInputComponent,
-    CreateTokenComponent
+    AddressInputComponent
   ],
   imports: [
     CommonModule,
@@ -58,7 +56,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     NzCheckboxModule,
     DescriptionInputModule,
     PriceInputModule,
-    NgxStripeModule.forRoot('pk_test_51HOpoZBXPSAG0EhSFjBwnh9jFI8m7FPICtihjLipglD1AWQERa1AfhALa7WDia2U8JTbqYQJFStdkys0qmgQI3rj00QkZt98uM')
+    CheckoutModule
   ]
 })
 export class CreateAdvertModule { }

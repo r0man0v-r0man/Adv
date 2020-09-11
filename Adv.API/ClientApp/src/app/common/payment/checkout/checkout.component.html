@@ -1,0 +1,19 @@
+<div nz-row>
+    <ngx-stripe-card nz-col
+        [nzXs]="{ span : 24 }"
+        [nzSm]="{ span : 12 }"
+        [nzMd]="{ span : 12 }"
+        [nzLg]="{ span : 12 }"
+        [nzXl]="{ span : 12 }"
+        [options]="cardOptions"
+        [elementsOptions]="elementsOptions"
+    ></ngx-stripe-card>
+    <button nz-col
+    [nzXs]="{ span : 24 }"
+    [nzSm]="{ span : 12 }"
+    [nzMd]="{ span : 12 }"
+    [nzLg]="{ span : 12 }"
+    [nzXl]="{ span : 12 }" type="submit" nz-button nzBlock="true" nzType="primary" (click)="createToken()">
+        <i nz-icon nzType="wallet" nzTheme="outline"></i> оплатить
+    </button> 
+</div>
