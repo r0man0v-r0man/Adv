@@ -1,4 +1,4 @@
-<div nz-row>
+<div nz-row [ngClass]="{disabledbutton:isPaySuccess}" >
     <ngx-stripe-card nz-col
         [nzXs]="{ span : 24 }"
         [nzSm]="{ span : 14 }"
@@ -8,13 +8,13 @@
         [options]="cardOptions"
         [elementsOptions]="elementsOptions"
     ></ngx-stripe-card>
-    <button nz-col
+    <a nz-col
     [nzXs]="{ span : 24 }"
     [nzSm]="{ span : 10 }"
     [nzMd]="{ span : 24 }"
     [nzLg]="{ span : 10 }"
-    [nzXl]="{ span : 10 }" type="submit" nz-button nzBlock="true" nzType="primary" (click)="createToken()">
-        <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> оплатить
-    </button> 
+    [nzXl]="{ span : 10 }" type="submit" nz-button nzBlock="true" [nzType]="isPaySuccess?'link':'primary'" [disabled]="isPaySuccess" (click)="createToken()">
+        <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> <span >оплатить</span> 
+    </a>
     <pre>{{isPaySuccess}}</pre>
 </div>
