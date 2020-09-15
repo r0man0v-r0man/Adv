@@ -27,7 +27,7 @@ export class RentFlatFormService {
     this.setDurations();
     this.form = this.fb.group({
       userId: [ this.authService.currentUser.sub, [Validators.required]],
-      isActive: [ false ],
+      isActive: [ true ],
       images: [ null, [Validators.required]],
       address:  [ null, [Validators.required]],
       floor: [ null, [Validators.required]],
@@ -42,7 +42,8 @@ export class RentFlatFormService {
       price: [ '', [Validators.required]],
       duration: [ null , [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]]
+      description: [ null, [DescriptionValidators.notOnlySpace]],
+      checkout: [ null, [Validators.requiredTrue]]
     });
   }
   /** установка наличия балкона */

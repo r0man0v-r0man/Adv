@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AdvertService } from 'src/app/services/advert.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -6,8 +6,6 @@ import { FlatRentModel } from 'src/app/models/flatRentModel';
 import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import {RentFlatFormService} from './services/rent-flat-form.service';
-import { PriceService } from 'src/app/services/price.service';
-import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-rent-flat',
@@ -17,13 +15,11 @@ import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.comp
     RentFlatFormService
   ]
 })
-export class RentFlatComponent implements OnInit {
+export class RentFlatComponent {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
 
-  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
-  
   get form(): FormGroup {
     return this.rentFlatFormService.form;
   }
@@ -36,6 +32,7 @@ export class RentFlatComponent implements OnInit {
   get listOfDuration() {
     return this.rentFlatFormService.listOfDuration;
   }
+  
   constructor(
     private rentFlatFormService: RentFlatFormService,
     private advertService: AdvertService,
@@ -43,17 +40,10 @@ export class RentFlatComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
-  }
-
   /** создание объявления */
   submitForm() {
     const rentFlatModel: FlatRentModel = { ...this.form.value };
-    console.log(rentFlatModel);
-    if(this.checkout.isPaySuccess){
-      rentFlatModel.isActive = true;
-      this.advertService.addFlatRent(rentFlatModel);    
-    }
+    this.advertService.addFlatRent(rentFlatModel);    
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

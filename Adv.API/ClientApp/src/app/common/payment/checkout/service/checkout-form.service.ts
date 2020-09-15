@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { StripeCardElementOptions } from '@stripe/stripe-js';
+import { PaymentRequestOptions, StripeCardElementOptions } from '@stripe/stripe-js';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
@@ -31,6 +31,10 @@ export class CheckoutFormService {
           '::placeholder': {
             color: '#CFD7E0'
           }
+        },
+        invalid: {
+          iconColor: '#ffc7ee',
+          color: '#ffc7ee'
         }
       }
     };

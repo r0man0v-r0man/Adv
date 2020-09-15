@@ -7,14 +7,22 @@
         [nzXl]="{ span : 14 }"
         [options]="cardOptions"
         [elementsOptions]="elementsOptions"
+        (change)="onChangeCard($event)"
     ></ngx-stripe-card>
     <a nz-col
     [nzXs]="{ span : 24 }"
     [nzSm]="{ span : 10 }"
     [nzMd]="{ span : 24 }"
     [nzLg]="{ span : 10 }"
-    [nzXl]="{ span : 10 }" type="submit" nz-button nzBlock="true" [nzType]="isPaySuccess?'link':'primary'" [disabled]="isPaySuccess" (click)="createToken()">
-        <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> <span >оплатить</span> 
+    [nzXl]="{ span : 10 }" 
+    type="submit" 
+    nz-button 
+    nzBlock="true" 
+    [nzType]="isPaySuccess?'link':'primary'" 
+    [disabled]="!isValidStripeForm" 
+    (click)="createToken()"
+    >
+        <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> <span *ngIf="isPaySuccess">Оплачено</span> <span *ngIf="!isPaySuccess">Оплатить, 1 USD</span> 
     </a>
-    <pre>{{isPaySuccess}}</pre>
+    <div id="card-errors"></div>
 </div>
