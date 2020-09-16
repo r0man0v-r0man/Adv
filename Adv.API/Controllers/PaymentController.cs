@@ -1,7 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Adv.API.Models.Payment;
+using Adv.BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
 
 namespace Adv.API.Controllers
 {
@@ -9,28 +10,27 @@ namespace Adv.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly IStripeClient stripeClient;
-        public PaymentController(IStripeClient stripeClient)
+        private readonly IPaymentService paymentService;
+        public PaymentController(IPaymentService paymentService)
         {
-            this.stripeClient = stripeClient;
+            this.paymentService = paymentService;
         }
         [HttpPost("checkout")]
         public async Task<IActionResult> Checkout(Checkout checkout)
         {
             if (string.IsNullOrEmpty(checkout.Token)) return BadRequest(false);
-
-            var options = new ChargeCreateOptions
+            try
             {
-                Amount = 100, // 1 dollar
-                Currency = "usd",
-                Source = checkout.Token,
-                Description = "My First Test Charge (created for API docs)"
-            };
+                var result = await paymentService.CheckoutAsync(checkout.Token).ConfigureAwait(false);
+
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+                throw;
+            }
             
-            var service = new ChargeService(stripeClient);
-            var result = await service.CreateAsync(options).ConfigureAwait(false);
-            
-            return Ok(true);
         }
     }
 }

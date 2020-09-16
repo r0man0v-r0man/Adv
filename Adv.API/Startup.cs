@@ -23,12 +23,10 @@ namespace Adv.API
         { 
             services.AddCors();
             services.AddApi(Configuration);
-            services.AddBll();
+            services.AddBll(Configuration);
             services.AddDal(Configuration);
 
-            // payment Stripe
-            var stripeSecretApiKey = Configuration.GetSection("Stripe")["SecretKey"];
-            services.AddSingleton<IStripeClient, StripeClient>(s => new StripeClient(stripeSecretApiKey));
+            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
