@@ -44,10 +44,7 @@ export class RentHouseComponent implements OnInit {
 
   submitForm() {
     const rentHouseModel: HouseRentModel = { ...this.form.value };
-    if(this.checkout.isPaySuccess){
-      rentHouseModel.isActive = true;
-      this.advertService.addHouseRent(rentHouseModel);  
-    }
+    this.advertService.addHouseRent(rentHouseModel);
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

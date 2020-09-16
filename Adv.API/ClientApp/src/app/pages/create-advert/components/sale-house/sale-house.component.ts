@@ -42,10 +42,7 @@ export class SaleHouseComponent implements OnInit{
 
   submitForm() {
     const advert: HouseSaleModel = { ...this.form.value };
-    if(this.checkout.isPaySuccess){
-      advert.isActive = true;
-      this.advertService.addHouseSale(advert);
-    }
+    this.advertService.addHouseSale(advert);
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ) {

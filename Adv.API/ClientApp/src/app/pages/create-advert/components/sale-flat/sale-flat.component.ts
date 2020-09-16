@@ -50,10 +50,7 @@ export class SaleFlatComponent implements OnInit {
   /** создание объявления */
   submitForm() {
     const saleFlatModel: FlatSaleModel = { ...this.form.value };
-    if(this.checkout.isPaySuccess){
-      saleFlatModel.isActive = true;
-      this.advertService.addFlatSale(saleFlatModel); 
-    }
+    this.advertService.addFlatSale(saleFlatModel); 
   }
   /** загрузка картинки */
   onUploadChange(info: NzUploadChangeParam ){

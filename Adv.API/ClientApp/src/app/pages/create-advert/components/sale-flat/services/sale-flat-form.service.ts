@@ -25,7 +25,7 @@ export class SaleFlatFormService {
     this.setListOfToilet();
     this.form = this.fb.group({
       userId: [ this.authService.currentUser.sub, [Validators.required]],
-      isActive: [ false ],
+      isActive: [ true ],
       images: [ null, [Validators.required]],
       address:  [ null, [Validators.required]],
       floor: [ null, [Validators.required]],
@@ -38,7 +38,8 @@ export class SaleFlatFormService {
       toilet: [ null, [Validators.required]],
       price: [ '', [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]]
+      description: [ null, [DescriptionValidators.notOnlySpace]],
+      checkout: [ null, [Validators.requiredTrue]]
     });
   }
   /** установка наличия балкона */

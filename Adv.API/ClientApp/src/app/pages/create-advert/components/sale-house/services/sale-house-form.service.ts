@@ -19,7 +19,7 @@ export class SaleHouseFormService {
   initForm() {
     this.form = this.fb.group({
       userId: [ this.authService.currentUser.sub, [Validators.required]],
-      isActive: [ false ],
+      isActive: [ true ],
       images: [ null, [Validators.required]],
       address:  [ null, [Validators.required]],
       houseArea: [ null, [Validators.required]],
@@ -35,7 +35,8 @@ export class SaleHouseFormService {
       garage: [ false ],
       price: [ '', [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]]
+      description: [ null, [DescriptionValidators.notOnlySpace]],
+      checkout: [ null, [Validators.requiredTrue]]
     });
   }
 }
