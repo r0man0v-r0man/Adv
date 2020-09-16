@@ -24,6 +24,7 @@ export class CheckoutComponent implements OnInit, ControlValueAccessor {
   isValidStripeForm = false;
   isPaySuccess = false;
   isValid = false;
+  isLoading = false;
   elementsOptions: StripeElementsOptions = {
     locale: 'ru'
   };
@@ -53,11 +54,13 @@ export class CheckoutComponent implements OnInit, ControlValueAccessor {
     this.checkoutService.isCheckoutSuccess.subscribe(data => {
       if(data) {
         this.isPaySuccess = data;
-        this.onChange(true)
+        this.onChange(true);
+        this.isLoading = false;
       }
     })
   }
   createToken(): void {
+    this.isLoading = true;
     this.checkoutService.createCheckout(this.card.element, this.stripeForm);
   }
   onChangeCard(ev: StripeCardElementChangeEvent) {

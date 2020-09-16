@@ -21,6 +21,7 @@
     [nzType]="isPaySuccess?'link':'primary'" 
     [disabled]="!isValidStripeForm" 
     (click)="createToken()"
+    [nzLoading]="isLoading"
     >
         <i nz-icon [nzType]="isPaySuccess?'check':'wallet'" nzTheme="outline"></i> <span *ngIf="isPaySuccess">Оплачено</span> <span *ngIf="!isPaySuccess">Оплатить, 1 USD</span> 
     </a>
