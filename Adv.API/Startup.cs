@@ -24,8 +24,6 @@ namespace Adv.API
             services.AddApi(Configuration);
             services.AddBll();
             services.AddDal(Configuration);
-
-            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

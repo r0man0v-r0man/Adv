@@ -6,7 +6,6 @@ import {
   LoginOutline,
   LogoutOutline,
   PlusCircleOutline,
-  MenuOutline,
   LockOutline,
   UserOutline,
   RightOutline,
