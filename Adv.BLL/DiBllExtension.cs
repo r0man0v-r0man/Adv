@@ -9,7 +9,7 @@ namespace Adv.BLL
 {
     public static class DiBllExtension
     {
-        public static IServiceCollection AddBll(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBll(this IServiceCollection services)
         {
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<IUserService, UserService>();
@@ -19,10 +19,6 @@ namespace Adv.BLL
 
             services.AddMemoryCache();
 
-            // payment Stripe
-            var stripeSecretApiKey = configuration?.GetSection("Stripe")["SecretKey"];
-            services.AddSingleton<IStripeClient, StripeClient>(s => new StripeClient(stripeSecretApiKey));
-            services.AddSingleton<IPaymentService, PaymentService>();
             return services;
         }
     }

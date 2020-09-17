@@ -23,7 +23,7 @@ namespace Adv.API
         { 
             services.AddCors();
             services.AddApi(Configuration);
-            services.AddBll(Configuration);
+            services.AddBll();
             services.AddDal(Configuration);
 
             
