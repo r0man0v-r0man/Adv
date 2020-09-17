@@ -354,7 +354,7 @@ namespace Adv.API.Controllers
             try
             {
                 var result = await _advertService
-                    .GetUserAdvertsAsync(userAdvertsViewModel?.UserId, new CancellationTokenSource(5000).Token)
+                    .GetUserAdvertsAsync(userAdvertsViewModel?.UserId)
                     .ConfigureAwait(false);
 
                 return Ok(result);
