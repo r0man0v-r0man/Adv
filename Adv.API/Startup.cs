@@ -68,7 +68,7 @@ namespace Adv.API
                     options.BootModuleBuilder = env.IsDevelopment()
                         ? new AngularCliBuilder(npmScript: "build:ssr")
                         : null;
-                    options.ExcludeUrls = new[] { "/sockjs-node", "/sitemap.xml" };
+                    options.ExcludeUrls = new[] { "/sockjs-node", "/sitemap.xml", "/robots.txt" };
                 });
 
                 if (env.IsDevelopment())
