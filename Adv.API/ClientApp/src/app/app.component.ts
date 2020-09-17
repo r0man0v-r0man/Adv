@@ -10,7 +10,6 @@ import { SeoService } from './services/seo.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  linkedInUrl: string = 'https://www.linkedin.com/in/roman-romanov-276b0417a';
   currentUrl: string;
   // видимость блоков навигации и футера
   isVisible: boolean = true;

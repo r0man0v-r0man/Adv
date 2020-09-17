@@ -23,6 +23,7 @@ import {AngularYandexMapsModule, IConfig} from 'angular8-yandex-maps';
 
 import { LogoModule } from './common/logo/logo.module';
 import { NavbarModule } from './common/navbar/navbar.module';
+import { FooterModule } from './common/footer/footer.module';
 
 
 const mapConfig: IConfig = {
@@ -51,6 +52,7 @@ registerLocaleData(ru);
     LogoModule,
     NavbarModule,
     AngularYandexMapsModule.forRoot(mapConfig),
+    FooterModule
   ],
   providers: [
     Title,

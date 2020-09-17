@@ -6,10 +6,8 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer 
-    *ngIf="isVisible"
-    >
-    halupa.by - Сайт по аренде и продаже недвижимости, 2020 - Created by <a [href]="linkedInUrl" rel="noreferrer" target="_blank">Романов Роман</a>
+    <nz-footer *ngIf="isVisible">
+      <app-footer></app-footer>
     </nz-footer>
   </nz-layout>
 </nz-layout>
