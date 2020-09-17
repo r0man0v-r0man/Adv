@@ -25,7 +25,6 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import {AddressInputComponent} from '../../common/Forms/address-input/address-input.component';
 import { DescriptionInputModule } from 'src/app/common/Forms/description-input/description-input.module';
 import { PriceInputModule } from 'src/app/common/Forms/price-input/price-input.module';
-import { CheckoutModule } from 'src/app/common/payment/checkout/checkout.module';
 
 @NgModule({
   declarations: [
@@ -55,8 +54,7 @@ import { CheckoutModule } from 'src/app/common/payment/checkout/checkout.module'
     NzDividerModule,
     NzCheckboxModule,
     DescriptionInputModule,
-    PriceInputModule,
-    CheckoutModule
+    PriceInputModule
   ]
 })
 export class CreateAdvertModule { }

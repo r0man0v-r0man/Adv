@@ -1,8 +1,6 @@
 ﻿using Adv.BLL.Interfaces;
 using Adv.BLL.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Stripe;
 using FileService = Adv.BLL.Services.FileService;
 
 namespace Adv.BLL

@@ -6,7 +6,6 @@ import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { HouseSaleModel } from 'src/app/models/house-sale.model';
 import { AdvertService } from 'src/app/services/advert.service';
 import {SaleHouseFormService} from './services/sale-house-form.service';
-import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-sale-house',
@@ -20,8 +19,6 @@ export class SaleHouseComponent implements OnInit{
   /** фото к объявлению */
   imageList: NzUploadFile[] = [];
   images: NzUploadFile[] = [];
-
-  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
 
   get form(): FormGroup {
     return this.saleHouseFormService.form;

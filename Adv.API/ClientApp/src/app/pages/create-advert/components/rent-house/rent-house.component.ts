@@ -6,7 +6,6 @@ import { NzUploadFile, NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import { HouseRentModel } from 'src/app/models/house-rent.model';
 import {RentHouseFormService} from './services/rent-house-form.service';
-import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-rent-house',
@@ -21,7 +20,6 @@ export class RentHouseComponent implements OnInit {
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
 
-  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
   get form(): FormGroup {
     return this.rentHouseFormService.form;
   }

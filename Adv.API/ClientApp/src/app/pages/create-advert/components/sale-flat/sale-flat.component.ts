@@ -6,7 +6,6 @@ import { ImageService } from 'src/app/services/image.service';
 import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable } from 'rxjs';
 import {SaleFlatFormService} from './services/sale-flat-form.service';
-import { CheckoutComponent } from 'src/app/common/payment/checkout/checkout.component';
 
 @Component({
   selector: 'app-sale-flat',
@@ -20,9 +19,6 @@ export class SaleFlatComponent implements OnInit {
   /** фото к объявлению */
   images: NzUploadFile[] = [];
   imageList: NzUploadFile[] = [];
-
-  @ViewChild(CheckoutComponent) checkout: CheckoutComponent;
-
 
   get form(): FormGroup {
     return this.saleFlatFormService.form;

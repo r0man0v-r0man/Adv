@@ -42,8 +42,7 @@ export class RentFlatFormService {
       price: [ '', [Validators.required]],
       duration: [ null , [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]],
-      checkout: [ null, [Validators.requiredTrue]]
+      description: [ null, [DescriptionValidators.notOnlySpace]]
     });
   }
   /** установка наличия балкона */

@@ -35,8 +35,7 @@ export class SaleHouseFormService {
       garage: [ false ],
       price: [ '', [Validators.required]],
       phone: [ null, [Validators.required, Validators.pattern('[0-9]*')]],
-      description: [ null, [DescriptionValidators.notOnlySpace]],
-      checkout: [ null, [Validators.requiredTrue]]
+      description: [ null, [DescriptionValidators.notOnlySpace]]
     });
   }
 }
