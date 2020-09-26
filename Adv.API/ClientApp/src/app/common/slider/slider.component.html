@@ -1,7 +1,0 @@
-<div class="slideshow-container" >
-    <div *ngFor="let image of images; let i = index" class="image-container" >
-        <img [style.display]="image.isVisible == true ? 'block' : 'none' " src="{{image.url}}" alt="{{image.alt}}" class="image">
-    </div>
-    <a class="prev" (click)="prev()">&#10094;</a>
-    <a class="next" (click)="next()">&#10095;</a>
-</div>
